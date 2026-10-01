@@ -198,7 +198,10 @@ non-negative-$r$ part,
 \emph{The negative part.}  For $r_\lambda<0$ we bound
 $\nu|r|^m\le\nu(1-\delta)^m$ unless $1+r_\lambda\le\delta$.  Now
 $N(N-1)(1+r_\lambda)=N(N-1)-j(j+3)+a(a-1)+b(b-3)\ge(a+b)(N+j)-N-3j-2
-\ge(a+b-1)N-2$, so $1+r_\lambda\le\delta$ forces $a+b\le\delta N+3$;
+\ge(a+b-1)N-2$ for $a+b\ge3$ (the last step needs $(a+b-3)j\ge0$;
+the only shape with $a+b=2$ is the sign character $(1^N)$, with
+$r=-1$ and $\nu=4/(N^2(N-1)^2)$, which is included in the count
+below), so $1+r_\lambda\le\delta$ forces $a+b\le\delta N+3$;
 such shapes have $a\le\delta N+2$, $b+j\ge N/2$, $a+j+1\ge N/2$, hence
 $\nu_\varepsilon(\lambda)\le4c_\lambda^2\le64(\delta N+3)^2/N^4$, and
 there are at most $(\delta N+3)^2/2$ of them; so
@@ -249,7 +252,9 @@ $\varepsilon_S=\varepsilon(\sigma\prod_{i\in S}\tau_i)$.  Then
 \]
 with absolute constants.  The same holds for the two-sided pools of
 Theorem~\ref{thm:master} (chords on both columns $j,j'$, with shared
-rows and conjugating coordinates), with the same proof.
+rows and conjugating coordinates), with $k$ replaced by
+$k'=|\mathcal I_j|+|\mathcal I_{j'}|$, the number of
+\emph{non-conjugating} useful coordinates.
 \end{corollary}
 
 \begin{proof}
@@ -268,9 +273,17 @@ $\E[\varepsilon_S\varepsilon_T]\le\E_M\langle\varepsilon,P^M\varepsilon\rangle
 $\Pr[M<k/4]\le e^{-k/8}$ the first term is
 $\le\Pr[M<k/4]+\max_{m\ge k/4}(12/m+O(m^{-4}\log^4m)+O(N^{-4}))\le C/k$.  For the
 two-sided pool, $\pi_0R_SM_S$ is uniform and
-$\pi_0R_TM_T=(\pi_0R_SM_S)\cdot(M_SR_{S\triangle T}M_S)\,M_{S\triangle T}$
-is its product with $|S\triangle T|$ transpositions which are
-disjoint and uniform up to the same $O(k^2/N)$ correction.
+$\pi_0R_TM_T=(\pi_0R_SM_S)\cdot(M_SR_{S\triangle T}M_S)\,M_{S\triangle T}$;
+off the $O(k^2/N)$ event that $M_S$ shares a row with
+$R_{S\triangle T}$ the conjugation is trivial, and a conjugating
+coordinate $i\in\mathcal I_{jj'}\cap(S\triangle T)$ contributes the
+same transposition to both $R_{S\triangle T}$ and
+$M_{S\triangle T}$, where the two copies cancel; so the product is
+$|(S\triangle T)\setminus\mathcal I_{jj'}|\sim\mathrm{Bin}(k',\tfrac12)$
+disjoint transpositions, uniform up to the same correction.  (With a
+pool consisting only of conjugating coordinates the bit is frozen
+and $\E[\varepsilon_S\varepsilon_T]=1-O(k^2/N)$, so $k'$ cannot be
+replaced by $k$.)
 \end{proof}
 
 \emph{Status: PROVED.  This is the iid-model core of
@@ -289,7 +302,9 @@ of the programme is item (II) --- the transfer (T1)--(T2) of
 \S\ref{sec:s13transfer}: that the frame $\pi_P(L)$ and the pool
 under $\mathrm{Unif}(S(\lambda))$ behave, for the purposes of
 $\E[\varepsilon(\alpha)\varepsilon(\alpha\rho)]$, like a uniform
-permutation and independent uniform chords.  The exact formula makes
+permutation and independent uniform chords.  (The supply of Lemma~\ref{lem:supply} is of intercalates through
+$j$ avoiding $j'$, i.e.\ of non-conjugating coordinates, so
+$k'\ge6\log^{11}n$ is what the lemma provides.)  The exact formula makes
 that hypothesis sharply testable on real squares: the model predicts
 $\E[\varepsilon_S\varepsilon_T]=\E_M\langle\varepsilon,P^M\varepsilon\rangle$
 to three digits.}
