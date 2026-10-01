@@ -1,0 +1,313 @@
+%======================================================================
+\section{The stationary marked chain, solved exactly: the spectral
+measure of the same-cycle sign}\label{sec:spectralexact}
+
+Session 13 took up the spectral route of \S\ref{sec:spectral} in the
+form that the scouting of \S\ref{sec:s13transfer} says is the true
+one: the frame is a (near-)uniform permutation of the $n$ rows, the
+pool is a set of transpositions, and the quantity the second-moment
+bound of Theorem~\ref{thm:factor} needs is
+$\E[\varepsilon_S\varepsilon_T]$ with the start \emph{stationary}.
+In that setting the chain is the random-transposition walk on $S_N$
+observed through the function ``$u$ and $v$ lie in a common cycle'',
+and the walk is diagonalised by the characters of $S_N$.  It turns out
+that the spectral measure of this function can be written down in
+closed form.  Everything in this section is at finite $N$; no
+continuum limit is taken, and nothing from
+\S\S\ref{sec:mixing}--\ref{sec:s13} is used.
+
+\subsection{Setting}
+
+Let $N\ge2$, let $u\ne v$ be two fixed points of $[N]$, and on
+$L^2(S_N)$ (uniform measure, inner product
+$\langle f,g\rangle=\frac1{N!}\sum_\sigma f(\sigma)g(\sigma)$) let
+\[
+\varepsilon(\sigma)=2\cdot\mathbf 1\{u\sim_\sigma v\}-1\in\{\pm1\},
+\qquad
+(Pf)(\sigma)=\binom N2^{-1}\sum_{\tau\text{ transposition}}f(\sigma\tau).
+\]
+$P$ is the transition operator of the random-transposition walk
+(right multiplication by a uniform transposition), self-adjoint on
+$L^2(S_N)$ with $\|P\|\le1$.  For a partition $\lambda\vdash N$ let
+$\chi_\lambda$, $d_\lambda$ be its character and dimension, let
+$\Pi_\lambda=\frac{d_\lambda}{N!}\sum_\rho\chi_\lambda(\rho)R(\rho)$,
+$(R(\rho)f)(\sigma)=f(\sigma\rho)$, be the projection onto the
+$\lambda$-isotypic component of the right-regular representation, and
+let
+\[
+r_\lambda=\frac{\chi_\lambda(\tau)}{d_\lambda}
+=\frac{2}{N(N-1)}\sum_{(i,j)\in\lambda}(j-i)
+\]
+be the eigenvalue of $P$ on that component (the normalised character
+at a transposition; the sum is over the boxes of $\lambda$, $j-i$ the
+content of the box).  Then $P=\sum_\lambda r_\lambda\Pi_\lambda$ and
+for every $f$,
+\[
+\|P^df\|^2=\sum_\lambda r_\lambda^{2d}\|\Pi_\lambda f\|^2,
+\qquad
+\langle f,P^mf\rangle=\sum_\lambda r_\lambda^{m}\|\Pi_\lambda f\|^2 .
+\]
+Write $\nu_f(\lambda)=\|\Pi_\lambda f\|^2$ for the spectral measure.
+
+The connection with the rest of these notes: $\langle\varepsilon,P^m\varepsilon\rangle
+=\E[\varepsilon(\sigma)\varepsilon(\sigma\tau_1\cdots\tau_m)]$ for
+$\sigma$ uniform, which is $\E_{\bar\pi}[\Phi_m]$, the annealed parity of
+the number of flips in $m$ steps from the stationary start (the
+discrete marked chain of \S\ref{sec:spectral} is the lumping of this
+walk), and $\|P^d\varepsilon\|^2=\psi_\pi(d)$ is the stationary-start
+mixing functional of Proposition~\ref{prop:lower}.  Self-adjointness
+gives $\psi_\pi(d)=\E_{\bar\pi}[\Phi_{2d}]$: at stationarity the second
+moment of the quenched parity is the first moment at twice the time.
+
+\subsection{The theorem}
+
+\begin{theorem}[spectral measure of the same-cycle sign]\label{thm:spectral}
+$\nu_\varepsilon(\lambda)\ne0$ only for $\lambda=(a,b,1^j)$ with
+$a\ge b\ge1$, $a+b+j=N$, and for these
+\[
+\boxed{\;
+\nu_\varepsilon(\lambda)=2\,c_\lambda^2\,(1-r_\lambda),\qquad
+c_\lambda=\frac{a-b+1}{(a+j+1)(b+j)},\qquad
+r_\lambda=\frac{a(a-1)+b(b-3)-j(j+3)}{N(N-1)} .\;}
+\]
+Here $c_\lambda=|\langle c,\chi_\lambda\rangle|$ is the Fourier
+coefficient of the number-of-cycles function $c(\sigma)$.  In
+particular $\sum_\lambda\nu_\varepsilon(\lambda)=1$ and
+\[
+\E_{\bar\pi}[\Phi_m]=\langle\varepsilon,P^m\varepsilon\rangle
+=\sum_{a\ge b\ge1,\ a+b+j=N}
+\frac{2(a-b+1)^2}{(a+j+1)^2(b+j)^2}\,(1-r_\lambda)\,r_\lambda^{\,m},
+\qquad
+\psi_\pi(d)=\E_{\bar\pi}[\Phi_{2d}] .
+\]
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1: the sign is a difference of the cycle-count function.}
+Right multiplication by the transposition $(u\,v)$ splits the cycle
+through $u$ and $v$ if $u\sim_\sigma v$ and merges their two cycles
+otherwise, so with $c(\sigma)$ the number of cycles,
+\[
+\mathbf 1\{u\sim_\sigma v\}=\tfrac12\bigl(1+c(\sigma(u\,v))-c(\sigma)\bigr),
+\qquad\text{i.e.}\qquad
+\varepsilon=\bigl(R((u\,v))-I\bigr)c .
+\]
+\emph{Step 2: Fourier coefficients of $c$.}  $c$ is a class function,
+$c=\sum_\lambda\hat c_\lambda\chi_\lambda$ with
+$\hat c_\lambda=\langle c,\chi_\lambda\rangle$.  By the classical
+identity $\sum_{\sigma}x^{c(\sigma)}\chi_\lambda(\sigma)
+=d_\lambda\prod_{\square\in\lambda}(x+\mathrm{cont}(\square))$
+(the content polynomial; both sides equal $N!\,s_\lambda(1^x)$),
+differentiating at $x=1$ gives
+\[
+\hat c_\lambda=\frac{d_\lambda}{N!}\,\frac{d}{dx}\Big|_{x=1}
+\prod_{\square\in\lambda}\bigl(x+\mathrm{cont}(\square)\bigr)
+=\frac{d_\lambda}{N!}\sum_{\square}\prod_{\square'\ne\square}\bigl(1+\mathrm{cont}(\square')\bigr).
+\]
+A factor vanishes at $x=1$ exactly for the boxes of content $-1$,
+which are the boxes $(i+1,i)$.  If two such boxes lie in $\lambda$ the
+derivative vanishes.  No such box: $\lambda=(N)$.  Exactly one, the
+box $(2,1)$: $\lambda_2\ge1$ and $\lambda_3\le1$, i.e.\
+$\lambda=(a,b,1^j)$, $a\ge b\ge1$, and then
+$\hat c_\lambda=\frac{d_\lambda}{N!}\prod_{\square\ne(2,1)}(1+\mathrm{cont})
+=\frac{d_\lambda}{N!}\,a!\,(b-1)!\,(-1)^jj!$ (row $1$ has contents
+$0,\dots,a-1$; row $2$ without its first box $0,\dots,b-2$; the
+column $-2,\dots,-(j+1)$).  The hook lengths of $(a,b,1^j)$ are
+$a+j+1$ at $(1,1)$; $a-c+2$ at $(1,c)$ for $2\le c\le b$; $a-c+1$ at
+$(1,c)$ for $c>b$; $b+j$ at $(2,1)$; $b-c+1$ at $(2,c)$, $c\ge2$; and
+$j,j-1,\dots,1$ down the column.  Hence
+$N!/d_\lambda=\prod\text{hooks}=(a+j+1)(b+j)\,a!\,(b-1)!\,j!/(a-b+1)$
+and
+\[
+\hat c_\lambda=(-1)^j\,\frac{a-b+1}{(a+j+1)(b+j)}\qquad(\lambda=(a,b,1^j)),
+\qquad \hat c_{(N)}=H_N,\qquad\hat c_\lambda=0\text{ otherwise}.
+\]
+\emph{Step 3: the projections.}  $\Pi_\lambda$ is right-convolution
+by a central element and so commutes with $R((u\,v))$; hence
+$\Pi_\lambda\varepsilon=(R((u\,v))-I)\Pi_\lambda c
+=\hat c_\lambda\,(R((u\,v))-I)\chi_\lambda$, and for $\lambda=(N)$
+this is $0$ (so $\nu_\varepsilon((N))=0$, consistent with
+$\langle\varepsilon\rangle=0$: $\Pr[u\sim v]=\tfrac12$ exactly).
+For the norm, with $\|\chi_\lambda\|=1$ and the generalised
+orthogonality relation
+$\frac1{N!}\sum_\sigma\chi_\lambda(\sigma)\chi_\lambda(\sigma\rho)
+=\chi_\lambda(\rho)/d_\lambda$,
+\[
+\|(R((u\,v))-I)\chi_\lambda\|^2
+=2-2\,\frac{\chi_\lambda((u\,v))}{d_\lambda}=2(1-r_\lambda),
+\]
+so $\nu_\varepsilon(\lambda)=2\hat c_\lambda^2(1-r_\lambda)$.
+\emph{Step 4: the contents.}  Row $1$ contributes $a(a-1)/2$, row $2$
+contributes $\sum_{c=1}^b(c-2)=b(b-3)/2$, the column
+$\sum_{i=1}^j(-1-i)=-j(j+3)/2$; multiply by $2/(N(N-1))$.
+$\sum_\lambda\nu_\varepsilon(\lambda)=\|\varepsilon\|^2=1$.
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED three ways (\texttt{s13\_spectral.py},
+\texttt{s13\_spectral\_big.py}): (i) by brute force over $S_N$ for
+$N=5,6,7$, applying $P$ directly to $\varepsilon$ and comparing
+$\|P^d\varepsilon\|^2$ and $\langle\varepsilon,P^d\varepsilon\rangle$ for
+$d\le4$ with the formula --- agreement to all printed digits (e.g.\
+$N=7$, $d=3$: $0.047319$ and $0.155229$); (ii) $\sum\nu=1$ to
+$10^{-12}$ at $N=400,1000,4000$; (iii) against the frame simulation
+of \S\ref{sec:s13transfer} (\texttt{s13\_frame} mode 2, $N=4096$,
+$10^6$ instances, disjoint chords): with $M=|S\triangle T|\sim\mathrm{Bin}(k,\tfrac12)$,
+$\E[\varepsilon_S\varepsilon_T]=\E_M\langle\varepsilon,P^M\varepsilon\rangle
+=0.3633,0.2132,0.1151,0.0596,0.0302$ predicted against
+$0.3632,0.2123,0.1159,0.0605,0.0301$ measured ($\pm0.001$) at
+$k=8,16,32,64,128$.}
+
+\subsection{Consequences}
+
+\begin{corollary}[the stationary parity decays like $1/m$, uniformly in $N$]
+\label{cor:stationarydecay}
+For all $N\ge8$ and $m\ge1$,
+\[
+0\le\psi_\pi(d)=\E_{\bar\pi}[\Phi_{2d}]\quad\text{and}\quad
+\bigl|\E_{\bar\pi}[\Phi_m]\bigr|\;\le\;\frac{12}{m}
++32\Bigl(\frac{4\log(m+1)}{m}+\frac3N\Bigr)^4+\frac1{(m+1)^4}.
+\]
+Moreover, as $N\to\infty$ the spectral measure converges to the law
+of $r=1-2(1-\alpha)(1-\beta)$ under the density
+$4(\alpha-\beta)^2/((1-\alpha)(1-\beta))\,d\alpha\,d\beta$ on
+$\{\alpha\ge\beta\ge0,\ \alpha+\beta\le1\}$ (total mass $1$), whose
+mass within $\delta$ of $1$ is $2\delta(1+o(1))$; consequently
+$\E_{\bar\pi}[\Phi_m]\to\int\!\!\int4\frac{(\alpha-\beta)^2}{(1-\alpha)(1-\beta)}
+\bigl(1-2(1-\alpha)(1-\beta)\bigr)^m d\alpha\,d\beta$ and
+$m\,\E_{\bar\pi}[\Phi_m]\to2$ as $m\to\infty$ after $N\to\infty$.
+\end{corollary}
+
+\begin{proof}
+Index the shapes by $k=b+j=N-a$ (the number of boxes outside the
+first row) and $b$.  \emph{Upper bound on the level mass.}  Since
+$a-b+1\le a+j+1$, $c_\lambda\le1/k$; and $N(N-1)(1-r_\lambda)
+=k(2N-k-1)+j^2+3j-b^2+3b\le2kN+k^2+3k\le3kN$ when $k\le N-3$
+(using $j\le k$, $j+b=k$), while for $k\ge N-2$ the trivial
+$1-r_\lambda\le2\le6k/N$ holds; so $1-r_\lambda\le6k/N$ and
+$\nu_\varepsilon(\lambda)\le12/(kN)$.  There are at most $k$ shapes at
+level $k$, so the level mass is $\le12/N$.  \emph{Lower bound on the
+gap.}  Since $b\le k$ and $b\le a=N-k$, $b^2\le k(N-k)$, so
+$N(N-1)(1-r_\lambda)\ge k(2N-k-1)-b^2\ge k(2N-k-1)-k(N-k)=k(N-1)$,
+i.e.\ $r_\lambda\le1-\frac kN$ for every shape.  Hence, summing the
+non-negative-$r$ part,
+\[
+\sum_{\lambda:\,r_\lambda\ge0}\nu_\varepsilon(\lambda)\,r_\lambda^m
+\le\frac{12}N\sum_{k\ge1}e^{-km/N}
+=\frac{12}{N}\cdot\frac1{e^{m/N}-1}\le\frac{12}m .
+\]
+\emph{The negative part.}  For $r_\lambda<0$ we bound
+$\nu|r|^m\le\nu(1-\delta)^m$ unless $1+r_\lambda\le\delta$.  Now
+$N(N-1)(1+r_\lambda)=N(N-1)-j(j+3)+a(a-1)+b(b-3)\ge(a+b)(N+j)-N-3j-2
+\ge(a+b-1)N-2$, so $1+r_\lambda\le\delta$ forces $a+b\le\delta N+3$;
+such shapes have $a\le\delta N+2$, $b+j\ge N/2$, $a+j+1\ge N/2$, hence
+$\nu_\varepsilon(\lambda)\le4c_\lambda^2\le64(\delta N+3)^2/N^4$, and
+there are at most $(\delta N+3)^2/2$ of them; so
+$\nu_\varepsilon([-1,-1+\delta])\le32(\delta+3/N)^4$.  With
+$\delta=4\log(m+1)/m$ the remainder is $(1-\delta)^m\le(m+1)^{-4}$.
+\emph{Continuum limit.}  With $a=\alpha N$, $b=\beta N$,
+$j=(1-\alpha-\beta)N$: $c_\lambda\to(\alpha-\beta)/((1-\beta)(1-\alpha)N)$,
+$1-r_\lambda\to2(1-\alpha)(1-\beta)$, and the number of shapes in
+$d\alpha\,d\beta$ is $N^2d\alpha\,d\beta$; the mass near $r=1$ comes
+from $s=1-\alpha\le\delta/2$ with $\beta\le s$, where the density is
+$4/s$, giving $\int_0^{\delta/2}4\,ds=2\delta$, and the same
+computation gives $\int4(1-2s)^m\,ds=2/(m+1)$ for the leading term.
+(The total mass $1$ and the values $m\E[\Phi_m]=1.634,1.896,1.973,
+1.993$ at $m=8,32,128,512$ were checked by numerical integration.)
+\end{proof}
+
+\emph{Status: PROVED.  Remarks.  (i) The rate $1/m$ is sharp: the
+lower bound of Proposition~\ref{prop:lower} is reproduced by the
+linear spectral density, with the exact constant: the top-of-spectrum
+density is $2$ (mass $2\delta$ within $\delta$ of $1$), against the
+trial-function bound of \S\ref{sec:spectral}.  (ii) The periodicity
+caveat of \S\ref{sec:spectral} is void for $\varepsilon$: the mass
+within $\delta$ of $-1$ is $O(\delta^4)$ (numerically $2\times10^{-5}$
+at $\delta=0.2$), so the sign character and its neighbours carry
+essentially none of $\varepsilon$.  (iii) The whole spectral measure
+lives on the two-row-plus-column shapes $(a,b,1^j)$: this is the
+exact statement behind ``the environment enters only through the
+block count'' (\S\ref{sec:noenv}) --- the function
+$\mathbf 1\{u\sim v\}$ is a first difference of the cycle count, and
+the cycle count is supported on these shapes.  (iv) Nothing here is
+asymptotic: the bound holds at the finite $N=n$ of the actual
+problem, which matters because the frame of an orbit is a
+permutation of $n$ rows and the pool has $k=\Theta(\log^{11}n)$
+chords, so ``continuum'' is not even the right regime; the only
+asymptotic statement, the continuum limit, is a remark.}
+
+\begin{corollary}[the stationary iid model of Problem~\ref{prob:annealed}]
+\label{cor:stationarymodel}
+Let $\sigma$ be uniform on $S_N$, let $\tau_1,\dots,\tau_k$ be $k$
+uniformly random pairwise disjoint transpositions avoiding $u,v$, let
+$S,T\subseteq[k]$ be independent uniform subsets and
+$\varepsilon_S=\varepsilon(\sigma\prod_{i\in S}\tau_i)$.  Then
+\[
+4\,\E[\mathrm{bias}^2]=\E[\varepsilon_S\varepsilon_T]
+\;\le\;\frac{C}{k}+\frac{Ck^2}{N},
+\qquad
+\E|\mathrm{bias}|\le\sqrt{\E[\mathrm{bias}^2]}\le\frac{C'}{\sqrt k}+\frac{C'k}{\sqrt N},
+\]
+with absolute constants.  The same holds for the two-sided pools of
+Theorem~\ref{thm:master} (chords on both columns $j,j'$, with shared
+rows and conjugating coordinates), with the same proof.
+\end{corollary}
+
+\begin{proof}
+The $\tau_i$ commute, so with $\alpha=\sigma\tau_S$ (uniform,
+independent of the $\tau$'s) one has
+$\sigma\tau_T=\alpha\tau_{S\triangle T}$ and
+$\E[\varepsilon_S\varepsilon_T]=\E\bigl[\varepsilon(\alpha)\varepsilon(\alpha\tau_{S\triangle T})\bigr]$,
+where $M=|S\triangle T|\sim\mathrm{Bin}(k,\tfrac12)$ and
+$\tau_{S\triangle T}$ is a product of $M$ uniformly random disjoint
+transpositions avoiding $u,v$.  Couple these with $M$ iid uniform
+transpositions: the iid ones are pairwise disjoint and avoid $u,v$
+except with probability $\le M^2\cdot4/N+M\cdot4/N$, and on that
+event the products agree.  Hence
+$\E[\varepsilon_S\varepsilon_T]\le\E_M\langle\varepsilon,P^M\varepsilon\rangle
++8k^2/N$, and by Corollary~\ref{cor:stationarydecay} and
+$\Pr[M<k/4]\le e^{-k/8}$ the first term is
+$\le\Pr[M<k/4]+\max_{m\ge k/4}(12/m+O(m^{-4}\log^4m)+O(N^{-4}))\le C/k$.  For the
+two-sided pool, $\pi_0R_SM_S$ is uniform and
+$\pi_0R_TM_T=(\pi_0R_SM_S)\cdot(M_SR_{S\triangle T}M_S)\,M_{S\triangle T}$
+is its product with $|S\triangle T|$ transpositions which are
+disjoint and uniform up to the same $O(k^2/N)$ correction.
+\end{proof}
+
+\emph{Status: PROVED.  This is the iid-model core of
+Problem~\ref{prob:annealed}, in the \emph{stationary-frame} model
+that \S\ref{sec:s13transfer}(T3) identifies as the right one, with
+the sharp exponent $c=\tfrac12$ (budget: $c>1/11$).  It is obtained
+without Theorem~\ref{thm:factor}'s Chernoff splitting, without the
+split--merge chain, without Problems~\ref{prob:mixing},
+\ref{prob:survival}, without (R1), (C1), (C2$''$), (S$_2$), the
+occupation-time lemma or the Markov-renewal apparatus of
+\S\S\ref{sec:s10}--\ref{sec:s12}: none of those is needed for the
+stationary start.  The one-block-start version of
+Problem~\ref{prob:mixing} ($\psi(j,d)$ from $\mu_j$) is not covered
+and is now moot.  What remains of item (I) is nothing; what remains
+of the programme is item (II) --- the transfer (T1)--(T2) of
+\S\ref{sec:s13transfer}: that the frame $\pi_P(L)$ and the pool
+under $\mathrm{Unif}(S(\lambda))$ behave, for the purposes of
+$\E[\varepsilon(\alpha)\varepsilon(\alpha\rho)]$, like a uniform
+permutation and independent uniform chords.  The exact formula makes
+that hypothesis sharply testable on real squares: the model predicts
+$\E[\varepsilon_S\varepsilon_T]=\E_M\langle\varepsilon,P^M\varepsilon\rangle$
+to three digits.}
+
+\begin{remark}[what the exact formula says about the earlier picture]
+(a) The ``gap-trapping'' mechanism of \S\ref{sec:gaplaw} is the top
+of the spectrum: the shapes $(N-k,b,1^j)$ with $k\ll N$ have
+$1-r_\lambda\approx2k/N$ and level mass $\approx4/N$, i.e.\ a
+linear density $2$ at $r=1$, and $k/N$ is the gap scale.  (b) The
+measured $\psi(256,256)\cdot256\approx0.7$ and the real-square
+constant $\E[\mathrm{bias}^2]k\approx0.7$--$0.9$ are both
+$\tfrac14\E_M[\Phi_M]k$ with $\E[\Phi_m]\approx1.9/m$, $M\approx k/2$:
+$\approx0.95$, with the finite-$m$ corrections of the table in
+\S\ref{sec:s13transfer}.  (c) The quenched quantities studied in
+\S\S\ref{sec:s10}--\ref{sec:s12} ($a_k$, $t_k(w)$, the post-flip
+chain) are not needed, but the exact formula gives a handle on them
+too: $(P^m\varepsilon)(\sigma_0)=\sum_\lambda r_\lambda^m\hat c_\lambda
+[\chi_\lambda(\sigma_0(u\,v))-\chi_\lambda(\sigma_0)]$ for any fixed
+start $\sigma_0$, which for the $N$-cycle reduces to hook characters
+and is Theorem~\ref{thm:exactonepoint}.
+\end{remark}
