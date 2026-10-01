@@ -1,0 +1,403 @@
+%----------------------------------------------------------------------
+\subsection{Session 13: audit of the reduction chain}\label{sec:s13}
+
+Session 13 opened with the audit recommended in the session-11 health
+note: nothing in the chain Theorem~\ref{thm:marked} $\to$
+Problem~\ref{prob:annealed} $\to$ Theorem~\ref{thm:factor} $\to$
+Problem~\ref{prob:mixing} $\to$ Problem~\ref{prob:survival} $\to$
+(R1)+(C1)+(C2$''$) had been re-read since it was laid, and two carried
+conditions had just been found false in consecutive sessions.  The
+audit produced three corrections to the \emph{form} of the bottom of
+the chain, none of which changes what is proved above it:
+\begin{enumerate}[leftmargin=2.2em]
+\item[(1)] the quantity the programme consumes is an $L^2$ average of
+the quenched parity $\Phi_m$ over the start, not a supremum over
+states (Proposition~\ref{prop:S2red}); the state-uniform target (S)
+of \S\ref{sec:s12left} was introduced by the strong-Markov step of
+the session-10 reduction, not demanded by anything above it, and the
+inert-dust obstruction of \S\ref{sec:s12dust} does not touch the
+$L^2$ form (Remark~\ref{rem:dustblind});
+\item[(2)] the exponent budget carried since session 10
+($\gamma>4/9$ at $z=-1$, hence $p>13/5$ in
+Proposition~\ref{prop:holder}) is too demanding by a factor of
+about five: the correct budget is $\gamma>1/11$, hence $p>6/5$
+(Corollary~\ref{cor:budget}).  The measured $p\approx2.7$ and
+modulus $0.75$ are far inside it, not marginal;
+\item[(3)] $\tau_k<\infty$ a.s.\ from every state with $ab>0$, taken
+for granted since session 10, has a four-line proof
+(Lemma~\ref{lem:flipsrecur}).
+\end{enumerate}
+The occupation-time step and (M$_1$) are stated exactly and left open
+(\S\ref{sec:s13occ}, \S\ref{sec:s13m1}).
+
+\subsubsection{The reduction consumes an \texorpdfstring{$L^2$}{L2} average, not a supremum}
+\label{sec:s13ltwo}
+
+Recall (Corollary~\ref{cor:quotient}) that
+$\psi(j,d)=\E_{\mu_j}[\Phi_d(\Gamma_0)^2]$ with
+$\Phi_m(\Gamma)=\E_\Gamma[(-1)^{N_m}]$ the parity of the number of
+flips in $m$ steps of the quotient chain, and that
+Theorem~\ref{thm:factor} needs $\psi(j,d)\le Kd^{-2c}$ for
+$j\le8d$ only.  Fix $K\ge3$ and
+$S'_K=\{a,b\ge1/(16K)\}$ as in \S\ref{sec:markovrenewal}.
+
+\begin{proposition}[$L^2$ form of the reduction to $S'_K$]\label{prop:S2red}
+Let $d\ge1$, $j\le8d$, $0<\varepsilon\le1/(2K)$, and let
+$T^*=T^*(\varepsilon,K,d)<d/2$ be any deterministic time.  Let
+$T'=\inf\{t\ge0:\Gamma_t\in S'_K\}$ and let
+$\nu=\nu_{j,\varepsilon,K,T^*}$ be the joint law of
+$(\Gamma_{T'},T')$ under $\Pr_{\mu_j}(\,\cdot\,;\,g_0\ge\varepsilon,\
+T'\le T^*)$, a sub-probability measure on $S'_K\times\{0,\dots,T^*\}$;
+write $\nu_t=\nu(\cdot\times\{t\})$ and, when $\nu_t\ne0$, let
+$\bar\nu_t=\nu_t/\nu_t(S'_K)$ be the \emph{time-$t$ entrance law}, a
+probability measure on $S'_K$.  Then
+\[
+\E_{\mu_j}\bigl[\Phi_d(\Gamma_0)^2;\ g_0\ge\varepsilon\bigr]
+\;\le\;2\int\Phi_{d-t}(x)^2\,\nu(dx,dt)
+\;+\;2\,\Pr_{\mu_j}\bigl[T'>T^*;\ g_0\ge\varepsilon\bigr]
+\;\le\;2\sup_{t\le T^*}\E_{\bar\nu_t}\bigl[\Phi_{d-t}^2\bigr]
+\;+\;2\,\Pr_{\mu_j}\bigl[T'>T^*;\ g_0\ge\varepsilon\bigr].
+\]
+\end{proposition}
+
+\begin{proof}
+$T'$ is a stopping time and $T'\wedge T^*\le T^*<d$.  By the strong
+Markov property at $T'\wedge T^*$ and the additivity of the flip
+count, $\E[(-1)^{N_d-N_{T'}}\mid\mathcal F_{T'}]=\Phi_{d-T'}(\Gamma_{T'})$
+on $\{T'\le T^*\}$, so
+\[
+\Phi_d(\Gamma_0)
+=\E_{\Gamma_0}\bigl[(-1)^{N_{T'}}\Phi_{d-T'}(\Gamma_{T'});\ T'\le T^*\bigr]
++\E_{\Gamma_0}\bigl[(-1)^{N_d};\ T'>T^*\bigr]
+=:A(\Gamma_0)+B(\Gamma_0).
+\]
+Then $|B|\le\Pr_{\Gamma_0}[T'>T^*]\le1$, so $B^2\le|B|$, and by
+Cauchy--Schwarz
+$A^2\le\E_{\Gamma_0}[\Phi_{d-T'}(\Gamma_{T'})^2;\,T'\le T^*]\cdot
+\Pr_{\Gamma_0}[T'\le T^*]\le\E_{\Gamma_0}[\Phi_{d-T'}(\Gamma_{T'})^2;\,T'\le T^*]$.
+Use $(A+B)^2\le2A^2+2B^2$ and integrate over $\Gamma_0\sim\mu_j$ on
+$\{g_0\ge\varepsilon\}$; the first integral is, by definition of
+$\nu$, $\int\Phi_{d-t}(x)^2\nu(dx,dt)=\sum_{t\le T^*}\nu_t(S'_K)\,
+\E_{\bar\nu_t}[\Phi_{d-t}^2]$, and $\sum_t\nu_t(S'_K)\le1$.  (The
+supremum over $t$ must stay inside the sum in this way: a bound in
+terms of the time-marginal $\sum_t\nu_t$ alone would cost a factor
+$T^*$.)
+\end{proof}
+
+\emph{Status: PROVED.  Compare the session-10 reduction paragraph at
+the end of \S\ref{sec:markovrenewal}, which at the same point bounds
+$|\Phi_d(\Gamma_0)|\le\E|\Phi_{d-T'}(\Gamma_{T'})|+\Pr[T'>T^*]$ and
+then takes the supremum of $|\Phi_m|$ over $S'_K\cap H$.  The
+supremum is where the state-uniform target (S) entered the
+programme; nothing above this point asks for it.  What the programme
+needs on $S'_K$ is therefore:}
+
+\medskip
+\noindent\textbf{(S$_2$)}\quad
+$\displaystyle\E_{\bar\nu_t}\bigl[\Phi_{m}^2\bigr]\le C(K)\,m^{-2\gamma}$
+\emph{for every $t\le T^*$ and $m=d-t\in[d/2,d]$, for the time-$t$
+entrance laws $\bar\nu_t=\bar\nu_{j,\varepsilon,K,T^*;t}$ of $S'_K$,
+$j\le8d$, with $K=K_{\gamma'}(9d)=O(\log d)$ and $C(K)$ polynomial
+in $K$,}
+
+\medskip
+\noindent together with the entrance estimate
+$\Pr_{\mu_j}[T'>T^*;\,g_0\ge\varepsilon]\le O(d^{-\gamma'})+O(\varepsilon K\log d)$
+for $T^*=O(\varepsilon^{-1}K\log d)$, which is the content of the
+session-10 reduction paragraph (Lemma~\ref{lem:srecharge} plus the
+occupation-time step of \S\ref{sec:s13occ}).  The block-bound event
+$H_{9d}$ of Corollary~\ref{cor:horizon} is also handled in $L^2$
+without any state-by-state argument: with $H=\{B_r<K,\ r\le m\}$
+for the chain from $x$, writing $\Phi_m=\Phi_m^H+\Phi_m^{H^c}$ with
+$|\Phi_m^{H^c}(x)|\le\Pr_x[H^c]$, one has
+$\E_{\bar\nu_t}[\Phi_m^2]\le2\E_{\bar\nu_t}[(\Phi_m^H)^2]+2\E_{\bar\nu_t}[\Pr_x[H^c]]$,
+and $\sum_t\nu_t(S'_K)\,\E_{\bar\nu_t}[\Pr_x[H^c]]\le\Pr_{\mu_j}[H^c_{9d}]\le(9d+1)^{-\gamma'}$
+because $\nu$ is a sub-law of the path measure from $\mu_j$, whose
+clock reaches at most $j+d\le9d$.
+
+\begin{remark}[what the dust obstruction does and does not touch]
+\label{rem:dustblind}
+(a) Proposition~\ref{prop:nomino} and Corollary~\ref{cor:noerg} are
+statements about the supremum norm on $\Omega_K$: they show that no
+Doeblin-type argument can give a bound on $\sup_{x\in S'_K}|\Phi_m(x)|$
+(or on $\|\kappa_1^kF-\bar\pi F\|_\infty$ for any weight).  They say
+nothing against (S$_2$), which is an average over laws $\bar\nu_t$
+that are themselves marginals of the chain run from one block.
+(b) Under the coupling of Lemma~\ref{lem:inert}, $\Phi_m$ is
+Lipschitz in the dust: $|\Phi_m(y_\varepsilon)-\Phi_m(y)|\le4\varepsilon m$,
+since the flip counts agree on the coupling event.  So $\Phi_m$ is a
+continuous function in the coarse topology at scale $1/m$ --- the
+topology in which $y_\varepsilon\to y$ --- and the dust of
+Proposition~\ref{prop:nomino}, which lives at scales
+$\varepsilon_i\ll1/T_i$, is invisible to the functions that (S$_2$)
+is about.  This is the precise sense in which \S\ref{sec:s12left}(i)
+asked for a ``dust-blind'' statement, and (S$_2$) is one.
+(c) (S$_2$) is \emph{not} an annealed statement in the naive sense:
+it bounds the second moment of the quenched parity, so a proof must
+still show that $\Phi_m(x)$ is small for $\bar\nu_t$-typical $x$, with
+the environment of $x$ frozen; only the \emph{uniformity} over $x$
+has been removed.  The quantity $\E_{\bar\nu_t}[\Phi_m]$ (parity
+averaged over the environment of the start) is not what is needed and
+is not sufficient.
+(d) The natural function space for (S$_2$) is $L^2(\bar\pi)$, in
+which the chain is self-adjoint (\S\ref{sec:spectral}); the spectral
+route of session 8, shelved in favour of the Markov-renewal route,
+is the dust-blind route.  What it additionally needs is a comparison
+of the entrance laws $\bar\nu_t$ with $\bar\pi$ on the functions
+$\Phi_m^2$; this is the first sub-problem of \S\ref{sec:s13spectral}.
+\end{remark}
+
+\subsubsection{The exponent budget, recomputed}\label{sec:s13budget}
+
+\begin{corollary}[the budget is $\gamma>1/11$, not $\gamma>4/9$]
+\label{cor:budget}
+Suppose (S$_2$) holds with exponent $\gamma\in(0,\tfrac12)$ and the
+entrance estimate holds as stated after Proposition~\ref{prop:S2red}.
+Then $\psi(j,d)\le C'(\log d)^{O(1)}\,d^{-2\gamma}$ for all $j\le8d$,
+i.e.\ Problem~\ref{prob:mixing} holds with $c=\gamma$, and
+Corollary~\ref{cor:psienough} closes the iid model as soon as
+$\gamma>1/11$.  The same holds if (S$_2$) is replaced by the
+state-uniform (S) with exponent $\gamma$.  In particular, in
+Proposition~\ref{prop:holder} the crude route needs only $p>6/5$,
+and (R1) needs only $C^{1,\gamma}$ regularity with $\gamma>1/11$,
+i.e.\ moments $\E_x[\tau^{1+\gamma}]$ with $\gamma>1/11$.
+\end{corollary}
+
+\begin{proof}
+Set $\varepsilon:=d^{-1/2-\gamma}$ and $T^*:=C\varepsilon^{-1}K\log d$
+with $K=K_{\gamma'}(9d)$, $\gamma'\ge2\gamma$; then
+$T^*=O(d^{1/2+\gamma}\log^2d)<d/2$ for $d$ large because
+$\gamma<\tfrac12$, and $\varepsilon\le1/(2K)$.  By
+Proposition~\ref{prop:shorthorizon} ($j\le8d$),
+$\Pr_{\mu_j}[g_0<\varepsilon]\le4\varepsilon^2j\le32\varepsilon^2d=32d^{-2\gamma}$.
+By Proposition~\ref{prop:S2red} and (S$_2$) (with $m=d-t\ge d/2$),
+$\E_{\mu_j}[\Phi_d^2;g_0\ge\varepsilon]\le2C(K)(d/2)^{-2\gamma}
++2\bigl(O(d^{-\gamma'})+O(\varepsilon K\log d)\bigr)$, and
+$\varepsilon K\log d=O(d^{-1/2-\gamma}\log^2d)=o(d^{-2\gamma})$ since
+$\gamma<\tfrac12$.  Add, and use $|\Phi_d|\le1$ on $\{g_0<\varepsilon\}$.
+The budget: Corollary~\ref{cor:psienough} needs $c>1/11$.
+For Proposition~\ref{prop:holder}: $(p-1)/(p+1)>1/11\iff p>6/5$.
+\end{proof}
+
+\emph{Status: PROVED (arithmetic).  Where the factor was lost.  The
+session-10 reduction paragraph ends by bounding $|\Phi_d(\Gamma_0)|$,
+not $\Phi_d(\Gamma_0)^2$, by $C(\varepsilon d)^{-2\alpha}$ --- the
+form of Problem~\ref{prob:survival}, which is a bound on the
+\emph{second moment} --- and then replaces $(\varepsilon d)^{-2\alpha}$
+by $d^{-2\alpha}$.  The first step costs a factor $2$ in the exponent,
+the second a further factor $2(1+\alpha)=22/9$; together they turn
+the true requirement $\gamma>1/11$ into $\gamma>2\alpha>4/9$.
+Problem~\ref{prob:survival} and Corollary~\ref{cor:kappafree} are
+correct as stated and, with the correct accounting, lossless: from
+$\Phi_d^2\le C(K)d^{-2\gamma}$ after the entrance one gets
+Problem~\ref{prob:survival} with
+$(\varepsilon d)^{-2\alpha}=d^{-\alpha/(1+\alpha)}$ at the optimising
+$\varepsilon$ for $\alpha=2\gamma/(1-2\gamma)$, and then
+$c'=\alpha/(2(1+\alpha))=\gamma$ exactly.  The loss was entirely in
+the two steps just named.  Every downstream statement that quotes
+``$\gamma>4/9$'' (\S\ref{sec:markovrenewal} (R1) discussion,
+\S\ref{sec:s11left}, Proposition~\ref{prop:holder} and
+\S\ref{sec:s12left}, the handoff documents of sessions 10--12) should
+be read with $1/11$ in its place.  Consequences: the ``marginal''
+verdict on the crude route of Proposition~\ref{prop:holder}
+($p>13/5$ against a measured $2.7\pm0.3$) is withdrawn --- the crude
+route needs $p>1.2$; (R1) needs barely more than a first moment of
+$\tau$ along the chain (the measured tail is $t^{-2}$); and
+Proposition~\ref{prop:lower}'s sharp rate $c=1/2$ exceeds the budget
+by a factor $5.5$, as \S\ref{sec:factor} already noted for
+$\bar\psi$.  The programme has a wide margin everywhere except in
+the one place where it has no proof.}
+
+The budget chain, for reference (each line is proved above it):
+\[
+\begin{array}{lll}
+\toprule
+\text{statement} & \text{exponent} & \text{needs}\\
+\midrule
+\E|\mathrm{bias}|=o(1/\log n),\ k\ge6\log^{11}n & k^{-c} & c>1/11\\
+\psi(j,d)\le Kd^{-2c},\ j\le8d\ \text{(Thm.~\ref{thm:factor})} & c & c>1/11\\
+\text{(S)}/\text{(S}_2)\ \text{on }S'_K\ \text{(Cor.~\ref{cor:budget})} & \gamma=c & \gamma>1/11\\
+G\in C^{0,\gamma}\ \text{at }z=-1\ \text{(Prop.~\ref{prop:condecay})} & \gamma & \gamma>1/11\\
+\text{(C2$''$) via Prop.~\ref{prop:holder}, crude} & (p-1)/(p+1) & p>6/5\\
+\text{(C2$''$) via Prop.~\ref{prop:holder}, factorised} & \min(1,p-1) & p>12/11\\
+\text{measured (\S\ref{sec:s12num})} & p=2.7\pm0.3,\ \text{modulus }0.75 & \\
+\bottomrule
+\end{array}
+\]
+
+\subsubsection{Flips recur: \texorpdfstring{$\tau_k<\infty$}{tau\_k<infty} a.s.}\label{sec:s13tau}
+
+\begin{lemma}[flips recur]\label{lem:flipsrecur}
+From every state of the quotient chain with $a_0b_0>0$,
+$\sum_t2a_tb_t=\infty$ a.s.; consequently flips occur infinitely
+often a.s., and $\tau_k<\infty$ a.s.\ for every $k$.
+\end{lemma}
+
+\begin{proof}
+Write $m_t=\min(a_t,b_t)$, $M_t=\max(a_t,b_t)$ and
+$p_t=2a_tb_t=2m_tM_t$, the conditional probability of a flip at step
+$t+1$.  By Lemma~\ref{lem:splitmerge} (read on the quotient,
+Corollary~\ref{cor:quotient}), at a non-flip step a marked coordinate
+either stays fixed, increases (a merge), or is multiplied by
+$\sqrt U$, $U\sim U(0,1)$ (a shrink: both cuts in that coordinate's
+material, probability equal to the square of the coordinate).  Hence
+$m_t$ is non-decreasing between the steps at which it strictly
+decreases, and at a non-flip step $m$ can decrease in exactly two
+ways: a shrink of the smaller coordinate, probability $m_t^2$; or a
+shrink of the larger coordinate below $m_t$, probability
+$M_t^2\cdot\Pr[M_t\sqrt U<m_t]=M_t^2(m_t/M_t)^2=m_t^2$.  So the event
+$E_{t+1}=\{\text{step }t{+}1\text{ is not a flip and }m_{t+1}<m_t\}$
+has $\Pr[E_{t+1}\mid\mathcal F_t]\le2m_t^2\le2m_tM_t=p_t$.
+
+Let $\Omega_0=\{\sum_tp_t<\infty\}$.  By L\'evy's conditional
+Borel--Cantelli lemma, on $\Omega_0$ almost surely only finitely many
+flips occur and only finitely many $E_t$ occur.  All marked
+coordinates stay strictly positive a.s.\ ($U>0$, flips land in the
+open interval), so after the last flip and the last $E_t$ the process
+$m_t$ is non-decreasing and bounded below by some $m_*>0$; then
+$p_t\ge2m_*^2$ for all large $t$ and $\sum_tp_t=\infty$,
+contradicting $\Omega_0$.  Hence $\Pr[\Omega_0]=0$, i.e.\
+$\sum_tp_t=\infty$ a.s., and L\'evy's lemma in the other direction
+gives flips infinitely often a.s.
+\end{proof}
+
+\emph{Status: PROVED.  This is the hypothesis of
+Propositions~\ref{prop:r2false}, \ref{prop:nomino}, \ref{prop:nodrift}
+and of the remark after Proposition~\ref{prop:genfun}; it needs
+nothing about the environment --- in particular it holds with an
+all-dust environment --- because the only mechanism that decreases the
+smaller marked coordinate has probability at most the flip
+probability.  It gives no rate; rates are (R1).}
+
+\subsubsection{The occupation-time step, stated}\label{sec:s13occ}
+
+The session-10 reduction (end of \S\ref{sec:markovrenewal}) and the
+entrance estimate after Proposition~\ref{prop:S2red} use, without
+proof, the following statement.
+
+\begin{lemma}[occupation time of the marked total; OPEN]\label{lem:occupation}
+Let $K\ge3$ and let $H=H_T$ be the block-bound event with bound $K$.
+There are $c_K,C_K>0$ such that for every start with
+$s_0\ge1/(2K)$, every $\varepsilon\le1/(8K)$ and every $T\ge1$,
+\[
+\Pr\Bigl[\#\{t\le T:\ s_t<\tfrac1{4K}\}>\tfrac T2\Bigr]
+\;\le\;C_K\,e^{-c_K\varepsilon T/K}\;+\;2\varepsilon^2T\;+\;\Pr[H^c].
+\]
+\end{lemma}
+
+\emph{Status: OPEN; believed standard.  What it is used for: in the
+entrance estimate, after $s$ first reaches $1/(2K)$ (within
+$T_1=O(\varepsilon^{-1}K\log d)$ steps by Lemma~\ref{lem:srecharge}),
+one needs, on at least half of the next $T_2=O(\varepsilon^{-1}K\log d)$
+steps, $s_t\ge1/(4K)$ and $\min(a_t,b_t)\ge\varepsilon$ (the second
+from the flux bound, cost $4\varepsilon^2T_2$); on those steps a flip
+has probability $\ge2\varepsilon(s_t-\varepsilon)\ge\varepsilon/(4K)$
+and lands in $S'_K$ with conditional probability $\ge\tfrac12$
+(the trapezoid of Lemma~\ref{lem:recharge}(ii) is symmetric and
+unimodal), so $T'\le T_1+T_2$ except with probability
+$O(d^{-\gamma'})+O(\varepsilon K\log d)$.  What fails if it is false:
+the entrance estimate, hence the reduction of (S$_2$) to the
+log-macroscopic set $S'_K$; (S$_2$) would then have to be proved for
+the laws $\mu_j$ restricted to $\{g_0\ge\varepsilon\}$ with
+$\varepsilon=d^{-1/2-\gamma}$, i.e.\ with the trap accounting inside
+the $L^2$ statement.  Nothing above Problem~\ref{prob:survival}
+depends on it.  Intended proof: Lemma~\ref{lem:logdrift} gives
+$\E[\Delta\log s\mid\Gamma_t]\ge c\,s_t/K$ on $H\cap\{s_t\le1/(2K)\}$,
+with down-jumps those of $\tfrac12\log U$; so for small $\theta>0$,
+$V=s^{-\theta}$ is a supermartingale on $\{s\le1/(2K)\}\cap H$ with
+drift $\le-\theta c's^{1-\theta}/K$, and the occupation time of
+$\{\varepsilon\le s<1/(4K)\}$ over $T$ steps is at most
+$\varepsilon^{-(1-\theta)}$ times the accumulated drift; the time
+below $\varepsilon$ is priced by Lemma~\ref{lem:strap}; excursions
+above $1/(2K)$ are handled by stopping $V$ at $1/(2K)$.  The missing
+piece is only the bookkeeping of the re-entries into
+$\{s<1/(2K)\}$ from above, each of which starts $V$ at
+$\le(2K)^\theta\cdot2^\theta$ (a single shrink from $\ge1/(2K)$
+lands at $\ge s\sqrt U$, and $\Pr[\sqrt U\le\tfrac12]=\tfrac14$) and
+of which there are at most $O(T/K^2)$ in expectation (shrinks have
+probability $\le s^2$).  We have not written it out.}
+
+\subsubsection{What (M\texorpdfstring{$_1$}{1}) needs}\label{sec:s13m1}
+
+Proposition~\ref{prop:holder} assumes (M$_1$):
+$\sup_{\bar x\in S'_K}\E_{\bar x}[\tau_k]\le C_1k$.  By the strong
+Markov property at the flip times,
+$\E_{\bar x}[\tau_k]=\sum_{i<k}\E_{\bar x}\bigl[\E_{\bar\Gamma_{\tau_i}}[\tau]\bigr]$,
+so (M$_1$) follows from a bound on the mean first-flip time that is
+uniform \emph{on average over post-flip states}.  The post-flip state
+has marked total $s$ (preserved by the flip) and landing gap $g'$
+with $\Pr[g'\le\eta]\le\eta^2/(ab)$ (Lemma~\ref{lem:recharge}(ii)),
+so $\E[1/g']\le\int_0^{s}\eta^{-2}\Pr[g'\le\eta]\,d\eta\cdot
+\text{(const)}<\infty$ is automatic from a macroscopic pre-flip
+state; what is needed is therefore
+\[
+\text{(R1$'$)}\qquad
+\E_{\bar x}[\tau]\;\le\;C(K)\,\bigl(1+1/g(\bar x)\bigr)\quad
+\text{on }H,\ \text{uniformly over the environment},
+\]
+together with control of the pre-flip state at each flip (so that
+$1/(ab)$ in the landing bound is $O(K^2)$ on average), which is the
+recurrence of the marked pair to $S'_K$ --- the same recharge
+machinery as the entrance estimate.  (R1$'$) is the first-moment
+part of TODO~11a (which asks for the tail $\Pr_x[\tau>t]\le C_Kt^{-2}$,
+measured in \S\ref{sec:parity}(c)); by Corollary~\ref{cor:budget},
+(R1) itself now needs only a $(1+\gamma)$-th moment with
+$\gamma>1/11$, so a tail bound $t^{-1-\delta}$ for any $\delta>1/11$
+would suffice for both.  (M$_p$) in Corollary~\ref{cor:noerg}(ii) is
+used only in a negative result and needs no further attention.
+
+\subsubsection{Where this leaves the programme}\label{sec:s13spectral}
+
+Items (I)--(III) of the overview are unchanged in substance, but (I)
+is now: prove (S$_2$) with any $\gamma>1/11$, for the time-$t$
+entrance laws $\bar\nu_t$ of $S'_K$, with $C(K)$ polynomial.  Two routes remain, neither of
+which is Doeblin-type:
+\begin{itemize}[leftmargin=2em]
+\item[(i)] \emph{The spectral route} (\S\ref{sec:spectral}): the
+quotient chain is reversible for $\bar\pi$; for the odd function
+$f=\varepsilon F$ the Dirichlet form has the massive flip term, and
+polynomial decay of $\psi_{\bar\pi}(d)=\|P^d\varepsilon\|^2_{L^2(\pi)}$
+with exponent $\beta$ is equivalent to the spectral measure of
+$\varepsilon$ having mass $O(\delta^\beta)$ within $\delta$ of
+$\pm1$.  A sufficient functional inequality is
+\[
+\text{(H$_\beta$)}\qquad
+\bigl|\E_{\bar\pi}[F]\bigr|^2\;\le\;C\,\mathcal E_{\mathrm{odd}}(F)^{\beta}\,\|F\|_{L^2(\bar\pi)}^{2(1-\beta)}
+\qquad\text{for all }F\in L^2(\bar\pi),
+\]
+with $\mathcal E_{\mathrm{odd}}(F)=\tfrac12\E_{\bar\pi}[(F-F')^2;\text{non-flip}]
++\tfrac12\E_{\bar\pi}[(F+F')^2;\text{flip}]$: applied to
+$F=\Pi_\delta\varepsilon$ (spectral projection onto
+$[1-\delta,1]$) it gives $\nu_\varepsilon([1-\delta,1])\le C\delta^\beta$.
+By Proposition~\ref{prop:lower}, $\beta\le1$; the budget needs only
+$\beta>2/11$.  (The limiting case $\beta=1$ is a Hardy inequality
+in the gap coordinate and is false by a logarithm: test functions
+$F=g^{-1}\log^{-2}(1/g)\mathbf 1\{g\le\delta\}$ have
+$|\E F|^2/\mathcal E_{\mathrm{odd}}(F)\asymp\log(1/\delta)$ --- consistent
+with $\psi_{\bar\pi}\asymp1/d$, since linear spectral density gives
+$\int d\nu_\varepsilon/(1-\lambda)=\infty$.)  The periodicity
+caveat of \S\ref{sec:spectral} applies: the same inequality is
+needed for $(-1)^BF$, i.e.\ near $\lambda=-1$.  What the spectral
+route does \emph{not} give by itself is (S$_2$) for the entrance
+laws $\bar\nu_t$: these are singular with respect to $\bar\pi$
+(finitely many blocks against infinitely many), and the comparison
+must be made at a coarse scale --- the blocks of mass $\gtrsim1/(m\log m)$,
+which are the only ones $\Phi_m$ sees (Remark~\ref{rem:dustblind}(b))
+--- where $\bar\nu_t$ has had time of order $m\log m\gg$ the
+relaxation time $1/(2\eta)$ of each scale $\eta$ in that range.
+This start-comparison is the first concrete sub-problem.
+\item[(ii)] \emph{The exact-law route} of \S\ref{sec:s12left}(iv):
+polynomial decay of the block-count parity at flip times from the
+exact fixed-time laws, from the one-curve start, extended to the
+$\mu_j$ starts.  Its target is now $p>6/5$ in
+Proposition~\ref{prop:holder}, i.e.\ $a_k=O(k^{-6/5})$, far weaker
+than the measured $k^{-3}$.  Since $B(\bar\Gamma_{\tau_k})$ spreads
+only like $\log k$, the decay cannot come from the width of its law;
+it comes from the smoothness of the law of $\tau_k$ on the time axis
+(the parity of $B$ at a \emph{fixed} time is deterministic,
+Lemma~\ref{lem:parity}), and quantifying that smoothness is exactly
+what (ii) must do.
+\end{itemize}
+Both routes consume the same two inputs that the audit has left open
+--- the occupation-time lemma and (R1$'$) --- and both are now aimed at
+a target with a fivefold margin.
