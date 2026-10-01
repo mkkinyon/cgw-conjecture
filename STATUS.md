@@ -1,67 +1,76 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-01 (session 13, continuous).  The notes
-`second_row_notes.tex` are the living document; this file is the two-page
-map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md` are kept for
-the record; their TODO lists are superseded by this file.*
+`second_row_notes.tex` (95 pp, 0 errors) are the living document; this file
+is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
+are kept for the record; their TODO lists are superseded by this file.*
 
 ## Goal and chain
 
 CGW weak conjecture d_TV(P_n,Q_n) → 0  ⇐  EQ(o(1/log n)) [thm:reduction]
 ⇐ marked bit P(B) = 1/2 + o(1/log n) [thm:marked]
 ⇐ KPS re-randomisation + rank formula [thm:master] + supply/cond. expander
-⇐ prob:annealed  ⇐  (I) prob:mixing  +  (II) transfer iid → orbit  [(III) closed]
-(I): prob:mixing (ψ(j,d) ≤ K d^{-2c}, c > 1/11)  ⇐  (S₂) on S'_K with γ > 1/11
-      + entrance estimate (lem:srecharge + occupation-time lemma, OPEN)
-      + for z=−1: prop:holder with p > 6/5 (crude) — measured p ≈ 2.7.
+⇐ prob:annealed: E|bias| = o(1/log n) over orbits, k' ≥ 6 log^11 n chords.
 
-## Open items (what a proof still needs)
+**prob:annealed in the stationary-frame model is PROVED with the sharp
+exponent** (§sec:spectralexact, session 13): 4E[bias²] ≤ C/k' + Ck²/N.
+It rests on an exact closed form for the spectral measure of the
+same-cycle sign under the random-transposition walk (thm:spectral):
+ν(λ) = 2c_λ²(1−r_λ) on shapes (a,b,1^j), c_λ = (a−b+1)/((a+j+1)(b+j)).
+Consequence: E_π̄[Φ_m] ≤ 12/m uniformly in N (cor:stationarydecay), m·E → 2.
 
-1. **(S₂)** [§sec:s13ltwo]: E_{ν_t}[Φ_m²] ≤ C(K) m^{−2γ}, γ > 1/11, for the
-   time-t entrance laws of S'_K.  Dust-blind L² statement; replaces the
-   sup-norm (S).  Routes: spectral (H_β) inequality in L²(π̄) [§s13spectral],
-   or exact-law route (a_k = O(k^{−6/5}) from thm:blockcount).
-2. **Occupation-time lemma** [lem:occupation, OPEN, believed standard].
-3. **(R1′)** E_x[τ] ≤ C(K)(1+1/g) on H, and the (1+γ)-moment of τ with
-   γ > 1/11 [§s13m1]; TODO 11a's t^{−2} tail would be far more than enough.
-4. **(II)(T1)+(T2)** [§s13transfer]: health of the frame and coarse product
-   genericity of the intercalate pool under Unif(S(λ)).  HARD, different in
-   kind from (I): distributional, cannot be imported by union-of-costs; only
-   visible route is a KPS-style "all but ℓ columns" robustness argument in
-   the triangle-removal model.  Numerics: true with margin.
-5. **(T3)** re-pose (S₂)/entrance from the stationary start (the true frame
-   is PD(1)-like, not one-block); budget unaffected, c = min(1/2, γ).
+## The one open item: (II) the transfer
 
-## Closed this session (13)
+The model assumes: frame π_P(L) ≈ uniform permutation of the rows (T1),
+pool of intercalate chords ≈ independent uniform transpositions (T2), both
+under Unif(S(λ)) ∩ expander, for the special pair (j, σ^α j).  What is
+needed precisely: E_{L,S,T}[ε(π_P(L^S)) ε(π_P(L^T))] = o(1/log² n).
+§sec:s13transfer: HARD, distributional (not existential), cannot be
+imported by union-of-costs (only e^{−ω(n log² n)}-robust properties
+transfer).  Visible route: KPS "all but ℓ columns" robustness in the
+triangle-removal model.  Numerics: real squares match the model to 15–20%
+in the constant with the 1/k law (s13_frame.c, §s13transfer table), and
+the exact formula predicts E[ε_Sε_T] to 3 digits — a sharp test to run on
+real squares (jm.c + s8_real_bias.py pipeline).
 
-- Budget corrected: γ > 1/11, not 4/9 (cor:budget).  p > 6/5 not 13/5.
-- L² form of the reduction (prop:S2red); dust obstruction does not touch it
-  (rem:dustblind).  Plain annealing E[Φ] is NOT sufficient.
-- τ_k < ∞ a.s. from any state with ab > 0 (lem:flipsrecur).
-- (III) prob:decouple NOT NEEDED: routing chains merge parts m ≥ n/(A log n)
-  (prop:nodecouple).  Also: cycle type of σ is a function of the bottom
-  rectangle alone (orientations are fair coins).
-- Factor-2.2 iid-vs-real-squares discrepancy explained: the real frame is
-  stationary (s13_frame.c: one-block/antipodal 0.3/k, random frame 0.9/k,
-  real 0.7/k).
+## Closed / superseded (do not spend time on these)
+
+- (III) prob:decouple: NOT NEEDED (prop:nodecouple; routing merges m ≥ n/(A log n)).
+- (I) in all its session 8–12 forms: prob:mixing (one-block start), prob:survival,
+  (R1), (C1), (C2″), (S₂), occupation-time lemma, Markov renewal, a_k, t_k(w):
+  all MOOT for the stationary frame.  The exact laws (thm:blockcount,
+  thm:sizebiased, thm:idleloop, lem:inert, prop:nomino) remain valid results.
+- Budget: γ > 1/11 not 4/9 (cor:budget) — now irrelevant since c = 1/2 is proved.
+- Dust obstruction: a sup-norm statement; irrelevant to L²/stationary (rem:dustblind).
+- Still true and worth keeping: lem:flipsrecur (τ_k < ∞ a.s.); the audit of §s13.
 
 ## Do not reopen (proved impossible / false)
 
-Doeblin minorisation of the post-flip chain in any form (prop:nomino);
-uniform or V-uniform ergodicity of κ₁ (cor:noerg); λ-drift on the full
-space (prop:nodrift); geometric (C2) (§s12num: a_k ~ k^{−3}); (R2)
-(prop:r2false); transport-metric contraction (§s12left); the two-block
-odd-perturbation argument (§s12odd); reading ρ from burnt-in starts
-(pitfall 56).
+Doeblin minorisation (prop:nomino); (V-)uniform ergodicity (cor:noerg);
+λ-drift (prop:nodrift); geometric (C2); (R2); transport contraction;
+two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
-## Running / recent numerics
+## Possible next steps (owner's choice)
 
-`runs/s13/akB_0_p.log` (4e8 samples, pin p), `akB_{6,7}_k40.log`
-(K-dependence of the tail constant), `frame*.log` (frame comparison).
-Handoff numeric task 1 ((C2″) on the unit circle) not yet run.
+1. (II): formulate the minimal "coarse product" property of the pool and
+   the frame-health property, and test both on real squares at n = 100–400
+   against the exact prediction; then the TRP/KPS robustness argument.
+2. Publishable checkpoint: thm:marked + thm:master + thm:spectral +
+   cor:stationarymodel + the layer theorems is a paper now; thm:spectral
+   is a standalone result about the random-transposition walk (check
+   literature: two-point/same-cycle statistics of random transpositions).
+3. Literature check whether thm:spectral is known.
+
+## Numerics this session
+
+`runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
+`akB_{6,7}_k40.log` (moot).  `s13_spectral.py brute N` (N ≤ 7) and
+`s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
 
-See HANDOFF_session_12.md §3 QUICKSTART (all green at start of s13) plus:
-`gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → E[bias²]k ≈ 0.92.
-`pdflatex second_row_notes.tex` ×2 → 0 errors, 91 pp.
+HANDOFF_session_12.md §3 QUICKSTART still green, plus:
+`python3 s13_spectral.py brute 6` (exact = brute, all digits);
+`python3 s13_spectral_big.py 4000` (sum ν = 1, m·E → 1.9);
+`gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → 4E[bias²] ≈ 0.115;
+`pdflatex second_row_notes.tex` ×2 → 0 errors, 95 pp.
