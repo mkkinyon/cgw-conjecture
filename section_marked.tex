@@ -1,0 +1,209 @@
+%======================================================================
+\section{The marked-pair identity: eliminating the post-flip events}
+\label{sec:marked}
+
+The identity of Theorem~\ref{thm:identity} expresses the completion
+ratio through the post-flip events $B_1,B_2$ of the \emph{joining}
+measure.  In this section we prove a cleaner exact identity that
+eliminates the joining measure, the switch tie-break, and the events
+$B_1,B_2$ altogether: the ratio $\CC_n(\lambda)/\CC_n(\mu)$ is the
+$A$-versus-$B$ \emph{odds of a single marked column pair in a single
+uniform square of} $S(\lambda)$.  The proof is self-contained (it does
+not use the multigraph of \cite{CGW08}), covers $\alpha=\beta$ without
+any modification --- resolving the bookkeeping discrepancy of
+Remark~\ref{rem:albe} --- and yields the lower bound
+$\CC_n(\lambda)/\CC_n(\mu)>\tfrac12$ for free.
+
+Throughout, squares are normalised to have first row $\mathrm{id}$, so
+the column map is $\omega=\sigma$ ($1\circ\omega(j)=2\circ j$ with the
+first row the identity gives $\omega(j)=\sigma(j)$).  For the proofs it
+is convenient to work with \emph{unnormalised} squares (equivalently,
+symbol-relabelling classes): every instance count below then acquires a
+common factor $n!$, which cancels from every ratio, and the maps we use
+(flip, switch) act on unnormalised squares without any renormalisation
+step.  Statuses, cycle types, and column positions are
+relabelling-invariant, so we freely state results in the normalised
+picture.
+
+\begin{definition}[marked instances]\label{def:marked}
+Let $\lambda\vdash n$ contain a part $m=\alpha+\beta$
+($\alpha,\beta\ge2$), and let $\mu$ be $\lambda$ with one part $m$
+split into $\alpha,\beta$.  The \emph{splitting instance space} is
+\[
+X \;=\; X(n,\lambda;\alpha,\beta)
+\;=\;\bigl\{(L',P)\;:\;L'\in S(\lambda),\;
+P=\{j,\sigma^\alpha(j)\}\text{ with } j\text{ in an $m$-cycle of }
+\sigma(L')\bigr\},
+\]
+unordered pairs counted once.  Thus every $L'$ carries exactly
+$\lambda_m\, m$ marked pairs when $\alpha\neq\beta$ and
+$\lambda_m\,\alpha$ when $\alpha=\beta$.  Since $\alpha,\beta\ge 2$
+every marked pair is admissible, and $X=X_A\sqcup X_B$ according to the
+$A$/$B$ status of $P$ in $L'$.  The \emph{joining instance space} is
+\[
+J \;=\; J(n,\mu;\alpha,\beta)
+\;=\;\bigl\{(L,P)\;:\;L\in S(\mu),\;P=\{j,j'\},\;
+j\text{ in an $\alpha$-cycle},\; j'\text{ in a different
+$\beta$-cycle}\bigr\},
+\]
+again with $J=J_A\sqcup J_B$ by the status of $P$ in $L$.
+\end{definition}
+
+The counting arithmetic is immediate: with
+$D_\nu$ the number of derangements of cycle type $\nu$ and
+$N(\nu)=\CC_n(\nu)(n-2)!$,
+\begin{equation}\label{eq:Xarith}
+\frac{2|X|}{|J|}
+=\frac{2\,D_\lambda N(\lambda)\,\lambda_m m}
+       {D_\mu N(\mu)\,\mu_\alpha\mu_\beta\,\alpha\beta}
+=\frac{2\CC_n(\lambda)}{\CC_n(\mu)}
+\qquad(\alpha\neq\beta),
+\end{equation}
+using $D_\lambda/D_\mu=\alpha\mu_\alpha\,\beta\mu_\beta/(m\lambda_m)$;
+for $\alpha=\beta$ one has
+$D_\lambda/D_\mu=\alpha^2\mu_\alpha(\mu_\alpha-1)/(2m\lambda_m)$,
+$|J|=|S(\mu)|\binom{\mu_\alpha}{2}\alpha^2$ and
+$|X|=|S(\lambda)|\lambda_m\alpha$, and \eqref{eq:Xarith} holds
+verbatim.  The content of the identity is therefore the following
+count.
+
+\begin{lemma}[cycle trades preserve pair status]\label{lem:cycletrade}
+Let $P=\{j,j'\}$ be an admissible column pair of a Latin square $L$ and
+let $C$ be one column cycle of $P$.  Trading $C$ (swapping the entries
+of columns $j,j'$ in the rows of $C$) inverts the pair permutation
+$\pi_P$ on $C$ and fixes it elsewhere; the partition of rows into
+column cycles of $P$ is unchanged.  In particular the $A$/$B$ status of
+$P$ itself is invariant under the CGW flip at $P$, which trades the
+full column cycle through row~$2$.
+\end{lemma}
+
+\begin{proof}
+Write $\pi=\pi_P$, so $\pi(r)$ is the row of column $j'$ holding the
+symbol $L(r,j)$; $C$ is $\pi$-closed and the trade swaps
+$L(r,j)\leftrightarrow L(r,j')$ for $r\in C$.  Fix $r\in C$ and let
+$\pi'$ be the new pair permutation.  The new $L(r,j)$ is the old
+$L(r,j')$; the row of the new column $j'$ holding that symbol is found
+by solving (new $L(s,j')$) $=$ (old $L(r,j')$): for $s\in C$ the new
+$L(s,j')$ is the old $L(s,j)$, and old $L(s,j)=$ old $L(r,j')$ exactly
+when $\pi(s)=r$.  Hence $\pi'=\pi^{-1}$ on $C$; off $C$ nothing
+changes.  A cycle inverted in place has the same support, so the
+partition into cycles is unchanged.
+\end{proof}
+
+\begin{lemma}[switch toggle]\label{lem:switchtoggle}
+Let $(L,P)\in J$ and let $Q$ be the row cycle through one column of
+$P$ (the two row cycles are distinct).  Trading $Q$ (the CGW switch)
+changes $\pi_P$ by precomposition with the transposition of rows
+$1,2$: the cycles of $\pi_P$ through rows $1,2$ are split if rows
+$1,2$ are in one cycle, and joined if in two.  Hence the switch
+toggles the status of $P$, preserves $S(\mu)$ and the instance data
+(it inverts one $\sigma$-cycle in place), and is an involution:
+the trade preserves the traded cycle's symbol set (the two rows carry
+the same symbols on its columns), so the min-symbol rule re-selects the
+same cycle.  Consequently $|J_A|=|J_B|$, exactly.
+\end{lemma}
+
+\begin{proof}
+Say $Q$ is the row cycle through $j$; its columns include $j$ but not
+$j'$.  The trade swaps the row-1 and row-2 entries in the columns of
+$Q$; for $\pi_P$ only column $j$ matters, where the entries of rows
+$1,2$ are exchanged.  Thus $\pi_P'=\pi_P\circ\tau_{12}$, and
+multiplying by a transposition splits or joins the cycles through its
+two points.  Rows $1,2$ lie in one cycle of $\pi_P$ exactly when $P$
+is a $B$-pair.  The trade swaps the two rows' entries along the
+columns of $Q$, which inverts the corresponding $\sigma$-cycle in
+place: the cycle type and the column sets of all row cycles are
+preserved, so $(L,P)\mapsto(\mathrm{sw}(L),P)$ maps $J$ to $J$.
+\end{proof}
+
+\begin{theorem}[marked-pair identity]\label{thm:marked}
+For every $n$, $\lambda$, and split $m=\alpha+\beta$ with
+$\alpha,\beta\ge2$ (including $\alpha=\beta$),
+\[
+|J_A|\;=\;|J_B|\;=\;|X_A|,
+\qquad\text{hence}\qquad
+\boxed{\;\frac{\CC_n(\lambda)}{\CC_n(\mu)}\;=\;\frac{|X|}{2|X_A|},
+\qquad
+2\,\frac{\CC_n(\lambda)}{\CC_n(\mu)}-1\;=\;\frac{|X_B|}{|X_A|}.\;}
+\]
+In particular $\CC_n(\lambda)>\tfrac12\,\CC_n(\mu)$ unconditionally,
+and Hypothesis~\ref{hyp:eq} ($\mathrm{EQ}(\delta)$) is equivalent to
+\[
+\Bigl|\;\Pr\bigl(P\text{ is a $B$-pair}\bigr)-\tfrac12\;\Bigr|
+\;\le\;\tfrac{\delta}{4}(1+o(1)),
+\]
+for $(L',P)$ uniform on $X$: the law of a single bit --- whether rows
+$1,2$ lie in one column cycle of the marked pair
+$\{j,\sigma^\alpha(j)\}$ --- of a single uniform square of
+$S(\lambda)$.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:Xarith} it suffices to prove $|J|=2|X_A|$.
+The flip at an $A$-pair $P$ whose columns lie in one row cycle at
+$\sigma$-distances $(\alpha,\beta)$ splits that cycle into an
+$\alpha$- and a $\beta$-cycle and maps $S(\lambda)\to S(\mu)$; by
+Lemma~\ref{lem:cycletrade} the pair $P$ is still an $A$-pair
+afterwards, so $x\mapsto\mathrm{unflip}(x)$ maps $X_A$ into $J_A$.
+The flip at a fixed pair is an involution (the traded cycle again
+contains row 2, with the same row support), so
+$\mathrm{join}=\mathrm{flip}$ inverts it: $X_A\leftrightarrow J_A$ is
+a bijection.  Composing with the switch of
+Lemma~\ref{lem:switchtoggle} gives a bijection
+$X_A\leftrightarrow J_B$, namely
+$x\mapsto \mathrm{sw}(\mathrm{unflip}(x))$ with inverse
+$(L,P)\mapsto \mathrm{flip}(\mathrm{sw}(L))$ --- the map
+``switch-then-flip'', which is exactly the CGW joining step at a
+$B$-pair.  Hence $|J|=|J_A|+|J_B|=2|X_A|$.
+\end{proof}
+
+\begin{remark}[what became of the events $B_1,B_2$]
+Theorem~\ref{thm:marked} recovers Theorem~\ref{thm:identity} and
+sharpens it: the joining measure, the min-symbol averaging, and the
+post-flip events have disappeared.  The mechanism is that
+\emph{every} joining edge lands in $X_A$ (Lemma~\ref{lem:cycletrade}),
+each marked-$A$ instance receiving exactly two (one from an $A$-join,
+one from its switched partner), while $X_B$ is never reached: the
+$B_1,B_2$ bookkeeping of \cite{CGW08} was the joining-side accounting
+of $|X_B|$.  On $X_B$ itself the only known measure-preserving
+involution is the cross-switch of \cite[Def.~3.9]{CGW08}.  By
+\cite[Lem.~3.10]{CGW08} it toggles the status of every pair
+$\{\omega^{k}(j),\omega^{k'}(j')\}$ with $1\le k<\alpha$,
+$1\le k'<\beta$ --- a family containing \emph{both} shifted pairs, at
+$(k,k')=(1,1)$ and $(\alpha-1,\beta-1)$ --- while (empirically: all
+$2880$ marked-$B$ instances at $n=5$) fixing the marked status
+itself.  This yields
+$\Pr(B_1\mid\text{marked }B)=\Pr(B_2\mid\text{marked }B)=\tfrac12$
+exactly, explaining the extraordinary balance of the post-flip events
+observed in \S\ref{sec:identity}.
+\end{remark}
+
+\begin{remark}[the case $\alpha=\beta$, and Remark~\ref{rem:albe}]
+Nothing in the proof distinguishes $\alpha=\beta$: marked pairs
+$\{j,\sigma^\alpha(j)\}$ in a $2\alpha$-cycle are counted once
+($\lambda_m\alpha$ per square), and \eqref{eq:Xarith} holds with the
+$\alpha=\beta$ conventions.  Exhaustive verification at $n=6$:
+$\mu=(3,3)$ gives $|X_B|/|X_A|=622080/829440=3/4$, exactly the value
+$2\CC_6((6))/\CC_6((3,3))-1$ that the joining-side bookkeeping of
+Remark~\ref{rem:albe} failed to reproduce.  The $\alpha=\beta\ge3$
+anomaly is thus resolved: the identity was never about the joining
+events.
+\end{remark}
+
+\paragraph{Verification.}  By complete enumeration
+(\texttt{pf\_bridge.py}, \texttt{xside.c}): at $n=5$,
+$\mu=(2,3)$: $|J_A|=|J_B|=|X_A|=1440$, $|X_B|=2880$, ratio $2$
+$=\bar q$ exactly.  At $n=6$: $(2,4)\to(6)$:
+$1520640/1520640/1520640$, $|X_B|=1382400$, ratio $10/11$;
+$(2,2,2)\to(2,4)$: ratio $4/7$; $(3,3)\to(6)$: ratio $3/4$ --- all
+equal to $2\CC_6(\lambda)/\CC_6(\mu)-1$ exactly.  At $n=7$, fixing one
+representative $\sigma_0$ per type (conjugation symmetry) and
+enumerating all $\approx6.6\times10^6$ completions per type
+(\texttt{xside2.c}), the $X$-side odds reproduce
+$2\CC_7(\lambda)/\CC_7(\mu)-1$ exactly for all four admissible merges:
+$(2,5)\to(7)$: $22848000/23116800=85/86$;
+$(3,4)\to(7)$: $23063040/22901760=143/142$ (note the $B$-excess);
+$(2,2,3)\to(2,5)$: $107/108$; $(2,2,3)\to(3,4)$: $35/36$.
+The bijections themselves
+(unflip status, roundtrips, hit multiplicities, orphan structure) were
+verified instance-by-instance at $n=5,6$.

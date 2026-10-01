@@ -1,0 +1,1 @@
+oddeven d=16 cs=20000 fs=200: <P^d e,P^d e>=5.7540e-02  <P^d e,P^{d+1} e>=5.5878e-02  (se floor 5.0e-04)  ratio odd/even=0.971

@@ -1,0 +1,494 @@
+%======================================================================
+\section{An exact switch calculus for the fourth layer}\label{sec:switch}
+
+This section develops the machinery for TODO~1 of the programme: a proof
+that the fourth-layer effect equals the third-layer effect to relative
+$O(1/n)$,
+\begin{equation}\label{eq:r4thm}
+r_4(n)\;=\;r_3(n)\,\bigl(1+O(n^{-1})\bigr),
+\qquad r_3(n)=\frac{M_{n-4}}{M_n}.
+\end{equation}
+The idea is to compare the two cycle types through \emph{adjacent
+representatives}: derangements $\sigma$ (type $(n)$) and $\sigma'$ (type
+$(2,n-2)$) whose boards differ by a single $2\times2$ switch.  All
+$\sigma$-dependent quantities then differ by four-term brackets of
+punctured counts, and these brackets are governed \emph{exactly} by
+Wronskian-type identities for path matching polynomials --- the punctured
+analogues of the fusion identity (Lemma~\ref{lem:fusion}).  The programme
+is carried out completely except for one boundary lemma
+(Lemma~\ref{lem:boundary} below), which is stated precisely, verified
+numerically, and reduced to a finite family of local resummation
+identities.  We record the state of each step honestly.
+
+\subsection{Adjacent representatives and the switch decomposition}
+
+Since $N^{(k)}_n$ depends only on the cycle type
+(Lemma~\ref{lem:type}), we may choose
+\[
+\sigma=(1\,2\,3\cdots n),\qquad \sigma'=(1\,2)(3\,4\cdots n).
+\]
+Then $\sigma(i)=\sigma'(i)$ except at $i=2,n$:
+\[
+B_2(\sigma)\setminus B_2(\sigma')=\{d_1,d_2\},\quad
+B_2(\sigma')\setminus B_2(\sigma)=\{e_1,e_2\},
+\]
+\[
+d_1=(2,3),\ d_2=(n,1),\qquad e_1=(2,1),\ e_2=(n,3).
+\]
+Let $B_0=B_2(\sigma)\cap B_2(\sigma')$, a board of $2n-2$ cells whose
+bipartite graph is a disjoint union of two paths,
+\[
+P^{(1)}:\ c_1-r_1-c_2-r_2\quad(3\ \text{edges}),\qquad
+P^{(2)}:\ c_3-r_3-c_4-\cdots-c_n-r_n\quad(2n-5\ \text{edges}),
+\]
+where $r_i$, $c_j$ denote row and column vertices.  The four cells
+$d_1,d_2,e_1,e_2$ avoid $B_0$ and connect the four path-ends pairwise:
+$d_1=r_2c_3$ and $d_2=r_nc_1$ join the two paths (\emph{crosswise}),
+while $e_1=r_2c_1$ and $e_2=r_nc_3$ close each path onto itself.
+Adding $\{d_1,d_2\}$ to $B_0$ yields the single cycle $C_{2n}$ of
+$B_2(\sigma)$; adding $\{e_1,e_2\}$ yields the $C_4\cup C_{2n-4}$ of
+$B_2(\sigma')$.
+
+Let $A_0$ be the set of permutations avoiding $B_0$, $N_0=|A_0|$, and for
+cells $z_1,\dots$ let $R_0(M)$ denote the number of $\tau\in A_0$ with
+$\tau\supseteq M$ (a punctured count, computable by
+\eqref{eq:punctured}; all components of the punctured board are
+\emph{paths}).  Write
+\[
+N^{(4)}_0=\#\{(\tau,\eta)\in A_0^2:\ \tau\cap\eta=\emptyset\},\qquad
+G(z)=\#\{(\tau,\eta)\in A_0^2:\ \tau\cap\eta=\emptyset,\ z\in\tau\},
+\]
+and analogously $G_2(z,z')$ ($z,z'\in\tau$) and $H(z,z')$ ($z\in\tau$,
+$z'\in\eta$).
+
+\begin{lemma}[switch decomposition; exact]\label{lem:switchIE}
+With $\Delta N^{(4)}=N^{(4)}_n(\sigma')-N^{(4)}_n(\sigma)$,
+\begin{align}
+\Delta N^{(4)}
+&=2\,\mathrm{Br}_G
++2\bigl[G_2(e_1,e_2)-G_2(d_1,d_2)\bigr]
++2\bigl[H(e_1,e_2)-H(d_1,d_2)\bigr],
+\label{eq:switchIE}\\
+\mathrm{Br}_G&:=G(d_1)+G(d_2)-G(e_1)-G(e_2).\notag
+\end{align}
+\end{lemma}
+
+\begin{proof}
+A pair of disjoint rows avoiding $B_2(\sigma)$ is a pair of disjoint
+members of $A_0$ avoiding $d_1,d_2$; inclusion--exclusion over the events
+$d_i\in\tau\cup\eta$ gives
+$N^{(4)}(\sigma)=N^{(4)}_0-U(d_1)-U(d_2)+U(d_1,d_2)$ with
+$U(z)=2G(z)$ (a cell lies in at most one row of a disjoint pair) and
+$U(z,z')=2G_2(z,z')+2H(z,z')$ (using $H(z,z')=H(z',z)$, by swapping
+$\tau,\eta$).  Similarly for $\sigma'$ with $e_1,e_2$; subtract.
+(Verified by complete enumeration at $n=6$: $\Delta N^{(4)}=10=
+2\cdot6+2\cdot(-1)+2\cdot0$; and $n=7$: $400=2\cdot224+2\cdot4-2\cdot28$;
+\texttt{switch.py}.)
+\end{proof}
+
+\begin{remark}[a hidden symmetry]\label{rem:psi}
+The map $\Psi(i,c)=(3-c,\,3-i)\bmod n$ is an involution of the cell grid
+that preserves $B_0$, swaps $d_1\leftrightarrow d_2$, and fixes $e_1$ and
+$e_2$.  It induces the involution
+$\tau\mapsto\Psi(\tau)$, $\Psi(\tau)(i)=3-\tau^{-1}(3-i)$, of $A_0$,
+which preserves disjointness of pairs.  Hence $G(d_1)=G(d_2)$
+\emph{exactly} (confirmed by exact computation at $n=8,\dots,11$), while
+$G(e_1)$ and $G(e_2)$ are merely each $\Psi$-invariant.
+\end{remark}
+
+\subsection{The path toolkit}
+
+Let $p_e(x)=\sum_k m_k(P_e)x^k$ be the matching polynomial of the path
+with $e$ edges ($p_0=1$, $p_1=1+x$, $p_e=p_{e-1}+xp_{e-2}$), so that with
+$\alpha_\pm$ as in \S\ref{sec:thirdrow},
+$p_e=(\alpha_+^{\,e+2}-\alpha_-^{\,e+2})/(\alpha_+-\alpha_-)$.
+Extend to negative indices by this formula:
+\[
+p_{-1}=1,\qquad p_{-2}=0,\qquad
+p_{-e}=-(-x)^{\,2-e}\,p_{e-4}\ (e\ge3).
+\]
+
+\begin{lemma}[path Wronskian]\label{lem:wronskian}
+For all integers $a,b$,
+\begin{equation}\label{eq:wronskian}
+p_a\,p_b-p_{a-1}\,p_{b+1}\;=\;-(-x)^{\,b+2}\,p_{a-b-3}.
+\end{equation}
+In particular $p_2p_{C-1}-p_1p_C=-x^3p_{C-4}$ and
+$p_2p_C-p_3p_{C-1}=-x^4p_{C-5}$.
+\end{lemma}
+
+\begin{proof}
+Put $d_m=(\alpha_+^m-\alpha_-^m)/(\alpha_+-\alpha_-)$, so $p_e=d_{e+2}$.
+In the product $(\alpha_+-\alpha_-)^2(p_ap_b-p_{a-1}p_{b+1})$ the
+``diagonal'' terms $\alpha_\pm^{a+b+4}$ cancel and the cross terms give
+\[
+-(\alpha_+\alpha_-)^{b+2}\Bigl[\alpha_+^{a-b}+\alpha_-^{a-b}
+-\alpha_+^{a-b-1}\alpha_--\alpha_-^{a-b-1}\alpha_+\Bigr]
+=-(-x)^{b+2}(\alpha_+-\alpha_-)\bigl(\alpha_+^{a-b-1}-\alpha_-^{a-b-1}\bigr),
+\]
+using $\alpha_+\alpha_-=-x$; divide by $(\alpha_+-\alpha_-)^2$.
+(Verified symbolically for $a,b\in[0,11]$; \texttt{fusion\_lemmas.py}.)
+\end{proof}
+
+The cycle polynomial decomposes over paths:
+$c_m:=\alpha_+^m+\alpha_-^m=d_{m+1}+x\,d_{m-1}$, i.e.
+\begin{equation}\label{eq:cycletopath}
+M_{C_{2m}}(x)=p_{2m-1}(x)+x\,p_{2m-3}(x).
+\end{equation}
+
+For a polynomial $f$ and integer $m\ge0$ define the \emph{IE evaluation}
+$\langle f\rangle_m=\sum_k(-1)^k[x^k]f\cdot(m-k)!$, so that the count of
+permutations of an $m$-set avoiding a board with matching polynomial $f$
+is $\langle f\rangle_m$, and
+\begin{equation}\label{eq:shift}
+\langle x^s f\rangle_m=(-1)^s\langle f\rangle_{m-s}.
+\end{equation}
+
+\subsection{The empty bracket: an exact identity}
+
+Define, for a partial matching $M$ avoiding $B_0$ and compatible with a
+pin $z$ (i.e.\ $M\cup\{z\}$ is again a matching avoiding $B_0$), the
+\emph{bracket}
+\[
+\mathrm{Br}(M)\;=\;R_0(M\cup d_1)+R_0(M\cup d_2)-R_0(M\cup e_1)-R_0(M\cup e_2).
+\]
+
+\begin{proposition}[empty bracket]\label{prop:S0}
+$\mathrm{Br}(\emptyset)=M_{n-4}$.
+\end{proposition}
+
+\begin{proof}
+Pinning a cell $(i,c)$ deletes the vertices $r_i,c_c$ from $B_0$.  Each
+of the four special vertices $r_2,c_1,c_3,r_n$ has degree $1$ in $B_0$,
+so each pin removes exactly two edges; the resulting boards are unions of
+two or three paths.  Grouping the bracket as
+$(R_0(d_1)-R_0(e_1))+(R_0(d_2)-R_0(e_2))$, both differences compare
+end-deletions of two paths within a common board, and
+Lemma~\ref{lem:wronskian} gives, as polynomial identities on the boards,
+\[
+f_{d_1}-f_{e_1}=-x^3p_{2n-9},\qquad
+f_{d_2}-f_{e_2}=-x^4p_{2n-11}
+\]
+(the computation is the generic case of Lemma~\ref{lem:master} below with
+$A=2$, $C=2n-5$, resp.\ $A''=3$, $C''=2n-6$).  Hence by \eqref{eq:shift},
+\[
+\mathrm{Br}(\emptyset)
+=\langle p_{2n-9}\rangle_{n-4}-\langle p_{2n-11}\rangle_{n-5}
+=\bigl\langle p_{2(n-4)-1}+x\,p_{2(n-4)-3}\bigr\rangle_{n-4}
+=\langle M_{C_{2(n-4)}}\rangle_{n-4}=M_{n-4},
+\]
+using \eqref{eq:cycletopath}.  (Verified exactly for $6\le n\le14$;
+\texttt{switch.py}, check~1.)
+\end{proof}
+
+Applying the same identity to single rows instead of pairs gives
+$\Delta N^{(3)}=g(d_1)+g(d_2)-g(e_1)-g(e_2)=M_{n-4}$ with
+$g(z)=R_0(\{z\})$ --- an alternative, ``local'' proof of the $\ell=2$
+case of Theorem~\ref{thm:thirdrow}: the two double-pin terms
+$R_0(\{d_1,d_2\})$ and $R_0(\{e_1,e_2\})$ coincide because both pin pairs
+delete the \emph{same} four vertices $r_2,r_n,c_1,c_3$.
+
+\subsection{Structure of the bracket for general punctures}
+
+Fix a matching $M$ avoiding $B_0$ with $\mathrm{rows}(M)\cap\{2,n\}=
+\mathrm{cols}(M)\cap\{1,3\}=\emptyset$ (so that all four pins are
+compatible; the remaining cases are the \emph{incompatible classes}
+treated in \S\ref{sec:boundary}).  Let $G_M$ denote $B_0$ punctured by
+$M$ and let $f_{M\cup z}$ be the matching polynomial of $G_M$ minus the
+two vertices of $z$, so $R_0(M\cup z)=\langle f_{M\cup z}\rangle_{n-|M|-1}$
+and the bracket polynomial is
+\[
+B_M\;=\;f_{M\cup d_1}+f_{M\cup d_2}-f_{M\cup e_1}-f_{M\cup e_2}.
+\]
+
+\begin{lemma}[valuation]\label{lem:valuation}
+$[x^0]B_M=[x^1]B_M=0$, and
+\[
+[x^2]B_M=\bigl(\mathbf 1_{c_2\text{-column}\notin M}-\mathbf 1_{c_n\text{-column}\notin M}\bigr)
+\bigl(\mathbf 1_{r_3\text{-row}\notin M}-\mathbf 1_{r_1\text{-row}\notin M}\bigr).
+\]
+In particular the valuation of $B_M$ is at least $3$ unless $M$ meets
+exactly one of the columns $\{2,n\}$ \emph{and} exactly one of the rows
+$\{1,3\}$, and it is always at least $2$.
+\end{lemma}
+
+\begin{proof}
+$[x^0]$: each $f$ has constant term $1$.  $[x^1]$: $m_1$ of a vertex-deleted
+graph is $E-\deg u-\deg v$ for nonadjacent $u,v$; the four deletions use
+each of $r_2,r_n,c_1,c_3$ twice with opposite signs, so both the $E$- and
+the degree-terms cancel.  $[x^2]$: $m_2(G\smallsetminus\{u,v\})=
+\binom{E-\deg u-\deg v}{2}-A(G\smallsetminus\{u,v\})$ where $A$ counts
+adjacent edge-pairs.  Writing $a=\deg r_2$, $b=\deg c_3$, $c=\deg r_n$,
+$d=\deg c_1$ (degrees in $G_M$), the binomial terms contribute
+$(a-c)(b-d)$ by the quadratic identity
+$f(a{+}b)+f(c{+}d)-f(a{+}d)-f(c{+}b)=(a-c)(b-d)$ for
+$f(t)=\binom{E-t}{2}$.  Since the graph is bipartite, a row-vertex and a
+column-vertex have no common neighbour, so
+$A(G\smallsetminus\{u,v\})=A(G)-\binom{\deg u}{2}-\binom{\deg v}{2}
+-\sum_{w\sim u}(\deg w-1)-\sum_{w\sim v}(\deg w-1)$; every one of these
+terms appears twice with opposite signs in the bracket, so the $A$-terms
+cancel identically.  Finally $\deg r_2=\mathbf 1[\text{column
+}2\notin\mathrm{cols}(M)]$ (its only $B_0$-edge is the cell $(2,2)$),
+and similarly $\deg r_n=\mathbf 1[c_n\ \mathrm{free}]$,
+$\deg c_3=\mathbf 1[r_3\ \mathrm{free}]$, $\deg c_1=\mathbf 1[r_1\ \mathrm{free}]$.
+(Exhaustive verification for all $|M|\le2$ at $n=9,10$:
+minimal valuation $2$, and valuation $2$ occurs exactly in the predicted
+classes; \texttt{valuation\_scan.py}.)
+\end{proof}
+
+\begin{lemma}[master formula]\label{lem:master}
+Let $M$ be as above.  In $G_M\smallsetminus r_2$, let $A$ be the edge-length
+of the path-piece containing $c_1$ and $C$ the edge-length of the piece
+containing $c_3$; in $G_M\smallsetminus r_n$, let $A''$ and $C''$ be the
+edge-lengths of the pieces containing $c_1$ and $c_3$.  Then, as an
+identity of polynomials,
+\begin{equation}\label{eq:master}
+B_M\;=\;(-x)^{A+1}\,p_{C-A-2}\cdot f^{\mathrm{rest}}_1
+\;-\;(-x)^{A''+1}\,p_{C''-A''-2}\cdot f^{\mathrm{rest}}_2 ,
+\end{equation}
+where $f^{\mathrm{rest}}_i$ are the matching polynomials of the remaining
+pieces.  Moreover $A\le 2$ and $A''\le3$ always, and in the
+\emph{window-avoiding} case --- $M$ meets none of rows $1,3$, columns
+$2,n$, and no piece-end lies within distance $8$ of $c_3$ or $r_n$ ---
+one has $A=2$, $A''=3$, $C''\in\{C,C-1\}$, and
+\begin{equation}\label{eq:generic}
+B_M=-x^3\,p_{C-4}\,p_D\,\textstyle\prod_{\mathrm{mid}}
+-x^4\,p_{C-5}\,p_{D-1}\,\prod_{\mathrm{mid}},
+\end{equation}
+with $D$ the edge-length of the piece containing $r_n$ and
+$\prod_{\mathrm{mid}}$ the product over the interior pieces.
+\end{lemma}
+
+\begin{proof}
+Group $B_M=(f_{M\cup d_1}-f_{M\cup e_1})+(f_{M\cup d_2}-f_{M\cup e_2})$.
+The first difference deletes $r_2$ from $G_M$ and then compares deletion
+of the end-vertices $c_3$ (in its piece of length $C$) and $c_1$ (in its
+piece of length $A$); these lie in distinct components (they descend from
+the distinct components $P^{(2)},P^{(1)}$ of $B_0$), so the difference is
+$\bigl[p_{C-1}p_A-p_Cp_{A-1}\bigr]\cdot f^{\mathrm{rest}}_1$, which is
+$(-x)^{A+1}p_{C-A-2}f^{\mathrm{rest}}_1$ by \eqref{eq:wronskian}.  The
+second difference is handled identically after deleting $r_n$ (with the
+roles of $c_1,c_3$ reversed, whence the minus sign).  $A\le2$, $A''\le3$
+because every piece of $P^{(1)}$ has at most $3$ edges.  In the
+window-avoiding case $P^{(1)}$ is intact, so $A=2$ ($P^{(1)}\smallsetminus
+r_2=c_1r_1c_2$) and $A''=3$; deleting $r_n$ shortens only the
+$r_n$-piece, so $C''=C$ if the $c_3$- and $r_n$-pieces are distinct
+($C''=C-1$ if $M$ leaves $P^{(2)}$ uncut).  Substituting gives
+\eqref{eq:generic}.  (Verified as exact integer identities on random
+generic $M$ with $1\le|M|\le4$ at $n=9,11,13$;
+\texttt{fusion\_lemmas.py}.)
+\end{proof}
+
+\subsection{A uniform estimate for punctured path boards}
+
+\begin{lemma}[uniform punctured estimate]\label{lem:uniform}
+There are absolute constants $m_0, C_0$ with the following property.
+Let $F$ be a disjoint union of paths with $E$ edges, considered as a
+board in an $m\times m$ grid, $E\le 2m$, $m\ge m_0$.  Then
+\[
+\langle M_F\rangle_m\;=\;m!\,e^{-E/m}\,(1+\theta),
+\qquad |\theta|\le C_0/m .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $S=\langle M_F\rangle_m/m!=\sum_k(-1)^k m_k/(m)_k$.  By Bonferroni
+(the summands are the inclusion--exclusion of the events ``the
+permutation hits a fixed cell of $F$''), the partial sums alternate
+around $S$, so for every $K$,
+$\bigl|S-\sum_{k<K}(-1)^km_k/(m)_k\bigr|\le m_K/(m)_K$.
+For $k\le K:=\lceil2\log m\rceil$ we use the two-sided bounds
+$\frac1{k!}\prod_{i<k}(E-3i)\le m_k\le E^k/k!$ (each edge of a
+max-degree-$2$ graph is adjacent to at most two others) and
+$(m)_k=m^ke^{-k^2/2m+O(k^3/m^2)}$, giving
+$m_k/(m)_k=\frac{(E/m)^k}{k!}(1+\delta_k)$ with
+$|\delta_k|\le Ck^2(1/E+1/m)$ when $3K^2\le E$, and
+$m_k/(m)_k\le\frac{(E/m)^k}{k!}e^{k^2/m}$ always.  Summing,
+$\sum_{k<K}(-1)^k\frac{(E/m)^k}{k!}(1+\delta_k)=e^{-E/m}+O(1/m)$
+(the weighted error $\sum_k\frac{(E/m)^k}{k!}k^2(1/E+1/m)=O(1/m)$
+uniformly in $E\le2m$, including small $E$), the truncation tails of the
+exponential series and the Bonferroni tail being
+$O((2e/K)^K)=O(m^{-2})$.  If $E<3K^2$ the same computation with the
+crude bound $|\delta_k|\le Ck^2/E$ for $k\le\sqrt{E/3}$ and Bonferroni
+truncation there gives the claim directly.
+\end{proof}
+
+\begin{corollary}[weights and moments]\label{cor:moments}
+For $n\ge n_0$ and any matching $M$ avoiding $B_0$ with $|M|=j\le n/2$:
+$q(M):=R_0(M)/N_0\le 2e^{6j/n}/(n)_j$, and consequently
+\[
+\sum_{j\ge0}(j+1)^4\!\!\sum_{M\in\mathcal M_j}\!q(M)^2\;\le\;C_1
+\qquad\text{(absolute constant)} .
+\]
+Moreover $N^{(4)}_0=\sum_M(-1)^{|M|}R_0(M)^2$ (pair inclusion--exclusion,
+Proposition~\ref{prop:pairIE} on $B_0$), and $c_2^{-1}N_0^2\le
+N^{(4)}_0\le N_0^2$ for an absolute $c_2$ and $n\ge n_0$.
+\end{corollary}
+
+\begin{proof}
+The weight bound follows from Lemma~\ref{lem:uniform} applied to numerator
+and denominator ($E$ changes by at most $4j$ under puncturing).  The
+moment bound follows from $|\mathcal M_j|\le (n(n-2))^j/j!$.  The lower
+bound on $N^{(4)}_0$ follows from Bonferroni in the pair
+inclusion--exclusion together with
+$t_j:=\sum_{\mathcal M_j}q(M)^2=\mu^j/j!\,(1+O((j{+}1)/n))$ for
+$j\le5$, $\mu=t_1\in[1,1.5]$, which is a direct consequence of
+Lemma~\ref{lem:uniform}.
+\end{proof}
+
+\subsection{The generic stratum}
+
+\begin{proposition}[generic per-puncture estimate]\label{prop:generic}
+There are $n_0,C$ such that for $n\ge n_0$, every window-avoiding $M$
+with $|M|=j\le n/2$ satisfies
+\[
+\langle B_M\rangle_{n-1-j}
+=\frac{M_{n-4}}{M_n}\,R_0(M)\,\bigl(1+\delta_M\bigr),
+\qquad|\delta_M|\le C\,\frac{j+1}{n}.
+\]
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:generic} and \eqref{eq:shift},
+$\langle B_M\rangle_{n-1-j}
+=\langle p_{C-4}p_D\prod_{\mathrm{mid}}\rangle_{n-4-j}
+-\langle p_{C-5}p_{D-1}\prod_{\mathrm{mid}}\rangle_{n-5-j}$.
+Apply Lemma~\ref{lem:uniform} to both terms and to
+$R_0(M)=\langle p_3\,p_C\,p_D\prod_{\mathrm{mid}}\rangle_{n-j}$; the
+edge counts of the two bracket boards are $E(G_M)-7$ and $E(G_M)-9$, so
+the exponential factors agree with that of $R_0(M)$ up to
+$e^{O((j+1)/n)}$, while the factorial prefactors give
+\[
+\frac{(n-4-j)!-(n-5-j)!\,e^{O(1/n)}}{(n-j)!}
+=\frac{1}{(n-j)_4}\Bigl(1+O\bigl(\tfrac1{n-j}\bigr)\Bigr).
+\]  Since $M_{n-4}/M_n=(n)_4^{-1}(1+O(n^{-2}))$ and
+$(n)_4/(n-j)_4=1+O(j/n)$ for $j\le n/2$, the claim follows.
+\end{proof}
+
+\subsection{Boundary and incompatible classes; the remaining lemma}
+\label{sec:boundary}
+
+Expanding each $G$-term of $\mathrm{Br}_G$ by pair inclusion--exclusion
+over common cells $M\subseteq\tau\cap\eta$ (which automatically avoid the
+pinned row and column) gives the exact stratified form
+\begin{equation}\label{eq:strata}
+\mathrm{Br}_G=\sum_{j\ge0}(-1)^j S_j,\qquad
+S_j=\sum_{M\in\mathcal M_j}\Bigl[\textstyle\sum_{z\in\{d_1,d_2\}}
+R_0^\dagger(M\cup z)-\sum_{z\in\{e_1,e_2\}}R_0^\dagger(M\cup z)\Bigr]R_0(M),
+\end{equation}
+where $R_0^\dagger(M\cup z)=R_0(M\cup z)$ if $M\cup\{z\}$ is a matching,
+$=R_0(M)$ if $z\in M$, and $=0$ otherwise.  ($S_0=M_{n-4}N_0$ by
+Proposition~\ref{prop:S0}; verified together with $S_1,S_2,S_3$ against
+direct enumeration at $n=8,9$; \texttt{switch\_j1.py}.)
+The matchings $M$ fall into three classes:
+\begin{itemize}[leftmargin=2em]
+\item[\textup{(a)}] \emph{window-avoiding} $M$: controlled by
+Proposition~\ref{prop:generic};
+\item[\textup{(b)}] \emph{compatible boundary} $M$ (all pins compatible
+but $M$ meets the window): by Lemmas~\ref{lem:valuation} and
+\ref{lem:master}, $|\langle B_M\rangle_{n-1-j}|\le
+C(n-j)^{-3}(n-j)^{-1}R_0(M)\cdot(n-j)^{\mathbf 1[\mathrm{two\ hits}]}$,
+and the two-hit configurations carry an extra measure factor
+$O((j+1)^2/n^2)$; the total is $O((j{+}1)^2/n)\cdot
+(M_{n-4}/M_n)\sum_{\mathcal M_j}R_0(M)^2$;
+\item[\textup{(c)}] \emph{incompatible classes} ($M$ meets row $2$, row
+$n$, column $1$, or column $3$, or contains a pin cell): here the bracket
+degenerates to two-term or one-term combinations whose individual sizes
+are as large as $(n-j)^{-2}R_0(M)$ (two-term, $x^1$-level) or
+$(n-j)^{-1}R_0(M)$ (one-term, $x^0$-level).
+\end{itemize}
+
+The class-(c) terms are \emph{not} small individually, but they resum:
+summing over the position of the $M$-cell in the critical line
+reconstitutes unpunctured counts,
+$\sum_{c}R_0(M'\cup\{(i,c)\})=R_0(M')$ exactly, and the classes assemble
+into differences of pair counts with prescribed \emph{local coincidence
+events} (e.g.\ $\tau(1)=\eta(1)$, $\tau(2)=\eta(2)$) pinned at $d$- versus
+$e$-cells, which cancel to the same $x^3$ order by
+Lemma~\ref{lem:wronskian} applied after the resummation.  We have carried
+this out numerically but not yet in full generality:
+
+\begin{lemma}[boundary resummation; \textbf{numerically verified, proof
+incomplete}]\label{lem:boundary}
+The total contribution of the class-(c) strata to
+$\sum_j(-1)^jS_j$ is $O\bigl(n^{-1}\,(M_{n-4}/M_n)\,N^{(4)}_0\bigr)$,
+and likewise the $G_2$- and $H$-differences in \eqref{eq:switchIE} are
+$O\bigl(n^{-1}(M_{n-4}/M_n)N^{(4)}_0\bigr)$.
+\end{lemma}
+
+\noindent\emph{Evidence and state of the proof.}
+(i)~Exact class-resolved computations at $n=8$ (all strata $j\le4$) give
+class-(a)$\,=5036$, class-(b)+(c)$\,=-1370$ against
+$\mathrm{Br}_G=3054$ and main scale $M_4N_0=12406$; the critical
+subclass ($M$ meeting rows $1$ and $2$) totals $-0.0611\,M_4N_0$ at
+$n=8$ and $-0.0528\,M_5N_0$ at $n=9$, consistent with $\approx-0.5/n$;
+individual terms in this subclass are $\Theta(n^2)$ larger than their
+resummed total (\texttt{switch\_j1.py}, worry-class scan), which is the
+resummation cancellation at work.
+(ii)~The full quantity is measured directly by exact permanent sums:
+with $E^\pm[A]$ the mean number of disjoint partners over
+$\tau\ni d$-cells resp.\ $e$-cells,
+\[
+\frac{\mathrm{Br}_G\,N_0}{M_{n-4}\,N^{(4)}_0}
+=0.8919,\ 0.8685,\ 0.8818,\ 0.8929
+\qquad(n=8,9,10,11),
+\]
+and the deviation decomposes as
+$m^+(E^+[A]-E^-[A])/(M_{n-4}E[A])=-1.17/n\pm2\%$ ($n=9,10,11$) plus
+$(E^-[A]-E[A])/E[A]=O(n^{-2})$ (\texttt{anatomy.c}), exactly the
+$1-O(1/n)$ shape required.
+(iii)~What remains for a complete proof: the finite family of
+resummation identities for the classes ``$M$ meets two of the four
+critical lines'' and ``$M$ contains a pin cell'', each an application of
+Lemma~\ref{lem:wronskian} to a pair count with $O(1)$ local coincidence
+pins; and routine tail bounds for $j>n/2$.  No new mechanism is needed;
+the bookkeeping is finite but lengthy.\qed
+
+\begin{theorem}[fourth layer; conditional on
+Lemma~\ref{lem:boundary}]\label{thm:layer4}
+For $n\ge n_0$,
+\[
+\log\frac{N^{(4)}_n((2,n{-}2))}{N^{(4)}_n((n))}
+=2\,\frac{M_{n-4}}{M_n}+O(n^{-5}),
+\qquad\text{hence}\qquad
+r_4(n)=r_3(n)\bigl(1+O(n^{-1})\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Combine \eqref{eq:switchIE} and \eqref{eq:strata}.  Classes (a) and (b):
+by Propositions~\ref{prop:generic} and the class-(b) bound, using
+Corollary~\ref{cor:moments} to sum unsigned errors,
+\[
+\sum_j(-1)^jS_j^{(a)+(b)}
+=\frac{M_{n-4}}{M_n}\Bigl[\sum_M(-1)^{|M|}R_0(M)^2\Bigr]\bigl(1+O(n^{-1})\bigr)
+=\frac{M_{n-4}}{M_n}N^{(4)}_0\bigl(1+O(n^{-1})\bigr),
+\]
+where re-completing the class-(c) matchings into the full signed sum
+$\sum_M(-1)^{|M|}R_0(M)^2=N^{(4)}_0$ costs another
+$O(n^{-1})$-relative term ($O(1/n)$ of the pair measure lies in class
+(c)).  Class (c) and the $G_2$-, $H$-differences are
+$O(n^{-1}(M_{n-4}/M_n)N^{(4)}_0)$ by Lemma~\ref{lem:boundary}.  Hence
+$\Delta N^{(4)}=2(M_{n-4}/M_n)N^{(4)}_0(1+O(1/n))$.  Finally
+$N^{(4)}_0=N^{(4)}_n((n))(1+O(1/n))$ (the switch decomposition for
+$N^{(4)}(\sigma)$ against $N^{(4)}_0$, with $G(z)\le e^{\mu}N^{(4)}_0/
+(n-2)$), so $\Delta\log N^{(4)}=2M_{n-4}/M_n+O(n^{-5})$, and
+$r_4-r_3=\Delta\log N^{(4)}-2\,\Delta\log N^{(3)}
+=O(n^{-5})=r_3\cdot O(n^{-1})$.
+\end{proof}
+
+\begin{remark}[general $\ell$; the layer-$k$ programme]
+Choosing $\sigma=(1\cdots n)$ and $\sigma'=(1\cdots \ell)(\ell{+}1\cdots
+n)$ gives boards differing by one switch at distance $\ell$; the same
+calculus applies with $P^{(1)}$ of length $2\ell-1$, and the empty
+bracket is $M_{n-2\ell}$ by the same Wronskian computation, predicting
+$r_4^{(\ell)}=\rho_\ell(1+O(1/n))$ for the $\ell$-cycle layer-4 effect.
+More significantly, nothing in \S\S8.1--8.5 is specific to \emph{two}
+added rows: the switch decomposition and the bracket calculus apply
+verbatim to $N^{(k)}$ for any fixed $k$, with pair counts replaced by
+$(k{-}2)$-tuple counts and Lemma~\ref{lem:uniform} applied to the
+correspondingly punctured boards.  The obstruction to
+$r_k=r_3(1+o(1))$ for growing $k$ is that the boards seen by the last
+rows are no longer unions of two paths --- this is where the cluster
+expansion of TODO~4 takes over.
+\end{remark}

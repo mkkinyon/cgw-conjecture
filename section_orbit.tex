@@ -1,0 +1,531 @@
+%======================================================================
+\section{The orbit bit is a rank condition: an exact interlacement
+formula}\label{sec:orbit}
+
+The open core of the transfer programme of \S\ref{sec:kps} is the
+``non-linear orbit-mixing lemma'': conditionally on a switching orbit,
+the marked bit --- rows $1,2$ in one column cycle of the marked pair
+--- is a cycle-structure functional of a product of a fixed
+permutation with a uniformly random subset of disjoint transpositions,
+and one must show its conditional law is close to $\mathrm{Ber}(1/2)$.
+In this section we prove that this functional is, exactly, a rank
+condition over $\mathbb{F}_2$ in a matrix determined by the orbit ---
+so the ``non-linear'' bit is a (non-linear but completely explicit)
+linear-algebraic event after all, directly comparable to the kernel
+computation that powers the parity theorem of \cite{KPS25} (their
+Lemma~8.5).  The formula turns the orbit-mixing problem into a
+question about ranks of random principal submatrices of a fixed
+interlacement matrix; we then (i) derive an exact identity for the
+conditional bias, (ii) exhibit the extremal configurations, (iii)
+show computationally that in generic position the bias decays like
+$k^{-1/2}$ in the number $k$ of available switches --- far inside the
+$o(1/\log n)$ budget when $k\ge6\log^{11}n$ --- and (iv) reformulate
+the open core accordingly, in an \emph{annealed} form which the
+present data indicate is both sufficient and true, while the
+orbit-by-orbit form stated at the end of \S\ref{sec:kps} is provably
+too strong.  We also record the two supporting lemmas of the
+programme, the supply lemma (\S\ref{sec:supply}) and the conditional
+expander (\S\ref{sec:condexp}), whose proofs are short.
+
+Throughout, $u=$ row $1$ and $v=$ row $2$; $\pi_P$ is the pair
+permutation of a column pair $P$ on the row set (\S\ref{sec:marked}),
+whose cycles are the column cycles of $P$; and the marked bit of an
+instance is $[\,u\sim v \text{ in } \pi_P\,]$, i.e.\ the indicator of
+$B$-status.
+
+%----------------------------------------------------------------------
+\subsection{Chords, interlacement, and the Cohn--Lempel theorem}
+
+Let $\gamma$ be a cyclic permutation of a finite set $V$ (``the
+circle'').  A \emph{chord} is an unordered pair $\{a,b\}\subseteq V$;
+a set of chords is \emph{disjoint} if the pairs are pairwise disjoint.
+Chords $\{a,b\}$ and $\{c,d\}$ \emph{interlace} (on $\gamma$) if $c,d$
+lie in different arcs of the circle determined by $a,b$; a chord
+$\{a,b\}$ \emph{separates} points $u,v\notin\{a,b\}$ if $u,v$ lie in
+different arcs.  For a set $T$ of disjoint chords, identified with the
+product $\tau_T=\prod_{\{a,b\}\in T}(a\,b)$ of the corresponding
+commuting transpositions, the \emph{interlacement matrix}
+$A_T\in\mathbb{F}_2^{T\times T}$ has $(A_T)_{ij}=1$ iff chords $i\neq
+j$ interlace, and zero diagonal.
+
+\begin{theorem}[Cohn--Lempel \cite{CL72}]\label{thm:CL}
+Let $\gamma$ be a single cycle on $V$ and $T$ a set of disjoint
+chords.  Then the number of cycles of $\gamma\,\tau_T$ equals
+$\operatorname{null}_{\mathbb{F}_2}(A_T)+1$.
+\end{theorem}
+
+(We re-verified Theorem~\ref{thm:CL} instance-by-instance over random
+circles and all activation subsets; \texttt{pf\_cl.py}.)
+
+The matrix $A_T$ is alternating (symmetric, zero diagonal), so
+$z^{\mathsf T}A_Tz=0$ for every $z$; this is what drives the next
+lemma.
+
+\begin{lemma}[bordered rank]\label{lem:border}
+Let $A\in\mathbb{F}_2^{m\times m}$ be alternating and
+$x\in\mathbb{F}_2^m$, and let
+$B=\begin{psmallmatrix}A&x\\x^{\mathsf T}&0\end{psmallmatrix}$.  If
+$x\in\operatorname{col}(A)$ then
+$\operatorname{null}(B)=\operatorname{null}(A)+1$; otherwise
+$\operatorname{null}(B)=\operatorname{null}(A)-1$.
+\end{lemma}
+
+\begin{proof}
+If $x=Ay$, add the $y$-combination of the first $m$ columns to the
+last column and the $y$-combination of the first $m$ rows to the last
+row: the border becomes $(0,\dots,0,\;y^{\mathsf T}Ay)=(0,\dots,0,0)$
+since $A$ is alternating; hence
+$\operatorname{rank}(B)=\operatorname{rank}(A)$ and
+$\operatorname{null}(B)=(m{+}1)-\operatorname{rank}A
+=\operatorname{null}(A)+1$.  If $x\notin\operatorname{col}(A)$, then
+$\operatorname{rank}[A\;x]=\operatorname{rank}(A)+1$, and the last row
+$(x^{\mathsf T},0)$ is independent of the rows of $[A\;x]$: a relation
+$x^{\mathsf T}=z^{\mathsf T}A$ would give $x=Az$ by symmetry.  So
+$\operatorname{rank}(B)=\operatorname{rank}(A)+2$ and
+$\operatorname{null}(B)=\operatorname{null}(A)-1$.
+\end{proof}
+
+\begin{theorem}[the bit as a rank condition; single cycle]
+\label{thm:bitrank}
+Let $\gamma$ be a single cycle on $V$, let $u,v\in V$, and let $T$ be
+a set of disjoint chords avoiding $u,v$.  Let $x\in\mathbb{F}_2^{T}$
+be the \emph{separation vector}, $x_i=[\,\text{chord }i\text{
+separates }u,v\,]$.  Then
+\[
+u\sim v\ \text{in}\ \gamma\,\tau_T
+\qquad\Longleftrightarrow\qquad
+x\in\operatorname{col}(A_T).
+\]
+\end{theorem}
+
+\begin{proof}
+Let $e$ denote the chord $\{u,v\}$; since $T$ avoids $u,v$, the set
+$T\cup\{e\}$ is disjoint, its interlacement matrix is the bordered
+matrix of Lemma~\ref{lem:border} (chord $i$ interlaces $e$ iff it
+separates $u,v$), and multiplication of any permutation $\rho$ by
+$(u\,v)$ splits the cycle through $u,v$ if $u\sim v$ in $\rho$ and
+joins two cycles otherwise.  Thus, writing $\rho=\gamma\tau_T$, we
+have $u\sim v$ in $\rho$ iff
+$c(\rho\,(u\,v))=c(\rho)+1$, iff (Theorem~\ref{thm:CL} twice)
+$\operatorname{null}(A_{T\cup e})=\operatorname{null}(A_T)+1$, iff
+(Lemma~\ref{lem:border}) $x\in\operatorname{col}(A_T)$.
+\end{proof}
+
+Both directions of the split/join dichotomy for $(u\,v)$ are the
+switch-toggle mechanism of Lemma~\ref{lem:switchtoggle} in disguise:
+adjoining the virtual chord $e$ is the CGW switch at the marked pair.
+
+%----------------------------------------------------------------------
+\subsection{Arbitrary base permutations and two-sided products}
+
+Two reductions extend Theorem~\ref{thm:bitrank} to the situation
+actually produced by an orbit: the base permutation $\pi_0=\pi_P$ has
+many cycles, and the switch actions multiply on both sides.
+
+\begin{lemma}[passenger construction]\label{lem:passenger}
+Let $\pi_0$ have cycles $C_1,\dots,C_p$ (written as sequences), let
+$s_1,t_1,\dots,s_{p-1},t_{p-1}$ be $2(p-1)$ fresh points, let
+\[
+\gamma=(\,C_1\;s_1\;C_2\;t_1\;s_2\;C_3\;t_2\;\cdots\;
+s_{p-1}\;C_p\;t_{p-1}\,)
+\]
+be the single cycle obtained by the indicated concatenation, and let
+$B=\{\{s_i,t_i\}:1\le i\le p-1\}$ (the \emph{bridges}; pairwise
+disjoint).  Then $\gamma\,\tau_B$ has cycles
+$C_1\cup\{s_1,\dots,s_{p-1}\}$ (with the $s_i$ inserted consecutively
+after the last element of $C_1$) and $C_i\cup\{t_{i-1}\}$ for $2\le
+i\le p$; in particular, deleting the fresh points (first-return map)
+recovers $\pi_0$ exactly, and for any set $T$ of chords on
+$V$ avoiding the fresh points,
+$u\sim v$ in $\pi_0\tau_T$ iff $u\sim v$ in $\gamma\,\tau_{B\cup T}$.
+\end{lemma}
+
+\begin{proof}
+Direct computation of successors in $\gamma\tau_B$: for $x\in C_i$ not
+last, $\gamma\tau_B(x)=\gamma(x)$ is the successor in $C_i$; for the
+last element $x$ of $C_i$ ($i\ge2$), $\gamma(x)=t_{i-1}$ and
+$\gamma\tau_B(t_{i-1})=\gamma(s_{i-1})$ is the first element of $C_i$,
+closing the cycle $C_i\cup\{t_{i-1}\}$; for the last element of $C_1$,
+$\gamma(x)=s_1$, $\gamma\tau_B(s_i)=\gamma(t_i)=s_{i+1}$ for $i<p-1$,
+and $\gamma\tau_B(s_{p-1})=\gamma(t_{p-1})=$ first element of $C_1$
+(the wrap), closing $C_1\cup\{s_1,\dots,s_{p-1}\}$.  Since first
+return commutes with right multiplication by transpositions avoiding
+the deleted points, the last claim follows.
+\end{proof}
+
+\begin{lemma}[point splitting for two-sided products]\label{lem:split}
+Let $\pi_0$ be a permutation of $V$, and let $\rho=\tau_R$,
+$\mu=\tau_M$ be products of transpositions where the chords within $R$
+are pairwise disjoint and likewise within $M$, all avoiding $u,v$, but
+chords of $R$ may meet chords of $M$.  Form the \emph{doubled circle}:
+replace each point $x$ by two consecutive copies $(x,0),(x,1)$ in each
+cycle of $\pi_0$; lift each chord $\{a,b\}\in M$ to
+$\{(a,0),(b,0)\}$ and each $\{a,b\}\in R$ to $\{(a,1),(b,1)\}$.  Then
+all lifted chords are pairwise disjoint, and the permutation
+$\widetilde P=\widetilde{\pi_0}\,\tau_{\widetilde R\cup\widetilde M}$
+of the doubled point set (where $\widetilde{\pi_0}$ is the doubled
+cyclic structure) satisfies: the first-return map of $\widetilde P$ on
+the copies $\{(x,0)\}$ is $(x,0)\mapsto(\pi_0\rho\mu(x),0)$.  In
+particular $u\sim v$ in $\pi_0\rho\mu$ iff $(u,0)\sim(v,0)$ in
+$\widetilde P$.
+\end{lemma}
+
+\begin{proof}
+Compute $\widetilde P$ on the two kinds of points.  On $(x,0)$: the
+only lifted chord that can contain $(x,0)$ is the lift of the
+$M$-chord through $x$ (if any), so
+$\tau(\,(x,0)\,)=(\mu(x),0)$ in every case, and
+$\widetilde{\pi_0}((\mu(x),0))=(\mu(x),1)$: hence $\widetilde
+P((x,0))=(\mu(x),1)$.  On $(x,1)$: the only chord containing $(x,1)$
+is the lift of the $R$-chord through $x$ (if any), so
+$\tau((x,1))=(\rho(x),1)$ and
+$\widetilde{\pi_0}((\rho(x),1))=(\pi_0\rho(x),0)$: hence $\widetilde
+P((x,1))=(\pi_0\rho(x),0)$.  Composing,
+$\widetilde P^2\!\restriction_{\text{copies }0}:
+(x,0)\mapsto(\pi_0\rho\mu(x),0)$, and every second point of each
+$\widetilde P$-cycle is a copy-$0$ point, so the first-return map is
+as claimed and cycle membership transfers.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The master formula for the orbit bit}
+
+Fix an orbit: a base square $L_0\in S(\lambda)$ (any point of the
+orbit), a marked pair $P=\{j,j'\}$, the stable collection
+$\mathcal I_0$ of disjoint stable intercalates in rows $3..n$ (in the
+sense of \cite[\S7]{KPS25}, with respect to a fixed template), and the
+uniform configuration $\omega\in\{0,1\}^{\mathcal I_0}$.  Partition
+the \emph{useful} coordinates by column incidence with $P$:
+$\mathcal I_j$ (meets column $j$ only), $\mathcal I_{j'}$ (column $j'$
+only), $\mathcal I_{jj'}$ (both).  As computed in \S\ref{sec:kps}: a
+switch in $\mathcal I_j$ with rows $\{r,r'\}$ precomposes $\pi_P$ with
+$(r\,r')$; one in $\mathcal I_{j'}$ postcomposes (left-multiplies); one
+in $\mathcal I_{jj'}$ conjugates; all other coordinates fix $\pi_P$.
+Two stable intercalates meeting a common column cannot share a row
+(they would share a cell, contradicting isolation), so the chords
+within each of the families $R:=\mathcal I_j\cup\mathcal I_{jj'}$
+(right side) and $M:=\mathcal I_{j'}\cup\mathcal I_{jj'}$ (left side)
+are pairwise disjoint; between the two sides rows may be shared.
+Writing $\pi(\omega)=M_\omega\,\pi_0\,R_\omega$ and conjugating by
+$M_\omega^{-1}$ (which fixes $u,v$: all supports avoid rows $1,2$),
+\[
+\text{bit}(\omega)
+=[\,u\sim v\ \text{in}\ \pi_0\,R_\omega\,M_\omega\,].
+\]
+Now apply Lemma~\ref{lem:split} (doubling; $M$-chords to copies $0$,
+$R$-chords to copies $1$), then Lemma~\ref{lem:passenger} (bridges
+$B$) to the doubled multi-cycle structure, then
+Theorem~\ref{thm:bitrank} on the resulting single circle:
+
+\begin{theorem}[master formula]\label{thm:master}
+For each orbit there is an explicitly computable alternating matrix
+$\bar A$ over $\mathbb{F}_2$, indexed by the lifted chords of the
+useful coordinates together with the bridge set $B$
+($|B|=\#\text{cycles}(\pi_0)-1$), and a vector $\bar x$ (separation of
+$(u,0),(v,0)$ on the augmented circle), both determined by the
+cyclic-order positions of the intercalate rows in the cycles of
+$\pi_0=\pi_P(L_0)$, such that for every configuration $\omega$,
+\[
+\mathrm{bit}(\omega)=
+\bigl[\,\bar x_{\,\varphi(\omega)\cup B}
+\in\operatorname{col}\bigl(\bar A_{\,\varphi(\omega)\cup B}\bigr)\bigr],
+\]
+where $\varphi(\omega)$ is the set of lifted chords of the active
+useful coordinates (a coordinate in $\mathcal I_{jj'}$ contributes its
+two lifts together).  Consequently the conditional law of the marked
+bit given the orbit is the law of a rank event of a uniformly random
+principal submatrix (containing the frozen block $B$) of the fixed
+matrix $\bar A$.
+\end{theorem}
+
+\emph{Status: PROVED (Theorem~\ref{thm:CL} cited; all other
+ingredients proved above), and VERIFIED instance-by-instance:
+\texttt{pf\_cl.py} checks (CL), (BIT), the passenger construction,
+and randomized two-sided configurations with shared rows and
+conjugating coordinates ($1262$ cases, all activation subsets,
+exhaustively) against direct computation.}
+
+The non-linearity of the bit is thus precisely the non-linearity of
+$S\mapsto\operatorname{null}(\bar A_S)$; the $\mathbb{F}_2$-linear
+parity functionals of \cite{KPS25} correspond to the special case
+where the relevant matrix acts by a fixed linear map on the
+configuration.  The coagulation--fragmentation dynamics
+(\cite{Sch05}) has been integrated out: no walk analysis is needed at
+fixed orbit.
+
+%----------------------------------------------------------------------
+\subsection{The exact bias identity and extremal configurations}
+
+Let $k$ be the number of useful coordinates and, for $S$ a uniform
+random subset, let
+$\mathrm{bias}=\Pr_S[\mathrm{bit}]-\tfrac12$ (conditional on the
+orbit).
+
+\begin{proposition}[bias identity]\label{prop:bias}
+With $e$ the virtual chord $\{(u,0),(v,0)\}$ adjoined to the ground
+set,
+\[
+\mathrm{bias}
+=\tfrac12\,\E_S\bigl[\operatorname{null}\bar A_{S\cup B\cup e}
+-\operatorname{null}\bar A_{S\cup B}\bigr]
+\]
+--- the expected nullity increment of the virtual chord.  Moreover,
+for any single coordinate $i$, the toggle status of $i$ (whether
+flipping $\omega_i$ flips the bit) is a function of
+$\omega_{-i}$ alone, and
+$|\mathrm{bias}|\le\tfrac12\Pr[\,i\text{ does not toggle}\,]$.
+\end{proposition}
+
+\begin{proof}
+The first claim is Lemma~\ref{lem:border} applied at each $S$ (the
+increment is $+1$ exactly on the event $\mathrm{bit}=1$).  For the
+second: multiplying by the transposition of coordinate $i$ splits or
+joins according to the current configuration of the others, and the
+toggle relation is symmetric between $\omega_i=0,1$; conditionally on
+$\omega_{-i}$ with $i$ toggling, the bit is exactly Bernoulli$(1/2)$.
+\end{proof}
+
+Three exactly solvable families calibrate what balance requires
+(all verified in \texttt{pf\_bias.py}):
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Ladders.}  $r$ separating chords, pairwise interlacing
+($\bar A=J+I$ on the ladder, $x=\mathbf 1$), no other chords: the
+kernel computation gives $\mathrm{bit}(S)=[\,|S|\ \text{even}\,]$
+--- the bit collapses to an $\mathbb{F}_2$-linear parity and
+$\mathrm{bias}=0$ exactly, for every $r\ge1$.
+\item \textbf{Nested families.}  $r$ separating chords, pairwise
+non-interlacing ($\bar A=0$, $x=\mathbf 1$):
+$\mathrm{bit}(S)=[S=\emptyset]$, $\mathrm{bias}=2^{-r}-\tfrac12$.
+This is the worst case, and is the exact analogue of the failure
+mode that the expander hypothesis exists to exclude.
+\item \textbf{Cut chords.}  A single separating chord $c$ interlacing
+no other chord (an ``uncrossed cut'') forces $\mathrm{bit}=0$ whenever
+$c$ is active: $e_c$ is then a kernel vector with $x_c=1$, killing the
+rank event.  Hence, exactly,
+$\mathrm{bias}=\tfrac12\,\mathrm{bias}'-\tfrac14\in[-\tfrac12,0]$,
+where $\mathrm{bias}'$ is the conditional bias given $c$ inactive.  In
+particular good structure elsewhere cannot restore balance: with a
+ladder in the remainder ($\mathrm{bias}'=0$), $\mathrm{bias}=-\tfrac14$
+exactly (verified).  Balance is therefore \emph{not} implied by the
+presence of good structure; it requires the \emph{absence} of bad
+structure --- every separating chord must itself be crossed,
+recursively.
+\end{enumerate}
+
+Item 3 has a consequence for the shape of the mixing lemma: no
+argument that only \emph{finds} favourable switches (a ladder) can
+close the programme; the statement must exploit the measure on
+orbits.
+
+%----------------------------------------------------------------------
+\subsection{Generic position: \texorpdfstring{$k^{-1/2}$}{k**-1/2}
+decay, and the annealed reformulation}\label{sec:annealed}
+
+The handoff formulation of the mixing lemma (``conditional bit-law
+$=\frac12+o(1/\log n)$ for all but $o(1/\log n)$ of orbits'') is
+\emph{too strong}: if rows $1,2$ are at distance $O(1)$ along their
+common $\pi_0$-cycle and no intercalate row falls in the short arc
+(an event of probability $\Theta(1/k)$ under any spread-out measure,
+and of constant conditional probability on some $S(\lambda)$-positive
+events), then no available chord separates $u,v$, $x=0$, and
+$\mathrm{bit}\equiv1$: $\mathrm{bias}=+\tfrac12$ on an orbit set of
+measure $\asymp 1/k$, not $o(1/\log n)$ small in general.  The correct
+target is the \emph{annealed} (orbit-averaged) statement, which is
+also all that Theorem~\ref{thm:marked} requires:
+
+\begin{problem}[annealed orbit-mixing --- the revised open core]
+\label{prob:annealed}
+For $L$ uniform on $S(\lambda)$ restricted to the intercalate-expander
+event, $j$ a supplied column (Lemma~\ref{lem:supply}), show
+\[
+\E_L\,\bigl|\mathrm{bias}(\mathrm{orbit}(L),P)\bigr|
+\;=\;o(1/\log n)
+\qquad\text{(averaged over marks as in \S\ref{sec:marked})}.
+\]
+\end{problem}
+
+Computationally, generic position gives far more than is needed.  For
+the ensemble ``$u,v$ and $k$ disjoint chords in uniformly random
+position on a circle'' (all activation subsets exact for $k\le20$,
+Monte Carlo beyond; \texttt{bias\_scale.c}):
+\[
+\begin{array}{lccccc}
+\toprule
+k & 8 & 16 & 32 & 64 & 128\\
+\midrule
+\E|\mathrm{bias}| & 0.124 & 0.099 & 0.075 & 0.044 & 0.032\\
+\text{median} & 0.102 & 0.082 & 0.053 & 0.028 & 0.018\\
+\text{mean (signed)} & +0.015 & +0.000 & -0.000 & +0.000 & +0.007\\
+\bottomrule
+\end{array}
+\]
+i.e.\ $\E|\mathrm{bias}|\approx0.35\,k^{-1/2}$, with the signed mean
+consistent with $O(1/k)$.  The dependence on the $u$--$v$ arc length
+is flat except when the arc contains $O(1)$ chord endpoints (measured:
+at $k=64$, mean bias $+0.12$ with $\approx1$ endpoint-slot in the
+arc, indistinguishable from generic already at $\approx3$); the
+short-arc contribution to the annealed average is therefore
+$O(1/k)$, self-regularizing --- no separate ``join-then-toggle chain
+argument'' is required in the annealed formulation.  With
+$k\ge6\log^{11}n$ (the supply lemma), a bound of quality
+$\E|\mathrm{bias}|\le k^{-c}$ for \emph{any} constant $c>1/11$ closes
+Problem~\ref{prob:annealed}; the generic-position value $c=1/2$ has a
+margin of a factor $5$ in the exponent.
+
+\emph{Status: the reduction of the weak conjecture to
+Problem~\ref{prob:annealed} together with
+Lemmas~\ref{lem:supply}--\ref{lem:condexp} is PROVED modulo the two
+bookkeeping items recorded in Remark~\ref{rem:bookkeeping}; the
+$k^{-1/2}$ scaling is COMPUTED (not proved) and refers to the
+iid-position ensemble, not yet to the true orbit ensemble.}
+
+What would a proof of Problem~\ref{prob:annealed} need?  By
+Proposition~\ref{prop:bias} it suffices to show that under the true
+orbit measure the chord configuration is \emph{generic}: e.g.,
+(i) with probability $1-o(1/\log n)$ every separating chord is
+interlaced by some other available chord (excluding cut chords and
+nested families), and (ii) a quantitative rank-balance for the
+resulting random interlacement matrices.  Both are statements about
+the joint law of the positions, in the cycles of $\pi_P$, of the
+stable-intercalate rows of a uniform $L\in S(\lambda)$ --- a
+concentration/anti-concentration problem, not a worst-case one.  The
+exchangeability of rows $3..n$ (which acts on everything by
+conjugation, though not template-equivariantly) and the
+Harer--Zagier-type computation of expected nullity for random chord
+systems are the natural tools.  [Session-7 update: conditions of
+type (i) are provably insufficient at any fixed crossing
+multiplicity (Proposition~\ref{prop:pendant} and the exhaustive scan
+of \S\ref{sec:pendant}); the productive formalisation of (ii) is the
+second-moment factorization of \S\ref{sec:factor}, which reduces the
+iid model to Problem~\ref{prob:mixing}.]
+
+%----------------------------------------------------------------------
+\subsection{The supply lemma}\label{sec:supply}
+
+\begin{lemma}[supply]\label{lem:supply}
+Let $H$ be a partial Latin square that is an
+$(\ell,\beta)$-intercalate-expander (Definition~8.1 of
+\cite{KPS25}) on $n$ symbols, $n$ large --- in the application,
+$H=T\cap L$; we avoid the letter $P$, which denotes the marked pair
+--- and let $u,v$ be two rows,
+$j'$ a column, and $t\ge1$ with $4t\ell+2t+\ell+2\le\beta n/2$ and
+$\beta\le\tfrac12$ (for general $\beta$ replace the hypothesis by
+$2t\ell+2\le(1-\beta)n$, $t\ell+\ell+1\le(1-\beta)n$; the application
+has $\beta=1/10$).  Then
+for all but fewer than $t\ell$ columns $c\neq j'$ there exist $t$
+stable intercalates of $H$ through $c$, pairwise disjoint in rows,
+partner columns and symbols, all avoiding rows $\{u,v\}$ and column
+$j'$.  Moreover \emph{all} stable intercalates through a common column
+are automatically pairwise row-disjoint (two of them sharing a row
+would share a cell in that column, contradicting isolation).
+With $\ell=\log^{11}n$ and $t=6\ell$: all but $6\log^{22}n$ columns
+carry at least $6\log^{11}n$ such intercalates.
+\end{lemma}
+
+\begin{proof}
+Process rounds $\tau=1,\dots,t$; every column starts alive with an
+empty family, and in round $\tau$ each alive column attempts to add
+one intercalate to its family subject to the constraints; a column
+that fails is declared dead and never retried.  Suppose $\ell$ columns
+die in some round $\tau$.  Each dead column has a current family of
+$\tau-1\le t$ intercalates.  Apply the expander property with:
+$C^*=$ the $\ell$ dead columns; $R=R^*=$ all rows except $u,v$ and the
+$\le 2t\ell$ rows used by the dead columns' families (size $\ge
+n-2-2t\ell\ge\beta n$); $C=$ all columns except $C^*$, $j'$, and the
+$\le t\ell$ used partner columns (size $\ge n-\ell-1-t\ell\ge\beta
+n$); $S=S^*=$ all symbols except the $\le2t\ell$ used ones.  The
+guaranteed stable intercalate has one column $c_0\in C^*$ and avoids
+every constraint of $c_0$'s attempted extension --- contradicting the
+death of $c_0$.  So fewer than $\ell$ columns die per round, hence
+fewer than $t\ell$ die overall, and every surviving column finishes
+with a full family of size $t$.
+\end{proof}
+
+Note that Definition~8.1 is monotone in the five $\beta n$-sets (a
+larger set contains a $\beta n$-subset), which the proof uses freely.
+
+\begin{remark}[bookkeeping for exceptional columns; template
+averaging]\label{rem:bookkeeping}
+Two quantifier items remain to make the assembly fully rigorous, both
+of which we record with proposed fixes rather than proofs.
+(i) \emph{Exceptional marks.}  The $t\ell$ exceptional columns of
+Lemma~\ref{lem:supply} are square-dependent; for merges whose
+$m$-cycles occupy few columns ($\lambda_m m=n^{o(1)}$, say) the
+per-square fraction of bad marks is not automatically $o(1/\log n)$.
+[Session-6 text proposed column-relabelling (template) averaging as
+a fix.  \emph{Withdrawn}: Proposition~\ref{prop:vacuity} shows that
+averaging over relabelled templates $g(T)$ leaves the $X$-averaged
+bad-mark fraction exactly unchanged, by joint equivariance.  The
+genuine requirement is the supply--mark decoupling stated as
+Problem~\ref{prob:decouple}.]
+(ii) \emph{Rows-$1,2$ conditioning.}  The expander Lemma 8.3 of
+\cite{KPS25} is stated for uniform $L$; conditioning on $S(\lambda)$
+is handled by Lemma~\ref{lem:condexp} below, but the supplied
+intercalates must additionally avoid rows $1,2$, which
+Lemma~\ref{lem:supply} already builds in through the row sets $R,R^*$.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{The conditional expander}\label{sec:condexp}
+
+\begin{lemma}[expander conditioned on the type]\label{lem:condexp}
+Let $T$ be the template of \cite[Lem.~8.3]{KPS25} and
+$\ell=\log^{11}n$.  For every type $\lambda$,
+\[
+\Pr\bigl[\,T\cap L\ \text{is an }(\ell,\beta)\text{-intercalate-expander}
+\ \big|\ L\in S(\lambda)\bigr]
+\;\ge\;1-e^{-\omega(n\log^2 n)}.
+\]
+\end{lemma}
+
+\begin{proof}
+$\Pr[\lnot\text{expander}\mid S(\lambda)]\le
+\Pr[\lnot\text{expander}]/\Pr[S(\lambda)]$, and
+$\Pr[\lnot\text{expander}]\le e^{-\omega(n\log^2n)}$ by
+\cite[Lem.~8.3]{KPS25}, so it suffices that
+$\Pr[S(\lambda)]\ge e^{-O(n\log n)}$ for every $\lambda$.  Writing
+$\Pr[S(\lambda)]=D_\lambda N(\lambda)/\sum_\nu D_\nu N(\nu)$:
+every $D_\nu/D_\lambda\le n!/D_\lambda\le e^{O(n\log n)}$ (the worst
+type, all $2$-cycles, has $D_\lambda=n!/(2^{n/2}(n/2)!)\ge
+n!\,e^{-O(n\log n)}$), the number of types is $e^{O(\sqrt n)}$, and
+$N(\nu)/N(\lambda)\le3^{n}$ for all $\nu,\lambda$ by composing the
+two-sided merge bounds ($\frac12\le \CC_n(\text{merge})/
+\CC_n(\text{split})\le\frac32$: the upper bound is
+\cite[Thm.~3.13]{CGW08}, the lower is that theorem or
+Theorem~\ref{thm:marked}) along a path of at most $n$ merges through
+the one-part type.  Combining, $\Pr[S(\lambda)]\ge
+e^{-O(n\log n)}$.
+\end{proof}
+
+In particular no transfer through the comparison machinery
+(\cite[Lem.~4.7]{KPS25}) is needed for the conditioning step: direct
+division of probabilities suffices, for every type simultaneously.
+
+%----------------------------------------------------------------------
+\subsection{Summary of the revised programme}
+
+\begin{enumerate}[leftmargin=2em]
+\item Conditioning is free; orbits re-randomise exactly
+(\S\ref{sec:kps}, unchanged).
+\item Supply: for all but $o(1/\log n)$ of marks, both marked
+columns carry $\ge6\log^{11}n$ disjoint stable switches avoiding
+rows $1,2$ (Lemma~\ref{lem:supply} + Lemma~\ref{lem:condexp}).
+[PROVED for marks in classes of size $\lambda_m m\ge\log^{24}n$,
+where the deterministic bound $|E|\le6\log^{22}n$ gives bad fraction
+$O(1/\log^2 n)$; for smaller classes OPEN as
+Problem~\ref{prob:decouple} --- template averaging does not close
+it, Proposition~\ref{prop:vacuity}.]
+\item The conditional bit given the orbit is an explicit
+$\mathbb{F}_2$ rank event in a fixed interlacement matrix
+(Theorem~\ref{thm:master}).  [PROVED.]
+\item Open core: the annealed bias bound
+(Problem~\ref{prob:annealed}).  Generic position gives
+$\E|\mathrm{bias}|\approx0.35k^{-1/2}$, a factor-$5$ exponent margin
+over the budget; extremal counterexamples (nested families, cut
+chords) show the bound must come from the measure, not from
+worst-case structure.  [OPEN; scaling COMPUTED.]
+\item $\mathrm{EQ}(o(1/\log n))$ then follows by
+Theorem~\ref{thm:marked}, and the weak conjecture by
+Theorem~\ref{thm:reduction}.
+\end{enumerate}

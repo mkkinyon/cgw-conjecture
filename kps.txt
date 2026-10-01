@@ -1,0 +1,3382 @@
+PARITIES IN RANDOM LATIN SQUARES
+
+arXiv:2509.13125v2 [math.PR] 17 Sep 2025
+
+MATTHEW KWAN, KALINA PETROVA, AND MEHTAAB SAWHNEY
+
+Abstract. In a Latin square, every row can be interpreted as a permutation, and therefore has a
+parity (even or odd). We prove that in a uniformly random n × n Latin square, the n row parities
+are very well approximated by a sequence of n independent unbiased coin flips: for example, the total
+variation error of this approximation tends to zero as n → ∞. This resolves a conjecture of Cameron.
+In fact, we prove a generalisation of Cameron’s conjecture for the joint distribution of the row parities,
+column parities and symbol parities (the latter are defined by the symmetry between rows, columns
+and symbols of a Latin square).
+Along the way, we introduce several general techniques for the study of random Latin squares,
+including a new re-randomisation technique via “stable intercalate switchings”, and a new approximation
+theorem comparing random Latin squares with a certain independent model.
+
+1. Introduction
+An n × n Latin square is an n × n array filled with n different “symbols” (usually taken to be the
+integers 1, . . . , n), with the property that each symbol appears exactly once in each row and each column.
+For example, the multiplication table of a group is always a Latin square; in general, Latin squares can be
+interpreted as multiplication tables of a class of algebraic structures called quasigroups. See for example
+[35] for an introduction to this vast subject.
+Each row or column of an n × n Latin square L can be interpreted as a permutation of order n,
+which can be either even or odd. Let Nrow (L) be the number of odd row permutations, and let Ncol (L)
+be the number of odd column permutations. If L is the multiplication table of a group, then either
+Nrow (L) = Ncol (L) = 0 or Nrow (L) = Ncol (L) = n/2. However, for general Latin squares, the row
+and column parities can have much richer behaviour, and much is still unknown. For example, one of
+the most important conjectures in this direction is the Alon–Tarsi conjecture, which (in probabilistic
+language) says that if n is even, and L is a uniformly random n × n Latin square, then
+
+
+
+ 1
+P Nrow (L) is even = P Nrow (L) + Ncol (L) is even ̸= .
+2
+(The first equality is not part of the original conjecture; it was observed by Huang and Rota [30], in a
+paper where they also observed that the Alon–Tarsi conjecture has a number of surprising consequences
+in seemingly unrelated areas of mathematics; see [26] for a modern survey). It was first proved by
+Alpöge [3] that
+
+ 1
+P Nrow (L) is even = + o(1).
+(1.1)
+2
+as n → ∞. In other words, if the Alon–Tarsi conjecture is true, then it is true “just barely”.
+Going far beyond (1.1), it has been suggested by Peter Cameron (in a variety of different sources;
+see for example [7, 10, 11, 12, 13, 14, 15]) that the row parities of a Latin square might be statistically
+completely unconstrained, in the sense that one can model the n row parities of a random Latin square
+by simply making n independent coin flips.
+Conjecture 1.1. Let L be a uniformly random n × n Latin square. Then the distribution of Nrow (L) is
+approximately the binomial distribution Bin(n, 1/2), as n → ∞.
+(Note that exchanging rows does not affect the distribution of L, so the sequence of row parities
+ξ⃗row (L) ∈ (Z/2Z)n has a permutation-invariant distribution. This means that if we condition on Nrow (L),
+then ξ⃗row (L) ∈ (Z/2Z)n is a uniformly random sequence in (Z/2Z)n , constrained to have exactly Nrow (L)
+“1”s. That is to say, in order to understand the distribution of ξ⃗row (L), it is enough to understand the
+distribution of Nrow (L).)
+MK was supported by ERC Starting Grant “RANDSTRUCT” No. 101076777. KP was supported by the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement
+No. 101034413
+. This research was conducted during the period MS served as a Clay Research Fellow.
+1
+
+To elaborate on the attribution/history of Conjecture 1.1: the starting point seems to have been
+the problem session at the British Combinatorial Conference in 1993, where Cameron asked a related
+question that was extended by Jeannette Janssen. However, at that time they did not seem to be very
+confident that the statement of Conjecture 1.1 was actually true (in the BCC problem list [10] they
+phrase the question as “is it true that...”). Cameron later posed the problem more assertively in a 2002
+survey on permutations and permutation groups [7], and it seems he first referred to it as a “conjecture”
+in a 2003 lecture on random Latin squares [11]. However, as far as we can tell, he never stated the
+problem in a fully precise form (always using language like “approximately”).
+There are many different ways to compare distributions, to make rigorous sense of the word “approximately”; in this paper we confirm Conjecture 1.1 in many different senses. For example, one strong way
+to compare distributions is in terms of total variation distance: for two probability distributions µ, ν on
+the same space, write dTV (µ, ν) = supA |µ(A) − ν(A)| (so for any event A, the probabilities of A with
+respect to µ and ν differ by at most dTV (µ, ν)). The following theorem is a consequence of our main
+(technical) result.
+Theorem 1.2. Let L be a uniformly random n × n Latin square. Then
+
+lim dTV Nrow (L), Bin(n, 1/2) = 0.
+n→∞
+
+Equivalently, writing ξ⃗row (L) ∈ (Z/2Z)n for the sequence of parities of rows of L, and writing Unif((Z/2Z)n )
+for the uniform distribution on (Z/2Z)n , we have
+
+lim dTV ξ⃗row (L), Unif((Z/2Z)n ) = 0.
+n→∞
+
+We can actually prove much more than Theorem 1.2; we will discuss this momentarily, but first it is
+worthwhile to briefly discuss why this conjecture took so long to be resolved (and, in our opinion, why
+it is so interesting). Generally speaking, it is quite easy to make plausible predictions about uniformly
+random Latin squares, by making various kinds of approximate independence assumptions (for example,
+Cameron’s conjecture can be justified from the point of view that there is “no obvious reason” for the
+parities of different rows to be correlated). However, it is surprisingly difficult to rigorously prove anything
+nontrivial about uniformly random Latin squares, or even to study them empirically.
+The main issues are that Latin squares do not enjoy any neat recursive structure, and they are very
+“rigid” objects, in the sense that there are only very limited ways to make a “local perturbation” to
+change a Latin square into another one. To highlight the difficulties here, we remark that (despite some
+very ambitious conjectures; see [1, Section 4.1]) we still have a rather poor understanding of the total
+number of n × n Latin squares (the best known upper and lower bounds differ by exponential factors;
+see [56, Section 17]), and there is no rigorously justified way to efficiently sample a uniformly random
+Latin square (there are certain ergodic Markov chains on the space of n × n Latin squares [31, 51], but
+these are not known to be rapidly mixing). By now, there are quite a few known results about random
+Latin squares; the proofs of many of these results have required fundamental new additions to a very
+limited toolbox of techniques, and Theorem 1.2 is no exception (we discuss existing and new techniques
+in Section 2).
+1.1. Row, column and symbol permutations. Our proof techniques actually allow us to go beyond
+Cameron’s conjecture, to approximate not just the distribution of Nrow (L) but also the joint distribution
+between Nrow (L), Ncol (L) and a third parameter Nsym (L), which counts the number of odd symbol
+permutations. Perhaps the most natural way to define a symbol permutation is to reinterpret a Latin
+square in a way that emphasises the natural symmetry between rows, columns and symbols: indeed,
+observe that an n × n Latin square (with symbols 1, . . . , n) can be interpreted as an n × n × n array
+in which every entry is “0” or “1”, such that every two-dimensional “slice” of this array is a permutation
+matrix1. So, the row and column permutations correspond to slices in two of the three possible directions,
+and the symbol permutations correspond to slices in the third direction.
+The row, column and symbol parities cannot vary completely freely: it was proved by Janssen [34]
+and Zappa [58] that for any Latin square L of order n, we have
+Nrow (L) + Ncol (L) + Nsym (L) = f (n)
+
+(mod 2),
+
+1The correspondence is that if the Latin square has symbol s in the (i, j)-entry, then we put a “1” in the (i, j, s)-entry
+of the corresponding n × n × n array.
+2
+
+where
+
+(
+f (n) =
+
+0
+1
+
+if n = 0 or 1
+if n = 2 or 3
+
+(mod 4)
+(mod 4).
+
+Subject to this constraint, we are able to prove the natural extension of Cameron’s conjecture to
+row, column and symbol parities. Specifically, let µ∗ be the conditional distribution of three independent Bin(n, 1/2) random variables, given that their sum is f (n) mod 2. We are able to prove that
+(Nrow (L), Ncol (L), Nsym (L)) approximately has the distribution µ∗ as n → ∞, in many different senses.
+Theorem 1.3. Let L be a uniformly random n × n Latin square, and let
+⃗ = (X1 , X2 , X3 ) = (Nrow (L), Ncol (L), Nsym (L)).
+X
+Then, the following hold as n → ∞.
+(1) (Law of large numbers) We have the convergence in probability
+1
+p
+(X1 , X2 , X3 ) → (1/2, 1/2, 1/2),
+n
+⃗ satisfies the same law of large numbers as µ∗ .
+i.e., X
+(2) (Central limit theorem) We have the convergence in distribution
+1
+d
+p
+(X1 − n/2, X2 − n/2, X3 − n/2) → N (0, I3 ),
+n/4
+⃗ satisfies the same trivariate central limit theorem as µ∗ .
+i.e., X
+(3) (Local central limit theorem) For all ⃗x = (x1 , x2 , x3 ) satisfying x1 + x2 + x3 = f (n) (mod 2), we
+have
+
+
+1
+(x1 − n/2)2 + (x2 − n/2)2 + (x3 − n/2)2
+⃗ = ⃗x] = 2 ·
+P[X
++ o(n−3/2 ),
+exp
+−
+2(n/4)
+(2π(n/4))3/2
+⃗ satisfies the same local central limit theorem as µ∗ .
+i.e., X
+(4) (Total variation convergence) We have
+⃗ µ∗ ) → 0.
+dTV (X,
+(5) (Large deviation principle) Let H2 : α 7→ −α log2 α − (1 − α) log2 (1 − α) be the base-2 binary
+entropy function, and let I(x1 , x2 , x3 ) = 3 − H2 (x1 ) − H2 (x2 ) − H2 (x3 ). We have
+⃗ ∈ E] ≤ lim sup n−1 log2 P[n−1 X
+⃗ ∈ E] ≤ − inf I(⃗x)
+− inf I(⃗x) ≤ lim inf n−1 log2 P[n−1 X
+⃗
+x∈E ◦
+
+⃗
+x∈E
+
+⃗
+for all Borel E ⊆ R , where E and E denote the closure and interior of E. That is to say, X
+satisfies the same large deviation principle as µ∗ .
+3
+
+◦
+
+Actually, all parts of Theorem 1.3 are really consequences of a single master theorem (Theorem 6.4),
+but we feel the statement of that master theorem is a little too technical for this introduction.
+1.2. Previous work. We end this introduction with a brief discussion of previous work on Cameron’s
+conjecture. The first theorem in this area was due to Häggkvist and Janssen [29], who proved that
+p
+P[Nrow (L) = 0] ≤ ( 3/4 + o(1))n ≈ 0.87n
+(1.2)
+(note that Theorem 1.3(5) implies that2 P[Nrow (L) = 0] ≤ (1/2 + o(1))n ). Second, generalising (1.1),
+Cavenagh and Wanless [18] proved that (Nrow (L), Ncol (L)) is asymptotically equidistributed modulo 2
+(this is a special case of Theorem 1.3(4)). Third, Cavenagh, Greenhill and Wanless [17] proved that the
+probability that the first two rows of L have the same parity lies between 1/4 − o(1) and 3/4 + o(1) (note
+that Theorem 1.3(1) implies that this probability is 1/2 + o(1), using the invariance of the distribution of
+L under permutations of the rows). Until now, these were the only rigorous pieces of evidence towards
+Cameron’s conjecture.
+Surprisingly, empirical evidence for small Latin squares has run counter to Cameron’s conjecture
+(and therefore Theorem 1.3): it seems that the approximations in Theorem 1.3 only start to “kick in”
+for reasonably large n (though, there is a limit to what can be done empirically, because randomly
+2Curiously, the methods in this paper do not directly imply the corresponding lower bound P[N
+row (L) = 0] ≥ (1/2 +
+o(1))n . However, this does seem to be provable with some additional tricks; we intend to explore this in future work with
+Catherine Greenhill and Lenka Kopfová.
+3
+
+sampling Latin squares is a notoriously difficult problem). Cameron himself [15] observed that “evidence
+supports this conjecture fairly well, but the tails of the distribution seem a little heavier than it would
+predict”, suggesting that there might be good reason that the Häggkvist–Janssen bound mentioned
+above is significantly larger than 2−n . Alimohammadi, Diaconis, Roghani and Saberi [1] attempted
+to test Conjecture 1.1 using sequential importance sampling (in the same paper, they gave rigorous
+grounding to this method). They were not able to find any evidence of the total variation convergence3
+dTV (Nrow (L), Bin(n, 1/2)) → 0, with random Latin squares of size n ≤ 15.
+1.3. Notation. We use standard asymptotic notation throughout: for functions f = f (n) and g = g(n),
+we write f = O(g) or g = Ω(f ) to mean that there is a constant C such that |f (n)| ≤ C|g(n)| for
+sufficiently large n, we write f = Θ(g) to mean that f = O(g) and f = Ω(g), and we write f = o(g) or
+g = ω(f ) to mean that f /g → 0 as n → ∞. We will often want to treat certain quantities as constants,
+for the purpose of asymptotic notation; we will always make this clear with phrasing like “fix a constant
+α > 0”.
+Somewhat less standardly, for ε > 0 we write f ± ε to denote a quantity that differs from f by at
+most ε.
+Regarding basic mathematical notation: for a real number x, the floor and ceiling functions are
+denoted ⌊x⌋ = max(i ∈ Z : i ≤ x) and ⌈x⌉ = min(i ∈ Z : i ≥ x). We will however generally omit floor
+and ceiling symbols and assume large numbers are integers, wherever divisibility considerations are not
+important. We write [n] = {1, . . . , n}, and all logarithms are base e unless explicitly stated otherwise.
+Finally, since this paper features so many objects of different types, we adopt some typographical
+conventions: random objects are printed in bold (e.g., a random variable X or a random Latin square
+L), and “ordered” objects are decorated with an arrow (e.g., vectors ⃗x, and later in the paper we will
+consider ordered partial Latin squares P⃗ ).
+1.4. Acknowledgements. The authors would like to thank Lenka Kopfová for helpful feedback on an
+earlier draft of this paper.
+2. Discussion of proof techniques
+In this section we give a high-level overview of the techniques which have previously been brought to
+bear on random Latin squares, and with this context we describe the new ideas that go into the proof
+of Theorem 6.4. (We end the section with an outline of the structure of the rest of the paper.)
+As far as we know, all the rigorous work on random Latin squares uses one of three general classes of
+techniques.
+(1) Permutation-invariance. The distribution of a uniformly random n × n Latin square is invariant under random permutation of the rows, columns, and symbols. So, one can attempt to
+study random Latin squares purely by considering the effect of such random permutations. This
+type of reasoning is rather limited, but does have some applications (see e.g. [9, 47]).
+(2) Enumeration. The most obvious way to study the probability that a random Latin square
+satisfies a property P is to simply count the number of Latin squares satisfying P, and divide
+by the total number of Latin squares. Unfortunately, we only have very crude methods to
+enumerate n × n Latin squares (the best known upper and lower bounds differ by a factor of
+about exp(n log2 n)), so generally speaking this can only be used to study properties that are
+extremely unlikely (i.e., that occur with probability less than about exp(−n log2 n)). Even for
+such properties, actually proving the necessary estimates is often a highly nontrivial matter (and
+often involves consideration of auxiliary random models, as we discuss in Section 2.1). For some
+examples of properties of random Latin squares proved by enumeration, see e.g. [5, 8, 28, 40, 42,
+43, 44, 46, 50].
+(3) Cycle switching. A common technique in probabilistic combinatorics is to study a random
+object by studying the effect of local “switching” operations. Unfortunately, it is very difficult
+to make a controlled local change to a Latin square. To give some idea of the difficulty, it is an
+open question to understand the minimum number f (n) such that every n × n Latin square can
+be transformed into some different Latin square √
+by changing f (n) entries (all we know is that
+f (n) has order of magnitude between log n and n; see [16]). There is only really one type of
+switching operation that has successfully been used to study random Latin squares, namely cycle
+3In fact, they did not even see any evidence of convergence with respect to the so-called Wasserstein metric (Wasserstein
+convergence is significantly weaker than total variation convergence).
+4
+
+switchings (and minor variants thereof). We will define cycle switchings properly in Section 2.3,
+but for now we just emphasise that they are very unwieldy; in general, if we want to make a
+particular local change using a cycle switching, we may be forced to make far-reaching changes
+to the rest of the Latin square. Nonetheless, since cycle switchings are one of very few available
+tools, they have played a crucial role in many of the known results about random Latin squares
+(see e.g. [2, 17, 18, 29, 44]).
+Permutation-invariance alone is certainly not enough to prove Cameron’s conjecture, since any permutation of the rows, columns and symbols affects all the row parities in the same way (though, permutationinvariance can be used to easily show that P[Nrow (L) is even] = 1/2 when n ≥ 3 is odd). At first sight,
+enumeration-based approaches also seem to be fundamentally unsuitable to prove Cameron’s conjecture,
+since we are concerned with events that occur with non-negligible probability, and a multiplicative error
+of exp(n log2 n) would completely overwhelm the main term. So, cycle-switching techniques seem to be
+the most promising avenue towards Cameron’s conjecture; indeed, such techniques underpin the results
+of Häggkvist–Janssen, Cavenagh–Wanless and Cavenagh–Greenhill–Wanless mentioned in the introduction. However, the usual type of switching analysis is far too crude to have any hope of proving anything
+like Theorem 1.2 (we discuss this further in Sections 2.3 and 2.4), and some fundamental new ideas are
+required.
+In this paper, we use a combination of cycle-switching and enumeration-based techniques. To very
+briefly summarise our approach: we use enumeration-based techniques to prove a new approximation
+theorem, comparing a random Latin square to a certain Erdős–Rényi-type random hypergraph (in a
+stronger sense than previously available). This allows us to show that random Latin squares are extremely likely to have a very rich constellation of 2 × 2 subsquares with certain strong disjointness and
+canonicity/stability properties. The special properties of these 2×2 subsquares allow us to independently
+perform many cycle switchings, to “re-randomise” a random Latin square without biasing its distribution.
+We are then able to prove the desired results using the randomness of our independent switchings, via
+some linear algebra over the finite field F2 .
+In the following subsections, we describe the above ideas in more detail.
+2.1. Enumeration and approximation. Let |Ln | be the number of n × n Latin squares. This number
+is known to be
+n2
+n
+,
+|Ln | = 2 + o(n)
+e
+and there are two known ways to prove this.
+(1) We can build up an n × n Latin square in a row-by-row fashion: at each step we choose an option
+for the next row that does not conflict with previous rows. One can use celebrated permanent
+estimates of of Egorychev–Falikman [21,22] and Bregman [6] to show that the number of choices
+for each row does not depend too strongly on previous choices; multiplying these bounds over all
+steps yields
+|Ln |
+exp(−O(n log n)) ≤
+≤ exp(O(n log2 n))
+(n/e2 )n2
+(see [56, Theorem 17.3] for the details).
+(2) We can instead build up an n×n Latin square in an entry-by-entry fashion: at each step we choose
+a row/column/symbol triple that does not conflict with the partial Latin square constructed so
+far, and add it. Unfortunately, the number of choices at each step can depend quite dramatically
+on previous choices; in particular it is possible to “get stuck”, and find oneself in a position where
+there are no legal choices for the next row/column/symbol triple.
+However, it turns out that “on average” (i.e., if one makes random choices at each step), this
+entry-by-entry process is quite well-behaved. Combining a number of very powerful tools, one
+can use this process to prove
+|Ln |
+exp(−O(n2−ε )) ≤
+≤ exp(O(n3/2 )).
+(n/e2 )n2
+for some tiny4 constant ε > 0. The details appear in [41], but are really an adaptation of
+a general enumeration approach systematised by Keevash [39]. Specifically, the upper bound
+is proved using the so-called entropy method of Radhakrishnan [52], in a form pioneered by
+4It is unclear what is the optimal ε with this approach, but certainly ε cannot be greater than 1/2 (this is a general
+barrier for techniques based on the triangle removal process, which we intend to explore further in upcoming work).
+5
+
+Linial and Luria [45]. For the lower bound, one combines an analysis of an instance of the socalled triangle removal process (first studied by Spencer [55] and Rödl and Thoma [53]), with a
+completion theorem of Keevash [37] (here one needs a “second generation” completion theorem,
+building on Keevash’s earlier ideas in the setting of the existence of designs conjecture [36]; see
+also [19, 27, 38]).
+The approaches in (1) and (2) suggest two different ways to study random Latin squares, by comparing
+them to two different auxiliary random models. First, a k × n Latin rectangle is a k × n array filled
+with n different symbols, such that each symbol appears exactly once in each row and at most once in
+each column. The ideas in (1) show that all k × n Latin rectangles can be completed to Latin squares in
+“about the same number of ways” (up to a multiplicative factor5 of about exp(n log2 n)), so if we could
+show that some property is overwhelmingly likely to hold in a random k × n Latin rectangle, then we
+could deduce that that property is also very likely to hold in a random n × n Latin square.
+Similarly, consider the random process in (2) (which can be interpreted as an instance of the so-called
+triangle removal process), and suppose we run this process for just a few steps (until the partial Latin
+square is half-full, say). The ideas in (2) allow us to show that most outcomes of this random process
+can be completed to Latin squares in “about the same number of ways” (up to a multiplicative factor
+of about exp(n2−ε )), so if we had some way to show that the first few steps of this random process are
+overwhelmingly likely to satisfy some property, then we could deduce that that property is also very
+likely to hold in a random n × n Latin square.
+Both of these two methods have quite fundamental quantitative limitations (they can only be used
+to study properties that hold with overwhelming probability), but they have seen many applications.
+To compare the two methods: the first method has much better quantitative aspects, and it is “more
+elementary” (not depending on Keevash’s sophisticated completion machinery). On the other hand, the
+second method is generally much easier to apply: the entry-by-entry random process can be straightforwardly coupled with an Erdős–Rényi random hypergraph, which allows one to take advantage of the
+huge body of techniques that have been developed to study random graphs6. The only known way to
+directly study random Latin rectangles is via delicate switching arguments (taking advantage of the fact
+that it is much easier to make local changes to a Latin rectangle than a Latin square).
+2.2. A new approximation lemma. One of our key contributions in this paper is a new approximation
+lemma (Lemma 4.7) that combines the advantages of both the above methods (and is proved by a delicate
+combination of both methods). Roughly speaking, this lemma says that if one can show that the entryby-entry random process described in the last subsection (i.e., the triangle removal process) satisfies a
+property with probability 1 − ε, then that property holds in a random subset of a random Latin square
+with probability at least 1 − ε exp(O(n log2 n)). The reader may also be interested in an easy-to-apply
+corollary of our main approximation lemma (Corollary 5.5) comparing random Latin squares to Erdős–
+Rényi random hypergraphs.
+For example, these tools could have been used to remove the switching analysis (or remove the
+dependence on general-purpose switching estimates) from [5,28,42,44,50], and remove the dependence on
+Keevash’s completion machinery from theorems in [40,42]. For the present paper, our new approximation
+lemma is rather crucial: quantitative aspects are very important (see Remark 2.1), and the properties we
+need to consider are so complicated that it would have been a herculean task to study them via switching
+on Latin rectangles. We hope that our approximation lemma will also be broadly useful in future work
+on random Latin squares.
+2.3. Cycle switchings. A cycle switching is specified by a pair of rows, a pair of columns or a pair of
+symbols, together with an entry of the Latin square “belonging to that pair”. For example, consider two
+rows r1 , r2 and an entry (r1 , c, s) (meaning that symbol s appears in row r1 of column c). The first step
+of the cycle switching is to “move our entry into the other row”: we put the symbol s into cell (r2 , c).
+However, there was already another symbol s′ in that cell, which we need to move somewhere else; we
+move it to the only available cell, which is (r1 , c). But there is already an instance of s′ in row r1 (in
+some column c′ ), so we move that instance of s′ to the cell (r2 , c′ ). But there was already some symbol
+s′′ in that cell, which we move to (r1 , c′ ). At this point, if we are very lucky, we will have s = s′′ , in
+which case no further moves are necessary, and we have successfully switched to a new Latin square. If
+5Of course, this multiplicative factor depends on k, but it turns out that most of the contribution comes from the last
+few rows, so one cannot gain much by taking k very close to n.
+6The second method is also much more robust, and can be applied in much more general settings than random Latin
+squares, though this is not relevant for the present paper.
+6
+
+not, we can keep going, repeatedly moving entries between r1 and r2 as long as it takes to resolve all
+conflicts and reach a Latin square. (In the worst case, we could end up exchanging the entirety of rows
+r1 and r2 ).
+The smallest possible cycle switching is called an intercalate switching. In the above example, it
+corresponds to the case where s = s′′ , so the entire switching affects just four entries of the Latin square.
+Alternatively, an intercalate switching can be viewed as “flipping a 2 × 2 Latin subsquare”. In general,
+the switchings described above (“row switchings”, where we are switching between two rows r1 and r2 )
+can be viewed as “flipping a 2 × k Latin subrectangle”, for some k.
+Cycle switchings have an easy-to-describe impact on the parities of rows, columns and symbols. For
+example, a row switching changes the parity of every column and symbol involved in the switching, and
+it may or may not change the parity of the two involved rows, depending on whether the length of the
+cycle switching is even or odd. More subtly, cycle switchings also have an impact on the structure of
+other cycle switchings (e.g., switching in a pair of rows can affect the switchings that are possible in some
+pair of columns), so one can consider combinations of cycle switchings with more complicated effects. It
+is even possible to combine multiple “partial” cycle switchings of different types (cf. the “cross-switch”
+operations in [17, 29]).
+One can use these types of switchings to estimate the relative likelihoods of various events. Indeed,
+given two sets of Latin squares A, B, we can design a switching operation to transform a Latin square
+in A into a Latin square in B. Then, for L1 ∈ A we can try to estimate the number of Latin squares in
+B that can be reached by such a switching, and for L2 ∈ B we can try to estimate the number of Latin
+squares in A that can reach L2 by such a switching. Dividing these two estimates gives us an estimate
+on |B|/|A|.
+For example, for a sequence ⃗x ∈ {0, 1}k , let L⃗x be the set of n × n Latin squares for which the
+parities of the first k rows are described by ⃗x. Using the above types of ideas, Häggkvist and Janssen [29]
+managed to show that if k is significantly smaller than n/2, we have |L⃗x | ≤ 3|L⃗y | whenever ⃗x and ⃗y differ
+in a single coordinate, and they iterated this estimate to deduce (1.2). Obviously, this comes very far
+short of proving Cameron’s conjecture; the condition on k and the extraneous factor of 3 are basically
+due to the fact that one has very little control over the structure of cycle switchings in an arbitrary
+Latin square. To make a desired change to the row parities it is necessary to make case distinctions with
+different combinations of cycle switchings that interact in different ways, and it is necessary to reserve a
+large subset of “junk rows” which may be affected by the cycle switchings in unpredictable ways.
+2.4. Individual intercalate switchings. An important point is that we do not actually need to consider cycle switchings in arbitrary Latin squares: we can use the enumeration/approximation methods
+described in Sections 2.1 and 2.2 to prove that Latin squares are very likely to satisfy certain properties,
+and then take advantage of these properties in cycle switching arguments. This sounds like a natural
+approach, but to our knowledge it has never been employed before, because until recently the properties
+that could be proved using enumeration/approximation were extremely limited.
+In particular, a very relevant direction is the study of intercalates (2 × 2 Latin subsquares) in random
+Latin squares. If an intercalate involves two even (respectively, odd) rows, then switching that intercalate
+reduces (respectively increases) the number of even rows by exactly two. So, if we had very tight control
+of the number of intercalates among the even rows, and the number of intercalates among the odd rows,
+we could hope to estimate the ratios
+P[Nrow (L) = x]
+,
+P[Nrow (L) = x + 2]
+
+(2.1)
+
+for all x ∈ N, by considering all the ways to switch a single intercalate. Note that these ratios fully
+determine the distribution of Nrow (L) (except for a possible bias mod 2, but this is handled by (1.1)).
+Recently, resolving a conjecture of McKay and Wanless [50], Kwan, Sah and Sawhney [42] showed how
+to use enumeration/approximation techniques (together with techniques from large deviations theory) to
+prove that L has n2 /4 + o(n2 ) intercalates with probability 1 − o(1). These techniques can be adapted to
+show that L typically has k 2 /4 + o(n2 ) intercalates in any subset of k rows, which allows one to estimate
+the ratio in (2.1) up to a multiplicative factor of 1 + o(n/(x(n − x))). This is already enough to make
+new progress towards Cameron’s conjecture: since binomial tails decay very rapidly, it is straightforward
+to deduce that Nrow (L) = n/2 + o(n) with probability 1 − o(1); that is, Nrow (L) satisfies the same law of
+large numbers as Bin(n, 1/2). This implies Theorem 1.3(1), and with a bit more work it is also possible
+to prove the large deviation principle in Theorem 1.3(5) using this type of idea.
+7
+
+That is to say, by studying the effect of switching an intercalate, one can estimate the ratios (2.1)
+tightly enough to study the tails of Nrow (L) (and Ncol (L) and Nsym (L)). Unfortunately, it is not feasible
+to study the bulk of
+√ the distribution of Nrow (L) this way: since the fluctuations of Bin(n,
+√ 1/2) have
+order of magnitude n, one would need to control the ratios (2.1) up to a factor of 1 + o(1/ n); roughly
+speaking, this is comparable to showing that the number of intercalates Y in L satisfies P[|Y−EY| > t] =
+o(1) for some t = o(n3/2 ). While we believe this to be true, it is beyond the reach of enumeration-based
+techniques: due to clustering phenomena in the upper tail of Y, the relevant deviation probabilities are
+simply not small enough7 to tolerate the super-exponential error terms described in Section 2.1. (This
+is an instance of Janson’s “infamous upper tail” [33], and is discussed further in [42].)
+2.5. Multiple intercalate switchings. So, instead of studying the effect of a single intercalate switching, our approach is to make many disjoint intercalate switches at the same time.
+A naïve approach for this is as follows. Using our new approximation theorem, together with techniques from [40,42], one can show that a random n×n Latin square L typically has a collection of disjoint
+intercalates I which “robustly span almost all the rows”, in the sense that for every set R0 of about8 log2 n
+rows, there is an intercalate in I which involves a row in R0 and a row outside R0 . Some simple linear
+algebra over F2 then shows that if we were to randomly and independently switch all the intercalates
+in I (thereby obtaining a new random Latin square L′ ), the resulting distribution of the n row parities
+would be uniform on some affine-linear subspace of Fn2 with codimension at most about log2 n, and it
+is easy to deduce a central limit theorem for Nrow (L′ ). (With a more sophisticated argument, one can
+handle the joint distribution of (Nrow (L′ ), Ncol (L′ ), Nsym (L′ )) and upgrade the central limit theorem to
+a local central limit theorem.)
+Remark 2.1. We are really proving a central limit theorem for Nrow (L′ ) conditioned on an outcome of
+L. So, it is important that for different outcomes of L, the corresponding conditional distributions of
+′
+Nrow (L
+√ ) are statistically indistinguishable. This would not be true if the√codimension above were greater
+than n, since the fluctuations of Bin(n, 1/2) have order of magnitude n. So, the quantitative aspects
+of our new approximation theorem are very important here. (E.g., the approximation theorem in [40]
+would not have sufficed.)
+Unfortunately, this only characterises the distribution of Nrow (L′ ), which could in principle be very
+different to the distribution of Nrow (L). The problem is that switching some intercalates can destroy
+other intercalates, or create new ones, so the probability of switching from L to L′ could be different
+from the probability of switching from L′ to L (i.e., the switching could “push probability mass” towards
+a subset of Latin squares, introducing bias to the distribution of L′ ). Trying to quantify this bias takes
+us back to the issues described in Section 2.4.
+The only way we were able to resolve this issue was to execute the entire argument above with
+a stable/canonical collection of disjoint intercalates. Specifically, we associate a collection of disjoint
+intercalates I(L) to each Latin square L, in such a way that if we switch any subset of these intercalates
+to obtain a new Latin square L′ , then I(L) and I(L′ ) are exactly the same (except that obviously some
+of these intercalates are switched). So, the probability of switching from L to L′ , and the probability of
+′
+switching from L′ to L, are both exactly 2−|I(L)| = 2−|I(L )| , and L′ is a uniformly random Latin square.
+In a typical Latin square, the intercalates heavily intersect each other (and therefore cannot be independently switched). Given a pair of intersecting intercalates, how do we decide which is “the canonical
+one” that we’re allowed to switch? Our approach is to randomly sparsify the situation, to reduce the
+intersections between intercalates. Namely, we consider a random “template” T, which describes a sparse
+subset of “switchable” row/column pairs. Then, given a Latin square L, we define a collection of intercalates IT (L) by starting with the collection of intercalates in L which use only row/column pairs in T,
+then deleting the intercalates which are “non-canonical” (the precise definition is a little complicated, but
+e.g. we delete all intercalates in intersecting pairs, and we delete all intercalates that could introduce a
+new intercalate when switched). The idea is that this deletion step should not have a very severe effect,
+since T is sparse. We need to show that a typical outcome of T yields collections of intercalates IT (L)
+which “robustly span almost all the rows” for almost all L, with which we can implement the argument
+described above.
+7For this to work, one would need to be able to estimate the number of n × n Latin squares |L | up to a subexponential
+n
+exp(o(n)) multiplicative error.
+8We cannot go smaller than about log2 n, due to the multiplicative error of about exp(n log2 n) in our enumeration
+estimates.
+8
+
+Actually proving the necessary properties of IT (L) is a very delicate matter (much more so than
+any previous work on random Latin squares), largely due to the aforementioned “infamous upper tail”
+issue. Specifically, because enumerative estimates have super-exponential error terms, most steps of the
+proof need to hold with overwhelming probability, so we constantly need to worry about large deviation
+behaviour. Whenever we need an upper bound on some quantity, we need to be extremely careful to
+avoid situations where clustering phenomena cause upper tails to be too heavy.
+2.6. Outline of the paper. The structure of the proof of Theorem 1.3, as distributed over the rest
+of the paper, is as follows. First (after Section 3, in which we record some standard concentration
+inequalities that will be used throughout the paper), in Section 4 we prove our new approximation
+theorem (Lemma 4.7) relating random Latin squares to the triangle removal process. In Section 5 we
+prove some simple lemmas relating the triangle removal process to Erdős–Rényi random hypergraphs,
+which will be useful in combination with Lemma 4.7.
+In Section 6, we reduce all parts of Theorem 1.3 to a technical “master theorem” (Theorem 6.4)
+giving a precise description of the distribution of (Nrow (L), Ncol (L), Nsym (L)). Then, in Section 7, we
+introduce the notion of a “stable intercalate”, which is an intercalate which can be safely switched without
+affecting any other intercalates. In Section 8 we show how to use linear-algebraic arguments with stable
+intercalate switchings to prove the master theorem described above, given a key lemma (Lemma 8.3)
+on stable intercalates in random Latin squares. Roughly speaking, the key lemma says that there is a
+“template” T (obtained via a sparse random set of row/column pairs), such that for a uniformly random
+Latin square, it is very likely that for any large-enough sets of rows, columns and symbols, we can find
+a stable intercalate (involving only entries in T ) “inside” those sets.
+The rest of the paper is devoted to the proof of Lemma 8.3. In Section 9 we break down this proof into
+two lemmas. First, Lemma 9.11 says that (inside any large-enough sets of rows, columns and symbols)
+there are likely to be many disjoint intercalates (saying nothing about whether they are stable). Second,
+Lemma 9.13 says that there are unlikely to be many entries which lie in certain “bad” arrangements of
+intercalates which could lead to our intercalates being non-stable. (Here, due to “infamous upper tail”
+issues, we cannot hope to consider the number of bad arrangements themselves, only the number of
+entries in them!)
+The first of these lemmas (Lemma 9.11) is proved in Section 10, via a careful 2-step application
+of Freedman’s martingale concentration inequality (using a “maximum disjoint family” technique of
+Bollobás [4]).
+The second lemma (Lemma 9.13) is proved in Section 11, and is much more involved. Here, our
+job is to understand “bad” arrangements of intercalates; there is an enormous range of possibilities for
+the structure of such an arrangement, so the first step is a switching argument (unrelated to the main
+switching argument in Section 8), which shows that every bad arrangement of intercalates can be switched
+to obtain one of four “basic types”, and therefore it suffices to restrict our attention to these types. We
+then carefully study how the four basic types of bad intercalate arrangements can emerge in the triangle
+removal process.
+3. Concentration inequalities
+Throughout this paper we will frequently use a general-purpose concentration inequality for functions
+of independent Bernoulli random variables. The following statement appears as [57, Corollary 6]9; it
+follows from the martingale approach of Freedman [25].
+Theorem 3.1. Let ⃗g = (g1 , . . . , gN ) be a sequence of independent Bernoulli random variables with
+P[gi = 1] = pi . Let f : {0, 1}N → R satisfy |f (⃗g ) − f (⃗g ′ )| ≤ Ki for all pairs ⃗g , ⃗g ′ ∈ {0, 1}N differing only
+in the i-th coordinate, and suppose Ki ≤ K for all i ∈ [N ]. Then for all t ≥ 0, we have
+!
+h
+i
+t2
+.
+P f (⃗g) − E[f (⃗g)] > t ≤ 2 exp − PN
+2 i=1 pi Ki2 + 2Kt/3
+Note that, in order to obtain a strong bound from Theorem 3.1, we need to know that f (⃗g ) is not very
+sensitive to changes in any individual gi . In this respect Theorem 3.1 is similar to the much more wellknown bounded differences inequality of McDiarmid [49] (which is a consequence of the Azuma–Hoeffding
+martingale concentration inequality). However, we need the stronger statement of Theorem 3.1 for its
+essentially-optimal dependence on p1 , . . . , pN .
+9In [57], Theorem 3.1 is stated only for the upper tail of f (⃗
+g); applying it to −f (⃗
+g) yields the lower tail.
+9
+
+We also record a corollary of Theorem 3.1 in the special case of weighted sums of Bernoulli random
+variables (this is basically the standard Chernoff bound).
+Corollary 3.2. Let g1 , . . . , gN be independent Bernoulli random variables, consider weights w1 , . . . , wN ∈
+[0, ∆], and let X = w1 g1 + · · · + wN gN . Then, for any δ > 0 we have
+!
+
+
+δ 2 EX
+.
+P |X − EX| ≥ δEX ≤ 2 exp −
+(2 + 2δ/3)∆
+4. Approximating random Latin squares with the triangle removal process
+In this section, we prove an approximation lemma that relates random Latin squares to the triangle
+removal process (which is a tractable probability distribution on partial Latin squares). To state this
+lemma, we need some preparations. First, it will be convenient for us to take an alternative perspective
+on Latin squares.
+Fact 4.1. An n × n Latin square can be interpreted as a tripartite 3-uniform hypergraph (specifically,
+(3)
+a subgraph of the complete tripartite 3-uniform hypergraph Kn,n,n ), in which every pair of vertices in
+different parts features in exactly one hyperedge.
+To see the correspondence, think of the three parts as the set of rows, the set of columns and the set
+of symbols; a hyperedge (r, c, s) means that symbol s appears in the c-th column of the r-th row.
+From now on, we interchangeably take the hypergraph point of view and the n × n array point of view,
+depending on whichever is most convenient at any given moment (generally speaking, the hypergraph
+point of view is more expressive, and highlights the symmetry between rows, columns and symbols, but
+it is easier to draw pictures with the n × n array point of view).
+Definition 4.2. Let Ln be the set of all n × n Latin squares.
+A partial Latin square is a tripartite 3-uniform hypergraph in which every pair of vertices in different
+parts features in at most one hyperedge (alternatively, one can also interpret this as an n × n array in
+which only some of the entries are filled with
+S symbols). Let Pn,m be the set of all n × n partial Latin
+squares with m hyperedges, and let Pn = m≤n2 Pn,m ⊇ Ln be the set of all n × n partial Latin squares
+(with any number of hyperedges).
+An ordered partial Latin square is a partial Latin square together with an ordering on its hyper⃗ n,m be the set of all n × n ordered partial Latin squares with m hyperedges, and let
+edges. Let P
+S
+⃗n =
+⃗
+P
+m≤n2 Pn,m .
+Now, our approximation lemma will compare uniformly random Latin squares to a distribution on
+(ordered) partial Latin squares; for this to make sense we need a notion of inheritance from a property
+of Latin squares to a property of (ordered) partial Latin squares.
+⃗ ⊆P
+⃗ n be a property of ordered partial Latin squares and let T ⊆ Ln be a property
+Definition 4.3. Let U
+⃗ m (L) to
+⃗ is (ρ, m)-inherited from T if for any L ∈ T , taking P
+of Latin squares. For m ≤ n2 , we say U
+be a uniformly random subset of m hyperedges of L, equipped with a uniformly random order, we have
+⃗ m (L) ∈ U
+⃗ with probability at least ρ.
+P
+⃗ for a desired event T (and
+Remark 4.4. It will often be quite obvious how to specify the property U,
+often, the ordering will play no role). For example, if T is the property of having fewer than (1 − ε)n2 /4
+⃗ to be the property of having fewer than (1 − ε/2)(m/n2 )4 n2 /4
+intercalates, it would make sense to take U
+intercalates. However, as we will see later in the paper, there is sometimes reason to make more exotic
+⃗
+choices for U.
+Remark 4.5. Throughout the paper we will need to consider many different properties of (ordered)
+(partial) Latin squares, and we have attempted to adopt some notational conventions to help the reader
+keep track of the “type” of each property. Specifically, for properties of partial Latin squares, we will
+usually use the letter U (think “unfinished”) and for properties of complete Latin squares we will usually
+use the letter T (think “total”). An arrow on top of a property indicates that it is a property of ordered
+(rather than unordered) partial Latin squares.
+Now, the main lemma of this section concerns the triangle removal process, which we now define.
+10
+
+⃗ n,m ∪ {⊥} obtained as follows. Start with
+Definition 4.6. Let TRP(n, m) be the distribution over P
+the complete tripartite graph Kn,n,n . At each step, choose a uniformly random triangle (among all the
+triangles in the current graph), and remove it. After m steps of this process, the sequence of removed
+⃗ ∈P
+⃗ n,m (unless we ran out of triangles
+triangles can be interpreted as an ordered partial Latin square R
+⃗
+at some point in the process, in which case we take R =⊥).
+We are now ready to state the main result of this section, comparing a uniformly random Latin square
+to the triangle removal process.
+⃗ ⊆P
+⃗ n,m
+Lemma 4.7. Fix constants α ∈ (0, 1) and ρ ∈ (0, 1], and let m = αn2 . Consider properties U
+⃗
+⃗
+and T ⊆ Ln such that U is (ρ, m)-inherited from T . Let R ∼ TRP(n, m) be an ordered partial Latin
+square obtained by m steps of the triangle removal process, and let L ∼ Unif(Ln ) be a uniformly random
+n × n Latin square. Then
+!
+n log2 n
+⃗ ∈ U].
+⃗
+P[R
+P[L ∈ T ] ≤ exp
+1 − α − o(1)
+Lemma 4.7 is a quantitative improvement to [42, Theorem 2.4] (which is itself an adaptation of
+[40, Theorem 2.4]). Our proof of Lemma 4.7 bears some similarities to the proofs in [40, 42], but
+incorporates various additional ideas (related to our use of enumeration results that are stronger but
+much less robust).
+Remark 4.8. It may seem that Lemma 4.7 is not suitable for studying “local” properties (e.g., properties
+concerning a particular vertex v). Such properties are important for the so-called absorption method,
+which (is not relevant for the main results in this paper but) has played a central role in previous work
+on random Latin squares. Indeed, it is not hard to see that with probability at least exp(−O(n)), the
+⃗ has no edges at all containing v, and this probability seems too large to have
+random hypergraph R
+any hope of applying Lemma 4.7 to any interesting local property about v. However, one can generally
+⃗ cf. Remark 4.4. For example (very informally speaking),
+overcome this issue with a judicious choice of U,
+⃗ to be the
+if T is the property that v does not participate in a desired local structure, we can take U
+property that v has high degree but still does not participate in the desired local structure.
+The rest of this section is devoted to the proof of Lemma 4.7. We start with some further definitions.
+Definition 4.9. For an (ordered) partial n × n Latin square P , let G(P ) ⊆ Kn,n,n be the graph which
+contains an edge uv (of Kn,n,n ) if and only if there is no hyperedge of P containing u and v. That is to
+say, G(P ) is the graph of pairs that would need to be covered to complete P to a full Latin square.
+For a graph G ⊆ Kn,n,n , let dens(G) = e(G)/(3n2 ).
+Definition 4.10. We say that a graph G ⊆ Kn,n,n , is ε-triangle-typical if its number of triangles is
+△:ε
+(1 ± ε)n3 dens(G)3 . Let Pn,m
+⊆ Pn,m be the set of partial Latin squares P ∈ Pn,m such that G(P ) is
+△:ε
+⃗ n,m be the set of ordered partial Latin squares P⃗ ∈ P
+⃗ n,m such that for
+⃗
+ε-triangle-typical. Let Pn,m ⊆ P
+each i ≤ m, if we consider the partial Latin square Pi consisting of the first i hyperedges of P⃗ , then
+△:ε
+.
+Pi ∈ Pn,m
+Definition 4.11. We say that a graph G ⊆ Kn,n,n , is γ-quasirandom if for all pairs of vertices u, v in
+γ
+different parts, the number of common neighbours of u and v is (1 ± γ)n dens(G)2 . Let Pn,m
+be the set
+of partial Latin squares P ∈ Pn,m such that G(P ) is γ-quasirandom.
+Remark 4.12. It is not hard to see that if a graph is γ-quasirandom, then it is necessarily O(γ)-triangletypical (this fact is used in the previous approximation lemmas in [40, 42]). However, in our proof of
+Lemma 4.7 (with its strong quantitative aspects), we will need to consider quasirandomness and triangletypicality with quite different parameters.
+In the next two lemmas, we show that for any Latin square L ∈ Ln , if we take a random ordering of
+a random subset of L, then the resulting random object is likely to satisfy certain triangle-typicality and
+quasirandomness properties. This will allow us to assume that various graphs we encounter later in the
+proof are triangle-typical/quasirandom, which will be necessary for our enumeration techniques.
+⃗ αn2 (L) ∈ P
+⃗ n,αn2 be a random
+Lemma 4.13. Fix a constant α ∈ (0, 1). Consider any L ∈ Ln and let P
+2
+−1
+ordering of a random set of αn hyperedges of L. Then, with ε = n log n, we have
+⃗ αn2 (L) ∈
+⃗ △:ε 2 ] ≤ exp(−Ω(log2 n)).
+P[P
+/P
+n,αn
+
+11
+
+⃗ m (L)) is ε-triangle-typical with probability at least
+Proof. Fix some m ≤ αn2 . We will show that G(P
+2
+1 − exp(−Ω(log n)). The statement of the lemma will then follow by a union bound over all m ≤ αn2 .
+⃗ m (L) consists of a uniformly random set of m hyperedges of L. Let Bp (L) be a random
+Note that P
+subset of the hyperedges of L where each hyperedge is taken independently at random with probability
+p = m/n2 . By “Pittel’s inequality” (see e.g. page 17 in [32]), for any property Q of unordered partial
+Latin squares,
+√
+⃗ m (L) ∈
+/ Q].
+P[P
+/ Q] ≤ 3 mP[Bp (L) ∈
+⃗ m (L)), it suffices to show that P[X ∈
+Thus, letting X be the number of triangles in G(P
+/ (1±ε)n3 (1−p)3 ] ≤
+
+exp(−Ω(log2 n)).
+For any v1 ∈ V1 , v2 ∈ V2 , v3 ∈ V3 such that v1 v2 v3 ∈ L, the probability that v1 v2 v3 is a triangle in
+G(Bp (L)) is precisely 1 − p = 1 − m/n2 . On the other hand, if v1 v2 v3 ∈
+/ L, the probability v1 v2 v3 is a
+triangle in G(Bp (L)) is (1 − p)3 , since each pair of vertices among v1 , v2 , v3 is in a distinct hyperedge of
+L, and all these hyperedges need to be absent from Bp (L) in order for v1 v2 v3 to be in G(Bp (L)). Thus,
+µ := E[X] = n2 (1 − p) + (n3 − n2 )(1 − p)3 = Θ(n3 ).
+There are n2 hyperedges in L, and adding or removing a hyperedge from Bp (L) can affect X by at most
+1 + 3(n − 1), since each pair of vertices in e can form a triangle with n − 1 other vertices in G(Bp (L)).
+Thus, by Theorem 3.1, we have
+P[X ∈
+/ (1 ± ε)n3 (1 − p)3 ] ≤ P[|X − µ| ≥ εµ/2]
+
+ε2 µ2 /4
+≤ 2 exp −
+2
+
+2n2 p 1 + 3(n − 1) + 2 1 + 3(n − 1) εµ/6
+
+= exp − Ω(log2 n) ,
+
+where in the first inequality we used that µ − n3 (1 − p)3 = o εn3 (1 − p)3 .
+
+!
+
+□
+
+Lemma 4.14. Fix a constant α ∈ (0, 1). Consider any L ∈ Ln and let Pαn2 (L) ∈ Pn,αn2 be a random
+subset of αn2 hyperedges of L. Let γ = ω(n−1/2 log1/2 n). Then
+γ
+2
+P[Pαn2 (L) ∈
+/ Pn,αn
+2 ] ≤ exp(−Ω(γ n)).
+
+Proof. Let m := αn2 . We will show that G(Pm (L)) is γ-quasirandom with probability at least 1 −
+exp(−Ω(γ 2 n)).
+As in the proof of Lemma 4.13, let Bp (L) be a random subset of the hyperedges of L where each
+hyperedge is taken independently at random with probability p = m/n2 = α. Let Su,v be the set of
+common neighbours of u and v, with respect to the graph G(Bp (L)). It suffices to show that for every
+u, v that are in different parts of G(Bp (L)), it holds that P[|Su,v | ∈
+/ (1 ± γ)n(1 − α)2 ] ≤ exp(−Ω(γ 2 n)).
+A union bound over all pairs of vertices u, v and Pittel’s inequality would then complete the proof.
+Fix some u, v in different parts of G(Bp (L)). Let w be the unique vertex such that uvw is a hyperedge
+of L. Then P[w ∈ Su,v ] = 1 − p. On the other hand, for all w′ ̸= w that are in the same part as w, we
+have P[w′ ∈ Su,v ] = (1 − p)2 (since w′ participates in some hyperedge together with u and in another
+hyperedge together with v, and both of these need to not be selected in Bp (L) to have w′ ∈ Su,v ). Thus,
+for X = |Su,v |,
+µ := E[X] = (1 − p) + (n − 1)(1 − p)2 = Θ(n).
+There are 2n − 1 hyperedges in L that affect X, and adding or removing such a hyperedge from Bp (L)
+can affect X by at most 1. Thus, by Theorem 3.1, we have
+
+
+γ 2 µ2 /4
+P[X ∈
+/ (1 ± γ)n(1 − p)2 ] ≤ P[|X − µ| ≥ γµ/2] ≤ exp −
+= exp(−Ω(γ 2 n)),
+2(2n − 1) + γµ/3
+where in the first inequality we used that µ − n(1 − p)2 = (1 − p)p = o(γµ).
+
+□
+
+We next prove an upper bound on the number of completions of a partial Latin square, under triangletypicality and quasirandomness assumptions.
+Theorem 4.15. Fix a constant α ∈ (0, 1), let γ = o(1) and let ε = n−1 log n. For any partial Latin
+γ
+△:ε
+square P ∈ Pn,αn
+2 ∩ Pn,αn2 , the number |Ln (P )| of completions of P to an n × n Latin square satisfies
+!(1−α)n2
+
+
+(1 − α)2 n
+n log2 n
+|Ln (P )| ≤
+· exp
+.
+e2
+1 − α − o(1)
+12
+
+Proof. For a row x (respectively, column y), we write rx (respectively, cy ) for the number of empty cells
+in that row, in P . Then for an empty cell e = (x, y), we write Qx,y for the set of symbols that do
+not appear in the row or column of e. Note that Qx,y is precisely the set of common neighbours of x
+and y in G(P ). Then, let L(P ) be a uniformly random completion of P . We will estimate the entropy
+H[L(P )] = log |Ln (P )| of L(P ).
+Let E ⊆ [n]2 be the set of empty cells in P . For each e = (x, y) ∈ E, let ze be the symbol in cell e in
+L(P ). So the sequence (ze )e∈E determines L(P ). For any total ordering ≺ on E, we have
+X 
+
+H[L(P )] =
+H ze (ze′ : e′ ≺ e) .
+(4.1)
+e∈E
+
+Now, consider a pair of sequences µ = (µx )x , ν = (νy )y ∈ [0, 1]n (of real numbers in the range [0, 1], which
+we assume to be all distinct from each other). Let λ = (λx,y )x,y be the array defined by λx,y = (µx , νy ).
+We can use λ to define a total order ≺λ on E, via reverse lexicographic order on the pairs λx,y . To be
+precise, write (x′ , y ′ ) ≺λ (x, y) when µx′ > µx or when x′ = x and νy′ > νy . Let Re (λ) be an upper
+bound on the conditional support size
+
+supp ze (ze′ : e′ ≺λ e)
+defined as follows. Re (λ) for e = (x, y) is 1 plus the number of symbols z ∈ Qe \ ze for which µxz < µx
+and νyz < νy , where xz and yz are the row and column such that cells (xz , y) and (x, yz ) contain symbol
+z in L(P ).
+Since Re (λ) is an upper bound on | supp(ze | (ze′ : e′ ≺λ e))|, we have
+
+
+(4.2)
+H ze (ze′ : e′ ≺λ e) ≤ E[log Re (λ)].
+It follows from (4.1) and (4.2) that
+H[L(P )] ≤
+
+X
+
+E[log Re (λ)].
+
+e∈E
+
+
+n2
+be obtained via
+This is true for any fixed λ, so it is also true if λ is chosen randomly: let λ ∈ [0, 1]2
+2n independent random variables µx , ν y each uniformly distributed in [0, 1] (with probability 1 they are
+all distinct). Then
+X
+H[L(P )] ≤
+E[log Re (λ)].
+e∈E
+
+Next, for any completion L of P , any e = (x, y) and any λe = (µx , νy ) ∈ [0, 1]2 , let
+ReL,λe = E[Re (λ) | L(P ) = L, λe = λe ].
+(Note that λe = λe occurs with probability zero, so formally we should condition on λe = λe ± dλe
+and take limits in what follows, but there are no continuity issues so we will ignore this detail). By the
+definition of Re (λ) and linearity of expectation, we have
+ReL,λe = 1 + (|Qe | − 1)µx νy .
+By Jensen’s inequality,
+E[log Re (λ) | L(P ) = L, λe = λe ] ≤ log ReL,λe ,
+so
+h
+i
+E[log Re (λ) | L(P ) = L] ≤ E log ReL,λe
+Z
+
+=
+log 1 + (|Qe | − 1)µx νy dλe .
+[0,1]2
+
+For C > 0 we compute
+Z 1Z 1
+log(1 + Cts) dt ds = log(1 + C) − 2 +
+0
+
+0
+
+where
+
+Z C
+
+log(1 + C) − Li2 (−C)
+,
+C
+
+log(1 − t)
+dt
+t
+0
+is an evaluation of the polylogarithm function, so, as C → ∞,
+Z −C
+Z C
+log(1 − t)
+log(1 + t)
+− Li2 (−C) =
+dt =
+dt
+t
+t
+0
+0
+Li2 (C) = −
+
+13
+
+Z 1
+≤
+0
+
+C−1
+X log(2 + t)
+log(1 + t)
+dt +
+≤ log2 (C + 1) + O(1).
+t
+t
+t=1
+
+Therefore, substituting C = |Qe | − 1, we have
+E[log Re (λ) | L(P ) = L] ≤ log |Qe | − 2 +
+
+(1 + o(1)) log2 |Qe |
+log |Qe | + log2 |Qe | + O(1)
+= log |Qe | − 2 +
+.
+|Qe |
+|Qe |
+
+γ
+Now recall that P ∈ Pn,αn
+2 , and that |Qe | = |Qx,y | is precisely the number of common neighbours of x
+and y in G(P ). Since G(P ) is γ-quasirandom, we have |Qe | = (1 ± γ)n(1 − α)2 = n(1 − α − o(1))2 . Thus,
+using |Qe | ≤ n, and noting that the expression above does not depend on the choice of L, we get
+
+E[log Re (λ)] ≤ log |Qe | − 2 +
+
+log2 n
+,
+(1 − α − o(1))2 n
+
+△:ε
+−1
+Next, since P ∈ Pn,αn
+log n, we have that the number of triangles in G(P ) is
+2 with ε := n
+X
+|Qe | = (1 ± ε)n3 (1 − α)3 .
+e∈E
+
+Since the natural logarithm is a concave function, Jensen’s inequality yields
+!
+P
+
+
+X
+e∈E |Qe |
+≤ |E| log (1 + ε)n(1 − α)2 .
+log |Qe | ≤ |E| log
+|E|
+e∈E
+
+We now get
+!
+log2 n
+log |Ln (P )| = H[L(P )] ≤
+E[log Re (λ)] ≤
+log |Qe | + |E|
+−2
+(1 − α − o(1))2 n
+e∈E
+e∈E
+!
+
+≤ n2 (1 − α) log (1 + ε)(1 − α)2 n − 2 +
+X
+
+X
+
+n log2 n
+.
+1 − α − o(1)
+
+Thus,
+|Ln (P )| ≤
+
+≤
+
+=
+
+!(1−α)n2
+
+
+(1 + ε)(1 − α)2 n
+n log2 n
+· exp
+e2
+1 − α − o(1)
+!(1−α)n2
+
+
+(1 − α)2 n
+n log2 n
+2
+·
+exp
+ε(1
+−
+α)n
++
+e2
+1 − α − o(1)
+!(1−α)n2
+
+
+(1 − α)2 n
+n log2 n
+· exp
+,
+e2
+1 − α − o(1)
+
+recalling that ε = n−1 log n and so exp(ε(1 − α)n2 ) = exp(o(n log2 n)).
+
+□
+
+The next ingredient we will need is a lower bound on the total number of n × n Latin squares.
+The current state of the art is the following bound (obtained via a celebrated result of Egorychev–
+Falikman [21, 22] on permanents of doubly stochastic matrices).
+Lemma 4.16 ([56, Theorem 17.2]). The number of n × n Latin squares is at least
+ n  n2
+|Ln | ≥ 2
+· exp(−O(n log n)).
+e
+Finally, we need the following lemma, which shows that each triangle-typical ordered partial Latin
+square is roughly equally likely to be the outcome of the triangle removal process.
+⃗ ∼
+⃗ △:ε 2 for some ε > 0. Then for R
+Lemma 4.17. Fix a constant α ∈ (0, 1). Consider P⃗ ∈ P
+n,αn
+TRP(n, m), we have
+ 3αn2
+2
+⃗ = P⃗ ] = (1 ± 2ε)αn2 exp O(log n) e
+P[R
+(1 − α)3n (1−α) .
+n
+14
+
+⃗ △:ε ,
+Proof. Let N = n2 . Since P⃗ ∈ P
+n,αN
+⃗ = P⃗ ] =
+P[R
+
+αN
+−1
+Y
+i=0
+
+1
+= (1 ± 2ε)αN n−3αN exp
+(1 ± ε)(1 − i/N )3 n3
+
+αN
+−1
+X
+
+!
+i 
+−3
+.
+log 1 −
+N
+i=0
+
+
+Note that
+αN
+−1
+X
+i=0
+
+
+1
+i + 1
+≤
+log 1 −
+N
+N
+
+Z α
+log(1 − t)dt ≤
+0
+
+αN
+−1
+X
+i=0
+
+
+1
+i 
+.
+log 1 −
+N
+N
+
+We have
+! αN −1
+−1
+
+ αN
+
+X
+X
+i + 1
+1
+i 
+1
+= O(log n).
+log 1 −
+− log 1 −
+≤
+=
+log 1 +
+N
+N
+N − (i + 1)
+N − (i + 1)
+i=0
+i=0
+i=0
+R
+Thus, using the fact that log x = x(log x − 1), we get
+Z α
+αN
+−1
+
+X
+i 
+log(1 − t) dt ± O(log n)
+= 3N
+3
+log 1 −
+N
+0
+i=0
+Z 1
+= 3N
+log s ds ± O(log n)
+1−α
+
+
+= 3N 1(log 1 − 1) − (1 − α) log(1 − α) − 1 ± O(log n)
+
+= 3N − α − (1 − α) log(1 − α) ± O(log n),
+αN
+−1
+X
+
+
+
+so
+exp
+
+αN
+−1
+X
+
+!
+
+i 
+−3
+log 1 −
+= e3N α (1 − α)3N (1−α) exp O(log n) .
+N
+i=0
+
+
+Therefore,
+⃗ = P⃗ ] = (1 ± 2ε)αN exp O(log n)
+P[R
+
+ e 3αN
+(1 − α)3N (1−α) .
+n
+
+□
+
+We are now ready to prove Lemma 4.7.
+⃗ is (ρ, m)Proof of Lemma 4.7. Let N := n2 and ε := n−1 log n and γ := n−1/4 . By the fact that U
+inherited from T and by Lemmas 4.13 and 4.14, we have that for every Latin square L ∈ T , a random
+⃗ m (L) of a random set of m hyperedges of L satisfies
+ordering P
+⃗ m (L) ∈ U
+⃗ ∩P
+⃗ △:ε ∩ P γ
+P[P
+n,αN
+n,αN ] ≥ ρ − o(1),
+γ
+where we say that an ordered partial Latin square is in Pn,αN
+if its underlying unordered partial Latin
+γ
+△:ε
+γ
+⃗
+⃗
+square is in Pn,αN . Thus, letting S := U ∩ Pn,αN ∩ Pn,αN ,
+
+P[L ∈ T ] =
+
+X
+L∈T
+
+X 1
+⃗ m (L) ∈ S]
+1
+P[P
+1
+1 X X ⃗
+≤
+·
+=
+·
+P[Pm (L) = P⃗ ].
+|Ln |
+|Ln |
+ρ − o(1)
+ρ − o(1) |Ln |
+L∈T
+
+L∈T P
+⃗ ∈S
+
+Changing the order of the two sums, we get
+P[L ∈ T ] ≤
+
+X
+1
+⃗ m (L) = P⃗ ],
+P[P
+ρ − o(1)
+⃗ ∈S
+P
+
+⃗ m (L) is a uniformly random ordering of a uniformly random subset of m hyperedges of L. Letting
+where P
+⃗
+|Ln (P )| denote the number of completions of the underlying unordered partial Latin square of P⃗ , we
+have
+⃗ m (L) = P⃗ ] = |Ln (P⃗ )| · 1 · (N − m)! ,
+P[P
+|Ln |
+N!
+since for each Latin square, there are N (N − 1) . . . (N − m + 1) ways to select an (ordered) sequence of
+m hyperedges. Therefore, by Theorem 4.15 and Lemma 4.16,
+P[L ∈ T ] ≤
+
+X
+⃗ ∈S
+P
+
+(ρ−1 + o(1)) ·
+
+|Ln (P⃗ )| (N − m)!
+·
+|Ln |
+N!
+15
+
+≤
+
+X
+
+(ρ−1 + o(1)) ·
+
+ n(1 − α)2 N −|P⃗ |
+
+
+exp
+
+n log2 n
+1 − α − o(1)
+
+
+
+· nO(n)
+
+e2
+
+  2
+X
+n log2 n
+e αN
+(N − m)!
+exp
+· (1 − α)2N (1−α) ·
+≤
+·
+.
+1 − α − o(1)
+n
+N!
+⃗ ∈S
+P
+
+ e2 n2 (N − m)!
+·
+n
+N!
+
+⃗ ∈S
+P
+
+By Stirling’s approximation, we deduce
+
+  2
+X
+n log2 n
+e αN
+N N (1−α) (1 − α)N (1−α) eN
+P[L ∈ T ] ≤
+exp
+·
+· (1 − α)2N (1−α) ·
+· N
+1 − α − o(1)
+n
+N
+eN (1−α)
+⃗
+P ∈S
+
+
+ e 3αN
+X
+n log2 n
+=
+exp
+(1 − α)3N (1−α) .
+1 − α − o(1)
+n
+⃗ ∈S
+P
+
+⃗ ∩P
+⃗ △:ε ∩ P γ
+On the other hand, for each P⃗ ∈ U
+n,αN
+n,αN , by Lemma 4.17 we have
+ 3αN
+⃗ = P⃗ ] ≥ (1 − 2ε)αN e−Θ(log n) e
+(1 − α)3N (1−α)
+P[R
+n
+ e 3αN
+(1 − α)3N (1−α) .
+≥ exp − (2 + o(1))αn log n
+n
+Therefore,
+
+
+
+
+X
+n log2 n
+n log2 n
+⃗
+⃗ ∈ U].
+⃗
+⃗
+exp
+P[L ∈ T ] ≤
+P[R = P ] ≤ exp
+P[R
+1 − α − o(1)
+1 − α − o(1)
+
+□
+
+⃗ ∈S
+P
+
+5. Approximating the triangle removal process
+In this section, we collect some simple lemmas that allow us to analyse the triangle removal process
+via Erdős–Rényi (binomial) random hypergraphs. The latter are defined in terms of independent choices,
+and are therefore much easier to analyse.
+We then use these lemmas to deduce a user-friendly corollary (Corollary 5.5) of Lemma 4.7.
+(3)
+
+Definition 5.1. Let Kn,n,n be the complete 3-uniform 3-partite hypergraph on n + n + n vertices, and
+(3)
+let G(3) (n, p) be the probability distribution on subgraphs of Kn,n,n obtained by including each possible
+hyperedge with probability p independently.
+Note that G ∼ G(3) (n, p) may not be a partial Latin square, as it may contain two hyperedges
+intersecting in more than one vertex. Call this a conflict.
+Now, our first lemma is similar to [24, Lemma 2.6]. It approximates the triangle removal process with
+a binomial random hypergraph, for properties U that are monotone increasing in the sense that P ∈ U
+and P ⊆ P ′ then P ′ ∈ U (i.e. “adding additional hyperedges doesn’t hurt”). For multiple-exposure
+arguments, it will be important that this lemma can handle the triangle removal process started from a
+proper subgraph of Kn,n,n .
+Definition 5.2. For a partial Latin square P , let TRP(P, m) be the partial Latin square distribution obtained with m steps of the triangle removal process starting from G(P ). Thus, an outcome of TRP(P, m)
+always has m hyperedges, and none of these hyperedges conflict with P (unless we run out of triangles
+and get the outcome “⊥”)
+Lemma 5.3. Fix constants γ, α1 , α2 such that γ > 0, and α1 , α2 ∈ [0, 1] are sufficiently small with respect
+to γ. Define m1 = α1 n2 and m2 = α2 n2 and p = (1 + γ)α2 /n. Let P ∈ Pn,m1 be a partial Latin square,
+(3)
+and consider a monotone increasing property U of subhypergraphs of Kn,n,n . Let R ∼ TRP(P, m2 ) and
+(3)
+G ∼ G (n, p). Then
+P[R ∈ U] ≤ P[G ∈ U] + exp(−Ω(n2 )).
+Proof. Let G∗ be obtained from G by deleting all hyperedges involved in conflicts. We say that the
+hyperedges of G∗ are isolated in G. Note that we can couple (G∗ , G) and R such that R ⊆ G as long
+as G∗ has at least m2 = α2 n2 hyperedges (to see this, randomly order the hyperedges in G and run the
+triangle removal process on that ordering).
+Let X be the number of hyperedges in G∗ (i.e., the number of isolated hyperedges in G). Note that
+each hyperedge in P conflicts with no more than 3n of the n3 potential hyperedges in G. Thus, there
+16
+
+are at least (1 − 3α1 )n3 potential hyperedges that do not conflict with P . Each of these is present and
+isolated in G with probability at least p(1 − p)3n ≥ (1 + γ)α2 exp(−6(1 + γ)α2 )/n. Thus, we have
+E[X] ≥ (1 − 3α1 )n3 · (1 + γ)α2 exp(−6(1 + γ)α2 )/n ≥ (1 + γ/2)α2 n2 .
+Adding a hyperedge to G can increase X by at most 1, and removing a hyperedge from G can increase
+X by at most 3, by making three hyperedges isolated. Thus, by Theorem 3.1,
+P[X < α2 n2 ] ≤ P[|X − E[X]| ≥ γα2 n2 /2] ≤ exp(−Ω(n2 )).
+Therefore,
+P[R ∈ U] ≤ P[G ∈ U] + P[X < α2 n2 ] = P[G ∈ U] + exp(−Ω(n2 )).
+
+□
+
+The next lemma appears as [42, Lemma 5.2], and handles properties U that are monotone decreasing
+in the sense that if P ∈ U and P ′ ⊆ P then P ′ ∈ U (i.e., “removing hyperedges doesn’t hurt”).
+Lemma 5.4 ([42, Lemma 5.2]). Fix a constant α ∈ (0, 1). Let U ⊆ Pn be a monotone decreasing property
+of partial Latin squares, let10 R ∼ TRP(n, αn2 ), let G ∼ G(3) (n, α/n), and let G∗ be obtained from G
+by deleting all hyperedges involved in conflicts. Then
+P[R ∈ U or R =⊥] = O(P[G∗ ∈ U]).
+For completeness, we reproduce the simple proof of Lemma 5.4 (from [42]).
+Proof. We can couple R and G∗ such that, if e(G) ≤ αn2 , then either G∗ ⊆ R or R =⊥ (to see this,
+randomly order the hyperedges of G and run the triangle removal process on that ordering).
+Since U is monotone decreasing, we have
+P[R ∈ U or R =⊥] ≤ P[G∗ ∈ U | e(G) ≤ αn2 ].
+Since e(G) is binomial with mean αn2 , we have that P[e(G) ≤ αn2 ] = Ω(1). Thus,
+P[R ∈ U or R =⊥] ≤ P[G∗ ∈ U]/P[e(G) ≤ αn2 ] = O(P[G∗ ∈ U]).
+
+□
+
+To illustrate the tools from this section, we conclude this section by stating a corollary of Lemma 4.7,
+which is an easy-to-apply tool for studying random Latin squares. We do not actually use this corollary
+in the present paper (due to some technical issues related to multiple-exposure arguments, we need the
+full power of Lemma 4.7), but we hope that it may be convenient in future work on random Latin squares.
+Note that we have defined (ρ, m)-inheritedness (in Definition 4.3) only for properties of ordered partial
+Latin squares, but in what follows we extend this definition to unordered partial Latin squares in the
+natural way.
+Corollary 5.5. Fix constants α ∈ (0, 1) and ρ ∈ (0, 1), and let m = αn2 . Let T be a property of n × n
+(3)
+Latin squares and let U be a property of subhypergraphs of Kn,n,n , such that U is (ρ, m)-inherited from
+T . Let L be a uniformly random n × n Latin square.
+(1) If U is a monotone decreasing property, we have
+
+P[L ∈ T ] ≤ exp O(n log2 n) P[G∗ ∈ U],
+where G ∼ G(3) (n, α/n), and G∗ is obtained from G by deleting all hyperedges involved in
+conflicts.
+(2) If U is a monotone increasing property, then for any constant γ > 0, if α is sufficiently small
+with respect to γ, we have
+
+P[L ∈ T ] ≤ exp O(n log2 n) P[G ∈ U ] + exp(−Ω(n2 )),
+where G ∼ G(3) (n, (1 + γ)α/n).
+Part (1) is obtained by combining Lemma 4.7 with Lemma 5.3 (with P = ∅ and α1 = 0 and α2 = α),
+and Part (2) is obtained by combining Lemma 4.7 with Lemma 5.4.
+10We previously defined TRP(n, m) as a distribution on ordered partial Latin squares, but here we are somewhat
+abusively viewing it as a distribution on unordered partial Latin squares (we simply ignore the ordering).
+17
+
+6. The master theorem for parity distributions
+All parts of Theorem 1.3 will be deduced from a master theorem which describes the distribution of
+(Nrow (L), Ncol (L), Nsym (L)) in somewhat technical terms. To state this theorem, we need some terminology to describe certain types of distributions that arise naturally from random intercalate switches.
+Definition 6.1. Consider a random vector (c1 +B1 , c2 +B2 , c3 +B3 ), where B1 , B2 , B3 are independent
+binomial random variables satisfying Bi ∼ Bin(ni , 1/2). We say that this random vector is (n, d)-nearbinomial if n − d ≤ ni ≤ n and ci ≤ d for each i.
+The reader should think of d as a “defect parameter”: if d is small, then (n, d)-near-binomial random
+vectors are approximately distributed like three independent copies of Bin(n, 1/2).
+√ We remark that if we
+want this approximation to have o(1) total variation error, then we need d = o( n). Indeed, for each i
+we need E[X
+√i ] − n/2 to be negligible compared to the fluctuations of Bin(n, 1/2) (which have order of
+magnitude n).
+Definition 6.2. Say that a random vector (X1 , X2 , X3 ) ∈ N3 is (n, d)-2-near-binomial if it can be
+obtained from an (n, d)-near-binomial random vector by conditioning on a particular parity (even or
+odd) for each of X1 , X2 , X3 .
+⃗ is a 2-near-binomial mixture with parameters (n, d, ε) if
+Definition 6.3. Say that a random vector X
+⃗ and an event A
+one can define an auxiliary random object Q (on the same probability space as X),
+depending only on Q, such that:
+• P[A] ≥ 1 − ε, and
+⃗ given
+• For any of the possible outcomes Q of Q satisfying A, the conditional distribution of X
+Q = Q is (n, d)-2-near-binomial.
+⃗ is closely approximated by a sequence of three
+If d is small, then the above definition says that X
+independent Bin(n, 1/2) random variables, except for possible biases mod 2. Note that the distribution
+µ∗ featuring in Theorem 1.3 is a 2-near-binomial mixture with parameters (n, 0, 0).
+Now, our main technical theorem is as follows.
+Theorem 6.4. Let L be a uniformly random n × n Latin square. Then (Nrow (L), Ncol (L), Nsym (L)) is
+a 2-near-binomial mixture with parameters
+
+n, O(log11 n), exp(−ω(n log2 n)) .
+6.1. Corollaries of the master theorem. In this subsection we briefly explain how to deduce all parts
+of Theorem 1.3 from our master theorem (Theorem 6.4). This is all quite routine. Note that Theorem 1.2
+is an immediate consequence of Theorem 1.3(4).
+We start with basic consequences of the de Moivre–Laplace local central limit theorem and a large
+deviation principle for binomial distributions.
+⃗ = (X1 , X2 , X3 ) be a (n, o(√n))-2-near-binomial random vector.
+Lemma 6.5. Let X
+(i) Recall that (X1 mod 2, X2 mod 2, X3 mod 2) always takes a common value ⃗v ∈ {0, 1}3 . For any
+⃗x ∈ Z3 satisfying ⃗x = ⃗v mod 2, we have
+
+
+1
+(x1 − n/2)2 + (x2 − n/2)2 + (x3 − n/2)2
+⃗ = ⃗x] = 8 ·
+exp
+−
++ o(n−3/2 ).
+P[X
+2(n/4)
+(2π(n/4))3/2
+(ii) Let H2 : α 7→ −α log2 α − (1 − α) log2 (1 − α) be the base-2 binary entropy function, and let
+I(x1 , x2 , x3 ) = 3 − H2 (x1 ) − H2 (x2 ) − H2 (x3 ). We have
+⃗ ∈ E] ≤ lim sup n−1 log P[n−1 X
+⃗ ∈ E] ≤ − inf I(⃗x)
+− inf I(⃗x) ≤ lim inf n−1 log P[n−1 X
+2
+
+⃗
+x∈E ◦
+
+2
+
+⃗
+x∈E
+
+3
+
+for all Borel E ⊆ R .
+⃗ is obtained from a (n, d)-near-binomial random vector Y
+⃗ by conditioning on the
+Proof. Recall that X
+11
+⃗
+event that Y = ⃗v mod 2 (which occurs with probability exactly 1/8). Now, the de Moivre–Laplace
+local central limit theorem (see e.g. [23, Chapter VII, Section 3, Theorem 1]) tells us that
+!
+
+
+3
+Y
+(x′i − ni /2)2
+1
+−1/2
+⃗
+p
+P[Y = ⃗x] =
+exp −
++ o(n
+)
+2(ni /4)
+2π(ni /4)
+i=1
+11Here we are using that Bin(n, 1/2) is equally likely to be even and odd, which is easy to prove e.g. by induction.
+18
+
+√
+√
+for some n1 , n2 , n3 = n − o( n), and some x′1 , x′2 , x′3 satisfying x′i = xi − o( n). It is easy to see that
+the error terms in the ni and x′i can be absorbed into the main error term (i.e., it makes no difference to
+replace n1 , n2 , n3 with n, and replace each x′i with xi ). The desired result follows, noting that conditioning
+on an event that occurs with probability 1/8 introduces a factor of 8.
+We can similarly deduce (ii) from a large deviation principle for binomial distributions (e.g. Sanov’s
+theorem, see [20, Theorem 2.1.10]12). Actually, this is even simpler than (i), because in this case the
+conditioning mod 2 has a negligible impact.
+□
+Now we are ready to deduce Theorem 1.3.
+Proof of Theorem 1.3. We start with Theorem 1.3(3) (the local central limit theorem). Consider any
+⃗x ∈ Z3 satisfying x1 + x2 + x3 = f (n) (mod 2). By Theorem 6.4, together with Lemma 6.5(i) and the
+⃗ = ⃗x] is of the form
+definition of a 2-near-binomial mixture, P[X
+
+
+
+
+(x1 − n/2)2 + (x2 − n/2)2 + (x3 − n/2)2
+1
+−3/2
+⃗ = ⃗x mod 2] · 8 ·
+exp
++
+o(n
+)
+P[X
+2(n/4)
+(2π(n/4))3/2
++ exp(−ω(n log2 n)).
+⃗ = ⃗x mod 2] =
+By the Cavenagh–Wanless theorem [18] (mentioned in the introduction), we have P[X
+1/4 + o(1), and Theorem 1.3(3) follows.
+We can then deduce Theorem 1.3(4) (total variation convergence) by summing over all ⃗x (using e.g.
+⃗ ∼ µ∗ . For any N , the variance of Bin(N, 1/2)
+Chebyshev’s inequality to control the tails). Indeed, let Z
+is N/4 = O(N ), so (recalling the definition of a 2-near-binomial
+mixture and noting that the means of
+√
+all relevant binomials are within O((log n)11 ) = O( n) of each other), the variance of each component
+⃗ and Z
+⃗ is O(n). Then, for any K ≥ 1, taking Z
+⃗ ∼ µ∗ and writing (n/2)⃗1 = (n/2, n/2, n/2), we have
+of X
+X
+⃗ µ∗ ) = 1
+⃗ = ⃗x] − P[Z
+⃗ = ⃗x]
+dTV (X,
+P[X
+2
+⃗
+x∈Z3
+
+
+√
+√ 
+√ 
+⃗ − (n/2)⃗1∥∞ ≥ K n + P ∥Z
+⃗ − (n/2)⃗1∥∞ ≥ K n
+≤ O((K n)3 ) · o(n−3/2 ) + P ∥X
+≤ o(1) · K 3 + O(1/K 2 ).
+Taking K → ∞ sufficiently slowly, Theorem 1.3(4) follows.
+It is then a near-trivial matter to deduce Theorem 1.3(1–2) (the central limit theorem and law of large
+numbers), since total variation convergence is much stronger than convergence in distribution (see e.g.
+[54, Proposition 1.2]).
+Finally, Theorem 1.3(5) (the large deviation principle) follows from Theorem 6.4 and Lemma 6.5(ii).
+⃗ is a mixture of (n, o(√n))-2-near-binomial distributions except with
+Indeed, Theorem 6.4 says that X
+an exceptional probability exp(−ω(n log2 n)) (which is negligible).
+□
+Remark 6.6. In the above proof, it was convenient to use the Cavenagh–Wanless theorem as a black
+box. However, we remark that given the machinery we developed in Sections 4 and 5, it would be a very
+simple matter to re-prove the Cavenagh–Wanless theorem. Indeed, using this machinery it is easy to
+prove that L is very likely to have a 2 × 3 Latin subrectangle (in the first half of the rows, columns and
+symbols of L, say), and a 3 × 2 Latin subrectangle (in the second half of the rows, columns and symbols
+of L, say), and switching on these two Latin subrectangles mixes between all four different possibilities
+for (Nrow (L), Ncol (L), Nsym (L)) mod 2.
+7. Stable intercalates
+An intercalate in a Latin square is a 2 × 2 Latin subsquare. To switch an intercalate with symbols
+a and b means to replace both occurrences of a with b and vice versa. The result of this operation is
+always another Latin square.
+As discussed in Section 2, we will prove Theorem 6.4 via random intercalate switches. It is very
+important that if we start with a uniformly random Latin square, and perform our random switches,
+the resulting Latin square is still uniformly random. To ensure this, we need to restrict our attention to
+intercalates with a certain stability property. We define this property in such a way that switching stable
+12A simple approximation argument (approximating general open and closed sets with product sets) can be used to
+combine large deviation principles for three independent random variables, see e.g. [48, Lemma 2.8].
+19
+
+intercalates can never create a new intercalate or destroy an existing intercalate (and, in particular, if we
+only ever switch stable intercalates, then the set of available stable intercalate switches never changes).
+Specifically, we define an intercalate to be stable if it does not intersect other intercalates, and if
+switching it and/or some other intercalates cannot make it intersect another intercalate, as follows.
+Definition 7.1. Let P be a partial Latin square. For an intercalate A, we denote by Ā the outcome of
+switching A.
+• We say that an intercalate in P is isolated if it does not share an entry with any other intercalate.
+• Consider a set of isolated intercalates {A1 , . . . , At } in P . We say that this is a critical set of
+intercalates if it is possible to switch a subset of A1 , . . . , At (resulting in intercalates B1 , . . . , Bt
+where Bi = Ai or Bi = Āi for each i ∈ [t]) to create a new intercalate that shares an entry with
+each of B1 , . . . , Bt .
+• We say that an isolated intercalate in P is stable if it is not contained in a critical set of intercalates.
+Observe that a critical set {A1 , . . . , At } may be a subset of another critical set {A1 , . . . , At+1 } (e.g.,
+if switching a subset of A1 , . . . , At creates a new intercalate that intersects At+1 ). Any critical set D has
+size at most 4, since its members A1 , . . . , At are pairwise entry-disjoint, and for each Ai , either Ai or Āi
+shares an entry with the new intercalate that can be produced by switching a subset of D.
+Now, in the following lemma we record the fact that switching stable intercalates leaves the set of
+stable intercalates switches unchanged.
+Definition 7.2. For an intercalate A with rows r1 , r2 , columns c1 , c2 , and symbols s1 , s2 , define the tuple
+σ(A) = ({r1 , r2 }, {c1 , c2 }, {s1 , s2 }) (i.e., this records the rows, columns and symbols of the intercalate,
+without recording which of the two possible “states” it is in). For a (partial) Latin square P , let S(P )
+be the set of all tuples σ(A) for all stable intercalates A in P (i.e., this records the intercalate switches
+we can perform, without recording which state each of those intercalates is in).
+Lemma 7.3. Let P1 be a Latin square, and suppose that we can switch a single stable intercalate in P1
+to obtain a second Latin square P2 . Then S(P1 ) = S(P2 ).
+Proof. Let A be the stable intercalate in P1 which is switched to obtain P2 . Then σ(A) ∈ S(P1 ). We
+start with a simple observation which will be used multiple times.
+Claim 7.4. If an intercalate B ̸= Ā is isolated in P2 , it is also present and isolated in P1 .
+Proof of claim. Since B shares no entry with Ā in P2 , we see that B is also present in P1 . Furthermore,
+if there were any intercalate C in P1 that shares an entry with B, that intercalate C would not be present
+in P2 , so it would have to share an entry with A in P1 . But that would imply A is not isolated in P1 ,
+which would contradict our assumption that A is stable in P1 .
+■
+Step 1: reversibility of the A switch. We will first show σ(A) ∈ S(P2 ), i.e., we could equally well have
+switched Ā in P2 to obtain P1 . This amounts to showing that Ā is isolated in P2 , and not contained in
+a critical set of intercalates.
+First, note that if Ā were not isolated in P2 , then there would be some intercalate B in P2 that shares
+an entry with Ā. Since that entry would not be in P1 , we would have that B is not in P1 , implying that
+{A} is a critical set in P1 , contradicting the stableness of A in P1 . Thus, Ā is isolated in P2 .
+Now, suppose for contradiction that Ā is contained in a critical set {Ā, A2 , . . . , At } of isolated intercalates in P2 . If t = 1, this would contradict the isolatedness of either A in P1 or Ā in P2 ; thus t ≥ 2. Since
+the intercalates A2 , . . . , At are isolated in P2 , they are also present and isolated in P1 , by Claim 7.4. But
+then {A, A2 , . . . , At } is a critical set in P1 : if switching S ⊆ {Ā, A2 , . . . , At } creates a new intercalate in
+P2 , then switching S̄ = S ∪ {A} (if Ā ∈
+/ S) or S̄ = S \ {Ā} (if Ā ∈ S) creates a new intercalate in P1 .
+This contradicts the stableness of A in P1 . We conclude that Ā is stable in P2 , so σ(A) ∈ S(P2 ).
+Step 2: the intercalates other than A. Since σ(A) ∈ S(P1 ) ∩ S(P2 ), by symmetry it is enough to show
+that for every intercalate B that is stable in P1 , we have σ(B) ∈ S(P2 ). Let B ̸= A be a stable intercalate
+in P1 . Then B must be present and isolated in P2 , by Claim 7.4 and the symmetry between P1 and P2 .
+Suppose for the purpose of contradiction that B is not stable in P2 . Then B is contained in a critical
+set Z = {B, A2 , . . . , At } of isolated intercalates in P2 . Since the intercalates in {A2 , . . . , At } \ {Ā} are
+isolated in P2 and distinct from Ā, they are also present and isolated in P1 . Now, either Z \ {Ā} ∪ {A} or
+Z \ {Ā} is a critical set in P1 . In particular, if the new intercalate that can be created in P2 by switching
+a subset of Z shares an entry with either A or Ā, then Z \ {Ā} ∪ {A} is a critical set in P1 . Otherwise,
+20
+
+Z \ {Ā} is a critical set in P1 . In either case, B is contained in a critical set in P1 , contradicting that B
+is stable in P1 . Thus, B must be stable in P2 , so σ(B) ∈ S(P2 ), concluding the proof.
+□
+8. Deducing the master theorem from stable intercalate information
+As discussed in Section 2, the main challenge in this paper is to show that random Latin squares
+typically have very rich constellations of stable intercalates. These intercalates can then be randomly
+switched to prove our master theorem on parity distributions (Theorem 6.4). In this section, we state
+our key lemma about stable intercalates in random Latin squares (Lemma 8.3), and show how to use this
+key lemma (together with some linear-algebraic arguments) to prove Theorem 6.4. After this section,
+the rest of the paper will be devoted to the proof of Lemma 8.3.
+8.1. The key lemma on stable intercalates. Roughly speaking, we need the property that for all
+“reasonably large” sets of rows, columns and symbols, we can find stable intercalates compatible with
+those choices. This will imply that the stable intercalates are so well-spread throughout the rows, columns
+and symbols that randomly switching them will thoroughly mix up the row, column and symbol parities.
+Definition 8.1. Let P be an n × n (partial) Latin square, and consider some 1 ≤ ℓ ≤ n. We say that
+P is an (ℓ, β)-intercalate-expander if the following property holds. For any sets of rows R, R ∗ , any sets
+of columns C , C ∗ , and any sets of symbols S , S ∗ , such that five out of these six sets have size βn and
+the last one has size ℓ, there is a stable intercalate in P with one row in R, the other row in R ∗ , one
+column in C , the other column in C ∗ , one symbol in S , and the other symbol in S ∗ .
+Note that the sets of rows, columns, and symbols above are not necessarily disjoint. Thus, the stable
+intercalate promised by Definition 8.1 may for instance have both its rows in R ∩ R ∗ .
+Random Latin squares themselves are unlikely to be good intercalate-expanders, because they have
+too many intercalates (that are too likely to intersect each other and form critical sets of intercalates). We
+are able to overcome this with a sparsification technique: instead of considering all the stable intercalates
+in a Latin square L, we consider only the stable intercalates in some sparsified partial Latin square (and
+we make sure to use the same “sparsification template” T for all Latin squares). To formalise this, we
+need another definition.
+Definition 8.2. An n × n template is a subset T ⊆ [n]2 , which we interpret as a set of row/column
+pairs. For a Latin square L ∈ Ln , we write T ∩ L ∈ Pn for the partial Latin square containing just the
+entries of L in positions specified by T .
+Now, our key lemma is as follows.
+Lemma 8.3. Let β > 0 be a constant. There exists a template T ⊆ [n]2 such that the following holds.
+(3)
+Let L ∼ Unif(Ln ) be a uniformly random Latin square (interpreted as a subgraph of Kn,n,n ) and let
+11
+ℓ = log n. Then
+P[T ∩ L is an (ℓ, β)-intercalate-expander ] ≥ 1 − exp(−ω(n log2 n)).
+8.2. Deducing the master theorem on parity distributions. To deduce Theorem 6.4 from Lemma 8.3,
+we will need some more notation and preliminaries.
+Definition 8.4. Consider an n × n Latin square L. For a set of rows R and a set of intercalates I in L,
+let MR,I ∈ {0, 1}|R|×|I| be the “incidence matrix” defined as follows:
+(
+1 if row r participates in intercalate I
+MR,I (r, I) =
+0 otherwise.
+We can similarly define MC,I or MS,I for a set of columns C or a set of symbols S.
+Lemma 8.5. Consider an n × n partial
+√ Latin square P that is an (ℓ, 1/10)-intercalate-expander, where
+n is sufficiently large and 1 ≤ ℓ = o( n). Then we can find sets R, C, S of rows, columns and symbols,
+satisfying |R|, |C|, |S| ≥ n − ℓ, with the following property.
+If we let I(R, C, S) be the set of all stable intercalates in P which are contained in the rows in R and
+the columns in C, only using the symbols in S, then the matrix
+
+
+MR,I(R,C,S)
+MC,I(R,C,S)  ∈ {0, 1}(|R|+|C|+|S|)×|I(R,C,S)|
+MS,I(R,C,S)
+21
+
+has rank exactly |R| + |C| + |S| − 3 over F2 . The left kernel vectors of this matrix are those vectors of
+|R|+|C|+|S|
+|Z|
+the form (⃗xR ⃗xC ⃗xS ) ∈ F2
+where ⃗xZ ∈ F2 is the all-zero vector (0, . . . , 0) or the all-one vector
+(1, . . . , 1) for each Z ∈ {R, C, S}.
+Proof. First, we translate the desired statement into more combinatorial language. Consider the auxiliary
+6-uniform hypergraph Q(R, C, S) on the vertex set13 R ⊔ C ⊔ S, where for every intercalate in I(R, C, S)
+we put a hyperedge consisting of the two rows, two columns and two symbols of that intercalate. We
+want to choose R, C, S to have the property that for any choices of vertex subsets R′ ⊆ R and C ′ ⊆ C
+and S ′ ⊆ S which are not all “trivial” (i.e., at least one of these three subsets is nonempty and proper),
+there is some hyperedge of Q(R, C, S) which intersects R′ ⊔ C ′ ⊔ S ′ in an odd number of vertices.
+Now, we specify R, C, S as follows. Let R be the set of all rows r for which there exist at least 6ℓ
+different stable intercalates in P which all involve r and which otherwise involve pairwise disjoint rows,
+columns and symbols. Define C, S similarly.
+Claim. Each of R, C, S has size greater than n − ℓ.
+Proof of claim. Suppose for contradiction (and without loss of generality) that there is a set R0 of ℓ rows
+which are not in R. Then we can use the intercalate-expansion property to greedily find n/10 stable
+intercalates in P which all involve disjoint rows, columns and symbols (except for their rows in R0 ). So,
+there must be some r ∈ R0 involved in (n/10)/|R0 | ≥ 6ℓ stable intercalates which involve disjoint rows,
+columns and symbols (except that they all involve r). This contradicts the choice of R0 .
+■
+Recall that the defining properties of R, C, S were that they are included in many (at least 6ℓ)
+“externally disjoint” stable intercalates in P . The above claim shows that almost all of those intercalates lie in I(R, C, S), and therefore correspond to hyperedges of Q(R, C, S). Specifically, each “bad”
+row/column/symbol (which is not in R, C, S) kills at most one of our externally disjoint stable intercalates, so each vertex of Q(R, C, S) is contained in more than 6ℓ − 3ℓ ≥ 3ℓ externally disjoint 6-uniform
+hyperedges.
+Now, consider vertex subsets R′ ⊆ R and C ′ ⊆ C and S ′ ⊆ S which are not all trivial (at least
+one of these subsets is nonempty and proper). We need to prove there is some hyperedge intersecting
+R′ ⊔ C ′ ⊔ S ′ in an odd number of vertices.
+Case 1: First, suppose that for each Z ∈ {R′ , C ′ , S ′ }, either Z or its complement has size less than ℓ.
+This gives us three “small sets” of size less than ℓ. At least one of our small sets must be non-empty;
+let v be a vertex in that set. Recall that v is contained in at least 3ℓ externally disjoint hyperedges
+of Q(R, C, S), so at least one of these hyperedges (externally) avoids our three small sets. Any such
+hyperedge has odd intersection with R ⊔ C ⊔ S.
+Case 2: If Case 1 does not occur, we may assume without loss of generality that R′ and R \ R′ both
+have size at least ℓ. Then we apply the intercalate-expansion property directly. We take the smaller of
+R′ and R \ R′ as R ∗ and the larger as R; we take the larger of C ′ and C \ C ′ as C = C ∗ ; and we take
+the larger of S ′ and S \ S ′ as S = S ∗ . This again gives us a stable intercalate in P (corresponding to
+an edge of Q(R, C, S)) with the desired odd intersection.
+□
+Now we can prove Theorem 6.4.
+Proof of Theorem 6.4. Let T be as given by Lemma 8.3, and let ℓ = log11 n. For a Latin square L ∈ Ln ,
+we say an intercalate in L is T -stable if it is present and stable in T ∩ L. Recall the notation S(P ) from
+Definition 7.2 (recording the set of stable intercalates in a partial Latin square P , but without recording
+which of the two possible “states” each intercalate is in).
+We consider an auxiliary multigraph G, whose vertices are the Latin squares L ∈ Ln , and where there
+is an edge between two Latin squares L1 , L2 if it is possible to switch some of the T -stable intercalates in
+L1 to transform it into L2 . So, for every L ∈ Ln , the degree of L in G is precisely 2|S(T ∩L)| (including one
+loop edge from L to itself). In fact, by Lemma 7.3, the connected component of L is a clique (with loops)
+of order 2|S(T ∩L)| , where each vertex L′ ∈ Ln in this clique has S(T ∩ L′ ) = S(T ∩ L). In particular, each
+component is regular, so the uniform distribution Unif(Ln ) is a stationary distribution for the random
+walk on G.
+Therefore, if we first sample L ∼ Unif(Ln ), and then we “re-randomise” L by randomly switching
+each T -stable intercalate with probability 1/2 independently (this is the same as stepping to a random
+13Here we use “⊔” to indicate a disjoint union.
+22
+
+neighbour of L in G), then the resulting random Latin square L′ still has the same uniform distribution
+as L.
+⃗ ′ = (Nrow (L′ ), Ncol (L′ ), Nsym (L′ )) is a 2Now, for the rest of the proof, our goal is to show that X
+2
+near-binomial mixture with parameters (n, ℓ, exp(−ω(n log n)). Recalling Definition 6.3, this means we
+need to show how to reveal certain information about L and L′ , in such a way that, conditional on a
+⃗ ′ is a (n, ℓ)-2-near-binomial random vector (where here
+typical outcome of this revealed information, X
+“typical” refers to an event which occurs with probability 1 − exp(−ω(n log2 n))).
+First, reveal an outcome of L such that T ∩ L is an (ℓ, 1/10)-intercalate-expander. By Lemma 8.3, this
+occurs with probability 1−exp(−ω(n log2 n)). From now on, we will view L as a non-random object (i.e.,
+all probabilities will implicitly be with respect to the conditional probability space given our outcome of
+L). Let R, C, S be the sets of rows, columns and symbols from Lemma 8.5, and let I = I(R, C, S) be
+as in the statement of Lemma 8.5. Recall that L′ is obtained from L via random T -stable intercalate
+switches; reveal any outcome of these random switches for T -stable intercalates which are not in I. We
+will show that, in the resulting conditional probability space (which can be described in terms of |I|
+⃗ ′ has a 2-near-binomial distribution with parameters (n, ℓ).
+random coin flips), X
+To see this, let ⃗x1 ∈ {0, 1}n , ⃗x2 ∈ {0, 1}n , ⃗x3 ∈ {0, 1}n be the sequences of parities of rows, columns
+and symbols in L′ . In our conditional probability space, the only parts of ⃗x1 , ⃗x2 , ⃗x3 that remain random
+are the subsequences ⃗xR ∈ {0, 1}R , ⃗xC ∈ {0, 1}C , ⃗xS ∈ {0, 1}S corresponding to our identified sets of
+rows, columns and symbols. We can describe their joint distribution as
+
+
+MR,I
+(⃗xR ⃗xC ⃗xS ) = (⃗yR ⃗yC ⃗yS ) + MC,I ⃗r,
+MS,I
+where ⃗yR , ⃗yC , ⃗yS describe the parities of our identified rows, columns and symbols in L (which we
+are viewing as non-random), ⃗r ∈ {0, 1}|I| is a uniformly random zero-one sequence of length |I|, and
+arithmetic is mod 2.
+Now, recall the structure of the left kernel vectors from Lemma 8.5. We see that (⃗xR ⃗xC ⃗xS ) is a
+uniformly random element of {0, 1}R × {0, 1}C × {0, 1}S , except that the values of ⃗1 · ⃗xR , ⃗1 · ⃗xC and ⃗1 · ⃗xS
+are constrained (i.e., the parities of the rows, columns and symbols in R, C, S are uniformly random,
+except that the number of odd rows, number of odd columns, and number of odd symbols are constrained
+mod 2). This implies the desired result.
+□
+9. Setup for the proof of the intercalate-expander lemma
+In this section, we set the stage for the proof of Lemma 8.3. We first rephrase it by slightly changing
+the nature and role of the template. After that, we state two main lemmas, and show how to deduce
+the (rephrased) intercalate-expander lemma from them (we will then spend the following sections of the
+paper proving these two lemmas).
+Recall the sparsifying role of the template T in Lemma 8.3. To prove Lemma 8.3, we will take a slightly
+different view on T . Namely, for most of the proof it will be convenient to instead work with a template
+hypergraph H (which specifies a set of row/column/symbol triples, instead of a set of row/column pairs).
+Our template hypergraph will be obtained by sampling G(3) (n, ε) with an appropriate ε, as specified in
+the following definition.
+Definition 9.1. Throughout this and the following sections, we fix a constant β > 0 (cf. Lemma 8.3).
+We also let ε = η log−1 n for some η = o(1) that slowly goes to 0 (concretely, take η = 1/ log log n) and
+let ℓ = log11 n.
+We now state a version of the intercalate-expander lemma with a random template hypergraph.
+Lemma 9.2. Fix a constant β > 0. Consider a random hypergraph H ∼ G(3) (n, ε) and an independent
+(3)
+random Latin square L ∼ Unif(Ln ) (both interpreted as subgraphs of Kn,n,n ). Then
+P[H ∩ L is an (ℓ, β)-intercalate-expander ] ≥ 1 − exp(−ω(n log2 n)).
+(3)
+
+Remark 9.3. Lemma 9.2 trivially implies that there is a hypergraph H ⊆ Kn,n,n such that
+P[H ∩ L is an (ℓ, β)-intercalate-expander] ≥ 1 − exp(−ω(n log2 n)).
+However, this would not have sufficed to prove Theorem 6.4 (we would have no guarantee that if we
+switch an intercalate which lies in H, the resulting switched intercalate still lies in H). The slightly
+different notion of a template in Definition 8.2 was chosen to avoid this issue.
+23
+
+We first show the (simple) deduction of Lemma 8.3 from Lemma 9.2. For this, we record the following
+simple fact, which we repeatedly use throughout the rest of the paper.
+Fact 9.4. Suppose H1 ∈ H1 and H2 ∈ H2 are independent random objects, let P (2) ⊆ H1 × H2 , and for
+any H1 ∈ H1 and p ∈ [0, 1] let P(p) be the set of all H1 ∈ H1 such that P[(H1 , H2 ) ∈ P (2) ] > p. Then
+√
+√
+(1) if P[(H1 , H2 ) ∈ P (2) ] ≤ p, then P[H1 ∈ P( p)] ≤ p.
+(2)
+(2) If P[H1 ∈ P(p2 )] ≤ p1 , then P[(H1 , H2 ) ∈ P ] ≤ p1 + p2 .
+Proof of Lemma 8.3. Say that L ∈ Ln is good if
+P[H ∩ L is an (ℓ, β)-intercalate-expander] ≥ 1 − exp(−ω(n log2 n)).
+By Lemma 9.2 and Fact 9.4(1), L is good with probability 1 − exp(−ω(n log2 n).
+Now, let T ⊆ [n]2 be a random subset of row/column pairs, where each is included with probability
+ε independently. Note that for each fixed outcome L of L, the two random partial Latin squares H ∩ L
+and T ∩ L have exactly the same distribution. Therefore, for each good L,
+P[T ∩ L is an (ℓ, β)-intercalate-expander] ≥ 1 − exp(−ω(n log2 n)),
+and Fact 9.4(2) yields
+P[T ∩ L is an (ℓ, β)-intercalate-expander] ≥ 1 − exp(−ω(n log2 n)).
+Applying Fact 9.4(1) again, we see that almost all outcomes T of T are suitable for the conclusion of
+Lemma 8.3 (namely, T satisfies the required property with probability 1 − exp(−ω(n log2 n))).
+□
+We now move on to reducing Lemma 9.2 to two main lemmas. Recall that the property of being an
+intercalate-expander says that (with respect to any appropriate 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ )) there
+is at least one stable intercalate consistent with our 6-tuple. Our first lemma (Lemma 9.11) will say
+that there are likely to be many intercalates consistent with every appropriate 6-tuple (and says nothing
+about isolatedness or stability). Our second lemma (Lemma 9.13) will say that there is likely to be a
+much smaller number of entries which participate in “bad sets” of intercalates which violate isolatedness
+or stability (i.e., they participate in a critical set of intercalates or a pair of intersecting intercalates).
+Remark 9.5. It is crucially important here that we consider the number of entries in bad sets of intercalates (as opposed to the number of bad sets of intercalates themselves). This is due to the “infamous
+upper tail” problem which arises when trying to estimate the upper tail of subgraph counts in random
+graphs and hypergraphs. Due to clustering phenomena, these upper tails are ‘fatter’ than their lower
+counterparts (we need to pay very close attention to tail bounds due to the exponential error terms in
+Lemma 4.7).
+Before stating our two lemmas, we need some preparations.
+Definition 9.6. For sets R and R ∗ of rows, sets C and C ∗ of columns and sets S and S ∗ of symbols,
+we say that an intercalate is (R, R ∗ , C , C ∗ , S , S ∗ )-split (or just split if the parameters are clear from
+context) if it has one row in R, the other row in R ∗ , one column in C , the other column in C ∗ , one
+symbol in S , and the other symbol in S ∗ .
+By symmetry between the rows, columns, and symbols of a Latin square, in the context of Definition 8.1 it suffices to consider the case where |R ∗ | = ℓ and |R|, |C |, |C ∗ |, |S |, |S ∗ | ≥ βn.
+Definition 9.7. We say a 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ) is (ℓ, β)-permissible if we have |R ∗ | = ℓ and
+|R|, |C |, |C ∗ |, |S |, |S ∗ | ≥ βn.
+Our goal is then to show that, with very high probability, all (ℓ, β)-permissible 6-tuples have a split
+stable intercalate.
+Definition 9.8. Let P be a partial Latin square, let {A1 , . . . , At } be a critical set of isolated intercalates
+in P , and let A′ be an intercalate that can be created by switching a subset of {A1 , . . . , At }. Then we
+say the entries in A1 ∪ · · · ∪ At ∪ (A′ ∩ P ) comprise a critical configuration with respect to P .
+We say that a set of entries in a partial Latin square P is a bad configuration with respect to P either
+if it is a critical configuration with respect to P , or if it comprises two intercalates that intersect in one
+entry. (We will from now on omit “with respect to P ” if P is clear from the context.)
+We say that a bad configuration is (R, R ∗ , C , C ∗ , S , S ∗ )-split if at least one intercalate in it (that
+is, one of the at most four intercalates in the critical set of intercalates or one of the two intersecting
+intercalates, depending on the type of bad configuration) is (R, R ∗ , C , C ∗ , S , S ∗ )-split.
+24
+
+Remark 9.9. We will sometimes need to talk about sets of entries which make up some arrangement of
+intercalates, and we will sometimes need to talk about sets of intercalates themselves. To try to assist
+the reader to keep track of this distinction, we will reserve the word “configuration” for a set of entries
+in a partial Latin square (i.e. a set of hyperedges, in the hypergraph perspective in Fact 4.1).
+Note that pairs of intercalates in a partial Latin square can intersect in at most one entry, so if an
+intercalate in a partial Latin square does not intersect any other intercalate in one entry, then it is
+isolated. Thus, an intercalate in a (partial) Latin square is stable if and only if it is not a subset of any
+bad configuration.
+Instead of reasoning directly about the total number of split intercalates, it will be easier to show
+lower bounds on the size of the maximum family of disjoint split intercalates (as this random variable
+behaves better with respect to Theorem 3.1). The next lemma states that if we consider a random Latin
+square intersected with a random sparse template hypergraph, then there is very likely to be a large
+family of disjoint split intercalates.
+(3)
+
+Definition 9.10. For c > 0 and a tripartite hypergraph H ⊆ Kn,n,n , let T int (H, c) ⊆ Ln be the set
+of Latin squares L such that for some (ℓ, β)-permissible 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ), the maximum
+family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates in H ∩ L has size smaller than cε4 nℓ.
+Lemma 9.11. Fix a constant c > 0 which is sufficiently small with respect to β. Then, consider a
+random hypergraph H ∼ G(3) (n, ε) and an independent random Latin square L ∼ Unif(Ln ). We have
+P[L ∈ T int (H, c)] ≤ exp(−ω(n log2 n)).
+Next, the following lemma gives an upper bound on the number of entries in split bad configurations.
+Definition 9.12. We say that an entry in a row in R ∗ is covered by some split bad configuration if
+it belongs to a split intercalate in it. We say an intercalate or a bad configuration is R ∗ -split if it is
+(R, R ∗ , C , C ∗ , S , S ∗ )-split for some (ℓ, β)-permissible 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ) containing R ∗ .
+(3)
+For C > 0 and a hypergraph H ⊆ Kn,n,n , let T bad (H, C) ⊆ Ln be the set of Latin squares L such
+∗
+that for some set of rows R of size ℓ, the number of entries in rows in R ∗ covered by R ∗ -split bad
+configurations in H ∩ L is more than Cε5 nℓ.
+Lemma 9.13. There is an absolute constant C > 0 such that the following holds. Consider a random
+hypergraph H ∼ G(3) (n, ε) and an independent random Latin square L ∼ Unif(Ln ). We have
+P[L ∈ T bad (H, C)] ≤ exp(−ω(n log2 n)).
+We can now deduce Lemma 9.2 from Lemmas 9.11 and 9.13.
+Proof of Lemma 9.2. By the union bound, Lemma 9.11, and Lemma 9.13, there are C, c > 0 such that
+we have
+P[L ∈ T int (H, c) ∪ T bad (H, C)] ≤ exp(−ω(n log2 n)).
+Note that if L ∈
+/ T int (H, c)∪T bad (H, C), then for every (ℓ, β)-permissible 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ),
+there are many (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates in H ∩ L, and only a small fraction of them can
+have entries covered by (R, R ∗ , C , C ∗ , S , S ∗ )-split bad configurations. Therefore, at least one of them
+must be stable. By symmetry between rows, columns, and symbols, and a union bound, we see that we
+have
+P[H ∩ L is an (ℓ, β)-intercalate-expander] ≥ 1 − exp(−ω(n log2 n)).
+That is to say, almost all outcomes H ∩ L of H ∩ L satisfy the conclusion of Definition 8.1.
+
+□
+
+It remains to prove Lemmas 9.11 and 9.13, which we will do in Sections 10 and 11, respectively. Both
+proofs will make crucial use of Lemma 4.7 (to deduce results about random Latin squares from veryhigh-probability results about the triangle removal process). Given Lemma 4.7, the proof of Lemma 9.11
+is a rather quick (though somewhat delicate) consequence of Theorem 3.1. The proof of Lemma 9.13 is
+much longer, and requires several additional ideas.
+10. Existence of many disjoint intercalates
+As already mentioned, to prove Lemma 9.11, we employ Lemma 4.7 and work in the setting of the
+triangle removal process. To do that, we define a property of ordered partial Latin squares that satisfies
+suitable inheritance properties with respect to T int (H, c) (recall Definition 4.3).
+25
+
+(3)
+
+Definition 10.1. Recall the definitions of ℓ and ε from Definition 9.1. For c > 0 and H ⊆ Kn,n,n ,
+⃗ int (H, c) ⊆ P
+⃗ n be the set of ordered partial Latin squares P⃗ such that for some (ℓ, β)-permissible
+let U
+6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ), the maximum family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates
+in H ∩ P⃗ has size less than cε4 nℓ.
+Now, the following lemma is a version of Lemma 9.11 for the triangle removal process.
+Lemma 10.2. Fix constants α, c > 0, such that α is sufficiently small and c is sufficiently small in
+⃗ ∼ TRP(n, αn2 ) and H ∼ G(3) (n, ε).
+terms of α and β. Consider independent random hypergraphs R
+Then
+⃗ ∈U
+⃗ int (H, c)] ≤ exp(−ω(n log2 n)).
+P[R
+We first deduce Lemma 9.11 from Lemma 10.2 using Lemma 4.7.
+Proof of Lemma 9.11. Let α, c be small enough for Lemma 10.2 and let ρ = 1. By Lemma 10.2
+and Fact 9.4(1), with probability 1 − exp(−ω(n log2 n) our random hypergraph H ∼ G(3) (n, ε) is
+⃗ ∈ U
+⃗ int (H, c) | H] ≤ exp(−ω(n log2 n)). Let H be an outcome of H for which this
+such that P[R
+⃗ int (H, c) is (ρ, αn2 )-inherited from T int (H, c): indeed, if L ∈ T int (H, c), then
+holds. Note that U
+there is some (ℓ, β)-permissible 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ) such that the maximum family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates in H ∩ L has size smaller than cε4 nℓ, so for any P ⊆ L,
+the maximum family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates in H ∩ P also has size smaller
+than cε4 nℓ. Thus, by Lemma 4.7,
+⃗ ∈U
+⃗ int (H, c)] ≤ exp(−ω(n log2 n)).
+P[L ∈ T int (H, c)] ≤ exp(2n log2 n)P[R
+Recalling our choice of H, Fact 9.4(2) then implies that
+P[L ∈ T int (H, c)] ≤ exp(−ω(n log2 n)),
+□
+
+as desired.
+
+Proof of Lemma 10.2. We will prove the desired statement with c = 10−5 β 5 α4 .
+⃗ int (H, c) is monotone decreasing. Let G ∼ G(3) (n, α/n), and let G∗ be
+Note that the property U
+obtained from G by deleting all hyperedges involved in conflicts (recall that a conflict is a pair of
+(3)
+hyperedges that intersect in more than one vertex). By Lemma 5.4, for each H ⊆ Kn,n,n we have
+⃗ ∈U
+⃗ int (H, c)] = O(P[G∗ ∈ U
+⃗ int (H, c)]),
+P[R
+so for our random hypergraph H we have
+⃗ ∈U
+⃗ int (H, c)] = O(P[G∗ ∈ U
+⃗ int (H, c)]).
+P[R
+Thus, from now on we work in G∗ . Fix an (ℓ, β)-permissible 6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ). We will
+show that the probability that the maximum family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates
+in H ∩ G∗ has size smaller than cε4 nℓ is at most exp(−ω(n log2 n)).
+Our main tool will be Theorem 3.1, but to effectively apply this concentration inequality we need to
+be quite careful with the way we interpret H ∩ G∗ as a function of independent choices. Specifically,
+for each potential hyperedge e, let geh and ge be two independent Bernoulli random variables with
+P[geh = 1] = αε/n and P[ge = 1] = α(1 − ε)/(n − αε). We generate G and H ∩ G by sampling geh and ge
+for each potential edge e, setting e ∈ H ∩ G if geh = 1, and setting e ∈ G if geh = 1 or ge = 1 (or both).
+To see that this correctly describes the joint distribution of G and H ∩ G, note that
+
+α(1 − ε) 
+αε 
+1−
+P[e ∈ G] = 1 − (1 − P[geh = 1])(1 − P[ge = 1]) = 1 − 1 −
+n
+n − αε
+2
+αε α(1 − ε) α ε(1 − ε)
+α
+=
++
+−
+= .
+n
+n − αε
+n(n − αε)
+n
+Now, the plan is to reveal G and H (via the random variables geh and ge ) in two phases. First, we
+reveal all entries in rows outside of R ∗ , and then we reveal entries in rows in R ∗ .
+Recall that a conflict is a pair of hyperedges that intersect in more than one vertex. We say a pair of
+entries {(r, c1 , s1 ), (r, c2 , s2 )} in H ∩ G on the same row r ∈
+/ R ∗ has a second-order conflict if s1 appears
+in column c2 or if s2 appears in column c1 on a row outside of R ∗ , with respect to G. For r ∈ R \ R ∗ ,
+c1 ∈ C , c2 ∈ C ∗ , s1 ∈ S and s2 ∈ S ∗ , we say a pair {(r, c1 , s1 ), (r, c2 , s2 )} is a half-intercalate if both
+its hyperedges are present in H ∩ G and have no conflicts with entries of G outside of R ∗ , and the pair
+has no second-order conflicts (which would make it impossible to complete it to an intercalate in G∗ ).
+26
+
+The idea is that in the first phase, by revealing all the entries in the rows outside R ∗ , we reveal all the
+half-intercalates. In the second phase, each half-intercalate {(r, c1 , s1 ), (r, c2 , s2 )} can then be completed
+to a split intercalate in H ∩ G∗ via any pair of entries (r′ , c1 , s1 ), (r′ , c2 , s2 ) (with r′ ∈ R ∗ ) in G, as long
+as the four entries involved in the intercalate do not conflict with other entries in G on rows in R ∗ .
+Let X be the number of half-intercalates. We will apply Theorem 3.1 to show concentration of X.
+First note that
+ 2
+βn
+E[X] ≥
+(βn − ℓ)(εα/n)2 (1 − α/n)8n−8 ≥ 10−1 ε2 α2 (βn − ℓ)β 4 n2 e−16α ≥ 10−2 ε2 α2 β 5 n3 .
+2
+To see this, recall that |R \ R ∗ | ≥ βn − ℓ and each of R, C , C ∗ , S , S ∗ have size at least βn; also, each
+pair of entries is present in H ∩ G with probability (εα/n)2 , it has no conflicts with other entries in G
+with probability at least (1 − α/n)6n−6 , and it has no second-order conflicts with probability at least
+(1 − α/n)2n−2 .
+Recall that we work with the independent random variables geh and ge for each of the O(n3 ) many
+potential hyperedges e outside the rows in R ∗ , and each of these random variables is 1 with probability
+O(1/n). The appearance of a hyperedge in H ∩ G can increase X by at most n − 1, since each entry
+can be in at most n − 1 half-intercalates. The appearance of a hyperedge in G can decrease X by at
+most 4n, since it can destroy at most 3 hyperedges in G∗ due to conflicts (and each of them could be
+in at most n − 1 pairs counted by X), and can introduce at most n second-order conflicts. Thus, the
+effect of changing any individual random variable (of the form geh or ge ) is O(n). By Theorem 3.1, with
+probability 1 − exp(−Ω(ε4 n2 )), we have X ≥ 10−3 ε2 α2 β 5 n3 . For the rest of the proof, we condition on
+an outcome of the first phase such that this is the case (i.e., in the rest of the proof, all probabilistic
+considerations are implicitly with respect to this conditional probability space).
+Now, in the second phase we reveal G and H ∩ G in rows in R ∗ , and estimate the size Z of the
+maximum family of disjoint (R, R ∗ , C , C ∗ , S , S ∗ )-split intercalates in H ∩ G∗ . Note that each halfintercalate counted by X forms an intercalate with two other entries on row r ∈ R ∗ if and only if these
+two other entries are present in H ∩ G and no entry in G in a row in R ∗ conflicts with any of the four
+entries of the intercalate. We can compute a lower bound on E[Z] by subtracting the expected number
+of pairs of intersecting split intercalates from the expected number of split intercalates. Indeed,
+E[Z] ≥ Xℓ(εα/n)2 (1 − α/n)8n−8 − Xnℓ2 (εα/n)4 − Xnℓ(εα/n)3 ≥ X
+
+ℓα2 ε2
+≥ 10−4 α4 β 5 ε4 nℓ,
+2n2
+
+where the term (1 − α/n)8n−8 accounts for the probability that some entry in a fixed potential split
+intercalate conflicts with some entry in a row in R ∗ . The second term bounds the expected number
+of pairs of split intercalates that intersect in an entry outside of R ∗ , since for a fixed half-intercalate,
+there are at most n choices for the other column of the other intercalate and at most ℓ choices for the
+other row of each intercalate, and for each such combination of choices, four entries need to be present
+in rows in R ∗ . The third term bounds the expected number of pairs of split intercalates that intersect
+in an entry in R ∗ , since for a fixed half-intercalate, there are at most ℓ choices for the common to both
+intercalates row in R ∗ and at most n choices for the other row of the other intercalate, which is outside of
+R ∗ (and this determines the entries of both intercalates completely). We again apply Theorem 3.1 with
+the remaining unrevealed random variables geh and ge . Since we are interested in a family of disjoint
+intercalates, the appearance of a hyperedge can increase Z by at most 1 and can decrease it by at most
+3 (as it can have a conflict with at most 3 edges in G∗ ). Crucially, there are now only O(n2 ℓ) many
+unrevealed random variables. Thus, by Theorem 3.1, we have that Z ≥ 10−5 α4 β 5 ε4 nℓ with probability
+at least 1 − exp(−Ωα,β (ε8 nℓ)).
+We conclude the proof with a union bound over all (at most 26n ) choices for an (ℓ, β)-permissible
+6-tuple (R, R ∗ , C , C ∗ , S , S ∗ ).
+□
+11. Upper-bounding the number of entries in bad configurations
+We now turn to the proof of Lemma 9.13. For any set of ℓ rows R ∗ , our goal is to upper bound the
+probability that there are many entries in rows in R ∗ covered by R ∗ -split bad configurations.
+11.1. Setup. As in the proof of Lemma 10.2, the special role of the rows in R ∗ requires us to consider
+two “phases”. In the first phase we reveal a subset of the entries of our random Latin square, and study
+configurations of entries which are “almost” bad configurations (they are just missing some entries from
+R ∗ ). In the second phase we reveal the rest of our random Latin square, and we study which of our
+27
+
+“almost bad configurations” give rise to actual bad configurations. However, this breakdown into phases
+is much more complicated than for Lemma 10.2 (for several different reasons), and requires some setup.
+Definition 11.1. Given a R ∗ -split bad configuration F , we say that the special entries of F are its
+two entries which belong to rows in R ∗ . (Technically, it is possible that there is more than one split
+intercalate in a bad configuration, or that the bad configuration contains an intercalate with both its
+rows in R ∗ . In these cases we imagine multiple “copies” of the bad configuration, each time making a
+different choice for the two special entries). Also, we say that the intercalate in F which contains the
+special entries is the special intercalate.
+Definition 11.2. Given a partial Latin square P and a set of rows R ∗ , consider a pair {e1 , e2 } of
+row/column/symbol triples, belonging to some row in R ∗ , which are not already present in P but which
+can be added to P without causing conflicts (i.e., P ∪ {e1 , e2 } is a partial Latin square). Say that {e1 , e2 }
+is a threatened pair for P if there is some split bad configuration F in P ∪ {e1 , e2 } which has e1 and e2
+as special entries. In this case, we say F ∩ P is a threat configuration in P .
+Informally speaking, threat configurations are the sets of entries which are “in danger of being completed to a split bad configuration”, only requiring the addition of their two special entries. Each of the
+possible ways to complete a threat configuration to a split bad configuration is described by a threatened pair. A single threatened pair may complete multiple different threat configurations to split bad
+configurations, and a single threat configuration may be completeable by multiple different threatened
+pairs (to different split bad configurations).
+Now, given the above terminology, we can be a bit more concrete about the high-level plan to prove
+Lemma 9.13. In a first phase, we reveal part of our random Latin square and upper-bound the number
+of threatened pairs in it (we do not upper bound the number of threat configurations themselves, cf.
+Remark 9.5). Then, in a second phase, we reveal the rest of the Latin square and upper bound the
+number of threatened pairs from the first phase that actually appear as entries in the second phase. By
+an averaging argument (over all the ways to split into two phases) we are able to deduce the desired
+bound on the number of entries in split bad configurations.
+For the first phase, we consider the following property.
+(3)
+
+Definition 11.3. Recall the definitions of ℓ and ε from Definition 9.1. For H ⊆ Kn,n,n and C, α, ϕ > 0,
+let T threat (H, C, α, ϕ) ⊆ Ln be the set of Latin squares L such that the following holds. If we take a
+random subset Pαn2 (L) ∈ Pn,αn2 of αn2 entries in L, then with probability at least ϕ, for some set of
+rows R ∗ of size |R ∗ | = ℓ, the number of threatened pairs for H ∩ Pαn2 (L) is more than Cε3 n3 ℓ.
+Note that here we are defining a property of Latin squares in terms of how their random subsets
+of entries behave. This may seem rather unwieldy, but it is very convenient for the ρ-inheritedness
+assumption in Lemma 4.7 (when it comes time to apply Lemma 4.7, the ρ-inheritedness assumption will
+hold basically by definition). The issue with more straightforward properties is that bad configurations
+and threatened pairs do not behave well under subsampling entries, and therefore ρ-inheritedness would
+be quite difficult to prove. (The issue is that a bad configuration is defined in terms of isolated intercalates,
+and deleting entries can cause more intercalates to be isolated14).
+Now, the following two lemmas correspond to the two “phases” informally discussed above.
+Lemma 11.4. There is an absolute constant C ′ > 0 such that the following holds. Fix constants
+α, ϕ > 0, and consider a random hypergraph H ∼ G(3) (n, ε) and an independent random Latin square
+L ∼ Unif(Ln ). We have
+P[L ∈ T threat (H, C ′ , α, ϕ)] ≤ exp(−ω(n log2 n)).
+Lemma 11.5. Fix constants α, C ′ , C, ϕ > 0, such that α is sufficiently small, C is sufficiently large
+in terms of α and C ′ , and ϕ is sufficiently small in terms of α. Consider a random hypergraph H ∼
+G(3) (n, ε) and an independent random Latin square L ∼ Unif(Ln ). We have
+P[L ∈ T bad (H, C) \ T threat (H, C ′ , α, ϕ)] ≤ exp(−ω(n log2 n)).
+Lemmas 11.4 and 11.5 are both proved using Lemma 4.7, comparing random Latin squares to the
+triangle removal process. In addition, the proof of Lemma 11.4 also involves a switching argument directly
+14The reader may then wonder why we insist on isolatedness in the definition of a bad configuration. The reason is
+that it is very convenient to restrict our attention to isolated intercalates in a switching argument which will appear later
+in this section.
+28
+
+on random Latin squares (to tame the complexity of all the different possibilities for the structure of a
+threat configuration).
+We conclude this subsection with the brief deduction of Lemma 9.13 from Lemmas 11.4 and 11.5.
+Proof of Lemma 9.13. Let C ′ be as in Lemma 11.4, and then let α, C, ϕ be as in Lemma 11.5 (for the
+same value of C ′ ). Then we have
+P[L ∈ T bad (H, C)] ≤ P[L ∈ T bad (H, C) \ T threat (H, C ′ , α, ϕ)] + P[L ∈ T threat (H, C ′ , α, ϕ)]
+≤ exp(−ω(n log2 n)) + exp(−ω(n log2 n))
+□
+
+by Lemmas 11.4 and 11.5.
+In the next three subsections, we will prove Lemmas 11.4 and 11.5 (in reverse order).
+
+11.2. Few bad configurations or many threatened pairs. In this subsection we prove Lemma 11.5.
+As previously mentioned, we will work with the triangle removal process, via Lemma 4.7. In contrast to
+our previous application of Lemma 4.7 in Section 10, this time the order of the edges will be important.
+⃗ n be an ordered partial Latin square, and write e1 , . . . , em for its entries (in
+Definition 11.6. Let P⃗ ∈ P
+order). For ι, κ ∈ [0, 1], we write P⃗ [ι, κ] ∈ Pn,(κ−ι)m for the partial Latin square consisting of the edges
+ei with ιm < i ≤ κm.
+Recall the definitions of ℓ and ε from Definition 9.1.
+(3)
+⃗ threat (H, C) ⊆ P
+⃗ n be the set of partial
+Definition 11.7. Let α ∈ (0, 1), C > 0, and H ⊆ Kn,n,n . Let U
+∗
+∗
+⃗
+ordered Latin squares P such that for some set of rows R of size ℓ = |R |, the number of threatened
+pairs for H ∩ P⃗ [0, 1/2] is more than Cε3 n3 ℓ.
+
+Definition 11.8. We call a bad configuration consistent with P⃗ if its corresponding threat configuration
+is in P⃗ [0, 1/2], one of its special entries is in P⃗ [1/2, 3/4], and its other special entry is in P⃗ [3/4, 1]. Let
+⃗ bad (H, C) ⊆ P
+⃗ n be the set of partial ordered Latin squares P⃗ such that for some set of rows R ∗ of
+U
+∗
+size ℓ = |R |, there are more than Cε5 nℓ entries in P⃗ [3/4, 1] that are in rows in R ∗ and are covered by
+R ∗ -split bad configurations in H ∩ P⃗ that are consistent with P⃗ .
+The following lemma is a version of Lemma 11.5 for the triangle removal process.
+Lemma 11.9. Fix constants α, C ′ , such that α is sufficiently small. Consider independent random
+⃗ ∼ TRP(n, αn2 ) and H ∼ G(3) (n, ε). Then
+hypergraphs R
+⃗ ∈U
+⃗ bad (H, C ′ ) \ U
+⃗ threat (H, C ′ )] ≤ exp(−ω(n log2 n)).
+P[R
+Before proving Lemma 11.9, we show how it implies Lemma 11.5, using Lemma 4.7 and an averaging
+argument.
+Proof of Lemma 11.5. Let m = 2αn2 and ρ = α16 /24 . We assume that ϕ ≤ ρ and ρC ≥ C ′ .
+By Lemma 11.9 and Fact 9.4(1), with probability 1 − exp(−ω(n log2 n)) over the randomness of H we
+have
+⃗ ∈U
+⃗ bad (H, C ′ ) \ U
+⃗ threat (H, C ′ ) | H] ≤ exp(−ω(n log2 n)).
+P[R
+⃗ bad (H, C ′ ) \
+The desired result would therefore follow from Lemma 4.7 and Fact 9.4(2), if we knew that U
+⃗ threat (H, C ′ ) is (ρ, m)-inherited from T bad (H, C) \ T threat (H, C ′ , α, ϕ) for all outcomes H of H. For the
+U
+rest of the proof, our goal is to prove that this is the case.
+⃗ m (L) ∈ P
+⃗ n,m be a random ordering of m
+Suppose L ∈ T bad (H, C) \ T threat (H, C ′ , α, ϕ), and let P
+bad
+′
+⃗ m (L) ∈ U
+⃗ (H, C ) \ U
+⃗ threat (H, C ′ ) with probability at
+random entries of L. We need to prove that P
+least ρ.
+⃗ m (L)[0, 1/2] is a uniformly random set of
+By the definition of T threat (H, C ′ , α, ϕ) and the fact that P
+2
+threat
+′
+⃗
+⃗ m (L) ∈
+⃗
+αn entries of L, first note that P[Pm (L) ∈ U
+(H, C )] ≤ ϕ. So, it suffices to show that P
+bad
+′
+⃗
+U (H, C ) with probability at least ρ + ϕ.
+Since L ∈ T bad (H, C), there is some R ∗ such that there are X ≥ Cε5 nℓ many entries in rows in
+∗
+R covered by R ∗ -split bad configurations in H ∩ L. Let Y ≤ X be the number of such entries in
+⃗ m (L)[3/4, 1] which are covered by R ∗ -split bad configurations in H ∩ P
+⃗ m (L) consistent with P
+⃗ m (L).
+P
+For each covered entry (r, c, s) in H ∩ L counted by X, the probability that its associated split bad
+29
+
+
+
+⃗ m (L) is n2 −s / n2 = (1 + o(1))(2α)s . Given that it is
+configuration with s ≤ 16 entries is present in P
+m−s
+m
+⃗ m (L), the probability that it is consistent with P
+⃗ m (L) and that (r, c, s) ∈ P
+⃗ m (L)[3/4, 1] is
+present in P
+
+ 
+
+m/2
+m−2
+m/4 m/4
+·
+·
+/
+= (1 + o(1))(1/4)2 (1/2)s−2 .
+m m−1
+s−2
+s−2
+⃗ m (L) is also isolated in H ∩ P
+⃗ m (L), so
+Note that each isolated intercalate in H ∩ L whose entries are in P
+⃗ m (L) is also a bad configuration in H ∩ P
+⃗ m (L).
+each bad configuration in H ∩ L that is present in H ∩ P
+Therefore
+E[Y] ≥ (1 + o(1))X(2α)s (1/4)2 (1/2)s−2 ≥ Xα16 /4.
+Recall our assumptions on ϕ, C from the start of the proof. Let δ = α16 /8 ≥ ρ + ϕ and note that
+⃗ m (L) ∈ U
+⃗ bad (H, C ′ )] is at least
+δX ≥ C ′ ε5 nℓ. By Markov’s inequality, P[P
+P[Y ≥ δX] = 1 − P[X − Y > (1 − δ)X] ≥ 1 −
+
+1 − 2δ
+E[X − Y]
+≥1−
+≥ ρ + ϕ,
+(1 − δ)X
+1−δ
+□
+
+as desired.
+Now we prove Lemma 11.9.
+
+⃗ 1/2]. We assume that for each choice of R ∗ of size ℓ,
+Proof of Lemma 11.9. First, we reveal H ∩ R[0,
+⃗ 1/2] is at most C ′ ε3 n3 ℓ (otherwise U
+⃗ threat (H, C ′ ) holds, and
+the number of threatened pairs for H ∩ R[0,
+there is nothing to prove). From now on, when we talk about threatened pairs in this proof, we mean
+⃗ 1/2].
+threatened pairs for H ∩ R[0,
+Given revealed information, our goal is to show that with probability 1 − exp(−ω(n log2 n)), for every
+∗
+⃗
+R with |R ∗ | = ℓ, there are at most C ′ ε5 nℓ entries of R[3/4,
+1] that are in rows in R ∗ and are covered
+⃗ that are consistent with R.
+⃗ Actually, it suffices to show this for
+by R ∗ -split bad configurations in H ∩ R
+∗
+∗
+a fixed choice of R (a union bound over choices of R has a negligible impact). So, fix some R ∗ with
+|R ∗ | = ℓ.
+⃗
+The next step is to consider H ∩ R[1/2,
+3/4]. We say a threatened pair survives if one of its entries is
+⃗
+in H ∩ R[1/2, 3/4].
+Claim. Given revealed information, the number of surviving threatened pairs is at most C ′ ε4 n2 ℓ with
+probability 1 − exp(−ω(n log2 n)).
+(3)
+
+Proof of claim. Let U be the set of G ⊆ Kn,n,n which intersect more than C ′ ε4 n2 ℓ threatened pairs.
+(3)
+Then, for each possible outcome H of H, the set {G ⊆ Kn,n,n : H ∩ G ∈ U} is a monotone increasing
+(3)
+property of subgraphs of Kn,n,n , so by Lemma 5.3, the probability that there are more than C ′ ε4 n2 ℓ
+surviving threatened pairs is
+⃗
+P[H ∩ R[1/2,
+3/4] ∈ U] ≤ P[H ∩ G′ ∈ U] + exp(−Ω(n2 )) = P[G ∈ U] + exp(−Ω(n2 )),
+where G′ ∼ G(3) (n, (α/2)/n) and G ∼ G(3) (n, (εα/2)/n).
+From here, we just need to apply a concentration inequality in G, to upper bound P[G ∈ U ]. For
+each row/column/symbol triple e, let we be the number of threatened pairs that e is in, and let X be
+the sum of we over all hyperedges e of G. Note that (for small α > 0) we have
+E[X] ≤ 2 · C ′ ε3 n3 ℓ ·
+
+εα/2
+C ′ ε4 n2 ℓ
+≤
+.
+n
+2
+
+Then, for any row/column/symbol triple e, consider each of the threatened pairs that e is in. Each of
+⃗
+these threatened pairs, if added to R[1/2,
+1], would complete a split bad configuration in which e would
+be in a different intercalate. Since a single entry can be in at most n many intercalates (in any Latin
+square), it follows that e is in at most n threatened pairs; that is, we ≤ n.
+We can therefore apply Corollary 3.2 with ∆ = n and δ = 1, to obtain
+
+
+C ′ ε4 n2 ℓ
+≤ exp(−Ω(ε4 nℓ)),
+P[G ∈ U ] ≤ P X ≥ E[X] +
+2
+and the desired result follows (recalling the relationship between ℓ and ε in Definition 9.1).
+30
+
+■
+
+⃗
+Now, reveal H∩ R[1/2,
+3/4]; by the above claim we may assume that our revealed outcome is such that
+⃗
+there are at most C ′ ε4 n2 ℓ surviving threatened pairs. Then, the final step is to consider H ∩ R[3/4,
+1].
+⃗
+Each surviving threatened pair’s presence in H ∩ R is determined by whether its second entry is in
+⃗
+H ∩ R[3/4,
+1]. Say a row/column/symbol triple e is a threatened entry if it is the second entry of some
+surviving threatened pair.
+⃗
+Claim. Given revealed information, there are at most C ′ ε5 nℓ threatened entries present in H∩ R[3/4,
+1],
+2
+with probability 1 − exp(−ω(n log n)).
+Proof of claim. We proceed very similarly to the last claim (in fact, the situation is even simpler). Let
+G ∼ G(3) (n, (αε/2)/n), and let Y be the number of threatened entries present in G. Using Lemma 5.3
+⃗
+as before, the probability that there are more than C ′ ε5 nℓ threatened entries present in H ∩ R[3/4,
+1] is
+′ 5
+2
+at most P[Y > C ε nℓ] + exp(−Ω(n )).
+We have
+αε/2
+C ′ ε5 nℓ
+E[Y] ≤ C ′ ε4 n2 ℓ ·
+≤
+,
+n
+2
+so by Corollary 3.2 (with ∆ = 1), we have P[Y > C ′ ε5 nℓ] ≤ exp(−Ω(ε5 nℓ)); the desired result follows. ■
+⃗
+Now, if e is an entry of R[3/4,
+1] that is in a row in R ∗ and is covered by a split bad configuration in
+⃗ consistent with R,
+⃗ then e was a threatened entry which happened to be present in H ∩ R[3/4,
+⃗
+H∩R
+1]
+⃗
+(the converse may not hold, as bad configurations in subsets of H ∩ R are not always bad configurations
+⃗ itself). So, the desired result follows from the above claim.
+in H ∩ R
+□
+11.3. Upper-bounding the number of threatened pairs: setup and switching. It remains to
+prove Lemma 11.4, which amounts to a careful study of threat configurations in a random subset of a
+random Latin square.
+Recall that threat configurations are sets of entries that are “two entries away” from a bad configuration, and there are a very large number of possibilities for the structure of a bad configuration (e.g.,
+critical configurations can have different numbers of intercalates, they can require different subsets of
+intercalates to be switched to create a new intercalate, and they can have different rows in R ∗ ). To tame
+this complexity, one crucial observation is that for every bad configuration in a partial Latin square,
+there is some way to switch isolated intercalates to obtain a pair of intersecting intercalates. So, with a
+switching argument (unrelated to the main switching argument in Section 8), we can reduce the number
+of cases significantly: it suffices to consider bad configurations that correspond to pairs of intersecting
+intercalates, and bad configurations that are “one switch away” from a pair of intersecting intercalates.
+Definition 11.10. Given a partial Latin square P ∈ Pn and a set of rows R ∗ , we define a basic split
+bad configuration to be a set F of seven entries in P , such that F contains an intercalate A with a row
+in R ∗ , and either F or (F \ A) ∪ Ā is a union of two intersecting intercalates.
+Then, say that a pair {e1 , e2 }, belonging to some row in R ∗ , is a basic threatened pair for P if there
+is some basic split bad configuration F in P ∪ {e1 , e2 } with e1 , e2 ∈ F . In this case, we say F \ {e1 , e2 }
+is a basic threat configuration in P .
+There are four cases for the structure of a basic threatened pair/basic threat configuration; see Figure 1.
+Note that we make no isolatedness assumptions in the above definition, so technically it is possible that
+a basic split bad configuration is not actually a split bad configuration (or that a basic threatened pair is
+not actually a threatened pair, or that a basic threat configuration is not actually a threat configuration).
+However, we still borrow the same terminology (e.g., we may talk about the special entries of a basic
+split bad configuration).
+
+r1∗
+r2
+r3
+
+c1
+s1
+s2
+
+c2
+s2
+s1
+s3
+
+c3
+s3
+s2
+
+r1∗
+r2
+r3
+
+c1
+s2
+s1
+
+c2
+s1
+s2
+s3
+
+c3
+r1
+r2∗
+r3
+
+s3
+s2
+
+c1
+s1
+s2
+
+c2
+s2
+s1
+s3
+
+c3
+s3
+s2
+
+r1
+r2∗
+r3
+
+c1
+s2
+s1
+
+c2
+s1
+s2
+s3
+
+c3
+s3
+s2
+
+Figure 1. The four possibilities for the structure of a basic threat configuration, each
+illustrated with a basic threatened pair in orange. In each case, rows in R ∗ are marked
+with a star. (Rows not marked with a star may or may not be in R ∗ .)
+31
+
+Fact 11.11. Consider any partial Latin square R ∈ Pn and set of rows R ∗ , and let R′ be obtained
+from R by switching each isolated intercalate with probability 1/2, independently. Let {e1 , e2 } be any
+threatened pair for R. Then, {e1 , e2 } is a basic threatened pair for R′ , with probability at least (1/2)5 .
+Proof. There is some threat configuration F0 in R corresponding to the threatened pair {e1 , e2 }. By the
+definition of a split bad configuration, in R ∪ {e1 , e2 }, there is a way to switch isolated intercalates to
+introduce a pair of intersecting intercalates containing {e1 , e2 }. If we do the same switches in R (except
+possibly the switch of the special intercalate, which may not actually exist in R), we make {e1 , e2 } a
+basic threatened pair. See Figure 2 for an example.
+Now, F0 intersects at most five isolated intercalates in R (it is clear that F0 contains at most three isolated intercalates, but the other entries in F0 could be contained in totally different isolated intercalates).
+The desired result follows.
+□
+We next record a lemma saying that there are typically not many entries covered by basic threatened
+pairs. Recall the definitions of ℓ and ε from Definition 9.1.
+(3)
+
+Definition 11.12. For C > 0 and a hypergraph H ⊆ Kn,n,n , let T basic (H, C) ⊆ Ln be the set of Latin
+squares L such that for some set of rows R ∗ of size |R ∗ | = ℓ, the number of basic threatened pairs in
+H ∩ L is more than Cε3 n3 ℓ.
+Lemma 11.13. There is an absolute constant C > 0 such that the following holds. Consider a random
+hypergraph H ∼ G(3) (n, ε) and an independent random Latin square L ∼ Unif(Ln ). We have
+P[L ∈ T basic (H, C)] ≤ exp(−Ω(ε3 n2 )).
+We defer the proof of Lemma 11.13 to Section 11.4. First, we show how to use a switching argument
+(with Fact 11.11) to deduce Lemma 11.4. Note that, as we will see, this deduction crucially requires that
+the error probability in Lemma 11.13 is exp(−Ω(ε3 n2 )) rather than our usual exp(−ω(n log2 n)). We
+also need an upper bound on the size of the largest family of pairwise disjoint intercalates, as follows.
+int
+(H) ⊆ Ln be the set of Latin squares L for which there is a family of more
+Definition 11.14. Let Tupper
+4 2
+than 80ε n disjoint intercalates in H ∩ L.
+
+Lemma 11.15. Consider a random hypergraph H ∼ G(3) (n, ε) and an independent random Latin square
+L ∼ Unif(Ln ). We have
+int
+P[L ∈ Tupper
+(H)] ≤ exp(−ω(n log2 n)).
+We prove Lemma 11.15 with an averaging argument and Lemma 4.7 (this is a subset of the ideas we
+have already seen in Sections 10 and 11.2). Indeed, the following lemma is a version of Lemma 11.15 for
+the triangle removal process.
+int
+⃗upper
+Definition 11.16. Let U
+(H, α) ⊆ P⃗n be the set of partial ordered Latin squares P⃗ for which there
+4 4 2
+is a family of more than 20α ε n disjoint intercalates in H ∩ P⃗ .
+
+Lemma 11.17. Let α ∈ (0, 1) be a sufficiently small constant. Consider independent random hypergraphs
+⃗ ∼ TRP(n, αn2 ) and H ∼ G(3) (n, ε). Then we have
+R
+int
+⃗ ∈U
+⃗upper
+P[R
+(H, α)] ≤ exp(−ω(n log2 n)).
+
+c1
+r1∗
+r2
+r3
+r4
+r5
+r6
+
+s3
+s5
+
+c2
+s2
+
+c3
+s1
+
+s1
+
+s2
+s5
+s3
+
+c4
+s3
+s4
+s6
+s2
+
+c5
+
+c6
+
+s4
+s3
+
+c1
+
+→
+s2
+s6
+
+r1∗
+r2
+r3
+r4
+r5
+r6
+
+s5
+s3
+
+c2
+s2
+
+c3
+s1
+
+s1
+
+s2
+s3
+s5
+
+c4
+
+c5
+
+s4
+s3
+s2
+
+s3
+s4
+
+s6
+
+c6
+
+s6
+s2
+
+Figure 2. On the left, an example of a threat configuration in a partial Latin square
+(with an example threatened pair in orange). If we switch the three highlighted intercalates, then we obtain the partial Latin square on the right, which contains a basic
+threat configuration (highlighted). The threatened pair on the left has now become a
+basic threatened pair on the right.
+32
+
+Proof of Lemma 11.15 given Lemma 11.17. Let α > 0 be small enough for Lemma 11.17, let m = αn2
+and let ρ = α4 /4.
+By Lemma 11.17 and Fact 9.4(1), with probability 1 − exp(−ω(n log2 n)) our random hypergraph
+int
+⃗ ∈U
+⃗upper
+H ∼ G(3) (n, ε) satisfies P[R
+(H, α) | H] ≤ exp(−ω(n log2 n)). Let H be such an outcome of H.
+⃗ int (H, α) is (ρ, m)-inherited from T int (H), let L ∈ T int (H), so there is a family of
+To show U
+upper
+upper
+upper
+4 2
+X ≥ 80ε n disjoint intercalates in H ∩ L. Let Y be the number of these intercalates which lie in a
+⃗ m (L) of L. We have
+random ordered m-subset P
+E[Y] = X · (1 + o(1))α4 ≥ α4 X/2.
+By Markov’s inequality,
+
+
+
+ 
+
+α4
+1 − α4 /2
+α4
+int
+⃗ m (L) ∈ U
+⃗upper
+X =1−P X −Y > 1−
+X ≥1−
+≥ ρ.
+P[P
+(H, α)] ≥ P Y ≥
+4
+4
+1 − α4 /4
+int
+int
+⃗upper
+That is to say, U
+(H, α) is (ρ, m)-inherited from Tupper
+(H). Thus, by Lemma 4.7,
+int
+int
+⃗ ∈U
+⃗upper
+P[L ∈ Tupper
+(H)] ≤ exp(2n log2 n)P[R
+(H, α)] = exp(−ω(n log2 n)).
+
+Recalling our choice of H, Fact 9.4(2) concludes the proof.
+
+□
+
+(3)
+int
+⃗upper
+Proof of Lemma 11.17. For each H ⊆ Kn,n,n , note that U
+(H, α) is a monotone increasing property.
+So, by Lemma 5.3 (applied to each possible outcome H of H), we have
+int
+int
+int
+⃗ ∈U
+⃗upper
+⃗upper
+⃗upper
+P[H∩R
+(H, α)] ≤ P[H∩G′ ∈ U
+(H, α)]+exp(−Ω(n2 )) = P[G ∈ U
+(H, α)]+exp(−Ω(n2 )),
+
+where G′ ∼ G(3) (n, 2α/n) and G ∼ G(3) (n, 2εα/n). Let X be the size of the maximum family of disjoint
+intercalates in G. We have
+E[X] ≤ n6 (2αε/n)4 = 16α4 ε4 n2 ,
+and changing an edge of G changes X by at most 1 (since an entry can be part of at most one intercalate
+int
+⃗upper
+(H, α)] is at most
+in a maximum disjoint family). By Theorem 3.1, P[G ∈ U
+!
+
+
+ε8 n4
+= exp(−Ω(ε7 n2 )) = exp(−ω(n log2 n)),
+P[X > 20α4 ε4 n2 ] ≤ exp − Ω 3
+n · ε/n + ε4 n2
+□
+
+and the desired result follows.
+We now deduce Lemma 11.4 from Lemmas 11.13 and 11.15 and Fact 11.11.
+
+Proof of Lemma 11.4. Let C be as in Lemma 11.13, and let C ′ = 100C.
+By Fact 9.4(1) and Lemmas 11.13 and 11.15, with probability 1 − exp(−ω(n log2 n)) over the randomness of H, we have
+int
+P[L ∈ Tupper
+(H) | H] ≤ exp(−ω(n log2 n)).
+
+P[L ∈ T basic (H, C) | H] ≤ exp(−Ω(ε3 n2 )),
+(3)
+
+int
+(H). By Fact 9.4(2), it
+Fix such an outcome H ∈ Kn,n,n of H, and let S = T threat (H, C ′ , α, ϕ) \ Tupper
+suffices to show that
+P[L ∈ S] ≤ exp(−ω(n log2 n)).
+Let P ∈ Pn,αn2 be a uniformly random subset of αn2 edges of L and let P′ be obtained from P by
+switching each isolated intercalate in H ∩ P with probability 1/2 independently. Let L′ = P′ ∪ (L \ P).
+Let X be the maximum over all choices of R ∗ of the number of threatened pairs in H ∩ P, and let
+Y ≤ X be the maximum over all choices of R ∗ of the number of threatened pairs in H ∩ P which
+become basic threatened pairs in H ∩ P′ . By Fact 11.11 with R = H ∩ P (and the fact that an expected
+maximum is at least the maximum expectation) we have E[Y | X] ≥ (1/32)X, so by Markov’s inequality
+
+
+
+
+1
+99
+31/32
+1
+P Y≥
+X X =1−P X−Y >
+X X ≥1−
+≥
+.
+100
+100
+99/100
+100
+
+Also, by the definition of T threat (H, C ′ , α, ϕ) ⊇ S, we have
+P[X ≥ C ′ ε3 n3 ℓ | L ∈ S] ≥ ϕ.
+Recalling that C ′ = 100C, and letting T = T basic (H, C), we deduce that P[L′ ∈ T | L ∈ S] ≥ ϕ/100 or
+in other words
+100
+P[L ∈ S] ≤
+P[L ∈ S and L′ ∈ T ].
+ϕ
+33
+
+So, it suffices to prove that P[L ∈ S and L′ ∈ T ] ≤ exp(−ω(n log2 n)).
+We introduce the notation L1 → L2 to mean that we can obtain L2 from L1 by switching some
+disjoint intercalates in H ∩ L1 . Recall that L′ is obtained from L by switching some intercalates which
+are isolated in H ∩ P, and these intercalates are certainly disjoint, so for any of the possible outcomes
+(L1 , L2 ) of (L, L′ ) we have L1 → L2 . We therefore have
+X
+X
+P[L ∈ S and L′ ∈ T ] ≤
+P[L = L1 ]P[L′ = L2 | L = L1 ]
+L2 ∈T L1 ∈S,L1 →L2
+
+≤
+
+X
+L2 ∈T
+
+≤
+
+X
+L2 ∈T
+
+X
+
+P[L = L2 ]
+
+1
+
+L1 ∈S,L1 →L2
+
+
+ 4
+n + 80ε4 n2
+P[L = L2 ]
+80ε4 n2
+
+≤ P[L ∈ T ] exp(O(80ε4 n2 log n))
+≤ exp(−Ω(ε3 n2 )) · exp(O(80ε4 n2 log n))
+≤ exp(−ω(n log2 n)),
+as desired. Here, in the second inequality we used the fact that P[L = L1 ] = P[L = L2 ] (since L has
+the same probability of being equal to any Latin square). In the third inequality we used the fact that
+every Latin square has at most n4 intercalates, and the difference between L1 and L2 is described by at
+int
+most 80ε4 n2 disjoint intercalate switches (note that L1 ∈ S implies that L1 ∈
+/ Tupper
+(H), i.e., H ∩ L1 has
+4 2
+at most 80ε n disjoint
+intercalates).
+Given
+a
+set
+of
+size
+N
+,
+the
+number
+of
+subsets
+of size at most k is
+
+N +k
+bounded by k . The fifth inequality is by our choice of H, and the final one uses that ε = o(1/ log n)
+(recall Definition 9.1). It is vital here that the error probability in Lemma 11.13 is exp(−Ω(ε3 n2 )). □
+11.4. Upper-bounding the number of basic threatened pairs. It remains to prove Lemma 11.13.
+This does not really involve any new ideas. Specifically, the approach is to carefully consider how basic
+threat configurations can emerge through the triangle removal process, using Lemma 4.7 to relate this
+to a random Latin square. There are four different cases for the structure of a basic threat configuration
+(cf. Figure 1), each of which needs to be treated in a slightly different way.
+We start by giving each of the four cases in Figure 1 a name.
+Definition 11.18. Consider the four cases for the structure of a basic threat configuration, as follows15.
+c1 c2 c3
+c1 c2 c3
+c1 c2 c3
+c1 c2 c3
+r1∗
+r1∗
+r1∗
+s3
+r1∗
+s3
+r2 s2 s1 s3
+r2 s1 s2 s3
+r2 s1 s2
+r2 s2 s1
+s3 s2
+s3 s2
+s3 s2
+s3 s2
+r3
+r3
+r3
+r3
+These four cases describe four partial Latin squares Q1 , Q2 , Q3 , Q4 ∈ P3 (from left to right). Each Qt
+has three rows, three columns and three symbols (though in Q1 and Q2 , one of the rows does not have
+any entries in it).
+For each type t, and any partial Latin square P ∈ Pn , an embedding from Qt into P is an injective
+map from the 9 vertices of Qt into the vertices of P (where row-vertices are mapped to row-vertices,
+column-vertices are mapped to column-vertices, and symbol-vertices are mapped to symbol-vertices),
+such that the image of every hyperedge of Qt is a hyperedge of Pt .
+Then, for a partial Latin square P ∈ Pn , note that a basic threatened pair (together with an associated
+basic threat configuration) is specified by an embedding of some Qt into P , where we demand that r1∗ is
+mapped into R ∗ . In this case we say that the basic threatened pair has type t.
+Note that a basic threatened pair can have multiple types (if it has multiple associated basic threat
+configurations).
+Definition 11.19. For some t ∈ {1, 2, 3, 4}, let π = (e1 , . . . , e5 ) be an ordering of the entries of Qt , and
+⃗ n . We say that ϕ(Qt ) is
+let ϕ(Qt ) be an embedding of Qt into an ordered partial Latin square P⃗ ∈ P
+⃗
+⃗
+π-consistent with P if ϕ(ei ) ∈ P [(i − 1)/5, i/5] for all i ∈ {1, . . . , 5}. We say that a basic threatened pair
+of type t is π-consistent with P⃗ if it is associated with some π-consistent embedding ϕ(Qt ).
+Now, we state a version of Lemma 11.13 for the triangle removal process. Recall the definitions of ℓ
+and ε from Definition 9.1.
+15These are exactly as in Figure 1, but in the last two cases we have swapped the first and second rows.
+34
+
+Definition 11.20. For a hypergraph H, a type t ∈ {1, 2, 3, 4} and an ordering π of the entries of Qt ,
+⃗ basic (H, t, π) ⊆ P
+⃗ n be the set of partial ordered Latin squares P⃗ such that for some set of rows R ∗
+let U
+of size |R ∗ | = ℓ, the number of type-t basic threatened pairs in H ∩ P⃗ which are π-consistent with P⃗ is
+more than ε3 n3 ℓ.
+Lemma 11.21. Fix a sufficiently small constant α > 0, and any t ∈ {1, 2, 3, 4}. There is an ordering π
+⃗ ∼ TRP(n, αn2 ) and H ∼ G(3) (n, ε), we have
+of Qt such that for independent random hypergraphs R
+⃗ ∈U
+⃗ basic (H, t, π)] ≤ exp(−Ω(ε3 n2 )).
+P[R
+Before proving Lemma 11.21, we show how to deduce Lemma 11.13.
+Proof of Lemma 11.13. Let α ∈ (0, 1) be small enough for Lemma 11.21, let m = αn2 and let ρ = α5 /57 ,
+and assume C ≥ 4(57 /α5 ). For each t, let πt be the ordering in Lemma 11.21.
+By Lemma 11.21 and Fact 9.4(1), with probability 1 − exp(−Ω(ε3 n2 )) over the randomness of H, we
+have that for each t ∈ {1, 2, 3, 4},
+⃗ ∈U
+⃗ basic (H, t, πt ) | H] ≤ exp(−Ω(ε3 n2 )).
+P[R
+
+(11.1)
+
+(3)
+Fix such an outcome H ⊆ Kn,n,n of H.
+S
+⃗ basic (H) = 4 U
+⃗ basic (H, t, πt ). Given an ordered partial Latin square P⃗ and a set of rows R ∗ ,
+Let U
+t=1
+
+we say a type-t basic threatened pair is consistent if it is πt -consistent.
+⃗ basic (H) is (ρ, m)-inherited from T basic (H, C), let L ∈ T basic (H, C), so there is R ∗ of size
+To show U
+∗
+|R | = ℓ for which there are X > Cε3 n3 ℓ many basic threatened pairs in H ∩ L. Let Y be the number of
+⃗ m (L)
+basic threatened pairs in H ∩ L which are present and consistent in an ordered random m-subset P
+of L. We have
+α5
+E[Y] = X · (1 + o(1))α5 (1/5)5 ≥ 6 X.
+5
+5 7
+3 3
+basic
+⃗
+Now, if Y ≥ (α /5 )X > 4ε n ℓ then U
+(H, t, πt ) holds for some t. Using Markov’s inequality, it
+follows that
+
+
+
+
+ 
+α5
+α5
+1 − (α5 /56 )
+basic
+⃗
+⃗
+≥ ρ,
+P[Pm (L) ∈ U
+(H)] ≥ P Y ≥ 7 X = 1 − P X − Y > 1 − 7 X ≥ 1 −
+5
+5
+1 − (α5 /57 )
+⃗ basic (H) is (ρ, m)-inherited from T basic (H, C).
+which means U
+Thus, we have
+⃗ ∈U
+⃗ basic (H)] ≤ exp(−Ω(ε3 n2 )),
+P[L ∈ T basic (H, C)] ≤ exp(2n log2 n)P[R
+where the first inequality follows by Lemma 4.7, and the second inequality follows by (11.1).
+Recalling our choice of H, Fact 9.4(2) implies that
+P[L ∈ T basic (H, C)] ≤ exp(−Ω(ε3 n2 )),
+□
+
+as desired.
+Now we prove Lemma 11.21, separately considering types 1 and 2, and types 3 and 4.
+Proof of Lemma 11.21 for types t = 1 and t = 2. Recall that Q1 and Q2 have the following forms.
+c1
+r1∗
+r2
+r3
+
+s2
+
+c2
+s1
+s3
+
+c3
+r1∗
+r2
+r3
+
+s3
+s2
+
+c1
+
+c2
+
+c3
+
+s1
+
+s2
+s3
+
+s3
+s2
+
+If t = 1, we take our ordering π to be
+e1 = (r3 , c3 , s2 ), e2 = (r2 , c3 , s3 ), e3 = (r3 , c2 , s3 ), e4 = (r2 , c2 , s1 ), e5 = (r2 , c1 , s2 ).
+If t = 2, we take our ordering π to be
+e1 = (r3 , c3 , s2 ), e2 = (r2 , c3 , s3 ), e3 = (r3 , c2 , s3 ), e4 = (r2 , c2 , s2 ), e5 = (r2 , c1 , s1 ).
+Fix t ∈ {1, 2} and let R ∗ be a set of rows with |R ∗ | = ℓ. Among all the π-consistent embed⃗ which satisfy ϕ(r∗ ) ∈ R ∗ , let N be the number of possibilities for
+dings ϕ(Qt ) of Qt into H ∩ R
+1
+∗
+(ϕ(r1 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )). Then, N is an upper bound on the number of type-t basic threatened
+⃗ which are π-consistent with R.
+⃗
+pairs in H ∩ R
+35
+
+⃗ 1/5], which has αn2 /5 entries. Each of them is present in H with probability ε
+We first reveal R[0,
+independently. Thus, by a Chernoff bound, with probability 1 − exp(−Ω(εn2 )), there are at most εn2
+many viable choices for ϕ(e1 ) (and therefore (ϕ(r3 ), ϕ(c3 ), ϕ(s2 ))). Assume this is the case.
+⃗
+Next, we reveal H ∩ R[1/5,
+3/5]. For each choice of (ϕ(r3 ), ϕ(c3 ), ϕ(s2 )), there are at most n choices
+⃗
+for ϕ(e2 ) in column ϕ(c3 ) of R[1/5, 2/5]. This determines ϕ(r2 ) and ϕ(s3 ), and then there is at most one
+⃗
+occurrence of ϕ(s3 ) in row ϕ(r3 ) of R[2/5,
+3/5], determining ϕ(c2 ). This makes a total of at most εn3
+choices for (ϕ(r2 ), ϕ(r3 ), ϕ(c2 ), ϕ(c3 ), ϕ(s2 ), ϕ(s3 )).
+Let S be the set of all possible choices for (ϕ(r2 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )) at this stage, so we
+have |S| ≤ εn5 (there are at most n2 choices for (ϕ(c1 ), ϕ(s1 ))). Let S4 ⊆ S be the set of all
+⃗
+(ϕ(r2 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )) ∈ S for which ϕ(e4 ) is an edge of H ∩ R[3/5,
+4/5], and let S5 ⊆ S4
+⃗
+be the set of all such tuples for which ϕ(e5 ) is an edge of H ∩ R[4/5,
+1]. Note that N ≤ ℓ|S5 | (there are
+at most ℓ choices for ϕ(r1∗ ) ∈ R ∗ ).
+⃗
+We next consider H ∩ R[3/5,
+4/5]. We claim that |S4 | ≤ ε2 n4 with probability 1 − exp(−Ω(ε2 n2 )).
+To see this, first note that, by Lemma 5.3, it suffices to prove an analogous bound with H ∩ G ∼
+⃗
+G(3) (n, (2εα/5)/n) in place of H ∩ R[3/5,
+4/5], where G ∼ G(3) (n, 2(α/5)/n). But this is a direct
+consequence of Corollary 3.2, since each potential entry ϕ(e4 ) is present in H ∩ G with probability at
+most 2εα/(5n), and appears in at most n2 tuples in S.
+⃗
+⃗
+Reveal an outcome of H ∩ R[3/5,
+4/5] satisfying |S4 | ≤ ε2 n4 . We next consider H ∩ R[4/5,
+1]: we
+3 3
+3 2
+claim that |S5 | ≤ ε n with probability 1 − exp(−Ω(ε n )). The proof is basically as before: first note
+⃗
+that it suffices to prove an analogous bound with H ∩ G ∼ G(3) (n, (2εα/5)/n) in place of H ∩ R[4/5,
+1],
+and then the desired result follows from Corollary 3.2 (noting that each potential entry ϕ(e5 ) appears in
+at most n tuples in S4 , since such a tuple is determined by a choice of ϕ(e4 ) in the same row).
+⃗ which are π-consistent
+We have proved that the number of type-t basic threatened pairs in H ∩ R
+3 3
+3 2
+⃗
+with R is at most N ≤ ℓ|S5 | ≤ ε n ℓ, with probability at least 1 − exp(−Ω(ε n )). A union bound over
+all (at most 2n ) choices of R ∗ finishes the proof.
+□
+Proof of Lemma 11.21 for types t = 3 and t = 4. Recall that Q3 and Q4 have the following forms.
+c1
+
+c2
+
+r1∗
+r2
+r3
+
+s1
+
+s2
+s3
+
+c3
+s3
+
+r1∗
+
+s2
+
+r2
+r3
+
+c1
+
+c2
+
+s2
+
+s1
+s3
+
+c3
+s3
+s2
+
+If t = 3, we take our ordering π to be
+e1 = (r3 , c3 , s2 ), e2 = (r1∗ , c3 , s3 ), e3 = (r3 , c2 , s3 ), e4 = (r2 , c2 , s2 ), e5 = (r2 , c1 , s1 ).
+If t = 4, we take our ordering π to be
+e1 = (r3 , c3 , s2 ), e2 = (r1∗ , c3 , s3 ), e3 = (r3 , c2 , s3 ), e4 = (r2 , c2 , s1 ), e5 = (r2 , c1 , s2 ).
+Fix t ∈ {3, 4} and let R ∗ be a set of rows with |R ∗ | = ℓ. Among all the π-consistent embed⃗ which satisfy ϕ(r∗ ) ∈ R ∗ , let N be the number of possibilities for
+dings ϕ(Qt ) of Qt into H ∩ R
+1
+∗
+(ϕ(r1 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )). Then, N is an upper bound on the number of type-t basic threatened
+⃗ which are π-consistent with R.
+⃗
+pairs in H ∩ R
+⃗ 1/5], which has αn2 /5
+The first part is exactly the same as the previous proof: we first reveal R[0,
+entries. By a Chernoff bound over the randomness of H, with probability 1 − exp(−Ω(εn2 )), there are
+at most εn2 many viable choices for ϕ(e1 ) (and therefore (ϕ(r3 ), ϕ(c3 ), ϕ(s2 ))). Assume this is the case.
+⃗
+Next, we reveal H ∩ R[1/5,
+3/5]. The numbers are slightly different than in the last proof: for each
+⃗
+choice of (ϕ(r3 ), ϕ(c3 ), ϕ(s2 )), there are at most ℓ choices for ϕ(e2 ) in column ϕ(c3 ) of R[1/5,
+2/5] (in a row
+∗
+∗
+in R ). This determines ϕ(r1 ) and ϕ(s3 ), and then there is at most one occurrence of ϕ(s3 ) in row ϕ(r3 )
+⃗
+of R[2/5,
+3/5]. This makes a total of at most εn2 ℓ choices for (ϕ(r1∗ ), ϕ(r3 ), ϕ(c2 ), ϕ(c3 ), ϕ(s2 ), ϕ(s3 )).
+Let S be the set of all possible choices for (ϕ(r1∗ ), ϕ(r2 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )) at this stage, so we
+have |S| ≤ εn5 ℓ (there are at most n3 choices for (ϕ(r2 ), ϕ(c1 ), ϕ(s1 ))). Let S4 ⊆ S be the set of all
+⃗
+(ϕ(r1∗ ), ϕ(r2 ), ϕ(c1 ), ϕ(c2 ), ϕ(s1 ), ϕ(s2 )) ∈ S for which ϕ(e4 ) is an edge of H ∩ R[3/5,
+4/5], and let S5 ⊆ S4
+⃗
+be the set of all such tuples for which ϕ(e5 ) is an edge of H ∩ R[4/5, 1]. Note that N ≤ |S5 |.
+⃗
+The end of the proof is similar to before. We next consider H∩ R[3/5,
+4/5]: we claim that |S4 | ≤ ε2 n4 ℓ
+2 2
+with probability 1−exp(−Ω(ε n )). To see this, we first note that it suffices to prove an analogous bound
+36
+
+⃗
+with H ∩ G ∼ G(3) (n, (2εα/5)/n) in place of H ∩ R[3/5,
+4/5], and then the desired result follows from
+Corollary 3.2, noting that each potential entry ϕ(e4 ) appears in at most n2 ℓ tuples in S.
+⃗
+Finally we consider H ∩ R[4/5,
+1]: we claim that |S5 | ≤ ε3 n3 ℓ with probability 1 − exp(−Ω(ε3 n2 )).
+Again, we first note that it suffices to prove an analogous bound with H ∩ G ∼ G(3) (n, (2εα/5)/n) in
+⃗
+place of H ∩ R[4/5,
+1], and then the desired result follows from Corollary 3.2 (noting that each potential
+entry ϕ(e5 ) appears in at most nℓ tuples in S4 , since such a tuple is determined by a choice of ϕ(e4 ) in
+the same row, and a choice of ϕ(r1∗ )).
+We then finish with a union bound over choices of R ∗ , as before.
+□
+12. Concluding remarks
+In this paper we have proved (a generalisation of) Cameron’s conjecture, describing the joint distribution of the number of odd row/column/symbol permutations in a random n × n Latin square. There
+are various directions for further research, as follows.
+• Can quantitative aspects be improved? For example, in Theorem 1.3(4), we see that the total
+variation error of our approximation is o(1). Actually, our proof gives an error of n−1/2+o(1) , and
+it seems this can be improved to n−1+o(1) with some additional calculations using the fact that
+E[Nrow (L)] = E[Ncol (L)] = E[Nsym (L)] = n/2. However, it seems plausible that the true error
+of the approximation might be super-exponentially small.
+• What about constrained distributions on Latin squares (e.g. symmetric Latin squares)? We
+expect that similar results should hold, but the available enumeration estimates are much weaker.
+It might be possible to prove analogues of Theorem 1.3(1) and Theorem 1.3(5) (using the ideas
+described in Section 2.4, which have relatively weak quantitative requirements), but new ideas
+would be required for the other parts of Theorem 1.3.
+• What about analogous questions for higher-dimensional analogues of Latin squares (sometimes
+called high dimensional permutations, see e.g. [46])? Here it seems completely new ideas would
+be required, because (we predict that) small switchings become rarer as the dimension increases.
+References
+[1] Y. Alimohammadi, P. Diaconis, M. Roghani, and A. Saberi, Sequential importance sampling for estimating expectations
+over the space of perfect matchings, Ann. Appl. Probab. 33 (2023), no. 2, 799–833.
+[2] J. Allsop and I. M. Wanless, Subsquares in random Latin rectangles, arXiv:2409.08446.
+[3] L. Alpoge, Square-root cancellation for the signs of Latin squares, Combinatorica 37 (2017), no. 2, 137–142.
+[4] B. Bollobás, The chromatic number of random graphs, Combinatorica 8 (1988), no. 1, 49–55.
+[5] C. Bowtell and R. Montgomery, Almost every Latin square has a decomposition into transversals, arXiv:2501.05438.
+[6] L. M. Brègman, Certain properties of nonnegative matrices and their permanents, Dokl. Akad. Nauk SSSR 211 (1973),
+27–30.
+[7] P. J. Cameron, Permutations, Paul Erdős and his mathematics, II (Budapest, 1999), Bolyai Soc. Math. Stud., vol. 11,
+János Bolyai Math. Soc., Budapest, 2002, pp. 205–239.
+[8] P. J. Cameron, Asymmetric Latin squares, Steiner triple systems, and edge-parallelisms, arXiv:1507.02190.
+[9] P. J. Cameron, Almost all quasigroups have rank 2, Discrete Math. 106/107 (1992), 111–115.
+[10] P. J. Cameron, BCC problem list, https://webspace.maths.qmul.ac.uk/p.j.cameron/bcc/allprobs.pdf, 2001.
+[11] P. J. Cameron, Random Latin squares, slides for a presentation at the RAND-APX meeting at Oxford in 2003,
+https://webspace.maths.qmul.ac.uk/p.j.cameron/slides/rand-apx.pdf, 2003.
+[12] P. J. Cameron, Problems from “Permutations”, https://webspace.maths.qmul.ac.uk/p.j.cameron/permgps/
+permutations.html, 2005.
+[13] P. J. Cameron, Peter Cameron’s BCC problems, https://webspace.maths.qmul.ac.uk/p.j.cameron/pjcatbcc.html,
+2007.
+[14] P. J. Cameron, Problems, https://webspace.maths.qmul.ac.uk/p.j.cameron/oldprob.html, 2013.
+[15] P. J. Cameron, A niggling problem, posted on Peter Cameron’s blog, https://cameroncounts.wordpress.com/2015/
+01/24/a-niggling-problem/, 2015.
+[16] N. Cavenagh and R. Ramadurai, On the distances between Latin squares and the smallest defining set size, J. Combin.
+Des. 25 (2017), no. 4, 147–158.
+[17] N. J. Cavenagh, C. Greenhill, and I. M. Wanless, The cycle structure of two rows in a random Latin square, Random
+Structures Algorithms 33 (2008), no. 3, 286–309.
+[18] N. J. Cavenagh and I. M. Wanless, There are asymptotically the same number of Latin squares of each parity, Bull.
+Aust. Math. Soc. 94 (2016), no. 2, 187–194.
+[19] M. Delcourt and L. Postle, Refined absorption: A new proof of the existence conjecture, arXiv:2402.17855.
+[20] A. Dembo and O. Zeitouni, Large deviations techniques and applications, Stochastic Modelling and Applied Probability, vol. 38, Springer-Verlag, Berlin, 2010, Corrected reprint of the second (1998) edition.
+[21] G. P. Egorychev, The solution of van der Waerden’s problem for permanents, Adv. in Math. 42 (1981), no. 3, 299–305.
+[22] D. I. Falikman, Proof of the van der Waerden conjecture on the permanent of a doubly stochastic matrix, Mat. Zametki
+29 (1981), no. 6, 931–938, 957.
+37
+
+[23] W. Feller, An introduction to probability theory and its applications. Vol. I, third ed., John Wiley & Sons, Inc., New
+York-London-Sydney, 1968.
+[24] A. Ferber and M. Kwan, Almost all Steiner triple systems are almost resolvable, Forum of Mathematics, Sigma, vol. 8,
+Cambridge University Press, 2020, p. e39.
+[25] D. A. Freedman, On tail probabilities for martingales, Ann. Probability 3 (1975), 100–118.
+[26] B. Friedman and S. McGuinness, The Alon-Tarsi conjecture: a perspective on the main results, Discrete Math. 342
+(2019), no. 8, 2234–2253.
+[27] S. Glock, D. Kühn, A. Lo, and D. Osthus, The existence of designs via iterative absorption: hypergraph F -designs for
+arbitrary F , Mem. Amer. Math. Soc. 284 (2023), no. 1406, v+131.
+[28] S. Gould and T. Kelly, Hamilton transversals in random Latin squares, Random Structures Algorithms 62 (2023),
+no. 2, 450–478.
+[29] R. Häggkvist and J. C. M. Janssen, All-even Latin squares, Proceedings of the 6th Conference on Formal Power Series
+and Algebraic Combinatorics (New Brunswick, NJ, 1994), vol. 157, 1996, pp. 199–206.
+[30] R. Huang and G.-C. Rota, On the relations of various conjectures on Latin squares and straightening coefficients,
+Discrete Math. 128 (1994), no. 1-3, 225–236.
+[31] M. T. Jacobson and P. Matthews, Generating uniformly distributed random Latin squares, J. Combin. Des. 4 (1996),
+no. 6, 405–437.
+[32] S. Janson, T. Łuczak, and A. Rucinski, Random graphs, Wiley-Interscience Series in Discrete Mathematics and Optimization, Wiley-Interscience, New York, 2000.
+[33] S. Janson and A. Ruciński, The infamous upper tail, Random Structures Algorithms 20 (2002), no. 3, 317–342,
+Probabilistic methods in combinatorial optimization.
+[34] J. C. M. Janssen, On even and odd Latin squares, J. Combin. Theory Ser. A 69 (1995), no. 1, 173–181.
+[35] A. D. Keedwell and J. Dénes, Latin squares and their applications, second ed., Elsevier/North-Holland, Amsterdam,
+2015, With a foreword to the previous edition by Paul Erdös.
+[36] P. Keevash, The existence of designs, arXiv:1401.3665.
+[37] P. Keevash, The existence of designs II, arXiv:1802.05900.
+[38] P. Keevash, A short proof of the existence of designs, arXiv:2411.18291.
+[39] P. Keevash, Counting designs, J. Eur. Math. Soc. (JEMS) 20 (2018), no. 4, 903–927.
+[40] M. Kwan, Almost all Steiner triple systems have perfect matchings, Proc. Lond. Math. Soc. (3) 121 (2020), no. 6,
+1468–1495.
+[41] M. Kwan, A. Sah, and M. Sawhney, Note on random latin squares and the triangle removal process, arXiv:2109.15201.
+[42] M. Kwan, A. Sah, and M. Sawhney, Large deviations in random Latin squares, Bull. Lond. Math. Soc. 54 (2022),
+no. 4, 1420–1438.
+[43] M. Kwan, A. Sah, M. Sawhney, and M. Simkin, Substructures in Latin squares, Israel J. Math. 256 (2023), no. 2,
+363–416.
+[44] M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares, Random Structures Algorithms 52
+(2018), no. 2, 181–196.
+[45] N. Linial and Z. Luria, An upper bound on the number of Steiner triple systems, Random Structures Algorithms 43
+(2013), no. 4, 399–406.
+[46] N. Linial and Z. Luria, Discrepancy of high-dimensional permutations, Discrete Anal. (2016), Paper No. 11, 8.
+[47] N. Linial and M. Simkin, Monotone subsequences in high-dimensional permutations, Combin. Probab. Comput. 27
+(2018), no. 1, 69–83.
+[48] J. Lynch and J. Sethuraman, Large deviations for processes with independent increments, Ann. Probab. 15 (1987),
+no. 2, 610–627.
+[49] C. McDiarmid, On the method of bounded differences, Surveys in combinatorics, 1989 (Norwich, 1989), London Math.
+Soc. Lecture Note Ser., vol. 141, Cambridge Univ. Press, Cambridge, 1989, pp. 148–188.
+[50] B. D. McKay and I. M. Wanless, Most Latin squares have many subsquares, J. Combin. Theory Ser. A 86 (1999),
+no. 2, 322–347.
+[51] A. O. Pittenger, Mappings of Latin squares, Linear Algebra Appl. 261 (1997), 251–268.
+[52] J. Radhakrishnan, An entropy proof of Bregman’s theorem, J. Combin. Theory Ser. A 77 (1997), no. 1, 161–164.
+[53] V. Rödl and L. Thoma, Asymptotic packing and the random greedy algorithm, Random Structures Algorithms 8
+(1996), no. 3, 161–177.
+[54] N. Ross, Fundamentals of Stein’s method, Probab. Surv. 8 (2011), 210–293.
+[55] J. Spencer, Asymptotic packing via a branching process, Random Structures Algorithms 7 (1995), no. 2, 167–172.
+[56] J. H. van Lint and R. M. Wilson, A course in combinatorics, 2nd ed., Cambridge University Press, Cambridge, 2001.
+[57] L. Warnke, On the method of typical bounded differences, Combinatorics, Probability and Computing 25 (2016), no. 2,
+269–299.
+[58] P. Zappa, Triplets of Latin squares, Boll. Un. Mat. Ital. A (7) 10 (1996), no. 1, 63–69.
+Institute of Science and Technology Austria (ISTA). Am Campus 1, 3400 Klosterneuburg, Austria
+Email address: matthew.kwan@ist.ac.at
+Institute of Science and Technology Austria (ISTA). Am Campus 1, 3400 Klosterneuburg, Austria
+Email address: kalina.petrova@ist.ac.at
+Department of Mathematics, Columbia University, New York, NY 10027
+Email address: m.sawhney@columbia.edu
+
+38
+
+

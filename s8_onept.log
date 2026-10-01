@@ -1,0 +1,5 @@
+SM one m=   8 trials=400000000: Eeps=+0.006280 (se 0.000050)
+SM one m=  12 trials=600000000: Eeps=+0.002951 (se 0.000041)
+SM one m=  16 trials=800000000: Eeps=+0.001713 (se 0.000035)
+SM one m=  24 trials=1200000000: Eeps=+0.000814 (se 0.000029)
+SM one m=  32 trials=1600000000: Eeps=+0.000458 (se 0.000025)

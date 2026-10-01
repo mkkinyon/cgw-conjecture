@@ -1,0 +1,2 @@
+n=5: instances=4320 subset-checks=7920 failures=0
+  family sizes: {0: 720, 1: 3600}

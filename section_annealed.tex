@@ -1,0 +1,389 @@
+%======================================================================
+\section{The annealed bound: factorization of the second moment,
+refutation of local genericity, and real-ensemble data}
+\label{sec:anneal}
+
+This section records the session-7 progress on
+Problem~\ref{prob:annealed}.  The positive result is a
+\emph{two-point factorization} of the annealed second moment
+(Theorem~\ref{thm:factor}), which reduces the iid model of the
+annealed bias bound to a single one-parameter mixing statement ---
+polynomial $L^2$ decay under a ``fresh-chord averaging'' Markov
+operator (Problem~\ref{prob:mixing}) --- verified numerically with a
+large margin.  The negative results sharpen the target: every local
+genericity condition of the kind contemplated at the end of
+\S\ref{sec:annealed} is refuted by an explicit family
+(Proposition~\ref{prop:pendant} and an exhaustive scan), and the
+template-averaging fix proposed in Remark~\ref{rem:bookkeeping}(i) is
+shown to be \emph{exactly neutral} (Proposition~\ref{prop:vacuity}),
+which re-opens the exceptional-mark bookkeeping as a genuine (if
+presumably easier) probabilistic sub-problem, stated as
+Problem~\ref{prob:decouple}.  Finally, the master formula and the
+bias statistics are grounded on \emph{real} random squares at
+$n=30$--$100$ via Jacobson--Matthews sampling.
+
+%----------------------------------------------------------------------
+\subsection{The two-point factorization of the annealed second
+moment}\label{sec:factor}
+
+Work in the \emph{iid ensemble}: $u,v$ fixed on the circle, and
+chords $Z_1,\dots,Z_k$ with iid endpoint pairs, uniform on the circle
+(a.s.\ disjoint); this is the continuum version of the
+generic-position ensemble of \S\ref{sec:annealed}, and the argument
+below uses nothing about the position law except that the $Z_i$ are
+iid given $(u,v)$.  For a finite set $W$ of disjoint chords let
+\[
+\varepsilon(W)\;=\;c\bigl(\gamma_W\,\tau_W\,(u\,v)\bigr)
+-c\bigl(\gamma_W\,\tau_W\bigr)\;\in\;\{\pm1\},
+\]
+the cycle increment of the virtual chord: $\varepsilon(W)=+1$ iff
+$u\sim v$ in $\gamma_W\tau_W$, i.e.\ $\varepsilon=2\,\mathrm{bit}-1$.
+For $S\subseteq[k]$ write $\varepsilon_S=\varepsilon(\{Z_i:i\in S\})$.
+Then $\mathrm{bias}=\tfrac12\,\E_S[\varepsilon_S]$ conditionally on
+the positions, so with $S,T$ independent uniform subsets of $[k]$,
+\begin{equation}\label{eq:bias2}
+4\,\E\bigl[\mathrm{bias}^2\bigr]
+=\E_{S,T}\,\E_{\mathrm{pos}}\bigl[\varepsilon_S\,\varepsilon_T\bigr].
+\end{equation}
+
+\begin{theorem}[two-point factorization]\label{thm:factor}
+Fix $S,T\subseteq[k]$ and let $j=|S\cap T|$, $d_1=|S\setminus T|$,
+$d_2=|T\setminus S|$.  Let $C=(Z_i)_{i\in S\cap T}$ and define the
+\emph{fresh-averaged sign}
+\[
+M_d(C)\;:=\;\E\bigl[\varepsilon(C\cup F_d)\,\big|\,C\bigr],
+\qquad F_d=d\text{ fresh iid chords}.
+\]
+Then
+\[
+\E_{\mathrm{pos}}\bigl[\varepsilon_S\varepsilon_T\bigr]
+=\E_C\bigl[M_{d_1}(C)\,M_{d_2}(C)\bigr].
+\]
+Consequently, with
+$\psi(j,d):=\E_{C_j}\bigl[M_d(C_j)^2\bigr]$ ($C_j=j$ iid chords),
+\[
+4\,\E[\mathrm{bias}^2]
+\;\le\;\max_{\,j\le k,\ d\ge k/8}\psi(j,d)\;+\;2e^{-k/32}.
+\]
+\end{theorem}
+
+\begin{proof}
+Given $C$, the position blocks $(Z_i)_{i\in S\setminus T}$ and
+$(Z_i)_{i\in T\setminus S}$ are independent, and
+$\varepsilon_S$ is a function of $C$ and the first block only,
+$\varepsilon_T$ of $C$ and the second only: so
+$\E[\varepsilon_S\varepsilon_T\mid C]=M_{d_1}(C)M_{d_2}(C)$; take
+expectations.  For the second claim: by Cauchy--Schwarz,
+$\E_C[M_{d_1}M_{d_2}]\le\psi(j,d_1)^{1/2}\psi(j,d_2)^{1/2}
+\le\max_{d\in\{d_1,d_2\}}\psi(j,d)$.  In \eqref{eq:bias2},
+$(j,d_1,d_2)$ is multinomial with cell probabilities $1/4$, so
+$d_1,d_2\ge k/8$ outside probability $2e^{-k/32}$ (Chernoff), where
+$|\varepsilon_S\varepsilon_T|\le1$ absorbs the exceptional mass.
+\end{proof}
+
+\begin{corollary}\label{cor:psienough}
+If $\psi(j,d)\le K\,d^{-2c}$ for all $j\le k$, $d\ge k/8$, then
+$\E|\mathrm{bias}|\le\E[\mathrm{bias}^2]^{1/2}\le K'k^{-c}$.  With
+the supply $k\ge6\log^{11}n$ of Lemma~\ref{lem:supply}, \emph{any}
+$c>1/11$ closes the iid model of Problem~\ref{prob:annealed}.
+\end{corollary}
+
+The quantity $M_d$ has a Markov-semigroup description: if $P$
+denotes the operator that adds \emph{one} fresh active chord and
+averages, i.e.\ $(Pf)(C)=\E_z[f(C\cup z)]$, then by exchangeability
+of the fresh chords
+\[
+M_d\;=\;P^{\,d}\,\varepsilon,
+\qquad
+\psi(j,d)\;=\;\bigl\|P^{\,d}\varepsilon\bigr\|_{L^2(\mu_j)}^2,
+\]
+$\mu_j$ the law of $j$ iid chords.  Adding a fresh chord is one step
+of a coagulation--fragmentation dynamics on the cycle structure of
+$\gamma\tau$ (cf.\ \cite{Sch05}); the one-point function
+$\E[\varepsilon(F_m)]$ is a Harer--Zagier-type quantity
+\cite{HZ86}.  The open core of the iid model is thus:
+
+The array $\psi$ is monotone in a useful way:
+
+\begin{lemma}[freezing dominates averaging]\label{lem:freeze}
+$\psi(j,d+1)\le\psi(j+1,d)$ for all $j,d\ge0$; hence
+$\psi(j,d)\le\psi(j+d-d',d')$ for all $0\le d'\le d$, and
+$\bar\psi(d):=\sup_j\psi(j,d)$ is non-increasing in $d$.
+\end{lemma}
+
+\begin{proof}
+Conditional Jensen: $(Pf)(C)^2=\E_z[f(C\cup z)]^2
+\le\E_z[f(C\cup z)^2]=P(f^2)(C)$.  Hence
+$\psi(j,d+1)=\E_{\mu_j}[(P(P^{d}\varepsilon))^2]
+\le\E_{\mu_j}[P((P^{d}\varepsilon)^2)]
+=\E_{\mu_{j+1}}[(P^{d}\varepsilon)^2]=\psi(j+1,d)$, since
+integrating one fresh chord into $C\sim\mu_j$ produces exactly
+$\mu_{j+1}$.  Iterate.
+\end{proof}
+
+\begin{problem}[polynomial $L^2$ mixing of fresh-chord
+averaging]\label{prob:mixing}
+Show that $\bar\psi(d)\le K d^{-2c}$ for some
+$c>1/11$ (numerically true with $c\approx0.52$: the measured
+$\psi(256,d)$ fits $d^{-1.05}$, and the $j$-dependence saturates;
+see below).
+\end{problem}
+
+\emph{Status: Theorem~\ref{thm:factor} and
+Corollary~\ref{cor:psienough} are PROVED (three-line conditioning
+argument; exact in the iid ensemble).  Problem~\ref{prob:mixing} is
+OPEN; the numerics below (COMPUTED, \texttt{s7\_twopoint.c}) give
+$\psi\approx0.8/d$ with at most slow growth in $j$:}
+\[
+\begin{array}{lcccc}
+\toprule
+\psi(j,d) & d=4 & d=16 & d=64 & d=256\\
+\midrule
+j=16  & 0.124 & 0.019 & 0.0017 & 0.0004\\
+j=64  & 0.174 & 0.041 & 0.0084 & 0.0010\\
+j=256 & 0.197 & 0.050 & 0.0114 & 0.0027\\
+j=1024&  --   & 0.064 & 0.0128 &  --  \\
+\bottomrule
+\end{array}
+\]
+\emph{Directly measured (cycle route, independent of the rank
+route): $4\E[\mathrm{bias}^2]\cdot k=0.95,1.08,1.22,1.28,1.27,1.44$
+at $k=8,16,32,64,128,256$, i.e.\
+$\E[\mathrm{bias}^2]\approx0.33/k$, consistent with
+$\E|\mathrm{bias}|\approx0.35k^{-1/2}$; the signed one-point
+function $\E[\varepsilon(F_m)]$ is $+0.024,+0.005,+0.001$ at
+$m=4,8,16$ and $\le10^{-3}$ (statistically $0$) for $m\ge16$.}
+
+Two further remarks.  (i) The factorization argument uses exactly
+one probabilistic fact: the positions attached to disjoint index
+sets are independent.  Transferring it to the true orbit measure ---
+where the chord positions are the stable-intercalate row positions
+in the cycles of $\pi_P$, exchangeable-in-rows but not independent
+--- therefore requires either a conditional-resampling argument
+(given the shared intercalates, re-randomise the rest of the square)
+or a quantitative correlation bound; this is the transfer problem
+7a(i), not an additional obstacle discovered here.  (ii) The
+short-arc orbits are visible in the factorization as the atom of
+$C$-configurations with no fresh-chord separation available; in the
+antipodal continuum ensemble this atom is absent, and in the true
+ensemble it contributes the $O(1/k)$ term already accounted for in
+\S\ref{sec:annealed}.
+
+%----------------------------------------------------------------------
+\subsection{No local genericity condition suffices}\label{sec:pendant}
+
+The discussion at the end of \S\ref{sec:annealed} contemplated a
+genericity condition of the form ``with high probability every
+separating chord is interlaced by some other available chord''.
+This is \emph{qualitatively insufficient}, in the strongest possible
+sense: crossing multiplicity of any fixed order does not help.
+
+\begin{proposition}[pendant stars]\label{prop:pendant}
+For every $m\ge1$ and $r\ge1$ there is a configuration of
+$k=r(m+1)$ disjoint chords in which every separating chord is
+interlaced by exactly $m$ other chords, and
+\[
+\mathrm{bias}
+=\bigl(1-2^{-(m+1)}\bigr)^{r}-\tfrac12
+\;\xrightarrow[r\to\infty]{}\;-\tfrac12 .
+\]
+\end{proposition}
+
+\begin{proof}
+Take $r$ pairwise non-interlacing (nested) separating chords
+$c_1,\dots,c_r$, and for each $i$ a cluster of $m$ pairwise nested
+``pendant'' chords straddling one endpoint of $c_i$, short enough to
+interlace $c_i$ and nothing else, and to separate nothing.  The
+interlacement graph is a disjoint union of $r$ stars $K_{1,m}$ with
+separation vector $e_{\mathrm{center}}$ on each; $\bar A_S$ is block
+diagonal, so the bit is the product of the block bits.  In a block,
+$x_S\in\operatorname{col}(A_S)$ fails iff the center is active and
+all $m$ pendants are inactive (probability $2^{-(m+1)}$): the block
+bit has $\Pr=1-2^{-(m+1)}$, and the blocks are independent.
+\end{proof}
+
+(Verified exactly for $m\le3$, $r\le4$: \texttt{s7\_bias\_lab.py
+pendant}.)  To keep $|\mathrm{bias}|\le k^{-c}$ in this family one
+needs $m\gtrsim\log r$: no condition ``every separating chord is
+crossed by $\ge m$ others'' with $m$ fixed (or growing slower than
+logarithmically) can imply the annealed bound.  An exhaustive scan of
+\emph{all} chord configurations with $k\le6$ chords
+(\texttt{s7\_bias\_lab.py exhaust}; $10{,}395$ matchings $\times$
+all $13$ $v$-positions at $k=6$) confirms the moral.  Within the
+classes cut by the natural local predicates --- number $r$ of
+separating chords, minimum crossing number of a separating chord (by
+all chords, or by separating chords only), connectivity or
+$\mathbb{F}_2$-rank of the separating-chord interlacement subgraph
+--- $|\mathrm{bias}|$ vanishes identically only on ladders and on
+the class ``$r=1$ with the separating chord crossing \emph{nothing}'',
+where the cut-chord identity of \S\ref{sec:annealed} gives
+$\mathrm{bias}=\tfrac12\cdot(+\tfrac12)-\tfrac14=0$ exactly (the
+remainder has empty separation vector, hence conditional bias
+$+\tfrac12$).  At $k=6$, every other class with $r\ge1$ contains configurations
+with $|\mathrm{bias}|\ge1/16$; the only classes whose maxima stay
+below $15/64$ are the all-separating ($r=k$) high-crossing classes,
+and the class maxima grow with $k$ (e.g.\ the class ``$r=2$, minimum
+crossing $1$'' has maxima $0.188,0.219,0.234$ at $k=4,5,6$).  The bound must come from the measure; the moment
+route of \S\ref{sec:factor} is the appropriate formalisation.
+
+Relatedly, the single-coordinate toggle bound of
+Proposition~\ref{prop:bias} cannot by itself produce decay: in the
+generic ensemble the measured $\E[\min_i\Pr(i\text{ does not
+toggle})]$ is $\approx0.35$--$0.40$ and \emph{non-decreasing} over
+$k=4,\dots,12$ (\texttt{s7\_bias\_lab.py toggle}), while
+$\E|\mathrm{bias}|$ already decays over the same range.
+
+%----------------------------------------------------------------------
+\subsection{Template averaging is exactly neutral}
+\label{sec:vacuity}
+
+Remark~\ref{rem:bookkeeping}(i) proposed to handle the
+square-dependence of the exceptional columns of
+Lemma~\ref{lem:supply} by relabelling the template by a uniform
+column permutation $g$ and averaging.  This does not work:
+
+\begin{proposition}[vacuity of template averaging]
+\label{prop:vacuity}
+Fix $n,\lambda,\alpha$ and a template $T$.  For a mark
+$(L,P)$ and a template $T'$, let
+$\mathrm{bad}(T';L,P)\in\{0,1\}$ indicate that a column of $P$ fails
+the supply property of Lemma~\ref{lem:supply} for the partial square
+$T'\cap L$ (with the exceptional set defined intrinsically: the set
+of columns $c$ that do not carry $t$ disjoint stable intercalates
+avoiding rows $1,2$ and the partner column).  Then for
+\emph{every} column permutation $h$,
+\[
+\E_{(L,P)\sim\mathrm{Unif}(X)}\bigl[\mathrm{bad}(h(T);L,P)\bigr]
+=\E_{(L,P)\sim\mathrm{Unif}(X)}\bigl[\mathrm{bad}(T;L,P)\bigr].
+\]
+In particular averaging over uniform $g$ leaves the $X$-averaged
+bad-mark fraction unchanged, and the same holds verbatim when $T$ is
+itself random with a column-exchangeable law (e.g.\ the iid
+Bernoulli templates behind \cite[Lem.~8.3]{KPS25}).
+\end{proposition}
+
+\begin{proof}
+Column permutations act on squares by $h(L)(r,h(c))=L(r,c)$.  This
+action fixes $\sigma$ as a permutation of symbols (the pair
+$(L(1,c),L(2,c))$ moves with the column), hence preserves the type
+and maps $S(\lambda)$ bijectively onto itself; marked pairs move
+covariantly, $P\mapsto h(P)$, so $(L,P)\mapsto(h(L),h(P))$ is a
+bijection of $X$.  Moreover $h(T)\cap h(L)=h(T\cap L)$, and the
+supply property is intrinsic (rows are untouched), so
+$\mathrm{bad}(h(T);h(L),h(P))=\mathrm{bad}(T;L,P)$.  Substituting
+$(L,P)=(h(L_0),h(P_0))$ in the left-hand average gives the claim.
+\end{proof}
+
+The remark's proposed fix is therefore withdrawn.  What the assembly
+actually needs is a \emph{decoupling} between the supply structure
+and the mark distribution:
+
+\begin{problem}[supply--mark decoupling]\label{prob:decouple}
+Show that
+$\Pr_{(L,P)\sim\mathrm{Unif}(X(n,\lambda;\alpha,\beta))}
+\bigl[\mathrm{bad}(T;L,P)\bigr]=o(1/\log n)$, uniformly over the
+admissible $(\lambda,\alpha,\beta)$ --- including types whose
+$m$-cycle class occupies as few as $m=O(1)$ columns, where the
+deterministic bound $|E|\le6\log^{22}n$ of Lemma~\ref{lem:supply} is
+vacuous.
+\end{problem}
+
+Heuristically Problem~\ref{prob:decouple} should hold with much
+room: the supply structure of $T\cap L$ is (almost) a function of
+rows $3..n$, while the class membership of a column is a function of
+rows $1,2$.  A concrete framing: condition on the bottom
+$(n-2)\times n$ rectangle $L_\downarrow$.  This fixes the
+``leftover'' $2$-regular bipartite graph on columns whose cycles are
+completed to rows $1,2$ by independent binary orientation choices
+(tilted by the $S(\lambda)$ conditioning), so the $m$-class columns
+are a function of $L_\downarrow$ plus these orientations, while the
+exceptional set is a function of $L_\downarrow$ \emph{up to} the
+weak dependence of stability (isolation and non-criticality in
+\cite[\S7]{KPS25}) on intercalates of $T\cap L$ meeting rows $1,2$.
+Quantifying either the orientation-randomness or a per-column
+failure probability is open; note that a per-column version of
+Lemma~\ref{lem:supply} cannot be extracted from the expander
+property alone, which bottoms out at exceptional sets of size
+$\ell$, nor from conditional division as in
+Lemma~\ref{lem:condexp}, since the per-tuple failure rates inside
+\cite[Lem.~8.3]{KPS25} are far too weak to survive division by
+$\Pr[S(\lambda)]\ge e^{-O(n\log n)}$.
+
+\emph{Status: Proposition~\ref{prop:vacuity} PROVED;
+Problem~\ref{prob:decouple} OPEN (new, replaces
+Remark~\ref{rem:bookkeeping}(i)'s proposed fix).  Session-8 empirical
+support (\texttt{s8\_real\_bias.py}, \texttt{s8\_dec\{30,50\}.csv}):
+on JM-uniform squares the supply $k$ of a marked instance is
+statistically independent of the $\sigma$-cycle length $m$ of its
+marked pair --- $\mathrm{corr}(k,m)=+0.006\pm0.018$ at $n=30$
+($3200$ instances), $-0.034\pm0.022$ at $n=50$ ($2000$), with
+$\E[k\mid m]$ flat across the full range of $m$ and no supply-poor
+instances at all ($\Pr[k\le4]=0$ in-sample) --- consistent with the
+heuristic that supply is a rows-$3..n$ property and class membership
+a rows-$1,2$ property.  The programme
+summary of \S\ref{sec:orbit} now carries two open items:
+Problem~\ref{prob:annealed} (main) and Problem~\ref{prob:decouple}
+(bookkeeping).}
+
+%----------------------------------------------------------------------
+\subsection{Real-ensemble grounding at \texorpdfstring{$n=30$--$100$}
+{n=30-100}}\label{sec:realbias}
+
+Finally, the master formula and the bias statistics were taken to
+\emph{real} random squares (\texttt{s7\_real\_bias.py}; uniform
+sampling by Jacobson--Matthews \cite{JM96}, marked pairs
+$P=\{j,\sigma^\alpha(j)\}$ sampled uniformly among admissible
+instances, greedy maximal cell-disjoint intercalate families through
+the marked columns in rows $3..n$, orbit data built exactly as in
+\texttt{pf\_master.py}).
+
+\[
+\begin{array}{lccccccc}
+\toprule
+n & \text{inst.} & \bar k & \E|\mathrm{bias}| &
+\E|\mathrm{bias}|\,(r{>}0) & \Pr[r{=}0] & \text{signed mean} &
+\E[\mathrm{bias}^2]\cdot\bar k\\
+\midrule
+30  & 4200 & 12.9 & 0.168 & 0.145 & 0.065 & +0.038 & 0.67\\
+50  & 3300 & 22.6 & 0.123 & 0.108 & 0.039 & +0.023 & 0.75\\
+100 & 1800 & 26\ (\text{capped}) & 0.114 & 0.101 & 0.029 & +0.013
+& 0.73\\
+\bottomrule
+\end{array}
+\]
+(Families capped at $26$ coordinates; $k>14$ instances by MC over
+$1500$--$2000$ activation subsets.)  Findings:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{The master formula holds on real squares at
+$n\le100$}: $3250$ random activation subsets across $n=30,50,100$
+checked against the actually-switched square --- $0$ mismatches.
+\item \textbf{The annealed decay survives on the real ensemble}:
+$\E[\mathrm{bias}^2]\cdot\bar k\approx0.7$ across $n$, i.e.\ the
+$1/k$ second-moment law of the iid ensemble holds with a constant
+$\approx2.2\times$ larger; equivalently
+$\E|\mathrm{bias}|\approx1.5$--$1.6\times$ the iid value at the same
+$k$.  At fixed $k=26$ the value is the same at $n=50$ and $n=100$:
+the elevation is a property of the orbit position law at given
+supply, not an $n$-effect.
+\item \textbf{The short-arc atom behaves exactly as predicted in
+\S\ref{sec:annealed}}: the orbits with no separating chord ($r=0$,
+$\mathrm{bias}=+\tfrac12$ exactly) have measure $\approx0.85/\bar k$
+($6.5\%,3.9\%,2.9\%$), and the \emph{signed} mean bias is accounted
+for by this atom alone ($+0.038$ vs.\ atom$\times\tfrac12=+0.032$;
+$+0.023$ vs.\ $+0.020$; $+0.013$ vs.\ $+0.015$): the annealed
+average is self-regularizing, no separate treatment needed.
+\item Cut-chord configurations occur at frequency
+$2.1\%,1.6\%,1.1\%$ (decreasing in supply), and no new pathology
+class appeared: the per-instance bias histogram is consistent with
+the iid shape plus the $r=0$ atom.
+\end{enumerate}
+
+\emph{Status: COMPUTED (tables above; per-instance data in
+\texttt{s7\_inst\{30,50,100\}.csv}); the ground-truth re-verification
+of the master formula at $n=30,50,100$ is VERIFIED (0/3250).
+Session-8 extension to $n=200$ (\texttt{s8\_inst200.csv}, $144$+
+instances at $k=26$ capped, JM thinning $2n^3$): $\E|\mathrm{bias}|
+=0.118$, $\E[\mathrm{bias}^2]\cdot k=0.87\pm0.15$, signed mean
+$-0.006\pm0.014$ --- the fixed-$k$ values agree with $n=50,100$
+($0.107$--$0.116$): the elevation is confirmed to be a $k$-level
+property out to $n=200$, and the $1/k$ law shows no $n$-drift.}

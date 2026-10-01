@@ -1,0 +1,4 @@
+CL+BIT: failures = 0
+MC: failures = 0
+SPLIT conv failures (conv0, conv1): [122, 0]
+SPLIT2: 1262 cases, failures = 0

@@ -1,0 +1,6 @@
+bias k=8 trials=400000: 4Ebias2=0.118875 (se 0.003162)  Eeps=+0.016575
+bias k=16 trials=400000: 4Ebias2=0.067650 (se 0.003162)  Eeps=+0.000065
+bias k=32 trials=400000: 4Ebias2=0.037985 (se 0.003162)  Eeps=-0.001575
+bias k=64 trials=400000: 4Ebias2=0.020065 (se 0.003162)  Eeps=-0.002715
+bias k=128 trials=400000: 4Ebias2=0.009905 (se 0.003162)  Eeps=+0.001100
+bias k=256 trials=400000: 4Ebias2=0.005630 (se 0.003162)  Eeps=-0.001420

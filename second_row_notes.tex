@@ -1,0 +1,2808 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+
+\DeclareMathOperator{\per}{per}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\dtv}{d_{\mathrm{TV}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\PP}{P}
+\newcommand{\QQ}{Q}
+\newcommand{\CC}{C}
+\newcommand{\spec}{\operatorname{spec}}
+
+\title{The second row of a random Latin square:\\
+towards a precise form of Cameron's conjecture\\[4pt]
+\large Working notes}
+\author{}
+\date{August 28, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Let $L$ be a uniformly random Latin square of order $n$ whose first row is the
+identity, and let $\sigma$ be its second row, a uniformly ``Latin-tilted''
+random derangement.  Cameron conjectured
+[\emph{A niggling problem}, blog post, 24 Jan 2015] that the law of $\sigma$
+tends \emph{very rapidly} to the uniform distribution on derangements.  These
+notes make the conjecture quantitative and assemble exact, structural, and
+numerical evidence for the following refined picture.  Write $N_n(\sigma)$ for
+the number of completions of the $2\times n$ rectangle
+$\binom{\mathrm{id}}{\sigma}$, which depends only on the cycle type
+$\lambda$ of $\sigma$; set $\CC_n(\lambda)=N_n(\sigma)/(n-2)!$.
+(i)~\textbf{Refined law (conjectural):} $\log \CC_n(\lambda)$ is, up to a
+constant, \emph{additive} over the cycles of $\lambda$:
+$\log \CC_n(\lambda)= c_0(n)+\sum_{\ell\ge 2}h_n(\ell)\,\lambda_\ell + \text{(small)}$,
+with $h_n(2)= c_2\,n^{-3}(1+o(1))$, $c_2\approx 1.3$, and
+$h_n(\ell)\asymp n^{1-2\ell}$; consequently
+$\max_{\sigma,\tau}N_n(\sigma)/N_n(\tau)= 1+\Theta(n^{-2})$ and
+$\dtv \asymp n^{-3}$ --- polynomially, not exponentially, fast.
+(ii)~\textbf{Exact layer mechanism:} for the first extension row the analogue
+of the refined law is a theorem.  With $M_n$ the m\'enage numbers, the number
+of third rows compatible with $\binom{\mathrm{id}}{\sigma}$, $\sigma$ of type
+$(\ell,n-\ell)$, equals $M_n+M_{n-2\ell}$ exactly --- an identity which turns
+out to be an instance of the classical theory of discordant permutations of
+Touchard and Riordan --- giving a per-$\ell$-cycle effect
+$(1+o(1))\,n^{-2\ell}$; exact computations of the fourth row show the same
+effect again, supporting the mechanism
+``$n$ layers $\times$ $n^{-4}$ per layer $= n^{-3}$''.  A \emph{pair
+inclusion--exclusion identity} reduces the fourth layer entirely to
+punctured Touchard--Riordan counts and extends the layer table to $n=18$;
+an \emph{exact switch calculus} (comparing adjacent cycle-type
+representatives whose boards differ by one $2\times2$ switch, via
+Wronskian identities for path matching polynomials) proves the
+fourth-layer law: $r_4=r_3(1+O(1/n))$; the calculus transfers layer by
+layer --- a triple inclusion--exclusion identity gives
+$r_5=r_3(1+O(1/n))$ as well, with exact confirmation at $n\le9$ --- so
+that each of the first three
+extension layers contributes the same $(1+o(1))n^{-4}$ per $2$-cycle.  The same toolkit
+yields as by-products exact joint intercalate statistics of $3\times n$
+rectangles: the three pair counts are asymptotically independent
+$\mathrm{Poisson}(1/2)$, with
+$\E[X_{12}]-\tfrac12 = \tfrac{M_{n-4}}{2M_n}(1+O(n^{-2}))$ (the third row
+tilts the second by exactly the layer coefficient) and pairwise covariances
+$(\tfrac12+o(1))n^{-2}$.
+(iii)~\textbf{An exact identity and a reduction:} the switching multigraph of
+Cavenagh--Greenhill--Wanless yields an \emph{exact} identity expressing
+adjacent completion ratios through a single structural probability: for a
+split of a part $\alpha+\beta$ into $\alpha\neq\beta$,
+$\CC_n(\lambda)/\CC_n(\mu) = \tfrac12\,(1+\bar q)$ where $\bar q\in[0,2]$ is
+twice the probability that an explicit ``post-flip'' column pair is a
+$B$-pair.  A row-swap involution forces the two constituent events of
+$\bar q$ to have exactly equal probability.  A \emph{marked-pair
+identity} then eliminates the joining measure and the post-flip events
+altogether: $2\CC_n(\lambda)/\CC_n(\mu)-1$ equals the exact $B$:$A$
+odds of a single marked column pair $\{j,\sigma^\alpha(j)\}$ in a
+single uniform square of $S(\lambda)$ --- an identity with a short
+self-contained proof, valid uniformly in $\alpha,\beta$ (including the
+previously anomalous $\alpha=\beta$ case) and verified exhaustively
+for $n\le7$.  Modulo an equidistribution
+hypothesis for this single bit --- verified exhaustively for $n\le 6$,
+exactly tabulated for $n\le 11$, and tested by Monte Carlo beyond ---
+the weak (total-variation) form of Cameron's conjecture follows, and with it
+the statement that almost all loops have multiplication group $S_n$.
+A transfer programme for the Kwan--Petrova--Sawhney re-randomisation
+machinery, whose quantifiers match the required $o(1/\log n)$ budget,
+is laid out for this bit.
+\end{abstract}
+
+\tableofcontents
+
+%======================================================================
+\section{The conjecture and its context}\label{sec:intro}
+
+\subsection{Setup and notation}
+
+A \emph{Latin square} of order $n$ is an $n\times n$ array over the symbol set
+$[n]=\{1,\dots,n\}$ in which every symbol occurs exactly once in each row and
+each column.  Rows are permutations of $[n]$ (row $r$ maps $j\mapsto L(r,j)$
+after identifying columns with symbols).  For two rows $r,s$ the permutation
+$\sigma_{r,s}$ defined by $\sigma_{r,s}(L(r,j))=L(s,j)$ is a
+\emph{derangement} of $[n]$.  We write $\DD_n$ for the set of derangements,
+$D_n=|\DD_n|$.
+
+Throughout, $\sigma$ denotes the second row of a uniformly random Latin
+square whose first row is the identity; equivalently
+$\sigma=\sigma_{1,2}$ under the convention row~1 $=\mathrm{id}$.  For a
+derangement $\sigma$ let
+\[
+N_n(\sigma)\;=\;\#\bigl\{\text{Latin squares with rows } 1,2
+ = (\mathrm{id},\sigma)\bigr\},
+\qquad
+\Pr(\text{second row}=\sigma)\;=\;\frac{N_n(\sigma)}{\sum_{\tau\in\DD_n}N_n(\tau)}.
+\]
+Cycle types of derangements are partitions
+$\lambda=(2^{\lambda_2}3^{\lambda_3}\cdots)\vdash n$ with no part~$1$; we
+write $\kappa(\lambda)=\sum_\ell \lambda_\ell$ for the number of parts and
+$\gamma(\lambda)=n!/\prod_\ell \lambda_\ell!\,\ell^{\lambda_\ell}$ for the
+number of derangements of type $\lambda$.
+
+\begin{lemma}[type dependence and within-type uniformity]\label{lem:type}
+$N_n(\sigma)$ depends only on the cycle type of $\sigma$.  Consequently,
+conditionally on its cycle type, the second row is uniform on the
+derangements of that type.
+\end{lemma}
+
+\begin{proof}
+For $\pi\in S_n$, relabelling symbols by $\pi$ and then columns by $\pi^{-1}$
+is a bijection of Latin squares sending rows
+$(\mathrm{id},\sigma)\mapsto(\mathrm{id},\pi\sigma\pi^{-1})$.
+\end{proof}
+
+Following \cite{CGW08} we set, for $\lambda\vdash n$ with no part $1$,
+\[
+\CC_n(\lambda)\;=\;\frac{N_n(\sigma)}{(n-2)!}\qquad(\sigma\text{ of type
+}\lambda),
+\]
+(the completions of a $2\times n$ rectangle fall into classes of size
+$(n-2)!$ under permutation of the remaining rows), and define two probability
+measures on cycle types:
+\[
+\PP_n(\lambda)=\frac{\gamma(\lambda)\CC_n(\lambda)}
+     {\sum_{\mu}\gamma(\mu)\CC_n(\mu)},
+\qquad
+\QQ_n(\lambda)=\frac{\gamma(\lambda)}{D_n}.
+\]
+$\PP_n$ is the law of the cycle type of $\sigma$; $\QQ_n$ is the law of the
+cycle type of a uniform derangement.  By Lemma~\ref{lem:type}, for any set
+$S\subseteq \DD_n$ of derangements,
+\begin{equation}\label{eq:setTV}
+\bigl|\Pr(\sigma\in S)-|S|/D_n\bigr|\;\le\;\dtv(\PP_n,\QQ_n),
+\end{equation}
+so total variation at the level of cycle types controls total variation at
+the level of derangements; in fact the two distances are \emph{equal},
+because the two laws of $\sigma$ share the same conditional (uniform)
+distribution within each type.
+
+\subsection{The conjecture}
+
+Cameron's blog post \cite{CamBlog15} states:
+
+\begin{quote}\itshape
+The probability distribution on derangements defined as above (where the
+probability of a derangement is the probability that a random Latin square
+with first row the identity has that derangement as its second row) tends
+very rapidly to the uniform distribution as $n$ tends to infinity.
+\end{quote}
+
+The weak form was formalised by Cavenagh, Greenhill and Wanless as
+
+\begin{conjecture}[{\cite[Conj.~6.1]{CGW08}}]\label{conj:cgw}
+$\dtv(\PP_n,\QQ_n)=o(1)$ as $n\to\infty$.
+\end{conjecture}
+
+Even Conjecture~\ref{conj:cgw} is open.  The purpose of these notes is
+(a)~to propose a sharp quantitative form of the full conjecture, based on new
+exact and numerical analysis; (b)~to isolate exact structure (a
+``layer'' theorem for the third row, and an exact switching identity) that
+explains the observed rates; and (c)~to give a reduction of
+Conjecture~\ref{conj:cgw} to a single equidistribution hypothesis about an
+explicit local event, together with extensive verification.
+
+\subsection{Known results}\label{sec:known}
+
+We use the following throughout; $[n]$-asymptotics are as $n\to\infty$.
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{CGW switching bounds \cite{CGW08}.}  For partitions
+$\lambda,\mu$ adjacent in the split/join graph (i.e.\ $\mu$ refines
+$\lambda$ by splitting one part in two),
+$\tfrac12\gamma(\lambda)/\gamma(\mu)\le |S(\lambda)|/|S(\mu)| \le
+\tfrac32\gamma(\lambda)/\gamma(\mu)$, where $S(\lambda)$ is the set of Latin
+squares whose first two rows have row-cycle type $\lambda$.  Iterating:
+$\PP_n(\lambda)$ agrees with $\QQ_n(\lambda)$ within a factor
+exponential in $\kappa(\lambda)$, whence, e.g., almost all cycle types have
+$\PP_n/\QQ_n\in[n^{-3/2},n^{3/2}]$, the single-cycle probability is
+$2n^{-2}\le \PP_n((n))\le 2n^{-2/3}$, and
+$\Pr(\sigma\text{ even})\in[\tfrac14-o(1),\tfrac34+o(1)]$.
+They also computed $\CC_n$ \emph{exactly} for $n\le 11$
+\cite[Tables 1--2]{CGW08}; those tables are the data source for
+\S\ref{sec:refined}.
+\item \textbf{Intercalates.}  An \emph{intercalate} is a $2\times2$ Latin
+subsquare; the number of intercalates inside rows $1,2$ equals
+$\lambda_2(\sigma)$ exactly.  McKay--Wanless \cite{McKW99} and, much more
+precisely, Kwan--Sah--Sawhney--Simkin \cite{KSSS22} determined the global
+intercalate count: whp $\mathbf N=(1+o(1))n^2/4$, with large-deviation rates
+$\exp(-\Theta(n^2))$ (lower tail) and $\exp(-\Theta(n^{4/3}\log n))$ (upper
+tail).
+\item \textbf{Parities.}  Kwan--Petrova--Sawhney \cite{KPS25} proved that the
+vector of row parities of a random Latin square converges in total variation
+to $n$ independent fair coins (resolving a different conjecture of Cameron),
+introducing \emph{stable intercalate switchings} and a quantitative
+comparison with the triangle-removal process.  Their results do not imply
+Conjecture~\ref{conj:cgw}, but their machinery is discussed in
+\S\ref{sec:kps}.
+\item \textbf{Loops motivation.}  Cameron \cite{Cam92} proved that almost all
+quasigroups have multiplication group $S_n$ or $A_n$;
+H\"aggkvist--Janssen \cite{HJ96} ruled out $A_n$ (the proportion of all-even
+Latin squares is $O(c^n)$, $c<1$); {\L}uczak--Pyber \cite{LP93} proved that
+almost no permutation lies in a transitive subgroup other than $S_n,A_n$.
+Conjecture~\ref{conj:cgw} would transfer this to \emph{loops} (reduced Latin
+squares) via \eqref{eq:setTV}: almost all loops would have multiplication
+group $S_n$, hence trivial character theory
+\cite[Lemma 6.2]{CGW08}.
+\end{itemize}
+
+\begin{remark}[reduced squares: the conditioning is invisible]
+\label{rem:reduced}
+A loop on $[n]$ with identity $1$ is a \emph{reduced} Latin square (first
+row \emph{and} first column the identity), so its second row satisfies the
+extra constraint $\sigma(1)=2$, whereas $\PP_n$ is defined from squares
+normalised in the first row only.  This costs nothing: sorting the rows of
+a first-row-normalised square by their first-column entries is an
+$(n-1)!$-to-one map onto reduced squares which is exchangeable in the rows
+$2,\dots,n$, so the second row of a uniform loop is distributed as
+$\sigma$ \emph{conditioned on} $\{\sigma(1)=2\}$.  By
+Lemma~\ref{lem:type} both $\PP_n$ and $\QQ_n$ are uniform on each
+derangement class, and on any fixed class $\sigma(1)$ is uniform on
+$\{2,\dots,n\}$ (conjugate by permutations fixing $1$); hence
+$\Pr(\sigma(1)=2\mid\lambda)=\tfrac1{n-1}$ independently of the type,
+the cycle-type law of the loop's second row is \emph{exactly} $\PP_n$,
+and the total-variation distance between the conditioned laws equals
+$\dtv(\PP_n,\QQ_n)$ exactly.  (Verified by complete enumeration at
+$n=5,6$: the three laws --- second row, loop second row, conditioned
+second row --- coincide as exact rationals.)  All statements in these
+notes therefore apply verbatim to loops.
+\end{remark}
+
+%======================================================================
+\section{The refined picture: exact data analysis for \texorpdfstring{$n\le11$}{n<=11}}\label{sec:refined}
+
+All statements in this section are \emph{exact} computations from the CGW
+tables of $\CC_n(\lambda)$, $4\le n\le 11$, re-verified in two independent
+ways: the published fractions $\PP_n(\lambda)$ are reproduced exactly, and
+$\sum_\lambda \gamma(\lambda)\CC_n(\lambda)\,(n-2)!\,n! = L_n$ reproduces the
+known numbers of Latin squares up to $n=11$ \cite{McKW05}.
+
+\subsection{Additivity over cycles}\label{sec:additivity}
+
+The completion counts are astonishingly rigid.  Along the chain of types
+$(n)\to(2,n-2)\to(2,2,n-4)\to\cdots$, each added $2$-cycle multiplies
+$\CC_n$ by almost exactly the same factor:
+
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+$n$ & step & $\CC_n(\mu')/\CC_n(\mu)-1$ & $\times\,n^3$ \\
+\midrule
+10 & $(10)\to(2,8)$          & $+1.320265\times10^{-3}$ & $1.3203$\\
+10 & $(2,8)\to(2^2,6)$       & $+1.321183\times10^{-3}$ & $1.3212$\\
+10 & $(2^2,6)\to(2^3,4)$     & $+1.323079\times10^{-3}$ & $1.3231$\\
+10 & $(2^3,4)\to(2^5)$       & $+2.647253\times10^{-3}$ & $2.6473$\\
+11 & $(11)\to(2,9)$          & $+9.609945\times10^{-4}$ & $1.2791$\\
+11 & $(2,9)\to(2^2,7)$       & $+9.620287\times10^{-4}$ & $1.2805$\\
+11 & $(2^2,7)\to(2^3,5)$     & $+9.610360\times10^{-4}$ & $1.2791$\\
+11 & $(2^3,5)\to(2^4,3)$     & $+9.750180\times10^{-4}$ & $1.2977$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The one apparent exception, the last step at $n=10$, changes the type by
+\emph{two} $2$-cycles ($\lambda_2\colon 3\to5$, removing a $4$-cycle), and its
+increment is exactly twice the others; the last step at $n=11$ adds a
+$3$-cycle as well, and the excess $+1.4\times10^{-5}$ matches the fitted
+$3$-cycle coefficient below.  This motivates:
+
+\begin{observation}[additive fit]\label{obs:fit}
+Fit $\log \CC_n(\lambda) = c_0(n)+\sum_{\ell\ge2} h_n(\ell)\lambda_\ell$ by
+least squares (the gauge freedom $h(\ell)\mapsto h(\ell)+t\ell$ is fixed by
+$h_n(n)=0$).  Then, using all types at each order:
+\[
+\begin{array}{l|lll|l}
+n & h_n(2) & h_n(3) & h_n(4) & \max_\lambda|\mathrm{resid}| \\\hline
+10 & 1.323\times10^{-3} & 5.12\times10^{-5} & -6.9\times10^{-6} & 3.2\times10^{-5}\\
+11 & 9.605\times10^{-4} & 1.544\times10^{-5} & 1.2\times10^{-6} & 1.8\times10^{-6}
+\end{array}
+\]
+At $n=11$ the additive model reproduces all fourteen $\log\CC_{11}(\lambda)$
+values to within $1.8\times10^{-6}$, while the leading coefficient is
+$9.6\times10^{-4}$: additivity holds to relative precision
+$\approx 0.2\%$, and improves rapidly with $n$.
+\end{observation}
+
+There is \emph{no} detectable dependence on the sign of $\sigma$: adding a
+$\pm\sgn(\sigma)$ term to the fit yields a coefficient
+($4.5\times10^{-7}$ at $n=11$) below the residual noise.  Consistently, the
+parity of $\sigma$ is explained entirely by the derangement count
+disparity (see \S\ref{sec:consequences}).
+
+\subsection{Scaling of the coefficients}
+
+The fitted $h_n(2)$, and two independent estimators of it --- the chain
+increments above, and the tilt of the expected number of rows-$(1,2)$
+intercalates, $2n^3(\E_{\PP_n}[\lambda_2]-\tfrac12)$ --- agree and scale as
+$n^{-3}$:
+\[
+\begin{array}{l|llllll}
+n & 6 & 7 & 8 & 9 & 10 & 11\\\hline
+n^3\,h_n(2)\text{-proxy (chain)} & 10.3 & 2.01 & 1.71 & 1.16 & 1.32 & 1.28\\
+2n^3(\E_{\PP_n}\lambda_2-\tfrac12) & 22.0 & 0.93 & 2.55 & 1.06 & 1.33 & 1.28
+\end{array}
+\]
+Odd and even $n$ approach the limit from different sides (as CGW already
+noticed for their coefficient of variation), and $n\le11$ cannot pin the
+limit precisely; the two largest orders give
+\begin{equation}\label{eq:c2}
+c_2 \;:=\; \lim_{n\to\infty} n^{3}h_n(2)\;\approx\;1.30\pm 0.05
+\qquad(\text{numerically; existence of the limit is conjectural}).
+\end{equation}
+The $3$-cycle coefficient is much smaller
+($n^4 h_n(3)=0.69,\,0.51,\,0.23$ at $n=9,10,11$), consistent with
+$h_n(3)=O(n^{-4})$ and, in view of the layer analysis of
+\S\ref{sec:layers}, conjecturally $\asymp n^{-5}$; coefficients for
+$\ell\ge4$ are below the resolution of the $n\le 11$ data.
+
+%======================================================================
+\section{Precise forms of the conjecture}\label{sec:conjectures}
+
+We can now state the proposed quantitative hierarchy.  Recall
+$c_2\approx1.30$ from \eqref{eq:c2}.
+
+\begin{conjecture}[refined law]\label{conj:refined}
+There are quantities $h_n(\ell)$, $2\le\ell\le n$, with
+\[
+\log \CC_n(\lambda)\;=\;c_0(n)\;+\;\sum_{\ell\ge2}h_n(\ell)\,\lambda_\ell
+\;+\;O\!\bigl(n^{-4}\bigr)
+\quad\text{uniformly in }\lambda,
+\]
+such that $h_n(2)=c_2n^{-3}(1+o(1))$ for a constant $c_2>0$ (numerically
+$c_2\approx1.30$), and, for each fixed $\ell\ge3$, $h_n(\ell)=O(n^{-4})$
+(conjecturally $h_n(\ell)= c_\ell\,n^{1-2\ell}(1+o(1))$).
+\end{conjecture}
+
+\begin{conjecture}[rates]\label{conj:rates}
+As $n\to\infty$:
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item $\displaystyle
+\max_{\sigma,\tau\in\DD_n}\frac{N_n(\sigma)}{N_n(\tau)}
+=1+\frac{c_2}{2}\,n^{-2}(1+o(1))$, the extremes being attained at
+$\lambda=(2^{\lfloor n/2\rfloor}\cdots)$ and $\lambda=(n)$;
+\item $\displaystyle
+\dtv(\PP_n,\QQ_n)\;=\;\frac{c_2\,e^{-1/2}}{2}\,n^{-3}(1+o(1))
+\;\approx\;0.394\,n^{-3}$,
+and the same for the total variation distance between the law of the second
+row and the uniform distribution on $\DD_n$.
+\end{enumerate}
+\end{conjecture}
+
+Part (b) follows from Conjecture~\ref{conj:refined} by a direct computation:
+to leading order $\PP_n(\lambda)\propto \QQ_n(\lambda)e^{h_n(2)\lambda_2}$,
+$\lambda_2$ is asymptotically Poisson$(1/2)$ under $\QQ_n$, and
+$\E\,|X-\E X| = e^{-1/2}$ for $X\sim\mathrm{Poisson}(1/2)$.
+The exact $n\le11$ data match both predictions strikingly well:
+\[
+\begin{array}{l|llll}
+n & 8 & 9 & 10 & 11\\\hline
+n^3\,\dtv(\PP_n,\QQ_n) & 0.62 & 0.34 & 0.40 & 0.39\\
+n^2\,(\max/\min-1) & 1.65 & 0.37 & 0.66 & 0.47
+\end{array}
+\qquad
+\begin{array}{l}
+\text{predicted limits:}\\
+0.394\ \text{and}\ c_2/2\approx0.65\ (n\ \text{even}),\\
+\text{smaller along odd $n$ (no type } (2^{n/2})).
+\end{array}
+\]
+
+\begin{remark}[``very rapidly'']
+The convergence is thus \emph{polynomial}, with small constants --- not
+exponential.  At $n=7$ the extreme completion counts already differ by only
+$1.4\%$ (Cameron's observation), yet the ratio $1+\Theta(n^{-2})$ decays
+slowly thereafter: uniformity to $0.1\%$ in sup-ratio requires $n\gtrsim36$.
+For every \emph{fixed} set $S\subseteq\DD_n$ of derangements, however,
+$\Pr(\sigma\in S)=|S|/D_n+O(n^{-3})$ --- rapid indeed.
+\end{remark}
+
+\subsection{Consequences and cross-checks}\label{sec:consequences}
+
+\paragraph{Parity.}  The number of even minus odd derangements of $[n]$ is
+$(-1)^{n-1}(n-1)$, so under $\QQ_n$,
+$\Pr(\text{even})-\tfrac12=(-1)^{n-1}(n-1)/(2D_n)$, of order $n^{-1}e\,/(n-1)!$.
+If Conjecture~\ref{conj:rates}(b) holds \emph{at the level of the sign
+functional} with its natural precision, then the same asymptotics should hold
+under $\PP_n$.  The exact data agree:
+\[
+\begin{array}{l|lllll}
+n & 7 & 8 & 9 & 10 & 11\\\hline
+\Pr_{\PP_n}(\mathrm{even})-\tfrac12 & +1.813\cdot10^{-3} & -1.998\cdot10^{-4}
+& +2.952\cdot10^{-5} & -3.168\cdot10^{-6} & +3.250\cdot10^{-7}\\
+(-1)^{n-1}\frac{n-1}{2D_n} & +1.618\cdot10^{-3} & -2.360\cdot10^{-4}
+& +2.996\cdot10^{-5} & -3.371\cdot10^{-6} & +3.405\cdot10^{-7}\\
+\text{ratio} & 1.12 & 0.85 & 0.985 & 0.94 & 0.95
+\end{array}
+\]
+This suggests the sharp parity conjecture
+$\Pr(\sigma\ \text{even})-\tfrac12\sim(-1)^{n-1}(n-1)/(2D_n)$ --- a
+statement finer, for this particular functional, than
+Conjecture~\ref{conj:rates}(b), since the parity imbalance is
+super-exponentially small while $\dtv\asymp n^{-3}$.  (It is the
+$\sigma_{1,2}$-analogue of the row-parity phenomena studied in \cite{KPS25}.)
+
+\paragraph{Intercalates.}  Since the intercalates inside rows $(1,2)$ number
+exactly $\lambda_2$, symmetry over row pairs gives
+$\E[\mathbf N]=\binom n2\,\E_{\PP_n}[\lambda_2]$ for the total intercalate
+count $\mathbf N$.  Under $\QQ_n$, $\E[\lambda_2]=\binom
+n2D_{n-2}/D_n=\tfrac12+O(1/(n-2)!)$.  Conjecture~\ref{conj:refined} thus
+predicts a third-order term in the intercalate expectation:
+\[
+\E[\mathbf N]\;=\;\frac{n^2}{4}-\frac n4+\frac{c_2+o(1)}{4n}.
+\]
+The known asymptotics $\E[\mathbf N]\sim n^2/4$ \cite{KSSS22} match the
+leading term; the finer terms appear to be new and give an independent
+interpretation of $c_2$.
+
+\paragraph{Loops.}  By \eqref{eq:setTV} and \S\ref{sec:known}, even the weak
+Conjecture~\ref{conj:cgw} implies that almost all loops have multiplication
+group $S_n$ and trivial character theory; Conjecture~\ref{conj:rates}(b)
+would give an $O(n^{-3})$ (plus {\L}uczak--Pyber) error term.
+
+%======================================================================
+\section{The third-row layer: exact results}\label{sec:thirdrow}
+
+Why $n^{-3}$?  The mechanism becomes visible if one builds the Latin square
+row by row.  Write
+\[
+N_n(\sigma)\;=\;\prod_{k=2}^{n-1}\frac{N^{(k+1)}_n(\sigma)}{N^{(k)}_n(\sigma)},
+\qquad
+N^{(k)}_n(\sigma)=\#\{k\times n \text{ Latin rectangles with rows
+}1,2=(\mathrm{id},\sigma)\},
+\]
+so that $\log N_n(\sigma)$ is a sum of $n-2$ \emph{layer contributions}.  The
+first layer is exactly solvable.
+
+For $k=2$, $N^{(3)}_n(\sigma)=\per(J-I-P_\sigma)$ counts the permutations
+\emph{discordant} with both $\mathrm{id}$ and $\sigma$.  The forbidden
+bipartite graph $I\cup P_\sigma$ is a disjoint union of even cycles, one
+cycle $C_{2\ell}$ per $\ell$-cycle of $\sigma$; by inclusion--exclusion
+\begin{equation}\label{eq:IE}
+\per(J-B)\;=\;\sum_{k\ge0}(-1)^k m_k(B)\,(n-k)!,
+\end{equation}
+where $m_k(B)$ is the number of $k$-matchings of $B$, and the matching
+generating polynomial $M_B(x)=\sum_k m_k(B)x^k$ factorises over the cycles,
+with
+\[
+M_{C_m}(x)=\alpha_+^m+\alpha_-^m,\qquad
+\alpha_\pm=\tfrac12\bigl(1\pm\sqrt{1+4x}\bigr),\qquad
+\alpha_+\alpha_-=-x .
+\]
+
+\begin{lemma}[fusion; Touchard--Riordan]\label{lem:fusion}
+For $a\ge b\ge1$,
+\(
+M_{C_{2a}}(x)\,M_{C_{2b}}(x)=M_{C_{2(a+b)}}(x)+x^{2b}M_{C_{2(a-b)}}(x),
+\)
+with the convention $M_{C_0}\equiv2$.
+\end{lemma}
+
+\begin{proof}
+Expand both products in $\alpha_\pm$:
+$(\alpha_+^{2a}+\alpha_-^{2a})(\alpha_+^{2b}+\alpha_-^{2b})
+=\alpha_+^{2(a+b)}+\alpha_-^{2(a+b)}
++(\alpha_+\alpha_-)^{2b}(\alpha_+^{2(a-b)}+\alpha_-^{2(a-b)})$,
+and $(\alpha_+\alpha_-)^{2b}=x^{2b}$.
+\end{proof}
+
+This is classical: in Riordan's normalisation of \emph{associated} m\'enage
+polynomials $m_k(x)=x^kM_{C_{2k}}(-x^{-1})$ one has the Chebyshev form
+$m_k(x)=2\,T_{2k}(\sqrt x/2)$ and the factor-free product rule
+$m_j\,m_k=m_{j+k}+m_{j-k}$
+\cite[Ch.~8, eqs.~(24)--(25)]{Riordan58}.
+
+Let $M_n$ denote the m\'enage numbers
+$0,1,2,13,80,579,4738,43387,439792,4890741,\dots$ ($n=2,3,\dots$), i.e.\
+$M_n=\per(J-I-P_{c})$ for an $n$-cycle $c$; classical asymptotics
+(e.g.\ via \eqref{eq:IE}) give $M_n=n!\,e^{-2}\bigl(1-\tfrac1n+O(n^{-2})\bigr)$.
+
+\begin{theorem}[third row, exact; essentially Touchard--Riordan]\label{thm:thirdrow}
+Let $2\le\ell\le n/2$ and let $\sigma$ have cycle type $(\ell,\,n-\ell)$.
+Then
+\[
+N^{(3)}_n(\sigma)\;=\;M_n+M_{n-2\ell}
+\qquad(\text{with }M_0:=2\text{ when }\ell=n/2).
+\]
+More generally, for any type $\lambda\cup\{a,b\}$ with $a\ge b$, $a-b\ge2$,
+\[
+N^{(3)}_n(\lambda\cup\{a,b\})
+=N^{(3)}_n(\lambda\cup\{a+b\})
++N^{(3)}_{n-2b}(\lambda\cup\{a-b\}),
+\]
+and when $a=b$ the last term is replaced by
+$2\,N^{(3)}_{n-2b}(\lambda)$.
+\end{theorem}
+
+\begin{proof}
+Insert Lemma~\ref{lem:fusion} into \eqref{eq:IE}: the factor $x^{2b}$ shifts
+the matching index by $2b$, turning $(n-k)!$ into $((n-2b)-k')!$, which
+reproduces the inclusion--exclusion sum \eqref{eq:IE} on the ground set of
+size $n-2b$ for the reduced type.  (Verified by exhaustive computation for
+all cycle types for $n\le25$.)
+\end{proof}
+
+\begin{corollary}[per-cycle effect at the third row]\label{cor:thirdrow}
+For fixed $\ell\ge2$,
+\[
+\rho_\ell(n):=\frac{N^{(3)}_n((\ell,n-\ell))}{N^{(3)}_n((n))}-1
+=\frac{M_{n-2\ell}}{M_n}
+=\frac{1}{(n)_{2\ell}}\Bigl(1-\frac{2\ell}{n^2}+O(n^{-3})\Bigr)
+=n^{-2\ell}\Bigl(1+\binom{2\ell}{2}\frac1n+O(n^{-2})\Bigr).
+\]
+\end{corollary}
+
+Numerically (exact rational computations up to $n=400$, Richardson
+extrapolation): $n^4\rho_2 = 1+6/n+21/n^2+42/n^3+\cdots$ and
+$n^6\rho_3=1+15/n+134/n^2+\cdots$, matching the corollary
+($\binom42=6$, $\binom62=15$; the third coefficients pick up the
+$-2\ell/n^2$ correction from the m\'enage asymptotics).
+
+Moreover the \emph{additivity} of \S\ref{sec:additivity} is already present,
+and provable, at this layer: iterating Theorem~\ref{thm:thirdrow} shows that
+\[
+\log N^{(3)}_n(\lambda)=\log M_n+\sum_{\ell\ge2}\lambda_\ell\,
+\frac{M_{n-2\ell}}{M_n}+(\text{pair interactions of smaller order}),
+\]
+and an exact least-squares check at $n=30$ (all $1039$ cycle types) gives a
+maximal additivity residual $1.1\times10^{-10}$ against a leading coefficient
+$h^{(3)}(2)=M_{26}/M_{30}=1.5\times10^{-6}$.
+
+\begin{remark}[attribution]\label{rem:attribution}
+Permutations discordant with two given permutations are a classical topic
+going back to Touchard \cite{Touchard53} and Riordan \cite{Riordan54}, and
+Chapter~8, \S3 of Riordan's book \cite{Riordan58} contains everything needed
+for Theorem~\ref{thm:thirdrow}: the rook polynomial of the cycle class
+$(k)=(1^{k_1}2^{k_2}\cdots)$ factorises over cycles (his eq.~(22)), the
+associated polynomials satisfy the Chebyshev product rule (eqs.~(24)--(25)),
+and his Theorem~2 reduces the hit polynomial of any class to a linear
+combination $\sum_jA_j(1-t)^jU_{n-j}(t)$ of m\'enage hit polynomials.
+Our identity $N^{(3)}_n((\ell,n-\ell))=M_n+M_{n-2\ell}$ is the evaluation at
+$t=0$ of the case $m_\ell m_{n-\ell}=m_n+m_{n-2\ell}$, and the general
+recursion of Theorem~\ref{thm:thirdrow} follows from eq.~(26) there; Riordan
+attributes the substance to Touchard \cite{Touchard53}.  What we add in this
+section is only the quantitative reading relevant to Cameron's conjecture:
+the per-$\ell$-cycle effect $\rho_\ell(n)=M_{n-2\ell}/M_n\sim n^{-2\ell}$
+with its full expansion, and the additivity of $\log N^{(3)}$ over cycles.
+Section 8.4 of \cite{Riordan58} carries the classical theory one layer
+further in aggregate form --- the three-line Latin rectangle count
+$K(3,n)=\sum_k\binom nkD_{n-k}D_kU_{n-2k}$ --- and the ``$k$ discordant
+permutations'' literature (Moser's very reduced $4\times n$ rectangles
+\cite{Moser67}; Whitehead \cite{Whitehead79}) is the natural classical
+toolkit for the layer-$4$ analogue raised in \S\ref{sec:open}.
+\end{remark}
+
+%======================================================================
+\section{Layer accumulation: the \texorpdfstring{$n^{-3}$}{n\^{}-3} mechanism}\label{sec:layers}
+
+Corollary~\ref{cor:thirdrow} gives a per-$2$-cycle effect $\asymp n^{-4}$ at
+the first layer.  The full effect is $h_n(2)\asymp n^{-3}$ --- precisely $n$
+times larger.  This suggests that \emph{every} layer contributes
+$\asymp n^{-4}$, the influence of the fixed first two rows persisting
+(neither amplified nor washed out) as the rectangle grows.  The fourth layer
+can still be computed exactly (summing $\per(J-I-P_\sigma-P_\tau)$ over all
+third rows $\tau$; Ryser--Gray-code permanents):
+
+\begin{center}
+\small
+\begin{tabular}{c|cc|cc}
+\toprule
+ & \multicolumn{2}{c|}{$2$-cycle effect} & \multicolumn{2}{c}{$3$-cycle effect}\\
+$n$ & layer 3 ($=M_{n-4}/M_n$) & layer 4 & layer 3 ($=M_{n-6}/M_n$) & layer 4\\
+\midrule
+8  & $4.221\times10^{-4}$ & $5.015\times10^{-4}$ & $0$ & $-7.0\times10^{-5}$\\
+9  & $2.996\times10^{-4}$ & $3.134\times10^{-4}$ & $2.305\times10^{-5}$ & $1.974\times10^{-5}$\\
+10 & $1.819\times10^{-4}$ & $1.872\times10^{-4}$ & $4.548\times10^{-6}$ & $4.093\times10^{-6}$\\
+11 & $1.184\times10^{-4}$ & $1.205\times10^{-4}$ & $2.658\times10^{-6}$ & $2.469\times10^{-6}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+(The layer-$k$ effect is
+$\log\bigl[L_k((\ell,n-\ell))/L_k((n))\bigr]$ up to lower order, with
+$L_k(\lambda)=N^{(k+1)}/N^{(k)}$; at $n=9$ the exact $3$-cycle layer-3 value
+is $1/M_9=1/43387$, a pleasing instance of Theorem~\ref{thm:thirdrow}.)
+
+The layer-4 effect equals the layer-3 effect within $1\text{--}5\%$ at
+$n=10,11$; the layer-5 effect (now exactly computed for $n\le9$,
+\S\ref{sec:fifth}) equals the layer-4 effect within $3\%$ at $n=9$.
+Summing the exactly known layers 3, 4 and comparing with the
+exactly known total at $n=11$: layers $3+4$ contribute
+$2.39\times10^{-4}$ of $h_{11}(2)=9.61\times10^{-4}$; the remaining seven
+layers average $1.03\times10^{-4}\approx(1.51)\,n^{-4}$ --- the same order,
+declining towards the final (forced) layers.  Writing the conjectural layer
+profile as $t_k(n)= \gamma(k/n)\,n^{-4}(1+o(1))$ with $\gamma(0)=1$ (by
+Corollary~\ref{cor:thirdrow}), the constant in \eqref{eq:c2} is
+\[
+c_2=\int_0^1 \gamma , \qquad \gamma(0)=1 .
+\]
+Determining $\gamma$ --- e.g.\ via permanent asymptotics for complements of
+random $k\times n$ rectangles containing a planted intercalate --- is, we
+believe, the most promising route to the sharp constant.  The same mechanism
+predicts $h_n(\ell)\asymp n\cdot n^{-2\ell}=n^{1-2\ell}$ for each fixed
+$\ell\ge3$, which is consistent with (though not yet demanded by) the
+$n\le11$ data.
+
+\begin{remark}[a finite-size caveat on $c_2$]\label{rem:c2caveat}
+The estimate $c_2\approx1.30$ in \eqref{eq:c2} is the value of $n^3h_n(2)$
+at $n=10,11$.  The layer analysis shows that this quantity carries a
+substantial finite-size inflation: the early-layer weights track
+$1/(n)_4=n^{-4}(1+6/n+\cdots)$, whose $n\le11$ values exceed $n^{-4}$ by
+$50\text{--}70\%$.  If, say, $\gamma\equiv1$, then
+$n^3h_n(2)\approx (n-2)\,n^3/(n)_4$ would still be $\approx1.5$ at $n=11$
+while converging to $c_2=1$.  The exact totals at $n=11$ (layer sum $14.1\,
+n^{-4}$ against $9\times1.73\,n^{-4}=15.6\,n^{-4}$ for nine constant-weight
+layers) show the late layers contributing $\approx0.9$ of the early-layer
+weight on average at that size.  We therefore regard the \emph{limit} $c_2$
+as substantially uncertain --- plausibly anywhere in $[0.8,1.5]$ --- while
+$n^3h_n(2)\approx1.3$ remains an accurate description of the exact data at
+$n=10,11$ (and, through Conjecture~\ref{conj:rates}(b), of
+$\dtv$ at those orders).  Determining $\gamma$ in the bulk is the key open
+computation; \S\ref{sec:pair} settles its behaviour at the fourth layer.
+\end{remark}
+
+%======================================================================
+\section{A pair calculus for the fourth row}\label{sec:pair}
+
+The fourth layer is governed by
+$N^{(4)}_n(\sigma)=\sum_\tau \per(J-B_2-P_\tau)$, a sum over third rows of
+permanents of complements of \emph{three}-regular boards, for which no
+product formula is available.  The following identity nevertheless reduces
+everything to the Touchard--Riordan calculus, extended to punctured
+(path-and-cycle) boards.
+
+For a partial matching $M$ of the complement of $B_2=I\cup P_\sigma$ (a set
+of cells, no two in a row or column, all avoiding $B_2$), let
+\[
+R(M;\sigma)\;=\;\#\{\tau\in S_n:\ \tau\ \text{avoids}\ B_2,\ \tau\supseteq M\}.
+\]
+Deleting the rows and columns of $M$ cuts the cycles of $B_2$ into disjoint
+paths and cycles; with $m_k$ the matching numbers of the resulting board and
+$N=n-|M|$,
+\begin{equation}\label{eq:punctured}
+R(M;\sigma)\;=\;\sum_k(-1)^k m_k\,(N-k)! ,
+\end{equation}
+computable from the matching polynomials of paths
+($m_k(P_e)=\binom{e-k+1}{k}$, the Chebyshev partner of \eqref{eq:IE}) and
+cycles.  We verified \eqref{eq:punctured} against exhaustive enumeration for
+all tested puncture sets at $n=6,7$.
+
+\begin{proposition}[pair inclusion--exclusion]\label{prop:pairIE}
+\[
+N^{(4)}_n(\sigma)\;=\;\sum_{j\ge0}(-1)^j\!\!\sum_{M\in\mathcal M_j}
+R(M;\sigma)^2 ,
+\]
+where $\mathcal M_j$ is the set of $j$-cell partial matchings of the
+complement of $B_2$.
+\end{proposition}
+
+\begin{proof}
+$N^{(4)}$ counts ordered pairs $(\tau,\eta)$ of $B_2$-avoiding permutations
+with no common cell.  Inclusion--exclusion over the common-cell set (which
+is automatically a partial matching) gives the sum; for fixed $M$, the pairs
+with $\tau,\eta\supseteq M$ number $R(M;\sigma)^2$ by independence.
+(Verified exactly at $n=6,7$: e.g.\ $N^{(4)}_7((7))=83600$ both ways.)
+\end{proof}
+
+Probabilistically: if $\tau,\eta$ are \emph{independent} uniform
+$B_2$-avoiding rows and $X=|\tau\cap\eta|$ their number of common cells,
+then with $t_j=T_j/T_0$, $T_j=\sum_{M\in\mathcal M_j}R(M)^2$:
+\[
+\Phi(\sigma):=\frac{N^{(4)}_n(\sigma)}{N^{(3)}_n(\sigma)^2}
+=\Pr(X=0),\qquad t_j=\E\binom Xj,
+\qquad
+\underbrace{r_4-r_3}_{\text{layer-4 minus layer-3 effect}}=\Delta_\lambda\log\Pr(X=0),
+\]
+where $\Delta_\lambda$ denotes the difference between $\sigma$ of types
+$(2,n-2)$ and $(n)$.  The layer-4 effect thus equals the layer-3 effect
+\emph{plus the cycle-type sensitivity of a pairwise-clash probability} ---
+and the latter is very small:
+
+\begin{observation}[near-uniformity of cell probabilities]\label{obs:cells}
+Writing $p_c=R(\{c\};\sigma)/N^{(3)}(\sigma)$ for the probability that a
+random $B_2$-avoiding row passes through the admissible cell $c$
+(so $\sum_cp_c=n$ over the $n(n-2)$ admissible cells),
+\[
+\mu:=\E X=t_1=\sum_cp_c^2\;=\;\frac n{n-2}\;+\;n(n-2)\,
+\operatorname{Var}_c(p_c)\;\ge\;\frac n{n-2},
+\]
+and exact computation shows the variance term to be astonishingly small:
+$t_1-\tfrac n{n-2}\approx 2.1\times10^{-7}$ at $n=12$ (type $(12)$),
+decaying like $n^{-6\pm}$ and depending on the cycle type only in its last
+digits.  Equivalently, the cell probabilities are uniform to relative
+$O(n^{-3})$: at $n=20$ (type $(20)$) the exact profile is flat to
+$10^{-8}$ across all cells except at $\omega$-distance $2$ (and its mirror
+$n-1$), where a single-cell deficit $\approx-1.4\,n^{-3}$ appears: the value
+$\tau(i)=\sigma^2(i)$ is slightly disfavoured.  (Both facts are provable by
+path fusion; we record them as computed.)  This is another appearance of the
+$n^{-3}$ scale of the master conjecture.
+\end{observation}
+
+\subsection{The fourth layer, extended}
+
+Truncations $S_J=\sum_{j\le J}(-1)^jT_j$ of Proposition~\ref{prop:pairIE}
+give layer-4 effects with rapidly cancelling errors: against the exact
+values (available for $n\le11$ from \S\ref{sec:layers}), the $J=2$ and
+$J=3$ estimates bracket the truth within a few percent and their average is
+accurate to $\approx0.4\%$.  This extends the layer-4 table:
+
+\begin{center}
+\small
+\begin{tabular}{c c c c c}
+\toprule
+$n$ & $r_3=M_{n-4}/M_n$ & $r_4$ & $r_4\cdot(n)_4$ & $r_4/r_3$\\
+\midrule
+8  & $4.2212\times10^{-4}$ & $5.0153\times10^{-4}$ & $0.843$ & $1.188$\\
+9  & $2.9963\times10^{-4}$ & $3.1340\times10^{-4}$ & $0.948$ & $1.046$\\
+10 & $1.8190\times10^{-4}$ & $1.8715\times10^{-4}$ & $0.943$ & $1.029$\\
+11 & $1.1839\times10^{-4}$ & $1.2049\times10^{-4}$ & $0.954$ & $1.018$\\
+12 & $8.0011\times10^{-5}$ & $8.074\times10^{-5}\,^*$ & $0.959$ & $1.009$\\
+13 & $5.5940\times10^{-5}$ & $5.629\times10^{-5}\,^*$ & $0.966$ & $1.006$\\
+14 & $4.0247\times10^{-5}$ & $4.043\times10^{-5}\,^*$ & $0.971$ & $1.005$\\
+15 & $2.9676\times10^{-5}$ & $2.978\times10^{-5}\,^*$ & $0.976$ & $1.003$\\
+16 & $2.2351\times10^{-5}$ & $2.241\times10^{-5}\,^*$ & $0.979$ & $1.003$\\
+17 & $1.7149\times10^{-5}$ & $1.718\times10^{-5}\,^*$ & $0.981$ & $1.002$\\
+18 & $1.3374\times10^{-5}$ & $1.340\times10^{-5}\,^*$ & $0.984$ & $1.002$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+($^*$: series estimate $\tfrac12(\mathrm{eff}(2)+\mathrm{eff}(3))$, with a
+validated systematic of $\approx-0.4\%$; $n\le11$ rows are exact.)  The
+evidence for
+\begin{equation}\label{eq:r4}
+r_4(n)\;=\;\frac{1+o(1)}{(n)_4}\;=\;r_3(n)\,\bigl(1+O(n^{-1})\bigr)
+\end{equation}
+is now overwhelming; the exact $n\le11$ values show the relative excess
+$r_4/r_3-1$ decaying from $4.6\%$ ($n=9$) to $1.8\%$ ($n=11$), already at
+the boundary of the series systematics beyond that.  The decomposition of
+$r_4-r_3=\Delta_\lambda\log\Pr(X=0)$ through the truncations shows the
+difference is \emph{not} dominated by $\Delta\mu$ (which contributes only
+$\approx5\%$ of it at $n=11$) but spread across the higher coincidence
+statistics --- consistent with its smallness and rapid decay.
+Section~\ref{sec:switch} turns this evidence into an exact ``switch
+calculus'' and a proof of \eqref{eq:r4} (Theorem~\ref{thm:layer4}).
+
+%======================================================================
+\section{An exact switch calculus for the fourth layer}\label{sec:switch}
+
+This section develops the machinery for TODO~1 of the programme: a proof
+that the fourth-layer effect equals the third-layer effect to relative
+$O(1/n)$,
+\begin{equation}\label{eq:r4thm}
+r_4(n)\;=\;r_3(n)\,\bigl(1+O(n^{-1})\bigr),
+\qquad r_3(n)=\frac{M_{n-4}}{M_n}.
+\end{equation}
+The idea is to compare the two cycle types through \emph{adjacent
+representatives}: derangements $\sigma$ (type $(n)$) and $\sigma'$ (type
+$(2,n-2)$) whose boards differ by a single $2\times2$ switch.  All
+$\sigma$-dependent quantities then differ by four-term brackets of
+punctured counts, and these brackets are governed \emph{exactly} by
+Wronskian-type identities for path matching polynomials --- the punctured
+analogues of the fusion identity (Lemma~\ref{lem:fusion}).  The programme is carried out in full: every step is an exact identity,
+an exhaustively verified finite case analysis, or a uniform Bonferroni
+estimate, and each is cross-checked against exact computation.
+
+\subsection{Adjacent representatives and the switch decomposition}
+
+Since $N^{(k)}_n$ depends only on the cycle type
+(Lemma~\ref{lem:type}), we may choose
+\[
+\sigma=(1\,2\,3\cdots n),\qquad \sigma'=(1\,2)(3\,4\cdots n).
+\]
+Then $\sigma(i)=\sigma'(i)$ except at $i=2,n$:
+\[
+B_2(\sigma)\setminus B_2(\sigma')=\{d_1,d_2\},\quad
+B_2(\sigma')\setminus B_2(\sigma)=\{e_1,e_2\},
+\]
+\[
+d_1=(2,3),\ d_2=(n,1),\qquad e_1=(2,1),\ e_2=(n,3).
+\]
+Let $B_0=B_2(\sigma)\cap B_2(\sigma')$, a board of $2n-2$ cells whose
+bipartite graph is a disjoint union of two paths,
+\[
+P^{(1)}:\ c_1-r_1-c_2-r_2\quad(3\ \text{edges}),\qquad
+P^{(2)}:\ c_3-r_3-c_4-\cdots-c_n-r_n\quad(2n-5\ \text{edges}),
+\]
+where $r_i$, $c_j$ denote row and column vertices.  The four cells
+$d_1,d_2,e_1,e_2$ avoid $B_0$ and connect the four path-ends pairwise:
+$d_1=r_2c_3$ and $d_2=r_nc_1$ join the two paths (\emph{crosswise}),
+while $e_1=r_2c_1$ and $e_2=r_nc_3$ close each path onto itself.
+Adding $\{d_1,d_2\}$ to $B_0$ yields the single cycle $C_{2n}$ of
+$B_2(\sigma)$; adding $\{e_1,e_2\}$ yields the $C_4\cup C_{2n-4}$ of
+$B_2(\sigma')$.
+
+Let $A_0$ be the set of permutations avoiding $B_0$, $N_0=|A_0|$, and for
+cells $z_1,\dots$ let $R_0(M)$ denote the number of $\tau\in A_0$ with
+$\tau\supseteq M$ (a punctured count, computable by
+\eqref{eq:punctured}; all components of the punctured board are
+\emph{paths}).  Write
+\[
+N^{(4)}_0=\#\{(\tau,\eta)\in A_0^2:\ \tau\cap\eta=\emptyset\},\qquad
+G(z)=\#\{(\tau,\eta)\in A_0^2:\ \tau\cap\eta=\emptyset,\ z\in\tau\},
+\]
+and analogously $G_2(z,z')$ ($z,z'\in\tau$) and $H(z,z')$ ($z\in\tau$,
+$z'\in\eta$).
+
+\begin{lemma}[switch decomposition; exact]\label{lem:switchIE}
+With $\Delta N^{(4)}=N^{(4)}_n(\sigma')-N^{(4)}_n(\sigma)$,
+\begin{align}
+\Delta N^{(4)}
+&=2\,\mathrm{Br}_G
++2\bigl[G_2(e_1,e_2)-G_2(d_1,d_2)\bigr]
++2\bigl[H(e_1,e_2)-H(d_1,d_2)\bigr],
+\label{eq:switchIE}\\
+\mathrm{Br}_G&:=G(d_1)+G(d_2)-G(e_1)-G(e_2).\notag
+\end{align}
+\end{lemma}
+
+\begin{proof}
+A pair of disjoint rows avoiding $B_2(\sigma)$ is a pair of disjoint
+members of $A_0$ avoiding $d_1,d_2$; inclusion--exclusion over the events
+$d_i\in\tau\cup\eta$ gives
+$N^{(4)}(\sigma)=N^{(4)}_0-U(d_1)-U(d_2)+U(d_1,d_2)$ with
+$U(z)=2G(z)$ (a cell lies in at most one row of a disjoint pair) and
+$U(z,z')=2G_2(z,z')+2H(z,z')$ (using $H(z,z')=H(z',z)$, by swapping
+$\tau,\eta$).  Similarly for $\sigma'$ with $e_1,e_2$; subtract.
+(Verified by complete enumeration at $n=6$: $\Delta N^{(4)}=10=
+2\cdot6+2\cdot(-1)+2\cdot0$; and $n=7$: $400=2\cdot224+2\cdot4-2\cdot28$;
+\texttt{switch.py}.)
+\end{proof}
+
+\begin{remark}[a hidden symmetry]\label{rem:psi}
+The map $\Psi(i,c)=(3-c,\,3-i)\bmod n$ is an involution of the cell grid
+that preserves $B_0$, swaps $d_1\leftrightarrow d_2$, and fixes $e_1$ and
+$e_2$.  It induces the involution
+$\tau\mapsto\Psi(\tau)$, $\Psi(\tau)(i)=3-\tau^{-1}(3-i)$, of $A_0$,
+which preserves disjointness of pairs.  Hence $G(d_1)=G(d_2)$
+\emph{exactly} (confirmed by exact computation at $n=8,\dots,11$), while
+$G(e_1)$ and $G(e_2)$ are merely each $\Psi$-invariant.
+\end{remark}
+
+\subsection{The path toolkit}
+
+Let $p_e(x)=\sum_k m_k(P_e)x^k$ be the matching polynomial of the path
+with $e$ edges ($p_0=1$, $p_1=1+x$, $p_e=p_{e-1}+xp_{e-2}$), so that with
+$\alpha_\pm$ as in \S\ref{sec:thirdrow},
+$p_e=(\alpha_+^{\,e+2}-\alpha_-^{\,e+2})/(\alpha_+-\alpha_-)$.
+Extend to negative indices by this formula:
+\[
+p_{-1}=1,\qquad p_{-2}=0,\qquad
+p_{-e}=-(-x)^{\,2-e}\,p_{e-4}\ (e\ge3).
+\]
+
+\begin{lemma}[path Wronskian]\label{lem:wronskian}
+For all integers $a,b$,
+\begin{equation}\label{eq:wronskian}
+p_a\,p_b-p_{a-1}\,p_{b+1}\;=\;-(-x)^{\,b+2}\,p_{a-b-3}.
+\end{equation}
+In particular $p_2p_{C-1}-p_1p_C=-x^3p_{C-4}$ and
+$p_2p_C-p_3p_{C-1}=-x^4p_{C-5}$.
+\end{lemma}
+
+\begin{proof}
+Put $d_m=(\alpha_+^m-\alpha_-^m)/(\alpha_+-\alpha_-)$, so $p_e=d_{e+2}$.
+In the product $(\alpha_+-\alpha_-)^2(p_ap_b-p_{a-1}p_{b+1})$ the
+``diagonal'' terms $\alpha_\pm^{a+b+4}$ cancel and the cross terms give
+\[
+-(\alpha_+\alpha_-)^{b+2}\Bigl[\alpha_+^{a-b}+\alpha_-^{a-b}
+-\alpha_+^{a-b-1}\alpha_--\alpha_-^{a-b-1}\alpha_+\Bigr]
+=-(-x)^{b+2}(\alpha_+-\alpha_-)\bigl(\alpha_+^{a-b-1}-\alpha_-^{a-b-1}\bigr),
+\]
+using $\alpha_+\alpha_-=-x$; divide by $(\alpha_+-\alpha_-)^2$.
+(Verified symbolically for $a,b\in[0,11]$; \texttt{fusion\_lemmas.py}.)
+\end{proof}
+
+The cycle polynomial decomposes over paths:
+$c_m:=\alpha_+^m+\alpha_-^m=d_{m+1}+x\,d_{m-1}$, i.e.
+\begin{equation}\label{eq:cycletopath}
+M_{C_{2m}}(x)=p_{2m-1}(x)+x\,p_{2m-3}(x).
+\end{equation}
+
+For a polynomial $f$ and integer $m\ge0$ define the \emph{IE evaluation}
+$\langle f\rangle_m=\sum_k(-1)^k[x^k]f\cdot(m-k)!$, so that the count of
+permutations of an $m$-set avoiding a board with matching polynomial $f$
+is $\langle f\rangle_m$, and
+\begin{equation}\label{eq:shift}
+\langle x^s f\rangle_m=(-1)^s\langle f\rangle_{m-s}.
+\end{equation}
+
+\subsection{The empty bracket: an exact identity}
+
+Define, for a partial matching $M$ avoiding $B_0$ and compatible with a
+pin $z$ (i.e.\ $M\cup\{z\}$ is again a matching avoiding $B_0$), the
+\emph{bracket}
+\[
+\mathrm{Br}(M)\;=\;R_0(M\cup d_1)+R_0(M\cup d_2)-R_0(M\cup e_1)-R_0(M\cup e_2).
+\]
+
+\begin{proposition}[empty bracket]\label{prop:S0}
+$\mathrm{Br}(\emptyset)=M_{n-4}$.
+\end{proposition}
+
+\begin{proof}
+Pinning a cell $(i,c)$ deletes the vertices $r_i,c_c$ from $B_0$.  Each
+of the four special vertices $r_2,c_1,c_3,r_n$ has degree $1$ in $B_0$,
+so each pin removes exactly two edges; the resulting boards are unions of
+two or three paths.  Grouping the bracket as
+$(R_0(d_1)-R_0(e_1))+(R_0(d_2)-R_0(e_2))$, both differences compare
+end-deletions of two paths within a common board, and
+Lemma~\ref{lem:wronskian} gives, as polynomial identities on the boards,
+\[
+f_{d_1}-f_{e_1}=-x^3p_{2n-9},\qquad
+f_{d_2}-f_{e_2}=-x^4p_{2n-11}
+\]
+(the computation is the generic case of Lemma~\ref{lem:master} below with
+$A=2$, $C=2n-5$, resp.\ $A''=3$, $C''=2n-6$).  Hence by \eqref{eq:shift},
+\[
+\mathrm{Br}(\emptyset)
+=\langle p_{2n-9}\rangle_{n-4}-\langle p_{2n-11}\rangle_{n-5}
+=\bigl\langle p_{2(n-4)-1}+x\,p_{2(n-4)-3}\bigr\rangle_{n-4}
+=\langle M_{C_{2(n-4)}}\rangle_{n-4}=M_{n-4},
+\]
+using \eqref{eq:cycletopath}.  (Verified exactly for $6\le n\le14$;
+\texttt{switch.py}, check~1.)
+\end{proof}
+
+Applying the same identity to single rows instead of pairs gives
+$\Delta N^{(3)}=g(d_1)+g(d_2)-g(e_1)-g(e_2)=M_{n-4}$ with
+$g(z)=R_0(\{z\})$ --- an alternative, ``local'' proof of the $\ell=2$
+case of Theorem~\ref{thm:thirdrow}: the two double-pin terms
+$R_0(\{d_1,d_2\})$ and $R_0(\{e_1,e_2\})$ coincide because both pin pairs
+delete the \emph{same} four vertices $r_2,r_n,c_1,c_3$.
+
+\subsection{Structure of the bracket for general punctures}
+
+Fix a matching $M$ avoiding $B_0$ with $\mathrm{rows}(M)\cap\{2,n\}=
+\mathrm{cols}(M)\cap\{1,3\}=\emptyset$ (so that all four pins are
+compatible; the remaining cases are the \emph{incompatible classes}
+treated in \S\ref{sec:boundary}).  Let $G_M$ denote $B_0$ punctured by
+$M$ and let $f_{M\cup z}$ be the matching polynomial of $G_M$ minus the
+two vertices of $z$, so $R_0(M\cup z)=\langle f_{M\cup z}\rangle_{n-|M|-1}$
+and the bracket polynomial is
+\[
+B_M\;=\;f_{M\cup d_1}+f_{M\cup d_2}-f_{M\cup e_1}-f_{M\cup e_2}.
+\]
+
+\begin{lemma}[valuation]\label{lem:valuation}
+$[x^0]B_M=[x^1]B_M=0$, and
+\[
+[x^2]B_M=\bigl(\mathbf 1_{c_2\text{-column}\notin M}-\mathbf 1_{c_n\text{-column}\notin M}\bigr)
+\bigl(\mathbf 1_{r_3\text{-row}\notin M}-\mathbf 1_{r_1\text{-row}\notin M}\bigr).
+\]
+In particular the valuation of $B_M$ is at least $3$ unless $M$ meets
+exactly one of the columns $\{2,n\}$ \emph{and} exactly one of the rows
+$\{1,3\}$, and it is always at least $2$.
+\end{lemma}
+
+\begin{proof}
+$[x^0]$: each $f$ has constant term $1$.  $[x^1]$: $m_1$ of a vertex-deleted
+graph is $E-\deg u-\deg v$ for nonadjacent $u,v$; the four deletions use
+each of $r_2,r_n,c_1,c_3$ twice with opposite signs, so both the $E$- and
+the degree-terms cancel.  $[x^2]$: $m_2(G\smallsetminus\{u,v\})=
+\binom{E-\deg u-\deg v}{2}-A(G\smallsetminus\{u,v\})$ where $A$ counts
+adjacent edge-pairs.  Writing $a=\deg r_2$, $b=\deg c_3$, $c=\deg r_n$,
+$d=\deg c_1$ (degrees in $G_M$), the binomial terms contribute
+$(a-c)(b-d)$ by the quadratic identity
+$f(a{+}b)+f(c{+}d)-f(a{+}d)-f(c{+}b)=(a-c)(b-d)$ for
+$f(t)=\binom{E-t}{2}$.  Since the graph is bipartite, a row-vertex and a
+column-vertex have no common neighbour, so
+$A(G\smallsetminus\{u,v\})=A(G)-\binom{\deg u}{2}-\binom{\deg v}{2}
+-\sum_{w\sim u}(\deg w-1)-\sum_{w\sim v}(\deg w-1)$; every one of these
+terms appears twice with opposite signs in the bracket, so the $A$-terms
+cancel identically.  Finally $\deg r_2=\mathbf 1[\text{column
+}2\notin\mathrm{cols}(M)]$ (its only $B_0$-edge is the cell $(2,2)$),
+and similarly $\deg r_n=\mathbf 1[c_n\ \mathrm{free}]$,
+$\deg c_3=\mathbf 1[r_3\ \mathrm{free}]$, $\deg c_1=\mathbf 1[r_1\ \mathrm{free}]$.
+(Exhaustive verification for all $|M|\le2$ at $n=9,10$:
+minimal valuation $2$, and valuation $2$ occurs exactly in the predicted
+classes; \texttt{valuation\_scan.py}.)
+\end{proof}
+
+\begin{lemma}[master formula]\label{lem:master}
+Let $M$ be as above.  In $G_M\smallsetminus r_2$, let $A$ be the edge-length
+of the path-piece containing $c_1$ and $C$ the edge-length of the piece
+containing $c_3$; in $G_M\smallsetminus r_n$, let $A''$ and $C''$ be the
+edge-lengths of the pieces containing $c_1$ and $c_3$.  Then, as an
+identity of polynomials,
+\begin{equation}\label{eq:master}
+B_M\;=\;(-x)^{A+1}\,p_{C-A-2}\cdot f^{\mathrm{rest}}_1
+\;-\;(-x)^{A''+1}\,p_{C''-A''-2}\cdot f^{\mathrm{rest}}_2 ,
+\end{equation}
+where $f^{\mathrm{rest}}_i$ are the matching polynomials of the remaining
+pieces.  Moreover $A\le 2$ and $A''\le3$ always, and in the
+\emph{window-avoiding} case --- $M$ meets none of rows $1,3$, columns
+$2,n$, and no piece-end lies within distance $8$ of $c_3$ or $r_n$ ---
+one has $A=2$, $A''=3$, $C''\in\{C,C-1\}$, and
+\begin{equation}\label{eq:generic}
+B_M=-x^3\,p_{C-4}\,p_D\,\textstyle\prod_{\mathrm{mid}}
+-x^4\,p_{C-5}\,p_{D-1}\,\prod_{\mathrm{mid}},
+\end{equation}
+with $D$ the edge-length of the piece containing $r_n$ and
+$\prod_{\mathrm{mid}}$ the product over the interior pieces.
+\end{lemma}
+
+\begin{proof}
+Group $B_M=(f_{M\cup d_1}-f_{M\cup e_1})+(f_{M\cup d_2}-f_{M\cup e_2})$.
+The first difference deletes $r_2$ from $G_M$ and then compares deletion
+of the end-vertices $c_3$ (in its piece of length $C$) and $c_1$ (in its
+piece of length $A$); these lie in distinct components (they descend from
+the distinct components $P^{(2)},P^{(1)}$ of $B_0$), so the difference is
+$\bigl[p_{C-1}p_A-p_Cp_{A-1}\bigr]\cdot f^{\mathrm{rest}}_1$, which is
+$(-x)^{A+1}p_{C-A-2}f^{\mathrm{rest}}_1$ by \eqref{eq:wronskian}.  The
+second difference is handled identically after deleting $r_n$ (with the
+roles of $c_1,c_3$ reversed, whence the minus sign).  $A\le2$, $A''\le3$
+because every piece of $P^{(1)}$ has at most $3$ edges.  In the
+window-avoiding case $P^{(1)}$ is intact, so $A=2$ ($P^{(1)}\smallsetminus
+r_2=c_1r_1c_2$) and $A''=3$; deleting $r_n$ shortens only the
+$r_n$-piece, so $C''=C$ if the $c_3$- and $r_n$-pieces are distinct
+($C''=C-1$ if $M$ leaves $P^{(2)}$ uncut).  Substituting gives
+\eqref{eq:generic}.  (Verified as exact integer identities on random
+generic $M$ with $1\le|M|\le4$ at $n=9,11,13$;
+\texttt{fusion\_lemmas.py}.)
+\end{proof}
+
+\subsection{A uniform estimate for punctured path boards}
+
+\begin{lemma}[uniform punctured estimate]\label{lem:uniform}
+There are absolute constants $m_0, C_0$ with the following property.
+Let $F$ be a disjoint union of paths and cycles with $E$ edges,
+considered as a board in an $m\times m$ grid, $E\le 2m$, $m\ge m_0$.  Then
+\[
+\langle M_F\rangle_m\;=\;m!\,e^{-E/m}\,(1+\theta),
+\qquad |\theta|\le C_0/m .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $S=\langle M_F\rangle_m/m!=\sum_k(-1)^k m_k/(m)_k$.  By Bonferroni
+(the summands are the inclusion--exclusion of the events ``the
+permutation hits a fixed cell of $F$''), the partial sums alternate
+around $S$, so for every $K$,
+$\bigl|S-\sum_{k<K}(-1)^km_k/(m)_k\bigr|\le m_K/(m)_K$.
+For $k\le K:=\lceil2\log m\rceil$ we use the two-sided bounds
+$\frac1{k!}\prod_{i<k}(E-3i)\le m_k\le E^k/k!$ (each edge of a
+max-degree-$2$ graph is adjacent to at most two others) and
+$(m)_k=m^ke^{-k^2/2m+O(k^3/m^2)}$, giving
+$m_k/(m)_k=\frac{(E/m)^k}{k!}(1+\delta_k)$ with
+$|\delta_k|\le Ck^2(1/E+1/m)$ when $3K^2\le E$, and
+$m_k/(m)_k\le\frac{(E/m)^k}{k!}e^{k^2/m}$ always.  Summing,
+$\sum_{k<K}(-1)^k\frac{(E/m)^k}{k!}(1+\delta_k)=e^{-E/m}+O(1/m)$
+(the weighted error $\sum_k\frac{(E/m)^k}{k!}k^2(1/E+1/m)=O(1/m)$
+uniformly in $E\le2m$, including small $E$), the truncation tails of the
+exponential series and the Bonferroni tail being
+$O((2e/K)^K)=O(m^{-2})$.  If $E<3K^2$ the same computation with the
+crude bound $|\delta_k|\le Ck^2/E$ for $k\le\sqrt{E/3}$ and Bonferroni
+truncation there gives the claim directly.
+\end{proof}
+
+\begin{corollary}[weights and moments]\label{cor:moments}
+For $n\ge n_0$ and any matching $M$ avoiding $B_0$ with $|M|=j\le n/2$:
+$q(M):=R_0(M)/N_0\le 2e^{6j/n}/(n)_j$, and consequently
+\[
+\sum_{j\ge0}(j+1)^4\!\!\sum_{M\in\mathcal M_j}\!q(M)^2\;\le\;C_1
+\qquad\text{(absolute constant)} .
+\]
+Moreover $N^{(4)}_0=\sum_M(-1)^{|M|}R_0(M)^2$ (pair inclusion--exclusion,
+Proposition~\ref{prop:pairIE} on $B_0$), and $c_2^{-1}N_0^2\le
+N^{(4)}_0\le N_0^2$ for an absolute $c_2$ and $n\ge n_0$.
+\end{corollary}
+
+\begin{proof}
+The weight bound follows from Lemma~\ref{lem:uniform} applied to numerator
+and denominator ($E$ changes by at most $4j$ under puncturing).  The
+moment bound follows from $|\mathcal M_j|\le (n(n-2))^j/j!$.  The lower
+bound on $N^{(4)}_0$ follows from Bonferroni in the pair
+inclusion--exclusion together with
+$t_j:=\sum_{\mathcal M_j}q(M)^2=\mu^j/j!\,(1+O((j{+}1)/n))$ for
+$j\le5$, $\mu=t_1\in[1,1.5]$, which is a direct consequence of
+Lemma~\ref{lem:uniform}.
+\end{proof}
+
+\subsection{The generic stratum}
+
+\begin{proposition}[generic per-puncture estimate]\label{prop:generic}
+There are $n_0,C$ such that for $n\ge n_0$, every window-avoiding $M$
+with $|M|=j\le n/2$ satisfies
+\[
+\langle B_M\rangle_{n-1-j}
+=\frac{M_{n-4}}{M_n}\,R_0(M)\,\bigl(1+\delta_M\bigr),
+\qquad|\delta_M|\le C\,\frac{j+1}{n}.
+\]
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:generic} and \eqref{eq:shift},
+$\langle B_M\rangle_{n-1-j}
+=\langle p_{C-4}p_D\prod_{\mathrm{mid}}\rangle_{n-4-j}
+-\langle p_{C-5}p_{D-1}\prod_{\mathrm{mid}}\rangle_{n-5-j}$.
+Apply Lemma~\ref{lem:uniform} to both terms and to
+$R_0(M)=\langle p_3\,p_C\,p_D\prod_{\mathrm{mid}}\rangle_{n-j}$; the
+edge counts of the two bracket boards are $E(G_M)-7$ and $E(G_M)-9$, so
+the exponential factors agree with that of $R_0(M)$ up to
+$e^{O((j+1)/n)}$, while the factorial prefactors give
+\[
+\frac{(n-4-j)!-(n-5-j)!\,e^{O(1/n)}}{(n-j)!}
+=\frac{1}{(n-j)_4}\Bigl(1+O\bigl(\tfrac1{n-j}\bigr)\Bigr).
+\]  Since $M_{n-4}/M_n=(n)_4^{-1}(1+O(n^{-2}))$ and
+$(n)_4/(n-j)_4=1+O(j/n)$ for $j\le n/2$, the claim follows.
+\end{proof}
+
+\subsection{Boundary and incompatible classes; the remaining lemma}
+\label{sec:boundary}
+
+Expanding each $G$-term of $\mathrm{Br}_G$ by pair inclusion--exclusion
+over common cells $M\subseteq\tau\cap\eta$ (which automatically avoid the
+pinned row and column) gives the exact stratified form
+\begin{equation}\label{eq:strata}
+\mathrm{Br}_G=\sum_{j\ge0}(-1)^j S_j,\qquad
+S_j=\sum_{M\in\mathcal M_j}\Bigl[\textstyle\sum_{z\in\{d_1,d_2\}}
+R_0^\dagger(M\cup z)-\sum_{z\in\{e_1,e_2\}}R_0^\dagger(M\cup z)\Bigr]R_0(M),
+\end{equation}
+where $R_0^\dagger(M\cup z)=R_0(M\cup z)$ if $M\cup\{z\}$ is a matching,
+$=R_0(M)$ if $z\in M$, and $=0$ otherwise.  ($S_0=M_{n-4}N_0$ by
+Proposition~\ref{prop:S0}; verified together with $S_1,S_2,S_3$ against
+direct enumeration at $n=8,9$; \texttt{switch\_j1.py}.)
+The matchings $M$ fall into three classes:
+\begin{itemize}[leftmargin=2em]
+\item[\textup{(a)}] \emph{window-avoiding} $M$: controlled by
+Proposition~\ref{prop:generic};
+\item[\textup{(b)}] \emph{compatible boundary} $M$ (all pins compatible
+but $M$ meets the window): write $B_M=(f_{M\cup d_1}-f_{M\cup e_1})
++(f_{M\cup d_2}-f_{M\cup e_2})$; by Lemma~\ref{lem:master} each group is
+a single $x^{s_i}$-shifted path product with $s_1,s_2\ge2$.  If both
+$s_i\ge3$, Lemma~\ref{lem:uniform} gives
+$|\langle B_M\rangle_{n-1-j}|\le C(n-j)^{-4}R_0(M)$.  If some $s_i=2$
+then, unless $M$ makes the two-hit configuration of
+Lemma~\ref{lem:valuation} (extra measure $O((j{+}1)^2/n^2)$, crude bound
+$C(n-j)^{-3}R_0(M)$), the $x^2$ coefficients of the two groups cancel
+($[x^2]B_M=0$), the two shifted products have edge counts differing by
+$O(1)$, and the difference of their Lemma~\ref{lem:uniform} evaluations
+is again $O((n-j)^{-4})R_0(M)$.  With Lemma~\ref{lem:linemeasure}, the
+class-(b) total is $O((j{+}1)^2/n)\cdot
+(M_{n-4}/M_n)\sum_{\mathcal M_j}R_0(M)^2$ per stratum;
+\item[\textup{(c)}] \emph{incompatible classes} ($M$ meets row $2$, row
+$n$, column $1$, or column $3$, or contains a pin cell): here the bracket
+degenerates to two-term or one-term combinations whose individual sizes
+are as large as $(n-j)^{-2}R_0(M)$ (two-term, $x^1$-level) or
+$(n-j)^{-1}R_0(M)$ (one-term, $x^0$-level).
+\end{itemize}
+
+The class-(c) terms are \emph{not} small individually, but they cancel
+in structured pairs.  The key device is a family of \emph{line-swap
+pairings}: bijections $M\mapsto\varphi(M)$ between two classes which
+leave the deleted row- and column-sets of the \emph{pinned} counts
+unchanged --- so that the pinned factors agree exactly --- while the
+free factors $R_0(M)$, $R_0(\varphi M)$ differ by a Wronskian
+(Lemma~\ref{lem:wronskian}), hence by a relative $O(n^{-3})$.  We first
+record the measure bound used throughout.
+
+\begin{lemma}[line measure]\label{lem:linemeasure}
+For any fixed line (row or column) $\ell$ and $j\le n/2$,
+$\sum_{M\in\mathcal M_j,\,M\text{ meets }\ell}R_0(M)^2
+\le C\,\tfrac{j}{n}\,\tilde C^{\,j}N_0^2/j!$ with absolute $C,\tilde C$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:uniform}, $R_0(M)\le C'R_0(M\smallsetminus z)/(n-j)$
+for $z\in M$; sum over the $\le n$ cells $z$ of $\ell$ and over
+$M'=M\smallsetminus z\in\mathcal M_{j-1}$, and use
+Corollary~\ref{cor:moments}.
+\end{proof}
+
+\begin{lemma}[pairing]\label{lem:pairing}
+The total contribution to $\sum_j(-1)^jS_j$ of the classes
+\textup{(c-2)} ($M$ meets one pinned row and one pinned column) and
+\textup{(c-3)} ($M$ contains a pin cell), and the difference
+$G_2(e_1,e_2)-G_2(d_1,d_2)$, are all
+$O\bigl(n^{-1}(M_{n-4}/M_n)N_0^2\bigr)$.
+\end{lemma}
+
+\begin{proof}
+\emph{(c-2).}  Consider the class $\{$row $2$, column $3\}$: all pins
+except $d_2$ are incompatible, so the stratum term is
+$+R_0(M\cup d_2)R_0(M)$.  Map $\varphi$: replace the column-$3$ cell
+$(\rho,3)\in M$ by $(\rho,1)$; then $\varphi M$ lies in the class
+$\{$row $2$, column $1\}$, whose only compatible pin is $e_2$, with
+term $-R_0(\varphi M\cup e_2)R_0(\varphi M)$.  The deletions of
+$M\cup d_2$ and $\varphi M\cup e_2$ are the \emph{same} rows and the
+same columns ($\{3\}\cup\{1\}$ in both), so
+$R_0(M\cup d_2)=R_0(\varphi M\cup e_2)$ \emph{exactly} (verified on
+random instances; \texttt{switch.py} suite).  The free factors differ by
+the deletion of $c_3$ versus $c_1$ from the same board with $r_2$
+already removed, which is the master-formula comparison:
+$R_0(M)-R_0(\varphi M)=\langle-x^3p_{C-4}\cdot
+f^{\mathrm{rest}}\rangle$, a relative $O(n^{-3})$.  Since the class
+carries measure $O((j{+}1)^2/n^2)$ (Lemma~\ref{lem:linemeasure} twice)
+and the pinned factor a further $(n-j)^{-1}$, the paired total is
+$O(n^{-2}\cdot n^{-1}\cdot n^{-3}\cdot n\,N_0^2)$ summed over strata,
+i.e.\ $O(n^{-5})N_0^2=O(n^{-1}(M_{n-4}/M_n))N_0^2$.  The pairs
+$\{$row $n$, col $1\}$ / $\{$row $n$, col $3\}$ (surviving pins
+$d_1$/$e_1$) are handled by the same map; $\varphi$-exceptional cases
+($\rho=1$, where $(\rho,1)\in B_0$) are paired instead by the row swap
+$(2,\gamma)\mapsto(n,\gamma)$ against the class $\{$row $n$, col $3\}$,
+with the same exact pinned-factor equality and an $x^2$ Wronskian, and
+measure smaller by a further $n^{-1}$; deeper exceptional cells carry
+measure $O(n^{-4})$ and the crude one-term bound suffices.
+Exact totals confirm the mechanism: the two class totals (all strata
+$j\le4$) are $+4.277$ vs $-4.276$ in units of $M_{n-4}N_0$ at $n=8$, and
+$+3.9012$ vs $-3.9025$ at $n=9$ --- cancellation to relative
+$O(n^{-2})$.
+
+\emph{(c-3).}  For $M\ni d_1$ the surviving terms are
+$+R_0(M)^2+R_0(M\cup d_2)R_0(M)$ (pins $e_1,e_2$ are incompatible with
+$d_1$'s row and column); for $M\ni e_1$ they are
+$-R_0(M)^2-R_0(M\cup e_2)R_0(M)$ ($d_1,d_2$ incompatible).  Pair
+$M\leftrightarrow M'=M\smallsetminus d_1\cup e_1$ (same rows; columns
+$3\leftrightarrow1$).  Again the double-deletion sets of
+$M\cup d_2$ and $M'\cup e_2$ coincide, so the cross terms cancel up to
+the free-factor Wronskian; and
+$R_0(M)^2-R_0(M')^2=(R_0(M)-R_0(M'))(R_0(M)+R_0(M'))$ with
+$R_0(M)-R_0(M')$ the \emph{same} $c_3$-vs-$c_1$ comparison with $r_2$
+deleted, again $-x^3p_{C-4}$-suppressed.  With class measure
+$O(n^{-2})$ this gives $O(n^{-2}\cdot n^{-3})N_0^2$ per stratum,
+$O(n^{-5})N_0^2$ in total; same for the $d_2/e_2$ pairing.  (Exact
+check at $n=9$, strata $j\le3$: the four pin-cell class totals are
+$-33.15,\,+33.00,\,-33.15,\,+33.18$ in units of $M_5N_0$, pairwise sums
+$-0.15$ and $+0.03$.)
+
+\emph{$G_2$-difference.}  In the pair inclusion--exclusion for
+$G_2(d_1,d_2)$ and $G_2(e_1,e_2)$ the compatible-$M$ ranges coincide
+(both pin pairs delete rows $2,n$ and columns $1,3$), and the pinned
+factors $R_0(M\cup\{d_1,d_2\})=R_0(M\cup\{e_1,e_2\})$ agree exactly; so
+all terms cancel except those with $M$ containing a pin cell, which are
+handled exactly as in (c-3).
+\end{proof}
+
+\begin{lemma}[$H$-difference]\label{lem:Hdiff}
+$H(e_1,e_2)-H(d_1,d_2)=O\bigl(n^{-1}(M_{n-4}/M_n)N_0^2\bigr)$.
+\end{lemma}
+
+\begin{proof}
+Both $H$'s expand over the \emph{same} $M$-range ($M$ must avoid rows
+$2,n$ and columns $1,3$, and cannot contain a pin cell since the pins
+lie in $\tau\smallsetminus\eta$ resp.\ $\eta\smallsetminus\tau$), with
+terms $R_0(M\cup e_1)R_0(M\cup e_2)-R_0(M\cup d_1)R_0(M\cup d_2)$.
+Writing the difference as
+$R_0(M\cup e_1)[R_0(M\cup e_2)-R_0(M\cup d_2)]
++R_0(M\cup d_2)[R_0(M\cup e_1)-R_0(M\cup d_1)]$, each bracket is a
+single pin-difference, i.e.\ an $x^{s}$-shifted single path product by
+Lemma~\ref{lem:master} with $s\ge3$ off the window and $s\ge2$ on it
+(Lemma~\ref{lem:valuation} logic); with the two pinned factors each
+$O(R_0(M)/(n-j))$ this gives $O(R_0(M)^2 n^{-5})$ per generic $M$ and
+$O(R_0(M)^2n^{-4})$ on the window (measure $O((j{+}1)/n)$); summing with
+Corollary~\ref{cor:moments} gives the claim.
+\end{proof}
+
+It remains to control class \textup{(c-1)}: $M$ meets exactly one
+pinned line, say row $2$ (the cases row $n$, column $1$, column $3$
+being its images under $\Psi$ and under transposition of the roles of
+$d$- and $e$-cells), so that the bracket is the two-term
+$R_0(M\cup d_2)-R_0(M\cup e_2)$.  The dangerous sub-case is a
+\emph{doubly degenerate} window hit, where this bracket is only
+$x^1$-suppressed; it is handled by an exact \emph{column-exchange
+identity} and one more line-swap pairing.
+
+\begin{lemma}[column exchange]\label{lem:colexchange}
+Let $M$ avoid rows $n,3$ and columns $1,3$ and meet both rows $1$ and
+$2$.  Then, exactly,
+\[
+R_0(M\cup d_2)-R_0(M\cup e_2)\;=\;-\,R_0\bigl(M\cup\{(3,1),(n,3)\}\bigr).
+\]
+Dually, if $M$ avoids rows $n,1$ and columns $1,3$ and meets rows $2$
+and $3$, then
+$R_0(M\cup d_2)-R_0(M\cup e_2)=+\,R_0(M\cup\{(1,3),(n,1)\})$.
+And if $M$ meets all three rows $1,2,3$, the bracket vanishes
+identically.
+\end{lemma}
+
+\begin{proof}
+Since rows $1,2$ meet $M$, the cells $(1,1),(1,2),(2,2)$ of $B_0$ are
+punctured and column $1$ carries no constraint in the reduced system;
+both counts live on the rows $\ne n$, and $R_0(M\cup d_2)$
+(resp.\ $R_0(M\cup e_2)$) counts the assignments leaving column $1$
+(resp.\ column $3$) unused.  Given $\tau$ with column $1$ unused, move
+the row $\tau^{-1}(3)$ from column $3$ to column $1$: the new cell is
+always admissible (column $1$ is free of constraints), so this is an
+injection into the column-$3$-unused family; its image misses exactly
+the $\tau'$ with $\tau'(3)=1$, whose count is
+$R_0(M\cup\{(3,1),(n,3)\})$ --- note $(3,1)$ avoids $B_0$ and the
+deleted lines, and leaving column $3$ unused while deleting row $n$ is
+the deletion set of $\{(n,3)\}$.  The dual statement is the same
+exchange with the roles of columns $1$ and $3$ reversed (column $3$ is
+constraint-free exactly when its unique $B_0$-cell $(3,3)$ is punctured,
+i.e.\ row $3$ meets $M$).  If rows $1,2,3$ all meet $M$, both columns
+are constraint-free and the two counts coincide.  (All three statements
+verified as exact integer identities on random class-$M$ at $n=9,11,13$;
+\texttt{switch.py} suite.)
+\end{proof}
+
+\begin{lemma}[boundary]\label{lem:boundary}
+The total contribution of class \textup{(c-1)} to $\sum_j(-1)^jS_j$ is
+$O\bigl(n^{-1}(M_{n-4}/M_n)N_0^2\bigr)$.
+\end{lemma}
+
+\begin{proof}
+Sub-classify by the window hits accompanying the row-$2$ hit.
+\emph{(i) No other special hit:} $A''=2$ in Lemma~\ref{lem:master}, an
+$x^3$-shifted single product: $|\mathrm{bracket}|\le C(n-j)^{-4}
+R_0(M)\cdot(n-j)$, and Lemma~\ref{lem:linemeasure} gives a class total
+$O((j{+}1)/n)(M_{n-4}/M_n)$ per stratum, as in class (b).
+\emph{(ii) One additional hit making $A''=1$ (column $2$) or shortening
+the $c_3$-side pieces:} valuation $\ge2$ with measure
+$O((j{+}1)^2/n^2)$; crude bounds suffice.
+\emph{(iii) Row $1$ also hit ($A''=0$, the $x^1$ case):} by
+Lemma~\ref{lem:colexchange} the stratum term is exactly
+$-R_0(M)R_0(M\cup\{(3,1),(n,3)\})$.  Pair this class with the class
+``rows $2,3$ hit'' via the row swap $\varphi:(1,\gamma)\mapsto
+(3,\gamma)$ on the row-$1$ cell: $\varphi$ maps one class onto the
+other (for the $O(1)$ exceptional columns $\gamma$ where $(3,\gamma)\in
+B_0$ or collisions occur, see below), and by the dual identity the
+partner's term is $+R_0(\varphi M)R_0(\varphi M\cup\{(1,3),(n,1)\})$.
+The two pinned factors agree \emph{exactly}: the deletion sets of
+$M\cup\{(3,1),(n,3)\}$ and $\varphi M\cup\{(1,3),(n,1)\}$ are the same
+rows and the same columns.  Hence the paired contribution is
+$[R_0(M)-R_0(\varphi M)]R_0(M\cup\{(3,1),(n,3)\})$, and
+$R_0(M)-R_0(\varphi M)$ compares the deletion of $r_1$ versus $r_3$
+from a common board --- a Wronskian difference, of relative size
+$O(1/n)$ by Lemmas~\ref{lem:wronskian} and~\ref{lem:uniform} (measured:
+$\approx-2/n^2$).  Since the paired class carries measure
+$O((j{+}1)^2/n^2)$ and the pinned factor two powers, the total is
+$O(n^{-2}\cdot n^{-2}\cdot n^{-1})N_0^2=O(n^{-5})N_0^2$ per stratum
+family, summable by Corollary~\ref{cor:moments}.  The
+$\varphi$-exceptional column slices ($\gamma$ with $(3,\gamma)\in B_0$,
+i.e.\ $\gamma\in\{3,4\}$, or $\gamma$ colliding with $M$'s columns) are
+single-column sub-families of a class of size $O(n^{-4})N_0^2$, hence
+$O(n^{-5})N_0^2$ by the crude bounds, as are the deeper multi-hit
+sub-classes; and the three-row class ``rows $1,2,3$'' contributes $0$
+identically by Lemma~\ref{lem:colexchange}.  The mirror families (row
+$n$; columns $1$, $3$) are identical under $\Psi$ and under exchanging
+the roles of the $d$- and $e$-pins.
+\end{proof}
+
+\noindent
+Exact class computations confirm the mechanism: the rows-$\{1,2\}$
+family totals $-0.0611\,M_4N_0$ at $n=8$ and $-0.0528\,M_5N_0$ at $n=9$
+($\approx-0.5/n$ in main-term units) while its individual strata are
+$\Theta(n)$ larger; the pinned-factor equalities and both column-exchange
+identities are integer-exact on all tested instances
+(\texttt{switch.py} suite).
+
+\medskip
+\noindent
+The full quantity is measured directly by exact permanent sums: with
+$E^\pm[A]$ the mean number of disjoint partners over $\tau\ni d$-cells
+resp.\ $e$-cells,
+\[
+\frac{\mathrm{Br}_G\,N_0}{M_{n-4}\,N^{(4)}_0}
+=0.8919,\ 0.8685,\ 0.8818,\ 0.8929
+\qquad(n=8,9,10,11),
+\]
+and the deviation decomposes as
+$m^+(E^+[A]-E^-[A])/(M_{n-4}E[A])=-1.17/n\pm2\%$ ($n=9,10,11$) plus
+$(E^-[A]-E[A])/E[A]=O(n^{-2})$ (\texttt{anatomy.c}), exactly the
+$1-O(1/n)$ shape required by Theorem~\ref{thm:layer4}.
+
+\begin{theorem}[fourth layer]\label{thm:layer4}
+For $n\ge n_0$,
+\[
+\log\frac{N^{(4)}_n((2,n{-}2))}{N^{(4)}_n((n))}
+=2\,\frac{M_{n-4}}{M_n}+O(n^{-5}),
+\qquad\text{hence}\qquad
+r_4(n)=r_3(n)\bigl(1+O(n^{-1})\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Combine \eqref{eq:switchIE} and \eqref{eq:strata}.  Strata with
+$j>n/2$ are bounded crudely by
+$|\mathcal M_j|\,(n-j)!\,(n-j-1)!$, which is superexponentially small
+against $N_0^2$; assume $j\le n/2$ throughout.  Classes (a) and (b):
+by Proposition~\ref{prop:generic} and the class-(b) bound, using
+Corollary~\ref{cor:moments} to sum unsigned errors,
+\[
+\sum_j(-1)^jS_j^{(a)+(b)}
+=\frac{M_{n-4}}{M_n}\Bigl[\sum_M(-1)^{|M|}R_0(M)^2\Bigr]\bigl(1+O(n^{-1})\bigr)
+=\frac{M_{n-4}}{M_n}N^{(4)}_0\bigl(1+O(n^{-1})\bigr),
+\]
+where re-completing the class-(c) matchings into the full signed sum
+$\sum_M(-1)^{|M|}R_0(M)^2=N^{(4)}_0$ costs another
+$O(n^{-1})$-relative term ($O(1/n)$ of the pair measure lies in class
+(c)).  Class (c) and the $G_2$-, $H$-differences are
+$O(n^{-1}(M_{n-4}/M_n)N_0^2)$ by Lemmas~\ref{lem:pairing},
+\ref{lem:Hdiff} and~\ref{lem:boundary}, and $N_0^2\le e^{\mu+o(1)}
+N^{(4)}_0$ by Corollary~\ref{cor:moments}.  Hence
+$\Delta N^{(4)}=2(M_{n-4}/M_n)N^{(4)}_0(1+O(1/n))$.  Finally
+$N^{(4)}_0=N^{(4)}_n((n))(1+O(1/n))$ (the switch decomposition for
+$N^{(4)}(\sigma)$ against $N^{(4)}_0$, with $G(z)\le e^{\mu}N^{(4)}_0/
+(n-2)$), so $\Delta\log N^{(4)}=2M_{n-4}/M_n+O(n^{-5})$, and
+$r_4-r_3=\Delta\log N^{(4)}-2\,\Delta\log N^{(3)}
+=O(n^{-5})=r_3\cdot O(n^{-1})$.
+\end{proof}
+
+\begin{remark}[general $\ell$; the layer-$k$ programme]
+Choosing $\sigma=(1\cdots n)$ and $\sigma'=(1\cdots \ell)(\ell{+}1\cdots
+n)$ gives boards differing by one switch at distance $\ell$; the same
+calculus applies with $P^{(1)}$ of length $2\ell-1$, and the empty
+bracket is $M_{n-2\ell}$ by the same Wronskian computation, predicting
+$r_4^{(\ell)}=\rho_\ell(1+O(1/n))$ for the $\ell$-cycle layer-4 effect.
+More significantly, nothing in the preceding subsections is specific to
+\emph{two} added rows: the switch decomposition and the bracket calculus apply
+verbatim to $N^{(k)}$ for any fixed $k$, with pair counts replaced by
+$(k{-}2)$-tuple counts and Lemma~\ref{lem:uniform} applied to the
+correspondingly punctured boards.  Section~\ref{sec:fifth} carries this
+out in full for $k=5$.  The obstruction to
+$r_k=r_3(1+o(1))$ for growing $k$ is that the boards seen by the last
+rows are no longer unions of two paths --- this is where the cluster
+expansion of TODO~4 takes over.
+\end{remark}
+
+
+
+%======================================================================
+\section{The fifth layer: the switch calculus transfers}\label{sec:fifth}
+
+The remark closing Section~\ref{sec:switch} promised that nothing in the
+switch calculus is specific to \emph{two} added rows.  This section makes
+that promise concrete for the fifth layer: we derive the triple
+inclusion--exclusion identity, transfer the switch decomposition and the
+bracket calculus, and obtain
+\begin{equation}\label{eq:r5thm}
+r_5(n)=r_3(n)\bigl(1+O(n^{-1})\bigr),
+\end{equation}
+where $r_5$ is the fifth-layer effect
+$\Delta_\lambda\log\bigl(N^{(5)}/N^{(4)}\bigr)$ between types $(2,n{-}2)$
+and $(n)$.  Exact computations (independent of the calculus) confirm the
+result at $n=8,9$ with striking precision.  Everything is written at the
+same working-note rigor as Section~\ref{sec:switch}: exact identities and
+finite verifications are labelled as such, and the two genuinely new
+bookkeeping steps (the spectator factors in the strata analysis) are
+flagged explicitly.
+
+\subsection{A triple inclusion--exclusion identity}
+
+$N^{(5)}(\sigma)$ is the number of ordered triples $(\tau,\eta,\theta)$
+of $B_2$-avoiding permutations that are pairwise cell-disjoint.
+Expanding each of the three pairwise-disjointness indicators by
+inclusion--exclusion over subsets of that pair's coincidence set --- the
+three expansions are independent --- gives the analogue of
+Proposition~\ref{prop:pairIE}.
+
+\begin{proposition}[triple inclusion--exclusion]\label{prop:tripleIE}
+Let $M_1,M_2,M_3$ range over matchings of the complement of $B_2$
+(the coincidence sets of $(\tau,\eta)$, $(\tau,\theta)$,
+$(\eta,\theta)$ respectively), subject to \emph{compatibility}: each
+pairwise union $M_i\cup M_j$ is again a matching (shared cells are
+allowed; two distinct cells of $M_i$, $M_j$ may not share a line).
+Then
+\begin{equation}\label{eq:tripleIE}
+N^{(5)}(\sigma)=\sum_{(M_1,M_2,M_3)}(-1)^{|M_1|+|M_2|+|M_3|}
+R(M_1{\cup}M_2)\,R(M_1{\cup}M_3)\,R(M_2{\cup}M_3),
+\end{equation}
+with $R(\cdot)$ the punctured counts of \eqref{eq:punctured}.
+Equivalently, in resummed form: compatibility of the triple is
+equivalent to $U=M_1\cup M_2\cup M_3$ being a matching, and collecting
+the label multiplicities cell by cell,
+\begin{equation}\label{eq:tripleIEU}
+N^{(5)}(\sigma)=\sum_{U}\ \sum_{U=U_{ab}\sqcup U_{ac}\sqcup U_{bc}\sqcup U_{abc}}
+(-1)^{|U_{ab}|+|U_{ac}|+|U_{bc}|}\,2^{|U_{abc}|}\,
+R(A)\,R(B)\,R(C),
+\end{equation}
+where $A=U_{ab}\cup U_{ac}\cup U_{abc}$,
+$B=U_{ab}\cup U_{bc}\cup U_{abc}$, $C=U_{ac}\cup U_{bc}\cup U_{abc}$
+are the constraint sets of $\tau,\eta,\theta$: \emph{every coincidence
+cell lies in at least two of the three constraint sets}.
+\end{proposition}
+
+\begin{proof}
+For fixed $\tau,\eta,\theta$ avoiding $B_2$, the product of the three
+indicators $\prod_{\text{pairs}}\mathbf 1[\text{disjoint}]$ expands as
+$\sum_{M_1\subseteq\tau\cap\eta}(-1)^{|M_1|}\cdots$, independently in
+the three pairs; exchanging sums gives \eqref{eq:tripleIE}, the count of
+triples with $\tau\supseteq M_1\cup M_2$ etc.\ factorizing since the
+three rows are constrained separately (and vanishing unless each union
+is a matching).  For \eqref{eq:tripleIEU}: if two cells of the $M_i$
+share a line, compatibility of the relevant pair forces them equal, so
+pairwise compatibility is the same as $U$ being a matching; each
+$u\in U$ carries the nonempty label set $T(u)\subseteq\{1,2,3\}$ of the
+$M_i$ containing it, the constraint-set membership of $u$ depends only
+on $T(u)$ ($|T|=1$ gives exactly two memberships, $|T|\ge2$ gives all
+three), and summing $(-1)^{|T|}$ over the label sets with a given
+membership pattern gives weight $-1$ for each two-membership pattern
+and $+3-1=+2$ for the full pattern.
+(Both forms verified against brute-force enumeration of all triples at
+$n=5$, and \eqref{eq:tripleIEU} additionally at $n=6,7$, both cycle
+types: $N^{(5)}$ values $36$; $4032$, $4224$; $2185152$, $2198160$.
+\texttt{triple\_ie.py}.)
+\end{proof}
+
+\begin{remark}[the truncated series is slowly convergent]
+Truncating \eqref{eq:tripleIEU} at total order
+$q=|M_1|+|M_2|+|M_3|\le Q$ gives an alternating series whose natural
+parameter is the \emph{total} coincidence intensity of the three pairs,
+$3\mu\approx6$ --- three times that of the pair series of
+Section~\ref{sec:pair}.  Convergence in $Q$ is correspondingly slower:
+at $n=8$ the $Q\le3$ truncation underestimates the fifth-layer effect
+by $24\%$ (exact anchor below), at $n=9$ by $6\%$; the truncation error
+shrinks rapidly with $n$ ($Q=3$ values $0.922$, $0.942$, $0.964$,
+$0.970$, $0.974$ at $n=10,\dots,14$ in
+the $r_5\cdot(n)_4$ normalisation of the table below, each presumably a
+few percent low, approaching $1$ monotonically as the layer-4 sequence
+did).  We therefore use the truncated series only as a
+consistency check at larger $n$ and rely on exact enumeration
+(\texttt{n5\_direct2.c}) at $n\le9$; the switch calculus below is what
+replaces series estimation as the source of the theorem.
+(\texttt{layer5\_production.py}.)
+\end{remark}
+
+\subsection{The switch decomposition for triples}
+
+Adopt the setting of Section~\ref{sec:switch}: adjacent representatives
+$\sigma,\sigma'$, common board $B_0$ (two paths), pins
+$d_1=(2,3)$, $d_2=(n,1)$, $e_1=(2,1)$, $e_2=(n,3)$, and $A_0$ the set of
+$B_0$-avoiding permutations.  Write
+\[
+N^{(5)}_0=\#\{(\tau,\eta,\theta)\in A_0^3\ \text{pairwise disjoint}\},
+\qquad
+G^{(5)}(z)=\#\{\text{such triples with }z\in\tau\},
+\]
+and analogously $G_2^{(5)}(z,z')$ ($z,z'\in\tau$) and $H^{(5)}(z,z')$
+($z\in\tau$, $z'\in\eta$).
+
+\begin{lemma}[switch decomposition, fifth layer; exact]\label{lem:switchIE5}
+With $\Delta N^{(5)}=N^{(5)}(\sigma')-N^{(5)}(\sigma)$,
+\begin{align}
+\Delta N^{(5)}
+&=3\,\mathrm{Br}^{(5)}_G
++3\bigl[G_2^{(5)}(e_1,e_2)-G_2^{(5)}(d_1,d_2)\bigr]
++6\bigl[H^{(5)}(e_1,e_2)-H^{(5)}(d_1,d_2)\bigr],
+\label{eq:switchIE5}\\
+\mathrm{Br}^{(5)}_G&:=G^{(5)}(d_1)+G^{(5)}(d_2)-G^{(5)}(e_1)-G^{(5)}(e_2).
+\notag
+\end{align}
+\end{lemma}
+
+\begin{proof}
+As for Lemma~\ref{lem:switchIE}: inclusion--exclusion over the events
+$d_i\in\tau\cup\eta\cup\theta$, with $U(z)=3G^{(5)}(z)$ (choice of the
+row through $z$) and $U(z,z')=3G_2^{(5)}(z,z')+6H^{(5)}(z,z')$ (one row
+through both, or an ordered pair of distinct rows).  Verified by
+complete enumeration at $n=6$
+($\Delta N^{(5)}=192=288-24-72$) and $n=7$
+($13008=15384+2496-4872$); and at $n=8$ the pieces computed on $B_0$
+(\texttt{anatomy5.c}: $3\mathrm{Br}^{(5)}_G=2649312$,
+$3\,\Delta G_2^{(5)}=159840$, $6\,\Delta H^{(5)}=-596544$) sum to
+$2212608$, exactly the value of $\Delta N^{(5)}$ from the independent
+direct enumeration of $N^{(5)}$ (\texttt{n5\_direct2.c}); likewise at
+$n=9$: $1632687552+69975336-375847080=1326815808=\Delta N^{(5)}$.
+\end{proof}
+
+\begin{remark}[$\Psi$ acts diagonally]
+The involution $\Psi$ of Remark~\ref{rem:psi} preserves $A_0$ and
+disjointness, hence acts on triples coordinatewise; consequently
+$G^{(5)}(d_1)=G^{(5)}(d_2)$ \emph{exactly} (confirmed at $n=7,8,9$:
+e.g.\ $G^{(5)}(d_1)=G^{(5)}(d_2)=357845442448$ at $n=9$).
+\end{remark}
+
+\subsection{The stratified bracket; spectator factors}
+
+Expand $G^{(5)}(z)$ by Proposition~\ref{prop:tripleIE} on the board
+$B_0$ with the pin $z$ carried by $\tau$'s factor.  In the notation of
+\eqref{eq:tripleIEU} ($A$ = $\tau$'s constraint set, $B,C$ the other
+two),
+\begin{equation}\label{eq:BrG5strata}
+\mathrm{Br}^{(5)}_G=\sum_{A}\,B_A\,w(A),
+\qquad
+w(A):=\!\!\sum_{\substack{(M_1,M_2,M_3)\\ M_1\cup M_2=A}}\!\!
+(-1)^{|M_1|+|M_2|+|M_3|}R_0(B)\,R_0(C),
+\end{equation}
+where $B_A=\sum_{z\in\{d_1,d_2\}}R_0^\dagger(A\cup z)
+-\sum_{z\in\{e_1,e_2\}}R_0^\dagger(A\cup z)$ is \emph{the same}
+four-term bracket as in \eqref{eq:strata}, now indexed by $A$.  Two
+exact identities anchor \eqref{eq:BrG5strata}:
+\begin{itemize}[leftmargin=2em]
+\item[(i)] $\sum_A R_0(A)\,w(A)=N^{(5)}_0$ (the regrouped
+\eqref{eq:tripleIEU} on $B_0$);
+\item[(ii)] $w(\emptyset)=\sum_{M_3}(-1)^{|M_3|}R_0(M_3)^2=N^{(4)}_0$
+(the pair inclusion--exclusion on $B_0$), so the $A=\emptyset$ stratum
+equals $M_{n-4}\,N^{(4)}_0$ \emph{exactly} by
+Proposition~\ref{prop:S0}.
+\end{itemize}
+(Both identities verified exactly on $B_0$ at $n=6,7$;
+\texttt{switch5.py}, \texttt{check3}.)
+Since $B_A$ is unchanged, the entire bracket toolkit of
+Section~\ref{sec:switch} --- Lemma~\ref{lem:wronskian},
+Lemma~\ref{lem:valuation}, Lemma~\ref{lem:master},
+Proposition~\ref{prop:generic} --- applies verbatim in the $A$-slot.
+What is new is the weight: $R_0(M)$ is replaced by the spectator weight
+$w(A)$.  The transfer rests on two observations.
+
+\emph{First observation.}  Every cell of $A$ lies in $B$ or $C$
+(cells of $M_1$ lie in $B$, cells of $M_2$ in $C$).  Hence a line-swap
+pairing $\varphi$ moving a cell of $A$ (as in Lemma~\ref{lem:pairing}
+or Lemma~\ref{lem:colexchange}) moves the \emph{same} cell in exactly
+one spectator factor when the cell has a single label, and in both when
+it is shared; the third factor is untouched in the first case.  The
+pinned-factor equalities of the pairing lemmas --- which involve only
+$B_A$, through the deleted row- and column-\emph{sets} of the pinned
+counts --- are therefore untouched, while the free-factor difference
+becomes, by the product rule,
+\[
+R_0(B)R_0(C)-R_0(\varphi B)R_0(\varphi C)
+=\bigl[R_0(B)-R_0(\varphi B)\bigr]R_0(C)
++R_0(\varphi B)\bigl[R_0(C)-R_0(\varphi C)\bigr],
+\]
+each bracket a single line-swap difference controlled by
+Lemma~\ref{lem:wronskian} exactly as at the fourth layer, i.e.\ a
+relative $O(n^{-3})$ per factor.
+
+\emph{Second observation (spectator stability).}  The pairing must also
+re-index the spectator sum over $M_3$: an $M_3$ compatible with
+$(M_1,M_2)$ maps to one compatible with $\varphi(M_1,M_2)$ by the
+identity map except on the $O(1/n)$-measure set of $M_3$ meeting the
+two swapped lines, which is absorbed by (the $B_0$-analogue of)
+Lemma~\ref{lem:linemeasure} applied inside $w$.  Thus
+$|w(A)-w(\varphi A)|=O(n^{-1})\,\overline w(A)$ with
+$\overline w$ the unsigned weight, and the paired-class cancellations
+of Lemmas~\ref{lem:pairing}, \ref{lem:Hdiff}, \ref{lem:colexchange}
+and~\ref{lem:boundary} survive with the same $O(n^{-1})$ headroom.
+Finally, Lemma~\ref{lem:uniform} and Corollary~\ref{cor:moments}
+apply to $R_0(B)$, $R_0(C)$ individually (any max-degree-2 board), so
+the unsigned sums $\sum_A|B_A|\,\overline w(A)$ obey the same stratum
+bounds as at the fourth layer with $N_0^2$ replaced by an
+$N^{(5)}_0$-scale; the $G_2$- and $H$-differences of
+\eqref{eq:switchIE5} are handled by the same pairings with one or two
+pins carried by spectator slots.
+
+These two observations are the only new content; we record the outcome.
+
+\begin{theorem}[fifth layer]\label{thm:layer5}
+For $n\ge n_0$,
+\[
+\log\frac{N^{(5)}_n((2,n{-}2))}{N^{(5)}_n((n))}
+=3\,\frac{M_{n-4}}{M_n}+O(n^{-5}),
+\qquad\text{hence}\qquad
+r_5(n)=r_4(n)\bigl(1+O(n^{-1})\bigr)=r_3(n)\bigl(1+O(n^{-1})\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Run the proof of Theorem~\ref{thm:layer4} on \eqref{eq:switchIE5} and
+\eqref{eq:BrG5strata}, with Proposition~\ref{prop:generic} in the
+$A$-slot, weights $w(A)$ in place of $R_0(M)$, and the two observations
+above supplying the paired-class and unsigned-sum bounds; the generic
+strata resum, via identity (i), to
+$\mathrm{Br}^{(5)}_G=(M_{n-4}/M_n)\,N^{(5)}_0\bigl(1+O(1/n)\bigr)$, and
+the pin-pin differences of \eqref{eq:switchIE5} are
+$O\bigl(n^{-1}(M_{n-4}/M_n)N^{(5)}_0\bigr)$.  Then
+$N^{(5)}_0=N^{(5)}((n))(1+O(1/n))$ as before, giving
+$\Delta\log N^{(5)}=3M_{n-4}/M_n+O(n^{-5})$, and
+$r_5-r_3=\Delta\log N^{(5)}-\Delta\log N^{(4)}-\Delta\log N^{(3)}
+=O(n^{-5})$.
+\end{proof}
+
+\subsection{Exact fifth-layer data}
+
+Direct enumeration (64/128-bit cell masks; \texttt{n5\_direct.c},
+\texttt{n5\_direct2.c}) gives $N^{(5)}$ exactly at $n\le9$; the $N^{(3)}$
+and $N^{(4)}$ values reproduce the known exact tables, certifying the
+enumeration.
+
+\begin{center}
+\begin{tabular}{r|rr|rrr|rr}
+$n$ & $N^{(5)}((n))$ & $N^{(5)}((2,n{-}2))$ &
+$r_3(n)_4$ & $r_4(n)_4$ & $r_5(n)_4$ &
+$\frac{\Delta\log N^{(4)}}{2M_{n-4}/M_n}$ &
+$\frac{\Delta\log N^{(5)}}{3M_{n-4}/M_n}$\\\hline
+$6$ & $4032$ & $4224$ & $0$ & $2.454$ & $14.29$ & --- & ---\\
+$7$ & $2185152$ & $2198160$ & $1.450$ & $2.560$ & $0.976$ & $1.382$ & $1.146$\\
+$8$ & $1539331584$ & $1541544192$ & $0.709$ & $0.842$ & $0.862$ & $1.094$ & $1.134$\\
+$9$ & $1417404643008$ & $1418731458816$ & $0.906$ & $0.948$ & $0.976$ & $1.023$ & $1.041$\\
+\end{tabular}
+\end{center}
+
+\noindent Here $r_k(n)_4$ abbreviates $r_k\cdot n(n{-}1)(n{-}2)(n{-}3)$,
+and $r_k=\Delta_\lambda\log(N^{(k)}/N^{(k-1)})$.  At $n=8,9$:
+$r_5/r_4=1.023$, $1.030$ --- the fifth-layer effect tracks the fourth
+to $3\%$ already at $n=9$ (small $n=6,7$ are off-trend, as for every
+other layer statistic).  On the anatomy side,
+$\mathrm{Br}^{(5)}_G=5128$, $883104$, $544229184$ at $n=7,8,9$ with
+$\mathrm{Br}^{(5)}_G N_0/(M_{n-4}N^{(5)}_0)=0.612$, $0.696$, $0.722$,
+consistent with a $1-c/n$ approach with $c\approx2.5$ ---
+about twice the fourth-layer constant $c\approx1.17$, as the two
+spectator rows suggest.
+
+\begin{remark}[all types at once]\label{rem:alltypes}
+The direct enumeration is cheap enough at $n\le8$ to cover \emph{every}
+derangement type (\texttt{n5\_types.c}).  Writing
+$\Delta_\lambda=\log N^{(k)}(\lambda)-\log N^{(k)}((n))$, the exact
+$n=8$ data are:
+\begin{center}
+\begin{tabular}{l|rrr|cc}
+$\lambda$ & $\Delta_\lambda\log N^{(3)}$ & $\Delta_\lambda\log N^{(4)}$
+& $\Delta_\lambda\log N^{(5)}$ &
+$\frac{\Delta\log N^{(4)}}{2\Delta\log N^{(3)}}$ &
+$\frac{\Delta\log N^{(5)}}{3\Delta\log N^{(3)}}$\\\hline
+$(2,6)$ & $+4.220\cdot10^{-4}$ & $+9.234\cdot10^{-4}$ & $+1.436\cdot10^{-3}$ & $1.094$ & $1.134$\\
+$(3,5)$ & $0$ & $-6.95\cdot10^{-5}$ & $-2.14\cdot10^{-4}$ & --- & ---\\
+$(4,4)$ & $+4.220\cdot10^{-4}$ & $+8.570\cdot10^{-4}$ & $+1.314\cdot10^{-3}$ & $1.015$ & $1.038$\\
+$(2,2,4)$ & $+1.266\cdot10^{-3}$ & $+2.714\cdot10^{-3}$ & $+4.213\cdot10^{-3}$ & $1.072$ & $1.110$\\
+$(2,3,3)$ & $+4.220\cdot10^{-4}$ & $+7.865\cdot10^{-4}$ & $+1.022\cdot10^{-3}$ & $0.932$ & $0.807$\\
+$(2,2,2,2)$ & $+2.951\cdot10^{-3}$ & $+6.384\cdot10^{-3}$ & $+1.006\cdot10^{-2}$ & $1.082$ & $1.136$\\
+\end{tabular}
+\end{center}
+Three reads.  (i) \emph{Uniformity over types}: every $2$-cycle-bearing
+type shows the same finite-$n$ factor $\approx1.09$ (layer 4) and
+$\approx1.11\text{--}1.14$ (layer 5) as the adjacent pair
+$(2,6)$ vs.\ $(8)$, with an $O(1/n)$-size spread --- the per-type version
+of Theorems~\ref{thm:layer4}--\ref{thm:layer5}.  (ii) \emph{The
+$M_{n-2\ell}$ pattern}: a $3$-cycle has $M_{n-6}=M_2=0$, and indeed its
+layer-4,5 effects are not zero but an order smaller (and negative) than
+the $2$-cycle effects.  (iii) \emph{The $M_0=2$ convention}: for
+$\lambda=(4,4)$ the leading bracket is $M_{n-2\ell}=M_0=2$, the same
+value as the $2$-cycle's $M_4=2$ at $n=8$ --- and indeed $(4,4)$ tracks
+$(2,6)$ closely at layers 3, 4 \emph{and} 5, a three-layer confirmation
+of the convention entering Lemma~\ref{lem:fusionexp}.  The deviation of
+$(2,3,3)$ is itself structured: its layer-4 effect equals
+$\Delta\log N^{(4)}(2,6)+2\,\Delta\log N^{(4)}(3,5)$ to $2\cdot10^{-6}$
+($0.3\%$ of its value; $1.3\cdot10^{-5}$, i.e.\ $1.3\%$, at layer 5) ---
+additivity over cycles at the fourth and fifth layers, within the
+accuracy that the neglected $\ell\ge5$ cycle terms allow one to test at
+a single $n$.
+\end{remark}
+
+\begin{remark}[general $k$; the profile at the origin]\label{rem:layerk}
+By induction on $k$, the identical transfer (a $(k{-}2)$-tuple
+inclusion--exclusion; one more spectator factor per layer) gives, for
+each \emph{fixed} $k$,
+\[
+\Delta_\lambda\log N^{(k)}=(k-2)\,\frac{M_{n-4}}{M_n}+O_k(n^{-5}),
+\qquad
+r_k(n)=r_3(n)\bigl(1+O_k(1/n)\bigr),
+\]
+with constants growing with $k$ (each spectator contributes its own
+$O(1/n)$ bookkeeping).  In the language of the layer profile
+$\gamma$ of Section~\ref{sec:layers}, $\gamma$ is flat at the origin:
+every fixed layer contributes the same $(1+o(1))\,M_{n-4}/M_n$ per
+$2$-cycle.  The uniformity in $k$ needed for the bulk of the profile
+(layers $k\asymp tn$) remains the province of the cluster expansion
+(TODO~4): there the boards are no longer two paths and the calculus
+here does not apply.
+\end{remark}
+
+
+%======================================================================
+\section{Three-row rectangles: exact moments and a joint Poisson limit}\label{sec:threerow}
+
+The same calculus resolves the ``cycle-type-refined $K(3,n)$'' question at
+the level of $2$-cycles.  Let $R$ be a uniform $3\times n$ Latin rectangle
+and let $X_{12},X_{13},X_{23}$ be the numbers of intercalates between the
+three pairs of rows (equivalently, the $2$-cycle counts of the three row
+permutations $\sigma_{ab}$).
+
+\begin{lemma}[exchangeability]\label{lem:exch}
+$(X_{12},X_{13},X_{23})$ is exchangeable under the full symmetric group on
+the three pair labels.
+\end{lemma}
+
+\begin{proof}
+Permuting the rows of a rectangle is a bijection of rectangles and induces
+the corresponding permutation of the three unordered pairs.
+\end{proof}
+
+\begin{theorem}[joint Poisson limit]\label{thm:poisson}
+For each fixed $(a,b,c)$,
+\[
+\E\bigl[(X_{12})_a\,(X_{13})_b\,(X_{23})_c\bigr]
+=\Bigl(\frac12\Bigr)^{a+b+c}\bigl(1+O_{a,b,c}(n^{-1})\bigr),
+\]
+so $(X_{12},X_{13},X_{23})$ converges jointly to three independent
+$\mathrm{Poisson}(1/2)$ variables.
+\end{theorem}
+
+The proof rests on two uniform estimates, both immediate from
+Lemma~\ref{lem:uniform}, whose Bonferroni proof applies verbatim to any
+board of maximum degree $2$ (unions of paths \emph{and cycles}).
+
+\begin{lemma}[uniform third-row estimates]\label{lem:thirdunif}
+Uniformly over derangement types, $N^{(3)}(\sigma)=n!\,e^{-2}(1+O(1/n))$;
+and for every partial matching $M$ avoiding $B_2(\sigma)$ with
+$|M|=j\le n/2$,
+\[
+R(M;\sigma)=(n-j)!\,e^{-E_M/(n-j)}\bigl(1+O(\tfrac1{n-j})\bigr)
+=(n-j)!\,e^{-2}\bigl(1+O(\tfrac{j+1}{n})\bigr),
+\]
+where $E_M\in[2n-4j,2n-2j]$ is the number of cells of the punctured
+board.  In particular
+$q(M):=R(M;\sigma)/N^{(3)}(\sigma)\le C\,e^{6j/n}/(n)_j$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem~\ref{thm:poisson}]
+Normalise the first row to $\mathrm{id}$; the uniform measure is then
+uniform over pairs $(\sigma,\tau)$ with $\sigma\in\DD_n$ and $\tau$
+avoiding $B_2(\sigma)$, and $X_{12}=\lambda_2(\sigma)$,
+$X_{13}=\lambda_2(\tau)$, $X_{23}=\lambda_2(\tau\sigma^{-1})$.  Since
+distinct $2$-cycles of a permutation are disjoint,
+\[
+\E\bigl[(X_{12})_a(X_{13})_b(X_{23})_c\bigr]
+=\sum_{(A,B,C)}\Pr\bigl(A\subseteq\mathrm{cyc}_2(\sigma),\
+B\subseteq\mathrm{cyc}_2(\tau),\ C\subseteq\mathrm{cyc}_2(\tau\sigma^{-1})\bigr),
+\]
+the sum over ordered tuples $A$ of $a$ pairwise disjoint $2$-sets, and
+similarly $B$ ($b$ sets) and $C$ ($c$ sets).  A $2$-cycle $\{u,v\}$ of
+$\tau\sigma^{-1}$ prescribes the $\tau$-cells
+$(\sigma^{-1}(u),v),(\sigma^{-1}(v),u)$; a $2$-cycle $\{i,j\}$ of $\tau$
+prescribes $(i,j),(j,i)$.
+
+\emph{Generic configurations.}  Call $(A,B,C)$ generic if the
+$2(a+b+c)$ indices appearing in $A\cup B\cup C$ are pairwise distinct.
+There are $\binom n2^{a+b+c}(1+O_{a,b,c}(1/n))$ generic tuples.  Fix one.
+First, $\Pr(A\subseteq\mathrm{cyc}_2(\sigma))=D_{n-2a}/D_n
+=(n)_{2a}^{-1}(1+O(1/(n-2a)!))$.  Conditionally on
+$\{A\subseteq\mathrm{cyc}_2(\sigma)\}$, the derangement $\sigma$
+restricted to the complement of the support of $A$ is uniform; the
+$B$- and $C$-prescriptions form a matching $M(\sigma)$ of exactly
+$2(b+c)$ $\tau$-cells avoiding $B_2(\sigma)$ \emph{unless} $\sigma$
+satisfies one of $O_{b,c}(1)$ degeneracy events, each of conditional
+probability $O(1/n)$: a prescribed cell may land on $B_2(\sigma)$
+(e.g.\ $\sigma(i)=j$ for a $B$-pair $\{i,j\}$, or $v=\sigma^{-1}(u)$ for
+a $C$-pair), or two prescriptions may conflict in a row or column
+(e.g.\ $\sigma^{-1}(u)$ in the support of $B$); for a generic tuple all
+index slots are distinct, so no two prescribed cells can \emph{coincide},
+and on every degeneracy event the prescriptions are inconsistent,
+$q=0$.  Off these events, Lemma~\ref{lem:thirdunif} gives
+$\Pr(\tau\supseteq M(\sigma)\mid\sigma)=q(M(\sigma))
+=(n)_{2(b+c)}^{-1}(1+O(1/n))$.  Hence each generic tuple contributes
+$(n)_{2a}^{-1}(n)_{2(b+c)}^{-1}(1+O_{a,b,c}(1/n))$, and the generic sum
+is $\binom n2^{a+b+c}(n)_{2a}^{-1}(n)_{2(b+c)}^{-1}(1+O(1/n))
+=2^{-(a+b+c)}(1+O_{a,b,c}(1/n))$.
+
+\emph{Collision configurations.}  The remaining tuples are classified by
+their collision pattern: which equalities hold among the $2(a+b+c)$
+index slots --- finitely many patterns for fixed $(a,b,c)$.  A pattern
+with $s\ge1$ independent equalities has $O(n^{2(a+b+c)-s})$ tuples, so it
+suffices to show that the per-tuple contribution is
+$O(n^{-2(a+b+c)}\cdot n^{\,s-1})$.  Bound it as follows:
+$\Pr(A\subseteq\mathrm{cyc}_2(\sigma))\le C n^{-2a}$; conditionally on
+$\sigma$, if the prescriptions are consistent they determine a matching
+of $2(b+c)-t$ cells, where $t$ counts coincidences among prescribed
+cells, and Lemma~\ref{lem:thirdunif} gives
+$q\le Cn^{-2(b+c)+t}$.  Two $B$-cells, or two $C$-cells, never coincide
+(the pairs within $B$, within $C$, are disjoint); a coincidence of the
+$B$-cell $(i,j)$ with the $C$-cell $(\sigma^{-1}(u),v)$ requires the
+index equality $v=j$ (counted in $s$) \emph{and} the $\sigma$-equation
+$u=\sigma(i)$, of conditional probability $O(1/n)$; and $t$ such
+coincidences involve $t$ distinct such $\sigma$-equations, of joint
+probability $O(n^{-t})$.  (A full coincidence of a $B$-pair with a
+$C$-pair is impossible: it would force $\sigma(i)=i$.)  Hence the
+per-tuple bound is $Cn^{-2a}\cdot n^{-t}\cdot n^{-2(b+c)+t}
+=Cn^{-2(a+b+c)}$, which beats the required bound by $n^{s-1}\ge1$
+--- with room to spare unless $s=1$, where it is exactly what is needed.
+
+Summing, $\E[(X_{12})_a(X_{13})_b(X_{23})_c]
+=2^{-(a+b+c)}(1+O_{a,b,c}(1/n))$, and the joint Poisson limit follows by
+the method of moments.
+\end{proof}
+
+The toolkit computes the low joint moments \emph{exactly} (certified against
+brute-force enumeration at $n=7$):
+
+\begin{center}
+\small
+\begin{tabular}{c c c c c c}
+\toprule
+$n$ & $\E X_{12}-\tfrac12$ & ratio to $\dfrac{M_{n-4}}{2M_n}$ &
+$\E[X_{12}X_{13}]$ & $n^2\operatorname{Cov}(X_{12},X_{13})$ &
+$\E\binom{X_{13}}2$\\
+\midrule
+8  & $+5.162\times10^{-4}$ & $2.45$ & $0.26230$ & $0.754$ & $0.12761$\\
+9  & $+1.143\times10^{-4}$ & $0.76$ & $0.25873$ & $0.698$ & $0.12466$\\
+10 & $+9.467\times10^{-5}$ & $1.041$ & $0.25689$ & $0.679$ & $0.12511$\\
+11 & $+5.886\times10^{-5}$ & $0.9944$ & $0.25552$ & $0.661$ & $0.12502$\\
+12 & $+4.005\times10^{-5}$ & $1.0010$ & $0.25453$ & $0.646$ & $0.12502$\\
+13 & $+2.797\times10^{-5}$ & $1.0000$ & $0.25378$ & $0.633$ & $0.12501$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+(All three $\E X_{ab}$ agree exactly, as do the three mixed products ---
+Lemma~\ref{lem:exch} at the level of exact rationals.)  Two structural
+features deserve note.
+
+The next two statements need a quantitative form of the fusion
+expansion of $N^{(3)}$, of independent interest: it proves the
+additivity of $\log N^{(3)}$ over cycles (\S\ref{sec:thirdrow}) with an
+explicit second-order remainder.
+
+\begin{lemma}[fusion expansion with remainder]\label{lem:fusionexp}
+There are $n_0,C$ such that for all $n\ge n_0$ and every derangement
+type $\lambda\vdash n$ with $\kappa=\kappa(\lambda)$ parts,
+\[
+N^{(3)}(\lambda)\;=\;M_n+\sum_{\ell\ge2}\lambda_\ell\,M_{n-2\ell}
++E(\lambda),\qquad |E(\lambda)|\;\le\;C\,\kappa^2\,(n-8)!\,,
+\]
+with the conventions $M_0=2$, $M_1=-1$ (the IE values
+$\langle M_{C_{2m}}\rangle_m$) and $M_m=0$ for $m<0$.  Exhaustive
+computation over all types gives
+$\max_\lambda|E(\lambda)|/(\kappa^2(n-8)!)\approx0.06$ at $n=12,16,20$,
+and $E(\lambda)\ge0$ except for the single type $(\tfrac n2,\tfrac n2)$,
+where $E=-2$.
+\end{lemma}
+
+\begin{proof}
+Induction on $\kappa$; the case $\kappa=1$ is trivial ($E=0$).  For
+$\kappa\ge2$ pick two parts as follows: two equal parts $b=a$ if any
+exist, otherwise the smallest and the largest, $b<a$ (then $a-b\ge2$
+unless $\kappa=2$ and $\lambda=(m,m+1)$, a single boundary case computed
+directly from $M_{C_2}=1+2x$: there
+$N^{(3)}=M_n+\langle x^{2m}(1+2x)\rangle_n=M_n-1$ and $E=0$ under the
+stated conventions).  Theorem~\ref{thm:thirdrow} gives
+$N^{(3)}(\lambda)=N^{(3)}(\mu)+N^{(3)}_{n-2b}(\nu)$, where $\mu$
+replaces $\{a,b\}$ by $a+b$ and $\nu$ (on $n-2b$ points) replaces them
+by $a-b$ (for $a=b$: $2N^{(3)}_{n-2b}(\lambda\smallsetminus\{a,b\})$,
+same bookkeeping).  Apply the induction hypothesis to both terms.  In
+the sum, the first-order terms reassemble as
+$\sum_\ell\lambda_\ell M_{n-2\ell}$ \emph{plus} the correction terms
+\[
+M_{n-2(a+b)}\;+\;\sum_{\ell\text{-parts of }\nu\smallsetminus\{a-b\}}
+M_{(n-2b)-2\ell}\;\le\;M_{n-8}+\kappa\,M_{n-8}
+\]
+(each index is at most $n-8$ because $a,b,\ell\ge2$), the term
+$M_{(n-2b)-2(a-b)}=M_{n-2a}$ cancelling the deficit of $\mu$'s
+first-order sum.  Hence
+$|E(\lambda)|\le|E(\mu)|+|E(\nu)|+C'(\kappa+1)(n-8)!
+\le C(\kappa-1)^2(n-8)!+C\kappa^2(n-2b-8)!+C'(\kappa+1)(n-8)!$,
+and since $(n-2b-8)!\le(n-12)!\le(n-8)!/n^3$, the right side is at most
+$C\kappa^2(n-8)!$ once $C\ge2C'$ and $n\ge n_0$.
+\end{proof}
+
+We also record the standard moment computation for derangement cycle
+counts: for $s_\ell\ge0$ with $m=\sum_\ell\ell s_\ell\le n/2$,
+\begin{equation}\label{eq:derangemoments}
+\E_{Q_n}\Bigl[\prod_\ell(\lambda_\ell)_{s_\ell}\Bigr]
+=\prod_\ell\ell^{-s_\ell}\cdot\frac{(n)_m D_{n-m}}{D_n}
+=\prod_\ell\ell^{-s_\ell}\,\Bigl(1+O\bigl(\tfrac1{(n-m)!}\bigr)\Bigr),
+\end{equation}
+by counting derangements with an ordered tuple of marked cycles.
+
+\begin{proposition}[the third row tilts the second]\label{prop:tilt}
+$\displaystyle
+\E[X_{12}]-\tfrac12=\frac{M_{n-4}}{2M_n}\,\bigl(1+O(n^{-2})\bigr).$
+\end{proposition}
+
+\begin{proof}
+$X_{12}=\lambda_2(\sigma)$ where $\Pr(\sigma)\propto N^{(3)}(\sigma)$ on
+$\DD_n$, so with $w(\lambda)=N^{(3)}(\lambda)/M_n$ and $\E_Q$ the
+uniform-derangement mean,
+\[
+\E[X_{12}]-\E_Q[\lambda_2]
+=\frac{\operatorname{Cov}_Q(\lambda_2,w)}{\E_Q[w]} .
+\]
+By Lemma~\ref{lem:fusionexp}, $w=1+\sum_\ell\rho_\ell\lambda_\ell+
+E(\lambda)/M_n$ with $\rho_\ell=M_{n-2\ell}/M_n$.  By
+\eqref{eq:derangemoments}, $\operatorname{Var}_Q(\lambda_2)=\tfrac12+
+O(1/(n-4)!)$ and $\operatorname{Cov}_Q(\lambda_2,\lambda_\ell)=
+O(1/(n-2-\ell)!)$ for $\ell\ge3$ (both are differences of products of
+factorial moments, and the Poisson values cancel exactly).  For the
+remainder, $\kappa\le n/2$ gives the crude bound
+$|\operatorname{Cov}_Q(\lambda_2,E/M_n)|\le C n^2(n-8)!/M_n=O(n^{-6})$.
+Hence
+\[
+\operatorname{Cov}_Q(\lambda_2,w)=\rho_2\cdot\tfrac12+O(n^{-6}),
+\qquad
+\E_Q[w]=1+O(n^{-4}),
+\]
+and $\E_Q[\lambda_2]=\tfrac12+O(1/(n-2)!)$ by
+\eqref{eq:derangemoments}; assembling,
+$\E[X_{12}]-\tfrac12=\tfrac12\rho_2(1+O(n^{-2}))$, as claimed (the
+$O(n^{-2})$ is dominated by $O(n^{-6})/\rho_2$).
+The exact table above confirms the formula to $10^{-4}$ relative by
+$n=13$ --- a sharp quantitative cross-check of the layer framework:
+\emph{conditioning on one extra row tilts the second row's $2$-cycle
+count by exactly the layer-3 coefficient times the variance}.
+\end{proof}
+
+\begin{proposition}[pair--pair covariance]\label{prop:cov}
+$\displaystyle \operatorname{Cov}(X_{12},X_{13})
+=\frac{1/2+O(n^{-1}\log n)}{n^{2}}\;>0 .$
+\end{proposition}
+
+\begin{proof}
+Write $h(\sigma)=\E[X_{13}\mid\sigma]=\sum_{\{i,j\}\,\mathrm{adm}}
+q_{ij}(\sigma)$, where $q_{ij}=R(M_{ij};\sigma)/N^{(3)}(\sigma)$,
+$M_{ij}=\{(i,j),(j,i)\}$, and the sum runs over the \emph{admissible}
+pairs (both cells off $B_2(\sigma)$); their number is
+$\binom n2-n+\lambda_2(\sigma)$ exactly (the excluded pairs are the
+$\{i,\sigma(i)\}$, of which $\lambda_2$ coincide in pairs).  A $2$-cycle
+$\{i,j\}$ of $\sigma$ thus makes $\{i,j\}$ doubly forbidden but
+\emph{frees} the two pairs that $i$ and $j$ would otherwise each
+exclude.  Split
+\[
+h(\sigma)=\bigl[\tbinom n2-n+\lambda_2(\sigma)\bigr]\,(n)_2^{-1}
++\Delta(\sigma),\qquad
+\Delta(\sigma)=\sum_{\mathrm{adm}}\bigl[q_{ij}(\sigma)-(n)_2^{-1}\bigr],
+\]
+so that, under the $N^{(3)}$-tilted measure of the three-row ensemble,
+\[
+\operatorname{Cov}(X_{12},X_{13})
+=(n)_2^{-1}\operatorname{Var}(\lambda_2)
++\operatorname{Cov}(\lambda_2,\Delta).
+\]
+As in Proposition~\ref{prop:tilt} (second factorial moments via
+Lemma~\ref{lem:fusionexp} and \eqref{eq:derangemoments}),
+$\operatorname{Var}(\lambda_2)=\tfrac12+O(n^{-2})$.
+
+$\Delta(\sigma)$ depends only on the cycle type, and we claim the
+\emph{join-stability} bound: for types $\lambda,\mu$ one join apart,
+$|\Delta(\lambda)-\Delta(\mu)|\le Cn^{-3}$.  Choose adjacent
+representatives as in \S\ref{sec:switch} (boards differing in one
+$2\times2$ switch).  For each admissible pair,
+$R(M_{ij};\sigma')-R(M_{ij};\sigma)$ equals the four-term bracket
+$\mathrm{Br}(M_{ij})$ of \S\ref{sec:switch} (the double-pin terms cancel
+as identical punctured boards, and if $M_{ij}$ meets a pinned line the
+bracket degenerates to the compatible terms).  By
+Lemmas~\ref{lem:valuation} and~\ref{lem:master}: for the
+$O(n^2)$ pairs avoiding the switch window the bracket is $x^3$-shifted
+and pinned, giving relative differences $O(n^{-4})$; for the $O(n)$
+pairs meeting one window line, valuation $\ge2$ gives $O(n^{-3})$; for
+the $O(1)$ pairs meeting two pinned lines the crude one-term bound gives
+$O(n^{-1})$.  Together with the $N^{(3)}$-normalisation
+($\Delta_\lambda\log N^{(3)}=O(n^{-4})$) and the $O(1)$ pairs entering
+or leaving the admissible set (each contributing
+$q-(n)_2^{-1}=O(n^{-3})$), this sums to
+$|\Delta(\lambda)-\Delta(\mu)|\le C(n^2\cdot n^{-4}+n\cdot n^{-3}+1\cdot
+n^{-1})\cdot(n)_2^{-1}+O(n^{-4})\le Cn^{-3}$.
+
+Any type with $\kappa$ parts is $\kappa-1$ joins from $(n)$, so
+$|\Delta(\lambda)-\Delta((n))|\le C\kappa n^{-3}$, and since the tilted
+density is bounded, $\E[\kappa^2]\le C\log^2 n$; Cauchy--Schwarz gives
+$|\operatorname{Cov}(\lambda_2,\Delta)|\le Cn^{-3}\log n$.  Assembling,
+$\operatorname{Cov}(X_{12},X_{13})=\tfrac12(n)_2^{-1}(1+O(n^{-1}\log n))$.
+The exact values $n^2\mathrm{Cov}=0.661,\,0.646,\,0.633$ at $n=11,12,13$
+extrapolate to $\approx0.48+2.0/n$, consistent with the constant
+$\tfrac12$ at these small orders.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:poisson} is the $k=3$ instance of the expectation that
+intercalate structure across any $O(1)$ rows is asymptotically that of an
+independent model; it may be seen as the (easy) rectangle-regime companion
+of the full-square intercalate results of \cite{KSSS22}.  We have not found
+it stated in the literature; the classical aggregate $K(3,n)$ theory
+(\cite[Ch.~8 \S4]{Riordan58}) does not resolve joint pair statistics.
+\end{remark}
+
+
+%======================================================================
+\section{An exact switching identity and the B-pair reformulation}\label{sec:identity}
+
+The switchings of \cite{CGW08} do more than bound ratios: their multigraph
+is exactly balanced on one side, and this yields an \emph{identity}.  We
+briefly recall the notions (see \cite[\S2--3]{CGW08} for details).
+
+Fix a Latin square $L$ (of order $n$; we take the CGW parameters $m=n$,
+$F=\emptyset$).  The first two rows decompose into \emph{row cycles}
+(corresponding to the cycles of $\sigma_{1,2}$).  For two columns $j\ne j'$
+with $j'\notin\{\omega(j),\omega^{-1}(j)\}$ --- where $\omega$ is the column
+map defined by $L(1,\omega(j))=L(2,j)$ --- the pair $\{j,j'\}$ is an
+\emph{$A$-pair} if rows $1,2$ lie in different column cycles of the column
+pair, and a \emph{$B$-pair} otherwise.  The \emph{switch} of $L$ at
+$\{j,j'\}$ trades the row cycle (among the two through $j,j'$) containing
+the minimal symbol; the \emph{flip} at an $A$-pair $\{j,j'\}$ whose columns
+lie in different row cycles of lengths $\alpha,\beta$ trades the column
+cycle of $\{j,j'\}$ through row 2, and joins the two row cycles into one of
+length $\alpha+\beta$.
+
+Let $\mu\vdash n$ contain parts $\alpha\neq\beta$ ($\alpha,\beta\ge2$) and
+let $\lambda$ be $\mu$ with $\alpha,\beta$ merged into $\alpha+\beta$.  Let
+$L$ be uniform on $S(\mu)=\{L:\ \sigma_{1,2}(L)\text{ has type }\mu\}$,
+pick an $\alpha$-cycle and a $\beta$-cycle of $L$ uniformly, and columns
+$j,j'$ uniformly in them.  Perform the CGW joining step:
+if $\{j,j'\}$ is a $B$-pair, switch at $\{j,j'\}$ (making it an $A$-pair);
+then flip at $\{j,j'\}$, obtaining $L'\in S(\lambda)$ in which $\{j,j'\}$
+lies in a single $(\alpha+\beta)$-cycle with
+$(\omega')^{\beta}(j)=j'$, where $\omega'=\omega_{L'}$.  Define the two
+\emph{post-flip events}
+\[
+B_1=\bigl\{\{\omega'^{-1}(j),\omega'^{-1}(j')\}\text{ is a $B$-pair of
+}L'\bigr\},
+\qquad
+B_2=\bigl\{\{\omega'(j),\omega'(j')\}\text{ is a $B$-pair of }L'\bigr\},
+\]
+(the shifted pairs are automatically admissible when $\alpha\ne\beta$), and
+put $\bar q=\bar q(\mu\to\lambda)=\Pr(B_1)+\Pr(B_2)\in[0,2]$.
+
+\begin{theorem}[exact identity; $\alpha\ne\beta$]\label{thm:identity}
+With the notation above,
+\[
+\frac{|S(\lambda)|}{|S(\mu)|}
+=\frac{\gamma(\lambda)}{\gamma(\mu)}\cdot\frac{1+\bar q}{2},
+\qquad\text{equivalently}\qquad
+\boxed{\;\bar q \;=\; 2\,\frac{\CC_n(\lambda)}{\CC_n(\mu)}\;-\;1.\;}
+\]
+\end{theorem}
+
+\begin{proof}[Proof (source and verification)]
+This is the exact content of the CGW splitting/joining multigraph
+$G_S=G_J$ \cite[\S3]{CGW08}: the splitting side is \emph{regular} --- every
+$L'\in S(\lambda)$ produces exactly two edges for each of its
+$\lambda_{\alpha+\beta}$ cycles of length $\alpha+\beta$ and each of the
+$\alpha+\beta$ column pairs at $\omega$-distance $\beta$ within the cycle
+(\cite[Eq.~(2)]{CGW08}) --- while the joining side produces, for each of the
+$\mu_\alpha\mu_\beta\alpha\beta$ instances, $1+\mathbf 1_{B_1}+\mathbf
+1_{B_2}$ edges.  Equating the edge counts and using
+$\gamma(\lambda)/\gamma(\mu)=
+\mu_\alpha\mu_\beta\alpha\beta/((\mu_{\alpha+\beta}+1)(\alpha+\beta))$ gives
+the identity.  Because the bookkeeping is delicate, we certified the exact
+statement independently: by \emph{complete enumeration} of all Latin squares
+of orders $n=5$ ($\mu=(2,3)$: both sides equal $2$) and $n=6$
+($\mu=(2,4)$: both sides equal $10/11$, from $3{,}041{,}280$ instances), and
+statistically at $n=8$ (\S\ref{sec:numerics}).  The min-symbol tie-break in
+the switch is averaged over symbol relabellings, which is the invariant
+formulation of the CGW rule.
+\end{proof}
+
+\begin{remark}[the case $\alpha=\beta$]\label{rem:albe}
+For $\alpha=\beta=2$ the two shifted pairs coincide and, with the event
+counted twice, the identity again holds exactly (verified at $n=6$,
+$\mu=(2,2,2)$: both sides $4/7$).  For $\alpha=\beta\ge3$ our reading of the
+joining bookkeeping does \emph{not} reproduce the splitting count (at $n=6$,
+$\mu=(3,3)$: joining average $5/6$ against the required $3/4$), so the exact
+identity in that case needs a corrected accounting; we do not use it ---
+see the routing argument in \S\ref{sec:reduction}.  (The CGW
+\emph{inequalities} are unaffected.)
+\end{remark}
+
+\begin{lemma}[symmetry of the two events]\label{lem:involution}
+$\Pr(B_1)=\Pr(B_2)$ exactly, for every $n,\mu,\alpha,\beta$.  Hence
+$\Pr(B_i)=\bar q/2 = \CC_n(\lambda)/\CC_n(\mu)-\tfrac12$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The involution $\iota$ that transposes rows $1$ and $2$ preserves $S(\mu)$
+and the instance measure (it fixes the row-cycle column sets, the $A/B$
+status of every pair, and the min-symbol rule, and conjugates
+$\omega\mapsto\omega^{-1}$), and it exchanges the two shifted pairs, mapping
+the event $B_1$ for the instance of $L$ onto the event $B_2$ for the
+corresponding instance of $\iota(L)$.  We verified the exchange
+\emph{instance-by-instance} over $7{,}000$ instances at $n=6$ (both $A$- and
+$B$-instances, both switch variants); the exact equalities
+$\Pr(B_1)=\Pr(B_2)=5/11,\,5/12,\,2/7$ in the three $n=6$ enumerations confirm
+it in aggregate.  A self-contained algebraic proof (chasing $\iota$ through
+the flip, whose defining column cycle is the one through row 2) is routine
+but fiddly; we record it as such.
+\end{proof}
+
+Theorem~\ref{thm:identity} converts the CGW exact tables into exact values
+of a structural probability of random Latin squares.  For the join
+$(2,n-2)\to(n)$:
+\[
+\begin{array}{l|lllll}
+n & 7 & 8 & 9 & 10 & 11\\\hline
+\bar q = 2\CC_n((n))/\CC_n((2,n-2))-1
+& 0.988372 & 0.993345 & 0.996822 & 0.997363 & 0.998080\\
+\tfrac12(1-\bar q)\,n^{3} & 1.99 & 1.70 & 1.16 & 1.32 & 1.28
+\end{array}
+\]
+Thus each post-flip event has probability
+$\tfrac12-\Theta(n^{-3})$: the deficit is precisely the refined-law
+coefficient.  By contrast a \emph{generic} admissible column pair is a
+$B$-pair with probability $\tfrac12+\Theta(n^{-2})$
+(\S\ref{sec:numerics}), and two marked points of a uniform random
+derangement lie in a common cycle with probability
+$\tfrac12+(1+o(1))/n$.  The post-flip pairs are extraordinarily well
+balanced, and this balance \emph{is} the conjecture:
+
+\begin{hypothesis}[B-pair equidistribution, $\mathrm{EQ}(\delta)$]\label{hyp:eq}
+For every pair $\mu\to\lambda$ as above with $\alpha\neq\beta$,
+$\bigl|\bar q(\mu\to\lambda)-1\bigr|\le\delta(n)$.
+\end{hypothesis}
+
+By Theorem~\ref{thm:identity}, $\mathrm{EQ}(\delta)$ with
+$\delta(n)=O(n^{-3+\varepsilon})$ is \emph{equivalent} to the corresponding
+precision in Conjecture~\ref{conj:refined} across $\alpha\neq\beta$ joins;
+$\mathrm{EQ}(o(1/\log n))$ already implies the weak conjecture
+(\S\ref{sec:reduction}).  In \S\ref{sec:marked} we prove an identity
+that removes the joining measure and the events $B_1,B_2$ from this
+picture entirely.
+
+\input{section_marked}
+
+%======================================================================
+\section{A reduction theorem}\label{sec:reduction}
+
+\begin{theorem}\label{thm:reduction}
+Assume $\mathrm{EQ}(\delta)$ with $\delta=\delta(n)\to0$.
+Then
+\[
+\dtv(\PP_n,\QQ_n)\;=\;O\bigl(\delta\,\log n\;+\;n^{-2/3}\bigr).
+\]
+In particular $\mathrm{EQ}(o(1/\log n))$ implies
+Conjecture~\ref{conj:cgw}, hence also that almost all loops have
+multiplication group $S_n$ and trivial character theory.
+\end{theorem}
+
+\begin{proof}
+Call $\lambda$ \emph{plain} if not all its parts are equal (so the only
+non-plain types are $(\ell^{\kappa})$, $\kappa\ge2$).
+
+\emph{Routing.}  Every plain $\lambda$ with $\kappa=\kappa(\lambda)$ parts is
+reachable from $(n)$ by a chain of $\kappa-1$ splits, each with
+$\alpha\ne\beta$.  Build the chain in reverse, splitting parts of $\lambda$
+off a shrinking residual, in a suitable order; a collision means splitting a
+part $p$ off a residual $R$ with $p=R-p$.  If the two largest parts of
+$\lambda$ are unequal, split smallest-first and let them be the final pair:
+while at least three parts remain, the split-off minimum $p$ satisfies
+$R-p\ge2p>p$ (all parts are $\ge2$ and at least two other parts remain), so
+no collision occurs, and the final split is unequal by hypothesis.  If
+instead the two largest parts are equal, say to $\ell_{\max}$, then
+$\ell_{\max}\neq n/2$ (else $\lambda=(n/2,n/2)$ is not plain), so we may
+split one copy of $\ell_{\max}$ off first without collision, then proceed
+smallest-first among the remaining parts, reserving for the final split the
+pair $(b,\ell_{\max})$ where $b<\ell_{\max}$ is the smallest part: at every
+intermediate step the residual minus the split-off minimum still contains
+the reserved $\ell_{\max}$, hence exceeds the minimum, and the final split
+is unequal.
+
+For each step of such a chain, Theorem~\ref{thm:identity} and
+$\mathrm{EQ}(\delta)$ give
+$|S(p_{i+1})|/|S(p_i)|=(\gamma(p_{i+1})/\gamma(p_i))(1+\varepsilon_i)$ with
+$|\varepsilon_i|\le\delta$.  Multiplying along the chain,
+\[
+\frac{\PP_n(\lambda)}{\PP_n((n))}
+=\frac{\gamma(\lambda)}{\gamma((n))}\,(1+\varepsilon)^{\pm(\kappa-1)},
+\qquad |\varepsilon|\le\delta,
+\]
+so for all plain $\lambda$ with $\kappa(\lambda)\le K$,
+$\PP_n(\lambda)=\QQ_n(\lambda)\,Z^{-1}(1+O(K\delta))$ where $Z>0$ is a
+normalising constant independent of $\lambda$ (namely
+$D_n\CC_n((n))/\sum\gamma\CC$).
+
+Let $K=\lceil A\log n\rceil$ with $A$ a large absolute constant, and let
+$\mathcal B$ be the set of types that are either non-plain or have
+$\kappa>K$.  Under $\QQ_n$, Markov's inequality with the generating function
+$\sum_{\pi\in\DD_n}2^{\kappa(\pi)}=n!\,[x^n]e^{-2x}(1-x)^{-2}\le n\cdot n!$
+(cf.\ \cite[proof of Lemma~4.4]{CGW08}) gives
+$\QQ_n(\kappa>K)\le e\,n\,2^{-K}=O(n^{-2})$ for $A\log2\ge3$; also
+$\QQ_n(\text{non-plain})\le\sum_{\ell\mid n,\ \ell<n}
+\gamma((\ell^{n/\ell}))/D_n=O(n^{-1})$.  Under $\PP_n$, the unconditional
+CGW bound \cite[Cor.~4.5]{CGW08},
+$\PP_n(\lambda)\le n^{1/3}(\gamma(\lambda)/n!)\,2^{\kappa(\lambda)}$,
+combined with
+$\sum_{\pi\in\DD_n}4^{\kappa(\pi)}=n!\,[x^n]e^{-4x}(1-x)^{-4}
+\le \binom{n+3}{3}\,n!$, gives
+\[
+\PP_n(\kappa>K)\;\le\;n^{1/3}\,2^{-K}\sum_\lambda
+\frac{\gamma(\lambda)}{n!}\,4^{\kappa(\lambda)}
+\;=\;O\bigl(n^{10/3}2^{-K}\bigr)\;=\;O(n^{-2/3})
+\]
+for $A\log2\ge4$, and similarly
+$\PP_n(\text{non-plain})\le n^{1/3}\sum_{k\ge2,\ k\mid n}
+4^{k}/(k!\,(n/k)^{k})=O(n^{-5/3})$.
+
+On the complement of $\mathcal B$, summing
+$\PP_n=\QQ_n Z^{-1}(1+O(K\delta))$ over $\lambda\notin\mathcal B$ and using
+the tail bounds shows $Z^{-1}=1+O(K\delta)+O(n^{-2/3})$, whence
+$\sum_{\lambda\notin\mathcal B}|\PP_n-\QQ_n|=O(K\delta)+O(n^{-2/3})$.
+Combining with the tails,
+$\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-2/3})$.  The loops statement follows
+from \eqref{eq:setTV}, Remark~\ref{rem:reduced} (the passage to reduced
+squares is exact), and \S\ref{sec:known} as in \cite[Lemma 6.2]{CGW08}.
+\end{proof}
+
+\begin{remark}
+The proof only uses $\mathrm{EQ}$ for splits along the specific chains, a
+strictly weaker hypothesis; and the numerically observed truth is
+$\mathrm{EQ}(Cn^{-3})$ on those chains.  The hypothesis is a statement about
+one bit of structure --- \emph{rows 1 and 2 lie in the same column cycle of a
+shifted post-flip column pair} --- for a uniformly random element of
+$S(\lambda)$; it seems genuinely more tractable than the conjecture itself,
+being an equidistribution assertion for a single event rather than a global
+comparison of measures.  A natural route is a second-moment/switching
+argument within $S(\lambda)$ itself; another is the transpose duality: the
+$B$-status of column pairs of $L$ is the same-cycle statistic of row pairs
+of $L^{\mathsf T}$, whose cycle-type law is again $\PP_n$ --- a
+self-referential structure that may admit a bootstrap.
+\end{remark}
+
+%======================================================================
+\section{Monte Carlo verification at larger \texorpdfstring{$n$}{n}}\label{sec:numerics}
+
+We implemented the Jacobson--Matthews chain \cite{JM96} (with the
+$\pm1$-tensor moves; uniform stationary distribution on proper squares) and
+measured the quantities of \S\ref{sec:identity} at orders beyond the exact
+tables.  Two methodological points deserve record.
+
+\begin{enumerate}[leftmargin=2em]
+\item \emph{Sampling bias of ``first proper state after $T$ moves''.}
+Emitting the first proper state reached after a fixed number of moves is
+\emph{not} uniform: the entry distribution into the proper set is biased by
+the improper-excursion flux, which varies across squares (squares rich in
+intercalates admit more proper-to-proper moves).  At $n=4$ this distorts the
+type-$(2,2)$ probability from $1/2$ to $0.3887$; at $n=8$ it produced a
+cycle-type $\chi^2\approx700$ on $6$ d.o.f.\ against the exact distribution.
+Correct procedure: sample on a fixed grid of times and \emph{discard}
+improper checkpoints.  With this correction the $n=4$ marginal is uniform to
+$5\times10^{-4}$ over $2\times10^6$ samples.
+\item \emph{Validation against exact data.}  With the corrected sampler:
+at $n=8$ ($4\times10^6$ samples) the seven cycle-type frequencies match the
+exact distribution with $\chi^2=2.7$ on $6$ d.o.f.; at $n=11$
+($2\times10^6$ samples) all fourteen types give $\chi^2=10.4$ on $13$
+d.o.f.
+\end{enumerate}
+
+\begin{center}
+\small
+\begin{tabular}{c c c c c c}
+\toprule
+$n$ & samples & $\Pr(B_1)$ & $\Pr(B_2)$ & $\bar q$ (measured) & $\bar q$ (exact, Thm~\ref{thm:identity})\\
+\midrule
+8  & $4.0\times10^6$ & $0.4971(5)$ & $0.4961(5)$ & $0.9932(8)$ & $0.993345$\\
+11 & $2.0\times10^6$ & $0.4987(9)$ & $0.4992(9)$ & $0.9979(15)$ & $0.998080$\\
+12 & $2.0\times10^6$ & $0.5009(10)$ & $0.4986(10)$ & $0.9995(15)$ & [$0.99850$ predicted]\\
+16 & $1.5\times10^6$ & $0.5001(13)$ & $0.4983(13)$ & $0.9984(21)$ & [$0.99937$ predicted]\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+(Joins $\mu=(2,n-2)\to(n)$ throughout; ``predicted'' extrapolates
+$\bar q=1-2c_2n^{-3}$.)  At $n=8$ the measurement is an $8\sigma$ detection
+of $\bar q<1$, in exact agreement with the identity; at $n=11$ it again
+matches the exact value; from $n=12$ on, the conjectured deviation
+$1-\bar q\asymp2.6\,n^{-3}$ sits below Monte Carlo resolution, and the
+measurements are consistent both with it and with
+Hypothesis~\ref{hyp:eq} at the precision $|\bar q-1|\lesssim2\times10^{-3}$.
+
+For a \emph{generic} admissible pair the measured $B$-probabilities are
+$0.4993(3)$, $0.4997(4)$, $0.5002(4)$, $0.5007(4)$ at $n=8,11,12,16$; exact
+enumeration
+gives $3/5$ at $n=5$ and $37/78\approx0.474$ at $n=6$.  Two marked points of
+a uniform derangement share a cycle with probability
+$s_n=\tfrac12+(1+o(1))/n$ ($\approx0.55$ at $n=20$), so a naive analogy
+would predict an excess $\approx+1/n$; but a uniform admissible column pair
+excludes the $\approx n$ pairs $\{j,\omega(j)\}$, which are \emph{always}
+same-cycle, and this exclusion cancels the $1/n$ term exactly, leaving
+$\Pr(B\mid\text{admissible})=\tfrac12+O(n^{-2})$ --- as observed.  The
+post-flip pairs of \S\ref{sec:identity} are then closer still to balance,
+with deviation $\Theta(n^{-3})$: a three-level hierarchy
+$\tfrac12+\Theta(n^{-1})\ \to\ \tfrac12+O(n^{-2})\ \to\ \tfrac12-\Theta(n^{-3})$
+of same-cycle statistics.
+
+%======================================================================
+\section{Can the modern machinery reach the conjecture?}\label{sec:kps}
+
+The strongest current toolkit for random Latin squares is that of
+\cite{KSSS22,KPS25}: comparison with the triangle-removal process (TRP), and
+re-randomisation via intercalate switchings.
+
+\paragraph{Transfer costs.}  The TRP comparison theorems transfer events at
+multiplicative cost $e^{O(n\log^2n)}$.  This is decisive for
+large-deviation-scale statements (probabilities $e^{-\Theta(n^{4/3}\log n)}$
+or smaller) but is far too lossy for Conjecture~\ref{conj:rates}, whose
+content is at scale $1\pm n^{-3}$; even Conjecture~\ref{conj:cgw}
+(constant-scale total variation) is out of its direct reach.
+
+\paragraph{Re-randomisation.}  More promising is the \cite{KPS25}
+re-randomisation philosophy.  An intercalate switch involving row $2$ and
+one other row composes $\sigma_{1,2}$ with a transposition, i.e.\ acts on
+the cycle type by an elementary split or merge --- these are exactly
+degenerate (length-4 column cycle) cases of the CGW flip.  The row-parity
+theorem of \cite{KPS25} shows that enough disjoint, well-separated
+(``stable'') intercalates exist, and mix well enough, to drive a
+$\pm1$ functional (the parity) to near-perfect equidistribution.  The cycle
+type of $\sigma_{1,2}$ is a richer functional, but the induced dynamics on
+types is a split/merge chain whose stationary law on cycle types, were the
+switch statistics exactly balanced, would be $\QQ_n$-like.
+
+\paragraph{A concrete programme via the marked-pair identity.}
+Theorem~\ref{thm:marked} makes the re-randomisation target precise and,
+we believe, attackable with the machinery of \cite{KPS25}.  The target
+bit is now: for uniform $L\in S(\lambda)$ and a marked pair
+$P=\{j,\sigma^\alpha(j)\}$, whether rows $1,2$ lie in one column cycle
+of $P$.  Three structural facts line up favourably.
+
+(i) \emph{The conditioning is free.}  Any intercalate avoiding rows
+$1,2$ can be switched without touching $\sigma$: subset-switches of a
+stable collection $\mathcal I_0(L)$ of disjoint intercalates in rows
+$3..n$ (in the sense of \cite[\S7]{KPS25}: the collection is invariant
+under such switches) act \emph{within} $S(\lambda)$, preserve the
+marking, and re-randomise exactly ($\Pr(L\to L')=2^{-|\mathcal I_0|}$
+both ways): conditionally on the orbit, the configuration is uniform
+on $\{0,1\}^{\mathcal I_0}$.  No comparison between $S(\lambda)$ and
+the uniform measure is needed at this step.
+
+(ii) \emph{Switch action on the bit.}  An intercalate on rows
+$\{r,r'\}\subseteq\{3..n\}$ meeting exactly one of the columns $j,j'$
+acts on the pair permutation $\pi_P$ by precomposition with
+$\tau_{rr'}$: it splits or joins the $\pi_P$-cycles through $r,r'$,
+and flips the target bit precisely when $r,r'$ ``interleave'' rows
+$1,2$ (one lies on the segment between them).  Intercalates meeting
+\emph{both} or \emph{neither} of the columns act by conjugation and
+fix the bit.  So the bit is non-linear in the switch configuration but
+locally computable, and each useful intercalate flips it with
+probability of constant order in a random-like configuration.
+
+(iii) \emph{The quantifiers fit the budget.}  The intercalate-expander
+lemma of \cite[Lem.~8.3, Def.~8.1]{KPS25} (with $\ell=\log^{11}n$)
+implies that all but at most $\ell$ columns carry at least $6\ell$
+disjoint stable intercalates (their construction of the row set $R$,
+transposed), with rows and partner columns avoidable in prescribed
+$\beta n$-sets --- in particular avoiding rows $1,2$ and column $j'$.
+The exceptional fraction of marks is $O(\log^{11}n/n)=o(1/\log n)$:
+exactly within the $\mathrm{EQ}(o(1/\log n))$ budget that the weak
+conjecture requires.  Moreover their approximation costs are
+affordable here: $\Pr(S(\lambda))\ge e^{-O(n\log n)}$ for every type
+$\lambda$ (worst case all-$2$-cycles), while the expander lemma fails
+with probability $e^{-\omega(n\log^2 n)}$, so the expander property
+holds for $L$ conditioned on $S(\lambda)$, for every $\lambda$, by a
+union-of-costs argument.
+
+What remains --- the genuinely open core --- is the \emph{non-linear
+orbit-mixing lemma}: for a $2^{\mathcal I_0}$-uniform configuration
+and $k\ge 6\log^{11}n$ disjoint stable intercalates through column $j$
+avoiding rows $1,2$, show that the conditional law of the bit given
+the orbit is $\tfrac12+o(1/\log n)$ for all but an $o(1/\log n)$
+fraction of orbits.  Unlike the parity bits of \cite{KPS25} the bit is
+not $\mathbb F_2$-linear in the configuration, so their kernel
+computation must be replaced by a mixing argument for the
+cycle-structure bit under random subsets of transpositions --- the
+orbit dynamics on $\pi_P$ is a coagulation--fragmentation process
+driven by (a random subset of) disjoint transpositions, for which the
+classical toolbox is that of random transposition walks
+\cite{Sch05} --- but the
+per-switch flip probability is of constant order and the budget
+$o(1/\log n)$ is far weaker than their polynomial error terms.  We
+record this as the sharpest currently-visible route to
+Conjecture~\ref{conj:cgw}.
+
+\medskip\noindent
+\emph{[Session-6 update: the non-linear orbit-mixing lemma just
+described has been reformulated exactly.  \S\ref{sec:orbit} proves
+that the conditional bit given an orbit is an explicit
+$\mathbb{F}_2$-rank event in a fixed interlacement matrix
+(Theorem~\ref{thm:master}), derives the supply and conditional
+expander lemmas, shows the orbit-by-orbit form of the mixing lemma
+stated above is too strong, and replaces it by the annealed
+Problem~\ref{prob:annealed}.]}
+
+\input{section_orbit}
+
+\input{section_annealed}
+
+\input{section_mixing}
+
+%======================================================================
+\section{Open problems}\label{sec:open}
+
+\begin{problem}
+Prove Hypothesis~\ref{hyp:eq} in any nontrivial regime, e.g.\
+$\delta(n)=o(1)$ ($\delta(n)=o(1/\log n)$ gives
+Conjecture~\ref{conj:cgw} by Theorem~\ref{thm:reduction}).  By
+Theorem~\ref{thm:marked} this is exactly the statement that a marked
+pair $\{j,\sigma^\alpha(j)\}$ of a uniform $L\in S(\lambda)$ is a
+$B$-pair with probability $\tfrac12+O(\delta)$; the programme at the
+end of \S\ref{sec:kps}, as sharpened in \S\ref{sec:orbit}, reduces it
+further to the annealed bias bound of Problem~\ref{prob:annealed}
+--- a genericity statement for the rank event of
+Theorem~\ref{thm:master} under the orbit measure, for which generic
+position gives $\E|\mathrm{bias}|\asymp k^{-1/2}$ against a budget of
+$k^{-1/11}$.  After \S\ref{sec:anneal} the outstanding pieces are:
+the $L^2$ mixing bound of Problem~\ref{prob:mixing} (which closes the
+iid model via the factorization Theorem~\ref{thm:factor}; after
+\S\ref{sec:mixing} this is reduced to the parity-decay statement
+Problem~\ref{prob:survival} alone with any exponent $\alpha>2/9$
+--- the gap law Problem~\ref{prob:gaplaw} is not needed over the
+short horizon $j\le8d$ of Theorem~\ref{thm:factor}
+(Corollary~\ref{cor:kappafree}) --- and the rate $1/d$ is proved
+sharp; after \S\ref{sec:s10} the environment is controlled over the
+horizon by the Harer--Zagier block count, Corollary~\ref{cor:horizon},
+and Problem~\ref{prob:survival} is reduced to the conditions
+(R1)--(R2) of Proposition~\ref{prop:condecay}), the
+transfer from iid to orbit positions, and the supply--mark decoupling
+of Problem~\ref{prob:decouple}.
+\end{problem}
+
+\begin{problem}
+Determine the layer profile $\gamma$ of \S\ref{sec:layers} and the constant
+$c_2=\int_0^1\gamma$ ($\gamma(0)=1$ is Corollary~\ref{cor:thirdrow};
+Theorems~\ref{thm:layer4} and~\ref{thm:layer5} pin the fourth and fifth
+layers, and Remark~\ref{rem:layerk} every fixed layer, so $\gamma$ is
+flat at the origin; see Remark~\ref{rem:c2caveat} for
+why the $n\le11$ value $1.30$ of $n^3h_n(2)$ does not yet determine the
+limit).  Even a heuristic derivation via permanents of complements of
+random rectangles with a planted rows-$(1,2)$ intercalate would be
+valuable; the remaining unknown is the bulk $k\asymp tn$, $t>0$.
+\end{problem}
+
+\begin{problem}
+Prove the third-order intercalate expectation
+$\E[\mathbf N]=n^2/4-n/4+\Theta(1/n)$ (\S\ref{sec:consequences}) --- a
+statement plausibly within reach of the switching methods of \cite{McKW99}.
+\end{problem}
+
+\begin{problem}
+Prove the sharp parity asymptotics
+$\Pr(\sigma_{1,2}\text{ even})-\tfrac12\sim(-1)^{n-1}(n-1)/(2D_n)$, in the
+spirit of \cite{KPS25}.
+\end{problem}
+
+\begin{problem}
+Give a corrected exact joining bookkeeping for $\alpha=\beta\ge3$
+(Remark~\ref{rem:albe}), restoring the identity for all adjacent pairs.
+\end{problem}
+
+\begin{problem}
+Extend the switch calculus of \S\ref{sec:switch} to the fifth layer
+(Theorem~\ref{thm:layer4} settles the fourth), where the
+analogue of Proposition~\ref{prop:pairIE} is an inclusion--exclusion over
+the three pairwise coincidence patterns of a triple $(\tau,\eta,\theta)$.
+Beyond that lies the bulk of the profile $\gamma$.  (Classical context:
+Riordan's aggregate $K(3,n)=\sum_k\binom nkD_{n-k}D_kU_{n-2k}$
+\cite[Ch.~8, eq.~(30a)]{Riordan58}; Moser's very reduced $4\times n$
+rectangles \cite{Moser67}; the $k$-discordant literature
+\cite{Whitehead79}.  Theorem~\ref{thm:poisson} resolves the
+$2$-cycle-level joint statistics for three rows; the full
+cycle-type-resolved joint law remains open.)
+\end{problem}
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{CamBlog15} P.~J. Cameron, \emph{A niggling problem}, blog post,
+24~January 2015,
+\url{https://cameroncounts.wordpress.com/2015/01/24/a-niggling-problem/};
+see also \emph{Some challenges on Latin squares}, 6~October 2023.
+
+\bibitem{Cam92} P.~J. Cameron, Almost all quasigroups have rank 2,
+\emph{Discrete Math.} \textbf{106/107} (1992), 111--115.
+
+\bibitem{CGW08} N.~J. Cavenagh, C.~Greenhill and I.~M. Wanless, The cycle
+structure of two rows in a random Latin square, \emph{Random Structures
+Algorithms} \textbf{33} (2008), 286--309.
+
+\bibitem{CL72} M.~Cohn and A.~Lempel, Cycle decomposition by disjoint
+transpositions, \emph{J.\ Combin.\ Theory Ser.\ A} \textbf{13} (1972),
+83--89.
+
+\bibitem{FS90} P.~Flajolet and M.~Soria, Gaussian limiting distributions for
+the number of components in combinatorial structures, \emph{J. Combin.
+Theory Ser.~A} \textbf{53} (1990), 165--182.
+
+\bibitem{HJ96} R.~H\"aggkvist and J.~C.~M. Janssen, All-even Latin squares,
+\emph{Discrete Math.} \textbf{157} (1996), 199--206.
+
+\bibitem{HZ86} J.~Harer and D.~Zagier, The Euler characteristic of the
+moduli space of curves, \emph{Invent.\ Math.} \textbf{85} (1986),
+457--485.
+
+\bibitem{JM96} M.~T. Jacobson and P.~Matthews, Generating uniformly
+distributed random Latin squares, \emph{J. Combin. Des.} \textbf{4} (1996),
+405--437.
+
+\bibitem{KPS25} M.~Kwan, K.~Petrova and M.~Sawhney, Parities in random Latin
+squares, arXiv:2509.13125 (2025).
+
+\bibitem{KSSS22} M.~Kwan, A.~Sah, M.~Sawhney and M.~Simkin, Substructures in
+Latin squares, \emph{Israel J. Math.} (2023); arXiv:2202.05088.  See also
+\emph{Large deviations in random Latin squares}, \emph{Bull. Lond. Math.
+Soc.} \textbf{54} (2022).
+
+\bibitem{Sch05} O.~Schramm, Compositions of random transpositions,
+\emph{Israel J. Math.} \textbf{147} (2005), 221--243.
+
+\bibitem{LP93} T.~{\L}uczak and L.~Pyber, On random generation of the
+symmetric group, \emph{Combin. Probab. Comput.} \textbf{2} (1993), 505--512.
+
+\bibitem{McKW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many
+subsquares, \emph{J. Combin. Theory Ser.~A} \textbf{86} (1999), 323--347.
+
+\bibitem{McKW05} B.~D. McKay and I.~M. Wanless, On the number of Latin
+squares, \emph{Ann. Comb.} \textbf{9} (2005), 335--344.
+
+\bibitem{Moser67} W.~O.~J. Moser, The number of very reduced $4\times n$
+Latin rectangles, \emph{Canad. J. Math.} \textbf{19} (1967), 1011--1017.
+
+\bibitem{Riordan54} J.~Riordan, Discordant permutations,
+\emph{Scripta Math.} \textbf{20} (1954), 14--23.
+
+\bibitem{Riordan58} J.~Riordan, \emph{An Introduction to Combinatorial
+Analysis}, Wiley, New York, 1958; Chapter 8 (\emph{Permutations with
+restricted position II}), esp.\ \S3, pp.~201--204.
+
+\bibitem{Touchard53} J.~Touchard, Permutations discordant with two given
+permutations, \emph{Scripta Math.} \textbf{19} (1953), 109--119.
+
+\bibitem{Whitehead79} E.~G. Whitehead, Jr., Four discordant permutations,
+\emph{J. Austral. Math. Soc. Ser.~A} \textbf{28} (1979), 369--377.
+
+\end{thebibliography}
+
+\appendix
+
+\section{Data and computation manifest}\label{app:data}
+
+All computations were performed in this working session; code and exact data
+are available alongside these notes.
+
+\begin{enumerate}[leftmargin=2em]
+\item \texttt{cgw\_data.py}: the exact $\CC_n(\lambda)$, $4\le n\le11$, from
+\cite[Tables 1--2]{CGW08}, verified against the published
+$\PP_n(\lambda)$ fractions and against $L_n$ for all $n\le11$.
+\item \texttt{fit\_additive.py}: additive fits of
+$\log \CC_n(\lambda)$, chain increments, $\dtv$, spreads.
+\item \texttt{third\_row.py}, \texttt{third\_row\_asymp.py}: exact
+$N^{(3)}$ via matching polynomials; fusion identity verified for all types,
+$n\le25$; exact ratios to $n=400$ with Richardson extrapolation.
+\item \texttt{layer4.c}: exact $N^{(4)}$ for $n\le11$ by summation of
+Ryser--Gray permanents over all third rows ($\approx5\times10^6$ permanents
+of order $11$).
+\item \texttt{verify\_identity.py}: complete enumeration of Latin squares of
+orders $5$ and $6$ (via first-row normalisation) implementing the CGW
+switch/flip operations; exact rational match of
+Theorem~\ref{thm:identity} in the cases reported, and the exact values
+$\Pr(B_1)=\Pr(B_2)$.
+\item \texttt{jm.c}, \texttt{jm\_stats.py}: Jacobson--Matthews sampler
+($O(1)$ per move) with fixed-grid proper-state sampling, and the
+measurement pipeline.
+\item \texttt{puncture.py}: the punctured-board calculus
+(\eqref{eq:punctured}), verified against exhaustive enumeration at
+$n=6,7$.
+\item \texttt{pair\_ie.py}, \texttt{layer4\_production.py},
+\texttt{layer4\_big.txt}: the pair inclusion--exclusion identity
+(verified exactly at $n=6,7$), exact $T_j$ sums for $j\le3$, truncated
+layer-4 effects to $n=18$ with validation against the exact
+$n\le11$ values.
+\item \texttt{three\_row\_moments.py}: exact joint intercalate moments of
+$3\times n$ rectangles (certified against brute force at $n=7$),
+$n\le13$ tables, the tilt identity and covariance data.
+\item \texttt{switch.py}: the switch calculus of \S\ref{sec:switch}:
+board $B_0$, punctured counts on arbitrary path/cycle boards, the empty
+bracket $=M_{n-4}$ for $n\le14$, brute-force verification of
+Lemma~\ref{lem:switchIE} at $n=6,7$, and per-$M$ bracket ratio scans.
+\item \texttt{fusion\_lemmas.py}: symbolic proof-checks of
+Lemma~\ref{lem:wronskian} and exact integer verification of the master
+formula \eqref{eq:generic} on random punctures at $n=9,11,13$.
+\item \texttt{valuation\_scan.py}: exhaustive verification of
+Lemma~\ref{lem:valuation} (valuation $\ge2$; the $[x^2]$
+classification) over all $|M|\le2$ at $n=9,10$.
+\item \texttt{switch\_j1.py}: stratified sums $S_j$ \eqref{eq:strata}
+against direct enumeration ($n=8,9$), class-resolved contributions,
+and the worry-class (rows $1\wedge2$) resummation scans.
+\item \texttt{loop\_reduction\_check.py}: complete-enumeration proof of
+Remark~\ref{rem:reduced} at $n=5,6$ (the loop second-row type law is
+exactly $\PP_n$).
+\item \texttt{anatomy.c}: exact $\mathrm{Br}_G$, $N^{(4)}_0$, masses
+$m^\pm$ and conditional means $E^\pm[A]$ by full enumeration of $A_0$
+with per-$\tau$ Ryser permanents, $n\le11$.
+\item \texttt{triple\_ie.py}: the triple inclusion--exclusion identity
+(Proposition~\ref{prop:tripleIE}), both forms, verified against
+brute-force triple enumeration at $n=5,6,7$ (both cycle types).
+\item \texttt{n5\_direct.c}, \texttt{n5\_direct2.c}: exact $N^{(5)}$ by
+direct enumeration with 64-/128-bit cell masks, $n\le9$, both types;
+$N^{(3)},N^{(4)}$ reproduced as certification.
+\item \texttt{switch5.py}, \texttt{anatomy5.c}: the fifth-layer switch
+decomposition (Lemma~\ref{lem:switchIE5}) verified by complete
+enumeration at $n=6,7$ and against the direct $\Delta N^{(5)}$ at
+$n=8$; exact $\mathrm{Br}^{(5)}_G$, $N^{(5)}_0$, $G_2^{(5)}$-,
+$H^{(5)}$-pieces on $A_0$.
+\item \texttt{layer5\_production.py}: the truncated triple-IE series
+$S(Q)$, $Q\le3$, both types, $n\le11$+, validated against the exact
+$N^{(5)}$ anchors.
+\item \texttt{pf\_orbit.py}: the CGW cross-switch
+(\cite[Def.~3.9]{CGW08}) implemented and verified exhaustively at
+$n=5$ (Latin, type-preserving, involutive, marked status preserved,
+shifted-pair toggle profile), and the splitting-instance statistics
+$\Pr(B_i\mid\text{marked }A/B)$.
+\item \texttt{pf\_bridge.py}: instance-by-instance verification of the
+bijections behind Theorem~\ref{thm:marked} at $n=5,6$ (unflip
+statuses, roundtrips, hit multiplicities, orphan structure) for
+$(2,3)\to(5)$, $(2,4)\to(6)$, $(2,2,2)\to(2,4)$, $(3,3)\to(6)$.
+\item \texttt{xside.c}, \texttt{xside2.c}: the $X$-side counts
+$|X_A|,|X_B|$ for all types and merges --- by complete enumeration of
+first-row-normalised squares ($n\le6$), and per fixed representative
+$\sigma_0$ of each type ($n=7$; conjugation symmetry); exact match
+with $2\CC_n(\lambda)/\CC_n(\mu)-1$ in all cases.
+\item \texttt{pf\_cl.py}: instance-by-instance verification of
+Theorem~\ref{thm:CL}, Theorem~\ref{thm:bitrank}, the passenger
+construction, and randomized two-sided products with shared rows and
+conjugating coordinates (all activation subsets, exhaustively).
+\item \texttt{pf\_master.py}: end-to-end verification of the master
+formula on real squares --- $n=5$ complete ($7920$ subset checks),
+$n=6$ sampled ($1{,}706{,}949$ checks, all four column-incidence
+classes): $0$ failures.
+\item \texttt{pf\_bias.py}, \texttt{bias\_scale.c}: the exactly
+solvable bias families of \S\ref{sec:orbit} and the $k$-scaling of
+the generic-position bias (rank route).
+\item \texttt{s7\_bias\_lab.py}: pendant-star family
+(Proposition~\ref{prop:pendant}), exhaustive predicate scan over all
+chord configurations $k\le6$, per-coordinate toggle statistics.
+\item \texttt{s7\_twopoint.c}: cycle-route measurements of
+$4\E[\mathrm{bias}^2]$, the one-point function, and $\psi(j,d)$
+(Theorem~\ref{thm:factor}); independent of the rank route.
+\item \texttt{s7\_real\_bias.py} (with \texttt{jm.c}): the
+real-ensemble study of \S\ref{sec:realbias} at $n=30$--$100$,
+including ground-truth re-verification of the master formula.
+\item \texttt{s8\_splitmerge.c}: the continuum marked split--merge
+chain of \S\ref{sec:mixing} (modes: \texttt{psi}/\texttt{psibar}
+gap-binned $\psi$, \texttt{one}, \texttt{iota} symmetry test,
+\texttt{gapdist} stationary gap law, \texttt{traj} invariants);
+validated against \texttt{s7\_twopoint.c} at matched $(j,d)$ and
+against the $\mathrm{PD}(1)$ invariants.
+\item \texttt{s8\_real\_bias.py}: \texttt{s7\_real\_bias.py} plus the
+$\sigma$-cycle length (class size) column and $k=0$ rows, for the
+supply--mark decoupling measurements; \texttt{s8\_inst200.csv} extends
+the real-ensemble study to $n=200$.
+\end{enumerate}
+
+\section{Exact \texorpdfstring{$\bar q$}{qbar} values from the identity}\label{app:qbar}
+
+All $\alpha\neq\beta$ joins at $n=11$, with
+$\bar q=2\CC_{11}(\lambda)/\CC_{11}(\mu)-1$ (exact values, displayed to six
+decimals) and the normalised deficit $\tfrac12(1-\bar q)n^3$:
+
+\begin{center}
+\small
+\begin{tabular}{llll r}
+\toprule
+$\mu$ & join & $\lambda$ & $\bar q$ & $\tfrac12(1-\bar q)n^3$\\
+\midrule
+$(2,9)$ & $2{+}9$ & $(11)$ & $0.998080$ & $+1.278$\\
+$(2,2,7)$ & $2{+}7$ & $(2,9)$ & $0.998078$ & $+1.279$\\
+$(2,3,6)$ & $2{+}6$ & $(3,8)$ & $0.998084$ & $+1.275$\\
+$(2,4,5)$ & $2{+}5$ & $(4,7)$ & $0.998084$ & $+1.275$\\
+$(2,2,2,5)$ & $2{+}5$ & $(2,2,7)$ & $0.998080$ & $+1.278$\\
+$(2,4,5)$ & $2{+}4$ & $(5,6)$ & $0.998077$ & $+1.280$\\
+$(2,2,3,4)$ & $2{+}4$ & $(2,3,6)$ & $0.998079$ & $+1.278$\\
+$(2,3,6)$ & $2{+}3$ & $(5,6)$ & $0.998046$ & $+1.301$\\
+$(2,2,3,4)$ & $2{+}3$ & $(2,4,5)$ & $0.998048$ & $+1.299$\\
+$(2,3,3,3)$ & $2{+}3$ & $(3,3,5)$ & $0.998054$ & $+1.295$\\
+$(2,2,2,2,3)$ & $2{+}3$ & $(2,2,2,5)$ & $0.998052$ & $+1.297$\\
+\midrule
+$(3,8)$ & $3{+}8$ & $(11)$ & $0.999966$ & $+0.023$\\
+$(2,3,6)$ & $3{+}6$ & $(2,9)$ & $0.999970$ & $+0.020$\\
+$(3,3,5)$ & $3{+}5$ & $(3,8)$ & $0.999970$ & $+0.020$\\
+$(3,4,4)$ & $3{+}4$ & $(4,7)$ & $0.999963$ & $+0.024$\\
+$(2,2,3,4)$ & $3{+}4$ & $(2,2,7)$ & $0.999971$ & $+0.019$\\
+\midrule
+$(4,7)$ & $4{+}7$ & $(11)$ & $0.999997$ & $+0.002$\\
+$(2,4,5)$ & $4{+}5$ & $(2,9)$ & $1.000001$ & $-0.001$\\
+$(5,6)$ & $5{+}6$ & $(11)$ & $1.000004$ & $-0.003$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The deficits stratify precisely by the smallest part destroyed by the join
+--- $\approx c_2 n^{-3}$ when a $2$-cycle is destroyed, $\approx h_n(3)$
+when a $3$-cycle is, and at noise level below --- and are essentially
+independent of the ambient type $\mu$: the identity turns the refined law of
+Conjecture~\ref{conj:refined} into an equidistribution statement, join by
+join.
+
+\end{document}

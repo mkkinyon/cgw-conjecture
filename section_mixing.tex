@@ -1,0 +1,575 @@
+%======================================================================
+\section{The mixing problem as a marked split--merge chain: symmetry,
+factorization, and the exact rate from below}
+\label{sec:mixing}
+
+This section records the session-8 progress on
+Problem~\ref{prob:mixing}.  The fresh-chord averaging operator $P$ of
+\S\ref{sec:factor} is identified \emph{exactly} with one step of the
+uniform split--merge (coagulation--fragmentation) dynamics on measured
+partitions of the circle, carrying two marked points
+(Lemma~\ref{lem:splitmerge}); the chain admits an exact sign-reversing
+involution (Theorem~\ref{thm:iota}) which factors the fresh-averaged
+sign as $M_d=\varepsilon_0\cdot\Phi_d(\text{geometry})$
+(Corollary~\ref{cor:quotient}) and removes the label from the problem;
+the stationary law of the relevant ``gap'' coordinate is computed
+exactly (linear density; Proposition~\ref{prop:gaplawstat}); and these
+combine into a \emph{proved} lower bound
+$\bar\psi(d)\ge c/d$ (Proposition~\ref{prop:lower}): the numerically
+measured rate $\psi\approx1.0/d$ is sharp, and $c=1/2$ is the true
+exponent of Problem~\ref{prob:mixing} if the matching upper bound
+holds.  The upper bound is reduced to two sharply scoped sub-problems
+(Problems~\ref{prob:gaplaw} and~\ref{prob:survival}), each with the
+mechanism confirmed numerically, plus a spectral route via
+reversibility (\S\ref{sec:spectral}).  \emph{Session 9
+(\S\ref{sec:s9}) shows the first of the two is unnecessary over the
+horizon $j\le8d$ relevant to Theorem~\ref{thm:factor}: any
+$\alpha>2/9$ in Problem~\ref{prob:survival} closes the iid model.
+Session 10 (\S\ref{sec:s10}) shows the environment must enter that
+problem through recharge, proves that the block count on the horizon is
+$O(\log d)$ (the Harer--Zagier law of the number of curves), so the
+environment is healthy where it is needed, and reduces
+Problem~\ref{prob:survival} to two conditions (R1)--(R2) on the
+log-macroscopic post-flip chain via an exact Markov-renewal identity.}
+
+Throughout, the ensemble is that of \S\ref{sec:factor}: $u,v$ fixed on
+the circle of unit circumference ($u$ at $0$, $v$ at $1/2$ in the
+code), chords $=$ iid uniform endpoint pairs.
+
+%----------------------------------------------------------------------
+\subsection{Identification with the uniform split--merge chain}
+\label{sec:smident}
+
+For a finite chord set $W$, the cycles of $\gamma\tau_W$ trace out a
+partition of the circle (minus the endpoint set) into finite unions of
+arcs (``curves''); each curve carries its Lebesgue measure, and its
+internal cyclic order (the order in which $\gamma\tau_W$ traverses its
+arcs) transports Lebesgue measure to a uniform measure along the
+curve.  The \emph{marked state} is
+\[
+X \;=\;\Bigl(\{\text{curve masses}\}, \ \text{curves of }u,v,\
+\begin{cases}
+(x,y) & u\sim v:\ \text{masses of the two }u\to v\text{ curve arcs},\\
+(p,q) & u\not\sim v:\ \text{masses of the curves through }u,\ v,
+\end{cases}\Bigr)
+\]
+and $\varepsilon(W)=+1$ iff $u\sim v$.
+
+\begin{lemma}[fresh chord $=$ one split--merge move]
+\label{lem:splitmerge}
+Adding one fresh chord (iid uniform endpoints $c_1,c_2$) maps the
+marked state by the following rules, which depend on the current state
+only.  Write $B(c)$ for the curve containing $c$; positions of $c_i$
+along their curves are independent uniform.
+\begin{enumerate}[leftmargin=2em]
+\item $B(c_1)=B(c_2)=B$ (probability $|B|^2$): $B$ splits into the two
+arcs of $B$ between the cuts.  Sub-cases:
+ (a) $B$ unmarked, or marked by exactly one of $u,v$ (mass $p$): the
+ mark keeps the piece of mass $p-|t_1-t_2|$, $t_i\sim U(0,p)$ iid; the
+ complementary piece of mass $|t_1-t_2|$ joins the environment.
+ (b) $B$ the common block, sides $(x,y)$: with the cycle parametrised
+ $u\to v$ ($x$-side) then $v\to u$ ($y$-side), cuts uniform on
+ $(0,x{+}y)$: both cuts on one side shrinks that side as in (a);
+ one cut per side (probability $2xy/(x{+}y)^2$ given the split)
+ \emph{separates} $u,v$: the new blocks have masses
+ $q'=t_2-t_1$ ($v$'s) and $p'=x+y-q'$ ($u$'s), i.e.\
+ $(p',q')\overset{d}{=}(\alpha+y-\beta,\ x-\alpha+\beta)$,
+ $\alpha\sim U(0,x)$, $\beta\sim U(0,y)$.
+\item $B(c_1)\ne B(c_2)$: the two curves merge (cut-and-join at
+$c_1,c_2$).  Sub-cases: (a) at most one is marked, or one holds $u$
+and the other neither: masses add, marks carried along.  (b) $u$'s and
+$v$'s blocks (masses $p,q$) merge: $u,v$ become joined with sides
+$(x,y)=(\alpha+\beta,\ p+q-\alpha-\beta)$, $\alpha\sim U(0,p)$,
+$\beta\sim U(0,q)$.  (c) the common block (sides $x,y$) merges with an
+environment block of mass $z$: the insertion point is on the $x$-side
+with probability $x/(x{+}y)$, and that side gains $z$.
+\end{enumerate}
+In particular $P$ (add one fresh chord and average) is the transition
+operator of this \emph{marked uniform split--merge chain}, the
+continuum limit of the cycle structure of the random-transposition
+walk (cf.\ \cite{Sch05}), and
+$M_d=P^d\varepsilon$ is its $d$-step averaged together-indicator sign.
+\end{lemma}
+
+\begin{proof}
+Adding the chord $z=(c_1,c_2)$ replaces $\gamma\tau_W$ (computed on
+the endpoint set enlarged by $c_1,c_2$; refining $\gamma$ at
+non-endpoint positions does not change the curve partition) by
+$\gamma\tau_W\,(c_1c_2)$.  Right multiplication by a transposition
+whose entries lie on one cycle splits it into the two arcs between
+them, and merges two cycles otherwise --- with the traversal orders
+spliced at the cuts; this is the standard surgery computation.  The
+probabilistic statements: $c_1,c_2$ are iid Lebesgue, the curves
+partition the circle, and Lebesgue restricted to a curve is uniform
+along it; all sub-case laws then read off from the traversal order,
+e.g.\ in 1(b) the cut positions along the cycle are iid $U(0,x{+}y)$
+and $u,v$ separate iff the cuts straddle both sides.
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED end-to-end
+(\texttt{s8\_splitmerge.c}): the continuum chain reproduces the
+discrete-surgery values of $\psi(j,d)$ (fs$=1$ unbiased runs;
+$\psi(16,4)$: $0.1341(22)$ vs $0.1305(22)$;
+$\psi(64,16)$: $0.0391(26)$ vs $0.0395(26)$), the one-point function
+($f(4)$: $+0.0232(4)$ vs $+0.0237(5)$), and the
+Poisson--Dirichlet sanity values at stationarity
+($\E\sum p_i^2=0.4979$ vs $\mathrm{PD}(1)$'s $1/2$;
+$\E[\text{common-block mass}\mid u\sim v]=0.6685$ vs $2/3$, see
+Proposition~\ref{prop:gaplawstat}).  NOTE: repeat runs show the
+session-7 $\psi$ table of \S\ref{sec:factor} carries sampling scatter
+$\approx\pm0.005$ (its inner-average standard errors were optimistic);
+its fitted exponent is unaffected.}
+
+%----------------------------------------------------------------------
+\subsection{The sign-reversing involution and the quotient chain}
+\label{sec:iota}
+
+\begin{theorem}[label-flip symmetry]\label{thm:iota}
+Let $\iota$ be the involution of marked states that swaps the label
+$\{u\sim v\}\leftrightarrow\{u\not\sim v\}$ while keeping the
+environment and the ordered geometry pair fixed:
+\[
+\iota:\ \bigl(\text{together},(x,y),\mathrm{env}\bigr)
+\;\longleftrightarrow\;
+\bigl(\text{apart},(p,q)=(x,y),\mathrm{env}\bigr).
+\]
+Then $\iota$ commutes with the transition kernel of the marked
+split--merge chain, and $\varepsilon\circ\iota=-\varepsilon$.
+Consequently $M_d\circ\iota=-M_d$ for every $d$.
+\end{theorem}
+
+\begin{proof}
+Match the transition laws of Lemma~\ref{lem:splitmerge} case by case
+under the correspondence $x\leftrightarrow p$ (the $u$-coordinate),
+$y\leftrightarrow q$ ($v$-coordinate).  The total marked mass is
+$x+y=p+q$ in both states, so the probabilities of the events ``both
+cuts in marked material'', ``one cut in marked material, one in a
+given environment block'', ``both in environment'' agree, as does the
+finer classification by $u$- vs $v$-material ($x^2/(x{+}y)^2$ etc.,
+against $p^2/(p{+}q)^2$ etc.).  Given the event: both cuts in
+$u$-material shrinks $x$ (resp.\ $p$) by $|t_1-t_2|$ with the same
+law; a cut pair straddling $u$- and $v$-material is the
+\emph{separation} in the together state and the \emph{join} in the
+apart state --- i.e.\ it flips the label in both --- and the outgoing
+geometry laws agree:
+$(\alpha+y-\beta,\,x-\alpha+\beta)
+\overset{d}{=}(\alpha+\beta',\,x+y-\alpha-\beta')$ jointly, by
+$\beta\mapsto y-\beta'$; a single cut in $u$-material merges an
+environment block $z$ into the $u$-coordinate in both states; and
+environment-only moves are identical.  This exhausts all cases, so
+$K(\iota s,\iota\,\cdot)=\iota_*K(s,\cdot)$; $\varepsilon$ flips by
+definition of $\iota$, and $M_d=P^d\varepsilon$ inherits oddness.
+\end{proof}
+
+\emph{Status: PROVED (case check as above).  VERIFIED
+(\texttt{s8\_splitmerge iota}): from mirrored starts
+$(\mathrm{tog},(x,y),z)$ and $(\mathrm{apart},(x,y),z)$, measured
+$P_A(u\sim v)+P_B(u\sim v)=1$ within Monte Carlo error at all tested
+$t\le32$ and geometries, with identical $u$-coordinate marginals.}
+
+\begin{corollary}[quotient factorization; the label carries all the
+sign]\label{cor:quotient}
+Let $\Gamma_t=(a_t,b_t;\mathrm{env}_t)$ be the quotient of the marked
+chain by $\iota$ (the geometry with the label forgotten;
+$a\leftrightarrow x$ or $p$, $b\leftrightarrow y$ or $q$).  Then:
+\begin{enumerate}[leftmargin=2em]
+\item $\Gamma_t$ is Markov, with the transition laws of
+Lemma~\ref{lem:splitmerge} read on $(a,b;\mathrm{env})$; the
+\emph{flip moves} (cut pair straddling $a$- and $b$-material) occur
+with probability $2a_tb_t$ per step and update
+$(a,b)\to(\alpha+\beta,\,a+b-\alpha-\beta)$.
+\item The label evolves deterministically along the quotient path:
+$\varepsilon_d=\varepsilon_0\cdot(-1)^{N_d}$ with $N_d$ the number of
+flip moves, a functional of the quotient path alone.
+\item Hence, with
+$\Phi_d(\Gamma):=\E_\Gamma\bigl[(-1)^{N_d}\bigr]$,
+\[
+M_d(C)\;=\;\varepsilon(C)\cdot\Phi_d\bigl(\Gamma(C)\bigr),
+\qquad
+\psi(j,d)\;=\;\E_{\mu_j}\bigl[\Phi_d(\Gamma_0)^2\bigr].
+\]
+\item Every stationary law of the marked chain is $\iota$-invariant
+wherever uniqueness holds on its support; in particular the label is
+a fair coin given the geometry at stationarity.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(1),(2): the flip moves are exactly the label-changing moves in both
+sectors (Theorem~\ref{thm:iota}), and their effect on the geometry has
+the stated common law; all other moves preserve the label.  (Flip
+moves are a.s.\ identifiable on the quotient path: they are the only
+moves that change both marked coordinates.)  (3):
+condition on the quotient path.  (4): $\iota$ pushes any stationary
+law to a stationary law with the same quotient marginal.
+\end{proof}
+
+\emph{Status: PROVED.  Problem~\ref{prob:mixing} is thereby freed of
+the sign structure: it is now a statement about the \emph{parity}
+functional $\Phi_d=\E[(-1)^{N_d}]$ of an autonomous
+positive-recurrent chain.  Consistency check: at stationarity the
+label-fairness (4) predicts $P(u\sim v)=1/2$; measured $0.5065(29)$ at
+burn-in $8192$.}
+
+\begin{remark}[renewal structure at flip times]\label{rem:renewal}
+Let $\tau$ be the first flip move.  Strong Markov gives the exact
+renewal identity
+\[
+\Phi_d(\Gamma)\;=\;\Pr_\Gamma[\tau>d]\;-\;
+\E_\Gamma\bigl[\Phi_{d-\tau}(\Gamma_\tau);\ \tau\le d\bigr].
+\]
+The flip clock runs at rate $2a_tb_t$; after a flip the $u$-coordinate
+is \emph{recharged} ($a'=\alpha+\beta$ is macroscopic unless both
+$a,b$ were small).  The correlation-survival mechanism is therefore
+gap-trapping: $\Pr[\tau>d]$ is dominated by trajectories on which
+$g_t=\min(a_t,b_t)$ stays $O(1/d)$, since an untouched small side
+freezes ($\Pr[\text{the }g\text{-material is hit in }d\text{ steps}]
+\le 4gd$), while a touched one is typically recharged to macroscopic
+size by a size-biased merge.
+\end{remark}
+
+%----------------------------------------------------------------------
+\subsection{The stationary gap law, and the exact rate from below}
+\label{sec:gaplaw}
+
+\begin{proposition}[stationary gap law]\label{prop:gaplawstat}
+Let $\pi$ be the stationary law of the marked chain (the $n\to\infty$
+limit of the cycle structure of a uniform permutation of $n$ circle
+points with two marked points; top of the size spectrum
+$\mathrm{PD}(1)$).  Under $\pi$: $\Pr[u\sim v]=\tfrac12$; given
+$u\sim v$ the common-block mass $s$ has density $2s$ on $(0,1)$ (so
+$\E[s\mid u\sim v]=2/3$) and $x\mid s\sim U(0,s)$; given $u\not\sim v$
+the pair $(p,q)$ is uniform on the triangle $\{p,q>0,\ p+q<1\}$
+(so the joint density of $(\text{apart},p,q)$ is $1$ there, mass
+$\tfrac12$).  Consequently, with
+$g=\min(x,y)$ resp.\ $\min(p,q)$,
+\[
+\Pr_\pi[g\le\delta]\;=\;4\delta+O(\delta^2)\qquad(\delta\to0),
+\]
+and the density of $g$ at $0^+$ is $4$.
+\end{proposition}
+
+\begin{proof}
+At $n$ points: for uniform $\sigma$, $\Pr[u,v$ in a common $m$-cycle$]
+=(m-1)/\bigl(n(n-1)\bigr)$ (choose and order the cycle), summing to
+$1/2$; given the cycle, the $u\to v$ distance is uniform on
+$\{1,\dots,m-1\}$; if apart,
+$\Pr[|C_u|=m_1,v\notin C_u]=\tfrac1n\cdot\tfrac{n-m_1}{n-1}$ and
+given this $|C_v|$ is uniform on $\{1,\dots,n-m_1\}$, so the joint
+law of $(p,q)=(m_1,m_2)/n$ converges to
+$(1-p)\,dp\cdot\tfrac{dq}{1-p}=dp\,dq$ on the triangle.  Pass to the
+limit ($m/n\to s$).  The
+gap: given together,
+$\Pr[\min(x,y)\le\delta]=\int_0^1 2s\min(1,2\delta/s)\,ds
+=4\delta-4\delta^2$; given apart,
+$\Pr[\min(p,q)\le\delta]=4\delta+O(\delta^2)$ likewise; average the
+two sectors.
+\end{proof}
+
+\emph{Status: PROVED at finite $n$ with a routine limit exchange
+(the marked chain is the lumping of the transposition walk, see
+\S\ref{sec:spectral}; over any fixed horizon the kernels converge).
+VERIFIED: measured dyadic masses at stationarity
+($\Pr[g\in(2^{-6},2^{-5})]$: together $0.0297$ vs predicted $0.0312$,
+apart $0.0288$ vs $0.0312$; lower bins consistent with density $4$
+throughout), and the label is a fair coin in every gap bin.}
+
+\begin{proposition}[the mixing rate is at most $1/d$: lower bound]
+\label{prop:lower}
+There are $c_0>0$, $d_0$ such that the stationary-start mixing
+functional obeys
+\[
+\psi_\pi(d)\;:=\;\E_\pi\bigl[M_d^2\bigr]\;\ge\;\frac{c_0}{d},
+\qquad d\ge d_0 .
+\]
+Hence $\bar\psi(d)\ge c_0/d$ along any initial family
+$\{\mu_j\}$ whose gap law dominates a multiple of the stationary one
+(numerically true for the iid-chord $\mu_j$ already at $j=16$), and
+no exponent $c>1/2$ is attainable in Problem~\ref{prob:mixing}.
+\end{proposition}
+
+\begin{proof}
+Fix $K$ and let
+$G=\{g_0\le1/(Kd)\}$.  On $G$, the $g$-material (the short side if
+together, the small block if apart) is hit by no cut during $d$ steps
+except with probability $\le 4g_0d\le4/K$: each step's two cuts avoid
+it with probability $\ge1-4g_0$ while it remains unhit, and while
+unhit its mass is frozen.  If it is never hit there is no flip move
+(a flip requires a cut in both $a$- and $b$-material), so
+$\varepsilon_d=\varepsilon_0$ and, for the conditional expectation,
+$|M_d|=|\E[\varepsilon_d\mid X_0]|\ge1-8/K$ on $G$.  Therefore
+$\psi_\pi(d)\ge\E[M_d^2;G]\ge(1-8/K)^2\,\pi(G)$, and
+$\pi(G)\ge c_1/(Kd)$ by Proposition~\ref{prop:gaplawstat}.  Take
+$K=16$.
+\end{proof}
+
+\emph{Status: PROVED (given Proposition~\ref{prop:gaplawstat}).  This
+settles the sharpness question left open in \S\ref{sec:factor}: the
+measured $\psi\approx0.8/d$ is the true order, the budget margin of
+Corollary~\ref{cor:psienough} is exactly $c=1/2$ vs $c>1/11$
+(factor $5.5$ in the exponent), and no route can do better than
+$1/d$ --- in particular any proof of Problem~\ref{prob:mixing} must
+tolerate the gap-trapped trajectories, they are really there.}
+
+%----------------------------------------------------------------------
+\subsection{What remains for the upper bound}
+\label{sec:upper}
+
+The decomposition
+$\psi(j,d)=\E[\Phi_d^2;\,g_0<\varepsilon]+\E[\Phi_d^2;\,g_0\ge
+\varepsilon]$ with $\varepsilon\asymp1/d$, together with
+$|\Phi_d|\le1$, reduces the upper bound to two independent
+statements.
+
+\begin{problem}[uniform gap law]\label{prob:gaplaw}
+Show $\Pr_{\mu_j}[g_0\le\varepsilon]\le C\varepsilon^{\kappa}$ (some
+$\kappa\in(0,1]$, uniformly in $j$) for the iid-chord initial laws
+$\mu_j$ --- equivalently for the chain run $j$ steps from the
+one-block start.
+\end{problem}
+
+\emph{Partial progress: (i) at stationarity this is
+Proposition~\ref{prop:gaplawstat} with $\kappa=1$; (ii) the per-step
+\emph{creation} flux into $\{g\le\varepsilon\}$ has the universal
+bound $\Pr[\text{step creates }g'\in d\varepsilon]\le
+C\varepsilon\,d\varepsilon$ for every current state (each channel ---
+shrink of a marked coordinate, flip recharge landing small --- has
+outgoing density $\le2\varepsilon$ at $\varepsilon$: e.g.\ a split of
+the $u$-block of mass $p$ leaves $u$ with $p-|t_1-t_2|$, of density
+$2\varepsilon'/p^2\cdot p^2$ at $\varepsilon'$); (iii) escape from
+$\{g\le\varepsilon\}$ happens at rate $\ge2g(1-g)\cdot
+\Pr[\text{merge partner macroscopic}]$, so a renewal bound gives
+$\kappa=1$ \emph{given} a uniform-in-time ``no-dust'' estimate (the
+environment retains a macroscopic block); it is the no-dust step that
+is open, and only it.  Numerically the dyadic gap masses under
+$\mu_j$ match the stationary density already at $j=16$.}
+
+\begin{lemma}[recharge estimates]\label{lem:recharge}
+For the quotient chain: (i) flip moves preserve the marked total
+$s=a+b$; (ii) a flip from $(a,b)$ lands at gap
+$g'=\min(\alpha+\beta,\,s-\alpha-\beta)$ with
+$\Pr[g'\le\eta]\le\eta^2/(ab)$ for $\eta\le\min(a,b)$; (iii) from
+\emph{any} state, each move channel sends a marked coordinate into
+$(0,\eta]$ from above with probability $\le\eta^2$ per step (e.g.\
+the shrink channel: both cuts in the $a$-material has probability
+$a^2$, and $|t_1-t_2|\in[a-\eta,a)$ has conditional probability
+$\le\eta^2/a^2$); so the total creation flux into
+$\{g\le\eta\}$ is $\le4\eta^2$ per step.
+\end{lemma}
+
+\begin{proof}
+(i) is immediate from the flip law.  (ii): $\alpha+\beta\le\eta$ has
+probability $\eta^2/(2ab)$ ($\alpha\sim U(0,a)$, $\beta\sim U(0,b)$
+independent), likewise the other end.  (iii): direct integration of
+the stated densities, channel by channel (shrink of $a$, shrink of
+$b$, and the two flip ends).
+\end{proof}
+
+\emph{Status: PROVED.  Together with Remark~\ref{rem:renewal} this
+pins the intended endgame: from a good start the first-flip time
+$\tau$ has tail $\asymp1/t$ (trapping is the only way to stall, and
+Lemma~\ref{lem:recharge}(iii) prices its creation), each flip
+recharges the gap with quadratic safety (ii), so the flips form an
+approximate renewal process with infinite-mean, regularly-varying
+inter-arrival tail $\sim c/t$; for such renewals the alternating sum
+$\E[(-1)^{N_d}]$ collapses to $\Theta(\text{tail}(d))=\Theta(1/d)$
+(the signed renewal measure $\sum_k(-1)^kG^{*k}$ has total mass
+$\tfrac12$).  Two genuine gaps remain: the inter-flip times are
+state-dependent rather than iid, and the escape-rate lower bound
+$\ge c\,g$ behind the $1/t$ tail needs the environment to offer a
+macroscopic merge partner --- a ``no-dust'' estimate; at stationarity
+dust configurations have probability $\approx$ the Dickman mass
+$\rho(8)\sim10^{-8}$, small but not $o(1)$ in $d$, so the assembly
+must let dust episodes delay rather than veto escape (dust coarsens
+under merges).  Note also the second trap coordinate: the marked total
+$s$ itself can be small (then flips are rare no matter the gap); but
+$\Pr_\pi[s\le\delta]=O(\delta^2)$ in both sectors (the together mass
+$s$ has density $2s$, and $(p,q)$ is uniform on the triangle), so the
+$s$-trap contributes only $O(1/d^2)$ and rides along harmlessly in
+the renewal bookkeeping.}
+
+\begin{problem}[parity decay off small gaps]\label{prob:survival}
+Show $\E_{\mu_j}\bigl[\Phi_d(\Gamma_0)^2;\ g_0\ge\varepsilon\bigr]\le
+C(\varepsilon d)^{-2\alpha}$ for some $\alpha>0$ (uniformly in $j$),
+i.e.\ trajectories started with both marked coordinates
+$\ge\varepsilon$ lose the parity memory at a polynomial rate in
+$\varepsilon d$.
+\end{problem}
+
+Any pair $(\kappa,\alpha)$ solves Problem~\ref{prob:mixing}: from
+$\psi\le C\bigl(\varepsilon^\kappa+(\varepsilon d)^{-2\alpha}\bigr)$,
+optimising at $\varepsilon=d^{-2\alpha/(\kappa+2\alpha)}$ gives
+$\psi\le Cd^{-2c'}$ with $c'=\alpha\kappa/(\kappa+2\alpha)$; the
+budget needs only $c'>1/11$, e.g.\ $(\kappa,\alpha)=(1,1/2)$ gives
+$c'=1/4$, and any $\kappa=\alpha>3/10$ still closes
+($c'=\kappa/3>1/11$ there).  \emph{The mechanism behind
+Problem~\ref{prob:survival} is confirmed numerically: binning
+$\psi$-contributions by $g_0$ (\texttt{s8\_splitmerge psibar}) shows
+$\E[\Phi_d^2\mid g_0]$ is a scaling function of $g_0d$ alone ---
+$\approx1$ for $g_0d\lesssim1/4$, $\lesssim0.05$ for $g_0d\gtrsim4$
+--- so the conditional decay is fast; what is missing is a proof
+device for the parity cancellation (the renewal identity of
+Remark~\ref{rem:renewal} plus recharge is the intended route: after
+the first flip the state is macroscopic w.h.p., flips then recur at
+rate $\Theta(1)$, and the alternating sum cancels to the heavy-tail
+term $\Pr[\tau>d]$).}
+
+%----------------------------------------------------------------------
+\subsection{The spectral route}\label{sec:spectral}
+
+The discrete precursor of the marked chain --- right multiplication
+of $\sigma_t\in S_n$ by uniform transpositions, marked cycle
+structure observed --- is a strongly lumpable function of a chain
+that is reversible with respect to the uniform measure; the lumped
+chain is therefore reversible with respect to its stationary law, and
+this persists in the $n\to\infty$ limit chainwise (the continuum
+statement deserves its own write-up; nothing below is used elsewhere).
+Granting it: $\psi_\pi(d)=\int\lambda^{2d}\,d\nu_\varepsilon(\lambda)$
+for the spectral measure $\nu_\varepsilon$ of $\varepsilon$ under the
+self-adjoint $P$, and Problem~\ref{prob:mixing} (stationary start)
+becomes: \emph{$\nu_\varepsilon$ has at most polynomial mass near
+$|\lambda|=1$}, with Proposition~\ref{prop:lower} asserting at least
+linear mass near $\lambda=1$.  Two structural facts make this
+attractive.  (i) By Theorem~\ref{thm:iota} the sign lives in the
+$\iota$-odd sector, where the Dirichlet form has a \emph{massive}
+term on flip moves: for $f=\varepsilon\cdot F(\Gamma)$,
+\[
+\mathcal{E}(f,f)=\tfrac12\,\E_\pi\Bigl[(F-F')^2\,;\,\text{non-flip}
+\Bigr]+\tfrac12\,\E_\pi\Bigl[(F+F')^2\,;\,\text{flip}\Bigr],
+\]
+so a low-energy odd function must be small wherever the flip rate
+$2ab$ is not, i.e.\ must localise on $\{g\lesssim\delta\}$, whose
+mass is $\asymp\delta$ (Proposition~\ref{prop:gaplawstat}): this is
+precisely the geometric picture of a linear spectral density, and
+trial functions $F=\mathbf{1}\{g\le\delta\}$ realise it (Rayleigh
+quotient $\asymp\delta$ at mass $\asymp\delta$), reproving
+Proposition~\ref{prop:lower} spectrally.  (ii) The converse direction
+--- \emph{every} odd $F$ with
+$\mathcal{E}\le\delta\|F\|^2$ has
+$|\langle F,\varepsilon\rangle|^2\le C\delta\|F\|^2$ --- is a
+weighted Hardy-type inequality in the gap coordinate and is the
+cleanest formulation of the missing upper bound.  A caveat for
+whoever takes this up: the chain is $2$-periodic
+($(-1)^{\#\mathrm{blocks}}$ flips deterministically, an exact
+$\lambda=-1$ eigenfunction, and it is $\iota$-odd since $\iota$
+changes the block count by one), so the top-of-spectrum analysis must
+be run on $P^2$ or per parity sector; $\psi$ decays, so
+$\langle\varepsilon,(-1)^{\#\mathrm{blocks}}\rangle_\pi=0$, which is
+consistent with phase symmetry of $\pi$, but intermediate
+inequalities must not silently assume aperiodicity.
+
+%----------------------------------------------------------------------
+\subsection{Transfer to the orbit measure: the mixture route}
+\label{sec:transfer}
+
+The factorization proof of Theorem~\ref{thm:factor} uses exactly one
+probabilistic input --- chords attached to disjoint index sets are
+conditionally independent given the shared ones --- and the session-7
+caution stands: this fails per-instance.  The split--merge picture
+suggests the correct weakening.  The orbit chord positions
+$(Z_1,\dots,Z_k)$ are exchangeable given the frame (the cycles of
+$\pi_P$, the points $u,v$); a finitely exchangeable vector drawn from
+a population of $N$ position slots is a mixture of iid$(\theta)$
+vectors up to total variation $O(k^2/N)$ (Diaconis--Freedman), with
+$\theta$ the (random) empirical position law of the instance, and the
+cell-disjointness of the intercalate family is a pairwise hard-core
+correction of the same $O(k^2/N)$ order.  Two observations make the
+mixture usable:
+\begin{enumerate}[leftmargin=2em]
+\item Conditionally on $\theta$, Theorem~\ref{thm:factor} applies
+verbatim (its proof needs only iid given $(u,v,\theta)$), giving
+$4\,\E[\mathrm{bias}^2]\le
+\E_\theta\bigl[\max_{j,d\ge k/8}\psi^\theta(j,d)\bigr]
++2e^{-k/32}+O(k^2/N)$.
+\item The entire analysis of
+\S\S\ref{sec:smident}--\ref{sec:gaplaw} is \emph{measure-covariant}:
+for chords with iid $\theta$-distributed endpoints, the induced chain
+is the split--merge chain in which every rate is read off the
+$\theta$-masses of curves and sides (cuts land in a curve with
+probability its $\theta$-mass, uniformly in its
+$\theta$-parametrisation).  In particular Lemma~\ref{lem:splitmerge},
+Theorem~\ref{thm:iota}, Corollary~\ref{cor:quotient} and
+Lemma~\ref{lem:recharge} hold verbatim with ``mass'' $=$
+$\theta$-mass, provided $\theta$ is atomless; atoms of mass $m$ act
+as permanent traps of that scale and cap the decay at
+$\psi^\theta\gtrsim\max_i\theta(\{i\})$, which for orbit frames
+($N\asymp n$ near-uniform slots) is $O(1/n)$ --- far below the
+$k^{-2c}$ budget, $k=\Theta(\log^{11}n)$.
+\end{enumerate}
+So the transfer problem 7a(i) is reduced to (a) a quantitative
+exchangeable-to-mixture step for the greedy maximal family under the
+orbit measure (the hard-core correction; KSS-type concentration
+should control the conflict density), and (b) the
+$\theta$-uniform version of the mixing bound, i.e.\
+Problem~\ref{prob:survival} with constants depending only on
+$\max_i\theta(\{i\})$ and not otherwise on $\theta$
+(Proposition~\ref{prop:shorthorizon} is already $\theta$-covariant:
+Lemma~\ref{lem:recharge}(iii) reads verbatim in $\theta$-mass for
+atomless $\theta$).  Empirically the conclusion already holds on real squares:
+binning the session-7 per-instance data
+(\texttt{s7\_inst\{30,50,100\}.csv}) by $k$ gives
+$\E[\mathrm{bias}^2\mid k]\cdot k=0.6$--$0.75$, flat across
+$k=8$--$26$ and $n=30$--$100$ (and \texttt{s8\_inst200.csv} extends
+this, see \S\ref{sec:mixnum}): the $1/k$ law transfers with a
+constant $\approx2.2\times$ the iid one, no drift.
+
+\emph{Status: reduction formulated; both steps OPEN.  This replaces
+the vaguer options ($\alpha$)/($\beta$) of the session-7 list.}
+
+%----------------------------------------------------------------------
+\subsection{Numerics at large $d$}\label{sec:mixnum}
+
+All session-8 runs, continuum chain unless stated
+(\texttt{s8\_psibar.log}, \texttt{s8\_4eb2\_big.log},
+\texttt{s8\_onept.log}); COMPUTED.
+
+\emph{(a) The stationary rate is $1/d$ on the nose.}  Stationary-start
+(burn-in $16384$) values of $\psi_\pi(d)\cdot d$:
+$0.96$ ($d{=}64$), $1.06$ ($d{=}128$), $1.11$ ($d{=}256$),
+$0.93$ ($d{=}512$), $0.87$ ($d{=}1024$; errors grow from $\pm0.05$
+to $\pm0.25$ along the list) --- constant $\approx1.0$, fitted
+exponent $1.03\pm0.09$ over $d=64$--$1024$ (and $1.05$ on the
+session-7 $j$-table route), no logarithmic growth, matching
+Proposition~\ref{prop:lower} from below and pinning the conjectured
+upper bound at $c=1/2$ exactly.
+
+\emph{(b) The scaling collapse.}  Binning the $\psi$-contribution by
+the initial gap: $\E[\Phi_d^2\mid g_0]$ is a function of $u=g_0d$
+alone across $d=64,128,512$ --- the dyadic profile
+$\varphi(u)\approx0.06,\,0.23,\,0.49,\,0.69,\,0.82,\,0.9,\,{\to}1$ at
+$u\approx0.7,\,0.35,\,0.18,\,0.09,\,0.04,\,0.02,\dots$, and
+$\varphi\le0.02$ for $u\ge1.4$ (consistent with fast decay); the
+transition sits at $g_0\approx1/d$ as the trap picture requires, the
+together and apart rows agree bin by bin (the $\iota$-symmetry made
+visible), and summing bins reproduces $\psi\approx1.0/d$ with the
+$\{g_0\lesssim1/d\}$ bins carrying essentially all of it.  Small-$u$
+behaviour $1-\varphi(u)\approx u^{1/2\text{--}0.6}$ (not the naive
+linear touch-count) --- unexplained, low stakes.
+
+\emph{(c) The iid-ensemble constant flattens.}  Extending the
+session-7 drift $4\E[\mathrm{bias}^2]\cdot k=0.95\to1.44$
+($k=8..256$): $k=512$: $1.448\pm0.229$; $k=1024$: $1.171\pm0.324$
+(discrete code, $20$M/$40$M trials) --- constant $\approx1.3$--$1.45$,
+\emph{no} $\log k$; the budget question of session 7 (8d(b)) is
+settled: no log factor.
+
+\emph{(d) The one-point exponent is exactly $2$.}  From the clean
+start (single curve, $x=y=\tfrac12$):
+$f(m)=+0.006280(50),\ +0.002951(41),\ +0.001713(35),\
++0.000814(29),\ +0.000458(25)$ at $m=8,12,16,24,32$;
+$f(m)\cdot m^2=0.402,0.425,0.438,0.469,0.469$ and the local exponent
+reaches $2.00$ on $m=24\to32$: $f(m)\to0.47\,m^{-2}$.  This confirms
+the trap-creation mechanism: a clean start must \emph{create} its
+trap (Lemma~\ref{lem:recharge}(iii) prices a depth-$1/m$ trap at
+$\asymp1/m^2$), whereas the stationary start carries a ready-made
+linear atom --- hence $1/m^2$ against the stationary $1/d$; it also
+resolves session 7's 8d(c) (the value was below MC resolution
+there).  \emph{Session-9 correction:} the same data at odd $m$ shows
+$f(m)$ \emph{alternates} in sign, so the leading $1/m^2$ term is the
+alternating one and not the frozen-label trap term; see
+Lemma~\ref{lem:parity}(a) and Theorem~\ref{thm:exactonepoint}.
+
+\input{section_mixing_s9}
+\input{section_mixing_s10}
+\input{section_mixing_s11}
+\input{section_mixing_s12}

@@ -1,0 +1,11 @@
+n=5 lam=(5,) (alpha,beta)=(2,3): squares=864 instances=4320
+  P(marked B) = 2/3 = 0.666667
+  P(B1) = 2/3 = 0.666667   P(B2) = 2/3 = 0.666667
+  P(B1|MB) = 1/2 = 0.500000   P(B2|MB) = 1/2 = 0.500000
+  P(B1|MA) = 1 = 1.000000   P(B2|MA) = 1 = 1.000000
+  cross-switch on 2880 marked-B instances: latin 2880/2880, type 2880/2880, involution 2880/2880, markB-preserved 2880/2880, hard-fail 0
+  toggle profile (k: toggles/opportunities):
+    k=1: 2880/2880  (1.0000)
+    k=2: 1080/2880  (0.3750)
+    k=3: 1080/2880  (0.3750)
+    k=4: 2880/2880  (1.0000)

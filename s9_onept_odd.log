@@ -1,0 +1,10 @@
+# s9 first-flip tails (clean start), phic bins, phi (forced gap; CONFOUNDED when s<g0, see handoff), oddeven, one-point odd m -- outputs as run in session 9
+SM one m=   7 trials=2000000: Eeps=-0.007472 (se 0.000707)
+SM one m=   8 trials=2000000: Eeps=+0.006312 (se 0.000707)
+SM one m=   9 trials=2000000: Eeps=-0.004965 (se 0.000707)
+SM one m=  11 trials=2000000: Eeps=-0.003894 (se 0.000707)
+SM one m=  12 trials=2000000: Eeps=+0.003179 (se 0.000707)
+SM one m=  13 trials=2000000: Eeps=-0.002891 (se 0.000707)
+SM one m=  15 trials=2000000: Eeps=-0.002333 (se 0.000707)
+SM one m=  16 trials=2000000: Eeps=+0.002646 (se 0.000707)
+SM one m=  17 trials=2000000: Eeps=-0.001177 (se 0.000707)

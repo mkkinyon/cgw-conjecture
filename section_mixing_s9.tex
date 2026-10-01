@@ -1,0 +1,326 @@
+%----------------------------------------------------------------------
+\subsection{Session 9: the gap law is not needed; parity; an exact
+one-point formula}\label{sec:s9}
+
+\subsubsection{Short horizon: Problem~\ref{prob:gaplaw} is
+unnecessary}\label{sec:shorthorizon}
+
+The reduction of \S\ref{sec:upper} asked for a gap law uniform in $j$.
+But in Theorem~\ref{thm:factor} the initial law $\mu_j$ enters only for
+$j\le k$ while $d\ge k/8$, i.e.\ $j\le8d$: the chain has run for at
+most $8d$ steps before the $d$ fresh steps begin, and over such a short
+horizon the state-independent creation flux of
+Lemma~\ref{lem:recharge}(iii) alone controls the gap.
+
+\begin{proposition}[short-horizon gap bound]\label{prop:shorthorizon}
+Let $g_0^{\mathrm{ini}}=\min(|u-v|,1-|u-v|)$ be the initial separation
+($=\tfrac12$ in the antipodal ensemble) and let $g_j$ be the gap of the
+marked state after $j$ iid chords.  Then for every $\varepsilon>0$ and
+every $j\ge0$,
+\[
+\Pr_{\mu_j}\bigl[g_j\le\varepsilon\bigr]
+\;\le\;\mathbf 1\{g_0^{\mathrm{ini}}\le\varepsilon\}\;+\;4\varepsilon^2 j .
+\]
+\end{proposition}
+
+\begin{proof}
+If $g_j\le\varepsilon<g_0^{\mathrm{ini}}$ there is a first step
+$t\le j$ at which the gap enters $(0,\varepsilon]$ from above; by
+Lemma~\ref{lem:recharge}(iii) each step does so with probability at
+most $4\varepsilon^2$ whatever the current state (the four channels
+--- shrink of either coordinate, either end of a flip --- each
+contribute at most $\varepsilon^2$; merges only increase coordinates
+and environment-only moves leave them unchanged).  Sum over $t\le j$.
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED (\texttt{s9\_survival flux}): at
+$j=8$ the ratio $\Pr[g_j\le\varepsilon]/(4\varepsilon^2j)$ is
+$1.00\pm0.05$ for $\varepsilon\le2^{-8}$ --- the bound is
+\emph{sharp} at small $\varepsilon$ (each channel's entry probability
+is exactly $\varepsilon^2$ while all coordinates exceed
+$\varepsilon$, and nothing has had time to escape); at $j=64$ and
+$j=512$ the ratio is $\le0.93$ resp.\ $\le0.92$ in every bin and
+decreases to the stationary linear law $4\varepsilon$ at moderate
+$\varepsilon$.}
+
+\begin{corollary}[$\kappa$-free budget]\label{cor:kappafree}
+Suppose Problem~\ref{prob:survival} holds with exponent $\alpha$:
+$\E_{\mu_j}[\Phi_d^2;\,g_j\ge\varepsilon]\le C(\varepsilon d)^{-2\alpha}$
+for all $j\le8d$.  Then, in the antipodal ensemble,
+\[
+\psi(j,d)\;\le\;32\,\varepsilon^2d+C(\varepsilon d)^{-2\alpha}
+\;\le\;C'\,d^{-\alpha/(1+\alpha)}\qquad(j\le8d),
+\]
+i.e.\ Problem~\ref{prob:mixing} holds with
+$c'=\alpha/(2(1+\alpha))$, and the budget $c'>1/11$ of
+Corollary~\ref{cor:psienough} is met as soon as $\alpha>2/9$.  In
+particular the expected value $\alpha=1/2$ gives $c'=1/6$ (against
+$c'=1/4$ with a linear gap law), and Problem~\ref{prob:gaplaw} is
+\emph{not needed} for the iid model.
+\end{corollary}
+
+\begin{proof}
+Combine Proposition~\ref{prop:shorthorizon} ($j\le8d$) with
+$|\Phi_d|\le1$ in the decomposition of \S\ref{sec:upper} and optimise
+$\varepsilon=d^{-(1+2\alpha)/(2+2\alpha)}$; $c'>1/11$ iff
+$11\alpha>2+2\alpha$.
+\end{proof}
+
+\emph{Status: PROVED.  The whole ``no-dust''/escape discussion of
+\S\ref{sec:upper} is thereby demoted to a route for the \emph{sharp}
+exponent $c=1/2$ (or for the stationary-start statement); the iid
+model needs only Problem~\ref{prob:survival} with any $\alpha>2/9$.
+In the true ensemble the indicator term is the short-arc atom already
+accounted for as the $O(1/k)$ term of \S\ref{sec:annealed}.}
+
+\begin{lemma}[$s$-trap flux]\label{lem:strap}
+From any state, the marked total $s=a+b$ enters $(0,\sigma]$ from above
+with probability at most $2\sigma^2$ per step; hence
+$\Pr_{\mu_j}[s_j\le\sigma]\le2\sigma^2j$ in the antipodal ensemble.
+\end{lemma}
+\begin{proof}
+Flips and merges do not decrease $s$; a shrink of $a$ lands at
+$s'=a'+b\le\sigma$ only if $b\le\sigma$ and $a'\le\sigma-b$, which has
+probability $\le(\sigma-b)^2\le\sigma^2$ (the shrink channel of
+Lemma~\ref{lem:recharge}(iii)); likewise for $b$.
+\end{proof}
+\emph{Status: PROVED.  Consequently in Corollary~\ref{cor:kappafree}
+one may also assume $s_0\ge\sigma$ at cost $16\sigma^2d$, so the
+target estimate of Problem~\ref{prob:survival} need only be proved
+for starts with $a_0,b_0\ge\varepsilon$ and $s_0\ge\sigma\asymp\varepsilon$.}
+
+\subsubsection{Parity: the label is a function of time and the
+environment block count}\label{sec:parity}
+
+\begin{lemma}[block-count parity]\label{lem:parity}
+Let $B_t$ be the total number of curves and $E_t$ the number of
+environment curves (those through neither $u$ nor $v$) at time $t$.
+Every step is a split or a merge, so $B_t\equiv B_0+t\pmod 2$; since
+$B_t=E_t+1+\mathbf 1\{u\not\sim v\}$,
+\[
+\varepsilon_t\;=\;-(-1)^{B_0+t}\,(-1)^{E_t},
+\qquad
+(-1)^{N_t}\;=\;(-1)^{t}\,(-1)^{E_t-E_0},
+\]
+with $N_t$ the number of flip moves.  Hence
+$\Phi_d(\Gamma)=(-1)^d\,\E_\Gamma[(-1)^{E_d-E_0}]$.
+\end{lemma}
+
+\begin{proof}
+Splits add a curve, merges remove one; a flip (separate or join)
+changes $B$ by one and leaves $E$ unchanged, every other move leaves
+the label and changes $E$ by one.
+\end{proof}
+
+\emph{Status: PROVED (trivial, but structurally decisive).  Three
+consequences.}
+
+\emph{(a) The sign of the one-point function alternates.}  From the
+clean start, $f(m)=\E[\varepsilon(F_m)]$ obeys
+$f(m)\cdot(-1)^m>0$: measured $f(7)=-0.00753(22)$, $f(8)=+0.00599(22)$,
+$f(9)=-0.00526(22)$, $f(11)=-0.00353$, $f(12)=+0.00295$,
+$f(13)=-0.00275$, $f(15)=-0.00192$, $f(16)=+0.00213$,
+$f(17)=-0.00149$ ($2\times10^7$ trials each).  Session 8 sampled only
+even $m$ and read $f(m)\approx0.47/m^2$ as the frozen-label trap
+term; that reading is \emph{incomplete}: the leading term is the
+alternating one, $f(m)\approx(-1)^m\,c_1/m^2$ with $m^2|f(m)|$
+increasing through $0.40,0.43,0.44,0.47,0.47$ ($m=8..32$) and
+plausibly $c_1=\tfrac12$ (Theorem~\ref{thm:exactonepoint} below gives
+exactly $\tfrac12$ for the $(u,v)$-averaged function), while the
+non-alternating (trap) part, $\tfrac12(f(m{-}1)+f(m{+}1))+f(m)$ at
+even $m$, is $\lesssim2\times10^{-4}$ at $m=8$.  Nothing downstream
+is affected ($\psi=\E\Phi^2$ is sign-blind), but the smooth object is
+$(-1)^d\Phi_d$, not $\Phi_d$, and Remark~\ref{rem:renewal}'s heuristic
+``$\Phi_d\approx\Pr[\tau>d]$'' must be read with this sign.
+
+\emph{(b) An obstruction for coupling proofs.}  Any two words of the
+same length whose final environments have the same block-count parity
+have the same flip parity; in particular two trajectories from the
+same start that agree in marked geometry \emph{and} environment at
+time $d$ have the same label.  A coupling proof of
+Problem~\ref{prob:survival} must therefore produce, at time $d$,
+environments of \emph{different} block-count parity with the same
+law --- e.g.\ one carrying an extra tiny block.  The natural ``swap a
+flip for a shrink--re-merge pair and let the environment take a tiny
+extra split'' coupling has success probability $O(1/d)$ per step
+and is repeated $d$ times, so it yields only $|\Phi_d|\le1-c$: no
+decay.  Same-time $\iota$-mirroring is impossible ($\iota$ changes
+$B$ by one); a one-step shifted mirror gives $\Phi_d\approx-\Phi_{d+1}$,
+which is the alternation (a), not decay.  The parity of $N_d$ is thus
+a genuinely ``continuous-state'' functional and the proof of
+Problem~\ref{prob:survival} has to go through the renewal or spectral
+route.
+
+\emph{(c) First-flip tail from good starts is $1/t^2$, not $1/t$.}
+From a stationary environment conditioned on $g_0\in[1/16,1/8)$
+(\texttt{s9\_survival phic}), $t^2\Pr[\tau>t]\to11.1$ ($t=128,256$;
+$16.1$ at $t=64$, $29$ at $t=32$); from the clean start with
+$g_0=1/4$, $t\Pr[\tau>t]$ halves per doubling of $t$ from $t=32$ on.
+The renewal heuristic explains this: a trap at depth $\eta\le\varepsilon$
+is created at rate $8\eta\,d\eta$ (Lemma~\ref{lem:recharge}(iii)) and
+survives $m$ further steps without flipping with probability
+$\approx e^{-2\eta sm}$, so the kernel $K(m)=\int_0^\varepsilon
+8\eta e^{-2\eta sm}d\eta\approx2/(s^2m^2)$ for $m\gg1/(\varepsilon s)$,
+with total mass $\approx4\varepsilon/s<1$: the first-flip time is a
+\emph{subcritical} renewal sum with a $1/t^2$ kernel, hence
+$\Pr[\tau>t]\asymp t^{-2}$ and, if the alternating-renewal
+cancellation holds, $|\Phi_d|\lesssim(\varepsilon d)^{-2}$ off small
+gaps --- i.e.\ the true $\alpha$ in Problem~\ref{prob:survival} is
+plausibly $2$, far above the $2/9$ needed.  Consistently,
+$\E[\Phi_d^2\mid g_0=u/d]$ is at the noise floor ($\lesssim10^{-3}$,
+often negative estimates) for every bin $u\ge3$ in the session-8
+\texttt{psibar} logs at $d=128$--$1024$.  COMPUTED, not proved.
+
+\subsubsection{An exact one-point formula}\label{sec:exactonept}
+
+Averaging the marked points over the circle turns the one-point
+function into a class function of the discrete precursor, and hook
+characters compute it exactly.
+
+\begin{theorem}[exact $(u,v)$-averaged one-point function]
+\label{thm:exactonepoint}
+Let $\sigma_m=\gamma\,\tau_1\cdots\tau_m$ with $\gamma$ a uniform
+$n$-cycle and $\tau_i$ iid uniform transpositions, and let $c_i$ be
+its cycle lengths.  Then
+\[
+\E\Bigl[\sum_i c_i(\sigma_m)^2\Bigr]
+=\frac{n(n+1)}2+\sum_{k=1}^{n-1}(n-k)\Bigl(1-\frac{2k}{n-1}\Bigr)^{m},
+\]
+so that for uniform distinct $u,v$,
+$\Pr[u\sim v\text{ in }\sigma_m]=\bigl(\E\sum c_i^2-n\bigr)/(n(n-1))$.
+Consequently, for the continuum uniform split--merge chain
+$(p_i(m))$ started from a single block,
+\[
+\E\Bigl[\sum_i p_i(m)^2\Bigr]
+=\frac12+\frac14\Bigl[\frac{1+(-1)^m}{m+1}+\frac{1-(-1)^m}{m+2}\Bigr]
+=\begin{cases}\tfrac12+\tfrac1{2(m+1)},& m\text{ even},\\[2pt]
+\tfrac12+\tfrac1{2(m+2)},& m\text{ odd},\end{cases}
+\]
+and the $(u,v)$-averaged one-point function
+$\bar f(m)=\E_{u,v}\E[\varepsilon(F_m)]=2\E\sum p_i^2-1$ equals
+$1/(m+1)$ for even and $1/(m+2)$ for odd $m$:
+$\bar f(m)=\dfrac{2m+3}{2(m+1)(m+2)}+(-1)^m\dfrac{1}{2(m+1)(m+2)}$.
+\end{theorem}
+
+\begin{proof}
+Right multiplication by a uniform transposition acts on the
+$\lambda$-isotypic component of $L^2(S_n)$ by
+$r_\lambda=\chi_\lambda(\tau)/d_\lambda$, and the law of $\gamma$ is
+the class measure of $n$-cycles, so for any $F$,
+$\E F(\sigma_m)=\sum_\lambda \rho_\lambda\,r_\lambda^{m}\,
+\langle\chi_\lambda,F\rangle$ with
+$\rho_\lambda=\chi_\lambda(n\text{-cycle})$ and
+$\langle\chi,F\rangle=\frac1{n!}\sum_\sigma\chi(\sigma)F(\sigma)$
+(Fourier inversion for class measures).  Only hooks
+$\lambda_k=(n-k,1^k)$ have $\rho_{\lambda}\ne0$, with
+$\rho_{\lambda_k}=(-1)^k$, and their content sum gives
+$r_{\lambda_k}=\bigl[(n-k)(n-k-1)-k(k+1)\bigr]/(n(n-1))=1-2k/(n-1)$.
+For $F=\sum_ic_i^2$ use the hook generating function
+$\sum_k\chi_{\lambda_k}(\mu)t^k=(1+t)^{-1}\prod_i(1-(-t)^{\mu_i})$ and
+the exponential formula with one marked part:
+\[
+\sum_{n}x^n\sum_k t^k\langle\chi_{\lambda_k},F\rangle
+=\frac1{1+t}\Bigl[\sum_{j\ge1}j\,(1-(-t)^j)x^j\Bigr]
+\exp\Bigl(\sum_{j\ge1}\frac{(1-(-t)^j)x^j}{j}\Bigr)
+=\frac1{1+t}\Bigl[\frac{x}{(1-x)^2}+\frac{tx}{(1+tx)^2}\Bigr]
+\frac{1+tx}{1-x}.
+\]
+Extracting $[x^n]$: the first term gives
+$\bigl[\binom{n+1}2+t\binom n2\bigr]/(1+t)$, the second
+$t(1-(-t)^n)/(1+t)^2$; the coefficient of $t^k$ ($1\le k\le n-1$) is
+$(-1)^kn+(-1)^{k-1}k=(-1)^k(n-k)$, and $\binom{n+1}2$ at $k=0$.
+Multiply by $\rho_{\lambda_k}=(-1)^k$ and $r^m$.  The continuum limit
+is the Riemann sum $\int_0^1(1-x)(1-2x)^m dx$, evaluated by
+$y=1-2x$; the identification of $\sigma_m/n$ with the split--merge
+chain from one block is Lemma~\ref{lem:splitmerge} (the $n$ points
+carry arcs of length $1/n$).
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED: the finite-$n$ formula
+(\texttt{s9\_hooks.py}, exact rationals; the inner products
+$(-1)^k(n-k)$ were also checked against the full character sums for
+$n\le12$) gives at $n=40$: $0.6007,\,0.5567,\,0.5314$ at $m=4,8,16$
+against the continuum simulator's $0.6005,\,0.5561,\,0.5297$
+(\texttt{s8\_splitmerge traj}), and the continuum values
+$m=1:\ 2/3$, $m=2:\ 2/3$ agree with direct hand integration.
+Remarks: (i) this is the $(u,v)$-averaged version of the one-point
+function of \S\ref{sec:mixnum}(d); its non-alternating part
+$\approx1/m$ is the frozen-label trap term fed by the linear initial
+gap density (2 on $(0,\tfrac12)$) of a random separation, absent for
+antipodal $u,v$, and its alternating part $(-1)^m/(2(m+1)(m+2))$ has
+exactly the coefficient $\tfrac12$ towards which the antipodal
+$m^2|f(m)|$ appears to converge; (ii) in spectral terms the averaged
+start has spectral density $(1+y)/4$ on $y=1-2x\in[-1,1]$ --- linear
+at \emph{both} ends $y=\pm1$, the two ends being the trap ($y=+1$)
+and the alternating ($y=-1$, the $(-1)^{B}$ eigenfunction) edges;
+(iii) the same technique cannot reach $\psi$ (a two-time quantity is
+not a class function of the increment), but it does prove the
+averaged one-point decay $\bar f(m)\le1/(m+1)$ outright, and gives
+the exact law of $\E\sum p_i^2$ along the whole approach to
+$\mathrm{PD}(1)$.}
+
+\subsubsection{The spectral route on the quotient: twisted kernel}
+\label{sec:twisted}
+
+Lemma~\ref{lem:parity} and Corollary~\ref{cor:quotient} make the
+spectral formulation of \S\ref{sec:spectral} concrete on the quotient
+chain.  Write $P=P_{\mathrm{nf}}+P_{\mathrm f}$ for the non-flip and
+flip parts of the quotient kernel and let
+$P_\pi:=P_{\mathrm{nf}}-P_{\mathrm f}$ (the kernel twisted by
+$(-1)^{F}$).  Then $\Phi_d=P_\pi^{\,d}\mathbf 1$, and since flips are
+reversed by flips, $P_\pi$ is self-adjoint on $L^2(\tilde\pi)$
+($\tilde\pi$ the quotient stationary law), so
+\[
+\psi_\pi(d)=\langle\mathbf 1,P_\pi^{2d}\mathbf 1\rangle
+=\int_{[-1,1]}\lambda^{2d}\,\nu(d\lambda),\qquad
+\nu=\text{spectral measure of }\mathbf 1\text{ under }P_\pi,\ \nu([-1,1])=1,
+\]
+and Problem~\ref{prob:mixing} at stationarity reads
+$\nu(\{|\lambda|\ge1-\delta\})\le C\delta^{\beta}$
+($\psi_\pi(d)\le Cd^{-\beta}$).  Two facts, one numerical and one a
+proof sketch:
+
+\emph{(a) No mass at the $-1$ end at stationarity (COMPUTED).}
+$(-1)^{E}$ is an exact $\lambda=-1$ eigenfunction of $P_\pi$
+(Lemma~\ref{lem:parity}), so the $2$-periodicity caveat of
+\S\ref{sec:spectral} is a priori relevant.  But
+$\langle P^d\varepsilon,P^{d+1}\varepsilon\rangle_\pi
+=\int\lambda^{2d+1}d\nu$ versus $\int\lambda^{2d}d\nu$
+(\texttt{s9\_survival oddeven}): $0.0559/0.0575=0.971$ at $d=16$ and
+$0.0146/0.0150=0.974$ at $d=64$ (both $\pm0.03$), so the relative
+mass of $\nu$ near $-1$ is $\lesssim3\%$ and compatible with zero; in
+the continuum $E=\infty$ under $\tilde\pi$ and the eigenfunction
+$(-1)^E$ is not in $L^2(\tilde\pi)$.  The sign alternation of
+\S\ref{sec:parity}(a) is a finite-block (clean-start) phenomenon,
+invisible at stationarity.
+
+\emph{(b) A Cauchy--Schwarz/smoothing route to $\beta=1/2$
+(SKETCH).}  The Dirichlet form of $P_\pi$ is
+$\mathcal E(F)=\tfrac12\E[(F-F')^2;\mathrm{nf}]+\tfrac12\E[(F+F')^2;\mathrm f]$.
+Let $k(x)=2ab$ be the flip rate and $Q(x,\cdot)=P_{\mathrm f}(x,\cdot)/k(x)$
+the normalised flip kernel, which acts on each segment
+$\{(a',s-a';\mathrm{env})\}$ separately by the trapezoidal density
+$a'\mapsto|\{\alpha\in(0,a):a'-\alpha\in(0,s-a)\}|/(a(s-a))$.  By
+Cauchy--Schwarz in the flip term,
+$\mathcal E(F)\ge\tfrac12\int\tilde\pi(dx)\,k(x)\,(F+QF)^2(x)$, so
+$\mathcal E(F)\le\delta\|F\|^2$ forces $F\approx-QF$ in
+$L^2(\tilde\pi k)$, hence $F\approx Q^2F$: $F$ is nearly constant,
+then nearly equal to minus itself, on every segment away from its
+ends --- i.e.\ $\int_{\{ab\ge\eta\}}F^2d\tilde\pi\le C\delta\|F\|^2/\eta$
+once the one-dimensional smoothing inequality for $Q^2$ on a segment
+is quantified (the trapezoid density is $\ge c/s$ away from the
+ends, $\asymp a'/s^2$ near them).  With $\tilde\pi(ab<\eta)\le C\eta$
+(Proposition~\ref{prop:gaplawstat} plus the quadratic $s$-law),
+$\langle F,\mathbf 1\rangle^2\le C\|F\|^2(\delta/\eta+\eta)$, and
+$\eta=\sqrt\delta$ gives $\nu([1-\delta,1])\le C\sqrt\delta$, i.e.\
+$\psi_\pi(d)\le Cd^{-1/2}$: $c=1/4>1/11$ \emph{at stationarity}.
+Gaps: (i) the segment smoothing inequality (a weighted Poincar\'e
+for $Q^2$ with weight $a'(s-a')$); (ii) the $-1$ end, to be handled
+either by (a) made rigorous or by running the argument for
+$\langle F,(I+P_\pi)F\rangle$; (iii) the passage from $\pi$ to
+$\mu_j$, $j\le8d$ --- the short-horizon Proposition~\ref{prop:shorthorizon}
+handles the gap coordinate but not the rest of the state, and
+Lemma~\ref{lem:freeze} only trades $d$ for $j$.  (iii) is the real
+obstacle for the iid model; a dust-insensitive comparison of
+$\mu_{j}$ with $\pi$ for $j\ge d/2$ (a block of mass $w$ influences
+$d$ steps with probability $\le2wd$) is the natural tool.

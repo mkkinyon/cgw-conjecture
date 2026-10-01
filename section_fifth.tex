@@ -1,0 +1,286 @@
+%======================================================================
+\section{The fifth layer: the switch calculus transfers}\label{sec:fifth}
+
+The remark closing Section~\ref{sec:switch} promised that nothing in the
+switch calculus is specific to \emph{two} added rows.  This section makes
+that promise concrete for the fifth layer: we derive the triple
+inclusion--exclusion identity, transfer the switch decomposition and the
+bracket calculus, and obtain
+\begin{equation}\label{eq:r5thm}
+r_5(n)=r_3(n)\bigl(1+O(n^{-1})\bigr),
+\end{equation}
+where $r_5$ is the fifth-layer effect
+$\Delta_\lambda\log\bigl(N^{(5)}/N^{(4)}\bigr)$ between types $(2,n{-}2)$
+and $(n)$.  Exact computations (independent of the calculus) confirm the
+result at $n=8,9$ with striking precision.  Everything is written at the
+same working-note rigor as Section~\ref{sec:switch}: exact identities and
+finite verifications are labelled as such, and the two genuinely new
+bookkeeping steps (the spectator factors in the strata analysis) are
+flagged explicitly.
+
+\subsection{A triple inclusion--exclusion identity}
+
+$N^{(5)}(\sigma)$ is the number of ordered triples $(\tau,\eta,\theta)$
+of $B_2$-avoiding permutations that are pairwise cell-disjoint.
+Expanding each of the three pairwise-disjointness indicators by
+inclusion--exclusion over subsets of that pair's coincidence set --- the
+three expansions are independent --- gives the analogue of
+Proposition~\ref{prop:pairIE}.
+
+\begin{proposition}[triple inclusion--exclusion]\label{prop:tripleIE}
+Let $M_1,M_2,M_3$ range over matchings of the complement of $B_2$
+(the coincidence sets of $(\tau,\eta)$, $(\tau,\theta)$,
+$(\eta,\theta)$ respectively), subject to \emph{compatibility}: each
+pairwise union $M_i\cup M_j$ is again a matching (shared cells are
+allowed; two distinct cells of $M_i$, $M_j$ may not share a line).
+Then
+\begin{equation}\label{eq:tripleIE}
+N^{(5)}(\sigma)=\sum_{(M_1,M_2,M_3)}(-1)^{|M_1|+|M_2|+|M_3|}
+R(M_1{\cup}M_2)\,R(M_1{\cup}M_3)\,R(M_2{\cup}M_3),
+\end{equation}
+with $R(\cdot)$ the punctured counts of \eqref{eq:punctured}.
+Equivalently, in resummed form: compatibility of the triple is
+equivalent to $U=M_1\cup M_2\cup M_3$ being a matching, and collecting
+the label multiplicities cell by cell,
+\begin{equation}\label{eq:tripleIEU}
+N^{(5)}(\sigma)=\sum_{U}\ \sum_{U=U_{ab}\sqcup U_{ac}\sqcup U_{bc}\sqcup U_{abc}}
+(-1)^{|U_{ab}|+|U_{ac}|+|U_{bc}|}\,2^{|U_{abc}|}\,
+R(A)\,R(B)\,R(C),
+\end{equation}
+where $A=U_{ab}\cup U_{ac}\cup U_{abc}$,
+$B=U_{ab}\cup U_{bc}\cup U_{abc}$, $C=U_{ac}\cup U_{bc}\cup U_{abc}$
+are the constraint sets of $\tau,\eta,\theta$: \emph{every coincidence
+cell lies in at least two of the three constraint sets}.
+\end{proposition}
+
+\begin{proof}
+For fixed $\tau,\eta,\theta$ avoiding $B_2$, the product of the three
+indicators $\prod_{\text{pairs}}\mathbf 1[\text{disjoint}]$ expands as
+$\sum_{M_1\subseteq\tau\cap\eta}(-1)^{|M_1|}\cdots$, independently in
+the three pairs; exchanging sums gives \eqref{eq:tripleIE}, the count of
+triples with $\tau\supseteq M_1\cup M_2$ etc.\ factorizing since the
+three rows are constrained separately (and vanishing unless each union
+is a matching).  For \eqref{eq:tripleIEU}: if two cells of the $M_i$
+share a line, compatibility of the relevant pair forces them equal, so
+pairwise compatibility is the same as $U$ being a matching; each
+$u\in U$ carries the nonempty label set $T(u)\subseteq\{1,2,3\}$ of the
+$M_i$ containing it, the constraint-set membership of $u$ depends only
+on $T(u)$ ($|T|=1$ gives exactly two memberships, $|T|\ge2$ gives all
+three), and summing $(-1)^{|T|}$ over the label sets with a given
+membership pattern gives weight $-1$ for each two-membership pattern
+and $+3-1=+2$ for the full pattern.
+(Both forms verified against brute-force enumeration of all triples at
+$n=5$, and \eqref{eq:tripleIEU} additionally at $n=6,7$, both cycle
+types: $N^{(5)}$ values $36$; $4032$, $4224$; $2185152$, $2198160$.
+\texttt{triple\_ie.py}.)
+\end{proof}
+
+\begin{remark}[the truncated series is slowly convergent]
+Truncating \eqref{eq:tripleIEU} at total order
+$q=|M_1|+|M_2|+|M_3|\le Q$ gives an alternating series whose natural
+parameter is the \emph{total} coincidence intensity of the three pairs,
+$3\mu\approx6$ --- three times that of the pair series of
+Section~\ref{sec:pair}.  Convergence in $Q$ is correspondingly slower:
+at $n=8$ the $Q\le3$ truncation underestimates the fifth-layer effect
+by $24\%$ (exact anchor below), at $n=9$ by $6\%$; the truncation error
+shrinks rapidly with $n$ ($Q=3$ values $0.922$, $0.942$ at $n=10,11$ in
+the $r_5\cdot(n)_4$ normalisation of the table below, each presumably a
+few percent low).  We therefore use the truncated series only as a
+consistency check at larger $n$ and rely on exact enumeration
+(\texttt{n5\_direct2.c}) at $n\le9$; the switch calculus below is what
+replaces series estimation as the source of the theorem.
+(\texttt{layer5\_production.py}.)
+\end{remark}
+
+\subsection{The switch decomposition for triples}
+
+Adopt the setting of Section~\ref{sec:switch}: adjacent representatives
+$\sigma,\sigma'$, common board $B_0$ (two paths), pins
+$d_1=(2,3)$, $d_2=(n,1)$, $e_1=(2,1)$, $e_2=(n,3)$, and $A_0$ the set of
+$B_0$-avoiding permutations.  Write
+\[
+N^{(5)}_0=\#\{(\tau,\eta,\theta)\in A_0^3\ \text{pairwise disjoint}\},
+\qquad
+G^{(5)}(z)=\#\{\text{such triples with }z\in\tau\},
+\]
+and analogously $G_2^{(5)}(z,z')$ ($z,z'\in\tau$) and $H^{(5)}(z,z')$
+($z\in\tau$, $z'\in\eta$).
+
+\begin{lemma}[switch decomposition, fifth layer; exact]\label{lem:switchIE5}
+With $\Delta N^{(5)}=N^{(5)}(\sigma')-N^{(5)}(\sigma)$,
+\begin{align}
+\Delta N^{(5)}
+&=3\,\mathrm{Br}^{(5)}_G
++3\bigl[G_2^{(5)}(e_1,e_2)-G_2^{(5)}(d_1,d_2)\bigr]
++6\bigl[H^{(5)}(e_1,e_2)-H^{(5)}(d_1,d_2)\bigr],
+\label{eq:switchIE5}\\
+\mathrm{Br}^{(5)}_G&:=G^{(5)}(d_1)+G^{(5)}(d_2)-G^{(5)}(e_1)-G^{(5)}(e_2).
+\notag
+\end{align}
+\end{lemma}
+
+\begin{proof}
+As for Lemma~\ref{lem:switchIE}: inclusion--exclusion over the events
+$d_i\in\tau\cup\eta\cup\theta$, with $U(z)=3G^{(5)}(z)$ (choice of the
+row through $z$) and $U(z,z')=3G_2^{(5)}(z,z')+6H^{(5)}(z,z')$ (one row
+through both, or an ordered pair of distinct rows).  Verified by
+complete enumeration at $n=6$
+($\Delta N^{(5)}=192=288-24-72$) and $n=7$
+($13008=15384+2496-4872$); and at $n=8$ the pieces computed on $B_0$
+(\texttt{anatomy5.c}: $3\mathrm{Br}^{(5)}_G=2649312$,
+$3\,\Delta G_2^{(5)}=159840$, $6\,\Delta H^{(5)}=-596544$) sum to
+$2212608$, exactly the value of $\Delta N^{(5)}$ from the independent
+direct enumeration of $N^{(5)}$ (\texttt{n5\_direct2.c}).
+\end{proof}
+
+\begin{remark}[$\Psi$ acts diagonally]
+The involution $\Psi$ of Remark~\ref{rem:psi} preserves $A_0$ and
+disjointness, hence acts on triples coordinatewise; consequently
+$G^{(5)}(d_1)=G^{(5)}(d_2)$ \emph{exactly} (confirmed at $n=7,8,9$:
+e.g.\ $G^{(5)}(d_1)=G^{(5)}(d_2)=496941376$ at $n=8$).
+\end{remark}
+
+\subsection{The stratified bracket; spectator factors}
+
+Expand $G^{(5)}(z)$ by Proposition~\ref{prop:tripleIE} on the board
+$B_0$ with the pin $z$ carried by $\tau$'s factor.  In the notation of
+\eqref{eq:tripleIEU} ($A$ = $\tau$'s constraint set, $B,C$ the other
+two),
+\begin{equation}\label{eq:BrG5strata}
+\mathrm{Br}^{(5)}_G=\sum_{A}\,B_A\,w(A),
+\qquad
+w(A):=\!\!\sum_{\substack{(M_1,M_2,M_3)\\ M_1\cup M_2=A}}\!\!
+(-1)^{|M_1|+|M_2|+|M_3|}R_0(B)\,R_0(C),
+\end{equation}
+where $B_A=\sum_{z\in\{d_1,d_2\}}R_0^\dagger(A\cup z)
+-\sum_{z\in\{e_1,e_2\}}R_0^\dagger(A\cup z)$ is \emph{the same}
+four-term bracket as in \eqref{eq:strata}, now indexed by $A$.  Two
+exact identities anchor \eqref{eq:BrG5strata}:
+\begin{itemize}[leftmargin=2em]
+\item[(i)] $\sum_A R_0(A)\,w(A)=N^{(5)}_0$ (the regrouped
+\eqref{eq:tripleIEU} on $B_0$);
+\item[(ii)] $w(\emptyset)=\sum_{M_3}(-1)^{|M_3|}R_0(M_3)^2=N^{(4)}_0$
+(the pair inclusion--exclusion on $B_0$), so the $A=\emptyset$ stratum
+equals $M_{n-4}\,N^{(4)}_0$ \emph{exactly} by
+Proposition~\ref{prop:S0}.
+\end{itemize}
+Since $B_A$ is unchanged, the entire bracket toolkit of
+Section~\ref{sec:switch} --- Lemma~\ref{lem:wronskian},
+Lemma~\ref{lem:valuation}, Lemma~\ref{lem:master},
+Proposition~\ref{prop:generic} --- applies verbatim in the $A$-slot.
+What is new is the weight: $R_0(M)$ is replaced by the spectator weight
+$w(A)$.  The transfer rests on two observations.
+
+\emph{First observation.}  Every cell of $A$ lies in $B$ or $C$
+(cells of $M_1$ lie in $B$, cells of $M_2$ in $C$).  Hence a line-swap
+pairing $\varphi$ moving a cell of $A$ (as in Lemma~\ref{lem:pairing}
+or Lemma~\ref{lem:colexchange}) moves the \emph{same} cell in exactly
+one spectator factor when the cell has a single label, and in both when
+it is shared; the third factor is untouched in the first case.  The
+pinned-factor equalities of the pairing lemmas --- which involve only
+$B_A$, through the deleted row- and column-\emph{sets} of the pinned
+counts --- are therefore untouched, while the free-factor difference
+becomes, by the product rule,
+\[
+R_0(B)R_0(C)-R_0(\varphi B)R_0(\varphi C)
+=\bigl[R_0(B)-R_0(\varphi B)\bigr]R_0(C)
++R_0(\varphi B)\bigl[R_0(C)-R_0(\varphi C)\bigr],
+\]
+each bracket a single line-swap difference controlled by
+Lemma~\ref{lem:wronskian} exactly as at the fourth layer, i.e.\ a
+relative $O(n^{-3})$ per factor.
+
+\emph{Second observation (spectator stability).}  The pairing must also
+re-index the spectator sum over $M_3$: an $M_3$ compatible with
+$(M_1,M_2)$ maps to one compatible with $\varphi(M_1,M_2)$ by the
+identity map except on the $O(1/n)$-measure set of $M_3$ meeting the
+two swapped lines, which is absorbed by (the $B_0$-analogue of)
+Lemma~\ref{lem:linemeasure} applied inside $w$.  Thus
+$|w(A)-w(\varphi A)|=O(n^{-1})\,\overline w(A)$ with
+$\overline w$ the unsigned weight, and the paired-class cancellations
+of Lemmas~\ref{lem:pairing}, \ref{lem:Hdiff}, \ref{lem:colexchange}
+and~\ref{lem:boundary} survive with the same $O(n^{-1})$ headroom.
+Finally, Lemma~\ref{lem:uniform} and Corollary~\ref{cor:moments}
+apply to $R_0(B)$, $R_0(C)$ individually (any max-degree-2 board), so
+the unsigned sums $\sum_A|B_A|\,\overline w(A)$ obey the same stratum
+bounds as at the fourth layer with $N_0^2$ replaced by an
+$N^{(5)}_0$-scale; the $G_2$- and $H$-differences of
+\eqref{eq:switchIE5} are handled by the same pairings with one or two
+pins carried by spectator slots.
+
+These two observations are the only new content; we record the outcome.
+
+\begin{theorem}[fifth layer]\label{thm:layer5}
+For $n\ge n_0$,
+\[
+\log\frac{N^{(5)}_n((2,n{-}2))}{N^{(5)}_n((n))}
+=3\,\frac{M_{n-4}}{M_n}+O(n^{-5}),
+\qquad\text{hence}\qquad
+r_5(n)=r_4(n)\bigl(1+O(n^{-1})\bigr)=r_3(n)\bigl(1+O(n^{-1})\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Run the proof of Theorem~\ref{thm:layer4} on \eqref{eq:switchIE5} and
+\eqref{eq:BrG5strata}, with Proposition~\ref{prop:generic} in the
+$A$-slot, weights $w(A)$ in place of $R_0(M)$, and the two observations
+above supplying the paired-class and unsigned-sum bounds; the generic
+strata resum, via identity (i), to
+$\mathrm{Br}^{(5)}_G=(M_{n-4}/M_n)\,N^{(5)}_0\bigl(1+O(1/n)\bigr)$, and
+the pin-pin differences of \eqref{eq:switchIE5} are
+$O\bigl(n^{-1}(M_{n-4}/M_n)N^{(5)}_0\bigr)$.  Then
+$N^{(5)}_0=N^{(5)}((n))(1+O(1/n))$ as before, giving
+$\Delta\log N^{(5)}=3M_{n-4}/M_n+O(n^{-5})$, and
+$r_5-r_3=\Delta\log N^{(5)}-\Delta\log N^{(4)}-\Delta\log N^{(3)}
+=O(n^{-5})$.
+\end{proof}
+
+\subsection{Exact fifth-layer data}
+
+Direct enumeration (64/128-bit cell masks; \texttt{n5\_direct.c},
+\texttt{n5\_direct2.c}) gives $N^{(5)}$ exactly at $n\le9$; the $N^{(3)}$
+and $N^{(4)}$ values reproduce the known exact tables, certifying the
+enumeration.
+
+\begin{center}
+\begin{tabular}{r|rr|rrr|rr}
+$n$ & $N^{(5)}((n))$ & $N^{(5)}((2,n{-}2))$ &
+$r_3(n)_4$ & $r_4(n)_4$ & $r_5(n)_4$ &
+$\frac{\Delta\log N^{(4)}}{2M_{n-4}/M_n}$ &
+$\frac{\Delta\log N^{(5)}}{3M_{n-4}/M_n}$\\\hline
+$6$ & $4032$ & $4224$ & $0$ & $2.454$ & $14.29$ & --- & ---\\
+$7$ & $2185152$ & $2198160$ & $1.450$ & $2.560$ & $0.976$ & $1.382$ & $1.146$\\
+$8$ & $1539331584$ & $1541544192$ & $0.709$ & $0.842$ & $0.862$ & $1.094$ & $1.134$\\
+$9$ & $1417404643008$ & $1418731458816$ & $0.906$ & $0.948$ & $0.976$ & $1.023$ & $1.041$\\
+\end{tabular}
+\end{center}
+
+\noindent Here $r_k(n)_4$ abbreviates $r_k\cdot n(n{-}1)(n{-}2)(n{-}3)$,
+and $r_k=\Delta_\lambda\log(N^{(k)}/N^{(k-1)})$.  At $n=8,9$:
+$r_5/r_4=1.023$, $1.030$ --- the fifth-layer effect tracks the fourth
+to $3\%$ already at $n=9$ (small $n=6,7$ are off-trend, as for every
+other layer statistic).  On the anatomy side,
+$\mathrm{Br}^{(5)}_G=5128$, $883104$ at $n=7,8$ with
+$\mathrm{Br}^{(5)}_G N_0/(M_{n-4}N^{(5)}_0)=0.612$, $0.696$,
+consistent with a $1-c/n$ approach with $c\approx2.4$ ---
+about twice the fourth-layer constant $c\approx1.17$, as the two
+spectator rows suggest.
+
+\begin{remark}[general $k$; the profile at the origin]\label{rem:layerk}
+By induction on $k$, the identical transfer (a $(k{-}2)$-tuple
+inclusion--exclusion; one more spectator factor per layer) gives, for
+each \emph{fixed} $k$,
+\[
+\Delta_\lambda\log N^{(k)}=(k-2)\,\frac{M_{n-4}}{M_n}+O_k(n^{-5}),
+\qquad
+r_k(n)=r_3(n)\bigl(1+O_k(1/n)\bigr),
+\]
+with constants growing with $k$ (each spectator contributes its own
+$O(1/n)$ bookkeeping).  In the language of the layer profile
+$\gamma$ of Section~\ref{sec:layers}, $\gamma$ is flat at the origin:
+every fixed layer contributes the same $(1+o(1))\,M_{n-4}/M_n$ per
+$2$-cycle.  The uniformity in $k$ needed for the bulk of the profile
+(layers $k\asymp tn$) remains the province of the cluster expansion
+(TODO~4): there the boards are no longer two paths and the calculus
+here does not apply.
+\end{remark}

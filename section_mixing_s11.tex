@@ -1,0 +1,574 @@
+%----------------------------------------------------------------------
+\subsection{Session 11: (R2) is false; the idle loop proves its repair
+on the whole disc except two points; and the residual condition is one
+scalar statement about the parity of the environment block
+count}\label{sec:s11}
+
+Session 11 was directed at condition (R2) of
+Proposition~\ref{prop:condecay} --- uniform invertibility of $I+K_z$ on
+the closed unit disc --- under the instruction that a fourth
+reformulation of the cancellation core would not count as progress.
+There are four findings, in logical order.
+
+\begin{enumerate}[leftmargin=2.2em]
+\item[(1)] \textbf{The label is a passenger.}  The quotient chain
+$\bar\Gamma=(p_1,p_2;\mathrm{env})$ --- the two marked masses and the
+environment, with the label $\varepsilon$ forgotten --- is
+\emph{autonomous}: its transition law does not depend on
+$\varepsilon$, and the involution $J$ that swaps the two sectors
+keeping $\bar\Gamma$ fixed commutes with the chain
+(Lemma~\ref{lem:autonomy}).  Hence $K_z=\kappa_z\oplus(-\kappa_z)$ for
+the quotient first-flip kernel $\kappa_z$, and
+$\spec K_z=\pm\spec\kappa_z$.  One line of this gives
+$\Pr_\pi[u\sim v]=\tfrac12$.
+\item[(2)] \textbf{(R2) is false.}  With the label kept,
+$K_1\varepsilon=-\varepsilon$ --- exactly one flip has occurred at
+time $\tau$ --- so $I+K_1$ has a bounded null vector.  On the quotient,
+where that artefact is absent, $I+\kappa_{-1}$ still has the bounded
+null vector $(-1)^{E}$ ($E=$ number of environment curves), by
+Lemma~\ref{lem:parity}.  Either way
+$\sup_{|z|\le1}\|(I+K_z)^{-1}\|=\infty$ and
+Proposition~\ref{prop:condecay} is vacuous as stated
+(Proposition~\ref{prop:r2false}).
+\item[(3)] \textbf{An unconditional contraction off $z=\pm1$.}  The
+chain can waste exactly two steps by splitting a curve and merging the
+two pieces it just created, returning to the same state without
+flipping.  This ``idle loop'' has probability
+$\lambda(\Gamma)=\tfrac13\sum_jr_j^4$ --- an exact formula, $r_j$ the
+arc-refined mass list --- and it forces
+$\|\kappa_z\|_\infty\le(1-\lambda)/|1-\lambda z^2|
+\le1/(1+\lambda(1-\Re z^2))$ for all $|z|\le1$
+(Theorem~\ref{thm:idleloop}).  On the block-bounded state space this is
+uniform, with $\lambda\ge\tfrac13K^{-3}$.  The non-lattice condition of
+Markov renewal theory on the \emph{whole} circle --- Pitfall~45,
+TODO~11b(v), and the third name of the cancellation core --- is
+therefore \emph{proved}, unconditionally and with explicit constants.
+\item[(4)] \textbf{What is left is two scalar conditions on one Markov
+kernel.}  After (3), $\widehat\Phi(z)=(1-z)^{-1}(I+\kappa_z)^{-1}
+(I-\kappa_z)\mathbf 1$ can fail to be regular only at $z=1$ and
+$z=-1$.  At $z=-1$ the $\bar M$-conjugation of Lemma~\ref{lem:conj}
+turns the problem into the ordinary renewal pole at $+1$ applied to the
+test function $(-1)^{E}$, and the condition is
+\[
+\text{(C2)}\qquad
+\bigl\|\kappa_1^{\,k}(-1)^{E}\bigr\|_\infty\le C\rho^k
+\quad\text{for some }\rho<1 ,
+\]
+i.e.\ \emph{the parity of the environment block count decorrelates
+geometrically along the post-flip chain}.  At $z=1$ the condition is
+$-1\notin\spec\kappa_1$ with a uniform inverse (C1), and we prove that
+a single Doeblin minorisation shared by the $n$-th and $(n{+}1)$-st
+post-flip laws implies it, with
+$\|(I+\kappa_1)^{-1}\|\le(2n+1)/(2\delta)$
+(Proposition~\ref{prop:c1}).  Neither condition contains a $z$, a
+phase, or an alternating sign that is not the sign of a state function.
+(C2) is exactly what \texttt{s11\_kflip} measures, and it holds
+numerically with $\rho\approx0.3$ from both a macroscopic and a deeply
+trapped start (\S\ref{sec:s11num}).
+\end{enumerate}
+
+\subsubsection{The label is a passenger}\label{sec:s11quotient}
+
+Recall the state: a partition of the circle into curves with masses,
+two marks $u,v$, and the pair $(p_1,p_2)$ --- the two arcs $(x,y)$ of
+the marked curve when $u\sim v$, the two marked curve masses $(a,b)$
+when $u\not\sim v$ --- with $s=p_1+p_2$, and $\varepsilon=\pm1$ the
+label.  Let $\bar\Gamma=(p_1,p_2;\mathrm{env})$ be the state with the
+label forgotten and $\pi_\ast:\Gamma\mapsto\bar\Gamma$ the projection.
+
+\begin{lemma}[label autonomy]\label{lem:autonomy}
+The transition kernel of $\Gamma$ projects to a kernel on
+$\bar\Gamma$, and in both sectors the moves and their probabilities are
+\[
+\text{flip: }2p_1p_2,\qquad
+p_i\to p_i\sqrt U:\ p_i^2,\qquad
+p_i\to p_i+q_j:\ 2p_iq_j,\qquad
+\text{environment moves: unchanged,}
+\]
+a flip replacing $(p_1,p_2)$ by $(V,s-V)$ with
+$V\sim\mathrm{U}(0,p_1)\star\mathrm{U}(0,p_2)$ and toggling
+$\varepsilon$.  Consequently:
+\begin{enumerate}[leftmargin=2em]
+\item[(i)] the involution $J$ of the state space that swaps the two
+sectors keeping $\bar\Gamma$ fixed commutes with the transition kernel
+and fixes every flip time;
+\item[(ii)] in the decomposition
+$F=g\circ\pi_\ast+\varepsilon\cdot(f\circ\pi_\ast)$ of bounded
+functions, $K_z=\kappa_z\oplus(-\kappa_z)$, where
+$(\kappa_zg)(\bar x)=\E_{\bar x}[z^\tau g(\bar\Gamma_\tau)]$; hence
+$\spec K_z=\spec\kappa_z\cup(-\spec\kappa_z)$ and
+$\widehat\Phi(z)=(1-z)^{-1}(I+\kappa_z)^{-1}(I-\kappa_z)\mathbf 1$;
+\item[(iii)] if $\bar\pi$ is a stationary law of $\bar\Gamma$ then the
+stationary label is uniform: $\Pr[u\sim v]=\tfrac12$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+A step picks two uniform points of the circle; if they lie in the same
+curve it is a split, otherwise a merge.  In the label-$+$ sector the
+marked curve has mass $s$ and is picked twice with probability $s^2$;
+given that, the two cuts lie on different arcs with probability
+$2xy/s^2$ (a flip, separating $u$ from $v$) and on the same arc $i$
+with probability $p_i^2/s^2$, in which case the arc loses a factor
+$\sqrt U$ in law ($1-|U_1-U_2|\sim\sqrt U$) and the removed piece
+becomes an unmarked curve.  A merge of the marked curve with an
+environment curve $q_j$ has probability $2sq_j$, and the mass $q_j$ is
+attached to arc $i$ with probability $p_i/s$, i.e.\ rate $2p_iq_j$.  In
+the label-$-$ sector the same four rates hold with $(a,b)$ in place of
+$(x,y)$: picking $u$'s and $v$'s curves is a merge --- a flip, joining
+them --- with probability $2ab$; picking $u$'s curve twice splits it,
+$a\to a\sqrt U$; picking $u$'s curve and $q_j$ merges them,
+$a\to a+q_j$.  The post-flip law is the same trapezoid
+$\mathrm{U}(0,p_1)\star\mathrm{U}(0,p_2)$ in both directions
+(Lemma~\ref{lem:recharge}(ii)).  This is the displayed list, and it
+does not mention $\varepsilon$.  (i) is immediate; (ii) follows because
+$\varepsilon(\Gamma_\tau)=-\varepsilon(x)$ while the law of
+$\bar\Gamma_\tau$ depends only on $\bar x$; (iii) because $J$ preserves
+the stationary law --- it commutes with the kernel and fixes
+$\bar\Gamma$ --- while exchanging the two sectors.
+\end{proof}
+
+\emph{Status: PROVED.  Implicit in the phrase ``quotient chain'' used
+since session 8 but never stated; it is worth stating because it is
+what makes the next two subsections possible.  Two consequences.  (a)
+The first-flip time $\tau$ has the same law from $x$ and from $Jx$:
+the alternating renewal governing $\Phi_d$ is \emph{symmetric}, which
+is why $\Phi_d\to0$ rather than to the generic limit
+$(\E_+\tau-\E_-\tau)/(\E_+\tau+\E_-\tau)$ of an asymmetric alternating
+renewal.  This is the structural reason behind
+$\Pr_\pi[\mathrm{tog}]=\tfrac12$, and it is exactly the residue that
+has to vanish at $z=1$ below.  (b) All the parity content therefore
+lives in $\kappa_z$, a kernel on a space where $\varepsilon$ does not
+exist.}
+
+\subsubsection{(R2) is false, in both bookkeepings}\label{sec:s11false}
+
+Write $E(\Gamma)$ for the number of environment curves and let $\bar M$
+be multiplication by $(-1)^{E}$, an isometric involution of every
+weighted sup-norm space; $N$ denotes multiplication by $\varepsilon$.
+
+\begin{lemma}[sign conjugations]\label{lem:conj}
+For every $z\in\mathbb C$,
+\[
+\text{(i)}\quad N\,K_z\,N=-K_z,
+\qquad\qquad
+\text{(ii)}\quad \bar M\,\kappa_z\,\bar M=-\kappa_{-z} .
+\]
+Hence $\spec K_z=-\spec K_z$ and $\spec\kappa_{-z}=-\spec\kappa_z$, and
+the resolvents $(I\pm\kappa_{\pm z})^{-1}$ have equal norms in pairs.
+\end{lemma}
+
+\begin{proof}
+(i) Exactly one flip has occurred at time $\tau$, so
+$\varepsilon(\Gamma_\tau)=-\varepsilon(x)$ a.s.
+(ii) By Lemma~\ref{lem:parity}, $(-1)^{N_t}=(-1)^t(-1)^{E_t-E_0}$; at
+$t=\tau$ we have $N_\tau=1$, so $(-1)^\tau=-(-1)^{E_\tau-E_0}$.
+Therefore
+$(\bar M\kappa_z\bar Mg)(\bar x)=(-1)^{E(\bar x)}
+\E_{\bar x}\bigl[z^\tau(-1)^{E(\bar\Gamma_\tau)}g(\bar\Gamma_\tau)\bigr]
+=-\E_{\bar x}\bigl[(-z)^\tau g(\bar\Gamma_\tau)\bigr]$.
+\end{proof}
+
+\emph{Remark (the label-carrying form of (ii)).  Since $B$ changes by
+exactly $\pm1$ at every step, $(-1)^\tau=(-1)^{B(\Gamma_\tau)-B(x)}$
+directly, so with $M$ = multiplication by $(-1)^{B}$ one has the
+cleaner-looking $M K_zM=K_{-z}$ on the label-carrying space, and
+$K_{-1}[(-1)^B]=+(-1)^B$.  That eigenvalue is $+1$ and is harmless;
+the obstruction to (R2) is the eigenvalue $-1$ of
+$\kappa_{-1}$ at $(-1)^E$ in Proposition~\ref{prop:r2false}.  The two
+are consistent: $(-1)^B=-\varepsilon\,(-1)^E$, and
+$N K_zN=-K_z$ supplies the sign.  Keeping these apart matters: in the
+label-carrying picture $\E_x[(-1)^{\tau_k}]$ has no a-priori reason to
+decay, while in the label-free picture its decay is exactly (C2).}
+
+\begin{proposition}[failure of (R2)]\label{prop:r2false}
+Assume $\tau<\infty$ a.s.\ (as is taken for granted after
+Proposition~\ref{prop:genfun}), so that $\kappa_1$ is Markov.  Then
+\[
+K_1\varepsilon=-\varepsilon
+\qquad\text{and}\qquad
+\kappa_{-1}\bigl[(-1)^{E}\bigr]=-(-1)^{E} .
+\]
+Hence $I+K_z$ is not injective at $z=1$ in the label-carrying
+bookkeeping and $I+\kappa_z$ is not injective at $z=-1$ in the
+label-free one, on every function space containing the bounded
+functions.  In particular condition (R2) of
+Proposition~\ref{prop:condecay} never holds, and
+Proposition~\ref{prop:condecay} is vacuous as stated.
+\end{proposition}
+
+\begin{proof}
+The first identity is Lemma~\ref{lem:conj}(i) applied to $\mathbf 1$
+together with $K_1\mathbf 1=\mathbf 1$.  For the second, by
+Lemma~\ref{lem:conj}(ii) with $z=1$,
+$\kappa_{-1}\bar M\mathbf 1=-\bar M\kappa_1\mathbf 1=-\bar M\mathbf 1$.
+\end{proof}
+
+\emph{Status: PROVED.  The failure is structural, not technical: the
+null vectors $\varepsilon$ and $(-1)^E$ are bounded by $1$ and lie in
+every space in sight, so no choice of weight, state space or test class
+removes them.  Session 10 did not see it because
+Proposition~\ref{prop:genfun} applies $(I+K_z)^{-1}$ only to
+$(I-K_z)\mathbf 1$, which degenerates at the same points; the whole
+question is whether the vanishing of the numerator beats the blow-up of
+the resolvent, and that is not what (R2) says.  The two failures are
+the same failure in the two bookkeepings, since
+$\spec K_z=\pm\spec\kappa_z$ by Lemma~\ref{lem:autonomy}(ii).}
+
+\begin{proposition}[the two singular points, exactly]\label{prop:repair}
+For $|z|<1$,
+$\widehat\Phi(z)=(1-z)^{-1}(I+\kappa_z)^{-1}(I-\kappa_z)\mathbf 1$, and
+for every $w$,
+\[
+(I+\kappa_{-w})^{-1}(I-\kappa_{-w})\mathbf 1
+=\bar M\,(I-\kappa_{w})^{-1}(I+\kappa_{w})\,\bar M\mathbf 1 .
+\]
+Thus near $z=1$ the singular factor is $(I+\kappa_z)^{-1}$ acting on
+the numerator $(I-\kappa_z)\mathbf 1=\E_\cdot[1-z^\tau]=O(|1-z|)$,
+while near $z=-1$ it is the ordinary renewal resolvent
+$(I-\kappa_w)^{-1}$, $w\to1$, acting on
+$(I+\kappa_w)(-1)^{E}\to2\,(-1)^{E}$.
+\end{proposition}
+
+\begin{proof}
+The first statement is Lemma~\ref{lem:autonomy}(ii) substituted in
+Proposition~\ref{prop:genfun}; the second is Lemma~\ref{lem:conj}(ii)
+together with $\bar M^2=I$.
+\end{proof}
+
+\emph{Status: PROVED (algebra).  This is the sharp form of the
+correction.  At $z=-1$ the singularity is the classical simple pole of
+a Markov renewal resolvent at $w=1$, whose residue is the stationary
+projection $\langle\bar\pi,\cdot\rangle\mathbf 1$; the residue of
+$\widehat\Phi$ at $z=-1$ is therefore proportional to
+$\langle\bar\pi,(-1)^{E}\rangle$, and $\Phi_d$ carries a non-decaying
+alternating part $c\,(-1)^d$ unless that pairing vanishes.  That is
+precisely the alternation found in Lemma~\ref{lem:parity}(a) --- where
+it is measured to decay like $(-1)^dc_1/d^2$, i.e.\ the residue does
+vanish.  At $z=1$ the numerator vanishes and the residue to be beaten
+is the residue of a \emph{symmetric} alternating renewal, zero by
+Lemma~\ref{lem:autonomy}(a).  Both residues therefore vanish for
+structural reasons; what is unproved is the quantitative, uniform
+version, and that is (C1) and (C2) of \S\ref{sec:s11left}.}
+
+\subsubsection{The idle loop: an unconditional contraction off
+\texorpdfstring{$z=\pm1$}{z=+-1}}\label{sec:idleloop}
+
+Write the \emph{arc-refined mass list} $r(\Gamma)=(r_j)_j$ for the
+masses of the unmarked curves together with $p_1$ and $p_2$; so
+$\sum_jr_j=1$ and $r$ has at most $B(\Gamma)+1$ entries, $B$ the total
+number of curves.
+
+\begin{lemma}[the idle loop]\label{lem:idleloop}
+Let $L$ be the event that step~1 splits some curve and step~2 merges
+the two pieces that step~1 created, the returned piece being
+re-attached to the arc it came from if the split curve was the marked
+one in the label-$+$ sector.  On $L$ no flip occurs and
+$\bar\Gamma_2=\bar\Gamma_0$; up to a null set
+$L=\{\bar\Gamma_2=\bar\Gamma_0\}$; and
+\[
+\lambda(\Gamma):=\Pr_\Gamma[L]\;=\;\frac13\sum_j r_j(\Gamma)^4
+\;\ge\;\frac1{3\,(B(\Gamma)+1)^3}.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix an entry $r$ of the arc-refined list; the events for distinct
+entries are disjoint.
+
+\emph{$r=q$, an unmarked curve.}  Step~1 picks it twice with
+probability $q^2$ and cuts it at two independent uniform points,
+giving pieces $qV$ and $q(1-V)$ with $V=|U_1-U_2|$, density $2(1-v)$.
+Step~2 picks those two curves with probability $2\,qV\cdot q(1-V)$ and
+merges them back into a curve of mass $q$.  Total
+$q^2\cdot2q^2\,\E[V(1-V)]=q^4/3$, since
+$\E[V(1-V)]=\int_0^1v(1-v)\,2(1-v)\,dv=\tfrac16$.
+
+\emph{$r=a=p_1$ in the label-$-$ sector.}  Identical, the mark staying
+in the piece of mass $a(1-V)$: total $a^4/3$.
+
+\emph{$r=x$, one arc in the label-$+$ sector.}  Both cuts must fall in
+that arc, probability $x^2$ --- and this is a split, not a flip,
+precisely because a flip needs the cuts on \emph{different} arcs.  The
+piece has mass $w=xV$; the marked curve keeps $s-w$ and the arc becomes
+$x-w$.  Step~2 merges the piece back with probability $2w(s-w)$, and
+the returned mass is re-attached to the arc it came from with
+conditional probability $(x-w)/(s-w)$.  The factor $s-w$ cancels:
+$x^2\,\E[2\,xV\cdot x(1-V)]=2x^4\E[V(1-V)]=x^4/3$.
+
+Summing gives $\lambda=\tfrac13\sum_jr_j^4$.  Conversely a merge at
+step~1 followed by a split at step~2 reproduces the two merged masses
+with probability $0$, and a split followed by the merge of two other
+curves reproduces the mass list only on a null set.  Finally, with
+$p\le B+1$ entries, Cauchy--Schwarz twice gives
+$\sum r_j^4\ge(\sum r_j^2)^2/p\ge p^{-3}$.
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED (\texttt{s11\_ztau}, $2\times10^6$
+two-step trials per start, exact state comparison at tolerance
+$10^{-12}$): one curve, arcs $(\tfrac12,\tfrac12)$: $\lambda$ measured
+$0.041530$ vs.\ $\tfrac13\cdot2\cdot2^{-4}=0.041667$; $s_0=0.6$, arcs
+$(0.1,0.5)$, environment $0.4$: $0.029459$ vs.\ $0.029400$;
+$s_0=0.5$, arcs $(0.02,0.48)$, environment $0.5$: $0.038556$ vs.\
+$0.038528$.  The formula is an identity, not an estimate, and it is the
+\emph{arc-refined} list that appears: splitting the marked curve across
+its two arcs is a flip, not an idle loop.  The quantity $\sum_jr_j^4$
+is the one whose expectation Theorem~\ref{thm:sizebiased} computes
+exactly, $\E\sum p^4(m)=\tfrac14+\int_0^1(1-x^3)(1-2x)^mdx\to\tfrac14$,
+so $\E\lambda\to\tfrac1{12}$; the block bound is needed only to turn
+that average into a uniform bound.}
+
+\begin{theorem}[idle-loop contraction]\label{thm:idleloop}
+Let $\lambda_*=\inf_{\bar x}\lambda(\bar x)$ over the state space on
+which $\kappa_z$ acts.  For all $|z|\le1$,
+\[
+\|\kappa_z\|_{\infty\to\infty}\;\le\;
+\sup_{\bar x}\frac{1-\lambda(\bar x)}{|1-\lambda(\bar x)z^2|}
+\;\le\;\frac1{1+\lambda_*\,(1-\Re z^2)} .
+\]
+Consequently if $1-\Re z^2\ge t_0$ then $I\pm\kappa_z$ and
+$I-\kappa_z^2$ are invertible with
+$\|(I\pm\kappa_z)^{-1}\|\le1+(\lambda_*t_0)^{-1}$.  On the state space
+$\Omega_K=\{B\le K\}$ --- the chain killed at the first split that
+would make $B=K+1$, whose $\Phi_d$ differs from the true one by at most
+$\Pr[H^c]\le(9d+1)^{-\gamma}$ (Corollary~\ref{cor:horizon}) --- one has
+uniformly
+\[
+\|\kappa_z\|_\infty\;\le\;1-\min\Bigl(\frac{t_0}{6K^3},\ \frac1{2K}\Bigr),
+\qquad\text{so}\qquad
+\|(I\pm\kappa_z)^{-1}\|\le\max\Bigl(\frac{6K^3}{t_0},\,2K\Bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+$L$ is measurable with respect to the first two steps; on $L$ no flip
+occurs and $\bar\Gamma_2=\bar x$.  By the Markov property at time $2$,
+$\E_{\bar x}[z^\tau g(\bar\Gamma_\tau)\mathbf 1_L]
+=z^2\lambda(\bar x)(\kappa_zg)(\bar x)$, whence
+\[
+(1-\lambda z^2)(\kappa_zg)(\bar x)
+=\E_{\bar x}\bigl[z^\tau g(\bar\Gamma_\tau)\mathbf 1_{L^c}\bigr],
+\qquad
+|(\kappa_zg)(\bar x)|\le\frac{(1-\lambda)\|g\|_\infty}{|1-\lambda z^2|} .
+\]
+For $|z|\le1$, $|1-\lambda z^2|\ge\Re(1-\lambda z^2)
+=(1-\lambda)+\lambda t$ with $t=1-\Re z^2$, and
+$u\mapsto(1-u)/(1-u+ut)$ has derivative $-t/(\,\cdot\,)^2<0$, so the
+supremum over $\bar x$ is attained at $\lambda_*$ and equals
+$1/(1+\lambda_*t/(1-\lambda_*))\le1/(1+\lambda_*t)$.  The resolvent
+bounds are Neumann series.
+
+For the killed chain, split the states.  If $B(\bar x)\le K-1$ the idle
+loop raises $B$ only to $B+1\le K$, so it stays inside $\Omega_K$ and
+is not killed; Lemma~\ref{lem:idleloop} gives
+$\lambda\ge\tfrac13K^{-3}$, and $1/(1+u)\le1-u/2$ for $u\le1$ gives the
+first branch.  If $B(\bar x)=K$ then \emph{every} split kills, and a
+split occurs at the next step with probability
+$\sum_i(\text{curve mass})^2\ge1/K$, so
+$|\kappa_zg(\bar x)|\le\|g\|_\infty\Pr_{\bar x}[\tau<\text{kill}]
+\le(1-1/K)\|g\|_\infty$.  Take the worse of the two branches.
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED (\texttt{s11\_ztau}): from each of the
+three deterministic starts above,
+$|\E_{\bar x}[z^\tau]|=|\kappa_z\mathbf 1(\bar x)|$ was measured at
+$\theta/\pi=0.1,\dots,0.9$ ($2\times10^5$ trials each) and compared
+with $(1-\lambda)/|1-\lambda z^2|$: the bound holds at every point,
+with margin (at $\theta=\pi/2$ from the $(\tfrac12,\tfrac12)$ start,
+measured $0.446$ against the bound $0.920$).  The bound is crude --- it
+uses one two-step return and nothing else --- but it is \emph{uniform
+in the state}, which is the entire difficulty; and it is the right
+mechanism, since $1-\lambda z^2$ is exactly the Euler factor of the
+geometric component that the idle loop puts into the law of $\tau$ at
+lag $2$, which is what an aperiodicity or non-lattice hypothesis is
+normally assumed to supply.}
+
+\emph{Three items on the open list are settled by
+Theorem~\ref{thm:idleloop} and Lemma~\ref{lem:conj}.  (i) Pitfall~45
+and TODO~11b(v) --- the non-lattice condition ``on the whole circle,
+not only near $z=1$'' --- are PROVED, with rate $1-\Re z^2$ and
+constant $3K^3$.  (ii) TODO~11b(iv), ``$-1\notin\spec K_1$'', is
+DISPROVED and was the wrong question
+(Proposition~\ref{prop:r2false}).  (iii) The point $z=-1$, treated as a
+separate problem in every handoff since session 8, is by
+Proposition~\ref{prop:repair} the ordinary renewal point $w=1$ with the
+test function $(-1)^E$: not a separate problem, and not a place where
+anything new has to be invented.}
+
+\subsubsection{What is left: (C1) and (C2)}\label{sec:s11left}
+
+By Theorem~\ref{thm:idleloop}, $\widehat\Phi$ is regular on
+$\{|z|\le1\}\setminus\{\pm1\}$ with bounds polynomial in $K$.  Two
+conditions remain, both about the single Markov kernel $\kappa_1$ ---
+the post-flip quotient chain --- on $\Omega_K$:
+
+\medskip
+\noindent\textbf{(C1)}\quad$-1\notin\spec\kappa_1$, with
+$\|(I+\kappa_1)^{-1}\|\le C(K)$;\\
+\noindent\textbf{(C2)}\quad$\bigl\|\kappa_1^{\,k}(-1)^{E}\bigr\|_\infty
+\le C(K)\rho^k$ for some $\rho=\rho(K)<1$.
+\medskip
+
+\noindent With (R1) and these two, the proof of
+Proposition~\ref{prop:condecay} goes through: (C1) gives regularity at
+$z=1$, where the numerator has its zero; (C2) gives, through
+Proposition~\ref{prop:repair}, both the vanishing of the residue at
+$z=-1$ --- since $\langle\bar\pi,(-1)^E\rangle=\lim_k\kappa_1^k(-1)^E=0$
+--- and a Hölder modulus there.  \emph{Neither contains a $z$, a phase,
+or an alternating sign that is not the sign of a state function: the
+parity content of the problem has been reduced to the single statement
+that the environment block count has no asymptotic parity bias along
+the post-flip chain.}
+
+\emph{Neither (C1) nor (C2) is false for the reason (R2) was.  The
+only deterministically-toggled state function available on the quotient
+is $(-1)^E$ (flips leave $E$ fixed; every non-flip step changes it by
+$\pm1$), and by Lemma~\ref{lem:conj}(ii)
+$\kappa_1[(-1)^E]=-(-1)^{E}\,\E_\cdot[(-1)^\tau]$, so $(-1)^E$ is an
+eigenfunction of $\kappa_1$ if and only if $\E_x[(-1)^\tau]$ is
+constant in $x$ --- which it measurably is not
+($-0.1306\pm0.003$ from the macroscopic start against
+$-0.0009\pm0.005$ from the trapped start, \S\ref{sec:s11num}).}
+
+\begin{proposition}[a minorisation suffices for (C1)]\label{prop:c1}
+Suppose there are $n\ge1$, $\delta>0$ and a probability measure $\nu$
+with
+\[
+\Pr_{\bar x}\bigl[\bar\Gamma_{\tau_n}\in\cdot\,\bigr]\ge\delta\nu(\cdot)
+\qquad\text{and}\qquad
+\Pr_{\bar x}\bigl[\bar\Gamma_{\tau_{n+1}}\in\cdot\,\bigr]\ge\delta\nu(\cdot)
+\qquad\text{for every }\bar x .
+\]
+Then $I+\kappa_1$ is invertible on $L^\infty$ with
+$\|(I+\kappa_1)^{-1}\|\le(2n+1)/(2\delta)$.
+\end{proposition}
+
+\begin{proof}
+Let $(I+\kappa_1)F=G$ and $m=\|F\|_\infty$.  Iterating
+$F=G-\kappa_1F$ gives $F=H_j+(-1)^j\kappa_1^{\,j}F$ with
+$H_j=\sum_{i<j}(-1)^i\kappa_1^{\,i}G$, $\|H_j\|\le j\|G\|$.  Write
+$\kappa_1^{\,n}F=\delta c+(1-\delta)\rho^1_{\bar x}(F)$ and
+$\kappa_1^{\,n+1}F=\delta c+(1-\delta)\rho^2_{\bar x}(F)$ with the same
+$c=\nu(F)$ and probability measures $\rho^i_{\bar x}$.  Multiplying the
+$j=n$ identity by $(-1)^n$ and the $j=n+1$ identity by $(-1)^{n+1}$ and
+subtracting the results eliminates the $\delta c$ terms' difference and
+leaves
+\[
+2F(\bar x)=\pm\bigl(H_n+H_{n+1}\bigr)(\bar x)
++(1-\delta)\bigl(\rho^2_{\bar x}-\rho^1_{\bar x}\bigr)(F),
+\]
+so $2m\le(2n+1)\|G\|+2(1-\delta)m$, i.e.\
+$2\delta m\le(2n+1)\|G\|$.
+\end{proof}
+
+\emph{The proof uses no property of $\kappa_1$ beyond
+$\|\kappa_1\|\le1$: it is valid verbatim for the \emph{sub}-Markov
+$\kappa_1$ of the chain killed on $\Omega_K$, the residual measures
+$\rho^i_{\bar x}$ then having mass $\le1-\delta$ rather than exactly
+$1-\delta$.  This matters because $\Omega_K$ is where
+Theorem~\ref{thm:idleloop} lives.}
+
+\emph{\textbf{SESSION-12 CORRECTION.}  The hypothesis of this proposition
+is never satisfied: for every $n$ there is no common minorant of the
+$n$-th post-flip laws over $\Omega_K$, because a curve of mass
+$\varepsilon$ survives the first $n$ flips untouched with probability
+$\to1$ (Proposition~\ref{prop:nomino}).  The proposition stays correct
+and vacuous; TODO~12b is closed.}
+
+\emph{Status: PROVED as a reduction; the minorisation is OPEN.  It is
+the honest remaining difficulty and it is the classical one: the
+post-flip chain regenerates on the fibre --- two consecutive flips
+produce a $p_1''$ whose law dominates
+$\tfrac14\mathrm{Unif}[s/4,3s/4]$ (\S\ref{sec:markovrenewal}) --- but
+not in the base $(s,\mathrm{env})$, which is carried along.  On
+$\Omega_K$ the base has at most $K$ curves, and the numerics of
+\S\ref{sec:s11num} show it equilibrating in about four flips from a
+deliberately bad start, so a minorisation with $n=O(1)$ and a
+$\delta$ polynomial in $1/K$ is the natural target; the $K$-dependence
+of $\delta$ may be as bad as one likes, polynomially.}
+
+\emph{Routes to (C2).  (a) Uniform ergodicity plus a parity symmetry:
+the same minorisation gives
+$\|\kappa_1^k(F-\bar\pi F)\|\le C\rho^k$ for all bounded $F$, reducing
+(C2) to $\langle\bar\pi,(-1)^E\rangle=0$ --- the statement that the
+post-flip stationary law on $\Omega_K$ has no environment block-count
+parity bias.  On $\Omega_K$ that is a statement about a
+finite-dimensional chain and is the cleanest target for session 12.
+(b) Directly: by Lemma~\ref{lem:conj}(ii),
+$\kappa_1^{\,k}(-1)^E=(-1)^{E}(-1)^k\kappa_{-1}^{\,k}\mathbf 1$ and
+$\kappa_{-1}^{\,k}\mathbf 1(\bar x)=\E_{\bar x}[(-1)^{\tau_k}]$, so
+(C2) says exactly that the parity of the $k$-th flip time decorrelates
+geometrically --- which is what \texttt{s11\_kflip} measures.  A proof
+along (b) needs a state-uniform lower bound on the probability that
+two consecutive inter-flip times have opposite parity; the idle loop
+supplies a uniform event at lag $2$, but it changes $\tau$ by an
+\emph{even} amount, so a genuinely odd perturbation is still needed.
+That is the one place where an odd/even asymmetry must be produced
+rather than conjugated away, and it is the sharpest statement of the
+residue of the whole problem.}
+
+\emph{A Lyapunov remark.}  The proof of Theorem~\ref{thm:idleloop}
+degrades only through $\lambda^{-1}=3(\sum_jr_j^4)^{-1}$, whose
+expectation along the chain is known exactly
+(Theorem~\ref{thm:sizebiased}).  A drift inequality
+$\kappa_1V\le\varrho V+b$ with $V=(\sum_jr_j^4)^{-\theta}$, $\theta>0$
+small, would replace the killing at $B=K$ by a weighted space and
+supply the ``base'' half of the minorisation of
+Proposition~\ref{prop:c1} at the same time.  It is a finite
+computation of the same kind as Lemma~\ref{lem:logdrift} and is the
+recommended first task of session 12.
+
+\subsubsection{Numerics along the post-flip chain}\label{sec:s11num}
+
+TODO~11d asked for $\E_{\bar x}[(-1)^{\tau_k}]$ along the post-flip
+chain, predicting geometric decay under (R2).  The prediction needed
+correcting before the run could be interpreted --- under (R2) as stated
+there is no such prediction, (R2) being false --- but the quantity is,
+by route (b) above, \emph{exactly} the residual condition (C2).
+Measured (\texttt{s11\_kflip}: stationary environment burnt in over
+$4096$ steps, accepted on the initial gap, $k\le16$, no censoring):
+
+\emph{Macroscopic start, gap in $[\tfrac18,\tfrac38)$,
+$1.2\times10^5$ samples (s.e.\ $0.0029$):
+$\E[(-1)^{\tau_k}]=-0.1306,\ +0.0263,\ -0.0100,\ +0.0011$, and at the
+noise floor for every $k\ge4$: geometric decay with ratio
+$\approx0.2$--$0.4$ and no persistent $(-1)^k$ component.  Trap start,
+gap in $[10^{-3},10^{-2})$, $4\times10^4$ samples (s.e.\ $0.0050$):
+$-0.0009,\,+0.0018,\,+0.0024,\dots$, at the noise floor throughout ---
+one long inter-flip time randomises the parity immediately.
+\textbf{This is (C2), measured, with $\rho\approx0.3$.}}
+
+\emph{\textbf{SESSION-12 CORRECTION.}  The ``$\rho\approx0.3$'' is the
+transient.  With $2\times10^7$ samples from fixed low-block-count
+starts, $a_k=(-1)^k(2.5\pm0.1)k^{-3}$ for $7\le k\le12$: the decay is
+polynomial, not geometric, and the stationary-start average above
+hides it because it averages the sign $(-1)^{B(\bar x)}$ over the
+start (\S\ref{sec:s12num}).  (C2) is replaced by the polynomial
+(C2$''$) of \S\ref{sec:s12left}, which suffices for a H\"older exponent
+$(p-1)/(p+1)>4/9$ at $z=-1$ when $p>13/5$.}
+
+\emph{Inter-flip parity $\E[(-1)^{\tau_k-\tau_{k-1}}]$ settles at
+$-0.170\pm0.003$ for $k\ge3$ from both starts: bounded away from
+$\pm1$, as (C2) needs, and strikingly stable.}
+
+\emph{The post-flip chain equilibrates in about four flips.  From the
+trap start, $\E[\mathrm{gap}]$ at $\tau_k$ runs
+$0.1995,0.2375,0.2468,0.2484,0.2491,\dots$ and $\E[s]$ runs
+$0.715,0.774,0.790,0.797,0.798$, matching the macroscopic start's
+$0.2498$ and $0.799$ by $k=4$; the correlations
+$\E[\mathrm{sgn}(g_0-\tfrac14)\,\mathrm{sgn}(g_k-\tfrac14)]$ decay
+$0.317,0.090,0.022,0.012,\dots$, geometrically with ratio
+$\approx0.3$.  This is direct evidence for the minorisation of
+Proposition~\ref{prop:c1} with $n$ of order $4$.}
+
+\emph{First-flip tails along the chain: $t^2\Pr[\tau_k-\tau_{k-1}>t]$
+lies in $15$--$20$ on $16\le t\le128$ for $k=2,4,8$ from both starts
+(and $\approx10^4$ for $k=1$ from the trap start, consistent with the
+$g^{-2}$ prefactor), so (R1) holds uniformly \emph{along} the post-flip
+chain and not merely at the start: TODO~11d(iii), answered in the
+affirmative.}
+
+\emph{Finally, \texttt{s11\_kflip} asserts
+$B(\Gamma_t)-B(\Gamma_0)\equiv t\pmod2$ at every flip of every one of
+the $1.6\times10^5$ trajectories --- the hypothesis of
+Lemma~\ref{lem:conj}(ii), via Lemma~\ref{lem:parity} --- and it holds.}

@@ -1,0 +1,5 @@
+n=5 lam=(5,): brute N5 = 36, U-form = 36, M-form = 36  MATCH
+n=6 lam=(6,): brute N5 = 4032, U-form = 4032  MATCH
+n=6 lam=(2, 4): brute N5 = 4224, U-form = 4224  MATCH
+n=7 lam=(7,): brute N5 = 2185152, U-form = 2185152  MATCH
+n=7 lam=(2, 5): brute N5 = 2198160, U-form = 2198160  MATCH

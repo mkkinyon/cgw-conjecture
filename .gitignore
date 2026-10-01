@@ -1,0 +1,33 @@
+# compiled binaries (rebuild with gcc -O3 ... as listed in HANDOFF files)
+/jm
+/s10_nomerge
+/s11_kflip
+/s11_ztau
+/s12_akB
+/s12_akdecay
+/s12_driftfail
+/s12_twist
+/s7_twopoint
+/s8_splitmerge
+/s9_survival
+/layer4
+/anatomy5
+/anatomy5b
+/n5_direct
+/n5_direct2
+/n5_types
+/xside
+/xside2
+/bias_scale
+__pycache__/
+*.o
+# LaTeX build products (PDF of the notes is kept)
+*.aux
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+second_row_notes.log

@@ -1,0 +1,13 @@
+n=6 type=(6)  completions=4032
+  m=6 alpha=2  XA=12672 XB=11520  XB/XA=0.909090909
+  m=6 alpha=3  XA=6912 XB=5184  XB/XA=0.750000000
+n=6 type=(2,4)  completions=4224
+  m=4 alpha=2  XA=5376 XB=3072  XB/XA=0.571428571
+n=6 type=(3,3)  completions=4608
+n=7 type=(7)  completions=6566400
+  m=7 alpha=2  XA=23116800 XB=22848000  XB/XA=0.988372093
+  m=7 alpha=3  XA=22901760 XB=23063040  XB/XA=1.007042254
+n=7 type=(2,5)  completions=6604800
+  m=5 alpha=2  XA=16588800 XB=16435200  XB/XA=0.990740741
+n=7 type=(3,4)  completions=6543360
+  m=4 alpha=2  XA=6635520 XB=6451200  XB/XA=0.972222222

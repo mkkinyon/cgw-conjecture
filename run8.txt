@@ -1,0 +1,13 @@
+n=8: samples read: 4000000
+cycle-type distribution vs exact:
+  (2, 2, 2, 2)       obs    28960  exp    28963.3
+  (2, 2, 4)          obs   342071  exp   342436.0
+  (2, 3, 3)          obs   302664  exp   301919.3
+  (2, 6)             obs   907211  exp   907315.2
+  (3, 5)             obs   723162  exp   722816.8
+  (4, 4)             obs   340143  exp   340105.5
+  (8,)               obs  1355789  exp  1356444.0
+  chi2 = 2.7 on ~6 dof
+generic-pair B prob: 0.49926 +- 0.00025   [(p-1/2)*n = -0.006]
+post-flip mu=(2, 6): N=907211  P(B1)=0.49708+-0.00052  P(B2)=0.49611  qbar=0.99319+-0.00084
+  exact qbar (identity) = 0.993345

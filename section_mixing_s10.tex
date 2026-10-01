@@ -1,0 +1,467 @@
+%----------------------------------------------------------------------
+\subsection{Session 10: the block count is Harer--Zagier, the environment
+is healthy on the short horizon, the exact size-biased law, and the
+Markov-renewal form of the survival problem}\label{sec:s10}
+
+Session 10 was to fix the exact statement behind
+Problem~\ref{prob:survival} (TODO~10a, step~0) and choose a route.  The
+first finding is negative and structural: \emph{the environment cannot
+be avoided} --- without merges the parity of the flip count from a start
+with $\min(a_0,b_0)=\varepsilon$ decays on the time scale
+$\varepsilon^{-2}$, not $\varepsilon^{-1}$, and the budget of
+Corollary~\ref{cor:kappafree} forces $\varepsilon\ll d^{-1/2}$, so a
+proof must use the recharge of small marked coordinates by
+environment blocks (\S\ref{sec:noenv}).  The second finding removes the
+obstacle this creates.  The number of curves $B_t$ after $t$ chords has
+an \emph{exact} law --- it is the Harer--Zagier vertex-count
+distribution of a random gluing of a $2t$-gon --- with
+$\E[3^{B_t}]=3+4t+2t^2$; a Chernoff bound then gives $B_t\le C\log d$
+simultaneously for all $t\le9d$ except with probability $d^{-\gamma}$
+(\S\ref{sec:blockcount}).  On that event every state on the horizon
+has $\sum p_i^2\ge1/(C\log d)$ and an environment block of mass
+$\ge(1-s)/(C\log d)$: the ``no-dust'' question is closed, up to
+logarithms, in exactly the form the short horizon needs.  The same hook
+computation gives the exact law of the mass of the curve through a
+uniform point at every time (\S\ref{sec:sizebiased}; this contains
+Theorem~\ref{thm:exactonepoint} and closes TODO~10b(b)).  Finally the
+survival problem is put in Markov-renewal form
+(\S\ref{sec:markovrenewal}): an exact operator identity for the
+generating function $\sum_d\Phi_dz^d$ separates the two remaining
+contents --- moments of the first-flip time (traps) and invertibility
+of $I+K_z$ (cancellation) --- and a conditional decay proposition
+states precisely what is left.
+
+\subsubsection{The environment cannot be avoided}\label{sec:noenv}
+
+Consider the marked pair alone, with merges suppressed (an adversarial
+``dust'' environment): per step, $a\to a\sqrt U$ with probability
+$a^2$, $b\to b\sqrt U$ with probability $b^2$, a flip
+$(a,b)\to(\alpha+\beta,s-\alpha-\beta)$ with probability $2ab$, and
+nothing otherwise.  Since merges only increase marked coordinates and
+are the only moves that do, this is the chain that any argument using
+the environment solely through upper bounds would have to control.
+Its scaling is elementary: all rates are quadratic in the coordinates,
+so from $(a_0,b_0)=(\varepsilon,\varepsilon)$ nothing happens for
+$\asymp\varepsilon^{-2}$ steps, and from $(c_0,\varepsilon)$ the large
+coordinate decays like $t^{-1/2}$ before a flip (rate $2\varepsilon b$)
+can occur, the first flip arriving only at $t\asymp\varepsilon^{-2}$.
+Measured (\texttt{s10\_nomerge}, $\Phi_t=\E[(-1)^{N_t}]$):
+from $(\tfrac14,\tfrac14)$, $\Phi_t=0.130,\,0.031,\,0.0070,\,0.0024$
+at $t=8,16,32,64$ (then noise floor $10^{-3}$; $t^2\Phi_t\approx8$--$10$
+on $16\le t\le64$) --- a healthy $1/t^2$-like decay without any
+environment; but from $(\tfrac14,0.02)$,
+$\Phi_t=0.53,\,0.25,\,0.088,\,0.040$ at $t=64,256,1024,4096$, and from
+$(0.02,0.02)$, $\Phi_t=0.90,\,0.68,\,0.30,\,0.13$ at
+$t=64,256,1024,8192$: decay only on the scale $\varepsilon^2t$, and
+slow even there.  In the budget of Corollary~\ref{cor:kappafree} the
+trap-entry flux forces $\varepsilon\ll d^{-1/2}$, hence
+$\varepsilon^2d\ll1$: a bound depending on the environment only
+through upper bounds is worthless.  \emph{Status: COMPUTED (the scaling
+statement is trivial).  Consequence: any proof of
+Problem~\ref{prob:survival} must lower-bound the masses of environment
+blocks over the horizon --- the recharge mechanism of
+Remark~\ref{rem:renewal}.  The next subsection supplies exactly this.}
+
+\subsubsection{The exact law of the number of curves}\label{sec:blockcount}
+
+Let $B_t$ be the number of curves after $t$ iid chords (the total
+block count of the marked chain from the one-block start; it does not
+depend on the marks).
+
+\begin{theorem}[the block count is Harer--Zagier]\label{thm:blockcount}
+For every $x$,
+\[
+\sum_{t\ge0}\E\bigl[x^{B_t}\bigr]z^t
+=\frac1{2z}\Bigl[\Bigl(\frac{1+z}{1-z}\Bigr)^{x}-1\Bigr],
+\qquad\text{i.e.}\qquad
+\Pr[B_t=m]=[z^{t+1}]\,\frac{(2\operatorname{artanh}z)^m}{2\,m!},
+\]
+so $B_t\equiv t+1\pmod2$, $\Pr[B_t=t+1-2g]=\varepsilon_g(t)/(2t-1)!!$
+with $\varepsilon_g(t)$ the Harer--Zagier numbers \cite{HZ86}, and for
+integer $x\ge1$ the expectation $\E[x^{B_t}]$ is a polynomial in $t$ of
+degree $x-1$:
+\[
+\E[2^{B_t}]=2+2t,\qquad \E[3^{B_t}]=3+4t+2t^2,\qquad
+\E[4^{B_t}]=4+\tfrac{20}3t+4t^2+\tfrac43t^3=\tfrac43(t+1)(t^2+2t+3),\qquad
+\Pr[B_t=1]=\frac{1+(-1)^t}{2(t+1)}.
+\]
+\end{theorem}
+
+\begin{proof}
+The $2t$ endpoints are iid uniform on the circle, a.s.\ distinct; by
+exchangeability, conditionally on their positions the pairing into
+chords is uniform among the $(2t-1)!!$ pairings.  Refining $\gamma$ at
+the endpoints does not change the curve partition
+(Lemma~\ref{lem:splitmerge}), so $B_t$ is the number of cycles of
+$\gamma_{2t}\tau$, with $\gamma_{2t}$ the rotation of the $2t$
+endpoints and $\tau$ the pairing involution --- the number of vertices
+of the surface obtained by gluing the sides of a $2t$-gon along a
+uniform pairing.  Harer--Zagier's formula \cite{HZ86} is
+$1+2\sum_{t\ge0}\bigl[\sum_g\varepsilon_g(t)N^{t+1-2g}\bigr]
+z^{t+1}/(2t-1)!!=\bigl((1+z)/(1-z)\bigr)^N$; dividing by $(2t-1)!!$ turns
+the bracket into $\E[N^{B_t}]$, which is the displayed identity for
+$x=N$, and both sides are polynomials in $N$ for each $t$.  Expanding
+$((1+z)/(1-z))^x=\exp(2x\operatorname{artanh}z)$ in powers of $x$ gives
+the law; the polynomials are the coefficients of
+$(1-z)^{-x}\sum_k\binom{x}{2k+1}z^{2k}$.
+\end{proof}
+
+\emph{Status: PROVED (the statement is classical once the chord
+diagram is identified; the identification is the content).  A second
+proof runs through the finite-$n$ hook machinery of
+Theorem~\ref{thm:exactonepoint}: $x^{c(\sigma)}=\sum_\lambda
+s_\lambda(1^x)\chi_\lambda(\sigma)$, so
+$\E[x^{c(\sigma_t)}]=\sum_{k}(-1)^k r_k^{\,t}\,s_{(n-k,1^k)}(1^x)$ with
+$s_{(n-k,1^k)}(1^x)=x(x{+}1)\cdots(x{+}n{-}k{-}1)\cdot(x{-}1)\cdots(x{-}k)
+/\bigl(n\,(n{-}k{-}1)!\,k!\bigr)$ by hook-content; for integer $x$ only
+$k\le x-1$ survive, e.g.\ $\E[2^{c(\sigma_t)}]=(n+1)-(n-1)r_1^{\,t}$,
+$\E[3^{c(\sigma_t)}]=\tfrac12(n+1)(n+2)-(n^2-1)r_1^{\,t}+\tfrac12(n-1)(n-2)r_2^{\,t}$,
+whose $n\to\infty$ limits are $2+2t$ and $3+4t+2t^2$
+(\texttt{s10\_blocks.py}, exact rationals, Lagrange-extrapolated in
+$1/(n-1)$, gives the polynomials for $x\le5$).  VERIFIED: the full law
+against a direct simulation of the split--merge chain
+(\texttt{s10\_blocksim.py}, $2\times10^5$ trials, $t\le6$): every
+probability agrees to $\pm0.001$, e.g.\ $\Pr[B_6=1,3,5,7]=
+0.1429,0.6222,0.2222,0.0127$ predicted vs.\ $0.1431,0.6230,0.2212,0.0127$
+measured.}
+
+\begin{corollary}[block count over the horizon]\label{cor:horizon}
+For all $T\ge1$ and $K\ge1$,
+\[
+\Pr\Bigl[\max_{0\le t\le T}B_t\ge K\Bigr]\;\le\;3^{\,1-K}(T+1)^3 .
+\]
+In particular, for $\gamma>0$ and
+$K_\gamma(T):=\lceil(3+\gamma)\log_3(T+1)\rceil+1$, the event
+$H_T=\{B_t<K_\gamma(T)\ \forall t\le T\}$ has probability
+$\ge1-(T+1)^{-\gamma}$, and on $H_T$, for every $t\le T$: the total number of
+blocks is $<K_\gamma(T)$, $\sum_ip_i(t)^2\ge1/K_\gamma(T)$, the
+environment has fewer than $K_\gamma(T)$ blocks and hence a block of
+mass $\ge(1-s_t)/K_\gamma(T)$.
+\end{corollary}
+
+\begin{proof}
+Markov with $x=3$: $\Pr[B_t\ge K]\le3^{-K}(3+4t+2t^2)\le3^{1-K}(t+1)^2$;
+sum over $t\le T$.  With $K=K_\gamma(T)$,
+$3^{1-K}\le(T+1)^{-3-\gamma}$.  The consequences are Cauchy--Schwarz
+($\sum p_i^2\ge1/\#\text{blocks}$) and pigeonhole.
+\end{proof}
+
+\emph{Status: PROVED.  In Problem~\ref{prob:survival} the start
+$\Gamma_0\sim\mu_j$ ($j\le8d$) followed by $d$ steps is the chain from
+one block over at most $9d$ steps, so $H_{9d}$ has probability
+$\ge1-(9d+1)^{-\gamma}$ for any fixed $\gamma$ at the price
+$K=O_\gamma(\log d)$.  This is the ``no-dust'' estimate that
+\S\ref{sec:upper} and the session-8/9 handoffs listed as the open
+ingredient of every route: over the short horizon it holds for free,
+up to a logarithm, because the chain simply has not had time to create
+many blocks --- $\E[B_t]=[z^t]\,(1+z)\operatorname{artanh}(z)/(z(1-z))=\log t+O(1)$
+and the pgf makes the tail geometric.  (At stationarity the count is infinite and the analogous
+statement is false as stated; the short horizon of
+Theorem~\ref{thm:factor} is again what makes the iid model tractable.)
+Since the required exponent in Corollary~\ref{cor:kappafree} is only
+$\alpha>2/9$, losing logarithms is harmless.}
+
+\subsubsection{The exact law of the block of a uniform point}
+\label{sec:sizebiased}
+
+\begin{theorem}[size-biased block mass at all times]\label{thm:sizebiased}
+Let $U$ be uniform on the circle, independent of the chords, and let
+$\zeta_m$ be the mass of the curve through $U$ after $m$ chords (chain
+from one block).  Then
+\[
+\Pr[\zeta_m\in dx]=\bigl(1-(1-2x)^m\bigr)\,dx\ \text{ on }(0,1),
+\qquad
+\Pr[\zeta_m=1]=\frac{1+(-1)^m}{2(m+1)} ,
+\]
+and consequently, for every $r\ge1$,
+\[
+\E\Bigl[\sum_ip_i(m)^r\Bigr]=\E[\zeta_m^{\,r-1}]
+=\frac1r+\int_0^1(1-x^{r-1})(1-2x)^m\,dx .
+\]
+By rotation invariance the same law governs the mass of the curve
+through any fixed point, in particular through $u$ (and through $v$).
+At finite $n$: $\Pr[|C_{\sigma_m}(1)|=j]=(1-r_j^{\,m})/n$ for $j<n$ and
+$\Pr[|C_{\sigma_m}(1)|=n]=\frac1n\sum_{k=0}^{n-1}r_k^{\,m}$, with
+$r_k=1-2k/(n-1)$; equivalently
+$(-1)^k\langle\chi_{(n-k,1^k)},\sum_ic_i^{\,r}\rangle=n^{r-1}-k^{r-1}$
+for $1\le k\le n-1$ and $\sum_{j\le n}j^{r-1}$ for $k=0$.
+\end{theorem}
+
+\begin{proof}
+For $F$ on $\{1,\dots,n\}$ put $G_F(\sigma)=\sum_{u}F(|C_\sigma(u)|)
+=\sum_ic_iF(c_i)$.  The exponential formula with one marked cycle, as
+in the proof of Theorem~\ref{thm:exactonepoint} (weight $jF(j)$ for a
+marked cycle of length $j$ replaces $j\cdot j$ there), gives
+\[
+\sum_nx^n\sum_kt^k\langle\chi_{(n-k,1^k)},G_F\rangle
+=\frac1{1+t}\Bigl[\sum_{j\ge1}F(j)\bigl(1-(-t)^j\bigr)x^j\Bigr]\frac{1+tx}{1-x}.
+\]
+Extracting $[x^n]$: $\sum_{j<n}F(j)(1-(-t)^j)(1+t)+F(n)(1-(-t)^n)$;
+dividing by $1+t$ and extracting $[t^k]$ gives, for $1\le k\le n-1$,
+$-(-1)^kF(k)+(-1)^kF(n)$, and $\sum_{j\le n}F(j)$ for $k=0$.  Hence,
+by the Fourier inversion of Theorem~\ref{thm:exactonepoint},
+$\E[G_F(\sigma_m)]=\sum_{j\le n}F(j)+\sum_{k=1}^{n-1}r_k^{\,m}(F(n)-F(k))
+=\sum_{j<n}F(j)(1-r_j^{\,m})+F(n)\sum_{k=0}^{n-1}r_k^{\,m}$.  Since
+$G_F(\sigma)/n=\E_U[F(|C_\sigma(U)|)]$ for a uniform point $U$, this is
+the finite-$n$ law; $F(j)=j^{r-1}$ gives the hook inner products, and
+$j=nx$, $r_j^{\,m}\to(1-2x)^m$ gives the continuum statements
+(Lemma~\ref{lem:splitmerge} for the identification).
+\end{proof}
+
+\emph{Status: PROVED.  VERIFIED: the hook identity
+$(-1)^k\langle\chi_k,\sum c^r\rangle=n^{r-1}-k^{r-1}$ by brute-force
+character sums for $r\le6$, $n\le9$ (\texttt{s10\_hooks34.py}); the
+continuum law and the moments $r=2,3,4$ against simulation
+(\texttt{s10\_sizebiased.py}, $2\times10^5$ trials): at $m=8$ the ten
+decile masses agree to $\pm0.001$, the atom $0.1115$ vs $1/9$, and
+$\E\sum p^{2,3,4}=0.5561,0.3947,0.3140$ vs $0.5556,0.3939,0.3131$.
+Remarks.  (i) $r=2$ is Theorem~\ref{thm:exactonepoint}; the atom is
+$\Pr[B_m=1]$ of Theorem~\ref{thm:blockcount}, as it must be.  (ii) The
+drift identity $\E[\Delta L]=2L^2-\tfrac73\sum p_i^4$ ($L=\sum p_i^2$)
+is now closed in expectation along the whole approach to
+$\mathrm{PD}(1)$: $\E\sum p_i^4(m)=\tfrac14+\int_0^1(1-x^3)(1-2x)^mdx$.
+(iii) Small marked blocks: $\Pr[\text{mass of }u\text{'s curve}\le\eta]
+=\int_0^\eta(1-(1-2x)^m)dx\le\min(\eta,\,m\eta^2)$ --- the
+$m\eta^2$ regime is the creation flux of Lemma~\ref{lem:recharge}(iii)
+made exact for the block through a fixed point, and the crossover at
+$\eta\asymp1/m$ is the trap scale.  (iv) The density $1-(1-2x)^m$ is
+$\ge1-e^{-2mx}$ on $(0,\tfrac12]$: the size-biased pick is macroscopic with probability
+bounded below uniformly in $m\ge1$ --- the quantitative handle for
+recharge that TODO~10a(A)(iii) asked for, now superseded by
+Corollary~\ref{cor:horizon}.}
+
+\subsubsection{Recharge under the block bound}\label{sec:recharge}
+
+Fix $K\ge3$ and let $H=H_T$ be the event of Corollary~\ref{cor:horizon}
+with $K_\gamma(T)$ replaced by $K$.
+
+\begin{lemma}[recharge of the marked total]\label{lem:srecharge}
+Let $K\ge3$, $s_0\ge\varepsilon$ with $\varepsilon\le1/(2K)$.  Then for every
+$T\ge1$,
+\[
+\Pr\Bigl[\max_{t\le T}s_t<\tfrac1{2K}\Bigr]
+\;\le\;e^{-\varepsilon T/K}+2\varepsilon^2T+\Pr[H^c].
+\]
+The same holds for each marked coordinate separately: if
+$a_0\ge\varepsilon$ then
+$\Pr[\max_{t\le T}a_t<1/(2K)]\le e^{-\varepsilon T/(3K)}+2\varepsilon^2T+\Pr[H^c]$,
+and likewise for $b$.
+\end{lemma}
+
+\begin{proof}
+On $H\cap\{s_t<1/(2K)\}$ the environment has mass $>1-1/(2K)\ge\tfrac12$
+in fewer than $K$ blocks, so it has a block of mass $z\ge1/(2K)$; the
+chord with one cut in the marked material and one in that block has
+probability $2s_tz\ge\varepsilon/K$ as long as $s_t\ge\varepsilon$, and
+it raises $s$ by $z\ge1/(2K)$.  Flips and merges never decrease $s$, and
+$s$ enters $(0,\varepsilon]$ from above with probability $\le2\varepsilon^2$
+per step (Lemma~\ref{lem:strap}); so the event $\{\max_{t\le T}s_t<1/(2K)\}$
+is contained in $\{s_t<\varepsilon\text{ for some }t\le T\}\cup H^c\cup
+\{T\text{ consecutive failures of an event of probability }\ge\varepsilon/K\}$.
+For a single coordinate $a$: if $s_t\le\tfrac12$ the same merge
+argument applies to $a$ (probability $\ge2a\cdot1/(2K)\ge\varepsilon/K$);
+if $s_t>\tfrac12$ and $a_t<1/(2K)$ then $b_t\ge\tfrac13$, a flip has
+probability $2a_tb_t\ge2\varepsilon/3$ and lands at
+$a'=\alpha+\beta\ge\beta\sim U(0,b_t)$, so $a'\ge1/(2K)$ with conditional
+probability $\ge1-3/(2K)\ge\tfrac12$: success probability
+$\ge\varepsilon/3\ge\varepsilon/(3K)$ per step in both regimes; the
+entry flux into $(0,\varepsilon]$ is $\le2\varepsilon^2$ per step
+(shrink of $a$, flip landing small; Lemma~\ref{lem:recharge}(iii)).
+\end{proof}
+
+\emph{Status: PROVED.  With $T=(3K/\varepsilon)\log(1/\delta)$ the
+failure probability is $\delta+6\varepsilon K\log(1/\delta)+\Pr[H^c]$,
+small precisely when $\varepsilon\ll1/K$ --- the regime in which
+recharge is needed at all (for $\varepsilon\ge1/(2K)$ the start is
+already log-macroscopic).  At the optimising
+$\varepsilon=d^{-(1+2\alpha)/(2+2\alpha)}\in[d^{-3/4},d^{-1/2})$ of
+Corollary~\ref{cor:kappafree} ($\alpha<1$) and $K=O(\log d)$,
+$T=O(\varepsilon^{-1}\log^2d)\ll d$ and the failure probability is
+$O(d^{-\gamma})+O(\varepsilon\log^2d)$, which is
+$o\bigl((\varepsilon d)^{-2\alpha}\bigr)=o(d^{-\alpha/(1+\alpha)})$ since
+$\varepsilon^{1+2\alpha}d^{2\alpha}=d^{-1/(2+2\alpha)}$.}
+
+\begin{lemma}[log-drift of the marked total]\label{lem:logdrift}
+On $H$, for a state with $s\le\tfrac12$,
+\[
+\E[\log s_{t+1}-\log s_t\mid\Gamma_t]\;\ge\;\frac{s}{K}\log\Bigl(1+\frac1{2Ks}\Bigr)-\frac{s^2}2 ,
+\]
+which is $\ge s\,(\log2-\tfrac14)/K>0$ for $s\le1/(2K)$; the negative
+jumps of $\log s$ are those of $\tfrac12\log U$ (exponential tails),
+the positive ones are unbounded above only through merges.
+\end{lemma}
+
+\begin{proof}
+Merges: with probability $\ge2sz$ the total gains $z$, and the largest
+environment block has $z\ge(1-s)/K\ge1/(2K)$; $\log(1+z/s)$ is
+increasing in $z$.  Shrinks: $a\to a\sqrt U$ with probability $a^2$
+changes $\log s$ by $\log(1-(a/s)(1-\sqrt U))\ge\log\sqrt U$, of mean
+$-\tfrac12$; likewise $b$; $a^2+b^2\le s^2$.  Flips preserve $s$;
+environment-only moves do not touch it.
+\end{proof}
+
+\emph{Status: PROVED (a calculation).  It says that, once the block
+count is bounded, the marked total is a one-dimensional process with
+positive log-drift below the level $\asymp1/K$ and light-tailed
+down-jumps; standard drift arguments (Lyapunov function
+$s^{-\theta}$, small $\theta$) then bound the occupation time of
+$\{s<c/K\}$ over any window by a small fraction with polynomially
+small failure probability.  This is the ``marked pair health''
+input for the tail of the first-flip time in
+\S\ref{sec:markovrenewal}; it is NOT written out.}
+
+\subsubsection{The Markov-renewal form of Problem~\ref{prob:survival}}
+\label{sec:markovrenewal}
+
+Let $\tau$ be the first flip time of the quotient chain and, for
+$|z|\le1$ and bounded measurable $F$,
+\[
+(K_zF)(x):=\E_x\bigl[z^{\tau}F(\Gamma_\tau)\bigr],
+\qquad \|K_z\|_{L^\infty\to L^\infty}\le\sup_x\E_x|z|^{\tau}\le|z| ,
+\]
+since $\tau\ge1$.  $K_1$ is the post-flip kernel (Markov whenever
+$\tau<\infty$ a.s.).
+
+\begin{proposition}[generating function of the parity]\label{prop:genfun}
+For $|z|<1$, as bounded functions of the initial state,
+\[
+\sum_{d\ge0}\Phi_d\,z^d\;=\;\frac1{1-z}\,(I+K_z)^{-1}(I-K_z)\mathbf 1 .
+\]
+\end{proposition}
+
+\begin{proof}
+With flip times $\tau_1<\tau_2<\cdots$, $\Phi_d=\sum_{k\ge0}(-1)^k
+\Pr_x[\tau_k\le d<\tau_{k+1}]$ and
+$\sum_dz^d\mathbf 1\{\tau_k\le d<\tau_{k+1}\}=(z^{\tau_k}-z^{\tau_{k+1}})/(1-z)$;
+by the strong Markov property at the flip times
+$\E_x[z^{\tau_k}]=(K_z^k\mathbf 1)(x)$.  Sum the Neumann series, which
+converges since $\|K_z\|\le|z|<1$.
+\end{proof}
+
+\emph{Status: PROVED.  It is exact and separates the problem: the
+factor $(I-K_z)\mathbf 1=\E_\cdot[1-z^{\tau}]$ carries the first-flip
+tail (traps), the resolvent $(I+K_z)^{-1}$ carries the cancellation
+(the parity of the number of flips per unit time).  Note
+$(I-K_1)\mathbf 1=0$ wherever $\tau<\infty$ a.s.\ (on $\{ab>0\}$, since
+$\sum_t2a_tb_t=\infty$ a.s.\ there --- taken for granted below), so the
+right side is a difference quotient at $z=1$: the decay of $\Phi_d$ is the regularity of
+$G(z):=(I+K_z)^{-1}(I-K_z)\mathbf 1$ on the closed disc.}
+
+\begin{proposition}[conditional decay]\label{prop:condecay}
+Let $\mathcal B$ be a Banach space of functions on the state space
+containing $\mathbf 1$, on which the evaluations $F\mapsto F(x)$,
+$x\in S'$, are uniformly bounded, and let $\gamma\in(0,1)$.  Suppose
+\begin{enumerate}[leftmargin=2em]
+\item[(R1)] $z\mapsto K_z\in\mathcal L(\mathcal B)$ is $C^{1,\gamma}$
+on $\{|z|\le1\}$ (for a weighted sup-norm space
+$\mathcal B=\{F:\sup|F|/V<\infty\}$ it suffices that
+$\sup_x\E_x[\tau^{1+\gamma}V(\Gamma_\tau)]/V(x)<\infty$, by
+$|\tau z_1^{\tau-1}-\tau z_2^{\tau-1}|\le2\tau^{1+\gamma}|z_1-z_2|^\gamma$);
+\item[(R2)] $I+K_z$ is invertible on $\mathcal B$ for every $|z|\le1$,
+with $\sup_{|z|\le1}\|(I+K_z)^{-1}\|<\infty$.
+\end{enumerate}
+Then $\sup_{x\in S'}|\Phi_d(x)|\le C\,d^{-\gamma}$.
+\end{proposition}
+
+\begin{proof}
+Under (R1)--(R2), $G$ is $C^{1,\gamma}$ on the closed disc with
+$G(1)=0$, so $\hat\Phi(z)=(G(z)-G(1))/(1-z)$ extends to a
+$C^{0,\gamma}$ function on the closed disc; it is analytic inside, so
+its boundary Fourier coefficients are the $\Phi_d$, and the Fourier
+coefficients of a H\"older-$\gamma$ function are $O(d^{-\gamma})$.
+Evaluate at $x\in S'$.
+\end{proof}
+
+\emph{\textbf{SESSION-11 CORRECTION.}  Condition (R2) is FALSE at
+$z=\pm1$ for every function space containing the bounded functions:
+$K_1\varepsilon=-\varepsilon$, because exactly one flip has occurred at
+time $\tau$ (Proposition~\ref{prop:r2false}).  Proposition~\ref{prop:condecay}
+is therefore vacuous as stated.  The same holds in the
+label-free bookkeeping, with $\kappa_{-1}[(-1)^E]=-(-1)^E$.  It is
+repaired in \S\ref{sec:s11}: (R2) is replaced by the two conditions
+(C1) and (C2) of \S\ref{sec:s11left}, both statements about the single
+Markov kernel $\kappa_1$, and everything on the closed disc away from
+$z=\pm1$ is proved unconditionally by
+Theorem~\ref{thm:idleloop}.  The discussion of (R1) below is
+unaffected, and so is the reduction paragraph at the end of this
+subsection.  Read the rest of this paragraph with that substitution.}
+
+\emph{Status: PROVED as a reduction; (R1) and (R2) are OPEN.  What each
+needs, and what is in hand:}
+
+\emph{(R1) --- traps.  A uniform bound $\sup_{x\in S'}\Pr_x[\tau>t]\le
+C_Kt^{-2}$ (measured: $t^2\Pr[\tau>t]\to11$ from stationary
+environments, \S\ref{sec:parity}(c)) gives every moment $\tau^{1+\gamma}$,
+$\gamma<1$, hence $\gamma$ arbitrarily close to $1$ in
+Proposition~\ref{prop:condecay}, far above the $4/9$ that
+Corollary~\ref{cor:kappafree} needs.  Ingredients: the state-independent
+trap-creation flux (Lemma~\ref{lem:recharge}(iii)); the recharge of
+Lemma~\ref{lem:srecharge} and the drift of Lemma~\ref{lem:logdrift},
+both available on $H$ by Corollary~\ref{cor:horizon}; and the fact
+that a trap of depth $g$ is left by a flip alone, at rate
+$2g(s-g)$, needing no environment.  The proof of the $1/t^2$ tail is
+a renewal computation with these inputs (the subcritical kernel
+$\approx2/(s^2m^2)$ of \S\ref{sec:parity}(c)), which we have not
+written.}
+
+\emph{(R2) --- cancellation.  This is the parity content and cannot be
+had from trap accounting.  It is needed on the whole closed disc: the
+trivial bound $\|K_z\|\le|z|$ gives nothing on $|z|=1$.  At $z=1$ it
+is the statement that $-1$ is not in the spectrum of the post-flip
+chain $K_1$ on $\mathcal B$, with a uniform inverse; near $z=1$ it
+follows by perturbation under (R1).  At other points of the circle it
+is the non-lattice condition of Markov renewal theory --- no $F\ne0$
+with $\E_x[z^{\tau}F(\Gamma_\tau)]=-F(x)$ --- and at $z=-1$, where
+$K_{-1}F=\E_\cdot[(-1)^{\tau}F(\Gamma_\tau)]$, it says the parity of the
+inter-flip times is not asymptotically deterministic; this is where
+the $(-1)^d$ alternation of \S\ref{sec:parity}(a) lives and it needs
+its own statement.  The Doeblin structure is on the marked pair: two consecutive
+flips from any $(a,b)$ with total $s$ produce $a''$ whose law dominates
+$\tfrac14\cdot\mathrm{Unif}[s/4,3s/4]$ (the trapezoid of
+Lemma~\ref{lem:recharge}(ii) is symmetric and unimodal, so the first
+flip lands in $[s/4,3s/4]$ with probability $\ge\tfrac12$, and from
+there the second has density $\ge1/s$ on that interval).  This is a
+minorisation on the fibre $\{a'+b'=s,\ \mathrm{env}\}$ only; the base
+$(s,\mathrm{env})$ is not regenerated, so $\mathcal B$ must be a
+weighted space in which the post-flip chain is $V$-geometrically
+ergodic in the base coordinates as well (Meyn--Tweedie), with the
+weight matched to the moment condition in (R1).  On $H$ the base is
+finite-dimensional ($<K$ blocks), which is what makes this plausible.
+Because the label parity is determined by the environment block-count
+parity (Lemma~\ref{lem:parity}), no argument can avoid the environment
+in (R2) either; but the environment enters only through the ergodicity
+of the base chain between flips, not through any fine property of
+$\mathrm{PD}(1)$.}
+
+\emph{Reduction to Problem~\ref{prob:survival}.  Take
+$S'=S'_K:=\{a,b\ge1/(16K)\}$ and enforce $H_{9d}$ (so $C=C(K)$ in
+Proposition~\ref{prop:condecay} may depend on the block bound, which
+holds up to time $d$).  Granting Proposition~\ref{prop:condecay} on
+$S'_K$ with $C(K)$ polynomial in $K$, and granting the occupation-time
+consequence of Lemma~\ref{lem:logdrift} (that after $s$ first reaches
+$1/(2K)$ it stays $\ge1/(4K)$ for at least half of the next $T_2$
+steps, except with polynomially small probability; NOT written out),
+the chain from $\Gamma_0\sim\mu_j$ with $a_0,b_0\ge\varepsilon$ enters
+$S'_K$ at a stopping time $T'$: first $s$ reaches $1/(2K)$ within
+$T_1=O(\varepsilon^{-1}K\log d)$ steps (Lemma~\ref{lem:srecharge});
+then, on the times with $s_t\ge1/(4K)$ and $\min(a_t,b_t)\ge\varepsilon$
+(the latter failing with probability $\le4\varepsilon^2(T_1+T_2)$ by
+the flux bound), a flip occurs with probability $\ge2\varepsilon(s_t-\varepsilon)
+\ge\varepsilon/(4K)$ per step and lands with $\min(a',b')\ge s_t/4\ge1/(16K)$
+with conditional probability $\ge\tfrac12$ (the trapezoid is
+symmetric and unimodal), so $T'\le T_1+T_2$ with
+$T_2=O(\varepsilon^{-1}K\log d)$ except with probability
+$O(d^{-\gamma})+O(\varepsilon K\log d)$.  Note that a single
+application of Lemma~\ref{lem:srecharge} to each coordinate does not
+suffice: it makes $a$ and $b$ large at different times, and a
+coordinate of size $1/(2K)$ shrinks on the scale $K^2\ll\varepsilon^{-1}K$.
+By the strong Markov property
+$|\Phi_d(\Gamma_0)|\le\E|\Phi_{d-T'}(\Gamma_{T'})|+\Pr[T'>T_1+T_2]
+\le C(K)(d/2)^{-\gamma}+O(d^{-\gamma})+O(\varepsilon K\log d)$, and
+with $K=O(\log d)$ and $\varepsilon$ as in Corollary~\ref{cor:kappafree}
+this is $\le C(\varepsilon d)^{-2\alpha}$ for $\alpha<\gamma/2$ (for
+$\varepsilon\ge1/(16K)$ no recharge is needed).  Thus
+\emph{Problem~\ref{prob:survival}, hence the iid model, is reduced to
+(R1) and (R2) on the log-macroscopic set $S'_K$ plus the
+occupation-time step}, with the environment controlled throughout by
+Corollary~\ref{cor:horizon}.}

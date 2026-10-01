@@ -1,0 +1,11 @@
+=== bias_scale antipodal ===
+k=  8 vslot=  9 trials=400 ssamp=20000: mean +0.01527 (se~0.00622) E|b| 0.12432  med 0.10156  q90 0.28125  max 0.50000
+k= 16 vslot= 17 trials=400 ssamp=20000: mean +0.00029 (se~0.00495) E|b| 0.09897  med 0.08185  q90 0.23100  max 0.39495
+k= 32 vslot= 33 trials=400 ssamp=20000: mean -0.00017 (se~0.00375) E|b| 0.07492  med 0.05320  q90 0.19265  max 0.34390
+k= 64 vslot= 65 trials=200 ssamp=4000: mean +0.00030 (se~0.00313) E|b| 0.04426  med 0.02800  q90 0.10600  max 0.31275
+k=128 vslot=129 trials=120 ssamp=2500: mean +0.00744 (se~0.00294) E|b| 0.03226  med 0.01800  q90 0.06400  max 0.27600
+k= 64 vslot=  3 trials=150 ssamp=4000: mean +0.11953 (se~0.01009) E|b| 0.12363  med 0.12300  q90 0.18325  max 0.33925
+k= 64 vslot=  7 trials=150 ssamp=4000: mean +0.00717 (se~0.00403) E|b| 0.04938  med 0.03325  q90 0.12950  max 0.29550
+k= 64 vslot= 13 trials=150 ssamp=4000: mean +0.00430 (se~0.00407) E|b| 0.04989  med 0.03100  q90 0.11725  max 0.40325
+k= 64 vslot= 26 trials=150 ssamp=4000: mean +0.00109 (se~0.00403) E|b| 0.04938  med 0.02825  q90 0.13625  max 0.30625
+k= 64 vslot= 65 trials=150 ssamp=4000: mean -0.00103 (se~0.00426) E|b| 0.05214  med 0.02825  q90 0.13825  max 0.30550

@@ -1,0 +1,7 @@
+E3: toggle bound  |bias| <= (1/2) min_i P(no toggle)
+  k   E|bias|   E[minNoTog/2]   bound viol.  corr-ish
+    4  0.16250   0.17250      0
+    6  0.14977   0.17445      0
+    8  0.13092   0.17643      0
+   10  0.12171   0.19720      0
+   12  0.11567   0.20138      0

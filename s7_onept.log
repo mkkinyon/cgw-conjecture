@@ -1,0 +1,8 @@
+one m=   4 trials=4000000: Eeps=+0.023732 (se 0.000500)
+one m=   8 trials=4000000: Eeps=+0.005381 (se 0.000500)
+one m=  16 trials=4000000: Eeps=+0.000776 (se 0.000500)
+one m=  32 trials=4000000: Eeps=+0.000713 (se 0.000500)
+one m=  64 trials=4000000: Eeps=+0.000608 (se 0.000500)
+one m= 128 trials=4000000: Eeps=+0.000485 (se 0.000500)
+one m= 256 trials=4000000: Eeps=+0.000434 (se 0.000500)
+one m= 512 trials=4000000: Eeps=-0.000558 (se 0.000500)

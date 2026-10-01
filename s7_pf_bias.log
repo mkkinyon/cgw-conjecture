@@ -1,0 +1,11 @@
+ladder r=1: bias = +0.000000
+ladder r=2: bias = +0.000000
+ladder r=3: bias = +0.000000
+ladder r=5: bias = +0.000000
+ladder r=8: bias = +0.000000
+ladder r=2 + uncrossed cut chord: bias = -0.250000
+ladder r=4 + uncrossed cut chord: bias = -0.250000
+ladder r=6 + uncrossed cut chord: bias = -0.250000
+nested r=2: bias = -0.250000  (predict -0.250000)
+nested r=4: bias = -0.437500  (predict -0.437500)
+nested r=6: bias = -0.484375  (predict -0.484375)

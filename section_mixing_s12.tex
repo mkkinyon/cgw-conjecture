@@ -1,0 +1,509 @@
+%----------------------------------------------------------------------
+\subsection{Session 12: the minorisation route is closed by inert dust;
+(C2) is polynomial, not geometric}\label{sec:s12}
+
+Session 12 was directed at (C1)+(C2) of \S\ref{sec:s11left}, through
+TODO~12a (a Lyapunov drift for $\lambda$), 12b (the minorisation of
+Proposition~\ref{prop:c1}) and 12c (an odd perturbation), with the
+instruction to return one of (A1)--(A3) or a clean negative (B).  The
+outcome is (B), in a form sharper than the one the brief anticipated.
+Four findings, in logical order.
+
+\begin{enumerate}[leftmargin=2.2em]
+\item[(1)] \textbf{The environment carries inert dust, and this closes
+every Doeblin-type route.}  A curve of mass $\varepsilon$ is touched by
+a chord with probability $\le2\varepsilon$ per step, so it survives
+\emph{unchanged} through the first $n$ flips with probability
+$\to1$ as $\varepsilon\to0$ (Lemma~\ref{lem:inert}).  Consequently the
+post-flip laws from the states $x_\varepsilon$ (a fixed macroscopic
+marked pair, plus one dust curve of mass $\varepsilon$) are supported,
+up to $o(1)$, on the pairwise disjoint sets ``some curve has mass
+exactly $\varepsilon$''.  No common minorant exists: the hypothesis of
+Proposition~\ref{prop:c1} fails on $\Omega_K$ for \emph{every} $n$
+(Proposition~\ref{prop:nomino}), and so does uniform ergodicity of
+$\kappa_1$ in $L^\infty(\Omega_K)$ and $V$-uniform ergodicity for
+\emph{every} weight $V$ (Corollary~\ref{cor:noerg}).  Route (a) of
+\S\ref{sec:s11left} and TODO~12b are therefore closed, not
+deferred.  The proof uses only $\tau_n<\infty$ a.s.
+\item[(2)] \textbf{TODO~12a fails on the full state space.}  From a
+state whose non-dust material has total mass $m$ and whose remaining
+mass sits in $N\gg m^{-3}$ equal pieces, one has
+$\sum_jr_j^4\le17m^4$ deterministically for a long time, so
+$\kappa_1^kV\ge\tfrac34(17m^4)^{-\theta}$ while $V\le m^{-4\theta}$:
+no inequality $\kappa_1V\le\varrho V+b$ with $\varrho<1$ can hold
+(Proposition~\ref{prop:nodrift}).  As instructed, the fallback is the
+killed chain on $\Omega_K$, where $V$ is bounded anyway.
+\item[(3)] \textbf{(C2) is true but polynomial.}  With $2\times10^7$
+samples from the one-curve start,
+$a_k(x)=\E_x[(-1)^{\tau_k}]=(-1)^k\,(2.5\pm0.1)\,k^{-3}$ for
+$7\le k\le13$, and with $10^8$ samples the local exponent over
+$8\le k\le20$ is $2.7\pm0.3$; a tail of the same form,
+$k^3|a_k|\to2.0$--$2.4$, from the three-curve start $(0.3,0.3;\{0.4\})$,
+and the same tail \emph{emerging} after a transient of $\approx8$
+flips from a nine-curve start.  Session~11's ``$\rho\approx0.3$''
+was the transient above a noise floor of $0.003$.  Since
+$a_k=\pm\E_x[(-1)^{B(\bar\Gamma_{\tau_k})}]$ is the parity bias of the
+block count at the $k$-th flip, the mechanism is the slow ($\log$)
+growth of $B$: the block-count parity is a slow mode of $\kappa_1$ at
+eigenvalue $+1$, not a mode near $-1$ (\S\ref{sec:s12num}).  The
+polynomial decay is insensitive to inserting dust into the start
+(identical to two standard errors) and is \emph{weaker} from starts
+with $9$ or $17$ curves.
+\item[(4)] \textbf{What the reduction actually needs is polynomial.}
+At $z=-1$ Proposition~\ref{prop:condecay} needs only
+$G\in C^{0,\gamma}$, $\gamma>4/9$, and a polynomial decay of the
+twisted parity $\E_x[w^{\tau_k}(-1)^{E_{\tau_k}}]$ with exponent $p$,
+uniformly for $w$ near $1$, gives $\gamma=(p-1)/(p+1)$ by a crude
+bound (Proposition~\ref{prop:holder}), so the budget needs $p>13/5$;
+if the parity memory factorises from the time weighting, as it does
+numerically, the exponent improves to $\min(1,p-1)$ and the budget
+needs only $p>13/9$.  The measured $p=2.7\pm0.3$ meets the second
+comfortably and the first marginally.  (C2) is accordingly replaced by
+(C2$''$) in \S\ref{sec:s12left}.  Any proof must be \emph{dust-blind},
+i.e.\ work in a topology in which $x$ and $x_\varepsilon$ are close;
+we record why the natural transport metric is not contracted by the
+dynamics and why an adversarial environment cannot be allowed
+(\S\ref{sec:s12left}).
+\end{enumerate}
+
+\subsubsection{Inert dust}\label{sec:s12dust}
+
+Throughout, the chain is realised on the circle: the state is a
+partition of the circle into curves (each a cyclically ordered union of
+arcs, the cyclic order being that of the chord diagram), a step picks
+two independent uniform points, and the move is determined by the
+curves the points lie in and their positions along those curves.
+
+\begin{lemma}[inert dust coupling]\label{lem:inert}
+Let $y$ be a state, $D$ a sub-arc of the circle of mass $\varepsilon$
+lying inside one curve of $y$ and containing neither mark, and let
+$y_\varepsilon$ be the state obtained from $y$ by declaring $D$ a
+separate (unmarked) curve.  Drive the chains from $y$ and from
+$y_\varepsilon$ by the same uniform points.  Then, up to the first step
+at which a point falls in $D$, the state of the $y_\varepsilon$-chain
+is the state of the $y$-chain with $D$ declared a separate curve; in
+particular the two chains have the same flip times, and the
+$y_\varepsilon$-chain contains a curve of mass exactly $\varepsilon$.
+The first point in $D$ falls at a step of probability at most
+$2\varepsilon$, so for every $T$,
+\[
+\Pr\bigl[\text{the coupling holds through time }T\bigr]\ge1-2\varepsilon T .
+\]
+\end{lemma}
+
+\begin{proof}
+$D$ is a contiguous segment of the cyclic order of the curve $C\supset D$
+containing it.  A split of $C$ at two points outside $D$ cuts the cycle
+into two arcs, one of which contains $D$; in the $y_\varepsilon$-chain
+the same cuts split $C\setminus D$ into the same two arcs with $D$
+excised.  A merge of $C$ with another curve at points outside $D$
+splices the two cycles at those points; in the $y_\varepsilon$-chain the
+same splice is applied to $C\setminus D$.  Moves not involving $C$ are
+identical.  A flip is a split or merge decided by which marked material
+the two points lie in; the marked material of the two chains differs
+only by $D$, which contains no point.  Induction on the steps.
+\end{proof}
+
+\begin{proposition}[no state-uniform minorisation]\label{prop:nomino}
+Let $K\ge4$ and assume $\tau_n<\infty$ a.s.\ from the state
+$x_0=(\tfrac14,\tfrac14;\{\tfrac12\})$ (apart sector).  Then there are
+no $n\ge1$, $\delta>0$ and probability measure $\nu$ on $\Omega_K$ with
+\[
+\Pr^{\Omega_K}_{\bar x}\bigl[\bar\Gamma_{\tau_n}\in\cdot\,\bigr]\ge\delta\,\nu(\cdot)
+\qquad\text{for every }\bar x\in\Omega_K\cap S'_K ,
+\]
+for the chain killed on $\Omega_K$ or for the unkilled chain.  A
+fortiori the hypothesis of Proposition~\ref{prop:c1} is never
+satisfied.
+\end{proposition}
+
+\begin{proof}
+Suppose such $n,\delta,\nu$ exist.  For $i\ge3$ let
+$\varepsilon_i=2^{-i}$, let $x_i$ be $x_0$ with a sub-arc $D_i$ of mass
+$\varepsilon_i$ of its environment curve declared a separate curve
+(so $x_i=(\tfrac14,\tfrac14;\{\tfrac12-\varepsilon_i,\varepsilon_i\})$,
+$B(x_i)=4$, $x_i\in\Omega_K\cap S'_K$), and let
+$S_i=\{\bar x\in\Omega_K:\ \text{some curve of }\bar x\text{ has mass
+exactly }\varepsilon_i\}$.  Apply the minorisation at $x_i$ to the set
+$\Omega_K\setminus S_i$.  By Lemma~\ref{lem:inert} with $T=T_i$, on the
+event that the coupling holds through $T_i$ and $\tau_n\le T_i$ for the
+unkilled $x_0$-chain, the $x_i$-chain performs its $n$-th flip at the
+same time and, if it is still alive, its state then contains $D_i$
+intact; if it has been killed, its state is the cemetery, which is not
+in $\Omega_K\setminus S_i$.  Hence
+\[
+\delta\,\nu(\Omega_K\setminus S_i)\;\le\;2\varepsilon_iT_i+\Pr_{x_0}[\tau_n>T_i]
+\qquad\text{for every }T_i ,
+\]
+and $T_i=\varepsilon_i^{-1/2}$ gives $\nu(S_i)\to1$ as $i\to\infty$.
+But a configuration in $\Omega_K$ has at most $K$ curves, hence at most
+$K$ distinct masses, hence lies in at most $K$ of the sets $S_i$; so
+$\sum_i\nu(S_i)=\int\#\{i:\bar x\in S_i\}\,\nu(d\bar x)\le K<\infty$,
+contradicting $\nu(S_i)\to1$.
+\end{proof}
+
+\emph{Status: PROVED.  Note what the proof does not use: no moment of
+$\tau$, no property of the environment beyond the trivial one that a
+curve of mass $\varepsilon$ is rarely hit, and no bound on $K$ beyond
+$K\ge4$.  It also shows that the difficulty is not the one anticipated
+in TODO~12b (``$K^{-2K}\to K^{-O(1)}$''): the obstruction is not the
+\emph{cost} of driving the environment to a reference configuration but
+the fact that no finite sequence of steps can remove a curve that is
+never hit.  The same applies with the $(n,n+1)$ pair of
+Proposition~\ref{prop:c1}, to any weighted space, and to any
+``small set'' containing a state with a dust curve --- which every set
+of positive $\bar\pi$-measure does, since dust is created at every
+scale at rate $\asymp2\eta\,d\eta$ per step.}
+
+\begin{corollary}[no uniform or $V$-uniform ergodicity]\label{cor:noerg}
+Let $K\ge4$ and let $\kappa_1$ be the post-flip kernel of the unkilled
+chain.
+\begin{enumerate}[leftmargin=2em]
+\item[(i)] There are no probability measure $\bar\pi$, $C<\infty$ and
+$\rho<1$ with $\sup_{\bar x\in\Omega_K}|\kappa_1^kF(\bar x)-\bar\pi F|
+\le C\rho^k\|F\|_\infty$ for all bounded $F$ and all $k$.
+\item[(ii)] Let $\mathcal Y=\{(a',\tfrac12-a';\{\tfrac12\}):
+a'\in[\tfrac18,\tfrac38]\}$ and assume
+$(\mathrm M_p)$: $\sup_{y\in\mathcal Y}\E_y[\tau_k]\le Ck^p$ for some
+$C,p<\infty$.  Then there is no $V\ge1$ for which $\kappa_1$ is
+$V$-uniformly ergodic: no $\bar\pi$, $C'$, $\rho<1$ with
+$|\kappa_1^kF(\bar x)-\bar\pi F|\le C'\rho^kV(\bar x)\|F\|_V$ for all
+$F$ with $\|F\|_V=\sup|F|/V<\infty$ and all $\bar x$ with $B(\bar x)\le4$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(i) With $F_i=\mathbf 1_{S_i}$ (notation of the previous proof) and
+$x_i$ as there, Lemma~\ref{lem:inert} gives
+$\kappa_1^kF_i(x_i)\ge1-2\varepsilon_iT-\Pr_{x_0}[\tau_k>T]$, while
+$\kappa_1^kF_i(x_0)=0$ because from $x_0$ every curve mass at every time
+is either a sum of some of $\tfrac14,\tfrac14,\tfrac12$ or has an
+atomless law, so no curve ever has mass exactly $\varepsilon_i\le\tfrac18$ a.s.  Let
+$i\to\infty$: the oscillation of $\kappa_1^kF_i$ over $\Omega_K$ tends
+to $1$ for each fixed $k$, contradicting $2C\rho^k<1$.
+
+(ii) Suppose such $V,\bar\pi,C',\rho$ exist.  First, $\Pi=\mathbf 1\otimes\bar\pi$
+is bounded on the $V$-space, so $\bar\pi V<\infty$ and
+$\kappa_1V\le(C'\rho+\bar\pi V)\,V$; in particular $\kappa_1V(x_0)<\infty$.
+Second, for $y\in\mathcal Y$ and $y_\varepsilon$ obtained by carving a
+sub-arc of mass $\varepsilon$ from its environment curve, the argument
+of (i) at $y$ gives $\kappa_1^kF_i(y_\varepsilon)\ge1-2\varepsilon T-\Pr_y[\tau_k>T]$
+and $\bar\pi F_i=\lim_k\kappa_1^kF_i(x_0)=0$, so with $T=T_k:=4Ck^p$
+and $\varepsilon\le\varepsilon_k:=1/(8T_k)$ (Markov and $(\mathrm M_p)$),
+\[
+V(y_\varepsilon)\;\ge\;\frac{1-\tfrac14-\tfrac14}{C'\rho^k}\;=\;\frac1{2C'\rho^k}
+\qquad(y\in\mathcal Y,\ \varepsilon\le\varepsilon_k).
+\]
+Third, from $x_0$ the first step carves a piece of mass in
+$d\varepsilon$ from the environment curve with probability
+$\ge\tfrac12\,d\varepsilon$ (pick that curve twice, $\tfrac14$;
+$|t_1-t_2|/\tfrac12$ has density $\ge2$ near $0$) and the second step
+is a flip landing in $\mathcal Y$ with probability $\ge\tfrac18\cdot\tfrac34$;
+the landing state is then some $y_\varepsilon$, $y\in\mathcal Y$.  So
+\[
+\kappa_1V(x_0)\;\ge\;\frac{3}{64}\sum_{k\ge1}\frac{\varepsilon_k-\varepsilon_{k+1}}{2C'\rho^k}
+\;\ge\;c\sum_k\frac{k^{-p-1}}{\rho^{k}}\;=\;\infty ,
+\]
+contradicting the first step.
+\end{proof}
+
+\emph{Status: PROVED ((ii) under $(\mathrm M_p)$, which (R1) along the
+chain implies with $p=1$ and which is measured: $\E[\tau_k]\approx6k$).
+For the chain killed on $\Omega_K$ the same argument runs up to
+$k\le c\,3^{K/(3p)}$, so any $V$-uniform ergodicity of the killed chain
+has $(1-\rho)^{-1}\log(C'V(x_0)\bar\pi V)\ge c\,3^{K/(3p)}$: exponential
+in $K$, i.e.\ fatal in the budget of the session-11 handoff.  This
+settles, negatively, the sentence of \S\ref{sec:markovrenewal} that
+asked for a weighted space ``in which the post-flip chain is
+$V$-geometrically ergodic in the base coordinates'': there is none.
+It does \emph{not} touch (C1) or (C2) themselves, whose null vectors
+would have to sit near $-1$, whereas the dust modes sit near $+1$.}
+
+\subsubsection{The drift for \texorpdfstring{$\lambda$}{lambda} fails
+on the full state space (TODO~12a)}\label{sec:s12drift}
+
+\begin{proposition}[no Lyapunov drift for $(\sum r_j^4)^{-\theta}$]
+\label{prop:nodrift}
+Let $V=(\sum_jr_j^4)^{-\theta}$ with $0<\theta\le\tfrac12$, on the full
+(unkilled) state space, and assume $\tau_k<\infty$ a.s.\ from every
+state.  There are no $\varrho<1$ and $b<\infty$ with
+$\kappa_1V\le\varrho V+b$.
+\end{proposition}
+
+\begin{proof}
+Suppose the inequality holds.  Iterating,
+$\kappa_1^kV\le\varrho^kV+b/(1-\varrho)$ for all $k$.  Fix $k$ with
+$\varrho^k\le\tfrac38\,17^{-\theta}$ and $m\in(0,\tfrac14)$.
+
+\emph{The isolated process.}  Let $\bar x$ be the apart-sector state
+with $a=m$, $b=m/10$ and one environment curve of mass $1-1.1m$, and
+let $\mathrm P^{\rm iso}$ be the law of the chain from $\bar x$ modified
+so that a chord with one point in the original environment curve (or in
+any curve descended from it by splits and merges among such curves)
+and one point elsewhere does nothing.  Under $\mathrm P^{\rm iso}$ the
+``non-dust'' material of total mass $1.1m$ evolves as a split--merge
+chain in its own right, slowed by the factor $(1.1m)^2$, with the
+marked pair inside it; its flip times are a.s.\ finite, so there is
+$T=T(m,k)$ with $\mathrm P^{\rm iso}[\tau_k>T]\le\tfrac18$.
+
+\emph{The states $x_{m,N}$.}  Let $x_{m,N}$ be $\bar x$ with the
+environment curve cut into $N$ equal pieces,
+$N\ge16(T+1)^3\max(m^{-1},m^{-4/3})$.  Drive the chain from $x_{m,N}$
+and the isolated process from $\bar x$ by the same points (the dust
+pieces of $x_{m,N}$ are sub-arcs of the environment curve of $\bar x$;
+dust--dust chords split or merge dust material in both and never
+touch the non-dust material).  The two processes make the same non-dust moves
+except at chords joining dust to non-dust, of which there are at most
+$T$ up to time $T$; each such chord appends to one non-dust curve of the
+$x_{m,N}$-chain a dust curve, i.e.\ a union of at most $T+1$ original pieces or
+fragments of them, of mass $\le(T+1)/N$.  As in Lemma~\ref{lem:inert} (with the
+appended material in the role of $D$, now inside a curve of one chain
+and absent from the other), the non-dust configurations of the two
+processes then agree up to the appended material, and their flip times
+agree, until a point falls in appended material, which has probability
+$\le2T(T+1)/N$ per step.  Hence
+$\Pr_{x_{m,N}}[\tau_k>T]\le\tfrac18+2T^2(T+1)/N\le\tfrac14$.
+
+\emph{The deterministic bound.}  Along the $x_{m,N}$-chain up to time
+$T$, the non-dust mass is at most $1.1m+T(T+1)/N\le2m$ and every dust
+curve has mass $\le(T+1)/N\le m^{4/3}$, so
+\[
+\sum_jr_j(\bar\Gamma_t)^4\;\le\;(2m)^4+\Bigl(\max_{\text{dust}}r_j\Bigr)^3
+\sum_{\text{dust}}r_j\;\le\;16m^4+m^4=17m^4\qquad(t\le T),
+\]
+whence $\kappa_1^kV(x_{m,N})\ge\Pr_{x_{m,N}}[\tau_k\le T]\,(17m^4)^{-\theta}
+\ge\tfrac34\,17^{-\theta}m^{-4\theta}$, while $V(x_{m,N})\le m^{-4\theta}$
+because the $u$-curve alone contributes $m^4$.  The drift bound gives
+$\tfrac34\,17^{-\theta}m^{-4\theta}\le\tfrac38\,17^{-\theta}m^{-4\theta}+b/(1-\varrho)$,
+i.e.\ $m^{-4\theta}\le\tfrac83\,17^{\theta}b/(1-\varrho)$ for every
+$m\in(0,\tfrac14)$: false.
+\end{proof}
+
+\emph{Status: PROVED.  This is the fallback the brief provided for: the
+obstruction is the family ``all non-dust mass $\asymp m$, the rest in
+ultra-fine mass-carrying dust'', which is of vanishing probability
+under the chain from one curve (Corollary~\ref{cor:horizon}) but is a
+legitimate state, and on it $\lambda$ cannot recover within one
+inter-flip period because there is no macroscopic partner to merge
+with.  On $\Omega_K$, $V\le(2K)^{4\theta}$ is bounded and the drift is
+vacuous.  The killing at $B=K$ in Theorem~\ref{thm:idleloop} therefore
+stays, and it is harmless: it costs $(9d+1)^{-\gamma}$ over the horizon.
+The second purpose of TODO~12a --- supplying the base half of the
+minorisation --- is void by Proposition~\ref{prop:nomino}.  A quick
+numerical check of the mechanism (\texttt{s12\_driftfail}): from
+$(0.3,0.03;\ 3\times10^4\text{ equal pieces})$, $\E[(\sum r^4(\bar\Gamma_\tau)/\sum r^4(x))^{-\theta}]=1.19$
+$(\theta=0.1)$, $1.71$ $(\theta=0.3)$, against $0.91$, $0.77$ with a
+single environment curve of the same mass.}
+
+\subsubsection{TODO~12c: the stated criterion does not give (C2)}
+\label{sec:s12odd}
+
+The session-11 handoff proposed, as route 12c, a state-uniform lower
+bound $c(K)$ on the probability that two consecutive inter-flip times
+have opposite parity, ``which gives (C2) by a standard two-block
+argument''.  It does not: if the inter-flip times were the
+deterministic sequence $1,2,1,2,\dots$ then consecutive parities are
+always opposite ($c=1$) while $(-1)^{\tau_k}$ is periodic with period
+$4$ and does not decay.  What the two-block argument needs is the
+\emph{operator} statement $\|\kappa_{-1}^{\,2}\|_\infty<1$, and that is
+false exactly: $\kappa_{-1}(-1)^E=-(-1)^E$ (Proposition~\ref{prop:r2false}),
+so $\|\kappa_{-1}^{\,m}\|_\infty=1$ for every $m$.  Any odd perturbation
+that is exact returns a state with a different block-count parity,
+which is visible; the only odd perturbations that are invisible are
+dust insertions, whose weight at scale $\eta$ is $\asymp2\eta$ per step
+and whose lifetime is $\asymp1/(2\eta)$, and one checks in one line
+that they give a contraction $1-O(\eta)$ per flip and nothing
+geometric.  Route 12c is closed as stated; the honest form of (C2) is
+in \S\ref{sec:s12num} and \S\ref{sec:s12left}.
+
+\subsubsection{The decay of the parity along the post-flip chain is
+polynomial}\label{sec:s12num}
+
+By Lemma~\ref{lem:parity}, $(-1)^{\tau_k}=(-1)^{B(\bar\Gamma_{\tau_k})-B(\bar x)}$
+exactly, so
+\begin{equation}\label{eq:akB}
+a_k(\bar x):=\E_{\bar x}[(-1)^{\tau_k}]=(-1)^{B(\bar x)}\sum_{b\ge1}(-1)^b\,
+\Pr_{\bar x}\bigl[B(\bar\Gamma_{\tau_k})=b\bigr],
+\end{equation}
+the parity bias of the block count at the $k$-th flip, and
+$\kappa_1^{\,k}(-1)^E=(-1)^{E}(-1)^ka_k$, so (C2) is the statement that
+\eqref{eq:akB} decays geometrically, uniformly in $\bar x$.
+
+\emph{Measurement (\texttt{s12\_akdecay}, \texttt{s12\_akB}; fixed
+deterministic starts, $2\times10^7$ independent trajectories each,
+standard error $2.2\times10^{-4}$, no censoring).}  From the one-curve
+start (arcs $(\tfrac12,\tfrac12)$):
+\[
+a_k=-0.4003,\ +0.1530,\ -0.0674,\ +0.0335,\ -0.0186,\ +0.0111,\ -0.0073,\
++0.0048,\ -0.0034,\ +0.0022,\ -0.0019,\ +0.0015\quad(k=1,\dots,12),
+\]
+so that $k^3|a_k|=2.51,2.48,2.49,2.20,2.54,2.54$ for $k=7,\dots,12$:
+\[
+a_k(\text{one curve})\;=\;(-1)^k\,(2.5\pm0.1)\,k^{-3}\qquad(7\le k\le12),
+\]
+with the successive ratios $|a_{k+1}/a_k|$ rising through
+$0.38,0.44,0.50,0.56,0.60,0.66,0.66,0.70$ --- no geometric rate.  A
+$10^8$-sample run to $k=20$ (standard error $10^{-4}$) gives
+$|a_k|=0.00495,0.00349,0.00271,0.00195,0.00142,0.00115,0.00107,0.00095,
+0.00091,0.00079,0.00055,0.00045,0.00035$ for $k=8,\dots,20$, all with
+sign $(-1)^k$; $k^3|a_k|$ stays in $2.4$--$2.7$ up to $k=13$ and
+fluctuates in $2.8$--$3.9$ (two to three standard errors) for
+$k=14$--$20$; the least-squares exponent over $8\le k\le20$ is
+$2.7\pm0.3$.  From
+the three-curve apart start $(0.3,0.3;\{0.4\})$: $a_1=-0.004$,
+then $-0.0606,+0.0385,-0.0219,+0.0132,-0.0086,+0.0060,-0.0041,+0.0031,
+-0.0020,+0.0018,-0.0014$ ($k=2,\dots,12$), with $k^3|a_k|\to2.0$--$2.4$:
+the same tail, sign $(-1)^{k+B_0+1}$.  Inserting a dust curve of mass
+$10^{-4}$ into either start (mass taken from an environment curve or
+from an arc) reproduces every $a_k$ to within two standard errors, as
+Lemma~\ref{lem:inert} predicts.  From a $9$-curve start
+$(0.3,0.3;\ 7\times0.057)$, $10^8$ samples: $a_k$ passes through zero
+at $k=3$ and then \emph{grows} in absolute value to $0.00145$ at
+$k=7$--$8$ before decaying, with the sign $(-1)^{k+1}$ at every
+$k=4,\dots,20$ (seventeen consecutive alternations); $k^3|a_k|$ rises
+from $0.5$ at $k=7$ to $2$--$3$ at $k=15$--$20$.  So the tail is
+universal --- $C k^{-3}$ with $C\approx2.5$--$3$ --- and is reached
+after a start-dependent transient, of about eight flips when the
+environment starts with nine curves.  From a $17$-curve start
+($5\times10^6$ samples) $|a_k|\le7\times10^{-4}$ for $3\le k\le16$,
+the transient not yet over.  From the
+burnt-in ``stationary'' start of session~11 (gap window
+$[\tfrac18,\tfrac38)$, $5\times10^6$ samples), $a_k(\mu)$ is at the noise
+floor $4.5\times10^{-4}$ for $k\ge5$ --- but that average carries the
+factor $(-1)^{B(\bar x)}$ of \eqref{eq:akB} inside the mixture, which
+cancels the tail; the sign-blind $\E_\mu[a_k(\bar x)^2]$ is at
+$(4\pm5)\times10^{-4}$ for $k=5..8$, consistent with the fixed-start
+values.  The decomposition of \eqref{eq:akB} by $b$ from the one-curve
+start (\texttt{s12\_akB}) shows the mechanism: $\Pr[B_{\tau_k}=1]$
+decays like $c/k$ with $c\approx0.5$ (the chain merges back to one curve with
+probability $\asymp1/t$, and there $\tau_k$ is even), the law of
+$B_{\tau_k}$ spreads only like $\log k$, and the alternating sum of a
+lattice law that spreads logarithmically decays polynomially.
+
+\emph{Status: MEASURED.  Conclusions.  (i) (C2) in the geometric form
+of \S\ref{sec:s11left} is false on the full state space, and on
+$\Omega_K$ it holds only with $1-\rho(K)\le e^{-cK}$ (the rate the
+killing provides), which is outside the budget; the session-11 value
+$\rho\approx0.3$ described the transient $k\le4$.  (ii) The polynomial
+decay is a $+1$ phenomenon, not a $-1$ phenomenon: the generating
+function $\sum_ka_kw^k$ is singular at $w=-1$, i.e.\ at the eigenvalue
+$-1$ of $\kappa_{-1}$, which is the eigenvalue $+1$ of $\kappa_1$ (the
+trivial one), approached sub-geometrically by the slow variable $B$.
+Nothing in the measurement bears on (C1).  (iii) The decay is
+sign-alternating in $k$ from every start tested, with the sign
+$(-1)^{k+B_0+1}$; this is the statement that $B_{\tau_k}\equiv k+1$ is
+slightly favoured, i.e.\ that the block count at the $k$-th flip
+remembers that it started odd --- a memory that $\log$-growth of $B$
+erases only polynomially.}
+
+\subsubsection{What is left, restated}\label{sec:s12left}
+
+\begin{proposition}[polynomial parity decay suffices at $z=-1$]
+\label{prop:holder}
+Fix $K$ and $S'_K$.  Suppose
+\begin{itemize}[leftmargin=2em]
+\item[(C2$''$)] there are $C,p$ and $\delta_0>0$ with
+$\sup_{\bar x\in S'_K}\bigl|\E_{\bar x}[w^{\tau_k}(-1)^{E_{\tau_k}}]\bigr|\le Ck^{-p}$
+for all $k\ge1$ and all $|w|\le1$ with $|1-w|\le\delta_0$;
+\item[(M$_1$)] $\sup_{\bar x\in S'_K}\E_{\bar x}[\tau_k]\le C_1k$ for all $k$.
+\end{itemize}
+Then $G(z)=(I+\kappa_z)^{-1}(I-\kappa_z)\mathbf 1$, evaluated on $S'_K$,
+is H\"older continuous of exponent $(p-1)/(p+1)$ on
+$\{|z|\le1,\ |1+z|\le\delta_0\}$, with constant
+$\le C_2\,(C+C_1)$.  In particular $p>13/5$ gives an exponent $>4/9$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:repair}, for $z=-w$,
+$G(-w)=\bar M(I-\kappa_w)^{-1}(I+\kappa_w)\bar M\mathbf 1
+=\mathbf 1+2\bar M\sum_{k\ge1}g_k(w)$ with
+$g_k(w)(\bar x)=\E_{\bar x}[w^{\tau_k}(-1)^{E_{\tau_k}}]$
+(Neumann series, $\|\kappa_w\|\le|w|<1$; the boundary values are limits).
+For $|w|,|w'|\le1$, $|w^n-w'^n|\le n|w-w'|$, so
+$|g_k(w)-g_k(w')|\le\min\bigl(2Ck^{-p},\ C_1k|w-w'|\bigr)$ by (C2$''$)
+and (M$_1$).  Summing with the cut at $k_*=|w-w'|^{-1/(p+1)}$:
+$\sum_{k\le k_*}C_1k|w-w'|+\sum_{k>k_*}2Ck^{-p}
+\le C_2(C+C_1)\,|w-w'|^{(p-1)/(p+1)}$.
+\end{proof}
+
+\emph{Status: PROVED as a reduction; the hypotheses are OPEN.  Two
+comments.  (a) The exponent $(p-1)/(p+1)$ is crude: it bounds
+$|g_k(w)-g_k(w')|$ by the trivial Lipschitz bound and never uses that
+$g_k(1)=(-1)^{E}(-1)^ka_k$ has one sign for all $k$.  If the parity
+memory factorises from the time weighting,
+\[
+\text{(C2$'''$)}\qquad
+\E_{\bar x}[w^{\tau_k}(-1)^{\tau_k}]=\E_{\bar x}[w^{\tau_k}]\,a_k(\bar x)\,(1+O(|1-w|k)),
+\]
+then $\sum_kg_k(w)\approx(-1)^E\sum_kCk^{-p}\E[w^{\tau_k}]$, and with
+$\E[w^{\tau_k}]\approx w^{6k}$ this is $C\,\mathrm{Li}_p(w^6)$ up to
+smoother terms, whose modulus of continuity at $w=1$ is
+$|1-w|^{\min(1,p-1)}$ (up to a logarithm at integer $p$): the budget
+then needs only $p>13/9$.  (C2$'''$) was measured (\texttt{s12\_twist}, one-curve start,
+$3\times10^7$ samples, $w=0.99,0.95,0.90$ real): the exact
+factorisation fails --- the twisted parity $\E[w^{\tau_k}(-1)^{\tau_k}]$
+exceeds $\E[w^{\tau_k}]\,a_k$ by a factor $1.2$ at $|1-w|k=0.08$ and
+$2$--$4$ at $|1-w|k\approx0.4$--$0.8$ (short paths carry more parity
+memory) --- but the uniform bound (C2$''$) holds with the same
+constant, $|\E[w^{\tau_k}(-1)^{\tau_k}]|\le|a_k|$ at every $k\le16$ and
+every $w$ tested.  More usefully, the sum itself was measured: with
+$\Sigma(w):=\sum_k(-1)^kE_x[w^{\tau_k}(-1)^{\tau_k}]$ (all terms of one
+sign), $\Sigma(1)-\Sigma(w)=0.026,\ 0.085,\ 0.143$ at
+$|1-w|=0.01,0.05,0.10$ (tail beyond $k=16$ estimated from $2.5k^{-3}$),
+i.e.\ a modulus of continuity $\asymp|1-w|^{0.75}$ over that range ---
+above the crude $(p-1)/(p+1)\approx0.5$, below the $\min(1,p-1)$ of the
+factorised heuristic, and far above the $4/9$ the budget needs.  The
+same on the unit circle near $w=1$ is the first numerical task of
+session~13.  With the measured $p=2.7\pm0.3$ the crude route is marginal
+($p>13/5$ required); the measured modulus is not.  (b) (C2$''$) at $w=1$ is exactly the polynomial
+(C2$'$): $\sup_{S'_K}|a_k|\le Ck^{-p}$.  Away from $w=1$ on the circle
+Theorem~\ref{thm:idleloop} gives a geometric rate; (C2$''$) asks that
+the polynomial rate survive a small complex twist near $w=1$, which is
+a damping of long paths and should not spoil a parity cancellation that
+is produced by the block count.  This is measurable and is the first
+numerical task for session~13.}
+
+\medskip
+\noindent The open conditions are now:
+
+\medskip
+\noindent\textbf{(C1)}\quad$\|(I+\kappa_1)^{-1}\|_{L^\infty(\Omega_K)}\le C(K)$ ---
+equivalently $\|(I-\kappa_{-1})^{-1}\|\le C(K)$, the summability of the
+signed renewal series $\sum_k\kappa_{-1}^{\,k}G$ for every bounded $G$;
+(C2$'$) is the case $G=\mathbf 1$.  Unchanged, not contradicted, and no
+longer reachable by any Doeblin/ergodicity argument
+(Proposition~\ref{prop:nomino}, Corollary~\ref{cor:noerg}).\\
+\noindent\textbf{(C2$''$)}\quad as in Proposition~\ref{prop:holder},
+with $p>13/5$ and $C=C(K)$ polynomial; measured $p\approx3$ at $w=1$.
+
+\medskip
+\emph{What a proof must look like.  (i) It must be dust-blind: by
+Lemma~\ref{lem:inert}, $a_k(y_\varepsilon)=a_k(y)+O(\varepsilon\,\E_y\tau_k)$
+while $(-1)^{E}$ changes sign, so any argument that treats $(-1)^E$ as
+a function to be contracted in a sup-type norm on configurations is
+doomed, and any argument that works must use a topology in which
+$y_\varepsilon\to y$.  (ii) The natural candidate --- the transport
+distance between mass configurations, under the coupling of
+Lemma~\ref{lem:inert} --- is not contracted: when the dust is finally
+hit, the two coupled configurations differ by a macroscopic merge
+(``$r+r_0$'' against ``$r+\varepsilon$, $r_0-\varepsilon$''), so a
+discrepancy of size $\varepsilon$ is amplified to size $O(1)$ rather
+than resolved.  A contracting metric would have to compare coarse
+\emph{laws} rather than configurations.  (iii) The environment's own
+randomness is needed: an adversary allowed to choose the masses gained
+by the marked pair at the merge steps (whose timing it cannot control)
+can bias the parity of each inter-flip time toward a target by a fixed
+amount, since a gain changes the flip hazard $2p_1p_2$ by a bounded
+amount at a time of its choosing among the merge steps; so no
+``uniformly over environments'' statement can be true, and the proof
+must use that the true gains are size-biased picks from a partition
+whose count parity is invisible to them.  (iv) Given
+\eqref{eq:akB}, the cleanest target is a statement about the block
+count alone: the parity of $B$ at the $k$-th flip equidistributes
+polynomially.  Since the total block count from one curve has the
+exact law of Theorem~\ref{thm:blockcount} at fixed times, and the flip
+times are a renewal-like sampling of the time axis, this may be
+provable from the exact formulas by an averaging argument, at least
+for the annealed environment --- which is the form the downstream
+reduction (Problem~\ref{prob:survival}, whose start is
+$\mu_j$) actually consumes.}

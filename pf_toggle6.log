@@ -1,0 +1,12 @@
+n=6 lam=(6,) (alpha,beta)=(2,4) instances=2903040
+  #useful intercalates U: {0: 501120, 1: 933120, 2: 864000, 3: 414720, 4: 155520, 5: 34560}
+  #flipping F: {0: 846720, 1: 1105920, 2: 552960, 3: 311040, 4: 51840, 5: 34560}
+  status balance by F (F: B-count/A-count, B-A imbalance):
+    F=0: B=311040 A=535680  B-A=-224640
+    F=1: B=622080 A=483840  B-A=138240
+    F=2: B=276480 A=276480  B-A=0
+    F=3: B=138240 A=172800  B-A=-34560
+    F=4: B=0 A=51840  B-A=-51840
+    F=5: B=34560 A=0  B-A=34560
+  total B-A imbalance: -138240  (= X_B - X_A)
+  imbalance carried by F=0 stratum: -224640

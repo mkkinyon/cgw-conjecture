@@ -1,0 +1,13 @@
+n=6 mu=(2, 2, 2) -> lam=(2, 4) (alpha,beta)=(2,2)
+  J = 967680 (A: 483840, B: 483840);  |X| = 760320 (A: 483840, B: 276480)
+  counting qbar = 2|X|/J - 1 = 4/7 = 0.571429
+  J_A - X_A = 0;   J_B - X_B = 207360
+  unflip status of marked-A instances: {'A': 483840}
+  A-join roundtrip flip(flip)==id: {True: 483840}
+  marked status of A-join images: {('A', 2): 483840}
+  marked status of B-join images (min-rule): {('A', 2): 483840}
+  marked status of B-join images (both variants): {('A', 2): 967680}
+  A-join hit multiplicities on X: {1: 483840}  (distinct images: 483840)
+  B-join hit multiplicities on X: {1: 483840}  (distinct images: 483840)
+  images hit by both A- and B-joins: 483840
+  orphans (never hit): A: 0, B: 276480
