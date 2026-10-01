@@ -2266,8 +2266,9 @@ split one copy of $\ell_{\max}$ off first without collision, then proceed
 smallest-first among the remaining parts, reserving for the final split the
 pair $(b,\ell_{\max})$ where $b<\ell_{\max}$ is the smallest part: at every
 intermediate step the residual minus the split-off minimum still contains
-the reserved $\ell_{\max}$, hence exceeds the minimum, and the final split
-is unequal.
+the reserved $\ell_{\max}$ and the reserved $b$, hence exceeds the
+minimum (also when a further copy of $\ell_{\max}$ is the split-off
+minimum: $R-p\ge\ell_{\max}+b>p$), and the final split is unequal.
 
 For each step of such a chain, Theorem~\ref{thm:identity} and
 $\mathrm{EQ}(\delta)$ give

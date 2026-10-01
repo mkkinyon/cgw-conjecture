@@ -401,3 +401,229 @@ what (ii) must do.
 Both routes consume the same two inputs that the audit has left open
 --- the occupation-time lemma and (R1$'$) --- and both are now aimed at
 a target with a fivefold margin.
+
+\subsubsection{Scouting (III): Problem~\ref{prob:decouple} is not needed}
+\label{sec:s13decouple}
+
+Problem~\ref{prob:decouple} asks that the fraction of marks whose
+column lacks intercalate supply be $o(1/\log n)$ \emph{uniformly over
+all admissible} $(\lambda,\alpha,\beta)$, including merges whose
+$m$-cycle class occupies $O(1)$ columns.  But
+Theorem~\ref{thm:reduction} uses $\mathrm{EQ}$ only along its routing
+chains, and on those chains the merged part is always large.
+
+\begin{proposition}[no decoupling is needed on the routing chains]
+\label{prop:nodecouple}
+Let $K=\lceil A\log n\rceil$ be as in the proof of
+Theorem~\ref{thm:reduction}.  Every split $\lambda\to\mu$ used by its
+routing chains (for plain types with $\kappa(\lambda)\le K$ parts)
+merges a part $m\ge n/K$.  Consequently, on the intercalate-expander
+event, the number of marks $(L',P)$ of $X(n,\lambda;\alpha,\beta)$
+whose column $j$ fails the supply property of Lemma~\ref{lem:supply}
+is at most $14\log^{22}n$ per square, out of $\lambda_mm\ge n/K$
+marks per square: the exceptional-mark fraction is at most
+$14A\log^{23}n/n=n^{-1+o(1)}$, for every chain and every square.
+\end{proposition}
+
+\begin{proof}
+The routing of Theorem~\ref{thm:reduction} builds the chain in
+reverse by splitting parts off a residual $R$ smallest-first; the
+part merged at each step of the forward chain is the residual $R$ at
+that step.  In the case ``two largest parts unequal'', $R$ always
+contains the largest part $p_{\max}\ge n/\kappa\ge n/K$; in the case
+``two largest parts equal to $\ell_{\max}$'', the first split has
+$R=n$ and every later residual contains the reserved copy of
+$\ell_{\max}\ge n/\kappa$.  So $m=R\ge n/K$, and the $m$-class has
+$\lambda_mm\ge m\ge n/K$ columns.
+
+For the count: apply Lemma~\ref{lem:supply} \emph{without} the
+constraint ``avoid column $j'$'' (drop $j'$ from its hypotheses; the
+proof is unchanged), with $\ell=\log^{11}n$, $t=6\ell+1$: all but
+fewer than $t\ell<7\log^{22}n$ columns $c$ carry $t$ stable
+intercalates avoiding rows $1,2$, pairwise disjoint in rows, partner
+columns and symbols.  For a mark $P=\{j,j'\}$ with $j$ outside this
+exceptional set $E$, at most one of the $t$ intercalates through $j$
+has partner column $j'$ (the partner columns are distinct), and
+discarding it leaves $6\ell$ useful ones avoiding $j'$: the mark is
+good.  So a bad mark has a column in $E$.  For $\alpha\ne\beta$ the
+$m$ marks $\{j,\sigma^\alpha(j)\}$ of an $m$-cycle are distinct
+(coincidence would need $\sigma^{2\alpha}(j)=j$, i.e.\ $m\mid2\alpha$,
+impossible for $0<\alpha<m$, $2\alpha\ne m$) and each column of the
+cycle lies in exactly two of them; hence at most $2|E|<14\log^{22}n$
+marks are bad.  (For $\alpha=\beta$, which the routing avoids, each
+column lies in one mark and the bound is $|E|$.)  With $t=6\ell+1$
+in place of $6\ell$ the hypothesis $4t\ell+2t+\ell+2\le\beta n/2$ of
+Lemma~\ref{lem:supply} still holds for large $n$.
+\end{proof}
+
+\emph{Status: PROVED.  Consequence: the exceptional-mark bookkeeping
+of Remark~\ref{rem:bookkeeping}(i) is closed for the purposes of
+Theorem~\ref{thm:reduction}, with room $n^{1-o(1)}$ to spare, and
+Problem~\ref{prob:decouple} can be struck from the programme.  The
+types with small $m$-classes --- the ones on which the deterministic
+bound is vacuous and on which Problem~\ref{prob:decouple} is a
+genuine question --- are exactly those the routing never uses, or
+reaches only through a large merge.  (The heuristic in
+\S\ref{sec:vacuity}, that class membership is a rows-$1,2$ property,
+is in any case not right: the cycle type of $\sigma$ is determined by
+the bottom rectangle $L_\downarrow$ alone, since a leftover cycle of
+length $2\ell$ of the missing-pair graph contributes an $\ell$-cycle
+of $\sigma$ whichever way it is oriented; the orientations are fair
+coins that change nothing.  So the question was never about rows
+$1,2$ against rows $3..n$; but it does not need an answer.)}
+
+\subsubsection{Scouting (II): the transfer from the iid model to the orbit measure}
+\label{sec:s13transfer}
+
+Item (II) was carried since session 7 as ``transfer problem 7a(i)''
+and reformulated in \S\ref{sec:transfer} as (a) an
+exchangeable-to-mixture step plus (b) a $\theta$-covariant mixing
+bound.  Reading Theorem~\ref{thm:master} against
+Theorem~\ref{thm:factor} with fresh eyes gives a different
+classification.  What the true orbit supplies is: a \emph{frame}
+$\pi_0=\pi_P(L_0)$, a permutation of the rows whose cycles are the
+curves; the marked points $u,v=$ rows $1,2$; and a \emph{pool} of $k$
+chords, the row pairs of the useful stable intercalates, in positions
+determined by $L_0$.  The iid model replaces the frame by a single
+circle with $u,v$ antipodal and the pool by iid uniform chords.  Three
+separate statements are therefore being modelled, of very different
+status.
+
+\paragraph{(T3) The start is stationary, not one-block.}
+The frame is the cycle structure of the pair permutation of two
+columns of a random Latin square with two marked rows: in the
+continuum it is the stationary law $\pi$ of the marked chain
+(Proposition~\ref{prop:gaplawstat}), not the one-curve state.  Two
+things follow.  First, the ``free'' short-horizon inputs of
+\S\ref{sec:s9}--\ref{sec:s10} --- Proposition~\ref{prop:shorthorizon}
+(gap law $4\varepsilon^2j$) and Corollary~\ref{cor:horizon} (block
+count $O(\log d)$ from the one-block start) --- are artefacts of the
+model.  Under the true start the gap law is the linear stationary
+one, $\Pr[g_0\le\varepsilon]\asymp4\varepsilon$, so the decomposition
+of \S\ref{sec:upper} gives $\psi\lesssim\varepsilon+C(K)(d-T^*)^{-2\gamma}$
+with $T^*=\varepsilon^{-1}\,\mathrm{polylog}$, i.e.\
+$\psi\lesssim d^{-\min(1,2\gamma)}\,\mathrm{polylog}$: the budget
+$c>1/11$ is \emph{unaffected} (and the trap term reproduces the true
+rate $1/d$ of Proposition~\ref{prop:lower}).  The block bound is
+replaced by the stationary one: blocks of mass $\ge\eta$ number
+$O(\log(1/\eta))$ with exponential tails under $\mathrm{PD}(1)$, and
+blocks below $\eta=1/(k\log^2n)$ carry total mass $\asymp\eta$ and are
+inert over the horizon (Lemma~\ref{lem:inert}: hit with probability
+$\le2k\eta=o(1/\log n)$).  Second, for the spectral route of
+\S\ref{sec:s13spectral} this is good news: the start-comparison
+sub-problem disappears, because the quantity the true ensemble needs
+is $\psi_\pi(d)$ itself, coarse-grained.  (S$_2$) and the entrance
+estimate of \S\ref{sec:s13ltwo} are posed for the entrance laws of
+the one-block-started $\mu_j$ and must be re-posed for the
+stationary start; the arithmetic above is what that re-posing
+costs.  Note also that ``the frame is stationary'' is itself a
+statement about $\mathrm{Unif}(S(\lambda))$ and the special pair
+$(j,\sigma^\alpha(j))$ --- it is (T1) below, and indeed
+$\Pr[u\sim v]=\tfrac12$ for the frame is the weak conjecture's own
+bit, since the base point of an orbit is a uniform orbit point; the
+mixing argument needs only the frame's \emph{health}, not its
+exact law.
+
+\emph{Numerical check (\texttt{s13\_frame.c}, $10^6$ instances per
+point, $N=4096$ slots, $k$ iid chords, $4\E[\mathrm{bias}^2]=\E[\varepsilon_S\varepsilon_T]$):}
+\[
+\begin{array}{lcccccc}
+\toprule
+\E[\mathrm{bias}^2]\cdot k & k=8 & 16 & 32 & 64 & 128 & 256\\
+\midrule
+\text{one block, $v$ antipodal (the model of \S\ref{sec:factor})} & 0.24 & 0.28 & 0.29 & 0.32 & 0.25 & 0.34\\
+\text{one block, $v$ uniform} & 0.47 & 0.55 & 0.61 & 0.62 & 0.65 & 0.62\\
+\text{random-permutation frame, $v$ uniform} & 0.73 & 0.85 & 0.93 & 0.97 & 0.96 & 1.15\\
+\midrule
+\text{real squares, \S\ref{sec:realbias}: } k\approx10,\ 13,\ 17,\ 22,\ 25,\ 26 & 0.64 & 0.67 & 0.60 & 0.74 & 0.72 & 0.73\\
+\bottomrule
+\end{array}
+\]
+(standard errors $0.002$ at $k=8$ rising to $0.06$ at $k=256$ in
+the model rows; the real-square row lists its own $k$-bins, with
+standard errors $0.03$--$0.06$, from $n=30,30,30,50,50,100$; the
+random-frame values at $N=50,100,200$ agree with $N=4096$ to
+$0.01$, so there is no finite-$N$ correction).  The factor $2$--$3$
+between the iid model and real squares, unexplained since
+session~7, is the start: the stationary frame accounts for a factor
+$\approx3$ at $k\le32$, of which a factor $2$ is the gap law ($v$
+uniform vs antipodal) and $1.5$ the multi-curve environment.  Real
+squares sit $15$--$20\%$ below the random-frame model at matched
+$k$ ($0.76,0.81,0.86,0.90$ at $k=10,13,17,24$), plausibly from
+shared rows between the $R$- and $M$-sides at $k^2/n\gg1$; within
+the precision of \S\ref{sec:realbias} the real pool behaves as a
+generic pool on a stationary frame.  The $1/k$ law and its constant are thus consistent
+with (T2) below being true.
+
+\paragraph{(T1) Health of the frame under the orbit measure.}
+The chain analysis needs the frame to have $O(\log k)$ blocks above
+scale $1/(k\log^2n)$ and $u,v$ untrapped except on a set of marks of
+measure $O(\mathrm{polylog}/k)$ --- properties that a uniform random
+permutation has.  The frame is the pair permutation of the columns
+$j,\sigma^\alpha(j)$ of $L\sim\mathrm{Unif}(S(\lambda))$: by
+transposition symmetry its cycle type has, for a \emph{uniform}
+square and a \emph{uniform} column pair, exactly the law $\PP_n$
+--- the object of the conjecture.  What is needed is far weaker (a
+polylogarithmic block count at coarse scale, a trapped fraction
+$O(1/k)$), but it is needed under the conditioning on $S(\lambda)$
+and for the special pair $(j,\sigma^\alpha(j))$, and it cannot be
+imported from the uniform measure by the union-of-costs device of
+Lemma~\ref{lem:condexp}: the device transfers only properties whose
+failure probability is $e^{-\omega(n\log^2n)}$, while ``more than
+$2n/k$ marks are trapped'' fails with probability of order
+$e^{-n/k}$ at best.  Status: UNEXAMINED; no proof route visible
+beyond the one sketched under (T2).
+
+\paragraph{(T2) Genericity of the pool.}
+This is the real content of (II).  Step (a) of \S\ref{sec:transfer}
+is routine: take the supplied family through $j$ with
+$t\asymp n/\log^{11}n$ members (Lemma~\ref{lem:supply} allows
+$t\le\beta n/(8\ell)$) and use a uniformly random $k$-subset of it as
+the pool; by Diaconis--Freedman the $k$ chords are, conditionally on
+$L$, iid from the empirical pair law $\theta_L$ of the family up to
+total variation $k^2/(2t)=n^{-1+o(1)}$, and the hard-core correction
+is absent because the family is already pairwise disjoint.  Step (b)
+is \emph{not} a mixing statement: the chain analysis is covariant
+under reparametrisation of the circle by an atomless measure $m$
+only when the two endpoints of a chord are \emph{independent} draws
+from $m$; $\theta_L$ is an empirical law on \emph{pairs} of frame
+positions, and if (say) the intercalate rows $r,r'$ were always
+adjacent in the cycles of $\pi_0$ the dynamics would be degenerate
+and the bit frozen.  What is needed is a coarse product structure:
+at scale $\eta=1/(k\log^2n)$, the fraction of the family with
+$(\mathrm{pos}\,r,\mathrm{pos}\,r')\in A\times B$ is $|A||B|$ up to
+$\delta\ll\eta^2/k$ for all arcs $A,B$ (a coupling of the
+$\theta_L$-chain with the uniform chain over $k$ steps then costs
+$O(k\delta/\eta^2)$).  Quantitatively this is mild --- a family of
+$n^{1-o(1)}$ random-like points in the square has discrepancy
+$n^{-1/2+o(1)}\ll\eta^2/k=\log^{-O(1)}n$ --- but it is a
+\emph{distributional} statement about where the stable intercalates
+of column $j$ sit relative to the pair permutation of columns
+$j,j'$, under $\mathrm{Unif}(S(\lambda))$, and like (T1) it is out
+of reach of union-of-costs.  The only route visible is the one
+\cite{KPS25} use for the expander itself: demand the property for
+all but $\ell=\log^{11}n$ columns, so that failure requires $\ell$
+simultaneous failures and costs $e^{-\ell\cdot n\delta^2/\mathrm{polylog}}
+=e^{-\omega(n\log^2n)}$ \emph{if} the per-column failures decouple
+in the triangle-removal model --- a KPS-scale sub-project (their
+Lemma~8.3 machinery re-run for a two-column pair permutation), not a
+problem of the continuum chain.
+
+\medskip
+\noindent\textbf{Classification.}  (III): \emph{closed}
+(Proposition~\ref{prop:nodecouple}).  (II)(a): routine.  (T3):
+routine arithmetic given (T1), and it improves the position of (I).  (II)(T1)--(T2): \emph{hard}, of
+a different nature from (I): they need distributional control of the
+intercalate structure relative to a pair permutation under the
+type-conditioned measure, which the existing toolkit (existence
+statements transferred by union of costs) cannot give; the
+plausible route is a KPS-style ``all but $\ell$ columns'' robustness
+argument in the triangle-removal model.  The numerics say the
+statements are true with a comfortable margin.  First concrete
+sub-problem: state the minimal coarse product property of (T2)
+precisely and determine whether its ``all but $\ell$ columns''
+version has failure probability $e^{-\omega(n\log^2n)}$ in the
+triangle-removal process; a positive answer would also deliver (T1)
+by the same device.  Second: redo the bookkeeping of
+\S\ref{sec:s9}--\S\ref{sec:s10} from the stationary start (T3),
+which is the honest form of (I).
