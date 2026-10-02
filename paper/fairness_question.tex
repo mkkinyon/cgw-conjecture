@@ -1,0 +1,160 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{A fairness question for two involutions on Latin squares}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Setting}
+
+Let $L$ be a Latin square of order $n$ on the symbol set $[n]$, with
+rows and columns indexed by $[n]$.  Two rows, $1$ and $2$, and two
+columns, $j\ne j'$, are distinguished throughout.
+
+\paragraph{The frame.}  Let $\pi=\pi_L$ be the permutation of the
+rows defined by
+\[
+L\bigl(\pi(r),\,j'\bigr)=L(r,j)\qquad(r\in[n]),
+\]
+i.e.\ $\pi(r)$ is the row in which column $j'$ holds the symbol that
+column $j$ holds in row $r$.  ($\pi$ is a derangement.)  The
+\emph{bit} of $L$ is
+\[
+\beta(L)=\mathbf 1\{\text{rows $1$ and $2$ lie in a common cycle of }\pi_L\}.
+\]
+
+\paragraph{Row-pair permutations.}  For rows $x\ne y$ let
+$\rho_{x,y}$ be the permutation of the columns defined by
+$L(y,\rho_{x,y}(q))=L(x,q)$.  For a cycle $Q$ of $\rho_{x,y}$ the two
+rows carry the same set of symbols on the columns of $Q$.
+
+\paragraph{Two moves.}
+\begin{enumerate}[leftmargin=2.2em]
+\item[(\textsc{trade})] For rows $x\ne y$ with $x,y\notin\{1,2\}$,
+let $Q$ be the cycle of $\rho_{x,y}$ containing $j'$, and exchange the
+entries of rows $x$ and $y$ in the columns of $Q$.
+\item[(\textsc{turn})] For a cycle $c$ of $\pi_L$ containing neither
+row $1$ nor row $2$, exchange the entries of columns $j$ and $j'$ in
+the rows of $c$.
+\end{enumerate}
+
+\begin{lemma}
+Both moves produce Latin squares, are involutions, and leave rows $1$
+and $2$ unchanged.  A turn inverts $\pi$ on the cycle $c$ and leaves
+its cycle partition unchanged.  A trade at $(x,y)$ replaces $\pi$ by
+$(x\,y)\circ\pi$ if $j\notin Q$ (so the cycles of $x$ and $y$ are
+merged if distinct and split if equal), and by
+$(x\,y)\circ\pi\circ(x\,y)$ if $j\in Q$ (the cycle partition is
+unchanged up to exchanging the labels $x,y$).  In particular a trade
+can change $\beta$ only when $j\notin Q$; call such a pair $(x,y)$
+\emph{flippable}.  Writing $b'=L(y,j')$ and $q^*$ for the column in
+which row $x$ holds $b'$, the pair $(x,y)$ is flippable iff $q^*$ does
+not lie on the $\rho_{x,y}$-cycle of $j$; if $\pi(x)=y$ or
+$\pi(y)=x$ it is never flippable.
+\end{lemma}
+
+The proofs are direct verifications.  (Both rows carry the same
+symbols on $Q$, and both columns carry the same symbols on $c$, which
+gives the Latin property; the frame formulas follow from the
+definition of $\pi$, since only the entries of rows $x,y$ in columns
+$j,j'$ matter.)
+
+\section*{Components and the question}
+
+Fix a $2\times n$ Latin rectangle $R$ (the first two rows) and
+columns $j\ne j'$ such that
+\begin{equation}\label{eq:nonadj}
+R(1,j)\ne R(2,j')\qquad\text{and}\qquad R(1,j')\ne R(2,j),
+\end{equation}
+i.e.\ $\pi(1)\ne2$ and $\pi(2)\ne1$ for every extension of $R$.  Let
+$S(R)$ be the set of Latin squares whose first two rows are $R$.  The
+two moves act on $S(R)$; let $\mathcal K(R)$ be the set of orbits
+(``components'') of the group they generate, and for a component
+$K$ let
+\[
+p(K)=\frac{|\{L\in K:\beta(L)=1\}|}{|K|}.
+\]
+
+\begin{question}[component fairness]
+Is it true that, uniformly over $R$ and over column pairs $(j,j')$
+satisfying \eqref{eq:nonadj},
+\[
+\frac1{|S(R)|}\sum_{K\in\mathcal K(R)}|K|\,\bigl(2p(K)-1\bigr)^2
+\;\longrightarrow\;0\qquad(n\to\infty)?
+\]
+Equivalently: for $L$ uniform in $S(R)$, the conditional probability
+that $\beta(L)=1$ given the component of $L$ is $\tfrac12+o(1)$ in
+$L^2$.  A quantitative version asks for the left side to be
+$o(1/\log^2n)$.
+\end{question}
+
+\begin{remark}[why the question is natural]
+Under the uniform measure on $S(R)$ the moves define a symmetric
+Markov chain (pick a uniform pair $x,y\notin\{1,2\}$ and trade, or a
+uniform row $x\notin\{1,2\}$ and turn its cycle when allowed), so the
+uniform measure on each component is stationary and the left side of
+the Question is $\lim_{M\to\infty}\E[\beta'(L_0)\beta'(L_{2M})]$ with
+$\beta'=2\beta-1$, the long-time autocorrelation of the bit.  Along
+the chain the frame $\pi$ performs the walk of left multiplication by
+transpositions $(x\,y)$, $x,y\notin\{1,2\}$, \emph{thinned} to the
+flippable pairs (the turns and the non-flippable trades only relabel
+rows within cycles).  The unthinned walk preserves $\pi^{-1}(1)$ and
+$\pi^{-1}(2)$ and is the random-transposition walk on $S_{n-2}$ after
+contracting the arcs $\pi^{-1}(1)\to1$ and $\pi^{-1}(2)\to2$; on each
+of its cosets exactly half of the permutations have rows $1,2$ in a
+common cycle.  So if every pair were flippable the answer would be
+yes, with rate $o(1)$ after $O(n\log n)$ steps by Diaconis--Shahshahani.
+The content of the Question is that the thinning by flippability does
+not destroy this.
+\end{remark}
+
+\begin{remark}[what is known numerically]
+On uniformly random Latin squares with $n=30$--$100$, a uniformly
+random pair $x,y\notin\{1,2\}$ is flippable with probability
+$0.50\pm0.01$, independently of the relative position of $x,y$ in the
+cycles of $\pi$ except for the exclusion $\pi(x)=y$, $\pi(y)=x$; the
+fraction of flippable pairs in a square is concentrated
+($0.42$--$0.55$ at $n=30$); and the autocorrelation of the bit along the
+chain, as a function of the number of trades performed, follows that
+of the unthinned walk and decays to zero.  No square with
+$|2p(K)-1|$ bounded away from $0$ has been observed except for
+components of trivial size.
+\end{remark}
+
+\begin{remark}[weaker forms that are still useful]
+(i) A yes in expectation over $R$ --- for $(R,j,j')$ drawn as the first
+two rows and a column pair of a uniformly random Latin square, with
+$(j,j')$ restricted to pairs at a prescribed distance along a cycle of
+the row permutation $R(1,\cdot)\mapsto R(2,\cdot)$ --- suffices for
+the application below.  (ii) A sufficient condition is that, for all
+but an $o(1/\log^2n)$-fraction of $L\in S(R)$, a positive proportion
+of the bit-changing pairs (the pairs $x,y$ in the common cycle of
+rows $1,2$ that separate them when $\beta=1$; the pairs
+$x\in C_1$, $y\in C_2$ when $\beta=0$) are flippable, together with a
+mixing estimate for the thinned walk.
+\end{remark}
+
+\begin{remark}[provenance]
+The Question arose in a programme on the Cavenagh--Greenhill--Wanless
+conjecture on the cycle type of the second row of a random Latin
+square: with $(j,j')$ a marked column pair $\{j,\sigma^\alpha(j)\}$,
+$\alpha\ge2$, inside a cycle of the row permutation $\sigma$, the
+marked-pair identity $2\,\mathcal C_n(\lambda)/\mathcal C_n(\mu)-1
+=\Pr[\beta=1]/\Pr[\beta=0]$ reduces the conjecture to
+$\Pr[\beta=1]=\tfrac12+o(1/\log n)$ over such instances, and a
+positive answer to the quantitative Question, averaged as in
+Remark~3(i), gives exactly that.  The question itself makes no
+reference to this.
+\end{remark}
+
+\end{document}
