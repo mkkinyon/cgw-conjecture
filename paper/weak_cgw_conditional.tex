@@ -1,0 +1,1184 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{enumitem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\dtv}{d_{\mathrm{TV}}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\PP}{P}
+\newcommand{\QQ}{Q}
+\newcommand{\CC}{C}
+
+\title{The cycle type of two rows of a random Latin square:\\ an exact ladder identity and a conditional proof of the weak Cavenagh--Greenhill--Wanless conjecture}
+\author{[author]}
+\date{2 October 2026 --- draft}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $L$ be a uniformly random Latin square of order $n$ and $\sigma$ the permutation of columns
+carrying its first row to its second.  Cavenagh, Greenhill and Wanless conjectured that the
+cycle type of $\sigma$ is asymptotically that of a uniform derangement, in total variation.
+We prove three exact identities --- the marked-pair identity, which expresses the ratio of
+completion counts of adjacent cycle types as the odds of one bit (``rows $1,2$ lie in a
+common column cycle of a marked column pair'') in a single uniform square; a reduction
+theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
+the ladder identity, by which the bit is exactly fair except on the squares in which no
+``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
+the exceptional set is bounded by a product of conditionally independent factors.  The
+conjecture is thereby reduced to a genericity hypothesis about the cycle structure of two
+rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, test
+numerically up to $n=100$, and locate within the known switching technology.  Along the
+way we observe that the published proof of the upper bound in Lemma~3.12 of
+Cavenagh--Greenhill--Wanless has a gap for $\min(\alpha,\beta)\ge3$; our results do not
+depend on that bound, and we re-derive from the surviving direction the tail estimate on
+the number of cycles that the reduction theorem needs.
+\end{abstract}
+
+\section{Introduction}
+
+Let $\PP_n$ be the law of the cycle type of $\sigma=\sigma_{1,2}(L)$ for a uniform Latin
+square $L$ of order $n$, and $\QQ_n$ the law of the cycle type of a uniform derangement of
+$[n]$.  Cavenagh, Greenhill and Wanless \cite[Conj.~6.1]{CGW08} conjectured:
+
+\begin{conjecture}\label{conj:cgw}
+$\dtv(\PP_n,\QQ_n)=o(1)$ as $n\to\infty$.
+\end{conjecture}
+
+For $\lambda\vdash n$ with all parts $\ge2$ let $\CC_n(\lambda)$ be the number of
+completions of a fixed $2\times n$ Latin rectangle of cycle type $\lambda$ to a Latin
+square, divided by $(n-2)!$ (the count does not depend on the rectangle chosen, since
+rectangles of the same type are isotopic by a row-preserving isotopy), and let
+$\gamma(\lambda)$ be the number of permutations of type $\lambda$.  Then
+$\PP_n(\lambda)\propto\gamma(\lambda)\CC_n(\lambda)$ and
+$\QQ_n(\lambda)\propto\gamma(\lambda)$, so the conjecture says that $\CC_n$ is nearly
+constant on the types that carry most of the mass.  CGW proved
+$\CC_n(\lambda)/\CC_n(\mu)\in[\tfrac12,\tfrac32]$ for adjacent types (one part of
+$\lambda$ split into two parts of $\mu$, both $\ge2$), and used it to show that the two
+laws agree within a factor $n^{3/2}$ on every type; the upper bound $\tfrac32$, and
+with it the upper half of the latter statement, is affected by the gap described in
+Remark~\ref{rem:gap} and \cite{gapnote}.
+
+\paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
+$j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
+$X=X(n,\lambda;\alpha,\beta)$ is the set of marked squares of type $\lambda$; the
+\emph{frame} of $P$ is the permutation of rows $\pi(r)=r'$ with $L(r',j')=L(r,j)$; and
+$P$ is a \emph{$B$-pair} if rows $1,2$ lie in one cycle of $\pi$, an \emph{$A$-pair}
+otherwise.  Our results are:
+\begin{enumerate}[leftmargin=2em]
+\item[(1)] \emph{Marked-pair identity} (Theorem~\ref{thm:marked}):
+$2\CC_n(\lambda)/\CC_n(\mu)-1=\Pr_X[B]/\Pr_X[A]$ exactly, for every $n,\lambda,\alpha,\beta$.
+\item[(2)] \emph{Reduction} (Theorem~\ref{thm:reduction}): if
+$|\Pr_X[B]-\tfrac12|\le\delta(n)/4$ for all adjacent pairs with $\alpha\ne\beta$, then
+$\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-1+o(1)})$.  The tail estimate it needs on the number
+of cycles of $\sigma$ is proved from the trivial half of (1) alone
+(Proposition~\ref{prop:tailsurvive}).
+\item[(3)] \emph{Ladder identity} (Theorem~\ref{thm:ladder}): with the ladder pairs
+$(x_k,y_k)=(\pi^{-k}(1),\pi^{-k}(2))$, $1\le k<K_0$, and ``flippable'' meaning that $j,j'$
+lie in different cycles of the column permutation of rows $x_k,y_k$,
+\[
+\Pr_X[B]-\Pr_X[A]=\Pr_X[B,\mathrm{Flip}=\emptyset]-\Pr_X[A,\mathrm{Flip}=\emptyset],
+\qquad |\Pr_X[B]-\tfrac12|\le\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
+\]
+So Conjecture~\ref{conj:cgw} follows from (L): $\Pr_X[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
+\item[(4)] \emph{Orbit method} (Proposition~\ref{prop:orbit}): the flippabilities of a
+family of ladder pairs are conditionally independent given the orbit of a group of
+commuting column-cycle turns, and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$,
+where $\bar y_k$ is an explicit ``orbit weight''.  Hence (L), and the conjecture, follow
+from Hypothesis~\ref{hyp:orbit} (Proposition~\ref{prop:Lorbit}).
+\end{enumerate}
+Hypothesis~\ref{hyp:orbit} is a statement of the form ``two pairs of lines of a random
+Latin square are interleaved in the cycle structure of a third pair with probability
+bounded away from $0$ and $1$'', under conditioning on the cycle type of rows $1,2$.
+Without that conditioning it is elementary (\S\ref{sec:remains}); the data give the
+interleaving probability $0.19$ in every version we measured, and $\Pr_X[B]=0.50\pm0.01$ at
+$n=30,50,100$.  Section~\ref{sec:remains} explains why the switching methods available
+inside $X$ --- all of which we have pushed as far as they go --- produce only fair
+identities and cannot by themselves give the hypothesis.
+
+\paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
+\cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
+not land in $S(\mu,F)$ when $\min(\alpha,\beta)\ge3$: the cross-switch reverses the
+$\omega$-arc from $\omega j$ to $\omega j'$, which contains $j'$, so $\{j,j'\}$ ends at
+distance $2$.  We give the details in a separate note \cite{gapnote}; here we only record
+(Remark~\ref{rem:gap}) which published statements depend on it.  Nothing in the present
+paper does: the lower bound $\tfrac12$ of CGW's lemma is the trivial half of
+Theorem~\ref{thm:marked}, and the upper bound $\tfrac32$ is, by the same theorem,
+$\Pr_X[B]\le\tfrac23$ --- a weak form of what we are after.  By Theorem~\ref{thm:ladder}
+it would follow from $\Pr_X[\mathrm{Flip}\ne\emptyset]\ge\tfrac13$.
+
+\paragraph{Conventions.}  $L(r,c)$ is the entry in row $r$, column $c$.  For rows $x,y$,
+$\rho_{x,y}$ is the permutation of columns with $L(y,\rho_{x,y}(q))=L(x,q)$, so that
+$\sigma=\rho_{1,2}$ up to inversion; a \emph{row cycle} of $(x,y)$ is a cycle of
+$\rho_{x,y}$.  For columns $q,c$, $\delta_{q,c}$ is the permutation of rows with
+$L(\delta(r),c)=L(r,q)$, and its cycles are the \emph{column cycles} of $(q,c)$.  A
+\emph{trade} of rows $x,y$ along a row cycle swaps their entries on the columns of that
+cycle; a \emph{turn} of a column cycle swaps the entries of columns $q,c$ in its rows.  Both
+are Latin trades (the result is again a Latin square).  For $\lambda\vdash n$, $S(\lambda)$ is
+the set of Latin squares of order $n$ with first row the identity whose rows $1,2$ have
+cycle type $\lambda$, so $|S(\lambda)|=\gamma(\lambda)(n-2)!\,\CC_n(\lambda)$.
+Jacobson--Matthews sampling
+\cite{JM96} is used for all numerical data; the scripts and logs are in the project
+repository.
+
+\section{The marked-pair identity}\label{sec:marked}
+
+Throughout, squares are normalised to have first row $\mathrm{id}$; CGW's column map
+$\omega$, defined by $L(1,\omega(j))=L(2,j)$, is then $\omega(j)=L(2,j)$, and we take
+$\sigma=\omega$ (only the cycle type matters, and it is the same for $\omega$ and $\omega^{-1}$).  For the proofs it
+is convenient to work with \emph{unnormalised} squares (equivalently,
+symbol-relabelling classes): every instance count below then acquires a
+common factor $n!$, which cancels from every ratio, and the maps we use
+(flip, switch) act on unnormalised squares without any renormalisation
+step.  Statuses, cycle types, and column positions are
+relabelling-invariant, so we freely state results in the normalised
+picture.
+
+\begin{definition}[marked instances]\label{def:marked}
+Let $\lambda\vdash n$ contain a part $m=\alpha+\beta$
+($\alpha,\beta\ge2$), and let $\mu$ be $\lambda$ with one part $m$
+split into $\alpha,\beta$.  The \emph{splitting instance space} is
+\[
+X \;=\; X(n,\lambda;\alpha,\beta)
+\;=\;\bigl\{(L',P)\;:\;L'\in S(\lambda),\;
+P=\{j,\sigma^\alpha(j)\}\text{ with } j\text{ in an $m$-cycle of }
+\sigma(L')\bigr\},
+\]
+unordered pairs counted once.  Thus every $L'$ carries exactly
+$\lambda_m\, m$ marked pairs when $\alpha\neq\beta$ and
+$\lambda_m\,\alpha$ when $\alpha=\beta$.  Since $\alpha,\beta\ge 2$
+every marked pair is admissible, and $X=X_A\sqcup X_B$ according to the
+$A$/$B$ status of $P$ in $L'$.  The \emph{joining instance space} is
+\[
+J \;=\; J(n,\mu;\alpha,\beta)
+\;=\;\bigl\{(L,P)\;:\;L\in S(\mu),\;P=\{j,j'\},\;
+j\text{ in an $\alpha$-cycle},\; j'\text{ in a different
+$\beta$-cycle}\bigr\},
+\]
+again with $J=J_A\sqcup J_B$ by the status of $P$ in $L$.
+\end{definition}
+
+The counting arithmetic is immediate: with
+$D_\nu$ the number of derangements of cycle type $\nu$ and
+$N(\nu)=\CC_n(\nu)(n-2)!$,
+\begin{equation}\label{eq:Xarith}
+\frac{2|X|}{|J|}
+=\frac{2\,D_\lambda N(\lambda)\,\lambda_m m}
+       {D_\mu N(\mu)\,\mu_\alpha\mu_\beta\,\alpha\beta}
+=\frac{2\CC_n(\lambda)}{\CC_n(\mu)}
+\qquad(\alpha\neq\beta),
+\end{equation}
+using $D_\lambda/D_\mu=\alpha\mu_\alpha\,\beta\mu_\beta/(m\lambda_m)$;
+for $\alpha=\beta$ one has
+$D_\lambda/D_\mu=\alpha^2\mu_\alpha(\mu_\alpha-1)/(2m\lambda_m)$,
+$|J|=|S(\mu)|\binom{\mu_\alpha}{2}\alpha^2$ and
+$|X|=|S(\lambda)|\lambda_m\alpha$, and \eqref{eq:Xarith} holds
+verbatim.  The content of the identity is therefore the following
+count.
+
+\begin{lemma}[cycle trades preserve pair status]\label{lem:cycletrade}
+Let $P=\{j,j'\}$ be an admissible column pair of a Latin square $L$ and
+let $C$ be one column cycle of $P$.  Trading $C$ (swapping the entries
+of columns $j,j'$ in the rows of $C$) inverts the pair permutation
+$\pi_P$ on $C$ and fixes it elsewhere; the partition of rows into
+column cycles of $P$ is unchanged.  In particular the $A$/$B$ status of
+$P$ itself is invariant under the CGW flip at $P$, which trades the
+full column cycle through row~$2$.
+\end{lemma}
+
+\begin{proof}
+Write $\pi=\pi_P$, so $\pi(r)$ is the row of column $j'$ holding the
+symbol $L(r,j)$; $C$ is $\pi$-closed and the trade swaps
+$L(r,j)\leftrightarrow L(r,j')$ for $r\in C$.  Fix $r\in C$ and let
+$\pi'$ be the new pair permutation.  The new $L(r,j)$ is the old
+$L(r,j')$; the row of the new column $j'$ holding that symbol is found
+by solving (new $L(s,j')$) $=$ (old $L(r,j')$): for $s\in C$ the new
+$L(s,j')$ is the old $L(s,j)$, and old $L(s,j)=$ old $L(r,j')$ exactly
+when $\pi(s)=r$.  Hence $\pi'=\pi^{-1}$ on $C$; off $C$ nothing
+changes.  A cycle inverted in place has the same support, so the
+partition into cycles is unchanged.
+\end{proof}
+
+\begin{lemma}[switch toggle]\label{lem:switchtoggle}
+Let $(L,P)\in J$ and let $Q$ be the row cycle through one column of
+$P$ (the two row cycles are distinct).  Trading $Q$ (the CGW switch)
+changes $\pi_P$ by precomposition with the transposition of rows
+$1,2$: the cycles of $\pi_P$ through rows $1,2$ are split if rows
+$1,2$ are in one cycle, and joined if in two.  Hence the switch
+toggles the status of $P$, preserves $S(\mu)$ and the instance data
+(it inverts one $\sigma$-cycle in place), and is an involution:
+the trade preserves the traded cycle's symbol set (the two rows carry
+the same symbols on its columns), so the min-symbol rule re-selects the
+same cycle.  Consequently $|J_A|=|J_B|$, exactly.
+\end{lemma}
+
+\begin{proof}
+Say $Q$ is the row cycle through $j$; its columns include $j$ but not
+$j'$.  The trade swaps the row-1 and row-2 entries in the columns of
+$Q$; for $\pi_P$ only column $j$ matters, where the entries of rows
+$1,2$ are exchanged.  Thus $\pi_P'=\pi_P\circ\tau_{12}$, and
+multiplying by a transposition splits or joins the cycles through its
+two points.  Rows $1,2$ lie in one cycle of $\pi_P$ exactly when $P$
+is a $B$-pair.  The trade swaps the two rows' entries along the
+columns of $Q$, which inverts the corresponding $\sigma$-cycle in
+place: the cycle type and the column sets of all row cycles are
+preserved, so $(L,P)\mapsto(\mathrm{sw}(L),P)$ maps $J$ to $J$.
+\end{proof}
+
+\begin{theorem}[marked-pair identity]\label{thm:marked}
+For every $n$, $\lambda$, and split $m=\alpha+\beta$ with
+$\alpha,\beta\ge2$ (including $\alpha=\beta$),
+\[
+|J_A|\;=\;|J_B|\;=\;|X_A|,
+\qquad\text{hence}\qquad
+\boxed{\;\frac{\CC_n(\lambda)}{\CC_n(\mu)}\;=\;\frac{|X|}{2|X_A|},
+\qquad
+2\,\frac{\CC_n(\lambda)}{\CC_n(\mu)}-1\;=\;\frac{|X_B|}{|X_A|}.\;}
+\]
+In particular $\CC_n(\lambda)>\tfrac12\,\CC_n(\mu)$ unconditionally,
+and Hypothesis~\ref{hyp:eq} ($\mathrm{EQ}(\delta)$) is equivalent to
+\[
+\Bigl|\;\Pr\bigl(P\text{ is a $B$-pair}\bigr)-\tfrac12\;\Bigr|
+\;\le\;\tfrac{\delta}{4}(1+o(1)),
+\]
+for $(L',P)$ uniform on $X$: the law of a single bit --- whether rows
+$1,2$ lie in one column cycle of the marked pair
+$\{j,\sigma^\alpha(j)\}$ --- of a single uniform square of
+$S(\lambda)$.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:Xarith} it suffices to prove $|J|=2|X_A|$.
+The flip at an $A$-pair $P$ whose columns lie in one row cycle at
+$\sigma$-distances $(\alpha,\beta)$ splits that cycle into an
+$\alpha$- and a $\beta$-cycle and maps $S(\lambda)\to S(\mu)$; by
+Lemma~\ref{lem:cycletrade} the pair $P$ is still an $A$-pair
+afterwards, so $x\mapsto\mathrm{unflip}(x)$ maps $X_A$ into $J_A$.
+The flip at a fixed pair is an involution (the traded cycle again
+contains row 2, with the same row support), so
+$\mathrm{join}=\mathrm{flip}$ inverts it: $X_A\leftrightarrow J_A$ is
+a bijection.  Composing with the switch of
+Lemma~\ref{lem:switchtoggle} gives a bijection
+$X_A\leftrightarrow J_B$, namely
+$x\mapsto \mathrm{sw}(\mathrm{unflip}(x))$ with inverse
+$(L,P)\mapsto \mathrm{flip}(\mathrm{sw}(L))$ --- the map
+``switch-then-flip'', which is exactly the CGW joining step at a
+$B$-pair.  Hence $|J|=|J_A|+|J_B|=2|X_A|$.
+\end{proof}
+
+
+\section{The reduction theorem}\label{sec:reduction}
+
+\begin{hypothesis}[B-pair equidistribution, $\mathrm{EQ}(\delta)$]\label{hyp:eq}
+For every $\lambda\vdash n$ with a part $m=\alpha+\beta$, $\alpha\ne\beta$, $\alpha,\beta\ge2$, and $\mu$ the split type,
+$\bigl|2\CC_n(\lambda)/\CC_n(\mu)-1\bigr|\le\delta(n)$.
+\end{hypothesis}
+
+By Theorem~\ref{thm:marked}, $\mathrm{EQ}(\delta)$ is the statement $|\Pr_X[B]-\tfrac12|\le\tfrac\delta4(1+o(1))$ for all adjacent pairs with $\alpha\ne\beta$.  The proof below needs a tail bound on the number $\kappa$ of cycles of $\sigma$; we first prove it from the trivial half of Theorem~\ref{thm:marked} alone, so that nothing depends on the upper bound of \cite[Lemma~3.12]{CGW08} (Remark~\ref{rem:gap}).
+
+\begin{proposition}[the number of cycles, from the surviving direction only]\label{prop:tailsurvive}
+Let $L$ be a uniform Latin square of order $n$, $\sigma$ the column
+permutation of rows $1,2$, $N_\ell$ its number of $\ell$-cycles and
+$\kappa=\sum_\ell N_\ell$.  Then, using only the identity
+$|J|=2|X_A|$ of Theorem~\ref{thm:marked} and $|X_A|\le|X|$:
+\begin{enumerate}[leftmargin=2em]
+\item[(i)] $\E[\ell N_\ell]\le2n/(n-\ell)$ for every $\ell$; in
+particular $\E[N_\ell]\le4/\ell$ for $\ell\le n/2$.
+\item[(ii)] For every $k\ge1$, with $(\kappa)_k=\kappa(\kappa-1)\cdots(\kappa-k+1)$,
+\[
+\E\bigl[(\kappa)_k\bigr]\;\le\;2^{k-1}\sum_{\ell_1,\dots,\ell_k\ge2}\frac{\E[mN_m]}{\ell_1\cdots\ell_k}\Big|_{m=\ell_1+\cdots+\ell_k}
+\;\le\;2^{k-1}\Bigl(4+\frac{k^2}{\log n}\Bigr)(\log n)^k .
+\]
+\item[(iii)] For $A\ge3$, $\Pr[\kappa\ge A\log n]\le(7+\log n)\,n^{-\log((A-1)/2)}$,
+which is $O(n^{-2}\log n)$ for $A\ge16$;
+and $\Pr[\text{all cycles of }\sigma\text{ have the same length }\ell<n]\le4d(n)/n$,
+$d(n)$ the number of divisors.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) For $\beta\ne\ell$ the joining instances $(L,\{j,j'\})$ with $j$ in
+an $\ell$-cycle and $j'$ in a $\beta$-cycle number $\ell N_\ell\beta N_\beta$
+per square, the splitting instances (pairs at distance $\ell$ on an
+$(\ell+\beta)$-cycle) number $(\ell+\beta)N_{\ell+\beta}$, and
+$|J|=2|X_A|\le2|X|$ gives
+$\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$; for
+$\beta=\ell$ the same count with $\ell^2\binom{N_\ell}{2}$ and
+$\ell N_{2\ell}$ gives $\E[\ell^2N_\ell(N_\ell-1)]\le4\ell\E[N_{2\ell}]$.
+Summing the first over $\beta\ne\ell$ ($\sum_\beta\beta N_\beta=n$) and
+adding the second (its right side is the missing summand $m=2\ell$):
+$\E[\ell N_\ell(n-\ell N_\ell)]+\E[\ell^2N_\ell(N_\ell-1)]\le2\E[\sum_{m\ge\ell+2}mN_m]\le2n$.  Hence
+$n\E[\ell N_\ell]=\E[\ell N_\ell(n-\ell N_\ell)]+\E[\ell^2N_\ell(N_\ell-1)]+\ell\E[\ell N_\ell]
+\le2n+\ell\E[\ell N_\ell]$.
+
+(ii) Count the instances $(L,(C_1,j_1),\dots,(C_k,j_k))$: $C_i$
+pairwise distinct $\sigma$-cycles of $L$ of lengths $\ell_i$ and
+$j_i\in C_i$; there are $\ell_1\cdots\ell_k$ of them per ordered
+$k$-tuple of distinct cycles with these lengths.  Join $C_1$ and $C_2$
+at the pair $\{j_1,j_2\}$ by a joining step: flip if the pair is an
+$A$-pair; if it is a $B$-pair, first trade the row cycle $C_2$ of $j_2$
+(a switch in the sense of Lemma~\ref{lem:switchtoggle}, whose proof
+applies to the row cycle through either column of the pair; it inverts
+$C_2$ in place and does not touch the cycle of $j_1$), then flip.  The
+flip replaces $\sigma$ by $\sigma\circ(j_1\,j_2)$ on rows $1,2$, so
+the result has $j_1,j_2$ on one cycle of length $\ell_1+\ell_2$ with
+$j_2=\sigma'^{\ell_2}(j_1)$ whether or not the trade was applied
+(CGW Lemma~3.3), every other cycle of $\sigma$ (in particular
+$C_3,\dots,C_k$) untouched, and the map is at most two-to-one (the
+backflip at $\{j_1,j_2\}$ returns $L$ or the traded square).  Repeat
+with $\{j_1,j_3\}$, \dots, $\{j_1,j_k\}$, always trading the cycle of
+the new column when needed, so that the cycle containing $j_1$ is never
+inverted: after step $i$ every earlier $j_r$ is shifted by exactly
+$\ell_{i+1}$.  After $k-1$ steps all $j_i$ lie on one cycle of length
+$m=\sum\ell_i$ at the positions $j_i=\sigma'^{\ell_i+\cdots+\ell_k}(j_1)$,
+determined by $j_1$ and $(\ell_1,\dots,\ell_k)$, and the composite is at
+most $2^{k-1}$-to-one.  (With CGW's min-symbol rule the trade may
+invert the merged cycle and the positions are not determined; the
+count would then be $2^{2k-3}$-to-one.)  Hence the number of instances with lengths
+$(\ell_i)$ is at most $2^{k-1}\sum_{L'}mN_m(L')$, i.e.\
+$\E[\ell_1\cdots\ell_k\,T(\ell_1,\dots,\ell_k)]\le2^{k-1}\E[mN_m]$ with
+$T$ the number of ordered $k$-tuples of distinct cycles with these
+lengths; summing over $(\ell_i)$ gives the first bound, since
+$\sum_{(\ell_i)}T=(\kappa)_k$.  For the second, split at $m\le n/2$,
+where $\E[mN_m]\le4$ by (i) and
+$\sum_{m\le n/2}\sum_{\sum\ell_i=m}\prod\ell_i^{-1}\le(\sum_{\ell\le n/2}\ell^{-1})^k\le(\log n)^k$,
+and $m>n/2$, where some $\ell_i\ge m/k$, so
+$\sum_{\sum\ell_i=m}\prod\ell_i^{-1}\le k\cdot(k/m)(\log n)^{k-1}$, and
+$\sum_{m>n/2}mN_m\cdot k^2(\log n)^{k-1}/m\le k^2(\log n)^{k-1}$ because at
+most one cycle is longer than $n/2$.
+
+(iii) Markov for $(\kappa)_k$ with $k=\lceil\log n\rceil\le\log n+1$:
+on $\{\kappa\ge K\}$, $(\kappa)_k\ge(K-k+1)^k\ge((A-1)\log n)^k$ for
+$K=A\log n$, and $k^2/\log n\le\log n+3$, so
+$\Pr[\kappa\ge K]\le2^{k-1}(4+k^2/\log n)(\log n)^k/((A-1)\log n)^k
+\le(7+\log n)(2/(A-1))^{k}\le(7+\log n)(2/(A-1))^{\log n}$ for $A\ge3$,
+and $(A-1)/2\ge e^2$ for $A\ge16$.  For the equal-length types,
+$\ell\mid n$ and $\ell<n$ force $\ell\le n/2$, so
+$\Pr[N_\ell=n/\ell]\le\E[N_\ell]\ell/n\le4/n$; $\ell=n$ is the $n$-cycle.
+\end{proof}
+
+\begin{theorem}\label{thm:reduction}
+Assume $\mathrm{EQ}(\delta)$ with $\delta=\delta(n)\to0$.
+Then
+\[
+\dtv(\PP_n,\QQ_n)\;=\;O\bigl(\delta\,\log n\;+\;n^{-2/3}\bigr).
+\]
+In particular $\mathrm{EQ}(o(1/\log n))$ implies
+Conjecture~\ref{conj:cgw}.
+\end{theorem}
+
+\begin{proof}
+Call $\lambda$ \emph{plain} if not all its parts are equal (so the only
+non-plain types are $(\ell^{\kappa})$, $\kappa\ge2$).
+
+\emph{Routing.}  Every plain $\lambda$ with $\kappa=\kappa(\lambda)$ parts is
+reachable from $(n)$ by a chain of $\kappa-1$ splits, each with
+$\alpha\ne\beta$.  Build the chain in reverse, splitting parts of $\lambda$
+off a shrinking residual, in a suitable order; a collision means splitting a
+part $p$ off a residual $R$ with $p=R-p$.  If the two largest parts of
+$\lambda$ are unequal, split smallest-first and let them be the final pair:
+while at least three parts remain, the split-off minimum $p$ satisfies
+$R-p\ge2p>p$ (all parts are $\ge2$ and at least two other parts remain), so
+no collision occurs, and the final split is unequal by hypothesis.  If
+instead the two largest parts are equal, say to $\ell_{\max}$, then
+$\ell_{\max}\neq n/2$ (else $\lambda=(n/2,n/2)$ is not plain), so we may
+split one copy of $\ell_{\max}$ off first without collision, then proceed
+smallest-first among the remaining parts, reserving for the final split the
+pair $(b,\ell_{\max})$ where $b<\ell_{\max}$ is the smallest part: at every
+intermediate step the residual minus the split-off minimum still contains
+the reserved $\ell_{\max}$ and the reserved $b$, hence exceeds the
+minimum (also when a further copy of $\ell_{\max}$ is the split-off
+minimum: $R-p\ge\ell_{\max}+b>p$), and the final split is unequal.
+
+For each step of such a chain, Theorem~\ref{thm:marked} and
+$\mathrm{EQ}(\delta)$ give
+$|S(p_{i+1})|/|S(p_i)|=(\gamma(p_{i+1})/\gamma(p_i))(1+\varepsilon_i)$ with
+$|\varepsilon_i|\le\delta$.  Multiplying along the chain,
+\[
+\frac{\PP_n(\lambda)}{\PP_n((n))}
+=\frac{\gamma(\lambda)}{\gamma((n))}\,(1+\varepsilon)^{\pm(\kappa-1)},
+\qquad |\varepsilon|\le\delta,
+\]
+so for all plain $\lambda$ with $\kappa(\lambda)\le K$,
+$\PP_n(\lambda)=\QQ_n(\lambda)\,Z^{-1}(1+O(K\delta))$ where $Z>0$ is a
+normalising constant independent of $\lambda$ (namely
+$D_n\CC_n((n))/\sum\gamma\CC$).
+
+Let $K=\lceil A\log n\rceil$ with $A$ a large absolute constant, and let
+$\mathcal B$ be the set of types that are either non-plain or have
+$\kappa>K$.  Under $\QQ_n$, Markov's inequality with the generating function
+$\sum_{\pi\in\DD_n}2^{\kappa(\pi)}=n!\,[x^n]e^{-2x}(1-x)^{-2}\le n\cdot n!$
+(cf.\ \cite[proof of Lemma~4.4]{CGW08}) gives
+$\QQ_n(\kappa>K)\le e\,n\,2^{-K}=O(n^{-2})$ for $A\log2\ge3$; also
+$\QQ_n(\text{non-plain})\le\sum_{\ell\mid n,\ \ell<n}
+\gamma((\ell^{n/\ell}))/D_n=O(n^{-1})$.  Under $\PP_n$, Proposition~\ref{prop:tailsurvive} gives
+$\PP_n(\kappa>K)=O(n^{-2}\log n)$ for $A\ge16$ and
+$\PP_n(\text{non-plain})=O(n^{-1+o(1)})$ without any input from
+\cite{CGW08} beyond the identity of Theorem~\ref{thm:marked}; the
+original argument, kept for the record, used the unconditional
+CGW bound \cite[Cor.~4.5]{CGW08} (whose proof relies on the $3/2$
+direction of their Lemma~3.12, see Remark~\ref{rem:gap}),
+$\PP_n(\lambda)\le n^{1/3}(\gamma(\lambda)/n!)\,2^{\kappa(\lambda)}$,
+combined with
+$\sum_{\pi\in\DD_n}4^{\kappa(\pi)}=n!\,[x^n]e^{-4x}(1-x)^{-4}
+\le \binom{n+3}{3}\,n!$, gives
+\[
+\PP_n(\kappa>K)\;\le\;n^{1/3}\,2^{-K}\sum_\lambda
+\frac{\gamma(\lambda)}{n!}\,4^{\kappa(\lambda)}
+\;=\;O\bigl(n^{10/3}2^{-K}\bigr)\;=\;O(n^{-2/3})
+\]
+for $A\log2\ge4$, and similarly
+$\PP_n(\text{non-plain})\le n^{1/3}\sum_{k\ge2,\ k\mid n}
+4^{k}/(k!\,(n/k)^{k})=O(n^{-5/3})$.
+
+On the complement of $\mathcal B$, summing
+$\PP_n=\QQ_n Z^{-1}(1+O(K\delta))$ over $\lambda\notin\mathcal B$ and using
+the tail bounds shows $Z^{-1}=1+O(K\delta)+O(n^{-2/3})$, whence
+$\sum_{\lambda\notin\mathcal B}|\PP_n-\QQ_n|=O(K\delta)+O(n^{-2/3})$.
+Combining with the tails,
+$\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-2/3})$ (with
+Proposition~\ref{prop:tailsurvive} in place of \cite[Cor.~4.5]{CGW08}
+the error term becomes $O(\delta\log n+n^{-1+o(1)})$).
+\end{proof}
+
+\begin{remark}[the gap in CGW's Lemma 3.12]\label{rem:gap}
+In \cite{CGW08}, the direction $|S(\lambda,F)|N_\lambda\ge\tfrac12|S(\mu,F)|N_\mu$ of
+Lemma~3.12 uses only that each splitting pair carries at most two edges and each joining
+pair at least one; by Theorem~\ref{thm:marked} it is the trivial inequality $|X|\ge|X_A|$.
+The direction $\le\tfrac32$ requires every splitting pair of every $\lambda$-square to carry
+exactly two edges, and case~3 of the splitting procedure fails to supply them when
+$\min(\alpha,\beta)\ge3$ \cite{gapnote}.  Consequently the upper bound of CGW's Theorem~3.13,
+the lower bound of their Lemma~4.1, the parity bounds of Theorem~4.3, the bound
+$\Pr[\sigma\text{ is an $n$-cycle}]\le2n^{-2/3}$ of Lemma~4.4 and Corollary~4.5 are not
+established by the published argument.  The present paper uses none of them:
+Proposition~\ref{prop:tailsurvive} replaces Corollary~4.5 in the proof of
+Theorem~\ref{thm:reduction}.  The exact completion counts tabulated in \cite{CGW08} give
+$\CC_n(\lambda)/\CC_n(\mu)$ within $0.4\%$ of $1$ for every adjacent pair at $7\le n\le11$,
+so the statement itself is not in doubt.
+\end{remark}
+
+\section{The ladder identity}\label{sec:ladder}
+
+Notation:
+$(L,P)\in X=X(n,\lambda;\alpha,\beta)$, $P=\{j,j'\}$, frame
+$\pi=\pi_P$ ($L(\pi(r),j')=L(r,j)$), $C_r$ the $\pi$-cycle of row $r$,
+$\rho_{x,y}$ the column permutation of rows $x,y$
+($L(y,\rho_{x,y}(q))=L(x,q)$), $(x,y)$ \emph{flippable} iff $j,j'$ lie
+in different cycles of $\rho_{x,y}$, and the \emph{$j'$-trade} at
+$(x,y)$ exchanges rows $x,y$ on the $\rho_{x,y}$-cycle through $j'$,
+which replaces $\pi$ by $(x\,y)\circ\pi$ if $(x,y)$ is flippable and by
+$(x\,y)\circ\pi\circ(x\,y)$ otherwise.  $B=\{1\sim2\}$ (rows $1,2$ in a
+common frame cycle), $A$ its complement, $\mathbf 1_B$ the bit; for $B$-instances $d_{12}$ and
+$d_{21}$ are the numbers of $\pi$-steps from $1$ to $2$ and from $2$ to
+$1$.
+
+\begin{definition}[ladder]\label{def:ladder}
+Put $K_0=\min(|C_1|,|C_2|)$ on $A$ and $K_0=\min(d_{12},d_{21})$ on
+$B$, and for $1\le k<K_0$ let
+\[
+x_k=\pi^{-k}(1),\qquad y_k=\pi^{-k}(2),\qquad
+T_k=\text{the $j'$-trade at }(x_k,y_k).
+\]
+The pairs $\{x_k,y_k\}$ are the \emph{ladder} of $(L,P)$, and
+$\mathrm{Flip}(L,P)=\{k<K_0:(x_k,y_k)\text{ flippable}\}$.
+\end{definition}
+
+The rows $x_1,\dots,x_{K_0-1}$ are distinct rows of $C_1\setminus\{1\}$
+(on $A$) or of the arc from $2$ to $1$ (on $B$), the $y_k$ likewise in
+$C_2\setminus\{2\}$ or the arc from $1$ to $2$; so the $2(K_0-1)$
+ladder rows are distinct and avoid rows $1,2$, and $K_0\ge2$: on $A$
+because $\pi$ is a derangement, on $B$ by the admissibility of the mark
+($\pi(1)\ne2$, $\pi(2)\ne1$).
+
+\begin{theorem}[ladder identity]\label{thm:ladder}
+For every $n$, $\lambda$ and split $\alpha+\beta=m$ with
+$\alpha,\beta\ge2$,
+\[
+\Pr_X[B]-\Pr_X[A]\;=\;\Pr_X\bigl[B,\ \mathrm{Flip}=\emptyset\bigr]
+-\Pr_X\bigl[A,\ \mathrm{Flip}=\emptyset\bigr],
+\qquad\text{hence}\qquad
+\bigl|\Pr_X[B]-\tfrac12\bigr|\;\le\;\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
+\]
+The same identity holds with $X$ replaced by $S(R)\times\{P\}$ for any
+fixed admissible pair of first rows $R$ and mark $P$.
+\end{theorem}
+
+\begin{proof}
+Fix $(L,P)\in X$ and write $K=\{1,\dots,K_0-1\}$.  The ladder depends
+on $(L,P)$, so the $T_k$ are not maps of $X$; the statement to prove is
+that $(L,P)\sim T_S(L,P)$, $S\subseteq K$ (the trades at the
+unordered pairs of $S$, in any order), is an equivalence relation on
+$X$ whose classes have exactly $2^{|K|}$ elements and on which the bit
+is $\mathbf 1_B(T_S(L,P))=\mathbf 1_B(L,P)+|S\cap\mathrm{Flip}|\bmod2$.
+This follows once we know that each $T_k$ is an involution of $X$
+which preserves $K_0$, the set of unordered ladder pairs and the
+flippability of each of them, that $T_k$ toggles the bit exactly when
+$k\in\mathrm{Flip}$, and that trades at disjoint row pairs commute:
+then the same trades, at the same unordered pairs with the same
+flippabilities, are available from every point of a class (symmetry
+and transitivity), the $2^{|K|}$ points $T_S(L,P)$ are distinct
+(rows $x_k,y_k$ are changed by $T_k$ and by no other $T_i$), and the
+bit formula holds.  If $\mathrm{Flip}\ne\emptyset$ exactly half of the
+subsets $S$ have $|S\cap\mathrm{Flip}|$ odd, so $B$ and $A$ each
+contain half of the class; summing over classes gives the identity,
+and the bound follows from $\Pr[B]+\Pr[A]=1$.
+
+\emph{$T_k$ is a well-defined involution of $X$.}  The $j'$-trade at
+$(x_k,y_k)$ changes only rows $x_k,y_k\notin\{1,2\}$, so $\sigma$ and
+the mark are untouched and $(L,P)$ stays in $X$; it is an involution
+because the traded columns are again the $\rho'_{x_k,y_k}$-cycle
+through $j'$.
+
+\emph{Effect on the frame.}  If $k\in\mathrm{Flip}$ the new frame is
+$\pi'=(x_k\,y_k)\circ\pi$.  On $A$ this merges $C_1$ and $C_2$: the
+new cycle runs $1\to\pi(1)\to\dots\to x_{k+1}\to y_k\to\pi(y_k)\to\dots
+\to2\to\dots\to y_{k+1}\to x_k\to\dots\to1$, so $d'_{12}=|C_1|$ and
+$d'_{21}=|C_2|$ (reading $x_{|C_1|}=1$, $y_{|C_2|}=2$).  On $B$,
+$x_k$ lies on the arc from $2$ to $1$ and $y_k$ on the arc from $1$ to
+$2$ (as $k<\min(d_{12},d_{21})$), and the split into
+$(x_k,\pi(x_k),\dots,\pi^{-1}(y_k))$ and $(y_k,\dots,\pi^{-1}(x_k))$
+puts $1$ ($k$ steps after $x_k$, fewer than the $d_{12}$ steps from
+$x_k$ to $y_k$) in the first cycle and $2$ in the second: the new
+state is in $A$ with $|C'_1|=d_{12}$, $|C'_2|=d_{21}$.  In both cases
+$K_0$ is preserved and the bit toggles.  If $k\notin\mathrm{Flip}$ the
+new frame is $(x_k\,y_k)\circ\pi\circ(x_k\,y_k)$: the cycle partition
+is unchanged up to exchanging the labels $x_k,y_k$, so $K_0$ and the
+bit are preserved.
+
+\emph{The ladder is preserved.}  Let $\pi'=(x_k\,y_k)\circ\pi$ (the
+conjugation case is similar and easier).  Since
+$\pi'^{-1}(r)=\pi^{-1}((x_k\,y_k)(r))$, the preimage chains of $1$ and
+$2$ under $\pi'$ agree with those under $\pi$ up to depth $k$ and are
+exchanged beyond it: $\pi'^{-i}(1)=x_i$ and $\pi'^{-i}(2)=y_i$ for
+$i\le k$, while $\pi'^{-(k+1)}(1)=\pi^{-1}(y_k)=y_{k+1}$ and then
+$\pi'^{-i}(1)=y_i$, $\pi'^{-i}(2)=x_i$ for $k<i<K_0$.  So the unordered
+pairs $\{x_i,y_i\}$, $i\in K$, are the ladder of $T_k(L,P)$.  In the
+conjugation case the same computation with $(x_k\,y_k)\circ\pi\circ(x_k\,y_k)$
+gives $\pi'^{-i}(1)=(x_k\,y_k)(x_i)$, which again permutes the pairs
+$\{x_i,y_i\}$ among themselves (only $i=k$ is affected, by exchanging
+$x_k,y_k$).
+
+\emph{Flippability is preserved and the $T_k$ commute.}  $T_k$ changes
+rows $x_k,y_k$ only, and the flippability of $(x_i,y_i)$, $i\ne k$,
+depends only on rows $x_i,y_i$, which are different rows.  Likewise
+$T_i$ and $T_k$ act on disjoint pairs of rows, each along a column set
+determined by its own two rows, so $T_iT_k=T_kT_i$.  (After $T_k$ the
+pair $\{x_i,y_i\}$ may have changed its index, but the trade at an
+unordered pair does not depend on the index or on the order of the
+two rows.)
+
+The statement for fixed $R$ holds because every $T_k$ fixes rows $1$
+and $2$.
+\end{proof}
+
+\begin{corollary}[the conjecture reduces to the ladder]\label{cor:ladder}
+Write $f(n,\lambda;\alpha,\beta)=\Pr_X[\mathrm{Flip}=\emptyset]$.  By
+Theorem~\ref{thm:marked}, $\bar q(\mu\to\lambda)-1=(\Pr_X[B]-\Pr_X[A])/\Pr_X[A]$
+and $\Pr_X[A]\ge(1-f)/2$, so $|\bar q-1|\le2f/(1-f)$: $\mathrm{EQ}(\delta)$
+holds with $\delta(n)=\max_{\lambda,\alpha\ne\beta}2f/(1-f)$.  If this
+$\delta(n)\to0$, Theorem~\ref{thm:reduction} gives
+\[
+\dtv(\PP_n,\QQ_n)=O\Bigl(\log n\cdot\max_{\lambda,\alpha\ne\beta}
+f(n,\lambda;\alpha,\beta)+n^{-2/3}\Bigr).
+\]
+In particular the weak CGW conjecture follows from
+\begin{equation}\label{eq:L}
+\textup{(L)}\qquad \Pr_X\bigl[\text{no ladder pair is flippable}\bigr]=o(1/\log n)
+\quad\text{uniformly in }\lambda,\alpha,\beta .
+\end{equation}
+\end{corollary}
+
+
+\begin{remark}[data]\label{rem:ladderdata}
+On Jacobson--Matthews samples with a uniformly random mark ($9000$, $7200$, $3600$ ladder-pair
+instances at $n=30,50,100$): $\Pr[\mathrm{Flip}=\emptyset\mid K_0]=2^{-(K_0-1)}$ within
+statistical error for every $K_0$; $\Pr[\mathrm{Flip}=\emptyset]=0.125,0.079,0.041\approx4/n$;
+the ladder pairs are flippable with frequency $0.5002$ ($62082$ pairs at $n=50$); and
+$\Pr[B]-\Pr[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$.
+\end{remark}
+
+\subsection{Offset ladders and short arcs}\label{sec:offsets}
+
+
+The ladder is one of a family.  For an integer $c$ (an \emph{offset}) put
+\[
+K_c=\begin{cases}\min(|C_1|-c,\ |C_2|)&\text{on }A,\\
+\min(d_{21}-c,\ d_{12})&\text{on }B,\end{cases}
+\qquad
+D_c=\bigl\{(x_{c+i},\,y_i)=(\pi^{-(c+i)}(1),\pi^{-i}(2)):\ 1\le i<K_c\bigr\},
+\]
+so $D_0$ is the ladder and for $c>0$ the $x$-row is $c$ steps deeper
+than the $y$-row ($x$-depths $c+1,\dots,c+K_c-1$ stay inside
+$C_1\setminus\{1\}$, resp.\ the arc from $2$ to $1$; $y$-depths
+$1,\dots,K_c-1$ inside $C_2\setminus\{2\}$, resp.\ the arc from $1$ to
+$2$).  We take $c\ge0$; the families with the $y$-row deeper are
+obtained by exchanging the roles of rows $1$ and $2$ (and of
+$C_1,C_2$, $d_{12},d_{21}$) throughout.
+
+\begin{theorem}[offset ladders]\label{thm:ladderoffset}
+For every offset $c\ge0$, on the domain $\mathcal D_c=\{K_c\ge2\}$
+(where $D_c\ne\emptyset$) the $j'$-trades at the pairs of $D_c$ are commuting
+involutions that preserve $K_c$, the unordered pairs of $D_c$ and their
+flippabilities, and toggle the bit iff the traded pair is flippable.
+Hence, with $\mathrm{Flip}_c$ the set of flippable pairs of $D_c$,
+\[
+\Pr[B,\mathcal D_c]-\Pr[A,\mathcal D_c]
+=\Pr[B,\mathcal D_c,\mathrm{Flip}_c=\emptyset]-\Pr[A,\mathcal D_c,\mathrm{Flip}_c=\emptyset].
+\]
+\end{theorem}
+
+\begin{proof}
+Identical to Theorem~\ref{thm:ladder}; only the bookkeeping changes.
+Let $\pi'=(x_{c+i}\,y_i)\circ\pi$.  The preimage chain of $1$ under
+$\pi'$ agrees with that of $\pi$ up to depth $c+i$ and then continues
+along the chain of $2$: $\pi'^{-(c+i+t)}(1)=y_{i+t}$; symmetrically
+$\pi'^{-(i+t)}(2)=x_{c+i+t}$ ($t\ge1$).  So the pair of $D_c$ at
+$y$-depth $i'>i$ is $\{y_{i'},x_{c+i'}\}$, unchanged as a set, and the
+pairs at depth $i'<i$ are untouched: $D_c$ is preserved.  (The same
+computation shows that trading a pair at depths $(k,k')$ sends a
+deeper pair at depths $(K,K')$ to depths $(K'+k-k',\,K-k+k')$, whose
+offset is $2(k-k')-(K-K')$; it is preserved iff $K-K'=k-k'$, so only
+families of constant offset, i.e.\ the $D_c$, are preserved.)  On $A$
+the trade merges $C_1,C_2$ into a cycle with
+$d'_{12}=|C_1|-(c+i)+i=|C_1|-c$ and $d'_{21}=|C_2|+c$, so
+$K'_c=\min(d'_{21}-c,d'_{12})=\min(|C_2|,|C_1|-c)=K_c$; on $B$ the pair
+separates rows $1,2$ ($c+i<d_{21}$ puts $x_{c+i}$ on the arc from $2$
+to $1$, $i<d_{12}$ puts $y_i$ on the arc from $1$ to $2$) and gives
+$|C'_1|=d_{12}+c$, $|C'_2|=d_{21}-c$, again
+$K'_c=\min(d_{12},d_{21}-c)=K_c$.  No pair of $D_c$ is frame-adjacent:
+$y_i=\pi(x_{c+i})$ would need $d_{21}=c-1$ (or $\pi(1)=2$ when $c=0$)
+and $x_{c+i}=\pi(y_i)$ would need $d_{21}=c+1$, both excluded on
+$\mathcal D_c$.  Commutation,
+preservation of flippability and the orbit count are as before.
+\end{proof}
+
+Exact enumeration at $n=7$ ($\lambda=(7)$, $\{\alpha,\beta\}=\{2,5\}$)
+confirms the identities for $c=0,1,2,3$ to all digits
+($\Pr[B,\mathcal D_c]-\Pr[A,\mathcal D_c]=-0.005848,\ +0.001462,\
++0.003509,\ -0.001316$, equal to the right-hand sides).
+
+\paragraph{Using the offsets to price short arcs.}  Fix $\ell\ge2$ and
+consider $B$-instances with $d_{12}=\ell$.  For $0\le c\le n/2-\ell$
+and $d_{21}\ge c+\ell$ one has $K_c=\ell$, so $D_c$ has $\ell-1$ pairs,
+and the offset-$c$ trade at a flippable pair of $D_c$ lands in $A$
+with $|C_1|=\ell+c\le n/2$ and $|C_2|=d_{21}-c\ge\ell$.  Within a
+class of $\mathcal D_c$ all $B$-members have the same $(d_{12},d_{21})$
+and all $A$-members the same $(|C_1|,|C_2|)=(d_{12}+c,d_{21}-c)$, and
+$\mathrm{Flip}_c$ is a class invariant, so Theorem~\ref{thm:ladderoffset}
+class by class and Proposition~\ref{prop:trapped} give
+\begin{equation}\label{eq:offsetprice}
+\Pr\bigl[B,\ d_{12}=\ell,\ d_{21}\ge c+\ell,\ \mathrm{Flip}_c\ne\emptyset\bigr]
+=\Pr\bigl[A,\ |C_1|=\ell+c,\ |C_2|\ge\ell,\ \mathrm{Flip}_c\ne\emptyset\bigr]
+\le\frac{18}{n-\ell-c-1}\le\frac{36}{n-2}.
+\end{equation}
+Averaging over $c$: if $\theta(L,P)$ denotes the fraction of offsets
+$c\in[0,n/2-\ell]$ whose diagonal $D_c$ contains a flippable pair,
+then for every $\theta_0>0$
+\begin{equation}\label{eq:offsetavg}
+\Pr\bigl[B,\ d_{12}=\ell,\ |C_1|\ge n/2+\ell,\ \theta\ge\theta_0\bigr]\le\frac{36}{(n-2)\,\theta_0},
+\end{equation}
+since on $|C_1|\ge n/2+\ell$ one has $d_{21}=|C_1|-\ell\ge n/2\ge c+\ell$
+for every such $c$, so $\E[\theta\,\mathbf 1_E]$ is the average over
+$c$ of the left side of \eqref{eq:offsetprice}, and Markov's
+inequality applies.  Together with the splice-in bound
+$\Pr[B,d_{12}=\ell,|C_1|<n/2+\ell]\le4/(n-2\ell+1)\le8/n$ for
+$\ell\le n/4$ (a splice-in switching with $n-|C_1|>n/2-\ell$ free rows, Remark~\ref{rem:splice}), this prices every short arc except on
+the event $\{\theta<\theta_0\}$.
+
+
+\begin{remark}[the splice-in bound]\label{rem:splice}
+The bound $\Pr[B,d_{12}=\ell,|C_1|<n/2+\ell]\le4/(n-2\ell+1)$ is the $B$-state version of
+the following switching, which we state and prove for the cycle of row $1$.
+\end{remark}
+
+\begin{proposition}[short frame cycles through a marked row are rare]
+\label{prop:trapped}
+For $(L,P)$ uniform on $X$ and every $2\le\ell\le n/2$,
+\[
+\Pr\bigl[|C_1|=\ell\bigr]\;\le\;\frac{18}{n-\ell-1},
+\qquad\text{hence}\qquad
+\Pr\bigl[|C_1|\le \ell\bigr]\;\le\;\frac{36\,\ell}{n}\quad(\ell\le n/2-1),
+\]
+and the same bounds hold for $C_2$.
+\end{proposition}
+
+\begin{proof}
+Let $E_\ell=\{(L,P)\in X:\ |C_1|=\ell\}$.  (The case $C_1=\{1,2\}$
+cannot occur: it would mean $\sigma(j)=j'$ and $\sigma(j')=j$, but
+$j'=\sigma^\alpha(j)$ lies in an $m$-cycle with $m\ge4$.)
+
+\emph{Forward moves.}  From $(L,P)\in E_\ell$ choose $y\in C_1\setminus\{1,2\}$
+and $x\notin C_1\cup\{2\}$: at least $(\ell-2)(n-\ell-1)$ pairs
+($(\ell-1)(n-\ell-1)$ if $2\notin C_1$; for $\ell=2$ this is $n-3$).
+If $(x,y)$ is flippable, trade $Q_{x,y}$; otherwise turn $C_1$ (which
+makes $(x,y)$ flippable, as $y\in C_1\not\ni x$) and then trade
+$Q_{x,y}$ in the turned square.  In both cases the resulting frame is
+$(x\,y)\circ\pi^\pm$ with $\pi^\pm$ equal to $\pi$ or to $\pi$
+inverted on $C_1$, so the cycle of row $1$ becomes $C_1\cup C_x$, of
+length $\ell+|C_x|>\ell$; rows $1,2$ are untouched by the trade, and
+the result is in $X$ (no turn, or $2\in C_1$) or in $J$ (turn with
+$2\notin C_1$).
+
+\emph{Backward moves.}  A square $(L',P)\in X\cup J$ is reached from
+$(L,P)\in E_\ell$ by the move at $(x,y)$ only if $x,y$ lie in the cycle
+$C'_1$ of row $1$ in $L'$, and undoing the trade (the same trade, since
+$\rho'_{x,y}=\rho_{x,y}^{-1}$ on $Q_{x,y}$) splits $C'_1$ into the arcs
+$\{\pi'(y),\dots,x\}$ and $\{\pi'(x),\dots,y\}$, of which the one
+containing row $1$ must have length exactly $\ell$: given $L'$, that
+arc is determined by its position relative to row $1$ ($\ell$
+choices), and the arc determines $\{x,y\}$.  With the binary choice
+``turn back or not'' this gives at most $2\ell$ preimages per $(L',P)$.
+
+\emph{Counting.}  The map $((L,P),\text{move})\mapsto((L',P),\text{inverse move})$
+is injective, so
+$|E_\ell|\,(\ell-2)(n-\ell-1)\le2\ell\,(|X|+|J|)\le6\ell\,|X|$, using
+$|J|=2|X_A|\le2|X|$ (Theorem~\ref{thm:marked}).  For $\ell\ge3$ this
+is the claim; for $\ell=2$ the forward count is $n-3$ and the backward
+count $4$, giving $12/(n-3)$.  The bound for $C_2$ is proved by the
+same argument with the roles of rows $1$ and $2$ exchanged: a turn of
+$C_2\not\ni1$ replaces $\sigma$ by $(\sigma(j)\,\sigma(j'))\circ\sigma$,
+which also splits the $m$-cycle into lengths $\alpha,\beta$ and lands
+in $J$.
+\end{proof}
+
+\section{The orbit method}\label{sec:orbit}
+
+Throughout this section $X=X(n,\lambda;\alpha,\beta)$, and ``legal'' means: preserves the
+type of rows $1,2$ and the mark, i.e.\ maps $X$ to itself.
+
+\paragraph{(a) Transposition: which half of the conditioning is the
+obstacle.}  Let $L$ be uniform on \emph{all} Latin squares of order
+$n$ (no condition on rows $1,2$ in this paragraph), let $x,y$ carry
+four distinct symbols on $\{p,p'\}$, and condition on the two full
+columns $p,p'$ (the frame $\pi$ of $(p,p')$).  In the transposed square $L^{\mathsf T}$ the
+columns $p,p'$ are the distinguished rows, the frame $\pi$ is their
+column permutation, and the event ``$p,p'$ lie in different cycles of
+$\rho_{x,y}$'' is the event ``$\{x,y\}$ is an $A$-pair for the
+distinguished rows''.  Conditioning on the two full rows $p,p'$ of
+$L^{\mathsf T}$ is conditioning on their type and on the position of
+the pair $\{x,y\}$ in their cycle structure, which is free by symbol
+and column relabelling.  Hence, by Lemma~\ref{lem:switchtoggle}
+($|J_A|=|J_B|$, which needs no condition on the cycle lengths) and
+CGW's Theorem~3.13 (the inequality $\Pr_X[A]\ge\tfrac13$, whose published proof has a gap for $\min(\alpha,\beta)\ge3$, Remark~\ref{rem:gap}):
+\begin{equation}\label{eq:CPcols}
+\Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
+\;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
+\ge\tfrac13\ \text{ if together at distances $\ge2$ (the latter under CGW($3/2$))}.
+\end{equation}
+So (CP) with the \emph{columns} prescribed is CGW's theorem; it is the
+conditioning on rows $1,2$ --- on their type and the mark, which is
+what defines $X$ and cannot be removed --- that is the path version.
+In the same transposed picture the ladder trades $T_k$ of
+Theorem~\ref{thm:ladder} at flippable pairs are CGW's flips and
+backflips at the column pairs $\{x_k,y_k\}$ of $L^{\mathsf T}$, and
+Theorem~\ref{thm:ladder} is exactly the legal half of CGW's
+Lemma~3.12 for the distinguished rows $p,p'$: the other half --- the
+switch and the cross-switch at $\{x_k,y_k\}$ --- trades the columns
+$p,p'$ of $L$ along a frame cycle or frame arc through exactly one of
+rows $1,2$ (apart: $C_1\ni1$, $C_1\not\ni2$; together: the arc from
+$x_k$ to $y_k$ contains $1$ but not $2$, the other arc $2$ but not
+$1$), so it changes the type of rows $1,2$ and leaves $X$.  The switch
+is, in the original orientation, the unflip of rows $1,2$ at $(p,p')$
+(which maps $X_A\to J_A$); it toggles the crossed/parallel status of
+\emph{every} pair $(x,y)$ with $x$ on the side of row $1$ and $y$ on
+the side of row $2$, and reverses the orientation of one side, so it
+carries the ladder (a diagonal of the side-by-side array of pairs) to
+a different family (an anti-diagonal).  The cross-switch likewise maps
+$X_B$ to $J_B$ (it splits the $\sigma$-cycle through $p,p'$ while
+keeping rows $1,2$ in one frame cycle, CGW Lemma~3.10) and toggles
+the interior pairs.  Both are exact but not usable for the ladder bits
+in $X$.
+
+
+\paragraph{(b) Row trades are free in $X$; column turns are
+conditionally free.}  For rows $z,w\notin\{1,2\}$ every trade of rows
+$z,w$ along a $\rho_{z,w}$-cycle or $\rho_{z,w}$-arc changes rows
+$z,w$ only, hence is legal in $X$.  In particular:
+
+\begin{lemma}[exact fairness of column-pair status for generic rows]
+\label{lem:rowfair}
+Let $x,y\notin\{1,2\}$ and let $(q,c)$ be a column pair lying in two
+different cycles of $\rho_{x,y}$.  The CGW switch at $(q,c)$ for the
+rows $x,y$ (trade of rows $x,y$ along the one of the two cycles that
+contains the smaller minimum symbol) is a legal involution of $X$
+that toggles whether $x,y$ lie in one column cycle of $(q,c)$, and
+preserves the cycle partition of $\rho_{x,y}$ and the separation
+status of every column pair with respect to $\{p,p'\}$.  Hence,
+conditionally on everything determined by the other rows and by the
+cycle partition of $\rho_{x,y}$,
+\[
+\Pr_X\bigl[x,y\text{ in different column cycles of }(q,c)\bigr]=\tfrac12 .
+\]
+\end{lemma}
+
+\begin{proof}
+As in Lemma~\ref{lem:switchtoggle} with $(1,2)$ replaced by $(x,y)$:
+the trade swaps the entries of rows $x,y$ on the columns of the chosen
+cycle $Q\ni q$, $Q\not\ni c$, so $\delta_{q,c}\mapsto\delta_{q,c}\circ(x\,y)$,
+which splits or joins the column cycles through $x,y$.  It inverts $Q$
+in place, so the symbol sets of the two cycles are unchanged and the
+min-symbol rule re-selects $Q$: an involution.  Rows $1,2$ are
+untouched, so type and mark are preserved.  Inverting $Q$ exchanges the
+two arcs between $p$ and $p'$ when $Q\ni p,p'$, so separation of any
+pair by $\{p,p'\}$ is preserved.  (If $Q$ contains $p$ or $p'$ the
+frame changes at rows $x,y$; so frame-determined data are part of the
+conditioning only when $Q$ avoids $p,p'$.)
+\end{proof}
+
+A column turn, by contrast, changes the rows of a column cycle.  Let
+$(q,c)$ be a free column pair and $Z$ one of its column cycles.
+
+\begin{lemma}[legal column turns]\label{lem:legalturn}
+The turn of $Z$ (swapping the entries of columns $q,c$ in the rows of
+$Z$) is a measure-preserving involution of $X$ if and only if
+$|Z\cap\{1,2\}|\in\{0,2\}$; when $|Z\cap\{1,2\}|=2$ it conjugates
+$\sigma$ by $(q\,c)$ and keeps the type and the mark.  It preserves the
+columns $p,p'$ (hence the frame and every frame-determined family of
+row pairs) and the column-cycle partition of $(q,c)$ and of every
+column pair disjoint from $\{q,c\}$ (in particular of every pair of
+a matching containing $(q,c)$).
+For a row pair $(x,y)$ with $|Z\cap\{x,y\}|=1$ it replaces
+$\rho_{x,y}$ by $\rho_{x,y}\circ(q\,c)$ (if $x\in Z$) or
+$(q\,c)\circ\rho_{x,y}$ (if $y\in Z$), which toggles the
+crossed/parallel status of $(x,y)$ exactly when $(q,c)$ is separated
+by $\{p,p'\}$ in $\rho_{x,y}$ (different arcs when crossed, different
+cycles $Q_p,Q_{p'}$ when parallel), and leaves $(q,c)$ separated
+afterwards; with $|Z\cap\{x,y\}|\in\{0,2\}$ the status is unchanged.
+Turns of cycles of column pairs from a fixed matching $\mathcal M$ of
+the free columns pairwise commute.
+\end{lemma}
+
+\begin{proof}
+A column cycle is a Latin trade (Lemma~\ref{lem:cycletrade}), so the
+turn is a bijection of Latin squares and an involution, and it
+preserves the cycle partition of $(q,c)$; column pairs disjoint from
+$\{q,c\}$ are untouched, and so are columns $p,p'$.  Rows $1,2$ change
+iff $Z$ meets them; if $Z\ni1,2$ both rows swap their entries at
+$q,c$, so $\sigma'=(q\,c)\sigma(q\,c)$, whose type is that of $\sigma$
+and in which $p,p'$ (fixed by $(q\,c)$) keep their distance.  If $Z$
+meets exactly one of rows $1,2$, $\sigma'=\sigma\circ(q\,c)$ or
+$(q\,c)\circ\sigma$, which changes the type.  The effect on $\rho_{x,y}$: if $x\in Z$ and $y\notin Z$ the entries of row $x$ at $q,c$ are exchanged, so $\rho'_{x,y}=\rho_{x,y}\circ(q\,c)$, and symmetrically; multiplying by a transposition of two points on one cycle splits it at those points, so $p,p'$ are separated iff $q,c$ lie on different arcs between them, and multiplying by a transposition of two points on different cycles merges the cycles, so $p,p'$ are joined iff $q,c$ lie one in each of their cycles; in both cases $q,c$ lie one on each side afterwards.  Turns of cycles of
+disjoint column pairs act on disjoint sets of cells; two cycles of the
+same pair have disjoint row sets.
+\end{proof}
+
+
+\paragraph{(c) The product bound.}  Fix a matching $\mathcal M$ of the
+free columns, independent of the square, and a frame-determined family
+$\mathcal G$ of row pairs $(x,y)$, $x,y\notin\{1,2\}$, whose
+$x$-rows are pairwise distinct and disjoint from its $y$-rows (a block
+of the ladder, where the pairs are even disjoint; or a union of
+diagonals $D_c$ with distinct $x$-rows, which may share $y$-rows).
+For $(x,y)\in\mathcal G$ call a column pair $(q,c)\in\mathcal M$ a
+\emph{clean coordinate} of $(x,y)$ if the column cycle $Z$ of $(q,c)$
+through $x$ has length at most $\ell_1$ (a fixed constant), satisfies
+$|Z\cap\{1,2\}|\in\{0,2\}$, and contains no row of $\mathcal G$
+other than $x$ (no other $x$-row and no $y$-row, in particular not
+$y$).  Let $\mathcal T_{x,y}$ be the set of clean coordinates of
+$(x,y)$ and $\eta_{x,y}\in\{0,1\}^{\mathcal T_{x,y}}$.  By
+Lemma~\ref{lem:legalturn} the turns of all clean coordinates of all
+pairs of $\mathcal G$ commute, generate a group acting freely on $X$,
+preserve $\mathcal G$ and the sets $\mathcal T_{x,y}$, and
+\[
+\rho_{x,y}(\eta)\;=\;\rho_{x,y}(0)\circ\!\!\prod_{(q,c)\in\mathcal T_{x,y}:\ \eta_{x,y}(q,c)=1}\!\!(q\,c),
+\]
+the bit $b_{x,y}(\eta)=[\,(x,y)\text{ parallel}\,]$ depending on
+$\eta_{x,y}$ only.  Let the \emph{orbit weight} of $(x,y)$ be
+\[
+\bar y_{x,y}\;=\;\E_{\eta_{x,y}}\Bigl[\frac{\#\{(q,c)\in\mathcal T_{x,y}:\ (q,c)\text{ separated by }\{p,p'\}\text{ in }\rho_{x,y}(\eta)\}}{|\mathcal T_{x,y}|}\Bigr]
+\]
+($0$ if $\mathcal T_{x,y}=\emptyset$), a function of the orbit, and
+$Y_{\mathcal G}=\sum_{(x,y)\in\mathcal G}\bar y_{x,y}$.
+
+\begin{proposition}[product bound]\label{prop:orbit}
+Conditionally on the orbit, the bits $b_{x,y}$, $(x,y)\in\mathcal G$,
+are independent, and
+\[
+\Pr\bigl[(x,y)\text{ crossed}\bigm|\text{orbit}\bigr]\le1-\tfrac12\bar y_{x,y},
+\qquad
+\Pr\bigl[\text{no pair of }\mathcal G\text{ is flippable}\bigm|\text{orbit}\bigr]
+\le\prod_{(x,y)\in\mathcal G}\bigl(1-\tfrac12\bar y_{x,y}\bigr)\le e^{-Y_{\mathcal G}/2}.
+\]
+Consequently $\Pr_X[\mathrm{Flip}_{\mathcal G}=\emptyset]\le\E_X[e^{-Y_{\mathcal G}/2}]$.
+\end{proposition}
+
+\begin{proof}
+The action is free: distinct column pairs act on disjoint cells, and
+two clean coordinates of different pairs at the same $(q,c)$ are the
+cycles through two distinct $x$-rows, each avoiding the other, hence
+different cycles; the sets $\mathcal T_{x,y}$ are orbit-invariant by
+Lemma~\ref{lem:legalturn} (row sets of the cycles, their meeting
+$\{1,2\}$, and the frame-determined family are preserved).  The
+uniform measure on $X$ restricted to an orbit is therefore uniform on
+the orbit, which is the product of the cubes
+$\{0,1\}^{\mathcal T_{x,y}}$.  A clean coordinate of $(x,y)$ contains
+$x$ and not $y$, and a clean coordinate of another pair contains
+neither $x$ nor $y$ (it avoids all $x$-rows but its own and all
+$y$-rows), so $b_{x,y}$ depends on $\eta_{x,y}$ alone, whence the
+independence.  Fix $(x,y)$ and
+$Z=(q,c)\in\mathcal T_{x,y}$.  Whether $Z$ is separated in
+$\rho_{x,y}(\eta)$ does not depend on $\eta_Z$
+(Lemma~\ref{lem:legalturn}: the turn of $Z$ leaves $Z$ separated), and
+when it is, the two values of $\eta_Z$ give opposite bits.  Hence
+$\Pr[b_{x,y}=0]\le1-\tfrac12\Pr_\eta[Z\text{ separated}]$ for every
+$Z$, and averaging the right side over $Z\in\mathcal T_{x,y}$ gives
+the first bound; the second is the product of the first over the
+independent bits.
+\end{proof}
+
+\begin{hypothesis}[orbit genericity]\label{hyp:orbit}
+With $\ell_0=n/\log^2n$: (i) for the sub-ladder $I$ of the first
+$\min(K_0-1,\lceil n/8\rceil)$ ladder pairs,
+$\Pr[K_0\ge\ell_0,\ Y_I<\kappa|I|]=o(1/\log n)$; (ii) for a
+$B$-instance with $d_{12}=\ell\le n/4$ and $|C_1|\ge n/2+\ell$, with
+$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps
+$2\ell$, so that the $x$-rows $\pi^{-(c+i)}(1)$, $c\in S$,
+$1\le i<\ell$, are pairwise distinct, $|S|\ge n/(4\ell)$, and the
+diagonals $D_c$, $c\in S$, involve at most $n/4+\ell$ rows), and
+cleanliness taken with respect to all rows of
+$\bigcup_{c\in S}D_c$: the event that fewer than half of the $D_c$,
+$c\in S$, have $Y_{D_c}\ge\kappa(\ell-1)$ has probability
+$o(1/\log n)$ (as a single event over all $\ell$).
+\end{hypothesis}
+
+\begin{proposition}\label{prop:Lorbit}
+Hypothesis~\ref{hyp:orbit} implies \textup{(L)}, hence the weak CGW
+conjecture.
+\end{proposition}
+
+\begin{proof}
+Put $\ell_0=n/\log^2n$.  By Theorem~\ref{thm:ladder}, $|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.  Long ladders:
+by Proposition~\ref{prop:orbit}, on $\{K_0\ge\ell_0\}$ and off the
+exceptional event of (i),
+$\Pr[\mathrm{Flip}=\emptyset\mid\text{orbit}]\le e^{-\kappa|I|/2}\le
+e^{-\kappa\ell_0/4}=o(1/\log n)$.  Short arcs: fix $\ell$ and apply
+Proposition~\ref{prop:orbit} to the family
+$\bigcup_{c\in S}D_c$: its $x$-rows $\pi^{-(c+i)}(1)$ lie in the
+disjoint intervals of depths $[c+1,c+\ell-1]$, $c\in S$, so they are
+pairwise distinct, and they lie on the frame arc from $2$ to $1$ while
+the $y$-rows $\pi^{-i}(2)$ lie on the arc from $1$ to $2$, so the two
+sets are disjoint.  Given the orbit the bits of all pairs are
+independent, hence so are the diagonals' flippabilities, and off the
+exceptional event at least $|S|/2$ of the diagonals are flippable with
+conditional probability $\ge1-e^{-\kappa(\ell-1)/2}\ge4\theta_0$,
+$\theta_0:=\tfrac14(1-e^{-\kappa/2})$.  The number of flippable
+offsets in $S$ then has conditional mean $\ge2\theta_0|S|$, and by
+Chernoff the fraction $\theta_S$ is $\ge\theta_0$ except with
+conditional probability $\le e^{-\theta_0|S|/4}\le
+e^{-\theta_0\log^2n/16}$ (as $|S|\ge n/(4\ell_0)=\log^2n/4$),
+summable over $\ell<\ell_0$ to $o(1/n)$.  The identity behind \eqref{eq:offsetavg}
+holds for the average over $c\in S$ as well as over all $c$, so
+$\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta_S\ge\theta_0]
+\le36\ell_0/((n-2)\theta_0)=O(1/\log^2n)$; the part $|C_1|<n/2+\ell$ costs $\le8/n$ per $\ell$ by the splice-in bound, and $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}; the case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
+\end{proof}
+
+
+\paragraph{What the hypothesis says.}  It replaces the witness
+lemma (a lower-tail statement about rare short cycles, probability
+$\ell'/n$ per pair) by a statement about a quantity that is
+typically of constant size: $\bar y_{x,y}$ is the average, over the
+cube of a few column turns that fix rows $y$ and $1,2$ and the whole
+family, of the fraction of those turns' column pairs that are
+separated by $\{p,p'\}$ in the row pair $(x,y)$.  It is a
+\emph{genericity} statement --- the short column cycles of the
+matching pairs through $x$ are not aligned with the arcs of
+$\rho_{x,y}$ at $p,p'$ --- together with concentration of the sum over
+the family; concentration of the \emph{flippabilities} themselves is
+no longer required, since Proposition~\ref{prop:orbit} makes them
+conditionally independent.  It still contains (CP)-type inputs: a
+positive orbit weight needs the cycles of $\rho_{x,y}$ through $p,p'$
+to be macroscopic (the arc-trapping input $(\alpha)$ of \S\ref{sec:remains}), and the genericity itself.  The pure
+permutation core is: for a permutation $\rho_0$ and a matching
+$\mathcal T$ of transpositions on points other than $p,p'$, with
+$\tau(\eta)$ the product of a uniformly random subset of
+$\mathcal T$, bound $\Pr_\eta[p,p'\text{ separated in }\rho_0\tau(\eta)]$
+from below.  For an adversarial $\mathcal T$ (e.g.\ all pairs at
+$\rho_0$-distance $2$, none straddling $p$ or $p'$) the probability is
+$0$, so the content is that the clean coordinates of a random square
+are not adversarial; and the
+moves that re-randomise the clean coordinates without touching
+$\rho_{x,y}$ --- the free row trades of Lemma~\ref{lem:rowfair} --- have
+availabilities that are again same-cycle events of generic row pairs.
+This is the recursion: every
+availability is a cycle-avoidance event, and the exact identities in
+$X$ (Lemma~\ref{lem:rowfair}, Proposition~\ref{prop:orbit}, and the one-step switchings of the marked space)
+are all fair.  What Proposition~\ref{prop:orbit} adds is that the
+fairness can be \emph{compounded} over a family: a product of
+conditionally independent coins, so that a constant per-pair
+genericity gives exponential decay in the family size.
+
+
+\paragraph{(d) Data.}  All scripts and logs referred to below are in the repository \cite{repo}, under \texttt{s13\_*.py} and \texttt{runs/s13/orbit/}.  The orbit test ($600$, $600$ and
+$360$ ladder pairs at $n=30,50,100$, true marks, $\ell_1\le4,5,8$;
+here the matching is chosen greedily among all clean short pairs of
+the instance, which over-counts the coordinates of a fixed matching by
+a factor $\approx n/\ell_1$ --- observed $10.8$ and $14.3$ --- but
+tests the same genericity):
+\begin{itemize}[leftmargin=2em]
+\item the length of the column cycle of $(q,c)$ through $x$ is spread
+like a uniform variable on $\{2,\dots,n\}$ (about $1/n$ per length);
+the turn is legal for $98\%$ of the $2$-cycles and $64\%$ of the long
+cycles, clean for $97\%$ resp.\ $27\%$ ($n=100$);
+\item genericity: $\Pr[(q,c)\text{ separated}\mid\text{clean, length }\ell]
+=0.199,0.198,0.193,0.201,0.201,0.198,0.197$ for $\ell=2,\dots,8$, against
+$\Pr[\text{separated}]=0.195$ over all column pairs ($n=100$; at $n=50$:
+$0.186$--$0.194$ against $0.184$); the dependence on the arc lengths
+of $\rho_{x,y}$ at $p,p'$ was not binned;
+\item the orbit coin: with $|\mathcal T|\approx42$ coordinates
+($n=100$) the orbit average of the parallel bit is $0.478$ starting
+from a crossed square and $0.523$ from a parallel one (at $n=30$:
+$0.398/0.594$ with $|\mathcal T|\approx10$; at $n=50$: $0.447/0.561$
+with $|\mathcal T|\approx18$); at $n=100$, $243$ of the $360$
+per-instance orbit averages lie in $[0.4,0.7)$.
+\end{itemize}
+So $\bar y\approx0.2$ with no detectable dependence on the cycle
+length, and the orbit coin is fair to within the mixing allowed
+by $\approx0.2|\mathcal T|$ separated coordinates.  With the
+\emph{fixed} matching of consecutive free columns, as in
+Proposition~\ref{prop:orbit}: $|\mathcal T|=1.7$ resp.\ $3.0$
+clean coordinates per pair on average ($\approx0.9(\ell_1-1)/2$, as
+the uniform spread of the lengths predicts),
+$\mathcal T=\emptyset$ for $15\%$ resp.\ $4\%$ of the pairs, and
+$\E[\bar y]=0.159$ resp.\ $0.189$.  So the per-pair factor of
+Proposition~\ref{prop:orbit} is $1-\tfrac12\bar y\approx0.9$ on
+average, and Hypothesis~\ref{hyp:orbit}(i) is the statement that the
+average over the sub-ladder does not collapse: $\kappa\approx0.15$ is
+what the data suggest.
+
+\paragraph{(d$'$) The concentration input $(\gamma)$: data.}
+The covariance test ($543$ and $286$ instances at $n=50,100$) computes, with the fixed matching and cleanliness with
+respect to all rows of the sub-ladder $I$ of the first
+$\min(K_0-1,n/8)$ pairs, every $\bar y_k$, $k\in I$, and
+$Y_I=\sum_{k\in I}\bar y_k$: mean $|I|=5.2$ resp.\ $9.9$,
+$\E[\bar y]=0.130$ resp.\ $0.135$, $\mathrm{Var}(\bar y)=0.084$ resp.\
+$0.080$, and $\mathrm{Var}(Y_I)=0.43$ resp.\ $0.90$ against
+$|I|\mathrm{Var}(\bar y)=0.44$ resp.\ $0.79$: the ratio $0.99$ resp.\
+$1.14$ (both including the variation of $|I|$, which at $n=100$
+contributes $\approx\E[\bar y]^2\mathrm{Var}(|I|)\approx0.2$; an
+independent re-run with fresh seeds gave within-$|I|$ ratios $1.03$ and
+$0.94$) shows no detectable positive correlation between the orbit
+weights of different ladder pairs.  So $(\gamma)$ is, numerically, an
+independence statement.  The orbit weight has an atom of $\approx0.8$
+at $0$ (few coordinates per pair with a fixed matching), and the lower
+tail $\Pr[Y_I<\kappa|I|]$ at these sizes ($0.18$ at $\kappa=0.05$,
+$n=100$) is dominated by the instances with $|I|\le4$.
+
+
+\section{What remains}\label{sec:remains}
+
+Hypothesis~\ref{hyp:orbit} has three inputs: $(\alpha)$ the cycles of $\rho_{x_k,y_k}$
+through $j,j'$ are macroscopic for a constant fraction of the ladder pairs (both arcs when
+they coincide, both cycles when they do not); $(\beta)$ \emph{genericity}: the clean
+coordinates of a ladder pair are separated by $\{j,j'\}$ with probability bounded below;
+$(\gamma)$ concentration of $\sum_k\bar y_k$ over the family.  Numerically $(\gamma)$ is an
+independence statement (the orbit weights of different ladder pairs are uncorrelated to
+within sampling error), $(\beta)$ holds with the same constant $0.19$--$0.20$ at every cycle
+length, and $(\alpha)$ holds with the lengths spread uniformly.  All three are instances of
+one statement:
+\[
+\textup{(U)}\qquad c\;\le\;\Pr\bigl[\text{two given pairs of lines are interleaved in the cycle structure of a third pair}\bigr]\;\le\;1-c
+\]
+in $X$ --- where two column pairs are interleaved in a row pair $(x,y)$ if they alternate
+on a common cycle of $\rho_{x,y}$ or lie crosswise in two of its cycles, and dually for
+row pairs in a column pair.  The pure permutation part of the problem is settled:
+
+\paragraph{(f) The permutation problem $(\Pi)$, and the one statement
+everything reduces to.}  Fix a permutation $\rho_0$ of the columns,
+two columns $p\ne p'$, and a set $\mathcal T$ of pairwise disjoint
+transpositions avoiding $p,p'$; for $\eta\in\{0,1\}^{\mathcal T}$ let
+$\tau(\eta)$ be the product of the transpositions with $\eta_Z=1$.
+Call $Z=(q,c)$ \emph{crossing} in a permutation $\rho$ (``separated'' in Lemma~\ref{lem:legalturn}) if $\{q,c\}$ and
+$\{p,p'\}$ are interleaved in the cycle structure of $\rho$: $q,c$ on
+different arcs of a common cycle through $p,p'$, or $q$ in the cycle
+of $p$ and $c$ in the (different) cycle of $p'$, or vice versa.  By
+Lemma~\ref{lem:legalturn}, $\rho\mapsto\rho\circ Z$ toggles the
+separation of $p,p'$ exactly when $Z$ is crossing in $\rho$, and $Z$
+is crossing in $\rho\circ Z$ iff it is crossing in $\rho$.  Hence, for
+$\eta$ uniform and $b(\eta)=[p,p'\text{ separated in }\rho_0\tau(\eta)]$,
+\begin{equation}\label{eq:Pi}
+\Pr_\eta[b=1]\;\ge\;\tfrac12\max_{Z\in\mathcal T}\Pr_\eta\bigl[Z\text{ crossing in }\rho_0\tau(\eta)\bigr]
+\;\ge\;\tfrac12\,\E_\eta\Bigl[\frac{\#\{Z\text{ crossing in }\rho_0\tau(\eta)\}}{|\mathcal T|}\Bigr],
+\end{equation}
+and $b\equiv0$ on the cube iff no $Z$ is crossing in any
+$\rho_0\tau(\eta)$.  Let $\rho_0$ be crossed, with arcs $P_1$ (from
+$p$ to $p'$) and $P_2$, and form the graph whose vertices are $P_1$,
+$P_2$ and the other cycles of $\rho_0$ and whose edges are the
+transpositions of $\mathcal T$ joining different vertices.  Then
+$b\equiv0$ iff $P_1$ and $P_2$ lie in different components.  If they
+are connected by a path $P_1=V_0,V_1,\dots,V_m=P_2$ with edges
+$Z_1,\dots,Z_m$, apply $Z_1,\dots,Z_{m-1}$ in order: $Z_i$, with one
+end on the arc from $p$ to $p'$ and the other in $V_i$, inserts $V_i$
+into that arc ($\rho\circ(q\,c)$ sends $q\mapsto\rho(c)$, runs around
+$V_i$, and returns to $\rho(q)$), $P_2$ is untouched, and $Z_m$ then
+joins the arc to $P_2$ and is crossing.  If they are disconnected, let
+$K_1$ be the union of the vertices in the component of $P_1$ and $K_2$
+that of $P_2$: every transposition of $\mathcal T$ has both ends in
+$K_1$, both in $K_2$ or both outside, so $\tau(\eta)$ preserves $K_1$,
+while $\rho_0(K_1)=(K_1\setminus\{p\})\cup\{p'\}$; the
+$\rho_0\tau(\eta)$-orbit of $p$ therefore stays in $K_1$ until it
+reaches $p'$, and it cannot close at $p$ before that, since
+$\rho_0\tau(x)=p$ forces $\tau(x)=\rho_0^{-1}(p)\in P_2\subseteq K_2$.
+In particular a single crossing $Z$ at $\eta=0$ gives
+$\Pr_\eta[b=1]\ge\tfrac12$ on the orbit of $Z$ alone, and a family of chords at $\rho_0$-distance $2$, none straddling $p$ or $p'$, is a disconnected example.  One may equally use one coordinate per
+pair: with $Z_k$ the first clean coordinate of the $k$-th pair in a
+fixed order of the matching (orbit-invariant, since cleanliness of
+every matching pair is), the proof of Proposition~\ref{prop:orbit}
+applied to the sub-family $\{Z_k\}$ gives
+\begin{equation}\label{eq:onecoord}
+\Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\Bigl[\prod_{k\in I}\bigl(1-\tfrac12X_k\bigr)\Bigr],
+\qquad X_k=[\,Z_k\text{ crossing in }\rho_{x_k,y_k}\,],
+\end{equation}
+and $(\beta)$ becomes: $\Pr_X[X_k=1]\ge c$ for most $k$, i.e.\ the
+column pair selected by the column-cycle structure through $x_k$ is
+interleaved with $\{p,p'\}$ in the row-cycle structure of $(x_k,y_k)$
+with probability bounded below.
+
+
+Three facts locate the difficulty.  (i) Without conditioning on the type of rows $1,2$,
+(U) for four generic columns in a generic row pair is elementary: by conjugation invariance
+the four columns are uniform points given the cycle type of $\rho_{x,y}$, and the
+interleaving probability is $\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$
+over the cycle lengths $m_i$, which lies in $[\tfrac1{27}-O(1/n),\tfrac13+O(1/n)]$.
+(ii) For generic rows the dual statement is trivial: the number of row pairs interleaved with
+$\{1,2\}$ in a column pair is at most $(n-2)^2/4$, half of all pairs, deterministically, and
+rows other than $1,2$ are exchangeable in $X$.  What is needed is the same for a row pair
+selected by its own row-cycle structure (the ladder pair, at the columns where its cycle
+through $j$ meets a joining pair), and exchangeability is lost exactly there.  (iii)
+Inside $X$ the exact tools are the free trades of rows other than $1,2$ (which preserve
+interleaving) and the column-cycle turns (which are legal exactly off the interleaved
+configurations), and every identity they produce is fair: it equates two expectations with
+random weights whose lower bounds are again statements of the form (U).  Lower bounds on
+``different cycles'' events are, in the language of \cite{CGW08}, of the type of the
+direction of their Lemma~3.12 whose proof has the gap: they require a canonical
+bounded-multiplicity repair of the same-cycle configurations, and the repairs available in
+$X$ (trades or cross-switches of a free pair of third rows) have unbounded multiplicity.
+What the orbit method adds to this is that the fairness compounds: a constant per-pair
+genericity gives exponential decay in the family size, which is why a hypothesis of
+constant strength suffices for a conclusion of strength $o(1/\log n)$.
+
+\begin{thebibliography}{9}
+\bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two
+rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 286--309.
+\bibitem{gapnote} [author], A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, note, October 2026.
+\bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
+squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
+\emph{Random Structures Algorithms} 52 (2018), 181--196.
+\bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
+\end{thebibliography}
+\end{document}
