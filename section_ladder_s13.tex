@@ -870,9 +870,10 @@ $X=X(n,\lambda;\alpha,\beta)$, and ``legal'' means: preserves the
 type of rows $1,2$ and the mark, i.e.\ maps $X$ to itself.
 
 \paragraph{(a) Transposition: which half of the conditioning is the
-obstacle.}  Let $x,y\notin\{1,2\}$ carry four distinct symbols on
-$\{p,p'\}$ and condition on the two full columns $p,p'$ (the frame
-$\pi$ of the mark).  In the transposed square $L^{\mathsf T}$ the
+obstacle.}  Let $L$ be uniform on \emph{all} Latin squares of order
+$n$ (no condition on rows $1,2$ in this paragraph), let $x,y$ carry
+four distinct symbols on $\{p,p'\}$, and condition on the two full
+columns $p,p'$ (the frame $\pi$ of $(p,p')$).  In the transposed square $L^{\mathsf T}$ the
 columns $p,p'$ are the distinguished rows, the frame $\pi$ is their
 column permutation, and the event ``$p,p'$ lie in different cycles of
 $\rho_{x,y}$'' is the event ``$\{x,y\}$ is an $A$-pair for the
@@ -880,7 +881,8 @@ distinguished rows''.  Conditioning on the two full rows $p,p'$ of
 $L^{\mathsf T}$ is conditioning on their type and on the position of
 the pair $\{x,y\}$ in their cycle structure, which is free by symbol
 and column relabelling.  Hence, by Lemma~\ref{lem:switchtoggle}
-($|J_A|=|J_B|$) and \eqref{eq:cgwA}:
+($|J_A|=|J_B|$, which needs no condition on the cycle lengths) and
+\eqref{eq:cgwA}:
 \begin{equation}\label{eq:CPcols}
 \Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
 \;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
@@ -890,20 +892,25 @@ So (CP) with the \emph{columns} prescribed is CGW's theorem; it is the
 conditioning on rows $1,2$ --- on their type and the mark, which is
 what defines $X$ and cannot be removed --- that is the path version.
 In the same transposed picture the ladder trades $T_k$ of
-Theorem~\ref{thm:ladder} are CGW's flips and backflips at the column
-pairs $\{x_k,y_k\}$ of $L^{\mathsf T}$, and Theorem~\ref{thm:ladder}
-is exactly the legal half of CGW's Lemma~3.12 for the distinguished
-rows $p,p'$: the other half --- the switch and the cross-switch at
-$\{x_k,y_k\}$ --- trades the columns $p,p'$ of $L$ along a frame cycle
-or frame arc through exactly one of rows $1,2$.  In the original
-orientation these are the flip of rows $1,2$ at $(p,p')$ (which maps
-$X_A\to J_A$) and the cross-switch of rows $1,2$ at $(p,p')$ (which
-maps $X_B\to X_B$); both toggle the crossed/parallel status of
+Theorem~\ref{thm:ladder} at flippable pairs are CGW's flips and
+backflips at the column pairs $\{x_k,y_k\}$ of $L^{\mathsf T}$, and
+Theorem~\ref{thm:ladder} is exactly the legal half of CGW's
+Lemma~3.12 for the distinguished rows $p,p'$: the other half --- the
+switch and the cross-switch at $\{x_k,y_k\}$ --- trades the columns
+$p,p'$ of $L$ along a frame cycle or frame arc through exactly one of
+rows $1,2$ (apart: $C_1\ni1$, $C_1\not\ni2$; together: the arc from
+$x_k$ to $y_k$ contains $1$ but not $2$, the other arc $2$ but not
+$1$), so it changes the type of rows $1,2$ and leaves $X$.  The switch
+is, in the original orientation, the unflip of rows $1,2$ at $(p,p')$
+(which maps $X_A\to J_A$); it toggles the crossed/parallel status of
 \emph{every} pair $(x,y)$ with $x$ on the side of row $1$ and $y$ on
-the side of row $2$, and both reverse the orientation of one side, so
-they carry the ladder (a diagonal of the side-by-side array of pairs)
-to a different family (an anti-diagonal).  They are therefore exact
-but not usable for the ladder bits as such.
+the side of row $2$, and reverses the orientation of one side, so it
+carries the ladder (a diagonal of the side-by-side array of pairs) to
+a different family (an anti-diagonal).  The cross-switch likewise maps
+$X_B$ to $J_B$ (it splits the $\sigma$-cycle through $p,p'$ while
+keeping rows $1,2$ in one frame cycle, CGW Lemma~3.10) and toggles
+the interior pairs.  Both are exact but not usable for the ladder bits
+in $X$.
 
 \paragraph{(b) Row trades are free in $X$; column turns are
 conditionally free.}  For rows $z,w\notin\{1,2\}$ every trade of rows
@@ -935,7 +942,9 @@ in place, so the symbol sets of the two cycles are unchanged and the
 min-symbol rule re-selects $Q$: an involution.  Rows $1,2$ are
 untouched, so type and mark are preserved.  Inverting $Q$ exchanges the
 two arcs between $p$ and $p'$ when $Q\ni p,p'$, so separation of any
-pair by $\{p,p'\}$ is preserved.
+pair by $\{p,p'\}$ is preserved.  (If $Q$ contains $p$ or $p'$ the
+frame changes at rows $x,y$; so frame-determined data are part of the
+conditioning only when $Q$ avoids $p,p'$.)
 \end{proof}
 
 A column turn, by contrast, changes the rows of a column cycle.  Let
@@ -947,7 +956,9 @@ $Z$) is a measure-preserving involution of $X$ if and only if
 $|Z\cap\{1,2\}|\in\{0,2\}$; when $|Z\cap\{1,2\}|=2$ it conjugates
 $\sigma$ by $(q\,c)$ and keeps the type and the mark.  It preserves the
 columns $p,p'$ (hence the frame and every frame-determined family of
-row pairs) and the column-cycle partition of every free column pair.
+row pairs) and the column-cycle partition of $(q,c)$ and of every
+column pair disjoint from $\{q,c\}$ (in particular of every pair of
+a matching containing $(q,c)$).
 For a row pair $(x,y)$ with $|Z\cap\{x,y\}|=1$ it replaces
 $\rho_{x,y}$ by $\rho_{x,y}\circ(q\,c)$ (if $x\in Z$) or
 $(q\,c)\circ\rho_{x,y}$ (if $y\in Z$), which toggles the
@@ -977,12 +988,15 @@ same pair have disjoint row sets.
 
 \paragraph{(c) The product bound.}  Fix a matching $\mathcal M$ of the
 free columns, independent of the square, and a frame-determined family
-$\mathcal G$ of pairwise disjoint row pairs $(x,y)$, $x,y\notin\{1,2\}$
-(a block of the ladder, or a diagonal $D_c$).  For $(x,y)\in\mathcal G$
-call a column pair $(q,c)\in\mathcal M$ a \emph{clean coordinate} of
-$(x,y)$ if the column cycle $Z$ of $(q,c)$ through $x$ has length at
-most $\ell_1$ (a fixed constant), satisfies $|Z\cap\{1,2\}|\in\{0,2\}$,
-and contains no row of $\mathcal G$ other than $x$ (in particular not
+$\mathcal G$ of row pairs $(x,y)$, $x,y\notin\{1,2\}$, whose
+$x$-rows are pairwise distinct and disjoint from its $y$-rows (a block
+of the ladder, where the pairs are even disjoint; or a union of
+diagonals $D_c$ with distinct $x$-rows, which may share $y$-rows).
+For $(x,y)\in\mathcal G$ call a column pair $(q,c)\in\mathcal M$ a
+\emph{clean coordinate} of $(x,y)$ if the column cycle $Z$ of $(q,c)$
+through $x$ has length at most $\ell_1$ (a fixed constant), satisfies
+$|Z\cap\{1,2\}|\in\{0,2\}$, and contains no row of $\mathcal G$
+other than $x$ (no other $x$-row and no $y$-row, in particular not
 $y$).  Let $\mathcal T_{x,y}$ be the set of clean coordinates of
 $(x,y)$ and $\eta_{x,y}\in\{0,1\}^{\mathcal T_{x,y}}$.  By
 Lemma~\ref{lem:legalturn} the turns of all clean coordinates of all
@@ -1012,10 +1026,19 @@ Consequently $\Pr_X[\mathrm{Flip}_{\mathcal G}=\emptyset]\le\E_X[e^{-Y_{\mathcal
 \end{proposition}
 
 \begin{proof}
-The uniform measure on $X$ restricted to an orbit is uniform on the
-orbit because the action is free, and the orbit is the product of the
-cubes $\{0,1\}^{\mathcal T_{x,y}}$; $b_{x,y}$ depends on
-$\eta_{x,y}$ alone, whence the independence.  Fix $(x,y)$ and
+The action is free: distinct column pairs act on disjoint cells, and
+two clean coordinates of different pairs at the same $(q,c)$ are the
+cycles through two distinct $x$-rows, each avoiding the other, hence
+different cycles; the sets $\mathcal T_{x,y}$ are orbit-invariant by
+Lemma~\ref{lem:legalturn} (row sets of the cycles, their meeting
+$\{1,2\}$, and the frame-determined family are preserved).  The
+uniform measure on $X$ restricted to an orbit is therefore uniform on
+the orbit, which is the product of the cubes
+$\{0,1\}^{\mathcal T_{x,y}}$.  A clean coordinate of $(x,y)$ contains
+$x$ and not $y$, and a clean coordinate of another pair contains
+neither $x$ nor $y$ (it avoids all $x$-rows but its own and all
+$y$-rows), so $b_{x,y}$ depends on $\eta_{x,y}$ alone, whence the
+independence.  Fix $(x,y)$ and
 $Z=(q,c)\in\mathcal T_{x,y}$.  Whether $Z$ is separated in
 $\rho_{x,y}(\eta)$ does not depend on $\eta_Z$
 (Lemma~\ref{lem:legalturn}: the turn of $Z$ leaves $Z$ separated), and
@@ -1030,12 +1053,15 @@ independent bits.
 With $\ell_0=n/\log^2n$: (i) for the sub-ladder $I$ of the first
 $\min(K_0-1,\lceil n/8\rceil)$ ladder pairs,
 $\Pr[K_0\ge\ell_0,\ Y_I<\kappa|I|]=o(1/\log n)$; (ii) for a
-$B$-instance with $d_{12}=\ell\le n/4$ and $|C_1|\ge n/2+\ell$, and a
-set $S$ of $\lfloor n/(4\ell)\rfloor$ offsets $c\in[0,n/2-\ell]$ (so
-that the diagonals $D_c$, $c\in S$, involve at most $n/4$ rows), the
-event that fewer than half of the $D_c$, $c\in S$, have
-$Y_{D_c}\ge\kappa(\ell-1)$ has probability $o(1/\log n)$ (as a single
-event over all $\ell$).
+$B$-instance with $d_{12}=\ell\le n/4$ and $|C_1|\ge n/2+\ell$, with
+$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps
+$2\ell$, so that the $x$-rows $\pi^{-(c+i)}(1)$, $c\in S$,
+$1\le i<\ell$, are pairwise distinct, $|S|\ge n/(4\ell)$, and the
+diagonals $D_c$, $c\in S$, involve at most $n/4+\ell$ rows), and
+cleanliness taken with respect to all rows of
+$\bigcup_{c\in S}D_c$: the event that fewer than half of the $D_c$,
+$c\in S$, have $Y_{D_c}\ge\kappa(\ell-1)$ has probability
+$o(1/\log n)$ (as a single event over all $\ell$).
 \end{hypothesis}
 
 \begin{proposition}\label{prop:Lorbit}
@@ -1050,15 +1076,20 @@ exceptional event of (i),
 $\Pr[\mathrm{Flip}=\emptyset\mid\text{orbit}]\le e^{-\kappa|I|/2}\le
 e^{-\kappa\ell_0/4}=o(1/\log n)$.  Short arcs: fix $\ell$ and apply
 Proposition~\ref{prop:orbit} to the family
-$\bigcup_{c\in S}D_c$ (pairwise disjoint pairs: distinct offsets share
-$y$-rows but not pairs, and cleanliness avoids all rows of the family).
-Given the orbit the diagonals' flippabilities are independent, and
-off the exceptional event at least $|S|/2$ of them are flippable with
-conditional probability $\ge1-e^{-\kappa(\ell-1)/2}\ge2\theta_0$,
-$\theta_0:=\tfrac12(1-e^{-\kappa/2})$.  By Chernoff the fraction
-$\theta_S$ of flippable offsets in $S$ is $\ge\theta_0$ except with
-conditional probability $e^{-c|S|}\le e^{-c\log^2n/4}$, summable over
-$\ell<\ell_0$ to $o(1/n)$.  The identity behind \eqref{eq:offsetavg}
+$\bigcup_{c\in S}D_c$: its $x$-rows $\pi^{-(c+i)}(1)$ lie in the
+disjoint intervals of depths $[c+1,c+\ell-1]$, $c\in S$, so they are
+pairwise distinct, and they lie on the frame arc from $2$ to $1$ while
+the $y$-rows $\pi^{-i}(2)$ lie on the arc from $1$ to $2$, so the two
+sets are disjoint.  Given the orbit the bits of all pairs are
+independent, hence so are the diagonals' flippabilities, and off the
+exceptional event at least $|S|/2$ of the diagonals are flippable with
+conditional probability $\ge1-e^{-\kappa(\ell-1)/2}\ge4\theta_0$,
+$\theta_0:=\tfrac14(1-e^{-\kappa/2})$.  The number of flippable
+offsets in $S$ then has conditional mean $\ge2\theta_0|S|$, and by
+Chernoff the fraction $\theta_S$ is $\ge\theta_0$ except with
+conditional probability $\le e^{-\theta_0|S|/4}\le
+e^{-\theta_0\log^2n/16}$ (as $|S|\ge n/(4\ell_0)=\log^2n/4$),
+summable over $\ell<\ell_0$ to $o(1/n)$.  The identity behind \eqref{eq:offsetavg}
 holds for the average over $c\in S$ as well as over all $c$, so
 $\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta_S\ge\theta_0]
 \le36\ell_0/((n-2)\theta_0)=O(1/\log^2n)$; the parts $|C_1|<n/2+\ell$
@@ -1100,11 +1131,12 @@ conditionally independent coins, so that a constant per-pair
 genericity gives exponential decay in the family size.
 
 \paragraph{(d) Data.}  \texttt{s13\_orbit.py}
-(\texttt{runs/s13/orbit/orbit\{50,100\}.log}; $600$ and $360$ ladder
-pairs at $n=50,100$, true marks, $\ell_1\le5$ resp.\ $8$; here the
-matching is chosen greedily among all clean short pairs of the
-instance, which over-counts the coordinates of a fixed matching by a
-factor $\approx n/\ell_1$ but tests the same genericity):
+(\texttt{runs/s13/orbit/orbit\{30,50,100\}.log}; $600$, $600$ and
+$360$ ladder pairs at $n=30,50,100$, true marks, $\ell_1\le4,5,8$;
+here the matching is chosen greedily among all clean short pairs of
+the instance, which over-counts the coordinates of a fixed matching by
+a factor $\approx n/\ell_1$ --- observed $10.8$ and $14.3$ --- but
+tests the same genericity):
 \begin{itemize}[leftmargin=2em]
 \item the length of the column cycle of $(q,c)$ through $x$ is spread
 like a uniform variable on $\{2,\dots,n\}$ (about $1/n$ per length);
@@ -1113,21 +1145,23 @@ cycles, clean for $97\%$ resp.\ $27\%$ ($n=100$);
 \item genericity: $\Pr[(q,c)\text{ separated}\mid\text{clean, length }\ell]
 =0.199,0.198,0.193,0.201,0.201,0.198,0.197$ for $\ell=2,\dots,8$, against
 $\Pr[\text{separated}]=0.195$ over all column pairs ($n=100$; at $n=50$:
-$0.189$--$0.194$ against $0.184$);
+$0.186$--$0.194$ against $0.184$); the dependence on the arc lengths
+of $\rho_{x,y}$ at $p,p'$ was not binned;
 \item the orbit coin: with $|\mathcal T|\approx42$ coordinates
 ($n=100$) the orbit average of the parallel bit is $0.478$ starting
 from a crossed square and $0.523$ from a parallel one (at $n=30$:
-$0.414/0.591$ with $|\mathcal T|\approx10$; at $n=50$: $0.447/0.561$
-with $|\mathcal T|\approx18$), and the per-instance orbit averages
-concentrate around $\tfrac12$.
+$0.398/0.594$ with $|\mathcal T|\approx10$; at $n=50$: $0.447/0.561$
+with $|\mathcal T|\approx18$); at $n=100$, $243$ of the $360$
+per-instance orbit averages lie in $[0.4,0.7)$.
 \end{itemize}
-So $\bar y\approx0.2$ with no detectable dependence on the length or
-on the arcs, and the orbit coin is fair to within the mixing allowed
+So $\bar y\approx0.2$ with no detectable dependence on the cycle
+length, and the orbit coin is fair to within the mixing allowed
 by $\approx0.2|\mathcal T|$ separated coordinates.  With the
 \emph{fixed} matching of consecutive free columns, as in
 Proposition~\ref{prop:orbit} (\texttt{--fixed};
 \texttt{orbit\{50,100\}\_fixed.log}): $|\mathcal T|=1.7$ resp.\ $3.0$
-clean coordinates per pair on average ($\approx\ell_1/2$, as expected),
+clean coordinates per pair on average ($\approx0.9(\ell_1-1)/2$, as
+the uniform spread of the lengths predicts),
 $\mathcal T=\emptyset$ for $15\%$ resp.\ $4\%$ of the pairs, and
 $\E[\bar y]=0.159$ resp.\ $0.189$.  So the per-pair factor of
 Proposition~\ref{prop:orbit} is $1-\tfrac12\bar y\approx0.9$ on
