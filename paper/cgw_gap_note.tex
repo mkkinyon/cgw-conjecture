@@ -21,18 +21,25 @@
 
 \begin{abstract}
 Case 3 of the splitting procedure used to prove Lemma 3.12 of
-\cite{CGW08} (``cross-switch with respect to $\{\omega(j),\omega(j')\}$,
-then backflip with respect to $\{j,j'\}$'') does not produce a Latin
-square of the intended type when $\min(\alpha,\beta)\ge3$: the
-cross-switch reverses an $\omega$-arc containing $j'$, after which
-$\{j,j'\}$ is at $\omega$-distance $2$.  The lower bound of Lemma 3.12
-survives (and is in fact elementary); the upper bound $3/2$, hence the
-upper bound of Theorem 3.13 and everything downstream of it, is not
-established by the published argument for those $(\alpha,\beta)$.  A
-canonical repair exists when $\alpha$ is even and $\alpha<2\beta$ (or
-symmetrically); we do not see one when $\alpha,\beta$ are both odd.
-Exact data for $n\le11$ and sampled squares up to $n=100$ indicate that
-the statement is true with much room to spare.
+\cite{CGW08} (cross-switch with respect to $\{\omega(j),\omega(j')\}$,
+then backflip with respect to $\{j,j'\}$) does not behave as claimed:
+the cross-switch reverses an $\omega$-arc containing $j'$ (or $j$),
+after which $\{j,j'\}$ is at $\omega$-distance $2$.  When
+$\min(\alpha,\beta)\ge3$ the backflip therefore produces a square of
+the wrong type.  When $\min(\alpha,\beta)=2<\max(\alpha,\beta)$ the type
+is right, but the resulting edge is in general not an edge of the
+joining multigraph, so the identity $G_S=G_J$ on which the double count
+rests fails; already for $n=5$, the sharp case, the splitting multigraph
+has vertices of degree $24$ on the $S(\mu,F)$ side where the proof
+asserts at most $18$.  The lower bound of Lemma 3.12 survives (and is
+in fact elementary); the upper bound $3/2$, hence the upper bound of
+Theorem 3.13 and the results of Section 4 that use it (listed below),
+is not established by the published argument for any split other than
+$(2,2)$.  A canonical repair of case 3 exists when $\alpha$ is even and
+$\alpha<2\beta$ (or symmetrically); we do not see one when
+$\alpha,\beta$ are both odd.  Exact data for $n\le11$ and sampled
+squares up to $n=100$ indicate that the statement is true with much
+room to spare.
 \end{abstract}
 
 \section{Setting and the procedure}
@@ -76,14 +83,20 @@ Lemma~3.12:
 \frac12\;\le\;\frac{|S(\lambda,F)|\,(\mu_{\alpha+\beta}+1)(\alpha+\beta)}{|S(\mu,F)|\,\mu_\alpha\mu_\beta\,\alpha\beta}\;\le\;\frac32
 \qquad(\alpha\ne\beta).
 \end{equation}
+(For $\alpha=\beta$ the statement has $2(\mu_{2\alpha}+1)/(\alpha\mu_\alpha(\mu_\alpha-1))$
+in place of the fraction; everything below applies verbatim, with the
+splits $(\alpha,\alpha)$, $\alpha\ge3$, in the class
+$\min(\alpha,\beta)\ge3$ and $(2,2)$ the only unaffected split.)
 
 \section{The cross-switch reverses an arc}
 
 Write $e_1=1\circ j$, $e_2=1\circ j'$, $e_3=2\circ j$, $e_4=2\circ j'$
 and consider the first form of Definition 3.9
-($\min(e_1,e_2,e_3,e_4)\in\{e_1,e_4\}$); the second form is the mirror
-image with the roles of $(j,\text{row }1)$ and $(j',\text{row }2)$
-exchanged.  On rows $1,2$ the bitrade is
+($\min(e_1,e_2,e_3,e_4)\in\{e_1,e_4\}$); the second form
+($\min\in\{e_2,e_3\}$) is the first form applied to the ordered pair
+$(j',j)$, i.e.\ with the roles of $j$ and $j'$ (and of $\alpha$ and
+$\beta$) exchanged, so that the cross-switch at an unordered $B$-pair
+is well defined.  On rows $1,2$ the bitrade is
 \[
 Q'\supseteq\{(2,j,e_2),(1,j',e_3)\}\cup
 \{(1,\omega^kj,\,2\circ\omega^kj),\ (2,\omega^kj,\,1\circ\omega^kj)\;:\;1\le k<\alpha\},
@@ -91,8 +104,8 @@ Q'\supseteq\{(2,j,e_2),(1,j',e_3)\}\cup
 i.e.\ in every interior column of the $\omega$-arc from $j$ to $j'$ the
 entries of rows $1,2$ are swapped, row $2$ receives $e_2=1\circ j'$ at
 column $j$, and row $1$ receives $e_3=2\circ j$ at column $j'$.  (This
-is forced by the proof of Lemma 3.10: row $1$ must keep the symbol set
-$\{1\circ\omega^kj:1\le k\le\alpha\}$ on the cells
+is the definition; the proof of Lemma 3.10 confirms it: row $1$ keeps
+the symbol set $\{1\circ\omega^kj:1\le k\le\alpha\}$ on the cells
 $\{\omega^kj:1\le k<\alpha\}\cup\{j'\}$, and ``precisely one column
 from the pair $\{\omega^kj,\omega^{k'}j'\}$ has symbols swapped in rows
 $1$ and $2$''.)  The remaining cells of $Q$ lie in columns $j,j'$ and
@@ -155,11 +168,40 @@ gives $\omega'(J')=j$, i.e.\ $\omega'^2(j')=j$.
 \end{proof}
 
 So the asserted membership $L'\in S(\mu,F)$ in item 4 fails in case 3
-whenever $\min(\alpha,\beta)\ge3$, and the joining rule 4 (cross-switch
-at $\{\omega j,\omega j'\}$ after a flip) fails symmetrically, so the
-two multigraphs do not coincide.  For $\min(\alpha,\beta)=2$ the arc has
-a single interior column, nothing is reversed, and the proof is
-complete; this is the case of the sharp example $n=5$.
+whenever $\min(\alpha,\beta)\ge3$.
+
+\paragraph{The case $\min(\alpha,\beta)=2$.}  Say $\alpha=2\le\beta$.
+In the form of the cross-switch that reverses the arc of length $2$
+(a single interior column), nothing is reversed and case 3 is as
+described.  In the other form the arc of length $\beta$ is reversed;
+$j$ or $j'$ is its last interior column, the backflipped square has
+parts $2$ and $\beta$, so it does lie in $S(\mu,F)$, and item 4 holds.
+But the proof of Lemma 3.12 rests on the identity $G_S=G_J$, and this
+fails: the case-3 edge $L$--$L'$ is supposed to be the joining rule-4
+edge from $L'$ (flip at $\{j,j'\}$ to $L''$, then cross-switch at
+$\{\omega_{L''}j,\omega_{L''}j'\}$), which returns $L$ by Corollary
+3.11 only if $\{\omega_{L''}j,\omega_{L''}j'\}=\{J,J'\}$; and when the
+long arc has been reversed this is not so (e.g.\ in the second form
+$\omega_{L''}(j)=\omega^{\beta-2}J'\ne J$).  Which form occurs is
+decided by the position of the smallest corner symbol, not by the
+author, so about half of the case-3 edges and their switch edges
+(item 5) are missing from $G_J$.  We computed both multigraphs exactly
+for $n=5$, $\lambda=(5)$, $\mu=(2,3)$, $F=\emptyset$, over all
+$161280$ Latin squares of order $5$ (the procedures select trades by
+the smallest symbol, so one cannot normalise the first row): $G_S$ and
+$G_J$ each have $1036800$ edges, but $172800$ edges of $G_S$ are not
+edges of $G_J$ (exactly half of the case-3 edges and the switch edges
+of the same instances; all edges of cases 1 and 2 are in $G_J$), and
+the degrees of the $\mu$-squares in $G_S$ are $12$, $18$ and $24$ (for
+$11520$, $34560$ and $11520$ squares) against $18$ for every
+$\mu$-square in $G_J$.  So the assertion ``each vertex of $S(\mu,F)$
+has degree $d\le3\mu_\alpha\mu_\beta\alpha\beta$'' is false for the
+splitting multigraph, and the inequality
+$Z\le3\mu_\alpha\mu_\beta\alpha\beta|S(\mu,F)|$ holds at $n=5$ (with
+equality, since the ratio is exactly $3/2$ there) only on average.  For
+$(4)\to(2,2)$ at $n=4$ the two multigraphs coincide, as they must: only
+arcs of length $2$ occur.  In summary, the published argument for the
+upper bound is incomplete for every split with $\max(\alpha,\beta)\ge3$.
 
 \paragraph{Numerical confirmation.}  We implemented Definition 3.9
 literally (rows $1,2$ as above; in columns $j,j'$ the rows
@@ -168,67 +210,83 @@ exactly as in the definition --- this is what balances the corner
 cells) and checked on uniformly sampled
 Latin squares (Jacobson--Matthews) that the cross-switch is a Latin
 square of the same type in every instance.  Applying case 3 as written:
-at $n=9$ and $n=12$, in $1006$ and $1670$ instances with
-$\min(\alpha,\beta)\ge3$ respectively, the result had the wrong type in
-every single instance (e.g.\ $(2,7)$ with $(\alpha,\beta)=(3,4)$ gives
-$(2,2,5)$ instead of $(2,3,4)$; $(9)$ with $(3,6)$ gives $(2,7)$).
+in $1006$ ordered instances $(j,j')$ with $\min(\alpha,\beta)\ge3$ at
+$n=9$ ($300$ sampled squares) and $3098$ at $n=12$ ($300$ squares),
+the result had the wrong type in every single instance (e.g.\ $(2,7)$
+with $(\alpha,\beta)=(3,4)$ gives $(2,2,5)$ instead of $(2,3,4)$; $(9)$
+with $(3,6)$ gives $(2,7)$).
 
 \section{What survives, and what depends on the gap}
 
-Only item 4's claim in case 3 is affected.  Cases 1 and 2 and the
-switch edge are valid, so each $L\in S(\lambda,F)$ has degree at most
-$2(\mu_{\alpha+\beta}+1)(\alpha+\beta)$ in the multigraph of valid
-edges, and each $L\in S(\mu,F)$ has degree at least
-$\mu_\alpha\mu_\beta\alpha\beta$ (joining rules 1--2 are valid).  Hence
-the \emph{lower} bound $\frac12$ in \eqref{eq:L312} stands.  (In fact it
-is elementary: with $X$ the set of pairs $(L,\{j,j'\})$,
-$L\in S(\lambda,F)$, $\omega^\alpha j=j'$, and $J$ the analogous set of
-joining pairs, the flip and the switch give $|J|=2|X_A|$ exactly, so
-\eqref{eq:L312} reads $\frac13\le|X_A|/|X|\le1$, and the lower bound
-$\frac12$ is $|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$,
-equivalently
+Only case 3 is affected.  The joining rules 1--2 are valid and each
+rule-2 edge is a case-1 edge or the switch edge of a case-1 instance,
+so each $L\in S(\mu,F)$ has degree at least
+$\mu_\alpha\mu_\beta\alpha\beta$ in the multigraph of valid splitting
+edges, in which each $L\in S(\lambda,F)$ has degree at most
+$2(\mu_{\alpha+\beta}+1)(\alpha+\beta)$.  Hence the \emph{lower} bound
+$\frac12$ in \eqref{eq:L312} stands.  (In fact it is elementary: with
+$X$ the set of pairs $(L,\{j,j'\})$, $L\in S(\lambda,F)$,
+$\omega^\alpha j=j'$, and $J$ the analogous set of joining pairs, the
+flip and the switch give $|J|=2|X_A|$ exactly, so \eqref{eq:L312}
+reads $\frac13\le|X_A|/|X|\le1$, and the lower bound $\frac12$ is
+$|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$, equivalently
 \[
 \Pr\bigl[\{j,j'\}\text{ is an $A$-pair}\bigr]\;\ge\;\tfrac13
 \quad\text{for $(L,\{j,j'\})$ uniform on $X$},
 \]
-is not established for $\min(\alpha,\beta)\ge3$.
+is not established for $\max(\alpha,\beta)\ge3$.
 
 Within \cite{CGW08} the upper bound of Lemma 3.12 is used for: the
 upper bound of Theorem 3.13; the lower bound $(2/3)^{\kappa-1}$ of
-Lemma 4.1 and the corresponding half of Lemma 4.2; the parity bounds
-of Theorem 4.3 (whose proof invokes the equality of the two
-multigraphs ``as in the proof of Lemma 3.12''); the upper bound
-$\PP_F((m))\le2m^{-2/3}$ of Lemma 4.4 and hence Corollary 4.5 (the
-factor $n^{1/3}$); and those results of Section 4.2 that rest on
-these.  The upper bound $2^{\kappa-1}$ of Lemma 4.1, the lower bound
-$\PP_F((m))\ge2m^{-2}$, and the upper bounds on short-cycle counts
+Lemma 4.1 and, in Lemma 4.2, the upper bound whenever the path from
+$\lambda$ to $\mu$ contains a splitting step and the lower bound
+whenever it contains a joining step; the bounds on $\PP_F(E)$ of
+Theorem 4.3 (whose proof invokes the equality of the two multigraphs
+``as in the proof of Lemma 3.12''); the upper bound
+$\PP_F((m))\le2m^{-2/3}$ of Lemma 4.4; both halves of Corollary 4.5
+(its lower half uses the $(2/3)^{\kappa-1}$ bound, its upper half the
+factor $m^{1/3}$ from Lemma 4.4); and the results that rest on these:
+Corollary 4.6, Lemma 4.7, Theorem 4.9, Corollary 4.10 and Theorem
+4.11.  (Corollary 4.10, on the number of intercalates, is in any case
+superseded by Kwan and Sudakov \cite{KS18}.)  The upper bound
+$2^{\kappa-1}$ of Lemma 4.1, the lower bound $\PP_F((m))\ge2m^{-2}$ of
+Lemma 4.4, Corollary 4.8, and the upper bounds on short-cycle counts
 derived from the joining direction are unaffected.  For instance, from
 the joining direction alone one still gets $\E[\ell N_\ell]\le2m/(m-\ell)$
-for the number $N_\ell$ of $\ell$-cycles (sum the inequality
-$\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$ over
-$\beta$), and by joining $k$ cycles successively one obtains
+for the number $N_\ell$ of $\ell$-cycles, $\ell\le m/2$ (sum the
+inequality $\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$,
+with $N_\ell N_\beta$ read as $N_\ell(N_\ell-1)$ when $\beta=\ell$, over
+$\beta$), and by joining $k$ cycles successively one obtains a
+factorial-moment bound of the form
 $\E[(\kappa)_k]\le2^{k-1}(4+k^2/\log m)(\log m)^k$ for the number of
-cycles $\kappa$, hence $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$; so the
-tail of the number of cycles survives, while the lower bound on the
-number of cycles in Section 4.2 does not.
+cycles $\kappa$, hence $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$ (we
+give the derivation elsewhere).  So a polynomial tail bound on the
+number of cycles at scale $\log m$ survives; the bound of Theorem 4.9
+at scale $\sqrt m$, and the lower bound on the number of cycles of
+Theorem 4.11, do not.
 
 \section{A partial repair}
 
 A cross-switch at a $B$-pair $\{J,J'\}$ at any $\omega$-distance
 $a\ge2$ is a type-preserving trade (the proof of Lemma 3.10 does not
 use $a=\alpha$), and by Lemma~\ref{lem:rev} it reverses the arc from
-$J$ to $J'$.  It toggles the status of $\{j,j'\}$ iff exactly one of
-$j,j'$ is an interior column of that arc, say at position $i$, and then
-the $\omega$-distance from $j$ to $j'$ changes by $a-2i$.  Thus the
-status-toggling moves that preserve the distance are precisely the
-cross-switches at $B$-pairs \emph{symmetric about $j$ or about $j'$}
-($a=2i$).
+$J$ to $J'$.  If $\{J,J'\}$ is disjoint from $\{j,j'\}$, it toggles the
+status of $\{j,j'\}$ iff exactly one of $j,j'$ is an interior column of
+that arc, say at position $i$ ($1\le i<a$), and then the
+$\omega$-distance from $j$ to $j'$ changes by $\pm(a-2i)$ (sign
+according to which of $j,j'$ is interior).  Thus, among cross-switches
+at pairs disjoint from $\{j,j'\}$, the status-toggling moves that
+preserve the distance are precisely those at $B$-pairs
+\emph{symmetric about $j$ or about $j'$} ($a=2i$).
 
 Suppose $\alpha$ is even and $\alpha<2\beta$, and let
 $R=\{\omega^{\alpha/2}j,\ \omega^{3\alpha/2}j\}$: the pair at distance
 $\alpha$ symmetric about $j'$, whose arc avoids $j$.  If $R$ is a
-$B$-pair, cross-switch at $R$: $\{j,j'\}$ becomes an $A$-pair at
-distance $\alpha$, and the backflip at $\{j,j'\}$ lies in $S(\mu,F)$.
+$B$-pair, cross-switch at $R$: $\{j,j'\}$ becomes an $A$-pair whose
+two $\omega'$-arcs still have lengths $\alpha$ and $\beta$ (in the
+form that reverses the arc of $R$ through $j'$ the distance from $j$
+to $j'$ stays $\alpha$; in the other form it becomes $\beta$), and the
+backflip at $\{j,j'\}$ lies in $S(\mu,F)$.
 If $R$ is an $A$-pair, backflip at $R$ itself, which is a pair at
 distance $\alpha$.  Either way case 3 acquires a valid edge
 (verified on $3928$ sampled instances at $n=10,13$: type $\mu$ in all of
@@ -278,20 +336,26 @@ $n$ & \#splits $(\lambda\to\mu)$ & $\max\CC_n(\lambda)/\CC_n(\mu)$ & $\min\Pr_X[
 \end{tabular}
 \end{center}
 \noindent (all splits with $\alpha,\beta\ge2$; for $n\ge7$ every ratio
-is within $0.4\%$ of $1$, in the covered and the uncovered classes
-alike --- e.g.\ $(2,6)\to(2,3,3)$ at $n=8$, in the $(3,3)$ class, has
-ratio $1.0017$).  On
-uniformly sampled squares with a uniformly random marked pair at
-distance $\alpha\ge2$ on an $m$-cycle, $m-\alpha\ge2$, we find
+lies in $[0.985,1.0035]$, with the minima $0.9861$ at
+$(3,4)\to(2,2,3)$, $n=7$, and $0.9853$ at $(2,2,4)\to(2,2,2,2)$, $n=8$,
+and the excess above $1$ at most $0.35\%$, in the covered and the
+uncovered classes alike --- e.g.\ $(2,6)\to(2,3,3)$ at $n=8$, in the
+$(3,3)$ class, has ratio $1.0017$).  On uniformly sampled squares with
+a uniformly random marked pair at distance $\alpha\ge2$ on an
+$m$-cycle, $m-\alpha\ge2$, we find
 $\Pr_X[B]-\Pr_X[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$
 at $n=30,50,100$ ($9000$, $7200$, $3600$ instances), i.e.\
 $\Pr_X[A]=0.50\pm0.01$ throughout.  So the true constant in the upper
-bound of \eqref{eq:L312} appears to be $1+O(n^{-2})$ rather than $3/2$;
-the question is only what has been proved.
+bound of \eqref{eq:L312} appears to be $1+o(1)$ (the maximal excess
+over $1$ in the table is $3.5\cdot10^{-3}$, $1.7\cdot10^{-3}$,
+$1.8\cdot10^{-4}$, $<10^{-5}$, $<10^{-5}$ for $n=7,\dots,11$) rather
+than $3/2$; the question is only what has been proved.
 
 \begin{thebibliography}{9}
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle
 structure of two rows in a random Latin square, \emph{Random Structures
 \& Algorithms} 33 (2008), 286--309.
+\bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
+\emph{Random Structures \& Algorithms} 52 (2018), 181--196.
 \end{thebibliography}
 \end{document}

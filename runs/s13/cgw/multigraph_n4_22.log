@@ -1,0 +1,11 @@
+squares (all, unnormalised): 576
+|S(lam)|= 288 |S(mu)|= 288 ratio C(lam)/C(mu)*gamma... |S(lam)|/|S(mu)| = 1.0
+edges G_S: 1152 G_J: 1152
+G_S == G_J as multisets: True
+edges in G_S not in G_J (with multiplicity): 0  in G_J not in G_S: 0
+G_S degrees of mu-squares: Counter({4: 288})
+G_J degrees of mu-squares: Counter({4: 288})
+G_S degrees of lam-squares: Counter({4: 288})
+sum degS: 1152 distinct targets in G_S: 288 distinct mu keys: 288
+targets of G_S that are mu-squares: 288 targets not in S(mu): 0
+G_S edges by case: {1: 576, 5: 576}  of which with multiplicity 0 in G_J: {}
