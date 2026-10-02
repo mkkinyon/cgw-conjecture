@@ -1,0 +1,35 @@
+R = 0123456 / 1230564, j=0 jp=4, sigma(j)=3 sigma(jp)=6, hypothesis (1): holds
+  j, jp in different sigma-cycles
+|S(R)| = 6543360 completions
+moves: 23508480 flippable trades, 41925120 non-flippable, 1635840 turns (426240 of odd cycles)
+P[beta=1 | R] = 0.500000
+
+== move set A (jp-trades + turns): 393 components, LHS of Question = 0.006993
+  |K| =  6492480 (0.99222 of S(R))  p(K) = 0.5000  row-parity-1 fraction = 0.500  (row,col,sym,sgnpi) bins: 0010:811560 0011:811560 0100:811560 0101:811560 1000:811560 1001:811560 1110:811560 1111:811560
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:120 1001:60 1110:120 1111:60
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.3333  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1001:120 1110:60 1111:120
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:120 1001:60 1110:120 1111:60
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.3333  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:60 0011:120 0100:60 0101:120
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:120 0011:60 0100:120 0101:60
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.3333  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1001:120 1110:60 1111:120
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:120 0011:60 0100:120 0101:60
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.3333  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:60 0011:120 0100:60 0101:120
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:120 1001:60 1110:120 1111:60
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.3333  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:60 0011:120 0100:60 0101:120
+  |K| =      360 (0.00006 of S(R))  p(K) = 0.6667  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:120 0011:60 0100:120 0101:60
+  + 381 smaller components, total size 46920 (0.00717 of S(R)), largest 360, contributing 0.006926 to the LHS
+
+== move set B (both trades + turns): 377 components, LHS of Question = 0.006896
+  |K| =  6498240 (0.99310 of S(R))  p(K) = 0.5000  row-parity-1 fraction = 0.500  (row,col,sym,sgnpi) bins: 0010:812280 0011:812280 0100:812280 0101:812280 1000:812280 1001:812280 1110:812280 1111:812280
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 0.000  (row,col,sym,sgnpi) bins: 0010:60 0100:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 0.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:60 1111:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 0.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:60 1111:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1110:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 0.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:60 1111:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1110:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1110:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1110:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1000:60 1110:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 0.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:60 1111:60
+  |K| =      120 (0.00002 of S(R))  p(K) = 0.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:60 1111:60
+  + 365 smaller components, total size 43800 (0.00669 of S(R)), largest 120, contributing 0.006694 to the LHS

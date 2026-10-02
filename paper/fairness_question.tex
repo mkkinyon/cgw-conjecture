@@ -167,9 +167,25 @@ function of the number of trades performed, decays at least as fast
 as that of the unthinned walk and reaches the noise floor
 ($\approx0.01$) within $64$ trades at each $n$.  Column pairs with
 $j,j'$ in different cycles of $\sigma$ were not tested at these
-sizes.  Components have been enumerated only for $n\le6$, where the
-left side of the Question takes values between $0$ (all tested pairs
-with $j,j'$ in different $\sigma$-cycles) and $0.14$.
+sizes.
+
+The components have been enumerated exactly for $n\le7$ (seven
+instances at $n=7$, $|S(R)|\approx6.6\cdot10^6$ each, all cycle types
+of $\sigma$).  At $n=7$ there is always one component containing
+$99.1$--$99.7\%$ of $S(R)$, on which $p(K)$ agrees with
+$\Pr[\beta=1\mid R]$ to four decimals ($0.493$--$0.502$ for
+within-cycle marks, exactly $\tfrac12$ for cross-cycle marks); the
+remaining squares lie in hundreds of components of size $120$--$960$
+and are the squares in which all, or all but one or two, row pairs
+$\rho_{x,y}$ are single $7$-cycles (isotopes of $\mathbb Z_7$ and other
+row-Hamiltonian squares), so that every trade swaps two whole rows and
+nothing is flippable.  These contribute $0.003$--$0.008$, essentially
+the whole left side.  ($n=6$ is degenerate: the moves preserve the row
+parity of $L$ there, because all free cycles are $2$-cycles.)  So the
+component structure is expected to be trivial for large $n$ --- one
+component up to a super-polynomially small set of locked squares ---
+and the Question with $R$ fixed is then the quenched statement
+$\Pr[\beta=1\mid R]=\tfrac12+o(1)$.
 \end{remark}
 
 \begin{remark}[weaker forms that are still useful]\label{rem:weaker}

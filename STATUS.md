@@ -40,20 +40,31 @@ row-sharing rare. Status:
   candidate graph; only local exclusion = π-adjacent rows. Real squares
   (true marks) decorrelate 10–30% FASTER than the model at n=50, half that
   at n=100 (the adjacency exclusion), frame statistics agree.
-- **Trade-chain route** (§s13tradechain), an alternative that bypasses (b)
-  and intercalates entirely: symmetric chain on X preserving S(λ) and the
-  mark; EQ(4δ) ⇐ bit autocorrelation along the chain ≤ δ². Merges with a
-  free cycle are free; EVERY split and the C₁–C₂ merge are thinned by
-  "flippability" (measured ½, uncorrelated with the frame beyond adjacency;
-  exact criterion: q* off the ρ_{x,y}-cycle of j). Needs (F1) flippable
-  bit-changing pairs in positive proportion for typical squares — merges in
-  the apart state AND separating splits in the together state — and (F2)
-  mixing of the thinned walk. Numerics: autocorrelation tracks the pure walk
-  to the noise floor (n=30). If everything were flippable, EQ(o(1)) would
-  follow from Diaconis–Shahshahani on the fibres {π⁻¹(1)=a, π⁻¹(2)=b} (= permutations
-  of n−2 points with no fixed point outside {a,b}, NOT all of S_{n−2}; P[u~v]=½
-  exactly there by the involution π ↦ (a b)∘π; NOT ½ on parity classes: ½ ± 1/((n−2)(n−3))). Standalone statement: paper/fairness_question.tex
-  (refereed; σ-distance ≥ 2 in BOTH directions; no component enumeration beyond n=6).
+- **Trade-chain route** (§s13tradechain, §s13comp7; standalone statement
+  paper/fairness_question.tex, refereed): symmetric chain on S(R) (trades along
+  the ρ_{x,y}-cycle through j′, turns of free frame cycles); EQ(4δ) ⇐ bit
+  autocorrelation ≤ δ² ⇐ component fairness Σ|K|(2p(K)−1)²/|S(R)| → 0.
+  **Exact enumeration at n=7 (s13_comp7.c, runs/s13/comp7/, 7 instances):
+  one giant component (99.1–99.7% of S(R)) with p(K) = P[β=1|R] to 4 decimals;
+  the rest is "locked" dust (ℤ₇-like squares, every ρ_{x,y} a 7-cycle, nothing
+  flippable; components = 5! row permutations), 0.3–0.8%, carrying the whole
+  LHS (0.003–0.008). n=6 is degenerate (row parity invariant).**  So the
+  component structure is trivial and the Question for fixed R IS the quenched
+  statement P[β=1|R] = ½+o(1); the chain is the tool, not a weakening.
+  Rectangle picture (delete columns j,j′): frame cycles = leftover row–symbol
+  cycles, turns = orientations, bit = function of the rectangle; flippable ⇔
+  the two (x,y)-paths pair "parallel"; for x,y in different cycles a turn
+  toggles it, so thinning only bites inside C₁∪C₂ (the bit-changing pairs).
+  Within-cycle mark ⇔ (1,2) crossed; cross-cycle marks have an exact
+  bit-flipping involution (switch at (1,2) + isotopy) ⇒ p = ½ exactly.
+  Needs (F1): P_stationary[no flippable bit-changing pair] = o(1/log² n) —
+  a parallel/crossed statement about row-pair paths in a random rectangle,
+  target for a KS switching as in prop:trapped — and (F2) mixing of the
+  thinned walk vs the "coin walk" on D = {derangements, π(1)≠2, π(2)≠1}
+  (uniform on D stationary, P_D[1~2] = ½ exactly; fibres {π⁻¹(1)=a,π⁻¹(2)=b}
+  = permutations of n−2 points with no fixed point outside {a,b}, exact ½
+  there via π ↦ (a b)∘π).  Right-multiplication trades (through j) are
+  equally legal and were included as move set B (no qualitative change).
 
 ## Bugs found this session
 - Sessions 7–8 real-square pipelines (s7/s8_real_bias.py) used σ's SYMBOLS as column
@@ -80,7 +91,8 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
 
-0. (F1) by a switching argument; (F2) by comparison with the full transposition walk.
+0. (F1) in the rectangle language by a switching argument (P[all bit-changing pairs crossed] ≲ C/(pq) + trapping);
+   (F2) by coupling with the coin walk on D.  Both now have precise statements (§s13comp7).
 
 1. (II): formulate the minimal "coarse product" property of the pool and
    the frame-health property, and test both on real squares at n = 100–400
@@ -94,7 +106,8 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 ## Numerics this session
 
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
-`akB_{6,7}_k40.log` (moot).  `s13_spectral.py brute N` (N ≤ 7) and
+`akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
+`trade{30,50,100}.log` (trade chain on real squares).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
