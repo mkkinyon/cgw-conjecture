@@ -35,8 +35,10 @@ asserts at most $18$.  The lower bound of Lemma 3.12 survives (and is
 in fact elementary); the upper bound $3/2$, hence the upper bound of
 Theorem 3.13 and the results of Section 4 that use it (listed below),
 is not established by the published argument for any split other than
-$(2,2)$.  A canonical repair of case 3 exists when $\alpha$ is even and
-$\alpha<2\beta$ (or symmetrically); we do not see one when
+$(2,2)$.  For $\min(\alpha,\beta)=2$ the count can be corrected and
+gives the bound with $2$ in place of $3/2$; for $\min(\alpha,\beta)\ge3$
+a canonical repair of case 3 exists when $\alpha$ is even and
+$\alpha<2\beta$ (or symmetrically), and we do not see one when
 $\alpha,\beta$ are both odd.  Exact data for $n\le11$ and sampled
 squares up to $n=100$ indicate that the statement is true with much
 room to spare.
@@ -235,7 +237,8 @@ $|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$, equivalently
 \Pr\bigl[\{j,j'\}\text{ is an $A$-pair}\bigr]\;\ge\;\tfrac13
 \quad\text{for $(L,\{j,j'\})$ uniform on $X$},
 \]
-is not established for $\max(\alpha,\beta)\ge3$.
+is not established for $\max(\alpha,\beta)\ge3$; for $\min(\alpha,\beta)=2$
+it holds with $\tfrac14$ in place of $\tfrac13$ (Proposition~\ref{prop:two} below).
 
 Within \cite{CGW08} the upper bound of Lemma 3.12 is used for: the
 upper bound of Theorem 3.13; the lower bound $(2/3)^{\kappa-1}$ of
@@ -311,6 +314,100 @@ or cross-switch rows $z,w$ at $\{j,j'\}$ (if they lie in one; this
 changes the type to $\mu$) --- but they are indexed by a free pair of
 rows and so have unbounded multiplicity on the $S(\mu,F)$ side, which
 defeats the double count.
+
+\section{The case $\min(\alpha,\beta)=2$: the bound holds with constant $2$}
+
+For $\min(\alpha,\beta)=2$ the published count can be corrected at the
+price of a weaker constant.  Say $\alpha=2\le\beta$, $m=\beta+2$.
+
+\begin{proposition}\label{prop:two}
+If $\alpha=2$ (or $\beta=2$), then
+\[
+\frac{|S(\lambda,F)|\,(\mu_{m}+1)\,m}{|S(\mu,F)|\,\mu_2\mu_\beta\,2\beta}\;\le\;2
+\qquad(\beta\ne2),
+\]
+and for $\alpha=\beta=2$ the quantity of Lemma 3.12 is $\le2$ as well.
+\end{proposition}
+
+\begin{proof}
+Every splitting instance $(L,\{j,j'\})$ yields two squares in
+$S(\mu,F)$: in cases 1 and 2 this is item 4, and in case 3 the
+cross-switch either reverses nothing (the arc of length $2$) or
+reverses the arc of length $\beta$, and in both forms the backflip at
+$\{j,j'\}$ produces parts $2$ and $\beta$ (Proposition~\ref{prop:gap}).
+So $Z=2(\mu_m+1)m\,|S(\lambda,F)|$ counts valid edges.  It remains to
+show that every $M\in S(\mu,F)$ receives at most $4$ edges per joining
+pair, i.e.\ per pair $\{q,q'\}$ with $q$ in a $2$-cycle and $q'$ in a
+$\beta$-cycle of $\omega_M$.  Attribute each edge $(L,M)$ to a joining
+pair of $M$ as follows: the direct edge of case $c\in\{1,2,3\}$ to the
+pair at which the backflip was made ($\{j,j'\}$ in cases 1, 3;
+$\{\omega j,\omega j'\}$ in case 2), which is an $A$-pair of $M$ (the
+backflipped pair is an $A$-pair afterwards); the switch edge of cases 1
+and 3 to the switched pair $\{j,j'\}$, which is a $B$-pair of $M$
+(Lemma 3.7: it was an $A$-pair before the switch); and the switch edge
+of case 2 to $\{\omega j,\omega j'\}$, which is a $B$-pair of $M$ (it
+was the backflipped $A$-pair of $L'$, and the switch at $\{j,j'\}$
+trades the row cycle through $j$ or through $j'$, which contains
+exactly one of $\omega j,\omega j'$, so the status toggles by the
+argument in the proof of Lemma 3.7).  Now fix $M$ and a joining pair
+$Q$ of $M$ and count the edges attributed to $Q$.
+
+If $Q$ is an $A$-pair of $M$, only direct edges arrive, and
+$L_1:=\mathrm{flip}_Q(M)$ is determined.  Case 1 contributes
+$(L_1,Q)$; case 2 contributes $(L_1,\{\omega_{L_1}^{-1}q,\omega_{L_1}^{-1}q'\})$;
+in case 3, $L$ is a cross-switch of $L_1$ at a $B$-pair $\{J,J'\}$ with
+$Q=\{j,j'\}$ at $\omega_L$-distance $2$, and $\{J,J'\}$ is determined by
+$L_1$ and $Q$: let $(a,b)$ be the ordering of $Q$ with
+$\omega_{L_1}^2(a)=b$ (unique since $\beta\ge3$; for $\beta=2$ both
+orderings give the same candidate below and there is no long arc, so
+case 3 then contributes at most $1$); if nothing was
+reversed, $\{J,J'\}=\{\omega_{L_1}a,\omega_{L_1}b\}$; if the long arc
+was reversed, the computation of Proposition~\ref{prop:gap} (with $j'$
+the column of $Q$ at distance $2$ after $j$ in $L$) gives
+$\omega_{L_1}(j')=J'$ and $\omega_{L_1}^{-1}(j')=J$, i.e.\ $(a,b)=(j',j)$
+and $\{J,J'\}=\{\omega_{L_1}^{-1}a,\omega_{L_1}a\}$, the pair symmetric
+about $a$.  So case 3 contributes at most $2$ edges.  Total $\le4$.
+
+If $Q$ is a $B$-pair of $M$, only switch edges arrive.  For cases 1 and
+3 the switch was made at $Q$ itself, $M'=\mathrm{sw}_Q(M)$ is
+determined (the switch is an involution: it preserves the symbol sets
+of the two row cycles, so the smallest-symbol rule re-selects the same
+cycle), and the direct edge into $M'$ at the $A$-pair $Q$ is the case-1 edge
+or one of the two case-3 edges listed above: $\le3$ edges.  For case 2, $Q=\{\omega j,\omega j'\}$
+and the switch was made at $\{j,j'\}$; the switch inverted the row
+cycle of $M'$ through $j$ or through $j'$ (whichever carries the
+smaller symbol, which is read off from $M$ since the symbol sets are
+preserved), so $j=\omega_M(\omega j)$ if the cycle through $j$ was
+inverted and $j=\omega_M^{-1}(\omega j)$ otherwise, and similarly
+$j'$; then $M'=\mathrm{sw}_{\{j,j'\}}(M)$ and
+$L=\mathrm{flip}_Q(M')$ are determined: $1$ edge.  Total $\le4$.
+
+Hence $Z\le4\,\mu_2\mu_\beta\,2\beta\,|S(\mu,F)|$ (resp.\
+$4\binom{\mu_2}{2}4|S(\mu,F)|$ for $\alpha=\beta=2$), and the result
+follows as in the proof of Lemma 3.12.
+\end{proof}
+
+We verified the recipe by computer: on sampled squares at $n=7,10,12$
+every direct and every switch edge of every splitting instance with
+$\alpha=2$ is recovered from its target and attributed pair by the
+inverse recipes above, with at most $4$ candidates per pair
+(\texttt{s13\_cgw\_min2.py}); and in the exact $n=5$ computation of
+Section~3 the multiplicities per (target, attributed pair) are exactly
+$2$, $3$ or $4$, direct edges always arrive at $A$-pairs and switch
+edges at $B$-pairs.  The constant $2$ is what this count gives at
+$n=5$ ($24=4\cdot6$ is attained), where the truth is $3/2$.
+
+In the language of Section~4, Proposition~\ref{prop:two} says that for
+a marked pair at distance $2$ (or $m-2$) on an $m$-cycle,
+$\Pr_X[A]\ge\tfrac14$: a lower bound on a different-cycles event, which
+the surviving direction alone could not give.  The reason it works for
+$\alpha=2$ and not for $\min(\alpha,\beta)\ge3$ is not multiplicity but
+type: for $\min(\alpha,\beta)\ge3$ the wrong-form case-3 edges land in
+$S(\mu',F)$ with $\mu'$ the $(2,m-2)$ split, so the same count gives
+only $2(|X|-|X_{3}|)\le3|J|$, where $X_3$ is the set of instances in
+case 3 ($\{j,j'\}$ and $\{\omega j,\omega j'\}$ both $B$-pairs), i.e.\
+$\Pr_X[A]\ge\tfrac13(1-\Pr_X[\text{case }3])$, which is empty without a
+lower bound on $\Pr_X[A\text{ at }\{j,j'\}\text{ or at }\{\omega j,\omega j'\}]$.
 
 \section{What the data say}
 

@@ -1800,3 +1800,81 @@ different-cycles event, which is what every reduction above asks for,
 but it is not yet in a usable place.  Whether a spreading statement is
 within reach of the switching method of \cite{KS18} is the question we
 would ask next.
+
+\paragraph{(i) What the Kwan--Sudakov machinery gives, and a
+gap-direction bound for distance-$2$ marks.}  We went through
+\cite{KS18} and \cite{KSS21} with the question of \S(h) in mind.
+
+\emph{Inventory.}  (1) Their transfer lemma (\cite[Prop.~5]{KS18},
+\cite[Thm.~3.3]{KSS21}, from Br\'egman and van der Waerden): the
+probability that the first $k$ rows of a uniform square equal a given
+$k\times n$ rectangle varies by a factor $e^{O(n\log^2n)}$ over
+rectangles.  This is the estimate of \S(h) and it means that
+\emph{every} statement with failure probability $e^{-\omega(n\log^2n)}$
+in the space of uniform squares holds in every class of $X$, uniformly
+in $\lambda$, $\alpha,\beta$ and the mark.  (2) \cite[Thm.~3]{KS18}:
+for two \emph{fixed} rows, $\E N_2\le1+o(1)$ and
+$\Pr[N_2\ge t]=e^{-\Omega(t\log t)}$, proved by the flips and turns of
+CGW composed into ``joins'' and a double count: this is exactly the
+method of Proposition~\ref{prop:tailsurvive}, which should be cited
+next to it; like ours it is an upper bound on short cycles obtained
+from the joining direction, and it says nothing in the gap direction.
+(3) The lower tail $\Pr[N\le(1-\delta)n^2/4]\le e^{-\Omega(n^2)}$ of
+\cite{KSS21} is proved in a different space: by Keevash's
+approximation of a random Latin square by the random triangle-removal
+process on a constant fraction of the cells, at a cost
+$e^{n^{2-\gamma}}$ (\cite[Thm.~2.4]{KSS21}), where counts of local
+substructures concentrate by a martingale argument.  It transfers lower
+tails of counts of \emph{local} substructures at scale $n^2$ with
+failure $e^{-\Omega(n^2)}$, and only those.  (4) \cite[Lemma~6.4]{KSS21}
+localises the \emph{upper} tail to one row in a $k\times n$ rectangle
+($\Pr[\text{row $1$ in $\ge t$ intercalates}]\le(k/t)^{\Omega(t)}$).
+
+\emph{What this does and does not give.}  The frame selects
+$\ge n/\log^2n$ disjoint row pairs; we would like a constant fraction
+of them to carry a local witness (a short $\rho_{x,y}$-cycle through
+$p$ avoiding $p'$, say).  A statement about a \emph{fixed} family $F$
+of $m\le n/2$ disjoint pairs has natural failure probability
+$e^{-\Omega(m)}$ in the rectangle space, which does not survive the
+transfer (1) (cost $e^{O(n\log^2n)}$); a union over all families costs
+$e^{O(n)}$ and does not help either; and the Keevash route (3) only
+sees counts at scale $n^2$.  So the published machinery gives, inside
+$X$: ``all but $o(n^2)$ row pairs have an intercalate'' (and similar
+local counts), uniformly in $\lambda$ --- and nothing about a family of
+$O(n)$ pairs selected by the square.  Decorrelation from the frame is
+not something these methods address.
+
+\emph{A gap-direction bound, by a rigid inverse.}  The one place where
+we found a bounded-multiplicity inverse for a type-changing move is
+CGW's case 3 with $\min(\alpha,\beta)=2$: there the cross-switch at
+$\{\omega j,\omega j'\}$ either reverses nothing or reverses the long
+arc, both forms land in $S(\mu)$, and the pair that was cross-switched
+is \emph{determined} by the target and the joining pair (it is
+$\{\omega_{L_1}a,\omega_{L_1}b\}$ or the pair symmetric about $a$ at
+distance $2$, $(a,b)$ the distance-$2$ ordering of the joining pair in
+$L_1=\mathrm{flip}(M)$).  Counting edges per joining pair of the target
+with this inverse (at most $4$: direct edges at $A$-pairs, switch edges
+at $B$-pairs, the case-2 switch edge attributed to the backflipped
+pair) gives (\texttt{paper/cgw\_gap\_note.tex}, Proposition~3,
+refereed; verified by \texttt{s13\_cgw\_min2.py} at $n=7,8,10,12$ and
+exactly at $n=5$, where the per-pair multiplicities are $2,3,4$):
+\begin{proposition}[distance-$2$ marks]\label{prop:alpha2}
+For every $\lambda$ with a part $m\ge4$ and $X=X(n,\lambda;2,m-2)$,
+$\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[B]/\Pr_X[A]\le3$ and
+$\Pr_X[A]\ge\tfrac14$.
+\end{proposition}
+\noindent This is an unconditional lower bound on a different-cycles
+event in $X$ (rows $1,2$ apart in the column cycles of the mark),
+obtained from the surviving direction plus a rigid inverse of the
+type-changing move --- the pattern that \S(g) said was unavailable.
+It does not extend to $\min(\alpha,\beta)\ge3$ for a reason of
+\emph{type}, not multiplicity: there the wrong-form case-3 edges land
+in the $(2,m-2)$ split, and the same count gives only
+$\Pr_X[A]\ge\tfrac13(1-\Pr_X[\{j,j'\}\text{ and }\{\omega j,\omega j'\}\text{ both }B])$,
+which needs a lower bound on an $A$-event at one of two adjacent
+marks.  By Theorem~\ref{thm:ladder} the same conclusion for all
+$\alpha$ would follow from $\Pr_X[\mathrm{Flip}=\emptyset]\le\tfrac12$.
+For the orbit method the lesson is that a lower bound on
+$\Pr[(q,c)\text{ separated}]$ for a clean coordinate would follow from
+a type-changing move at $(q,c)$ whose inverse is rigid; the moves of
+\S(g) are not, because the third pair of rows they use is free.

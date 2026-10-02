@@ -74,6 +74,7 @@ itself is not in doubt."""),
     post.append((r"""normalising constant independent of $\lambda$ (namely
 $D_n\CC_n((n))/\sum\gamma\CC$).""", r"""normalising constant independent of $\lambda$ (namely
 $Z=\sum_\nu\gamma(\nu)\CC_n(\nu)/(|\DD_n|\,\CC_n((n)))$)."""))
+    post.append((r"(the latter under CGW($3/2$))", r"(the latter under the upper bound of CGW's Lemma~3.12; $\ge\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap})"))
     for a, b in post:
         assert a in text, a[:70]
         text = text.replace(a, b)

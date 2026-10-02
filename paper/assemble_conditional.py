@@ -321,7 +321,11 @@ Consequently the upper bound of CGW's Theorem~3.13, the lower bound of their Lem
 the parity bounds of Theorem~4.3, the bound $\Pr[\sigma\text{ is an $n$-cycle}]\le2n^{-2/3}$
 of Lemma~4.4, both halves of Corollary~4.5, and the results of their Section~4.2 that rest
 on these (Corollary~4.6, Lemma~4.7, Theorems~4.9 and~4.11, Corollary~4.10 --- the last
-superseded by \cite{KS18}) are not established by the published argument.  The present paper uses none of them:
+superseded by \cite{KS18}) are not established by the published argument.  For
+$\min(\alpha,\beta)=2$ the count can be corrected with the constant $2$ in place of $\tfrac32$
+\cite[Prop.~3]{gapnote}: for marks at distance $2$ or $m-2$ on an $m$-cycle,
+$\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[A]\ge\tfrac14$ unconditionally.  The present
+paper uses none of them:
 Proposition~\ref{prop:tailsurvive} replaces Corollary~4.5 in the proof of
 Theorem~\ref{thm:reduction}.  The exact completion counts tabulated in \cite{CGW08} give
 $\CC_n(\lambda)/\CC_n(\mu)\in[0.985,1.0035]$ for every adjacent pair at $7\le n\le11$ (and

@@ -18,7 +18,14 @@ at {j,j′}) lands in the WRONG type when min(α,β) ≥ 3: the cross-switch rev
 right but the form reversing the LONG arc makes joining rule 4 cross-switch at a different pair, so
 G_S ≠ G_J: exact at n=5, (5)→(2,3), all 161280 squares (s13_cgw_multigraph.py, runs/s13/cgw/):
 172800 of 1036800 G_S edges absent from G_J (half of case-3 + their switch edges), µ-degrees in G_S
-12/18/24 vs 18 asserted.  Only (2,2) is unaffected.  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
+12/18/24 vs 18 asserted.  Only (2,2) is unaffected.  REPAIR for min(α,β)=2 (gap note Prop. 3, refereed;
+s13_cgw_min2.py): attributing edges to joining pairs (direct at A-pairs, switch at B-pairs, case-2 switch edge to
+the backflipped pair) gives ≤ 4 per pair, hence C(λ)/C(µ) ≤ 2 and **P_X[A] ≥ 1/4 unconditionally for marks at
+distance 2 or m−2** (prop:alpha2) — the first gap-direction bound we have; fails for min ≥ 3 by type, not
+multiplicity.  §(h),(i): two disjoint row pairs have numerically independent cycle types (n=30,50,100);
+prop:genericlong: a generic row pair has a cycle > n/5 w.p. ≥ 1/2 unconditionally; KS/KSS inventory: transfer
+lemma e^{O(n log² n)} ⇒ KSS intercalate concentration holds in every class of X; nothing in KS/KSS addresses
+frame-selected families.  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
 form of OUR target) is unproved as published; the 1/2 direction is trivial given
 thm:marked.  Conditional on "CGW(3/2)" from now on: eq:cgwA's P_X[A] ≥ 1/3,
 prop:shortcycles lower bounds, the unconditional witness bound, unconditional (CP)

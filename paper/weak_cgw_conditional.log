@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  2 OCT 2026 15:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  2 OCT 2026 17:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,7 +503,7 @@ ML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 =^^M\OT1/cmr/m/n/1
  []
 
 [6]
-Overfull \hbox (19.11624pt too wide) detected at line 519
+Overfull \hbox (19.11624pt too wide) detected at line 523
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95
  ] \OMS/cmsy/m/n/10.95 ^^@ \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/i
 t/10.95 A\OT1/cmr/m/n/10.95 ]  =  \U/msb/m/n/10.95 P[][]\OML/cmm/m/it/10.95 B; 
@@ -516,7 +516,7 @@ T1/cmr/m/n/10.95 ] \OMS/cmsy/m/n/10.95 ^^@ [][]  ^^T  []\U/msb/m/n/10.95 P[]\OT
  []
 
 [7] [8]
-Overfull \hbox (32.79228pt too wide) detected at line 691
+Overfull \hbox (32.79228pt too wide) detected at line 695
 [][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 B;  d[] \OT1/cmr/m/n/10.95 = \OML
 /cmm/m/it/10.95 `;  d[] \OMS/cmsy/m/n/10.95 ^^U \OML/cmm/m/it/10.95 c \OT1/cmr/
 m/n/10.95 + \OML/cmm/m/it/10.95 `;  [][] \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.9
@@ -529,14 +529,14 @@ sy/m/n/10.95 ;[] ^^T [] ^^T []\OML/cmm/m/it/10.95 :
  []
 
 [9] [10]
-Overfull \hbox (271.1708pt too wide) detected at line 819
+Overfull \hbox (641.78705pt too wide) detected at line 823
 [][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 p; p[][]^^Z[] [] []p; p[][]  \OT1
 /cmr/m/n/10.95 =  [] []\OML/cmm/m/it/10.95 ;  \OMS/cmsy/m/n/10.95 ^^U [] []\OML
 /cmm/m/it/10.95 :
  []
 
 [11] [12]
-Overfull \hbox (36.92215pt too wide) detected at line 953
+Overfull \hbox (36.92215pt too wide) detected at line 957
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x; y\OT1/cmr/m/n/10
 .95 )[] [] [][] \OMS/cmsy/m/n/10.95 ^^T \OT1/cmr/m/n/10.95 1 \OMS/cmsy/m/n/10.9
 5 ^^@ [][]\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P[][]\OMS/cmsy/m/n/10.95 G[] 
@@ -545,7 +545,7 @@ m/m/it/10.95 e[]:
  []
 
 [13] [14]
-Overfull \hbox (2.27061pt too wide) in paragraph at lines 1077--1082
+Overfull \hbox (2.27061pt too wide) in paragraph at lines 1081--1086
 []\OT1/cmr/m/n/10.95 genericity: $\U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 [(\OML/c
 mm/m/it/10.95 q; c\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 j []\OML/cmm/m/it/
 10.95 `\OT1/cmr/m/n/10.95 ] = 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 199\OML/
@@ -559,14 +559,14 @@ t/10.95 :\OT1/cmr/m/n/10.95 197$
  []
 
 
-Overfull \hbox (24.81438pt too wide) detected at line 1134
+Overfull \hbox (24.81438pt too wide) detected at line 1138
 [] \OML/cmm/m/it/10.95 c  \OMS/cmsy/m/n/10.95 ^^T  \U/msb/m/n/10.95 P[][][]  \O
 MS/cmsy/m/n/10.95 ^^T  \OT1/cmr/m/n/10.95 1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/
 it/10.95 c
  []
 
 [15] [16]
-Underfull \hbox (badness 1117) in paragraph at lines 1227--1228
+Underfull \hbox (badness 1117) in paragraph at lines 1231--1232
 []\OT1/cmr/m/n/10.95 [author], \OT1/cmtt/m/n/10.95 cgw-conjecture\OT1/cmr/m/n/1
 0.95 : scripts, logs and notes, [][]$\OT1/cmtt/m/n/10.95 https : / / github . c
 om / mkkinyon /
@@ -607,10 +607,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/symbols/msbm10.pfb>
-Output written on weak_cgw_conditional.pdf (17 pages, 354994 bytes).
+Output written on weak_cgw_conditional.pdf (17 pages, 355471 bytes).
 PDF statistics:
- 365 PDF objects out of 1000 (max. 8388607)
- 302 compressed objects within 4 object streams
+ 370 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
  70 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

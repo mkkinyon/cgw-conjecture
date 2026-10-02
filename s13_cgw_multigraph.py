@@ -55,70 +55,75 @@ def splitting_edges(L, alpha, beta):
             out.append((L2,case)); out.append((switch(L2,j,jp),5))
     return out
 
-n=int(sys.argv[1]); alpha=int(sys.argv[2]); beta=n-alpha
-lam=(n,); mu=tuple(sorted((alpha,beta)))
-# enumerate all Latin squares with first row identity
-squares=[]
-def rec(L, r):
-    if r==n: squares.append([row[:] for row in L]); return
-    used_col=[set(L[i][c] for i in range(r)) for c in range(n)]
-    def fill(c, row):
-        if c==n:
-            L.append(row[:]); rec(L, r+1); L.pop(); return
-        for s in range(n):
-            if s not in row and s not in used_col[c]:
-                row.append(s); fill(c+1,row); row.pop()
-    fill(0,[])
-rec([list(range(n))],1)
-from itertools import permutations
-allsq=[]
-for L in squares:
-    for perm in permutations(range(n)):
-        allsq.append([[perm[s] for s in row] for row in L])
-squares=allsq
-print("squares (all, unnormalised):",len(squares))
-key=lambda L: tuple(map(tuple,L))
-Sl=[L for L in squares if ctype(L)==lam]; Sm=[L for L in squares if ctype(L)==mu]
-print("|S(lam)|=",len(Sl),"|S(mu)|=",len(Sm), "ratio C(lam)/C(mu)*gamma... |S(lam)|/|S(mu)| =", len(Sl)/len(Sm))
-GS=Counter(); GJ=Counter()
-for L in Sl:
-    for (M,case) in splitting_edges(L,alpha,beta):
-        assert ctype(M)==mu, (ctype(M),case)
-        GS[(key(L),key(M))]+=1
-for M in Sm:
-    om=omega_of(M); cyc=cycles(om)
-    ca=[c for c in cyc if len(c)==alpha]; cb=[c for c in cyc if len(c)==beta]
-    for ia,A in enumerate(ca):
-        for ib,B in enumerate(cb):
-            if A is B: continue
-            if alpha==beta and ib<ia: continue
-            for j in A:
-                for jp in B:
-                    for Lp in joining_edges(M,j,jp):
-                        assert ctype(Lp)==lam
-                        GJ[(key(Lp),key(M))]+=1
-print("edges G_S:",sum(GS.values()),"G_J:",sum(GJ.values()))
-print("G_S == G_J as multisets:", GS==GJ)
-only_S=sum((GS-GJ).values()); only_J=sum((GJ-GS).values())
-print("edges in G_S not in G_J (with multiplicity):",only_S," in G_J not in G_S:",only_J)
-degS=Counter(); degJ=Counter()
-for (a,b),v in GS.items(): degS[b]+=v
-for (a,b),v in GJ.items(): degJ[b]+=v
-print("G_S degrees of mu-squares:",Counter(degS[key(M)] for M in Sm))
-print("G_J degrees of mu-squares:",Counter(degJ[key(M)] for M in Sm))
-dl=Counter()
-for (a,b),v in GS.items(): dl[a]+=v
-print("G_S degrees of lam-squares:",Counter(dl[key(L)] for L in Sl))
-print("sum degS:",sum(degS.values()),"distinct targets in G_S:",len(degS),"distinct mu keys:",len(set(key(M) for M in Sm)))
-tS=set(b for (a,b) in GS); tM=set(key(M) for M in Sm)
-print("targets of G_S that are mu-squares:",len(tS&tM),"targets not in S(mu):",len(tS-tM))
-bad=[b for b in tS-tM][:1]
-if bad:
-    B=[list(r) for r in bad[0]]; print("example target:",B,"type",ctype(B),"first row",B[0])
+def main():
+    n=int(sys.argv[1]); alpha=int(sys.argv[2]); beta=n-alpha
+    lam=(n,); mu=tuple(sorted((alpha,beta)))
+    # enumerate all Latin squares with first row identity
+    squares=[]
+    def rec(L, r):
+        if r==n: squares.append([row[:] for row in L]); return
+        used_col=[set(L[i][c] for i in range(r)) for c in range(n)]
+        def fill(c, row):
+            if c==n:
+                L.append(row[:]); rec(L, r+1); L.pop(); return
+            for s in range(n):
+                if s not in row and s not in used_col[c]:
+                    row.append(s); fill(c+1,row); row.pop()
+        fill(0,[])
+    rec([list(range(n))],1)
+    from itertools import permutations
+    allsq=[]
+    for L in squares:
+        for perm in permutations(range(n)):
+            allsq.append([[perm[s] for s in row] for row in L])
+    squares=allsq
+    print("squares (all, unnormalised):",len(squares))
+    key=lambda L: tuple(map(tuple,L))
+    Sl=[L for L in squares if ctype(L)==lam]; Sm=[L for L in squares if ctype(L)==mu]
+    print("|S(lam)|=",len(Sl),"|S(mu)|=",len(Sm), "ratio C(lam)/C(mu)*gamma... |S(lam)|/|S(mu)| =", len(Sl)/len(Sm))
+    GS=Counter(); GJ=Counter()
+    for L in Sl:
+        for (M,case) in splitting_edges(L,alpha,beta):
+            assert ctype(M)==mu, (ctype(M),case)
+            GS[(key(L),key(M))]+=1
+    for M in Sm:
+        om=omega_of(M); cyc=cycles(om)
+        ca=[c for c in cyc if len(c)==alpha]; cb=[c for c in cyc if len(c)==beta]
+        for ia,A in enumerate(ca):
+            for ib,B in enumerate(cb):
+                if A is B: continue
+                if alpha==beta and ib<ia: continue
+                for j in A:
+                    for jp in B:
+                        for Lp in joining_edges(M,j,jp):
+                            assert ctype(Lp)==lam
+                            GJ[(key(Lp),key(M))]+=1
+    print("edges G_S:",sum(GS.values()),"G_J:",sum(GJ.values()))
+    print("G_S == G_J as multisets:", GS==GJ)
+    only_S=sum((GS-GJ).values()); only_J=sum((GJ-GS).values())
+    print("edges in G_S not in G_J (with multiplicity):",only_S," in G_J not in G_S:",only_J)
+    degS=Counter(); degJ=Counter()
+    for (a,b),v in GS.items(): degS[b]+=v
+    for (a,b),v in GJ.items(): degJ[b]+=v
+    print("G_S degrees of mu-squares:",Counter(degS[key(M)] for M in Sm))
+    print("G_J degrees of mu-squares:",Counter(degJ[key(M)] for M in Sm))
+    dl=Counter()
+    for (a,b),v in GS.items(): dl[a]+=v
+    print("G_S degrees of lam-squares:",Counter(dl[key(L)] for L in Sl))
+    print("sum degS:",sum(degS.values()),"distinct targets in G_S:",len(degS),"distinct mu keys:",len(set(key(M) for M in Sm)))
+    tS=set(b for (a,b) in GS); tM=set(key(M) for M in Sm)
+    print("targets of G_S that are mu-squares:",len(tS&tM),"targets not in S(mu):",len(tS-tM))
+    bad=[b for b in tS-tM][:1]
+    if bad:
+        B=[list(r) for r in bad[0]]; print("example target:",B,"type",ctype(B),"first row",B[0])
 
-bycase=Counter(); tot=Counter()
-for L in Sl:
-    for (M,case) in splitting_edges(L,alpha,beta):
-        tot[case]+=1
-        if GJ[(key(L),key(M))]==0: bycase[case]+=1
-print("G_S edges by case:",dict(tot)," of which with multiplicity 0 in G_J:",dict(bycase))
+    bycase=Counter(); tot=Counter()
+    for L in Sl:
+        for (M,case) in splitting_edges(L,alpha,beta):
+            tot[case]+=1
+            if GJ[(key(L),key(M))]==0: bycase[case]+=1
+    print("G_S edges by case:",dict(tot)," of which with multiplicity 0 in G_J:",dict(bycase))
+
+
+if __name__ == '__main__':
+    main()
