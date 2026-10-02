@@ -12,31 +12,45 @@ CGW weak conjecture d_TV(P_n,Q_n) → 0  ⇐  EQ(o(1/log n)) [thm:reduction]
 ⇐ KPS re-randomisation + rank formula [thm:master] + supply/cond. expander
 ⇐ prob:annealed: E|bias| = o(1/log n) over orbits, k' ≥ 6 log^11 n chords.
 
-**prob:annealed in the stationary-frame model is PROVED with the sharp
-exponent** (§sec:spectralexact, session 13): 4E[bias²] ≤ C/k' + Ck²/N.
-It rests on an exact closed form for the spectral measure of the
-same-cycle sign under the random-transposition walk (thm:spectral):
-ν(λ) = 2c_λ²(1−r_λ) on shapes (a,b,1^j), c_λ = (a−b+1)/((a+j+1)(b+j)).
-Consequence: E_π̄[Φ_m] ≤ 12/m uniformly in N (cor:stationarydecay), m·E → 2.
+**prob:annealed in the stationary-frame MODEL is PROVED with the sharp
+exponent** (§sec:spectralexact): 4E[bias²] ≤ C/k' + Ck'²/N for a uniform
+frame and a uniform disjoint pool (so k' ≪ √N; the real pool is a central
+element and the restriction can presumably be lifted). It rests on the exact
+spectral measure of the same-cycle sign (thm:spectral): ν(λ) = 2c_λ²(1−r_λ)
+on shapes (a,b,1^j), c_λ = (a−b+1)/((a+j+1)(b+j)); E_π̄[Φ_m] ≤ 12/m.
+The chain is: thm:reduction ⇐ EQ ⇐ thm:marked + [KPS re-randomisation,
+thm:master, lem:supply, lem:condexp, prop:nodecouple] ⇐ **(T)**, where
+(T): E_{Unif(X)}[ε(π₀R_SM_S) ε(π₀R_TM_T)] = o(1/log² n) over the real orbit
+measure. cor:stationarymodel says (T) holds (≈ 2/k') in the model.
 
-## The one open item: (II) the transfer — three equivalent-ish formulations
+## The one open item: (T), i.e. (II) the transfer — what it contains
 
-Needed: E_{Unif(X)}[ε(π_P(L^S)) ε(π_P(L^T))] = o(1/log² n) (pool subsets S,T).
-- **(T1) PROVED** (prop:trapped, refereed): P[row 1 in a frame cycle of length ℓ] ≤ 18/(n−ℓ−1)
-  under Unif(X), by a Kwan–Sudakov switching whose only row-1 move is the CGW switch
-  at the mark (priced by thm:marked). Trapped marks cost O(1/k′).
-- **(T2) OPEN**: the pool (intercalate row pairs) in generic position relative to the
-  frame. Exact structure (§s13transfer2): delete columns j,j′; frame = leftover graph
-  of the n×(n−2) rectangle; pool = ¼-coin thinning of a candidate graph; only local
-  exclusion = π-adjacent rows. Real squares (true marks) decorrelate 10–30% FASTER
-  than the model at n=50 (adjacency exclusion), frame stats agree.
-- **Trade-chain route (§s13tradechain) OPEN, promising**: symmetric Markov chain on X
-  (trades at row pairs ∉{1,2}, turns of cycles avoiding 1,2) preserving S(λ) and the
-  mark, acting on the frame by transpositions thinned by "flippability" (prob ½, no
-  frame correlation except adjacency). EQ(δ) ⇐ bit autocorrelation along the chain
-  ≤ δ². Needs (F1): in the apart state a positive fraction of C_1×C_2 pairs flippable
-  (typical squares), (F2): mixing of the thinned walk. Numerics: autocorrelation
-  tracks the pure walk to the noise floor (n=30). No intercalates/expander needed.
+(T) is one statement but it carries three things: (a) the real frame law
+π_P(L) under Unif(X) must be close to uniform ON THE TEST FUNCTION
+ε·P^Mε (a function of the cycle type and the cycles of u,v) — the quenched
+one-point content of the old item (I) is relocated here, not removed;
+(b) the pool must be in generic position relative to the frame; (c) R/M
+row-sharing rare. Status:
+- **Trapping half of (a) PROVED** (prop:trapped, refereed): P_X[row 1 in a
+  frame cycle of length ℓ] ≤ 18/(n−ℓ−1), by a Kwan–Sudakov switching whose
+  only row-1 move is the CGW switch at the mark (priced by thm:marked).
+  Trapped marks cost O(1/k'). The rest of (a) is OPEN.
+- (b) OPEN. Exact structure (§s13transfer2): delete columns j,j′; frame =
+  leftover graph of the n×(n−2) rectangle; pool = ¼-coin thinning of a
+  candidate graph; only local exclusion = π-adjacent rows. Real squares
+  (true marks) decorrelate 10–30% FASTER than the model at n=50, half that
+  at n=100 (the adjacency exclusion), frame statistics agree.
+- **Trade-chain route** (§s13tradechain), an alternative that bypasses (b)
+  and intercalates entirely: symmetric chain on X preserving S(λ) and the
+  mark; EQ(4δ) ⇐ bit autocorrelation along the chain ≤ δ². Merges with a
+  free cycle are free; EVERY split and the C₁–C₂ merge are thinned by
+  "flippability" (measured ½, uncorrelated with the frame beyond adjacency;
+  exact criterion: q* off the ρ_{x,y}-cycle of j). Needs (F1) flippable
+  bit-changing pairs in positive proportion for typical squares — merges in
+  the apart state AND separating splits in the together state — and (F2)
+  mixing of the thinned walk. Numerics: autocorrelation tracks the pure walk
+  to the noise floor (n=30). If everything were flippable, EQ(o(1)) would
+  follow from Diaconis–Shahshahani on cosets (P[u~v]=½ exactly on each coset).
 
 ## Bugs found this session
 - Sessions 7–8 real-square pipelines (s7/s8_real_bias.py) used σ's SYMBOLS as column
@@ -47,9 +61,9 @@ Needed: E_{Unif(X)}[ε(π_P(L^S)) ε(π_P(L^T))] = o(1/log² n) (pool subsets S,
 ## Closed / superseded (do not spend time on these)
 
 - (III) prob:decouple: NOT NEEDED (prop:nodecouple; routing merges m ≥ n/(A log n)).
-- (I) in all its session 8–12 forms: prob:mixing (one-block start), prob:survival,
-  (R1), (C1), (C2″), (S₂), occupation-time lemma, Markov renewal, a_k, t_k(w):
-  all MOOT for the stationary frame.  The exact laws (thm:blockcount,
+- (I) in all its session 8–12 forms (prob:mixing one-block start, prob:survival,
+  (R1), (C1), (C2″), (S₂), occupation-time lemma, Markov renewal, a_k, t_k(w)):
+  closed IN THE MODEL; the quenched frame-law question survives inside (T)(a).  The exact laws (thm:blockcount,
   thm:sizebiased, thm:idleloop, lem:inert, prop:nomino) remain valid results.
 - Budget: γ > 1/11 not 4/9 (cor:budget) — now irrelevant since c = 1/2 is proved.
 - Dust obstruction: a sup-norm statement; irrelevant to L²/stationary (rem:dustblind).

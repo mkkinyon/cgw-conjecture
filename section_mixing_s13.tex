@@ -529,9 +529,17 @@ costs.  Note also that ``the frame is stationary'' is itself a
 statement about $\mathrm{Unif}(S(\lambda))$ and the special pair
 $(j,\sigma^\alpha(j))$ --- it is (T1) below, and indeed
 $\Pr[u\sim v]=\tfrac12$ for the frame is the weak conjecture's own
-bit, since the base point of an orbit is a uniform orbit point; the
-mixing argument needs only the frame's \emph{health}, not its
-exact law.
+bit, since the base point of an orbit is a uniform orbit point.
+[Referee note, end of session 13: for the spectral route of
+\S\ref{sec:spectralexact} this is \emph{not} a matter of ``health''
+only --- Corollary~\ref{cor:stationarymodel} uses the exact uniform
+law of the frame.  What (T) below needs from the frame law is that
+it be close to uniform \emph{on the test function}
+$\alpha\mapsto\varepsilon(\alpha)(P^M\varepsilon)(\alpha)$, a function
+of the cycle type and of the cycles of $u,v$; the quenched one-point
+function of \S\S\ref{sec:s10}--\ref{sec:s12} is thereby relocated
+into (II), not removed.  Proposition~\ref{prop:trapped} proves the
+trapping half of this.]
 
 \emph{Numerical check (\texttt{s13\_frame.c}, $10^6$ instances per
 point, $N=4096$ slots, $k$ iid chords, $4\E[\mathrm{bias}^2]=\E[\varepsilon_S\varepsilon_T]$):}
@@ -580,8 +588,10 @@ imported from the uniform measure by the union-of-costs device of
 Lemma~\ref{lem:condexp}: the device transfers only properties whose
 failure probability is $e^{-\omega(n\log^2n)}$, while ``more than
 $2n/k$ marks are trapped'' fails with probability of order
-$e^{-n/k}$ at best.  Status: UNEXAMINED; no proof route visible
-beyond the one sketched under (T2).
+$e^{-n/k}$ at best.  Status: the trapping half is PROVED by a
+switching argument (Proposition~\ref{prop:trapped}, written after
+this paragraph); the closeness of the frame law to uniform on the test
+function $\varepsilon\cdot P^M\varepsilon$ is OPEN.
 
 \paragraph{(T2) Genericity of the pool.}
 This is the real content of (II).  Step (a) of \S\ref{sec:transfer}
@@ -620,8 +630,9 @@ problem of the continuum chain.
 
 \medskip
 \noindent\textbf{Classification.}  (III): \emph{closed}
-(Proposition~\ref{prop:nodecouple}).  (II)(a): routine.  (T3):
-routine arithmetic given (T1), and it improves the position of (I).  (II)(T1)--(T2): \emph{hard}, of
+(Proposition~\ref{prop:nodecouple}).  (II)(a): routine.  (T3): a model
+hypothesis, part of (II); given it, the arithmetic is routine and it
+improves the position of (I).  (II)(T1)--(T2): \emph{hard}, of
 a different nature from (I): they need distributional control of the
 intercalate structure relative to a pair permutation under the
 type-conditioned measure, which the existing toolkit (existence
@@ -892,7 +903,7 @@ which also splits the $m$-cycle into lengths $\alpha,\beta$ and lands
 in $J$.
 \end{proof}
 
-\emph{Status: PROVED (modulo the referee pass noted below).  This is
+\emph{Status: PROVED.  This is
 the trapping half of (T1): with a pool of $k'$ chords the marks for
 which the chain cannot move row $1$ or row $2$ within the horizon are
 those with $|C_1|$ or $|C_2|$ below $\asymp n/k'$, of total probability
@@ -928,14 +939,20 @@ $\varepsilon(\pi)$.  Hence, by stationarity, for every $M$,
 \qquad
 (T^M\varepsilon)(L,P)=\E\bigl[\varepsilon(\pi_P(L_M))\,\big|\,L_0=L\bigr],
 \]
-and EQ$(\delta)$ follows from $\E_X|T^M\varepsilon|\le\delta$ for some
-$M$.  If every pair were flippable, $T^M\varepsilon$ would be the
-one-point function $P^M\varepsilon$ of the walk with transpositions
-avoiding $u,v$, and $\sup_\alpha|(P^M\varepsilon)(\alpha)|\le2\max_\alpha
-d_{\mathrm{TV}}(\text{law of }\sigma_M\mid\sigma_0=\alpha,\ \mathrm{Unif})\le2n^{-1/2}$
-at $M=n\log n$ by Diaconis--Shahshahani --- EQ$(2n^{-1/2})$ with no
-knowledge of the frame law, no spectral measure, and no genericity of
-anything.  The entire difficulty is the thinning: which pairs are
+and, since $\E_X\varepsilon=2(\Pr_X[B]-\tfrac12)$, EQ$(4\delta)$
+follows from $\E_X|T^M\varepsilon|\le\delta$ for some $M$.  If every
+pair were flippable, the frame would perform the walk of
+left-multiplication by uniform transpositions of $\{3,\dots,n\}$,
+which preserves $\pi^{-1}(1)$ and $\pi^{-1}(2)$ and is the ordinary
+transposition walk on $S_{n-2}$ after contracting the arcs
+$\pi^{-1}(1)\to1$ and $\pi^{-1}(2)\to2$ to single points; on every such
+coset $\Pr[u\sim v]=\tfrac12$ exactly (two distinct points of a uniform
+permutation of $n-2$ points), so $T^M\varepsilon$ would be bounded by
+twice the total-variation distance of that walk from its uniform
+coset law, which is $o(1)$ after $Cn\log n$ trades by
+Diaconis--Shahshahani (the turn steps supply aperiodicity) ---
+EQ$(o(1))$ with no knowledge of the frame law, no spectral measure, and
+no genericity of anything.  The entire difficulty is the thinning: which pairs are
 flippable depends on $L$, so the frame is not Markov by itself.  What
 is needed is that, for $\mathrm{Unif}(X)$-typical squares, the
 flippable graph on $\{3,\dots,n\}$ is dense and expanding and only
@@ -965,16 +982,17 @@ a stationary two-time statement, the exact analogue for the trade chain
 of Corollary~\ref{cor:stationarydecay} for the walk, and the quantity
 \texttt{s13\_trade.py} measures.
 
-(ii) \emph{Which frame moves are free.}  Combining a turn with a trade
-makes the transposition $(x\,y)$ available at any pair for which the
-cycle of $x$ or of $y$ avoids rows $1,2$, or contains both (a turn of
-$C_x$ toggles the flippability of $(x,y)$ when $y\notin C_x$, and
-turning a cycle through both marked rows leaves $\sigma$ unchanged).
-Hence: in the \emph{together} state every move is available, including
-every separating one; in the \emph{apart} state every move is
-available except the splits of $C_1$, the splits of $C_2$, and the
-merges of $C_1$ with $C_2$, which require flippability.  The merges
-$C_1$--$C_2$ are the bit-changing moves.
+(ii) \emph{Which frame moves are free.}  A turn of $C_x$ toggles the
+flippability of $(x,y)$ only when $y\notin C_x$; when $x,y$ lie in one
+cycle the turn conjugates $\rho_{x,y}$ by $(j\,j')$ and flippability is
+unchanged.  Hence combining a turn with a trade frees exactly the
+\emph{merges} $(x,y)$ for which $C_x$ or $C_y$ avoids rows $1,2$;
+\emph{every split} is constrained (needs flippability), and so is the
+merge of $C_1$ with $C_2$ in the apart state.  In the together state
+the bit-changing moves are the separating splits of the common cycle;
+in the apart state they are the merges $C_1$--$C_2$.  [An earlier
+version of this paragraph claimed that turning the common cycle frees
+the separating splits; it does not.]
 
 (iii) \emph{Flippability, exactly.}  Let $a=L(x,j)$, $b'=L(y,j')$ and
 $q^*$ the column where row $x$ holds $b'$ ($q^*\ne j$ when
@@ -990,9 +1008,11 @@ $\Pr_X[\text{no flippable merge}\mid\text{apart}]\le2\Pr_J[\text{all merges flip
 this does not by itself show either is small.
 
 What a proof must supply is therefore: (F1) under $\mathrm{Unif}(X)$,
-in the apart state, a positive fraction of the pairs
-$C_1\times C_2$ (and of the splitting pairs of $C_1$, $C_2$) are
-flippable, except on a set of squares of measure $o(1/\log^2n)$; and
+a positive fraction of the bit-changing pairs --- the merging pairs
+$C_1\times C_2$ in the apart state and the separating pairs of the
+common cycle in the together state --- and of the other splitting
+pairs, are flippable, except on a set of squares of measure
+$o(1/\log^2n)$; and
 (F2) a mixing argument for the frame walk in which all moves are
 available at rate $\asymp1/n^2$ except the constrained ones, which are
 available at rate $\ge c/n^2$ on the event (F1).  Both are statements

@@ -1,0 +1,18 @@
+n=100: squares=100 instances=300 steps/instance=6000; sigma preserved, Latin checked
+  flippable fraction | adj : 0.0000  (18089 pairs)
+  flippable fraction | same: 0.5001  (441168 pairs)
+  flippable fraction | diff: 0.4998  (441408 pairs)
+  trades m : E[eps eps] chain     baseline (uniform derangement frame, pi(u)!=v, pi(v)!=u; iid transp. avoiding u,v)   exact walk (all transp.)
+    0 : +1.0000        +1.0000        +1.0000
+    1 : +0.6348        +0.6567        +0.6531
+    2 : +0.4790        +0.4963        +0.4950
+    3 : +0.3819        +0.3918        +0.3916
+    4 : +0.3111        +0.3227        +0.3237
+    6 : +0.2264        +0.2342        +0.2370
+    8 : +0.1726        +0.1817        +0.1850
+   12 : +0.1155        +0.1232        +0.1260
+   16 : +0.0888        +0.0927        +0.0935
+   24 : +0.0540        +0.0595        +0.0591
+   32 : +0.0386        +0.0365        +0.0412
+   48 : +0.0117        +0.0266        +0.0232
+   64 : +0.0074        +0.0126        +0.0145
