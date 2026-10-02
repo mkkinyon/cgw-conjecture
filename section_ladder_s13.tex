@@ -557,11 +557,26 @@ With $(J,J')=(\omega j,\omega j')$ the reversed arc has $j'=\omega^{\alpha-1}J$
 in its interior, so afterwards $\omega'(j)=\omega j$ and
 $\omega'(\omega j)=j'$: the pair $\{j,j'\}$ is at distance $2$, and the
 backflip at it splits the $(\alpha+\beta)$-cycle into parts $2$ and
-$\alpha+\beta-2$.  (For $\alpha=2$ the arc has a single interior
-column and nothing changes, so the proof is complete for
-$\min(\alpha,\beta)=2$ --- hence at $n\le5$, where it is sharp.)  The
-joining rule~4 fails symmetrically, and the two multigraphs are not
-equal.  Independent check: \texttt{s13\_cgwcase3.py} implements the
+$\alpha+\beta-2$.  For $\min(\alpha,\beta)=2<\max(\alpha,\beta)$ the
+type is still $\mu$, but the proof is still incomplete: the form of
+the cross-switch (chosen by the smallest corner symbol) that reverses
+the \emph{long} arc moves $j$ or $j'$, so that joining rule~4 from the
+backflipped square cross-switches at a pair other than
+$\{\omega j,\omega j'\}$ and does not return $L$; the case-3 edge and
+its switch edge are then missing from $G_J$, and the identity
+$G_S=G_J$ asserted in the proof of Lemma~3.12 fails.  Exact
+computation (\texttt{s13\_cgw\_multigraph.py}, all $161280$ squares of
+order $5$, $\lambda=(5)\to\mu=(2,3)$ --- the sharp case): $G_S$ and
+$G_J$ have $1036800$ edges each, $172800$ edges of $G_S$ are not in
+$G_J$ (half of the case-3 edges and their switch edges; all case-1,2
+edges are in $G_J$), and the $\mu$-squares have $G_S$-degrees
+$12,18,24$ (for $11520,34560,11520$ squares) against $18$ in $G_J$; so
+the degree bound $\le3\alpha\beta=18$ asserted for every $\mu$-vertex
+is false for $G_S$, and holds at $n=5$ only on average (with
+equality).  For $(4)\to(2,2)$ the multigraphs coincide.  So the
+published argument is incomplete for every split with
+$\max(\alpha,\beta)\ge3$; the only unaffected split is $(2,2)$.
+Independent check: \texttt{s13\_cgwcase3.py} implements the
 cross-switch (rows $1,2$ as above, columns $j,j'$ swapped on the
 $\delta_{j,j'}$-arc from row $2$ to row $1$, which is what balances
 the corner cells), verifies that it is a Latin square of the same type
@@ -595,7 +610,9 @@ distance-preserving toggle has even arc length $a\ne\alpha,\beta$, so
 if all the symmetric pairs are $A$-pairs no one-cross-switch repair
 exists and we see no canonical repair; the same holds for
 $\alpha\ge2\beta$ with $\beta$ odd.  The gap is therefore open in
-those classes, which the reduction chains do use.
+those classes, which the reduction chains do use (and the
+$G_S=G_J$ failure for $\min(\alpha,\beta)=2$ is not addressed by this
+repair at all).
 
 \emph{Our own machinery bears on the missing direction.}  By
 Theorem~\ref{thm:ladder}, $\Pr_X[B]-\Pr_X[A]=\Pr_X[B,\mathrm{Flip}=\emptyset]-\Pr_X[A,\mathrm{Flip}=\emptyset]\le\Pr_X[\mathrm{Flip}=\emptyset]$,

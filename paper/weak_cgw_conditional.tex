@@ -45,7 +45,7 @@ conjecture is thereby reduced to a genericity hypothesis about the cycle structu
 rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, test
 numerically up to $n=100$, and locate within the known switching technology.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
-Cavenagh--Greenhill--Wanless has a gap for $\min(\alpha,\beta)\ge3$; our results do not
+Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
 the number of cycles that the reduction theorem needs.
 \end{abstract}
@@ -113,9 +113,13 @@ identities and cannot by themselves give the hypothesis.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
-not land in $S(\mu,F)$ when $\min(\alpha,\beta)\ge3$: the cross-switch reverses the
-$\omega$-arc from $\omega j$ to $\omega j'$, which contains $j'$, so $\{j,j'\}$ ends at
-distance $2$.  We give the details in a separate note \cite{gapnote}; here we only record
+not behave as claimed: the cross-switch reverses the $\omega$-arc from $\omega j$ to
+$\omega j'$ (or the complementary arc, depending on the smallest corner symbol), which
+contains $j'$ (resp.\ $j$), so $\{j,j'\}$ ends at distance $2$.  For $\min(\alpha,\beta)\ge3$
+the backflip then lands in the wrong type; for $\min(\alpha,\beta)=2<\max(\alpha,\beta)$ the
+type is right but the edge is not an edge of the joining multigraph, so the identity
+$G_S=G_J$ on which the double count rests fails (already at $n=5$, where we computed both
+multigraphs exactly).  We give the details in a separate note \cite{gapnote}; here we only record
 (Remark~\ref{rem:gap}) which published statements depend on it.  Nothing in the present
 paper does: the lower bound $\tfrac12$ of CGW's lemma is the trivial half of
 Theorem~\ref{thm:marked}, and the upper bound $\tfrac32$ is, by the same theorem,
@@ -461,15 +465,17 @@ In \cite{CGW08}, the direction $|S(\lambda,F)|N_\lambda\ge\tfrac12|S(\mu,F)|N_\m
 Lemma~3.12 uses only that each splitting pair carries at most two edges and each joining
 pair at least one; by Theorem~\ref{thm:marked} it is the trivial inequality $|X|\ge|X_A|$.
 The direction $\le\tfrac32$ requires every splitting pair of every $\lambda$-square to carry
-exactly two edges, and case~3 of the splitting procedure fails to supply them when
-$\min(\alpha,\beta)\ge3$ \cite{gapnote}.  Consequently the upper bound of CGW's Theorem~3.13,
-the lower bound of their Lemma~4.1, the parity bounds of Theorem~4.3, the bound
-$\Pr[\sigma\text{ is an $n$-cycle}]\le2n^{-2/3}$ of Lemma~4.4 and Corollary~4.5 are not
-established by the published argument.  The present paper uses none of them:
+exactly two edges that are also edges of the joining multigraph, and case~3 of the splitting
+procedure fails to supply them for every split other than $(2,2)$ \cite{gapnote}.
+Consequently the upper bound of CGW's Theorem~3.13, the lower bound of their Lemma~4.1,
+the parity bounds of Theorem~4.3, the bound $\Pr[\sigma\text{ is an $n$-cycle}]\le2n^{-2/3}$
+of Lemma~4.4, both halves of Corollary~4.5, and the results of their Section~4.2 that rest
+on these (Corollary~4.6, Lemma~4.7, Theorems~4.9 and~4.11, Corollary~4.10 --- the last
+superseded by \cite{KS18}) are not established by the published argument.  The present paper uses none of them:
 Proposition~\ref{prop:tailsurvive} replaces Corollary~4.5 in the proof of
 Theorem~\ref{thm:reduction}.  The exact completion counts tabulated in \cite{CGW08} give
-$\CC_n(\lambda)/\CC_n(\mu)$ within $0.4\%$ of $1$ for every adjacent pair at $7\le n\le11$,
-so the statement itself is not in doubt.
+$\CC_n(\lambda)/\CC_n(\mu)\in[0.985,1.0035]$ for every adjacent pair at $7\le n\le11$ (and
+$=\tfrac32$ at $n=5$), so the statement itself is not in doubt.
 \end{remark}
 
 \section{The ladder identity}\label{sec:ladder}
@@ -774,7 +780,7 @@ $L^{\mathsf T}$ is conditioning on their type and on the position of
 the pair $\{x,y\}$ in their cycle structure, which is free by symbol
 and column relabelling.  Hence, by Lemma~\ref{lem:switchtoggle}
 ($|J_A|=|J_B|$, which needs no condition on the cycle lengths) and
-CGW's Theorem~3.13 (the inequality $\Pr_X[A]\ge\tfrac13$, whose published proof has a gap for $\min(\alpha,\beta)\ge3$, Remark~\ref{rem:gap}):
+CGW's Theorem~3.13 (the inequality $\Pr_X[A]\ge\tfrac13$, whose published proof has a gap for every split other than $(2,2)$, Remark~\ref{rem:gap}):
 \begin{equation}\label{eq:CPcols}
 \Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
 \;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
