@@ -503,3 +503,162 @@ family --- are true in the data with margin, are not in the
 literature, and are of the kind the two-row switching method of
 \cite{CGW08,KS18} is designed for, provided its counts can be made
 exact to $1+O(\mathrm{polylog}\,n/n)$.  That is now the whole problem.
+
+\subsection{The unconditional witness bound follows from CGW's switching theorem}
+\label{sec:cgwcycles}
+
+The lower-bound clause of the witness lemma, for a fixed pair of rows
+of a uniform square without any conditioning, is a consequence of a
+theorem that has been in print since 2008.  Cavenagh, Greenhill and
+Wanless \cite{CGW08} (Lemma 3.12, Theorem 3.13) prove, for adjacent
+types $\lambda$ (one part $m=\alpha+\beta$) and $\mu$ (that part split
+into $\alpha\ne\beta$), that
+\[
+\tfrac12\;\le\;\frac{|S(\lambda)|\,\lambda_m\,m}{|S(\mu)|\,\mu_\alpha\mu_\beta\,\alpha\beta}
+\;\le\;\tfrac32 ,
+\]
+uniformly over $\lambda,\alpha,\beta$ (and over any prescription of a
+set of full columns on which rows $1,2$ carry the same symbols).  In
+the notation of \S\ref{sec:marked} the middle term is $|X|/|J|$ for
+$X=X(n,\lambda;\alpha,\beta)$ and $J=J(n,\mu;\alpha,\beta)$, so by
+Theorem~\ref{thm:marked} ($|J|=2|X_A|$) the CGW theorem is exactly
+\begin{equation}\label{eq:cgwA}
+\tfrac13\;\le\;\Pr_X[A]\;\le\;1
+\qquad\text{for every }n,\lambda,\alpha\ne\beta:
+\end{equation}
+rows $1,2$ lie in different frame cycles of a marked pair with
+probability at least $1/3$.  (The upper bound $\Pr_X[A]\le1$ is the
+trivial direction $|J|\le2|X|$ of our identity; CGW's constant $1/2$
+is its switching-count shadow.)  The conjecture asks for $\Pr_X[A]=\frac12+o(1/\log n)$.
+
+\begin{proposition}[short cycles in two rows]\label{prop:shortcycles}
+Let $L$ be a uniform Latin square of order $n$, $\sigma$ the column
+permutation of two fixed rows, $N_\ell$ the number of $\ell$-cycles of
+$\sigma$, and $Q_q$ the $\sigma$-cycle through a fixed column $q$.
+For all $\ell\ne\beta$ with $\ell,\beta\ge2$,
+\begin{equation}\label{eq:cgwprod}
+\tfrac23\,\E\bigl[(\ell+\beta)N_{\ell+\beta}\bigr]\;\le\;\E[\ell N_\ell\cdot\beta N_\beta]\;\le\;2\,\E\bigl[(\ell+\beta)N_{\ell+\beta}\bigr].
+\end{equation}
+Consequently, with $\tau_n=\Pr[\sigma\text{ has at least }20\sqrt n\text{ cycles}]=e^{-\Omega(\sqrt n)}$
+(\cite{CGW08}, Theorem~4.9), for every $2\le\ell\le\sqrt n/40$,
+\[
+\frac{2}{3\ell}\Bigl(1-\frac{(\ell+2)(4+n\tau_n)}{n}\Bigr)\;\le\;\E[N_\ell]\;\le\;\frac{4+n\tau_n}{\ell},
+\qquad
+\Pr\bigl[|Q_q|=\ell\bigr]=\frac{\ell\,\E N_\ell}{n}\in\Bigl[\frac{2/3-o(1)}{n},\ \frac{4+o(1)}{n}\Bigr].
+\]
+In particular $\Pr[|Q_q|\le\ell',\ q'\notin Q_q]\ge(\tfrac23-o(1))(\ell'-1)/n$
+for any second column $q'$ and $\ell'\le\sqrt n/40$: a fixed pair of
+rows carries a witness of length $\ell'$ with probability at least
+$(2/3-o(1))\ell'/n$.
+\end{proposition}
+
+\begin{proof}
+For $\ell\ne\beta$ let $X(\ell,\beta)$ be the set of $(L,\{q,q'\})$
+with $q,q'$ in a common $\sigma$-cycle of length $\ell+\beta$ and
+$q'=\sigma^\ell(q)$, and $J(\ell,\beta)$ the set of $(L,\{q,q'\})$ with
+$q$ in an $\ell$-cycle and $q'$ in a $\beta$-cycle.  Each $(L,\{q,q'\})$
+in $X(\ell,\beta)$ has a type $\lambda$ with an $(\ell+\beta)$-part and
+lies in $X(n,\lambda;\ell,\beta)$; splitting that part gives the type
+$\mu$ of $J(n,\mu;\ell,\beta)\subseteq J(\ell,\beta)$, and this is a
+bijection between the types occurring on the two sides.  Summing the
+CGW inequality over types,
+$\tfrac23|X(\ell,\beta)|\le|J(\ell,\beta)|\le2|X(\ell,\beta)|$.  Now
+$|X(\ell,\beta)|=\sum_L(\ell+\beta)N_{\ell+\beta}(L)$: every $q$ in an
+$(\ell+\beta)$-cycle gives the pair $\{q,\sigma^\ell(q)\}$, and
+distinct $q$ give distinct pairs because $\{q,\sigma^\ell q\}=\{q_2,\sigma^\ell q_2\}$
+with $q_2\ne q$ forces $\sigma^{2\ell}q=q$, i.e.\ $\ell=\beta$.  And
+$|J(\ell,\beta)|=\sum_L\ell N_\ell(L)\,\beta N_\beta(L)$ ($q$ in an
+$\ell$-cycle, $q'$ in a $\beta$-cycle; the unordered pair determines
+which is which since $\ell\ne\beta$).  Dividing by the number of
+squares gives \eqref{eq:cgwprod}.
+
+Sum \eqref{eq:cgwprod} over $\beta\ge2$, $\beta\ne\ell$.  Since
+$\sigma$ is a derangement, $\sum_{\beta\ge2,\beta\ne\ell}\beta N_\beta=n-\ell N_\ell$,
+and $\sum_{\beta}(\ell+\beta)N_{\ell+\beta}=n-W_\ell$ with
+$W_\ell=\sum_{m\le\ell+1}mN_m+2\ell N_{2\ell}$ the number of columns in
+cycles of length $\le\ell+1$ or exactly $2\ell$.  Hence
+\begin{equation}\label{eq:cgwsum}
+\tfrac23\,\E[n-W_\ell]\;\le\;\E\bigl[\ell N_\ell\,(n-\ell N_\ell)\bigr]\;\le\;2\,\E[n-W_\ell]\;\le\;2n .
+\end{equation}
+Upper bound: on $\{\ell N_\ell\le n/2\}$ the middle term is at least
+$\ell N_\ell\cdot n/2$, so $\E[\ell N_\ell;\ \ell N_\ell\le n/2]\le4$ and
+$\E[\ell N_\ell]\le4+n\Pr[N_\ell>n/(2\ell)]\le4+n\tau_n$, because
+$N_\ell>n/(2\ell)\ge20\sqrt n$ means at least $20\sqrt n$ cycles, and
+CGW's Theorem~4.9, $\Pr[\ge k\text{ cycles}]=o\bigl((3/4)^ke^{\pi\sqrt{2n/3}}\bigr)$,
+is $e^{-\Omega(\sqrt n)}$ for $k=20\sqrt n$ ($20\log\tfrac43>\pi\sqrt{2/3}$).
+By column symmetry
+$\Pr[|Q_q|=m]=\E[mN_m]/n\le(4+n\tau_n)/n$ for each $m$.  Lower bound:
+$\E[\ell N_\ell]\cdot n\ge\E[\ell N_\ell(n-\ell N_\ell)]\ge\tfrac23(n-\E W_\ell)$
+and $\E W_\ell/n=\sum_{m\le\ell+1}\Pr[|Q_q|=m]+\Pr[|Q_q|=2\ell]\le(\ell+2)(4+n\tau_n)/n$
+(all these $m$ are $\le\sqrt n/20$, where the upper bound applies).
+Finally $\Pr[q'\in Q_q\mid|Q_q|=m]=(m-1)/(n-1)$ by column symmetry,
+which gives the last claim.
+\end{proof}
+
+\begin{remark}
+(i) For a uniform derangement, $\E[\ell N_\ell\,\beta N_\beta]=\E[(\ell+\beta)N_{\ell+\beta}]=1+O(1/n)$
+for fixed $\ell\ne\beta$, so \eqref{eq:cgwprod} is a constant-factor
+form of the cycle-count part of the CGW conjecture; the exact version
+is $\E[\ell N_\ell\beta N_\beta]=2\Pr_X[A]\cdot\E[(\ell+\beta)N_{\ell+\beta}]$
+summed over types with the appropriate weights, by Theorem~\ref{thm:marked}.
+(ii) Until now the literature had $\E N_\ell\ge c_\ell/\ell$ only with
+$c_\ell$ decaying exponentially in $\ell$ (from the universal bounds of
+Allsop--Morris \cite{AM26}), and $\E N_\ell\to1/\ell$ only for $\ell=2$
+(Kwan--Sudakov, Kwan--Sah--Sawhney).  The constant-factor bound for all
+$\ell\le\sqrt n/40$ is, to our knowledge, new, although it is an
+immediate corollary of \cite{CGW08}; the point is that the switching
+theorem compares a cycle of length $\ell+\beta$ with the \emph{pair}
+of cycles $(\ell,\beta)$ in one step, so no loss accumulates along
+$\ell$.
+(iii) The data (Remark~\ref{rem:ladderdata}(iv)): $\Pr[|Q_q|=\ell]\approx1/n$
+for all $\ell$ at $n=50,100$, inside $[0.66,4]/n$.
+\end{remark}
+
+\paragraph{What is still missing for the witness lemma.}  The
+proposition is unconditional.  The witness lemma needs the same lower
+bound (a) for pairs of rows selected by the frame, i.e.\ conditionally
+on columns $j,j'$, and (b) inside $X$, i.e.\ conditionally on the type
+of $\sigma$ and the mark, together with (c) the lower-tail
+concentration.  For (a), CGW's framework already allows an arbitrary
+prescription of full columns, so conditioning on columns $j,j'$ is of
+the kind their argument tolerates; the one obstacle is their standing
+assumption that the two distinguished rows carry the same symbols on
+the prescribed columns (so that their row-pair permutation restricted
+to the free columns is a permutation).  For a ladder pair $(x,y)$ this
+fails --- the four symbols $L(x,j),L(x,j'),L(y,j),L(y,j')$ are distinct
+--- and the free part of rows $x,y$ consists of cycles together with
+two paths; the witness is precisely ``the path leaving the $b_x$-end is
+short and ends at the $b_y$-end''.  Extending CGW's three switchings
+and their counting to this path structure is a bounded technical task
+(the switchings act on free columns only and never touch columns
+$j,j'$).  For (b), the switchings that act on rows $\ne1,2$ (trades,
+cross-switches of the pair $x,y$) preserve $\sigma$, but the turns of
+column cycles of free column pairs may pass through rows $1,2$ and
+change the type of $\sigma$; either one restricts to turns avoiding
+rows $1,2$ (whose availability is again a non-giant-cycle statement),
+or one lets the type change by one merge/split and compensates with
+the CGW ratio bound for rows $1,2$ --- which is itself the same lemma
+with prescribed columns $j,j'$ and distinct symbols, i.e.\ (a) again.
+So the whole of (a)+(b) is one lemma: \emph{CGW's Lemma~3.12 for two
+prescribed full columns on which the two distinguished rows carry
+distinct symbols} (the path version).  (c) is the second-moment
+version of the same switchings applied to two pairs at once.
+
+\paragraph{A duality.}  Transposing the square exchanges the roles:
+the witness event for the ladder pair $(x,y)$ --- a short
+$\rho_{x,y}$-cycle through column $j$ avoiding $j'$ --- becomes, in the
+transpose, the event that the column pair $(x,y)$ has rows $j,j'$ in
+different frame cycles with the cycle of row $j$ short; and the ladder
+pairs of $(L,P)$ become the column pairs $(\sigma_T^{-k}(c_1),\sigma_T^{-k}(c_2))$
+of the transpose $T$ at the same $\sigma_T$-position as the pair
+$(c_1,c_2)$ of columns that were rows $1,2$.  So the conditional
+witness lemma is equivalent to a \emph{lower} bound on short frame
+cycles of the $\sigma$-shifts of a mark, given $\sigma$ --- the
+opposite direction to Proposition~\ref{prop:trapped}, which bounds
+them from above by the splice-in switching.  The splice-in move
+lengthens $C_1$ using a free cycle and is always available; the cut
+that shortens it needs a flippable pair inside $C_1$.  This is the
+same flippability obstruction in yet another guise, and it says what a
+proof of the witness lemma must contain: a lower bound on flippable
+pairs inside a frame cycle, which is what CGW's cross-switch supplies
+for the pair $(1,2)$ at the level of constants.
