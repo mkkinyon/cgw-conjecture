@@ -8,12 +8,13 @@
 \newtheorem{remark}[lemma]{Remark}
 \newcommand{\PP}{\mathbb P}
 \newcommand{\CC}{\mathcal C}
+\newcommand{\E}{\mathbb E}
 \DeclareMathOperator{\dist}{dist}
 
 \title{A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, \\
 \emph{The cycle structure of two rows in a random Latin square}}
-\author{Notes from the second-row project, 2 October 2026}
-\date{}
+\author{[author]}
+\date{2 October 2026}
 
 \begin{document}
 \maketitle
@@ -161,9 +162,10 @@ a single interior column, nothing is reversed, and the proof is
 complete; this is the case of the sharp example $n=5$.
 
 \paragraph{Numerical confirmation.}  We implemented Definition 3.9
-literally (rows $1,2$ as above; in columns $j,j'$ the rows strictly
-between $2$ and $1$ along $\delta_{j,j'}$ swap their two entries, which
-is what balances the corner cells) and checked on uniformly sampled
+literally (rows $1,2$ as above; in columns $j,j'$ the rows
+$\delta^k(1)$, $1\le k<a$, with $\delta^a(1)=2$, swap their two entries,
+exactly as in the definition --- this is what balances the corner
+cells) and checked on uniformly sampled
 Latin squares (Jacobson--Matthews) that the cross-switch is a Latin
 square of the same type in every instance.  Applying case 3 as written:
 at $n=9$ and $n=12$, in $1006$ and $1670$ instances with
@@ -197,10 +199,18 @@ Lemma 4.1 and the corresponding half of Lemma 4.2; the parity bounds
 of Theorem 4.3 (whose proof invokes the equality of the two
 multigraphs ``as in the proof of Lemma 3.12''); the upper bound
 $\PP_F((m))\le2m^{-2/3}$ of Lemma 4.4 and hence Corollary 4.5 (the
-factor $n^{1/3}$); and the results of Section 4.2 that rest on these.
-The upper bound $2^{\kappa-1}$ of Lemma 4.1, the lower bound
+factor $n^{1/3}$); and those results of Section 4.2 that rest on
+these.  The upper bound $2^{\kappa-1}$ of Lemma 4.1, the lower bound
 $\PP_F((m))\ge2m^{-2}$, and the upper bounds on short-cycle counts
-derived from the joining direction are unaffected.
+derived from the joining direction are unaffected.  For instance, from
+the joining direction alone one still gets $\E[\ell N_\ell]\le2m/(m-\ell)$
+for the number $N_\ell$ of $\ell$-cycles (sum the inequality
+$\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$ over
+$\beta$), and by joining $k$ cycles successively one obtains
+$\E[(\kappa)_k]\le2^{k-1}(4+k^2/\log m)(\log m)^k$ for the number of
+cycles $\kappa$, hence $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$; so the
+tail of the number of cycles survives, while the lower bound on the
+number of cycles in Section 4.2 does not.
 
 \section{A partial repair}
 
@@ -233,7 +243,15 @@ or $\beta$; if all symmetric pairs about $j$ and $j'$ happen to be
 $A$-pairs, no single cross-switch repairs $\{j,j'\}$, and two-step
 repairs pass through a third type, which breaks the two-sided count.
 We do not see a canonical repair in this case (nor when
-$\alpha\ge2\beta$ with $\beta$ odd).
+$\alpha\ge2\beta$ with $\beta$ odd).  Repairs that use other rows do
+exist --- for a $B$-pair $\{j,j'\}$ with column cycle $Z\ni1,2$, trade
+rows $z,w$ lying on different arcs of $Z$ between $1$ and $2$ along
+the row cycle of $\{z,w\}$ through $j$ (if $j,j'$ lie in different row
+cycles of $\{z,w\}$; this separates $1$ from $2$ and keeps the type),
+or cross-switch rows $z,w$ at $\{j,j'\}$ (if they lie in one; this
+changes the type to $\mu$) --- but they are indexed by a free pair of
+rows and so have unbounded multiplicity on the $S(\mu,F)$ side, which
+defeats the double count.
 
 \section{What the data say}
 
