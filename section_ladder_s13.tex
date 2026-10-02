@@ -1651,3 +1651,150 @@ upper bound nor $(\beta)$ yields to switchings in $X$: the moves that
 toggle a same-cycle bit without touching the prescribed lines exist,
 but they are indexed by a free third pair of rows and so have
 unbounded multiplicity.
+
+\paragraph{(h) Two disjoint row pairs: the conditioning problem in its
+cleanest form.}  Three observations from the refereeing of the
+conditional paper.
+
+\emph{(i) The column-free part of $(\alpha)$ for generic rows is
+unconditional, with constants.}
+\begin{proposition}[a generic row pair has a macroscopic cycle]\label{prop:genericlong}
+Let $x\ne y$ be two rows of a uniform Latin square of order $n$ and
+$0<\varepsilon<1/3$.  Then
+$\Pr[\text{every cycle of }\rho_{x,y}\text{ has length}\le\varepsilon n]
+\le2\varepsilon/(1-\varepsilon)$; in particular $\rho_{x,y}$ has a
+cycle of length $>n/5$ with probability at least $\tfrac12$.
+\end{proposition}
+\begin{proof}
+By row symmetry take $(x,y)=(1,2)$.  Proposition~\ref{prop:tailsurvive}(i)
+gives $\E[\ell N_\ell]\le2n/(n-\ell)$ for $\ell<n$, so the expected
+number of columns on cycles of length $\le\varepsilon n$ is
+$\sum_{\ell\le\varepsilon n}\E[\ell N_\ell]\le\varepsilon n\cdot2n/(n-\varepsilon n)
+=2\varepsilon n/(1-\varepsilon)$; the event in question is that this
+number equals $n$, and Markov's inequality gives the bound.
+\end{proof}
+\noindent Together with the Jensen bound in \S(f)
+($\tfrac13A+2B\ge\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$ and
+$\Pr[W\mid\text{type}]\ge\varepsilon^2-O(1/n)$ on the event of a cycle
+of length $>\varepsilon n$), the unconditional (U) for generic rows and
+generic columns now has an explicit constant:
+$\Pr[\{q,c\},\{q',c'\}\text{ interleaved in }\rho_{x,y}]\ge\tfrac16(1/5)^6-O(1/n)$
+for four generic columns.  The constant is poor but the statement is
+unconditional and uses only $|J|=2|X_A|$.  (The same Markov count
+gives the version through a \emph{generic} column: the cycle of
+$\rho_{x,y}$ through a uniformly random column has length
+$>\varepsilon n$ with probability $\ge1-2\varepsilon/(1-\varepsilon)$;
+$(\alpha)$ proper asks this for the mark column $p$, whose position
+relative to $\rho_{1,2}$ is prescribed, and that is part of the
+difficulty.)  So the residual difficulty is the conditioning on the
+type of rows $1,2$, the position of the mark, and the frame selection
+of the ladder rows, and its column-free first case is
+\begin{equation}\label{eq:tworows}
+\Pr\bigl[\rho_{x,y}\text{ has a cycle of length}>\varepsilon n\bigm|\operatorname{type}(\rho_{1,2})=\lambda\bigr]\ge c
+\quad\text{uniformly in }\lambda\ (\kappa(\lambda)\le K\log n),
+\end{equation}
+for rows $x,y\notin\{1,2\}$ --- a decorrelation of the cycle types of
+two disjoint row pairs.
+
+\emph{(ii) Data.}  \texttt{s13\_rowpairs.py}
+(\texttt{runs/s13/rowpairs/rowpairs\{30,50,100\}.log}; $2000$, $1500$,
+$400$ squares, every square contributing the pair $(1,2)$ and the
+$(n-2)/2$ disjoint pairs $(3,4),(5,6),\dots$) sees no correlation at
+all: with $\mathrm{LONG}=[\text{longest cycle}>n/2]$,
+$\Pr[\mathrm{LONG}(x,y)]=0.7075\pm0.003$ ($n=30$), $0.7017\pm0.002$
+($n=50$) unconditionally, and $0.705$, $0.711$, $0.701$, $0.712$ given
+$\kappa(1,2)=1,2,3,\ge4$ ($n=30$; $0.698,0.702,0.701,0.703$ at $n=50$),
+$0.7076$ resp.\ $0.699$ given $\neg\mathrm{LONG}(1,2)$, $0.697$ resp.\
+$0.702$ given $L_{\max}(1,2)\le n/3$, $0.708$ resp.\ $0.701$ given
+$L_{\max}(1,2)\ge0.9n$, with no dependence on $N_2(1,2)$ either; the
+correlations of $\kappa$, $L_{\max}$, $\mathrm{LONG}$ and $N_2$ across
+the two pairs are all $|r|<0.006$ (naive s.e.\ $0.005$--$0.006$), and
+the conditional law of $\kappa(x,y)$ given $\kappa(1,2)=k$ is the same
+row for every $k$.  Numerically \eqref{eq:tworows} holds with $c$ equal
+to the unconditional value for the classes of $\lambda$ that the
+samples populate; the ``all cycles short'' classes
+($L_{\max}(1,2)\le n/4$: $4$ resp.\ $9$ squares) are too rare to be
+tested this way, so the data speak to typical $\lambda$, not to
+uniformity.
+
+\emph{(iii) What the marked-pair identity gives with rows $1,2$
+fixed, and where it stalls.}  Fix rows $1,2$ (or only their type
+$\lambda$) and run the marked-pair machinery for the pair $(x,y)$ with
+a mark $\{q,q'\}$ on a cycle of $\rho_{x,y}$.  The switch (trade of
+rows $x,y$ along a row cycle) is always legal.  The flip (turn of the
+column cycle of $(q,q')$ through row $y$) is legal iff that cycle meets
+$\{1,2\}$ in $0$ rows (rows $1,2$ fixed) or in $0$ or $2$ rows (type
+only, by Lemma~\ref{lem:legalturn}); call such marked instances
+\emph{legal}.  The flip bijects legal $A$-instances of the split space
+onto legal $A$-instances of the joined space (the row set of the
+turned cycle is preserved), and the switch bijects $J'_A$ onto
+$J'_B$; so the exact statement with rows $1,2$ prescribed is
+$|X'_{A,\mathrm{leg}}|=|J'_{A,\mathrm{leg}}|$ and $|J'_A|=|J'_B|$,
+and nothing is known about $X'_{A}\setminus\mathrm{leg}$ or $X'_B$.
+The legal restriction is not innocuous: on uniform squares
+(\texttt{s13\_cleanid.py}, $n=30$, rows $(3,4)$, $238634$ marked
+instances, legality in the rows-fixed sense) $\Pr[A]=0.499$ and
+$\Pr[\mathrm{leg}]=0.299$ but $\Pr[\mathrm{leg}\mid A]=0.466$ against
+$\Pr[\mathrm{leg}\mid B]=0.133$ (a cycle through $y$ avoiding $x$ is
+shorter), so $|X'_{B,\mathrm{leg}}|/|X'_{A,\mathrm{leg}}|=0.287$, not
+$\approx1$; the identity on the legal part does not determine the type
+ratio.  (The numbers are identical given $\mathrm{LONG}(1,2)$ or not,
+consistently with (ii).)  The same obstruction appears if one tries to
+reprove Proposition~\ref{prop:tailsurvive} inside
+$X_\lambda=\{\operatorname{type}(\rho_{1,2})=\lambda\}$ for the free
+pair $(x,y)$: the $k$-fold joining works verbatim on the legal joining
+pairs, so one needs a constant fraction of the column pairs
+$(q,q')$ of a square in $X_\lambda$ to have the column cycle through
+$y$ meeting $\{1,2\}$ in $0$ or $2$ rows; for a column pair chosen
+independently of $(x,y)$, exchangeability of the rows other than $1,2$
+turns this into the statement that the column cycles of $(q,q')$
+through rows $1$ and $2$, when distinct, do not cover almost all rows
+--- a ``huge frame cycle is not certain'' statement for a generic
+column pair (the joining pairs of $\rho_{x,y}$ are not independent of
+$(x,y)$, so even this is a simplification, as for (BL) in \S(e)).  Its
+natural proof is a splice-\emph{out}: a trade of a free row pair
+$(z,w)$, $z,w$ in the big cycle, along a $\rho_{z,w}$-cycle through
+$q$ but not $q'$ splits the cycle
+($\delta_{q,q'}\mapsto\delta_{q,q'}\circ(z\,w)$) and is always legal
+in $X_\lambda$; it is an involution for each fixed $(z,w)$, so what it
+yields is the fair identity
+$\E[\#\text{available }(z,w)\subset Z;\ Z\text{ big}]=\E[\#\text{available }(z,w)\in Z'_1\times Z'_2;\ \text{split}]$
+with the product weights of \S(g), and a bound only if $q,q'$ lie in
+different $\rho_{z,w}$-cycles for a constant fraction of the free
+pairs $(z,w)$ --- (U) again, now for free rows and generic columns in
+$X_\lambda$.  So (U) reproduces itself under every reduction we have
+(rows$\leftrightarrow$columns, conditioned$\leftrightarrow$free), each
+time with the ``different cycles'' event for a fresh pair of lines, and
+a proof must start from an unconditional \emph{seed}.
+
+\emph{The one seed we know.}  The surviving direction gives no lower
+bound on any different-cycles event (\S(f), aside), but the intercalate
+count does: Kwan, Sah and Sawhney \cite{KSS21} prove
+$\Pr[N<(1-\delta)n^2/4]\le e^{-\Omega(n^2)}$ and
+$\Pr[N>(1+\delta)n^2/4]\le e^{-\Omega(n^{4/3}(\log n)^{2/3})}$ for the
+number $N$ of intercalates of a uniform square.  These bounds are
+superpolynomially small, and they survive conditioning on \emph{any}
+fixed first two rows $R$: the number of completions of a $2\times n$
+rectangle is at least $\prod_{k=2}^{n-1}n!\,((n-k)/n)^n$ by van der
+Waerden's inequality applied row by row, while $L_n\le\prod_{k\le n}(k!)^{n/k}$
+(Br\'egman), and both have logarithm $n^2\log n-2n^2+O(n\log^2n)$, so
+$\Pr[\text{rows }1,2=R]\ge e^{-O(n\log^2n)}$ for every $R$, hence
+$\Pr[(L,P)\in\text{any given class of }X]\ge e^{-O(n\log^2n)}$ as well.
+Therefore, uniformly over $\lambda$, $\alpha,\beta$ and the mark, a
+uniform element of $X$ has $(1\pm\delta)n^2/4$ intercalates with
+probability $1-e^{-\Omega(n^{4/3}(\log n)^{2/3})}$: an average of
+$\tfrac12$ two-cycles per row pair, including the pairs the frame
+selects.  What is missing is, first, a
+\emph{spreading} statement --- that the intercalates are not
+concentrated on $o(n^2)$ row pairs --- and second a decorrelation
+from the frame, since spreading over the $\binom n2$ row pairs says
+nothing about the $O(n)$ pairs the frame selects; and even then a
+$2$-cycle $\{q,c\}$ of $\rho_{x_k,y_k}$ is of no direct use for
+$(\beta)$: its column cycle through $x_k$ is $\{x_k,y_k\}$, which
+contains $y_k$, so it is not a clean coordinate, and its turn
+conjugates $\rho_{x_k,y_k}$ by $(q\,c)$ and is inert
+(Lemma~\ref{lem:legalturn}).  The seed is a lower bound on a
+different-cycles event, which is what every reduction above asks for,
+but it is not yet in a usable place.  Whether a spreading statement is
+within reach of the switching method of \cite{KS18} is the question we
+would ask next.

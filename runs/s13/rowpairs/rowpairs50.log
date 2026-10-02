@@ -1,0 +1,31 @@
+n=50: squares=1500 row-pair records=36000  (LONG = longest cycle > n/2; ln2 = 0.6931)
+  unconditional                           P[LONG(x,y)] = 0.7017 +- 0.0024   (n_pairs=36000, squares=1500)
+  kappa(1,2) = 1                          P[LONG(x,y)] = 0.6980 +- 0.0098   (n_pairs=1944, squares=81)
+  kappa(1,2) = 2                          P[LONG(x,y)] = 0.7023 +- 0.0055   (n_pairs=6768, squares=282)
+  kappa(1,2) = 3                          P[LONG(x,y)] = 0.7005 +- 0.0046   (n_pairs=9576, squares=399)
+  kappa(1,2) >= 4                         P[LONG(x,y)] = 0.7026 +- 0.0035   (n_pairs=17712, squares=738)
+  kappa(1,2) >= 6                         P[LONG(x,y)] = 0.7037 +- 0.0083   (n_pairs=3024, squares=126)
+  LONG(1,2)                               P[LONG(x,y)] = 0.7030 +- 0.0029   (n_pairs=24936, squares=1039)
+  not LONG(1,2)  (Lmax <= n/2)            P[LONG(x,y)] = 0.6988 +- 0.0044   (n_pairs=11064, squares=461)
+  Lmax(1,2) <= n/3                        P[LONG(x,y)] = 0.7024 +- 0.0123   (n_pairs=1512, squares=63)
+  Lmax(1,2) <= n/4                        P[LONG(x,y)] = 0.7407 +- 0.0228   (n_pairs=216, squares=9)
+  Lmax(1,2) <= n/5                        P[LONG(x,y)] = 0.7500 +- 0.0000   (n_pairs=24, squares=1)
+  Lmax(1,2) >= 0.9 n                      P[LONG(x,y)] = 0.7008 +- 0.0059   (n_pairs=5592, squares=233)
+  N2(1,2) = 0                             P[LONG(x,y)] = 0.7018 +- 0.0031   (n_pairs=21360, squares=890)
+  N2(1,2) >= 1                            P[LONG(x,y)] = 0.7016 +- 0.0038   (n_pairs=14640, squares=610)
+  N2(1,2) >= 2                            P[LONG(x,y)] = 0.7073 +- 0.0079   (n_pairs=2904, squares=121)
+  --- exchanged roles (should agree within error) ---
+  not LONG(x,y) -> P[LONG(1,2)]           P[LONG(x,y)] = 0.6897 +- 0.0119   (n_pairs=10737, squares=1500)
+  kappa(x,y) >= 4 -> P[LONG(1,2)]         P[LONG(x,y)] = 0.6901 +- 0.0119   (n_pairs=17139, squares=1500)
+  corr(kappa(1,2), kappa(x,y)) = -0.0048
+  corr(Lmax(1,2), Lmax(x,y))   = -0.0044
+  corr(LONG(1,2), LONG(x,y))   = +0.0042
+  corr(N2(1,2), N2(x,y))       = -0.0019
+  (naive s.e. of a correlation on 36000 records: 0.0053; records within a square are correlated)
+  P[kappa(x,y)=k' | kappa(1,2)=k]  (rows k=1..5, cols k'=1..6):
+    k=1 (n=  1944): 0.055 0.178 0.274 0.251 0.155 0.087
+    k=2 (n=  6768): 0.053 0.186 0.285 0.253 0.142 0.081
+    k=3 (n=  9576): 0.051 0.189 0.282 0.251 0.145 0.081
+    k=4 (n=  8880): 0.054 0.181 0.290 0.244 0.144 0.087
+    k=5 (n=  5808): 0.054 0.186 0.287 0.260 0.134 0.079
+    all (n= 36000): 0.053 0.186 0.285 0.251 0.142 0.083
