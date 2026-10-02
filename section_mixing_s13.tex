@@ -722,9 +722,17 @@ n=50 & k' & \E[\varepsilon_S\varepsilon_T] & \text{lev }1 & \text{lev }2 & \text
 \midrule
 \text{real}  & 22.7 & 0.1326\,(73) & 0.627\,(5) & 0.472\,(6) & 0.374\,(6) & 0.522 & 0.073\\
 \text{model} & 22.7 & 0.1296\,(72) & 0.638\,(5) & 0.482\,(6) & 0.376\,(7) & 0.515 & 0.076\\
+\midrule
+n=100 & k' & \E[\varepsilon_S\varepsilon_T] & \text{lev }1 & \text{lev }2 & \text{lev }3 & \Pr[u\sim v] & \Pr[|C_u|\le10]\\
+\midrule
+\text{real}  & 47.8 & 0.0795\,(92) & 0.643\,(6) & 0.495\,(7) & 0.406\,(8) & 0.518 & 0.089\\
+\text{model} & 47.8 & 0.0781\,(87) & 0.643\,(6) & 0.496\,(7) & 0.398\,(8) & 0.508 & 0.083\\
 \bottomrule
 \end{array}
 \]
+($n=100$: $300$ squares, $1200$ instances.)  At $n=100$ the same-cycle
+deficit is $-1.6\%$ and the end-bin depletion $\approx4\%$, both
+halved from $n=50$, as the $2/(\text{cycle length})$ exclusion predicts.
 Pool position: real $27085$ same-cycle chords against a null of
 $28050$ ($-3.4\%$), model $28179$ against $28373$; position bins
 real $[5880,7322,7854,6029]$, model $[6674,7199,7463,6843]$ --- the
@@ -794,3 +802,151 @@ What the final argument needs is then
 $\E_\alpha\bigl|\E[\varepsilon(\alpha\rho_D)\mid\alpha]-(P^{M}\varepsilon)(\alpha)\bigr|=o(1/\log^2n)$,
 a statement comparing the conditional law of the pool given the frame
 with iid chords through the single test function $\varepsilon$.
+
+\subsubsection{(T1) is a switching lemma: trapped marks are rare}
+\label{sec:s13trapped}
+
+Fix $n$, a plain type $\lambda$ and a split $m=\alpha+\beta$ with
+$\alpha\ne\beta$, and let $(L,P)$ be uniform on
+$X=X(n,\lambda;\alpha,\beta)$, $P=\{j,j'\}$.  Write $\pi=\pi_P$ for
+the frame (a derangement of the rows), $C_r$ for the $\pi$-cycle of a
+row $r$.  Two elementary moves on Latin squares are used; both are
+involutions.
+\begin{itemize}[leftmargin=2em]
+\item[(\textsc{trade})] For rows $x\ne y$ let $\rho_{x,y}$ be the
+permutation of the columns with $L(y,\rho_{x,y}(q))=L(x,q)$.  For a
+cycle $Q$ of $\rho_{x,y}$, exchanging the entries of rows $x$ and $y$
+in the columns of $Q$ gives a Latin square (the two rows carry the
+same symbols on $Q$).  If $j'\in Q\not\ni j$ the new frame is
+$(x\,y)\circ\pi$; if $j\in Q\not\ni j'$ it is $\pi\circ(x\,y)$; if
+both or neither lie in $Q$ the cycle partition of $\pi$ is unchanged.
+Call $(x,y)$ \emph{flippable} if $j,j'$ lie in different cycles of
+$\rho_{x,y}$, and let $Q_{x,y}$ be the cycle through $j'$.
+\item[(\textsc{turn})] For a cycle $c$ of $\pi$, exchanging the
+entries of columns $j$ and $j'$ in the rows of $c$ gives a Latin
+square; the frame is inverted on $c$ (Lemma~\ref{lem:cycletrade}) and
+its cycle partition is unchanged.  If $x\in c\not\ni y$, the turn
+replaces $\rho_{x,y}$ by $\rho_{x,y}\circ(j\,j')$ (if instead
+$y\in c\not\ni x$, by $(j\,j')\circ\rho_{x,y}$), so it toggles the
+flippability of $(x,y)$.
+\end{itemize}
+A trade at rows $x,y\notin\{1,2\}$ leaves rows $1,2$, hence $\sigma$
+and the mark, untouched.  A turn of a cycle $c\not\ni1,2$ likewise.
+A turn of $C_1$ when $2\notin C_1$ replaces $\sigma$ by
+$\sigma\circ(j\,j')$ (reading $j,j'$ as the row-$1$ symbols), which
+splits the $m$-cycle of $\sigma$ through $j$ into cycles of lengths
+$\alpha$ and $\beta$ and sends $(L,P)$ into the joining space
+$J=J(n,\mu;\alpha,\beta)$ of Definition~\ref{def:marked}; a turn of a
+cycle containing both rows $1$ and $2$ leaves $\sigma$ unchanged.
+
+\begin{proposition}[short frame cycles through a marked row are rare]
+\label{prop:trapped}
+For $(L,P)$ uniform on $X$ and every $2\le\ell\le n/2$,
+\[
+\Pr\bigl[|C_1|=\ell\bigr]\;\le\;\frac{18}{n-\ell-1},
+\qquad\text{hence}\qquad
+\Pr\bigl[|C_1|\le \ell\bigr]\;\le\;\frac{36\,\ell}{n}\quad(\ell\le n/2-1),
+\]
+and the same bounds hold for $C_2$.
+\end{proposition}
+
+\begin{proof}
+Let $E_\ell=\{(L,P)\in X:\ |C_1|=\ell\}$.  (The case $C_1=\{1,2\}$
+cannot occur: it would mean $\sigma(j)=j'$ and $\sigma(j')=j$, but
+$j'=\sigma^\alpha(j)$ lies in an $m$-cycle with $m\ge4$.)
+
+\emph{Forward moves.}  From $(L,P)\in E_\ell$ choose $y\in C_1\setminus\{1,2\}$
+and $x\notin C_1\cup\{2\}$: at least $(\ell-2)(n-\ell-1)$ pairs
+($(\ell-1)(n-\ell-1)$ if $2\notin C_1$; for $\ell=2$ this is $n-3$).
+If $(x,y)$ is flippable, trade $Q_{x,y}$; otherwise turn $C_1$ (which
+makes $(x,y)$ flippable, as $y\in C_1\not\ni x$) and then trade
+$Q_{x,y}$ in the turned square.  In both cases the resulting frame is
+$(x\,y)\circ\pi^\pm$ with $\pi^\pm$ equal to $\pi$ or to $\pi$
+inverted on $C_1$, so the cycle of row $1$ becomes $C_1\cup C_x$, of
+length $\ell+|C_x|>\ell$; rows $1,2$ are untouched by the trade, and
+the result is in $X$ (no turn, or $2\in C_1$) or in $J$ (turn with
+$2\notin C_1$).
+
+\emph{Backward moves.}  A square $(L',P)\in X\cup J$ is reached from
+$(L,P)\in E_\ell$ by the move at $(x,y)$ only if $x,y$ lie in the cycle
+$C'_1$ of row $1$ in $L'$, and undoing the trade (the same trade, since
+$\rho'_{x,y}=\rho_{x,y}^{-1}$ on $Q_{x,y}$) splits $C'_1$ into the arcs
+$\{\pi'(y),\dots,x\}$ and $\{\pi'(x),\dots,y\}$, of which the one
+containing row $1$ must have length exactly $\ell$: given $L'$, that
+arc is determined by its position relative to row $1$ ($\ell$
+choices), and the arc determines $\{x,y\}$.  With the binary choice
+``turn back or not'' this gives at most $2\ell$ preimages per $(L',P)$.
+
+\emph{Counting.}  The map $((L,P),\text{move})\mapsto((L',P),\text{inverse move})$
+is injective, so
+$|E_\ell|\,(\ell-2)(n-\ell-1)\le2\ell\,(|X|+|J|)\le6\ell\,|X|$, using
+$|J|=2|X_A|\le2|X|$ (Theorem~\ref{thm:marked}).  For $\ell\ge3$ this
+is the claim; for $\ell=2$ the forward count is $n-3$ and the backward
+count $4$, giving $12/(n-3)$.  The bound for $C_2$ is proved by the
+same argument with the roles of rows $1$ and $2$ exchanged: a turn of
+$C_2\not\ni1$ replaces $\sigma$ by $(\sigma(j)\,\sigma(j'))\circ\sigma$,
+which also splits the $m$-cycle into lengths $\alpha,\beta$ and lands
+in $J$.
+\end{proof}
+
+\emph{Status: PROVED (modulo the referee pass noted below).  This is
+the trapping half of (T1): with a pool of $k'$ chords the marks for
+which the chain cannot move row $1$ or row $2$ within the horizon are
+those with $|C_1|$ or $|C_2|$ below $\asymp n/k'$, of total probability
+$O(1/k')$ --- exactly as for a uniform frame, up to the constant $36$.
+The proof is a Kwan--Sudakov style switching \cite{KS18} in which the
+only non-trivial step, the turn through row $1$, is priced by the
+marked-pair identity itself: the turn is the CGW switch at the mark,
+and $|J|\le2|X|$ is Theorem~\ref{thm:marked}.  It uses nothing about
+intercalates.  A VERIFICATION on real squares is in
+\S\ref{sec:s13transfer2} ($\Pr[|C_1|\le10]$ at $n=100$: $0.089$
+real against $0.083$ model).}
+
+\subsubsection{A third route: the trade chain}\label{sec:s13tradechain}
+
+The moves of \S\ref{sec:s13trapped} suggest replacing the intercalate
+orbit of \cite{KPS25} altogether.  Consider the Markov chain $T$ on
+$X$ which, from $(L,P)$, with probability $\tfrac12$ picks a uniform
+pair of rows $x\ne y$ in $\{3,\dots,n\}$ and trades $Q_{x,y}$ if
+$(x,y)$ is flippable (else does nothing), and with probability
+$\tfrac12$ picks a uniform row $x\in\{3,\dots,n\}$ and turns $C_x$ if
+$C_x\not\ni1,2$ (else does nothing).  Every move is an involution,
+the probability of a move equals that of its inverse (flippability
+and $|C_x|$ are preserved), so $T$ is symmetric and
+$\mathrm{Unif}(X)$ is stationary; $T$ never touches rows $1,2$, so it
+preserves $S(\lambda)$ and the mark exactly, with no expander
+hypothesis, no stable families and no orbit bookkeeping.  Along $T$
+the frame evolves as $\pi\mapsto(x\,y)\circ\pi$ at the flippable
+trades (turns do not change the bit), i.e.\ as the random-transposition
+walk \emph{thinned by flippability}, and the marked bit is
+$\varepsilon(\pi)$.  Hence, by stationarity, for every $M$,
+\[
+\E_X[\varepsilon]=\E_X\bigl[(T^M\varepsilon)(L,P)\bigr],
+\qquad
+(T^M\varepsilon)(L,P)=\E\bigl[\varepsilon(\pi_P(L_M))\,\big|\,L_0=L\bigr],
+\]
+and EQ$(\delta)$ follows from $\E_X|T^M\varepsilon|\le\delta$ for some
+$M$.  If every pair were flippable, $T^M\varepsilon$ would be the
+one-point function $P^M\varepsilon$ of the walk with transpositions
+avoiding $u,v$, and $\sup_\alpha|(P^M\varepsilon)(\alpha)|\le2\max_\alpha
+d_{\mathrm{TV}}(\text{law of }\sigma_M\mid\sigma_0=\alpha,\ \mathrm{Unif})\le2n^{-1/2}$
+at $M=n\log n$ by Diaconis--Shahshahani --- EQ$(2n^{-1/2})$ with no
+knowledge of the frame law, no spectral measure, and no genericity of
+anything.  The entire difficulty is the thinning: which pairs are
+flippable depends on $L$, so the frame is not Markov by itself.  What
+is needed is that, for $\mathrm{Unif}(X)$-typical squares, the
+flippable graph on $\{3,\dots,n\}$ is dense and expanding and only
+locally correlated with the frame (an adjacent pair $\pi(x)=y$ is
+never flippable, by \S\ref{sec:s13transfer2}(iii)); stationarity then
+makes it typical at every time, and a comparison of the thinned walk
+with the full one (Aldous' spectral-gap theorem for the interchange
+process on a dense expander, or a direct path argument) would give
+$T^M\varepsilon\to0$.  This is a second, independent formulation of
+(II), with the advantage that its hypotheses are about pairs of rows
+of a random Latin square --- objects the switching method of
+Proposition~\ref{prop:trapped} can reach --- rather than about the
+joint position of intercalates.  Numerical test: run $T$ on real
+squares and compare the autocorrelation of the bit, as a function of
+the number of trades performed, with $\langle\varepsilon,P^m\varepsilon\rangle$
+of Theorem~\ref{thm:spectral}; and measure the flippable fraction and
+its correlation with the frame.
