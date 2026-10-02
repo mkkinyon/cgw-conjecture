@@ -768,3 +768,29 @@ graph $H$), i.e.\ a proof that, conditionally on $G$, the candidate
 graph is in generic position.  This is the open problem of the
 project; it is a problem about $n\times(n-2)$ Latin rectangles, and
 the numerics say its conclusion holds with margin.
+
+\paragraph{First concrete sub-problems.}  (1) \emph{(T1) at polylog
+scale by join switchings.}  Kwan--Sudakov \cite[Thm.~3 and Fact~10]{KS18}
+bound the expected number of $2$-cycles of two rows of a uniform Latin
+square by $1+o(1)$ with a switching (the CGW flip joining a $2$-cycle to
+another cycle, with the ``turn'' to make the pair flippable), counting
+the ways in and out.  The same switching applied to a column pair
+$(j,j')$ joins the cycle through row $1$ to a cycle avoiding rows
+$1,2$; it changes $L(1,j),L(1,j')$ and hence $\sigma$, but only by a
+merge or split of $\sigma$-cycles whose effect on $|S(\lambda)|$ is
+controlled by Theorem~\ref{thm:marked} within a factor $[\tfrac12,\tfrac32]$.
+Target: $\E_{\mathrm{Unif}(X)}\bigl[\#\{\text{rows in }\pi_P\text{-cycles of length}\le\ell\}\bigr]\le C\ell$
+uniformly for $\ell\le n^{1/2}$ and all admissible marks, which gives
+$\Pr[\text{trapped}]\le C\ell/n$ --- far more than the $o(1/\log n)$
+needed, with constant-factor losses affordable.  (2) \emph{(T2) as a
+switching statement on $L_{\mathrm{rest}}$.}  For a window of
+relative positions $W\subset(0,1)$ along a leftover cycle, the number
+of candidates $(r,r')$ with $r'$ in the window of $r$'s cycle, against
+the null $|W|\cdot(\text{cycle length})\cdot(\text{candidate degree})/n$:
+a switching that moves one end of a candidate (exchange the symbol
+$L(r',c)$ with another occurrence by an intercalate switch in
+$L_{\mathrm{rest}}$) should show the ratio is $1+O(1/\text{cycle length})$.
+What the final argument needs is then
+$\E_\alpha\bigl|\E[\varepsilon(\alpha\rho_D)\mid\alpha]-(P^{M}\varepsilon)(\alpha)\bigr|=o(1/\log^2n)$,
+a statement comparing the conditional law of the pool given the frame
+with iid chords through the single test function $\varepsilon$.

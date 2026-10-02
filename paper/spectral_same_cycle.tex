@@ -29,11 +29,11 @@
 \begin{document}
 
 \begin{abstract}
-Let $u\neq v$ be two fixed points of $[N]$ and let $\varepsilon(\sigma)=2\cdot\mathbf 1\{u\text{ and }v\text{ lie in a common cycle of }\sigma\}-1$ on the symmetric group $S_N$.  We show that the spectral measure of $\varepsilon$ with respect to the random-transposition walk has an explicit closed form: it is supported on the partitions $\lambda=(a,b,1^j)$ with $a\ge b\ge1$, and there
+Let $u\neq v$ be two distinguished points of $[N]$ and let $\varepsilon(\sigma)=2\cdot\mathbf 1\{u\text{ and }v\text{ lie in a common cycle of }\sigma\}-1$ on the symmetric group $S_N$.  We show that the spectral measure of $\varepsilon$ with respect to the random-transposition walk has an explicit closed form: it is supported on the partitions $\lambda=(a,b,1^j)$ with $a\ge b\ge1$, and there
 \[
 \|\Pi_\lambda\varepsilon\|^2=\frac{2(a-b+1)^2}{(a+j+1)^2(b+j)^2}\,\bigl(1-r_\lambda\bigr),
 \]
-where $r_\lambda$ is the normalised character of a transposition.  The proof is a few lines: $\mathbf 1\{u\sim_\sigma v\}$ is half the increment of the number of cycles under right multiplication by $(u\,v)$, and the Fourier coefficients of the cycle-count function are read off the content polynomial.  Consequences include the exact two-point correlation $\langle\varepsilon,P^m\varepsilon\rangle$ of the same-cycle status along the walk, the bound $|\langle\varepsilon,P^m\varepsilon\rangle|\le 12/m+o(m^{-3})$ uniformly in $N$, the limiting spectral density $4(\alpha-\beta)^2/((1-\alpha)(1-\beta))\,d\alpha\,d\beta$, and the probability $(N+1)(N+2)/(6N(N-1))$ that one random transposition changes the same-cycle status of two points of a uniformly random permutation.  The same spectral measure governs every conjugation-invariant random walk.
+where $r_\lambda$ is the normalised character of a transposition.  The proof is a few lines: $\mathbf 1\{u\sim_\sigma v\}$ is half the increment of the number of cycles under right multiplication by $(u\,v)$, and the Fourier coefficients of the cycle-count function are read off the content polynomial.  Consequences include the exact two-point correlation $\langle\varepsilon,P^m\varepsilon\rangle$ of the same-cycle status along the walk, the bound $|\langle\varepsilon,P^m\varepsilon\rangle|\le 12/m+O\bigl((\log m/m+1/N)^4\bigr)$ with absolute constants, the limiting spectral density $4(\alpha-\beta)^2/((1-\alpha)(1-\beta))\,d\alpha\,d\beta$ (so that the correlation at lag $m$ is $2/(m+1)-3/(2m^2)+O(m^{-3})$ as $N\to\infty$), and the probability $(N+1)(N+2)/(6N(N-1))$ that one random transposition changes the same-cycle status of two points of a uniformly random permutation.  The same spectral measure governs every conjugation-invariant random walk.
 \end{abstract}
 
 \maketitle
@@ -56,7 +56,7 @@ where $\cont(i,j)=j-i$ is the content of the box in row $i$ and column $j$ \cite
 \qquad
 \|P^df\|^2=\sum_{\lambda\vdash N}r_\lambda^{\,2d}\,\nu_f(\lambda).
 \]
-Here $L^2(\SN)$ carries the uniform measure, $(Pf)(\sigma)=\binom N2^{-1}\sum_\tau f(\sigma\tau)$, and $\Pi_\lambda=\frac{d_\lambda}{N!}\sum_\rho\chi_\lambda(\rho)R(\rho)$ with $(R(\rho)f)(\sigma)=f(\sigma\rho)$ is the projection onto the $\lambda$-isotypic component of the right-regular representation.  For class functions the spectral measure is simply the square of the Fourier coefficient; the function $\varepsilon$ is not a class function, and one does not expect its spectral measure to be computable.  It is.
+Here $L^2(\SN)$ carries the uniform measure, $(Pf)(\sigma)=\binom N2^{-1}\sum_\tau f(\sigma\tau)$, and $\Pi_\lambda=\frac{d_\lambda}{N!}\sum_\rho\chi_\lambda(\rho)R(\rho)$ with $(R(\rho)f)(\sigma)=f(\sigma\rho)$ is the projection onto the $\lambda$-isotypic component of the right-regular representation.  For class functions the spectral measure is simply the square of the Fourier coefficient, and for the cycle-count statistics it is known: Alon and Kozma \cite[Thm.~3]{AK13} expand the number of $k$-cycles over the shapes $(N-k,k-i,1^i)$, and Berestycki and Kozma \cite{BK15} use this expansion to study the cycle structure of the interchange process (see also \cite{Arc25}).  The function $\varepsilon$ is not a class function.  Nevertheless its spectral measure is explicit, because $\mathbf 1\{u\sim v\}$ is a first difference of the cycle count.
 
 \begin{theorem}\label{thm:main}
 $\nu_\varepsilon(\lambda)\ne0$ only for $\lambda=(a,b,1^j)$ with $a\ge b\ge1$ and $a+b+j=N$, and for these shapes
@@ -104,7 +104,7 @@ Let $c(\sigma)$ be the number of cycles of $\sigma$.  Right multiplication by th
 \end{equation}
 
 \subsection*{Step 2: the Fourier coefficients of the cycle count}
-$c$ is a class function, $c=\sum_\lambda\hat c_\lambda\chi_\lambda$ with $\hat c_\lambda=\langle c,\chi_\lambda\rangle=\frac1{N!}\sum_\sigma c(\sigma)\chi_\lambda(\sigma)$.  The generating function of $c$ against a character is the content polynomial \cite[Ch.~I, \S3 Ex.~4 and \S7]{Mac95}:
+$c$ is a class function, $c=\sum_\lambda\hat c_\lambda\chi_\lambda$ with $\hat c_\lambda=\langle c,\chi_\lambda\rangle=\frac1{N!}\sum_\sigma c(\sigma)\chi_\lambda(\sigma)$.  The generating function of $c$ against a character is the content polynomial \cite[Ch.~I, \S1 Ex.~11, \S3 Ex.~4 and \S7]{Mac95}:
 \[
 \sum_{\sigma\in\SN}x^{c(\sigma)}\chi_\lambda(\sigma)=d_\lambda\prod_{\square\in\lambda}\bigl(x+\cont(\square)\bigr)
 \]
@@ -117,7 +117,7 @@ A factor $1+\cont(\square')$ vanishes exactly when $\cont(\square')=-1$, i.e.\ f
 \hat c_\lambda=\frac{d_\lambda}{N!}\prod_{\square\ne(2,1)}\bigl(1+\cont(\square)\bigr)
 =\frac{d_\lambda}{N!}\;a!\;(b-1)!\;(-1)^j\,j! ,
 \]
-since the contents are $0,\dots,a-1$ in the first row, $0,\dots,b-2$ in the second row without its first box, and $-2,\dots,-(j+1)$ down the column.  The hook lengths of $(a,b,1^j)$ are $a+j+1$ at $(1,1)$; $a-c+2$ at $(1,c)$ for $2\le c\le b$; $a-c+1$ at $(1,c)$ for $c>b$; $b+j$ at $(2,1)$; $b-c+1$ at $(2,c)$ for $c\ge2$; and $j,j-1,\dots,1$ down the column.  Their product is
+since the contents are $0,\dots,a-1$ in the first row, $0,\dots,b-2$ in the second row without its first box, and $-2,\dots,-(j+1)$ down the column.  The hook lengths of $(a,b,1^j)$ are $a+j+1$ at $(1,1)$; $a-q+2$ at $(1,q)$ for $2\le q\le b$; $a-q+1$ at $(1,q)$ for $q>b$; $b+j$ at $(2,1)$; $b-q+1$ at $(2,q)$ for $q\ge2$; and $j,j-1,\dots,1$ down the column.  (The expansion of $c$ itself, i.e.\ \eqref{eq:chat}, can also be read off \cite[Thm.~3]{AK13} by summing their expansion of the number of $k$-cycles over $k$.)  Their product is
 \[
 \frac{N!}{d_\lambda}=(a+j+1)\cdot\frac{a!}{(a-b+1)!}\cdot(a-b)!\cdot(b+j)\cdot(b-1)!\cdot j!
 =\frac{(a+j+1)(b+j)\,a!\,(b-1)!\,j!}{a-b+1},
@@ -141,7 +141,7 @@ which vanishes for $\lambda=(N)$ (consistent with $\langle\varepsilon\rangle=0$,
 Hence $\nu_\varepsilon(\lambda)=2\hat c_\lambda^{\,2}(1-r_\lambda)$, which with \eqref{eq:chat} is \eqref{eq:main}.
 
 \subsection*{Step 4: the eigenvalue}
-In \eqref{eq:r} the first row contributes $\sum_{c=1}^a(c-1)=a(a-1)/2$, the second row $\sum_{c=1}^b(c-2)=b(b-3)/2$, and the column $\sum_{i=1}^j(-1-i)=-j(j+3)/2$.\qed
+In \eqref{eq:r} the first row contributes $\sum_{q=1}^a(q-1)=a(a-1)/2$, the second row $\sum_{q=1}^b(q-2)=b(b-3)/2$, and the column $\sum_{i=1}^j(-1-i)=-j(j+3)/2$.\qed
 
 \begin{remark}
 The theorem was checked by brute force over $\SN$ for $N\le7$ (applying $P$ to $\varepsilon$ directly and comparing $\|P^d\varepsilon\|^2$ and $\langle\varepsilon,P^d\varepsilon\rangle$, $d\le4$, with \eqref{eq:corr}; e.g.\ for $N=6$, $d=1$ both give $799/3375$ and $17/45$), and $\sum_\lambda\nu_\varepsilon(\lambda)=1$ was checked to $10^{-12}$ for $N\le4000$.
@@ -172,7 +172,7 @@ Fix $k$ and $b$, so $a=N-k$, $j=k-b$, and $N(N-1)(1-r_\lambda)=k(2N-k-1)+j^2+3j-
 \sum_{\lambda:\ r_\lambda\ge0}\nu_\varepsilon(\lambda)\,r_\lambda^{\,m}\le\frac{12}N\sum_{k\ge1}e^{-km/N}=\frac{12}{N}\,\frac1{e^{m/N}-1}\le\frac{12}m .
 \]
 
-\emph{The bottom of the spectrum.}  For $r_\lambda<0$ we use $|r_\lambda|^m\le(1-\delta)^m$ unless $1+r_\lambda\le\delta$.  Now $N(N-1)(1+r_\lambda)=N(N-1)-j(j+3)+a(a-1)+b(b-3)$, and with $j=N-a-b$ one checks $N(N-1)-j(j+3)=(a+b)(N+j)-N-3j$ and $a(a-1)+b(b-3)\ge-2$; for $a+b\ge3$ this gives $N(N-1)(1+r_\lambda)\ge(a+b-1)N-2$ (the only shape with $a+b=2$ is the sign character $(1^N)$, with $r=-1$ and $\nu_\varepsilon=4/(N^2(N-1)^2)$).  So $1+r_\lambda\le\delta$ forces $a+b\le\delta N+3$; such shapes have $\nu_\varepsilon(\lambda)\le4c_\lambda^2\le64(\delta N+3)^2/N^4$ (as $a+j+1$ and $b+j$ are both $\ge N/2$ once $\delta N+3\le N/2$, which holds whenever the bound is non-trivial), and there are at most $(\delta N+3)^2/2$ of them.  Hence $\nu_\varepsilon([-1,-1+\delta])\le32(\delta+3/N)^4$, and taking $\delta=4\log(m+1)/m$ gives $(1-\delta)^m\le(m+1)^{-4}$.
+\emph{The bottom of the spectrum.}  We may assume $\delta:=4\log(m+1)/m\le\tfrac12-\tfrac3N$, since otherwise the right-hand side exceeds $2\ge|\Phi(m)|$.  For $r_\lambda<0$ we use $|r_\lambda|^m\le(1-\delta)^m$ unless $1+r_\lambda\le\delta$.  Now $N(N-1)(1+r_\lambda)=N(N-1)-j(j+3)+a(a-1)+b(b-3)$, and with $j=N-a-b$ one checks $N(N-1)-j(j+3)=(a+b)(N+j)-N-3j$ and $a(a-1)+b(b-3)\ge-2$; for $a+b\ge3$ this gives $N(N-1)(1+r_\lambda)\ge(a+b-1)N-2$ (the only shape with $a+b=2$ is the sign character $(1^N)$, with $r=-1$ and $\nu_\varepsilon=4/(N^2(N-1)^2)$).  So $1+r_\lambda\le\delta$ forces $a+b\le\delta N+3$; such shapes have $\nu_\varepsilon(\lambda)\le4c_\lambda^2\le64(\delta N+3)^2/N^4$ (as $a+j+1$ and $b+j$ are both $\ge N/2$ once $\delta N+3\le N/2$, which holds whenever the bound is non-trivial), and there are at most $(\delta N+3)^2/2$ of them.  Hence $\nu_\varepsilon([-1,-1+\delta])\le32(\delta+3/N)^4$, and $(1-\delta)^m\le e^{-\delta m}=(m+1)^{-4}$.
 \end{proof}
 
 The rate $1/m$ is sharp, and the constant is $2$:
@@ -186,16 +186,16 @@ As $N\to\infty$, the spectral measure $\nu_\varepsilon$ converges weakly to the 
 whose mass within $\delta$ of $r=1$ is $2\delta(1+o(1))$ as $\delta\to0$ and within $\delta$ of $r=-1$ is $O(\delta^4)$.  Consequently
 \begin{equation}\label{eq:cont}
 \lim_{N\to\infty}\Phi(m)=\int\!\!\int\frac{4(\alpha-\beta)^2}{(1-\alpha)(1-\beta)}\bigl(1-2(1-\alpha)(1-\beta)\bigr)^m\,d\alpha\,d\beta
-=\frac{2}{m}+O\Bigl(\frac{\log m}{m^2}\Bigr).
+=\frac{2}{m+1}-\frac{3}{2m^2}+O\Bigl(\frac1{m^3}\Bigr).
 \end{equation}
 \end{corollary}
 
 \begin{proof}
-Put $a=\alpha N$, $b=\beta N$, $j=(1-\alpha-\beta)N$.  Then $c_\lambda=\frac{(\alpha-\beta)+1/N}{((1-\beta)N+1)(1-\alpha)N}$, $1-r_\lambda=2(1-\alpha)(1-\beta)+O(1/N)$ uniformly, and the shapes in a cell $d\alpha\,d\beta$ number $N^2d\alpha\,d\beta$, so $\nu_\varepsilon$ is a Riemann sum for \eqref{eq:density}; the total mass is $1$ by Theorem~\ref{thm:main}.  Near $r=1$ put $s=1-\alpha$: the region is $\beta\le s$, the density is $4/s+O(1)$, and $1-r=2s(1-\beta)=2s+O(s^2)$, so the mass with $1-r\le\delta$ is $\int_0^{\delta/2}4\,ds\,(1+O(\delta))=2\delta+O(\delta^2)$; integrating $4(1-2s)^m$ over $s\le\tfrac12$ gives $2/(m+1)$ and the corrections are of relative order $\log m/m$.  Near $r=-1$ both $\alpha$ and $\beta$ are $O(\delta)$ and the density is $O(\delta^2)$ on a set of area $O(\delta^2)$.
+Put $a=\alpha N$, $b=\beta N$, $j=(1-\alpha-\beta)N$.  Then $c_\lambda=\frac{(\alpha-\beta)N+1}{((1-\beta)N+1)(1-\alpha)N}$, $1-r_\lambda=2(1-\alpha)(1-\beta)+O(1/N)$ uniformly, and the shapes in a cell $d\alpha\,d\beta$ number $N^2d\alpha\,d\beta$, so $\nu_\varepsilon$ is a Riemann sum for \eqref{eq:density}; the total mass is $1$ by Theorem~\ref{thm:main}.  Near $r=1$ put $s=1-\alpha$: the region is $\beta\le s$, the density is $4/s+O(1)$, and $1-r=2s(1-\beta)=2s+O(s^2)$, so the mass with $1-r\le\delta$ is $\int_0^{\delta/2}4\,ds\,(1+O(\delta))=2\delta+O(\delta^2)$; For the expansion, substitute $t=1-\beta=1-w$ with $0\le w\le s$: the integrand is $4(1-s-w)^2(1-2s+2sw)^m/(s(1-w))$, and expanding in $w$ and $s$ (the mass is carried by $s=O(1/m)$) gives $\int_0^s(\cdots)dw=\frac4s(1-2s)^m\bigl(s-\tfrac52s^2+ms^3+O(s^3+m^2s^5)\bigr)$; with $\int_0^{1/2}s^k(1-2s)^mds=2^{-k-1}k!\,m!/(m+k+1)!$ this integrates to $\frac2{m+1}-\frac{5/2}{(m+1)(m+2)}+\frac{m}{(m+1)(m+2)(m+3)}+O(m^{-3})$.  (Numerically $m^2(\lim_N\Phi(m)-2/(m+1))\to-1.500$.)  Near $r=-1$ both $\alpha$ and $\beta$ are $O(\delta)$ and the density is $O(\delta^2)$ on a set of area $O(\delta^2)$.
 \end{proof}
 
 \begin{remark}
-The mass $2\delta$ at the top of the spectrum has a transparent probabilistic meaning.  Under the uniform measure the pair of cycle lengths $(|C_u|,|C_v|)$ is well understood: the smaller of the two relevant masses (the shorter arc between $u$ and $v$ when $u\sim v$, the smaller of the two cycles otherwise) has density $4$ at $0^+$ on the scale of $N$, and a pair whose smaller mass is $g$ keeps its status for $\asymp N/g$ steps, since no transposition touches the small part.  Thus the slow modes of $\varepsilon$ are the ``trapped'' pairs, and the linear spectral density is the linear density of the gap.  Theorem~\ref{thm:main} shows that this trapping is the \emph{only} slow mechanism and identifies the constant.
+The mass $2\delta$ at the top of the spectrum has a transparent probabilistic meaning.  Under the uniform measure the pair of cycle lengths $(|C_u|,|C_v|)$ is well understood: the smaller of the two relevant masses (the shorter arc between $u$ and $v$ when $u\sim v$, the smaller of the two cycles otherwise) has density $4$ at $0^+$ on the scale of $N$ (density $2$ from each of the two cases, by the conditional laws recalled in the proof of Corollary~\ref{cor:onestep}), and a pair whose smaller mass is $g$ keeps its status for $\asymp N/g$ steps, since no transposition touches the small part.  Thus the slow modes of $\varepsilon$ are the ``trapped'' pairs, and the linear spectral density is the linear density of the gap.  Theorem~\ref{thm:main} shows that this trapping is the \emph{only} slow mechanism and identifies the constant.
 \end{remark}
 
 \subsection{One step}
@@ -231,21 +231,24 @@ For a fixed start $\sigma_0$, $\Pi_\lambda\varepsilon=\hat c_\lambda(R((u\,v))-I
 \E\bigl[\varepsilon(\sigma_0\tau_1\cdots\tau_m)\bigr]=(P^m\varepsilon)(\sigma_0)
 =\sum_{\lambda=(a,b,1^j)}r_\lambda^{\,m}\,\hat c_\lambda\,\bigl[\chi_\lambda(\sigma_0(u\,v))-\chi_\lambda(\sigma_0)\bigr],
 \end{equation}
-with $\hat c_\lambda$ carrying the sign $(-1)^j$ of \eqref{eq:chat}.  At $m=0$ this reads $\sum_\lambda\hat c_\lambda[\chi_\lambda(\sigma_0(u\,v))-\chi_\lambda(\sigma_0)]=\varepsilon(\sigma_0)$, which for $\sigma_0=\mathrm{id}$ is the identity $\sum_{\lambda=(a,b,1^j)}\hat c_\lambda d_\lambda(1-r_\lambda)=1$.  When $\sigma_0$ is an $N$-cycle, $\chi_\lambda(\sigma_0)$ vanishes unless $\lambda$ is a hook, and $\sigma_0(u\,v)$ has cycle type $(\ell,N-\ell)$, where the characters of the shapes $(a,b,1^j)$ are given by the Murnaghan--Nakayama rule in terms of two rim hooks; \eqref{eq:fixed} then becomes an explicit finite sum for the probability that two points at distance $\ell$ on an $N$-cycle are still (or again) in a common cycle after $m$ random transpositions.
+with $\hat c_\lambda$ carrying the sign $(-1)^j$ of \eqref{eq:chat}.  At $m=0$ this reads $\sum_\lambda\hat c_\lambda[\chi_\lambda(\sigma_0(u\,v))-\chi_\lambda(\sigma_0)]=\varepsilon(\sigma_0)$, which for $\sigma_0=\mathrm{id}$ (where $\chi_\lambda(\mathrm{id}\cdot(u\,v))-\chi_\lambda(\mathrm{id})=-d_\lambda(1-r_\lambda)$ and $\varepsilon(\mathrm{id})=-1$) is the identity $\sum_{\lambda=(a,b,1^j)}\hat c_\lambda d_\lambda(1-r_\lambda)=1$.  When $\sigma_0$ is an $N$-cycle, $\chi_\lambda(\sigma_0)$ vanishes unless $\lambda$ is a hook, and $\sigma_0(u\,v)$ has cycle type $(\ell,N-\ell)$, where the characters of the shapes $(a,b,1^j)$ are given by the Murnaghan--Nakayama rule in terms of two rim hooks; \eqref{eq:fixed} then becomes an explicit finite sum for the probability that two points at distance $\ell$ on an $N$-cycle are still (or again) in a common cycle after $m$ random transpositions.
 
 \subsection{The structure behind the formula}
 The identity \eqref{eq:step1} says that the same-cycle indicator is a first difference of the cycle count, and the cycle count is supported on the shapes $(a,b,1^j)$ because its generating function is the content polynomial, whose derivative at $x=1$ survives only one subdiagonal box.  More generally, for any $g\in\SN$ the function $\sigma\mapsto c(\sigma g)-c(\sigma)$ has spectral measure $\hat c_\lambda^{\,2}\,\|(R(g)-I)\chi_\lambda\|^2=2\hat c_\lambda^{\,2}(1-\chi_\lambda(g)/d_\lambda)$, supported on the same shapes.  Functions such as $\mathbf 1\{u_1\sim u_2\sim u_3\}$ are not of this form, and we do not know whether their spectral measures are equally explicit.
 
 \begin{remark}[the Latin square problem]\label{rem:latin}
-Let $L$ be a Latin square of order $n$, let $j,j'$ be two columns, and let $\pi$ be the permutation of the rows sending $r$ to the row $r'$ with $L(r',j')=L(r,j)$ (the ``column cycles'' of the pair).  Whether two given rows lie in a common cycle of $\pi$ is a bit that appears in the switching identities of Cavenagh, Greenhill and Wanless for the distribution of the second row of a random Latin square \cite{CGW08}, and the re-randomisation method of Kwan, Petrova and Sawhney \cite{KPS25} randomises it by switching a pool of disjoint intercalates through the columns $j,j'$, each of which multiplies $\pi$ by a transposition of rows.  If the base permutation is uniform and the pool consists of $k$ uniform disjoint transpositions, the bit's conditional bias given the pool, $\mathrm{bias}=\Pr_S[\text{bit}]-\tfrac12$ over uniform subsets $S$ of the pool, satisfies $4\E[\mathrm{bias}^2]=\E_{M}\Phi(M)+O(k^2/n)$ with $M\sim\mathrm{Bin}(k,\tfrac12)$, so that $\E|\mathrm{bias}|=O(k^{-1/2})$ by Corollary~\ref{cor:bound}; this is the estimate that the present computation was made for.
+Let $L$ be a Latin square of order $n$, let $j,j'$ be two columns, and let $\pi$ be the permutation of the rows sending $r$ to the row $r'$ with $L(r',j')=L(r,j)$ (the ``column cycles'' of the pair).  Whether two given rows lie in a common cycle of $\pi$ is a bit that appears in the switching identities of Cavenagh, Greenhill and Wanless for the distribution of the second row of a random Latin square \cite{CGW08}, and the re-randomisation method of Kwan, Petrova and Sawhney \cite{KPS25} randomises it by switching a pool of disjoint intercalates through the columns $j,j'$, each of which multiplies $\pi$ by a transposition of rows.  If the base permutation is uniform and the pool consists of $k$ uniform disjoint transpositions, the bit's conditional bias given the pool, $\mathrm{bias}=\Pr_S[\text{bit}]-\tfrac12$ over uniform subsets $S$ of the pool, satisfies $4\E[\mathrm{bias}^2]=\E_{M}\Phi(M)+O(k^2/n)$ with $M\sim\mathrm{Bin}(k,\tfrac12)$ (sketch: with $S,T$ independent uniform subsets, $\varepsilon_S\varepsilon_T=\varepsilon(\alpha)\varepsilon(\alpha\tau_{S\triangle T})$ for the uniform $\alpha=\sigma\tau_S$, and $|S\triangle T|$ disjoint uniform transpositions avoiding $u,v$ are coupled to iid ones at cost $O(k^2/n)$), so that $\E|\mathrm{bias}|=O(k^{-1/2})$ by Corollary~\ref{cor:bound}; this is the estimate that the present computation was made for.
 \end{remark}
 
 \begin{thebibliography}{9}
+\bibitem{AK13} G.~Alon and G.~Kozma, The probability of long cycles in interchange processes, \emph{Duke Math.\ J.} 162 (2013), 1567--1585.
+\bibitem{Arc25} D.~Arcona, Representation theory and cycle statistics for random walks on the symmetric group, arXiv:2512.13969 (2026).
 \bibitem{BD06} N.~Berestycki and R.~Durrett, A phase transition in the random transposition random walk, \emph{Probab.\ Theory Related Fields} 136 (2006), 203--233.
+\bibitem{BK15} N.~Berestycki and G.~Kozma, Cycle structure of the interchange process and representation theory, \emph{Bull.\ Soc.\ Math.\ France} 143 (2015), 265--280.
 \bibitem{BSZ11} N.~Berestycki, O.~Schramm and O.~Zeitouni, Mixing times for random $k$-cycles and coalescence-fragmentation chains, \emph{Ann.\ Probab.} 39 (2011), 1815--1843.
 \bibitem{CGW08} N.~J.~Cavenagh, C.~Greenhill and I.~M.~Wanless, The cycle structure of two rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 286--309.
 \bibitem{DS81} P.~Diaconis and M.~Shahshahani, Generating a random permutation with random transpositions, \emph{Z.\ Wahrsch.\ Verw.\ Gebiete} 57 (1981), 159--179.
-\bibitem{KPS25} M.~Kwan, A.~Petrova and M.~Sawhney, Random Latin squares: the parity of the second row, arXiv:2509.13125 (2025).
+\bibitem{KPS25} M.~Kwan, A.~Petrova and M.~Sawhney, Parities in random Latin squares, arXiv:2509.13125 (2025).
 \bibitem{Mac95} I.~G.~Macdonald, \emph{Symmetric Functions and Hall Polynomials}, 2nd ed., Oxford University Press, 1995.
 \bibitem{Sch05} O.~Schramm, Compositions of random transpositions, \emph{Israel J.\ Math.} 147 (2005), 221--243.
 \end{thebibliography}

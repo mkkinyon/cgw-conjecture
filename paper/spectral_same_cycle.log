@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  1 OCT 2026 18:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  1 OCT 2026 19:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -484,12 +484,12 @@ Package hyperref Info: Link coloring ON on input line 29.
 \openout3 = `spectral_same_cycle.out'.
 
 
-Overfull \hbox (45.25975pt too wide) in paragraph at lines 32--33
+Overfull \hbox (79.02203pt too wide) in paragraph at lines 32--33
 []\OT1/cmr/m/n/9 Let $\OML/cmm/m/it/9 u \OMS/cmsy/m/n/9 6\OT1/cmr/m/n/9 = \OML/
-cmm/m/it/9 v$ \OT1/cmr/m/n/9 be two fixed points of $[\OML/cmm/m/it/9 N\OT1/cmr
-/m/n/9 ]$ and let $\OML/cmm/m/it/9 "\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 ^^[\OT1/cmr
-/m/n/9 ) = 2 \OMS/cmsy/m/n/9 ^^A \OT1/cmr/bx/n/9 1\OMS/cmsy/m/n/9 f\OML/cmm/m/i
-t/9 u[]v[]^^[\OMS/cmsy/m/n/9 g ^^@
+cmm/m/it/9 v$ \OT1/cmr/m/n/9 be two dis-tin-guished points of $[\OML/cmm/m/it/9
+ N\OT1/cmr/m/n/9 ]$ and let $\OML/cmm/m/it/9 "\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 ^
+^[\OT1/cmr/m/n/9 ) = 2 \OMS/cmsy/m/n/9 ^^A \OT1/cmr/bx/n/9 1\OMS/cmsy/m/n/9 f\O
+ML/cmm/m/it/9 u[]v[]^^[\OMS/cmsy/m/n/9 g ^^@
  []
 
 
@@ -513,13 +513,7 @@ cmr/m/n/10.95 ) = \OMS/cmsy/m/n/10.95 k\OT1/cmr/m/n/10.95 ^^E[]\OML/cmm/m/it/10
  r[] \OT1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 :
  []
 
-[2] [3] [4] [5]
-Underfull \hbox (badness 1102) in paragraph at lines 248--249
-[]\OT1/cmr/m/n/9 M. Kwan, A. Petrova and M. Sawh-ney, Ran-dom Latin squares: th
-e par-ity of the sec-ond row,
- []
-
-[6] (./spectral_same_cycle.aux)
+[2] [3] [4] [5] [6] (./spectral_same_cycle.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -528,13 +522,13 @@ Package rerunfilecheck Info: File `spectral_same_cycle.out' has not changed.
 (rerunfilecheck)             Checksum: B41E6C163C58148471624CE93D0F5256;2937.
  ) 
 Here is how much of TeX's memory you used:
- 12123 strings out of 476106
- 183253 string characters out of 5793933
- 1947975 words of memory out of 5000000
- 33779 multiletter control sequences out of 15000+600000
+ 12129 strings out of 476106
+ 183300 string characters out of 5793933
+ 1949975 words of memory out of 5000000
+ 33782 multiletter control sequences out of 15000+600000
  568955 words of font info for 76 fonts, out of 8000000 for 9000
  220 hyphenation exceptions out of 8191
- 75i,9n,79p,1145b,601s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1432b,556s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texl
@@ -557,10 +551,10 @@ s/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type
 c/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/symbols/msbm10.pfb>
-Output written on spectral_same_cycle.pdf (6 pages, 312105 bytes).
+Output written on spectral_same_cycle.pdf (6 pages, 317600 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
- 44 named destinations out of 1000 (max. 500000)
+ 280 PDF objects out of 1000 (max. 8388607)
+ 224 compressed objects within 3 object streams
+ 47 named destinations out of 1000 (max. 500000)
  113 words of extra memory for PDF output out of 10000 (max. 10000000)
 
