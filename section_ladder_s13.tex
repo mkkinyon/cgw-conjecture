@@ -613,9 +613,8 @@ $(\tfrac23-o(1))(\ell'-1)/n$; the unconditional (CP) constant $2/5$
 of \S\ref{sec:crossspace}; the ``$\ge\tfrac13$'' of \eqref{eq:CPcols};
 CGW's $\Pr[(n)]\le2n^{-2/3}$ and Corollary~4.5, hence the tail bound
 $\PP_n(\kappa>A\log n)=O(n^{-2/3})$ used in the proof of
-Theorem~\ref{thm:reduction}, which must be re-derived from the
-surviving direction (a $k$-fold joining bound on
-$\E\binom{\kappa}{k}$ with $k=\log n$ does it; to be written).  The
+Theorem~\ref{thm:reduction} --- now re-derived from the surviving
+direction in Proposition~\ref{prop:tailsurvive}.  The
 data ($\Pr_X[B]\approx\tfrac12$ throughout) leave no doubt about the
 statement, and the exact tables at $n\le11$ verify it there.
 \end{remark}
@@ -626,15 +625,16 @@ permutation of rows $1,2$, $N_\ell$ its number of $\ell$-cycles and
 $\kappa=\sum_\ell N_\ell$.  Then, using only the identity
 $|J|=2|X_A|$ of Theorem~\ref{thm:marked} and $|X_A|\le|X|$:
 \begin{enumerate}[leftmargin=2em]
-\item[(i)] $\E[\ell N_\ell]\le4n/(n-\ell)$ for every $\ell$; in
-particular $\E[N_\ell]\le8/\ell$ for $\ell\le n/2$.
+\item[(i)] $\E[\ell N_\ell]\le2n/(n-\ell)$ for every $\ell$; in
+particular $\E[N_\ell]\le4/\ell$ for $\ell\le n/2$.
 \item[(ii)] For every $k\ge1$, with $(\kappa)_k=\kappa(\kappa-1)\cdots(\kappa-k+1)$,
 \[
 \E\bigl[(\kappa)_k\bigr]\;\le\;2^{k-1}\sum_{\ell_1,\dots,\ell_k\ge2}\frac{\E[mN_m]}{\ell_1\cdots\ell_k}\Big|_{m=\ell_1+\cdots+\ell_k}
-\;\le\;2^{k}\Bigl(4+\frac{k^2}{\log n}\Bigr)(\log n)^k .
+\;\le\;2^{k-1}\Bigl(4+\frac{k^2}{\log n}\Bigr)(\log n)^k .
 \]
-\item[(iii)] For $A\ge16$, $\Pr[\kappa\ge A\log n]\le(4+\log n)\,n^{-\log((A-1)/2)}=O(n^{-2}\log n)$;
-and $\Pr[\text{all cycles of }\sigma\text{ have the same length }\ell<n]\le8d(n)/n$,
+\item[(iii)] For $A\ge3$, $\Pr[\kappa\ge A\log n]\le(7+\log n)\,n^{-\log((A-1)/2)}$,
+which is $O(n^{-2}\log n)$ for $A\ge16$;
+and $\Pr[\text{all cycles of }\sigma\text{ have the same length }\ell<n]\le4d(n)/n$,
 $d(n)$ the number of divisors.
 \end{enumerate}
 \end{proposition}
@@ -648,43 +648,56 @@ $|J|=2|X_A|\le2|X|$ gives
 $\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$; for
 $\beta=\ell$ the same count with $\ell^2\binom{N_\ell}{2}$ and
 $\ell N_{2\ell}$ gives $\E[\ell^2N_\ell(N_\ell-1)]\le4\ell\E[N_{2\ell}]$.
-Summing the first over $\beta\ne\ell$ ($\sum_\beta\beta N_\beta=n$):
-$\E[\ell N_\ell(n-\ell N_\ell)]\le2\E[\sum_mmN_m]=2n$.  Hence
+Summing the first over $\beta\ne\ell$ ($\sum_\beta\beta N_\beta=n$) and
+adding the second (its right side is the missing summand $m=2\ell$):
+$\E[\ell N_\ell(n-\ell N_\ell)]+\E[\ell^2N_\ell(N_\ell-1)]\le2\E[\sum_{m\ge\ell+2}mN_m]\le2n$.  Hence
 $n\E[\ell N_\ell]=\E[\ell N_\ell(n-\ell N_\ell)]+\E[\ell^2N_\ell(N_\ell-1)]+\ell\E[\ell N_\ell]
-\le2n+2n+\ell\E[\ell N_\ell]$.
+\le2n+\ell\E[\ell N_\ell]$.
 
 (ii) Count the instances $(L,(C_1,j_1),\dots,(C_k,j_k))$: $C_i$
 pairwise distinct $\sigma$-cycles of $L$ of lengths $\ell_i$ and
 $j_i\in C_i$; there are $\ell_1\cdots\ell_k$ of them per ordered
 $k$-tuple of distinct cycles with these lengths.  Join $C_1$ and $C_2$
-at the pair $\{j_1,j_2\}$ by CGW's joining step (flip if the pair is an
-$A$-pair; switch along the cycle with the smaller minimum symbol, then
-flip, if it is a $B$-pair): the result has $j_1,j_2$ on one cycle of
-length $\ell_1+\ell_2$ with $j_2$ at a $\sigma$-distance from $j_1$
-determined by $(\ell_1,\ell_2)$ and the rule, every other cycle of
-$\sigma$ (in particular $C_3,\dots,C_k$) untouched, and the map is at
-most two-to-one (the backflip at $\{j_1,j_2\}$ returns $L$ or its
-switch).  Repeat with $\{j_1,j_3\}$, \dots, $\{j_1,j_k\}$.  After $k-1$
-steps all $j_i$ lie on one cycle of length $m=\sum\ell_i$ at positions
+at the pair $\{j_1,j_2\}$ by a joining step: flip if the pair is an
+$A$-pair; if it is a $B$-pair, first trade the row cycle $C_2$ of $j_2$
+(a switch in the sense of Lemma~\ref{lem:switchtoggle}, whose proof
+applies to the row cycle through either column of the pair; it inverts
+$C_2$ in place and does not touch the cycle of $j_1$), then flip.  The
+flip replaces $\sigma$ by $\sigma\circ(j_1\,j_2)$ on rows $1,2$, so
+the result has $j_1,j_2$ on one cycle of length $\ell_1+\ell_2$ with
+$j_2=\sigma'^{\ell_2}(j_1)$ whether or not the trade was applied
+(CGW Lemma~3.3), every other cycle of $\sigma$ (in particular
+$C_3,\dots,C_k$) untouched, and the map is at most two-to-one (the
+backflip at $\{j_1,j_2\}$ returns $L$ or the traded square).  Repeat
+with $\{j_1,j_3\}$, \dots, $\{j_1,j_k\}$, always trading the cycle of
+the new column when needed, so that the cycle containing $j_1$ is never
+inverted: after step $i$ every earlier $j_r$ is shifted by exactly
+$\ell_{i+1}$.  After $k-1$ steps all $j_i$ lie on one cycle of length
+$m=\sum\ell_i$ at the positions $j_i=\sigma'^{\ell_i+\cdots+\ell_k}(j_1)$,
 determined by $j_1$ and $(\ell_1,\dots,\ell_k)$, and the composite is at
-most $2^{k-1}$-to-one.  Hence the number of instances with lengths
+most $2^{k-1}$-to-one.  (With CGW's min-symbol rule the trade may
+invert the merged cycle and the positions are not determined; the
+count would then be $2^{2k-3}$-to-one.)  Hence the number of instances with lengths
 $(\ell_i)$ is at most $2^{k-1}\sum_{L'}mN_m(L')$, i.e.\
 $\E[\ell_1\cdots\ell_k\,T(\ell_1,\dots,\ell_k)]\le2^{k-1}\E[mN_m]$ with
 $T$ the number of ordered $k$-tuples of distinct cycles with these
 lengths; summing over $(\ell_i)$ gives the first bound, since
 $\sum_{(\ell_i)}T=(\kappa)_k$.  For the second, split at $m\le n/2$,
-where $\E[mN_m]\le8$ by (i) and
+where $\E[mN_m]\le4$ by (i) and
 $\sum_{m\le n/2}\sum_{\sum\ell_i=m}\prod\ell_i^{-1}\le(\sum_{\ell\le n/2}\ell^{-1})^k\le(\log n)^k$,
 and $m>n/2$, where some $\ell_i\ge m/k$, so
 $\sum_{\sum\ell_i=m}\prod\ell_i^{-1}\le k\cdot(k/m)(\log n)^{k-1}$, and
 $\sum_{m>n/2}mN_m\cdot k^2(\log n)^{k-1}/m\le k^2(\log n)^{k-1}$ because at
 most one cycle is longer than $n/2$.
 
-(iii) Markov for $(\kappa)_k$ with $k=\lceil\log n\rceil$:
-$\Pr[\kappa\ge K]\le\E[(\kappa)_k]/(K-k)^k$ with $K=A\log n$ gives
-$(4+\log n)(2/(A-1))^{\log n}$, and $(A-1)/2\ge e^2$ for $A\ge16$.  For
-the equal-length types, $\Pr[N_\ell=n/\ell]\le\E[N_\ell]\ell/n\le8/n$
-for $\ell\le n/2$, and $\ell=n$ is the $n$-cycle.
+(iii) Markov for $(\kappa)_k$ with $k=\lceil\log n\rceil\le\log n+1$:
+on $\{\kappa\ge K\}$, $(\kappa)_k\ge(K-k+1)^k\ge((A-1)\log n)^k$ for
+$K=A\log n$, and $k^2/\log n\le\log n+3$, so
+$\Pr[\kappa\ge K]\le2^{k-1}(4+k^2/\log n)(\log n)^k/((A-1)\log n)^k
+\le(7+\log n)(2/(A-1))^{k}\le(7+\log n)(2/(A-1))^{\log n}$ for $A\ge3$,
+and $(A-1)/2\ge e^2$ for $A\ge16$.  For the equal-length types,
+$\ell\mid n$ and $\ell<n$ force $\ell\le n/2$, so
+$\Pr[N_\ell=n/\ell]\le\E[N_\ell]\ell/n\le4/n$; $\ell=n$ is the $n$-cycle.
 \end{proof}
 
 With this, the tail estimates in the proof of Theorem~\ref{thm:reduction}
