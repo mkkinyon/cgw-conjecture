@@ -1448,3 +1448,73 @@ involution property); and CGW's cross-switch repairs trade along
 $\rho_{x,y}$-arcs that may pass through $p$ or $p'$.  This enlarges
 the blocked set by a second cycle-avoidance event; we have not carried
 the bookkeeping through.
+
+\paragraph{(f) The permutation problem $(\Pi)$, and the one statement
+everything reduces to.}  Fix a permutation $\rho_0$ of the columns,
+two columns $p\ne p'$, and a set $\mathcal T$ of pairwise disjoint
+transpositions avoiding $p,p'$; for $\eta\in\{0,1\}^{\mathcal T}$ let
+$\tau(\eta)$ be the product of the transpositions with $\eta_Z=1$.
+Call $Z=(q,c)$ \emph{crossing} in a permutation $\rho$ if $\{q,c\}$ and
+$\{p,p'\}$ are interleaved in the cycle structure of $\rho$: $q,c$ on
+different arcs of a common cycle through $p,p'$, or $q$ in the cycle
+of $p$ and $c$ in the (different) cycle of $p'$, or vice versa.  By
+Lemma~\ref{lem:legalturn}, $\rho\mapsto\rho\circ Z$ toggles the
+separation of $p,p'$ exactly when $Z$ is crossing in $\rho$, and $Z$
+is crossing in $\rho\circ Z$ iff it is crossing in $\rho$.  Hence, for
+$\eta$ uniform and $b(\eta)=[p,p'\text{ separated in }\rho_0\tau(\eta)]$,
+\begin{equation}\label{eq:Pi}
+\Pr_\eta[b=1]\;\ge\;\tfrac12\max_{Z\in\mathcal T}\Pr_\eta\bigl[Z\text{ crossing in }\rho_0\tau(\eta)\bigr]
+\;\ge\;\tfrac12\,\E_\eta\Bigl[\frac{\#\{Z\text{ crossing in }\rho_0\tau(\eta)\}}{|\mathcal T|}\Bigr],
+\end{equation}
+and $b\equiv0$ on the cube iff no $Z$ is crossing in any
+$\rho_0\tau(\eta)$.  This happens iff the two arcs $P_1,P_2$ of the
+cycle through $p,p'$ (crossed state) lie in different components of
+the graph whose vertices are $P_1$, $P_2$ and the other cycles of
+$\rho_0$ and whose edges are the transpositions of $\mathcal T$ joining
+different vertices: a transposition inside a vertex splits off a
+piece without changing the separation, one joining a third cycle to
+$P_1$ merges it into the arc, and once a path of such merges connects
+$P_1$ to $P_2$ some transposition has become crossing.  In particular
+a single crossing $Z$ at $\eta=0$ gives $\Pr_\eta[b=1]\ge\tfrac12$ on
+the orbit of $Z$ alone, and the examples of \S(c) (chords at
+$\rho_0$-distance $2$) are precisely the disconnected case.  There is
+no loss in using one coordinate per pair: with $Z_k$ the first clean
+coordinate of the $k$-th pair in a fixed order of the matching (an
+orbit-invariant choice), Proposition~\ref{prop:orbit} reads
+\begin{equation}\label{eq:onecoord}
+\Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\Bigl[\prod_{k\in I}\bigl(1-\tfrac12X_k\bigr)\Bigr],
+\qquad X_k=[\,Z_k\text{ crossing in }\rho_{x_k,y_k}\,],
+\end{equation}
+and $(\beta)$ becomes: $\Pr_X[X_k=1]\ge c$ for most $k$, i.e.\ the
+column pair selected by the column-cycle structure through $x_k$ is
+interleaved with $\{p,p'\}$ in the row-cycle structure of $(x_k,y_k)$
+with probability bounded below.
+
+Every input of Hypothesis~\ref{hyp:orbit} is now of one form.  Call two
+pairs of parallel lines \emph{interleaved in} a third pair of lines
+if they are interleaved in its cycle structure, as above.  Then
+$(\beta)$ asks that the column pairs $\{p,p'\}$ (the mark) and
+$\{q,c\}$ (a clean coordinate) be interleaved in the row pair
+$(x_k,y_k)$ with probability $\ge c$; (BL), hence $(\alpha)$, asks
+that the row pairs $\{1,2\}$ and $\{x,y\}$ be \emph{not} interleaved in
+a joining column pair $(q,c)$ with probability $\ge c$; and the
+availability of every third-row repair of \S(e) is the event that
+$\{p,p'\}$ and $\{q,c\}$ are not interleaved in $(z,w)$.  So the whole
+residual is the two-sided statement
+\[
+\textup{(U)}\qquad c\;\le\;\Pr\bigl[\text{two given pairs of lines are interleaved in a third pair}\bigr]\;\le\;1-c
+\]
+in $X$ (type and mark of rows $1,2$ prescribed; the other lines
+generic or selected by cycle structure), and the exact tools of $X$
+--- the free row trades of Lemma~\ref{lem:rowfair}, which preserve
+interleaving of $\{1,2\}$ with the traded pair (\S(e)), and the column
+turns of Lemma~\ref{lem:legalturn}, which are legal exactly off the
+interleaved configurations --- are either blind to (U) or need (U).
+Without any conditioning, (U) for four generic columns in a generic
+row pair follows from $\Pr[W]\le3/5$ under CGW($3/2$)
+(\S\ref{sec:crossspace}); from the surviving direction alone one does
+not even get $\Pr[\sigma\text{ is an $n$-cycle}]\le1-c$ (that is CGW's
+Lemma~4.4, upper half), although it follows from the intercalate
+counts of Kwan--Sudakov \cite{KS18} by a second moment.  The data give
+$0.19$ for the interleaving probability in every version we measured
+(\S(d), \S(e)).
