@@ -568,7 +568,36 @@ the corner cells), verifies that it is a Latin square of the same type
 in every instance, and finds that case~3 lands in the wrong type in
 $2676$ of $2676$ instances at $n=9,12$ with $\min(\alpha,\beta)\ge3$
 (a referee subagent found the gap first, with its own implementation).
-We found no published correction.  \emph{What survives:} the direction
+We found no published correction (the text we use is the journal
+version, DOI 10.1002/rsa.20216, and the example on its p.~293 exhibits
+the reversal: $\omega=(1234567)$, $j=2$, $j'=5$, $\alpha=3$, and after
+the cross-switch $\omega'=(1243567)$).
+
+\emph{A partial repair.}  A cross-switch at a $B$-pair $(J,J')$ at
+any distance $a\ge2$ is a type-preserving trade (the proof of
+Lemma~3.10 does not use $a=\alpha$), it reverses the $\omega$-arc from
+$J$ to $J'$, and it toggles $\{j,j'\}$ iff exactly one of $j,j'$ lies in
+the interior of that arc, say at position $i$; the distance from $j$
+to $j'$ then changes by $a-2i$.  So the distance-preserving toggles
+of $\{j,j'\}$ are exactly the cross-switches at pairs \emph{symmetric
+about $j$ or about $j'$} ($a=2i$), and they exist as $B$-pairs or not.
+When $\alpha$ is even and $\alpha<2\beta$, the pair
+$R=(\omega^{\alpha/2}j,\omega^{3\alpha/2}j)$ --- symmetric about $j'$,
+at distance $\alpha$, with $j$ outside its arc --- always gives an
+edge: if $R$ is $B$, cross-switch at $R$ and backflip at $\{j,j'\}$
+(now an $A$-pair at distance $\alpha$); if $R$ is $A$, backflip at
+$R$ itself.  Symmetrically for $\beta$ even and $\beta<2\alpha$.
+(\texttt{s13\_cgwfix.py}: type $\mu$ in all $3928$ covered instances
+at $n=10,13$.)  The $\mu$-side multiplicities change (an $A$-pair's
+backflip may serve two splitting pairs), so the constant $3/2$ would
+have to be recomputed.  When $\alpha,\beta$ are both odd, every
+distance-preserving toggle has even arc length $a\ne\alpha,\beta$, so
+if all the symmetric pairs are $A$-pairs no one-cross-switch repair
+exists and we see no canonical repair; the same holds for
+$\alpha\ge2\beta$ with $\beta$ odd.  The gap is therefore open in
+those classes, which the reduction chains do use.
+
+\emph{What survives:} the direction
 $|S(\lambda)|N_\lambda\ge\tfrac12|S(\mu)|N_\mu$, which by
 Theorem~\ref{thm:marked} is the trivial $|X|\ge|X_A|$; CGW's
 Lemma~4.1 upper bound ($|S(\lambda,F)|(m-1)!/(|S((m),F)|\gamma(\lambda))\le2^{\kappa-1}$),

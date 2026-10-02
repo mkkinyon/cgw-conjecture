@@ -61,27 +61,27 @@ def is_A(L, j, jp): return 1 not in col_cycle_through(L, j, jp, 0)
 
 
 def cross_switch(L, j, jp):
-    """CGW Def 3.9 at the B-pair (j,jp) with omega^alpha(j) = jp (rows 1,2 = indices 0,1)."""
-    om = omega_of(L); n = len(L)
+    """CGW Def 3.9 at the B-pair (j,jp) with omega^alpha(j) = jp (rows 1,2 = indices 0,1).
+    First form (min symbol in {e1,e4}): rows 1,2 swap on the interior of the omega-arc from j to jp,
+    (2,j) <- e2 = L(1,jp), (1,jp) <- e3 = L(2,j); columns j,jp swap on the rows strictly between 2 and 1
+    along d, where d(i) is the row holding L(i,j) in column jp (CGW's delta^{-1}).
+    Second form (min in {e2,e3}): rows 1,2 swap on the interior of the omega-arc from jp to j,
+    (1,j) <- e4 = L(2,jp), (2,jp) <- e1 = L(1,j); columns j,jp swap on the rows strictly between 1 and 2."""
+    n = len(L); om = omega_of(L); M = [list(r) for r in L]
     e1, e2, e3, e4 = L[0][j], L[0][jp], L[1][j], L[1][jp]
-    if min(e1, e2, e3, e4) in (e2, e3):               # second form: exchange roles
-        return cross_switch_form(L, jp, j, 1, 0)
-    return cross_switch_form(L, j, jp, 0, 1)
-
-
-def cross_switch_form(L, j, jp, r1, r2):
-    """first form with distinguished rows (r1,r2) and omega-arc from j to jp in the direction
-    'r1 o omega(c) = r2 o c'."""
-    n = len(L); M = [list(r) for r in L]
-    col = {L[r1][c]: c for c in range(n)}; om = [col[L[r2][c]] for c in range(n)]
-    arc = []; c = om[j]
-    while c != jp: arc.append(c); c = om[c]
-    for c in arc: M[r1][c], M[r2][c] = L[r2][c], L[r1][c]
-    M[r1][jp] = L[r2][j]; M[r2][j] = L[r1][jp]
-    # delta-arc from r2 to r1 in columns j,jp (interior rows swap); delta(i) o jp = i o j
     row = {L[r][jp]: r for r in range(n)}; d = [row[L[r][j]] for r in range(n)]
-    r = d[r2]
-    while r != r1: M[r][j], M[r][jp] = L[r][jp], L[r][j]; r = d[r]
+    if min(e1, e2, e3, e4) in (e1, e4):
+        c = om[j]
+        while c != jp: M[0][c], M[1][c] = L[1][c], L[0][c]; c = om[c]
+        M[1][j] = e2; M[0][jp] = e3
+        r = d[1]
+        while r != 0: M[r][j], M[r][jp] = L[r][jp], L[r][j]; r = d[r]
+    else:
+        c = om[jp]
+        while c != j: M[0][c], M[1][c] = L[1][c], L[0][c]; c = om[c]
+        M[0][j] = e4; M[1][jp] = e1
+        r = d[0]
+        while r != 1: M[r][j], M[r][jp] = L[r][jp], L[r][j]; r = d[r]
     return M
 
 
