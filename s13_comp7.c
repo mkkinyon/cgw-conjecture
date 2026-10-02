@@ -137,59 +137,39 @@ int main(int argc, char **argv) {
     for (uint32_t i = 0; i < nk; i++) parA[i] = parB[i] = i;
 
     long nflip = 0, nnon = 0, nturn = 0, nturn_odd = 0;
-    long lad_B = 0, lad_A = 0, lad_none_B = 0, lad_none_A = 0, lad_K0hist[N + 1] = {0}, lad_none_K0[N + 1] = {0};
+#define NOFF 4
+    long lad_in[NOFF][2] = {{0}}, lad_out[NOFF][2] = {{0}}, lad_none[NOFF][2] = {{0}}, lad_K0hist[N + 1] = {0}, lad_none_K0[N + 1] = {0};
     for (uint32_t i = 0; i < nk; i++) {
         int M[N][N], pi[N], cyc[N];
         decode(i, M); frame(M, pi);
         beta[i] = same_cycle(pi, 0, 1);
-        {   /* ladder: pairs (pi^-k(0), pi^-k(1)), 1 <= k < K0 = min(|C_0|,|C_1|) (apart) = min(d01,d10) (together) */
+        for (int c = 0; c < NOFF; c++) {   /* diagonal families D_c: pairs (pi^-(c+i)(1), pi^-i(2)), 1 <= i < K_c */
             int inv[N]; for (int r = 0; r < N; r++) inv[pi[r]] = r;
             int c0 = 0, r = 0; do { c0++; r = pi[r]; } while (r != 0);
             int c1 = 0; r = 1; do { c1++; r = pi[r]; } while (r != 1);
-            int K0;
-            if (beta[i]) { int d01 = 0; r = 0; while (r != 1) { r = pi[r]; d01++; } K0 = d01 < c0 - d01 ? d01 : c0 - d01; }
-            else K0 = c0 < c1 ? c0 : c1;
+            int Kc;
+            if (beta[i]) { int d01 = 0; r = 0; while (r != 1) { r = pi[r]; d01++; } int d10 = c0 - d01; Kc = (d10 - c) < d01 ? (d10 - c) : d01; }
+            else Kc = (c0 - c) < c1 ? (c0 - c) : c1;
+            if (Kc < 2) { lad_out[c][beta[i]]++; continue; }   /* outside the domain D_c */
             int anyflip = 0, x = 0, y = 1;
-            for (int k = 1; k < K0; k++) {
+            for (int t = 0; t < c; t++) x = inv[x];
+            for (int k = 1; k < Kc; k++) {
                 x = inv[x]; y = inv[y];
                 int len = rho_cycle(M, x, y, JP, cyc), hasj = 0;
                 for (int t = 0; t < len; t++) if (cyc[t] == J) hasj = 1;
                 if (!hasj) { anyflip = 1; break; }
             }
-            lad_K0hist[K0]++;
-            if (beta[i]) { lad_B++; if (!anyflip) { lad_none_B++; lad_none_K0[K0]++; } }
-            else { lad_A++; if (!anyflip) { lad_none_A++; lad_none_K0[K0]++; } }
-        }
-        for (int x = 2; x < N; x++) for (int y = x + 1; y < N; y++) {
-            int len = rho_cycle(M, x, y, JP, cyc), hasj = 0;
-            for (int t = 0; t < len; t++) if (cyc[t] == J) hasj = 1;
-            int T[N][N]; memcpy(T, M, sizeof T);
-            for (int t = 0; t < len; t++) { int q = cyc[t]; T[x][q] = M[y][q]; T[y][q] = M[x][q]; }
-            uint32_t k = encode(T);
-            unite(parA, i, k); unite(parB, i, k);
-            if (hasj) nnon++; else {
-                nflip++;
-                int len2 = rho_cycle(M, x, y, J, cyc);
-                memcpy(T, M, sizeof T);
-                for (int t = 0; t < len2; t++) { int q = cyc[t]; T[x][q] = M[y][q]; T[y][q] = M[x][q]; }
-                unite(parB, i, encode(T));
-            }
-        }
-        int seen = 3; /* rows 0,1 marked: their cycles are not free */
-        { int x = 0; do { seen |= 1 << x; x = pi[x]; } while (x != 0); }
-        { int x = 1; do { seen |= 1 << x; x = pi[x]; } while (x != 1); }
-        for (int x = 2; x < N; x++) if (!(seen >> x & 1)) {
-            int T[N][N]; memcpy(T, M, sizeof T); int l = 0, r = x;
-            do { seen |= 1 << r; T[r][J] = M[r][JP]; T[r][JP] = M[r][J]; r = pi[r]; l++; } while (r != x);
-            nturn++; if (l % 2) nturn_odd++;
-            uint32_t k = encode(T); unite(parA, i, k); unite(parB, i, k);
+            lad_in[c][beta[i]]++; if (!anyflip) lad_none[c][beta[i]]++;
+            if (c == 0) { lad_K0hist[Kc]++; if (!anyflip) lad_none_K0[Kc]++; }
         }
     }
     printf("moves: %ld flippable trades, %ld non-flippable, %ld turns (%ld of odd cycles)\n", nflip, nnon, nturn, nturn_odd);
     double pb = 0; for (uint32_t i = 0; i < nk; i++) pb += beta[i]; pb /= nk;
     printf("P[beta=1 | R] = %.6f\n", pb);
-    printf("ladder identity: P[B]-P[A] = %.6f ; P[B,Flip=0]-P[A,Flip=0] = %.6f ; P[Flip=0] = %.6f\n",
-           (double)(lad_B - lad_A) / nk, (double)(lad_none_B - lad_none_A) / nk, (double)(lad_none_B + lad_none_A) / nk);
+    for (int c = 0; c < NOFF; c++)
+        printf("diagonal c=%d: P[B,D]-P[A,D] = %+.6f ; P[B,D,Flip=0]-P[A,D,Flip=0] = %+.6f ; P[D^c] = %.4f (B:%ld A:%ld) ; P[D,Flip=0] = %.4f\n", c,
+               (double)(lad_in[c][1] - lad_in[c][0]) / nk, (double)(lad_none[c][1] - lad_none[c][0]) / nk,
+               (double)(lad_out[c][0] + lad_out[c][1]) / nk, lad_out[c][1], lad_out[c][0], (double)(lad_none[c][0] + lad_none[c][1]) / nk);
     printf("  K0 histogram (K0: count, Flip=0 count):"); for (int k = 0; k <= N; k++) if (lad_K0hist[k]) printf(" %d:%ld,%ld", k, lad_K0hist[k], lad_none_K0[k]); printf("\n");
 
     for (int which = 0; which < 2; which++) {
