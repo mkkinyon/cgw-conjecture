@@ -1033,3 +1033,41 @@ showed a plateau at $\approx0.09$: the frozen instances were exactly
 those with $\pi(1)=2$ or $\pi(2)=1$, impossible for a true mark, on
 which the chain --- which preserves $\pi^{-1}(1)$ and $\pi^{-1}(2)$
 --- cannot move the bit.]
+
+\paragraph{(F1): what was tried, and the enlarged chain.}  A direct
+switching proof of (F1) was attempted and not found: the natural
+moves at a non-flippable pair $(x,y)$ (trading the $\rho_{x,y}$-cycle
+through $j$, which now contains $j'$ too) conjugate the frame by
+$(x\,y)$ and change the flippability of every pair involving $x$ or $y$
+in an uncontrolled way, so a graded double count on the number of
+flippable bit-changing pairs does not close.  Three observations
+frame what is true.
+(a) \emph{Conjugating trades are legal moves.}  Adding to $T$ the
+trades at non-flippable pairs (both $j,j'$ in the traded cycle) keeps
+the chain symmetric; such a trade exchanges the positions of $x$ and
+$y$ in the frame without changing the bit, and changes rows $x,y$.  The
+enlarged chain $T''$ therefore relabels the rows sitting in each frame
+position (by the conjugations) while merging and splitting only at
+flippable pairs; a bit-changing position (a separating pair of
+positions of the common cycle, or a pair of positions in $C_1\times C_2$)
+is visited by many different row pairs over time, so for the bit to
+stay frozen \emph{every} row pair that ever occupies such a position
+must be non-flippable.  In the extreme, a square in which every pair of
+rows $x,y\notin\{1,2\}$ is non-flippable (``locked'': $j,j'$ lie in a
+common cycle of $\rho_{x,y}$ for all $x,y$) has a $T''$-component on
+which the bit is constant; locked squares should be rare beyond any
+polynomial, but no bound is proved.
+(b) \emph{Components.}  Since $T''$ is symmetric,
+$\lim_M\E_X[\varepsilon(L_0)\varepsilon(L_{2M})]=\E_X\bigl[\E[\varepsilon\mid\text{component}]^2\bigr]$,
+so $\mathrm{EQ}$ reduces to the conditional fairness of the bit on
+the components of $T''$ --- a purely combinatorial statement about the
+orbits of a group of involutions on $X$, each of which fixes rows $1,2$
+and the mark.
+(c) \emph{Numerics} ($n=30$, $240$ instances, true marks): the flippable
+fraction of all pairs of rows $3..n$ is $0.467$ on average (the
+adjacency exclusion accounts for the deficit from $\tfrac12$) with
+minimum $0.415$ and maximum $0.550$ over instances --- tightly
+concentrated; exactly one instance had bit-changing pairs with none
+flippable (an apart state with a tiny $C_1\times C_2$).  So (F1) is true
+with margin in the data; what is missing is a structural reason, and
+the cleanest target is (b).
