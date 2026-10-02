@@ -19,19 +19,30 @@ same-cycle sign under the random-transposition walk (thm:spectral):
 ν(λ) = 2c_λ²(1−r_λ) on shapes (a,b,1^j), c_λ = (a−b+1)/((a+j+1)(b+j)).
 Consequence: E_π̄[Φ_m] ≤ 12/m uniformly in N (cor:stationarydecay), m·E → 2.
 
-## The one open item: (II) the transfer
+## The one open item: (II) the transfer — three equivalent-ish formulations
 
-The model assumes: frame π_P(L) ≈ uniform permutation of the rows (T1),
-pool of intercalate chords ≈ independent uniform transpositions (T2), both
-under Unif(S(λ)) ∩ expander, for the special pair (j, σ^α j).  What is
-needed precisely: E_{L,S,T}[ε(π_P(L^S)) ε(π_P(L^T))] = o(1/log² n).
-§sec:s13transfer: HARD, distributional (not existential), cannot be
-imported by union-of-costs (only e^{−ω(n log² n)}-robust properties
-transfer).  Visible route: KPS "all but ℓ columns" robustness in the
-triangle-removal model.  Numerics: real squares match the model to 15–20%
-in the constant with the 1/k law (s13_frame.c, §s13transfer table), and
-the exact formula predicts E[ε_Sε_T] to 3 digits — a sharp test to run on
-real squares (jm.c + s8_real_bias.py pipeline).
+Needed: E_{Unif(X)}[ε(π_P(L^S)) ε(π_P(L^T))] = o(1/log² n) (pool subsets S,T).
+- **(T1) PROVED** (prop:trapped, refereed): P[row 1 in a frame cycle of length ℓ] ≤ 18/(n−ℓ−1)
+  under Unif(X), by a Kwan–Sudakov switching whose only row-1 move is the CGW switch
+  at the mark (priced by thm:marked). Trapped marks cost O(1/k′).
+- **(T2) OPEN**: the pool (intercalate row pairs) in generic position relative to the
+  frame. Exact structure (§s13transfer2): delete columns j,j′; frame = leftover graph
+  of the n×(n−2) rectangle; pool = ¼-coin thinning of a candidate graph; only local
+  exclusion = π-adjacent rows. Real squares (true marks) decorrelate 10–30% FASTER
+  than the model at n=50 (adjacency exclusion), frame stats agree.
+- **Trade-chain route (§s13tradechain) OPEN, promising**: symmetric Markov chain on X
+  (trades at row pairs ∉{1,2}, turns of cycles avoiding 1,2) preserving S(λ) and the
+  mark, acting on the frame by transpositions thinned by "flippability" (prob ½, no
+  frame correlation except adjacency). EQ(δ) ⇐ bit autocorrelation along the chain
+  ≤ δ². Needs (F1): in the apart state a positive fraction of C_1×C_2 pairs flippable
+  (typical squares), (F2): mixing of the thinned walk. Numerics: autocorrelation
+  tracks the pure walk to the noise floor (n=30). No intercalates/expander needed.
+
+## Bugs found this session
+- Sessions 7–8 real-square pipelines (s7/s8_real_bias.py) used σ's SYMBOLS as column
+  indices on unnormalised JM squares: their "marks" were random column pairs.
+  Qualitative findings survive; §sec:realbias numbers are for random pairs.
+  Fixed in s13_real.py / s13_trade.py (symbol → column via row 1).
 
 ## Closed / superseded (do not spend time on these)
 
@@ -51,6 +62,8 @@ Doeblin minorisation (prop:nomino); (V-)uniform ergodicity (cor:noerg);
 two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
+
+0. (F1) by a switching argument; (F2) by comparison with the full transposition walk.
 
 1. (II): formulate the minimal "coarse product" property of the pool and
    the frame-health property, and test both on real squares at n = 100–400
