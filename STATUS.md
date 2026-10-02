@@ -15,8 +15,10 @@ form of OUR target) is unproved as published; the 1/2 direction is trivial given
 thm:marked.  Conditional on "CGW(3/2)" from now on: eq:cgwA's P_X[A] ≥ 1/3,
 prop:shortcycles lower bounds, the unconditional witness bound, unconditional (CP)
 c = 2/5, eq:CPcols "≥ 1/3", CGW's P[(n)] ≤ 2n^{−2/3} and Cor 4.5, hence the TAIL BOUND in
-thm:reduction (P_n(κ > A log n) = O(n^{−2/3})) — TO DO: re-derive it from the surviving
-direction (k-fold joining bound on E[binom(κ,k)], k = log n; sketch in rem:cgwgap).
+thm:reduction — DONE: prop:tailsurvive (refereed) gives E[N_ℓ] ≤ 4/ℓ (ℓ ≤ n/2),
+E[(κ)_k] ≤ 2^{k−1}(4+k²/log n)(log n)^k and P[κ ≥ 16 log n] = O(n^{−2} log n) from |J| = 2|X_A|
+alone, so thm:reduction is now independent of CGW's unproved direction.  Also: CGW(3/2) ⟸
+P_X[Flip≠∅] ≥ 1/3 (thm:ladder), i.e. our (L) in constant form would repair their theorem.
 Everything exact of ours (thm:marked, thm:ladder, offsets, lem:rowfair, lem:legalturn,
 prop:orbit, eq:Jp) is unaffected.  No published erratum found (quick search only).
 
