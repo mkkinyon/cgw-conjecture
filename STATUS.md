@@ -1,29 +1,46 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-01 (session 13, continuous).  The notes
-`second_row_notes.tex` (95 pp, 0 errors) are the living document; this file
+`second_row_notes.tex` (105 pp, 0 errors) are the living document; this file
 is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
 are kept for the record; their TODO lists are superseded by this file.*
 
-## Goal and chain
+## Goal and chain — REWRITTEN after the ladder identity (§sec:ladder)
 
 CGW weak conjecture d_TV(P_n,Q_n) → 0  ⇐  EQ(o(1/log n)) [thm:reduction]
-⇐ marked bit P(B) = 1/2 + o(1/log n) [thm:marked]
-⇐ KPS re-randomisation + rank formula [thm:master] + supply/cond. expander
-⇐ prob:annealed: E|bias| = o(1/log n) over orbits, k' ≥ 6 log^11 n chords.
+⇐ |P_X(B) − ½| = o(1/log n) [thm:marked]
+⇐ **(L): P_X[no ladder pair flippable] = o(1/log n)** [thm:ladder, cor:ladder].
 
-**prob:annealed in the stationary-frame MODEL is PROVED with the sharp
-exponent** (§sec:spectralexact): 4E[bias²] ≤ C/k' + Ck'²/N for a uniform
-frame and a uniform disjoint pool (so k' ≪ √N; the real pool is a central
-element and the restriction can presumably be lifted). It rests on the exact
-spectral measure of the same-cycle sign (thm:spectral): ν(λ) = 2c_λ²(1−r_λ)
-on shapes (a,b,1^j), c_λ = (a−b+1)/((a+j+1)(b+j)); E_π̄[Φ_m] ≤ 12/m.
-The chain is: thm:reduction ⇐ EQ ⇐ thm:marked + [KPS re-randomisation,
-thm:master, lem:supply, lem:condexp, prop:nodecouple] ⇐ **(T)**, where
-(T): E_{Unif(X)}[ε(π₀R_SM_S) ε(π₀R_TM_T)] = o(1/log² n) over the real orbit
-measure. cor:stationarymodel says (T) holds (≈ 2/k') in the model.
+**thm:ladder (PROVED, exact, verified to all digits at n=7):** with
+K₀ = min(|C₁|,|C₂|) (apart) / min(d₁₂,d₂₁) (together) and the ladder pairs
+(x_k,y_k) = (π⁻ᵏ(1), π⁻ᵏ(2)), 1 ≤ k < K₀, the j′-trades T_k at the ladder
+pairs are commuting involutions of X preserving the ladder; each toggles the
+bit iff its pair is flippable (j, j′ in different ρ_{x_k,y_k}-cycles).  Hence
+on every orbit of ⟨T_k⟩ the bit is EXACTLY fair unless no ladder pair is
+flippable, and
+    P[B] − P[A] = P[B, Flip=∅] − P[A, Flip=∅],   |P[B] − ½| ≤ ½ P[Flip=∅],
+for X and for every fixed R (quenched).  Data: P[Flip=∅ | K₀] = 2^{−(K₀−1)}
+to the resolution of 9000/7200 instances at n=30/50; P[Flip=∅] ≈ 8/n.
 
-## The one open item: (T), i.e. (II) the transfer — what it contains
+**(L) is the one open item.**  It needs NO fairness of anything: only that
+the K₀−1 disjoint-row ladder pairs are not all crossed.  Plan:
+- K₀ ≤ n/log³n costs O(1/log³n) by prop:trapped on A; on B the arc version
+  is proved for |C₁| ≤ n/2 (splice-in switching); MISSING: P[B, d₁₂=ℓ,
+  |C₁| > n/2, Flip=∅] = O(1/n) (rem:ladderdata(iii)).
+- K₀ ≥ n/log³n: it suffices that some ladder pair has a j-cycle of length
+  ≤ log⁵n avoiding j′ (a LOCAL witness; P ≈ ℓ/n per pair, expected log² n
+  witnesses) — eq:Lloc — a polylog-size substructure statement about
+  Θ(n/log³n) disjoint row pairs; target for KS switching / second moment
+  (precision o(1/log² n) in covariances).  Data: at n=50, K₀ ≥ 12: a witness
+  of length ≤ 10 exists in 93 %, ≤ 20 in 99.6 %.
+
+Superseded by (L) (keep as results, do not work on): (I), (II)/(T), (III),
+(F1), (F2), the component question, the pool/master-formula route, the
+spectral stationary model (still a standalone theorem: paper/spectral_same_cycle.tex).
+
+## Older map (pre-ladder), kept for orientation
+
+### (T), i.e. (II) the transfer — what it contained
 
 (T) is one statement but it carries three things: (a) the real frame law
 π_P(L) under Unif(X) must be close to uniform ON THE TEST FUNCTION
@@ -91,8 +108,11 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
 
-0. (F1) in the rectangle language by a switching argument (P[all bit-changing pairs crossed] ≲ C/(pq) + trapping);
-   (F2) by coupling with the coin walk on D.  Both now have precise statements (§s13comp7).
+-1. (L): (a) the arc-trapping gap rem:ladderdata(iii); (b) eq:Lloc by a Kwan–Sudakov
+   switching in the space of completions of rows 1,2 and columns j,j′ (short
+   j-cycles of disjoint ladder pairs); (c) measure covariances of the witness
+   events W_k on real squares to see the precision needed.
+0. (superseded) (F1)/(F2).
 
 1. (II): formulate the minimal "coarse product" property of the pool and
    the frame-health property, and test both on real squares at n = 100–400
@@ -107,7 +127,8 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
 `akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
-`trade{30,50,100}.log` (trade chain on real squares).  `s13_spectral.py brute N` (N ≤ 7) and
+`trade{30,50,100}.log` (trade chain on real squares); `f1/ladder{30,50,100}.log` (ladder
+statistics), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
@@ -116,4 +137,6 @@ HANDOFF_session_12.md §3 QUICKSTART still green, plus:
 `python3 s13_spectral.py brute 6` (exact = brute, all digits);
 `python3 s13_spectral_big.py 4000` (sum ν = 1, m·E → 1.9);
 `gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → 4E[bias²] ≈ 0.115;
-`pdflatex second_row_notes.tex` ×2 → 0 errors, 95 pp.
+`pdflatex second_row_notes.tex` ×2 → 0 errors, 105 pp;
+`gcc -O2 -DN=7 -o s13_comp7 s13_comp7.c && ./s13_comp7 0123456 1234560 0 2` → ladder identity exact (~1 min);
+`./jm 30 300 30000 1 | python3 s13_ladder.py 30` → P[Flip=∅|K₀] ≈ 2^{−(K₀−1)}.

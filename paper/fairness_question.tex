@@ -225,4 +225,28 @@ averaged as in Remark~\ref{rem:weaker}(i), gives exactly that.  The
 question itself makes no reference to this.
 \end{remark}
 
+\begin{remark}[an exact partial answer]\label{rem:ladder}
+Put $K_0=\min(|C_1|,|C_2|)$ if $\beta=0$ and $K_0=\min(d_{12},d_{21})$
+if $\beta=1$, where $d_{12},d_{21}$ are the numbers of $\pi$-steps from
+row $1$ to row $2$ and back, and let $(x_k,y_k)=(\pi^{-k}(1),\pi^{-k}(2))$,
+$1\le k<K_0$ (the \emph{ladder}: $2(K_0-1)$ distinct rows avoiding
+$1,2$).  The trades at the ladder pairs are commuting involutions of
+$S(R)$; each preserves the ladder and toggles $\beta$ iff its pair is
+flippable.  On each orbit of the group they generate, $\beta$ is
+therefore \emph{exactly} fair unless no ladder pair is flippable, and
+\[
+\Pr[\beta=1\mid R]-\Pr[\beta=0\mid R]
+=\Pr[\beta=1,\ \mathrm{Flip}=\emptyset\mid R]-\Pr[\beta=0,\ \mathrm{Flip}=\emptyset\mid R],
+\]
+where $\mathrm{Flip}$ is the set of flippable ladder indices.  So
+$|2\Pr[\beta=1\mid R]-1|\le\Pr[\mathrm{Flip}=\emptyset\mid R]$, and
+since the components are essentially everything (Remark~\ref{rem:numerics}),
+the Question reduces to showing that the $K_0-1$ ladder pairs are not
+all crossed except with probability $o(1)$ (or $o(1/\log n)$ for the
+quantitative version).  Numerically $\Pr[\mathrm{Flip}=\emptyset\mid K_0]
+=2^{-(K_0-1)}$ to the resolution of $9000$ instances at $n=30$ and
+$7200$ at $n=50$.  The identity was verified exactly by enumeration at
+$n=7$.
+\end{remark}
+
 \end{document}

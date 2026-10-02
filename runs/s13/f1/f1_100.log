@@ -1,0 +1,22 @@
+n=100: squares=150 instances=450
+ tog: instances=232  mean #bit-changing pairs m=784.7  overall flippable fraction=0.5012  P[f=0]=0.0000
+      other non-adjacent pairs inside C1uC2: 0.5025 (329721);  pairs meeting a free cycle: 0.5019 (8856)
+      corr of indicators, share pairs: +0.0031  (15195 samples)
+      corr of indicators, disj  pairs: +0.0018  (76308 samples)
+      m-bin      count   mean f/m   var(f)/(m/4)   P[f=0]   2^-m(pred, bin mid)
+      [  8, 15]       1   0.2857    2.571        0.0000   0.0003
+      [ 16, 31]       5   0.4497    1.392        0.0000   0.0000
+      [ 32, 63]       9   0.5124    1.126        0.0000   0.0000
+      [ 64,127]      18   0.4952    1.134        0.0000   0.0000
+      [128,255]     199   0.5021    0.936        0.0000   0.0000
+ apt: instances=218  mean #bit-changing pairs m=940.4  overall flippable fraction=0.5001  P[f=0]=0.0000
+      other non-adjacent pairs inside C1uC2: 0.5008 (367781);  pairs meeting a free cycle: 0.5032 (7853)
+      corr of indicators, share pairs: -0.0024  (13276 samples)
+      corr of indicators, disj  pairs: +0.0021  (72614 samples)
+      m-bin      count   mean f/m   var(f)/(m/4)   P[f=0]   2^-m(pred, bin mid)
+      [  4,  7]       1   0.3333    0.667        0.0000   0.0221
+      [  8, 15]       1   0.5714    0.286        0.0000   0.0003
+      [ 16, 31]       4   0.5565    1.854        0.0000   0.0000
+      [ 32, 63]       7   0.5078    0.408        0.0000   0.0000
+      [ 64,127]      16   0.5062    1.350        0.0000   0.0000
+      [128,255]     189   0.5004    0.974        0.0000   0.0000
