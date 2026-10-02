@@ -1,0 +1,6 @@
+n=100: squares=150 instances=286 LMAX=8 NEPS=32  mean |I|=9.87
+  per pair: E[ybar]=0.1352  Var(ybar)=0.0795
+  per instance: E[Y]=1.335  Var(Y)=0.898  vs independent sum |I| Var(ybar) = 0.785  (ratio 1.14; includes the variation of |I|)
+  P[Y < 0.05|I|] = 0.1783
+  P[Y < 0.1|I|] = 0.3671
+  P[Y < 0.15|I|] = 0.5804

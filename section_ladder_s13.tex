@@ -1350,6 +1350,22 @@ average, and Hypothesis~\ref{hyp:orbit}(i) is the statement that the
 average over the sub-ladder does not collapse: $\kappa\approx0.15$ is
 what the data suggest.
 
+\paragraph{(d$'$) The concentration input $(\gamma)$: data.}
+\texttt{s13\_cov.py} (\texttt{runs/s13/orbit/cov\{50,100\}.log}; $543$ and
+$286$ instances) computes, with the fixed matching and cleanliness with
+respect to all rows of the sub-ladder $I$ of the first
+$\min(K_0-1,n/8)$ pairs, every $\bar y_k$, $k\in I$, and
+$Y_I=\sum_{k\in I}\bar y_k$: mean $|I|=5.2$ resp.\ $9.9$,
+$\E[\bar y]=0.130$ resp.\ $0.135$, $\mathrm{Var}(\bar y)=0.084$ resp.\
+$0.080$, and $\mathrm{Var}(Y_I)=0.43$ resp.\ $0.90$ against
+$|I|\mathrm{Var}(\bar y)=0.44$ resp.\ $0.79$: the ratio $0.99$ resp.\
+$1.14$ (the latter including the variation of $|I|$) shows no positive
+correlation between the orbit weights of different ladder pairs.  So
+$(\gamma)$ is, numerically, an independence statement; the lower tail
+$\Pr[Y_I<\kappa|I|]$ at these small $|I|$ ($0.18$ at $\kappa=0.05$,
+$n=100$) is what $|I|\approx10$ independent summands with mean $0.13$
+and a $50\%$ atom at $0$ give.
+
 \paragraph{(e) The arc-trapping input $(\alpha)$: CGW's lemma for a
 generic row pair in $X$, and the blocked fraction.}  The orbit weight
 $\bar y_{x,y}$ vanishes when the $\rho_{x,y}$-cycles through $p,p'$

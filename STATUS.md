@@ -217,7 +217,7 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
 `akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
 `trade{30,50,100}.log` (trade chain on real squares); `f1/ladder{30,50,100}.log` (ladder
-statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent), `f1/icsw50.log` (intercalate identity), `orbit/orbit{30,50,100}.log`, `orbit/orbit{50,100}_fixed.log`, `orbit/interleave50.log` (orbit method / blocked fraction: `./jm 100 120 300000 9 | python3 s13_orbit.py 100 --inst 3 --lmax 8 --fixed`).  `s13_spectral.py brute N` (N ≤ 7) and
+statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent), `f1/icsw50.log` (intercalate identity), `orbit/orbit{30,50,100}.log`, `orbit/orbit{50,100}_fixed.log`, `orbit/interleave50.log`, `orbit/cov{50,100}.log` (orbit method / blocked fraction / covariance of orbit weights: `./jm 100 120 300000 9 | python3 s13_orbit.py 100 --inst 3 --lmax 8 --fixed`).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
