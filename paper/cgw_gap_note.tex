@@ -1,0 +1,279 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}[lemma]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[lemma]{Remark}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\CC}{\mathcal C}
+\DeclareMathOperator{\dist}{dist}
+
+\title{A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, \\
+\emph{The cycle structure of two rows in a random Latin square}}
+\author{Notes from the second-row project, 2 October 2026}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Case 3 of the splitting procedure used to prove Lemma 3.12 of
+\cite{CGW08} (``cross-switch with respect to $\{\omega(j),\omega(j')\}$,
+then backflip with respect to $\{j,j'\}$'') does not produce a Latin
+square of the intended type when $\min(\alpha,\beta)\ge3$: the
+cross-switch reverses an $\omega$-arc containing $j'$, after which
+$\{j,j'\}$ is at $\omega$-distance $2$.  The lower bound of Lemma 3.12
+survives (and is in fact elementary); the upper bound $3/2$, hence the
+upper bound of Theorem 3.13 and everything downstream of it, is not
+established by the published argument for those $(\alpha,\beta)$.  A
+canonical repair exists when $\alpha$ is even and $\alpha<2\beta$ (or
+symmetrically); we do not see one when $\alpha,\beta$ are both odd.
+Exact data for $n\le11$ and sampled squares up to $n=100$ indicate that
+the statement is true with much room to spare.
+\end{abstract}
+
+\section{Setting and the procedure}
+
+We use the notation of \cite{CGW08}, Section 3.  $L$ is a Latin square
+of order $n$ containing a suitable partial square $F$; $\omega$ is the
+permutation of the first $m$ columns with $1\circ\omega(j)=2\circ j$,
+whose cycle type $\lambda\in P(m)$ defines $S(\lambda,F)$.  For
+columns $j,j'$ let $\delta_{j,j'}$ be the row permutation with
+$\delta(i)\circ j=i\circ j'$; $\{j,j'\}$ is an \emph{$A$-pair} if rows
+$1,2$ lie in different cycles of $\delta_{j,j'}$ and a \emph{$B$-pair}
+otherwise.  The \emph{backflip} at an $A$-pair $\{j,j'\}$ lying on one
+$\omega$-cycle of length $\alpha+\beta$ with $\omega^\alpha(j)=j'$
+trades the $\delta_{j,j'}$-cycle through row $2$; it splits that
+$\omega$-cycle into the two arcs between $j$ and $j'$, of lengths
+$\alpha$ and $\beta$ (Lemma 3.5).  The \emph{cross-switch} at a
+$B$-pair $\{j,j'\}$ with $\omega^\alpha(j)=j'$ (Definition 3.9) is a
+Latin bitrade $(Q,Q')$ that preserves $S(\lambda,F)$ (Lemma 3.10).
+
+Let $\mu$ be $\lambda$ with one part $\alpha+\beta$ split into
+$\alpha,\beta\ge2$.  The splitting procedure (p.~294) considers, for
+$L\in S(\lambda,F)$, every pair $\{j,j'\}$ with $\omega^\alpha(j)=j'$
+on an $(\alpha+\beta)$-cycle and produces $L'\in S(\mu,F)$ as follows:
+\begin{enumerate}
+\item[1.] if $\{j,j'\}$ is an $A$-pair, backflip at $\{j,j'\}$;
+\item[2.] else if $\{\omega j,\omega j'\}$ is an $A$-pair, backflip at
+$\{\omega j,\omega j'\}$;
+\item[3.] otherwise cross-switch with respect to $\{\omega j,\omega j'\}$;
+``now $\{j,j'\}$ has become an $A$-pair, and we backflip with respect to
+$\{j,j'\}$''.
+\end{enumerate}
+Item 4 asserts that in each case $L'\in S(\mu,F)$.  Together with a
+fifth edge (a switch) this gives every $L\in S(\lambda,F)$ degree
+exactly $2(\mu_{\alpha+\beta}+1)(\alpha+\beta)$ in a bipartite
+multigraph between $S(\lambda,F)$ and $S(\mu,F)$, while the joining
+procedure gives every $L\in S(\mu,F)$ degree between
+$\mu_\alpha\mu_\beta\alpha\beta$ and three times that; the two
+multigraphs are asserted to coincide, and the double count is
+Lemma~3.12:
+\begin{equation}\label{eq:L312}
+\frac12\;\le\;\frac{|S(\lambda,F)|\,(\mu_{\alpha+\beta}+1)(\alpha+\beta)}{|S(\mu,F)|\,\mu_\alpha\mu_\beta\,\alpha\beta}\;\le\;\frac32
+\qquad(\alpha\ne\beta).
+\end{equation}
+
+\section{The cross-switch reverses an arc}
+
+Write $e_1=1\circ j$, $e_2=1\circ j'$, $e_3=2\circ j$, $e_4=2\circ j'$
+and consider the first form of Definition 3.9
+($\min(e_1,e_2,e_3,e_4)\in\{e_1,e_4\}$); the second form is the mirror
+image with the roles of $(j,\text{row }1)$ and $(j',\text{row }2)$
+exchanged.  On rows $1,2$ the bitrade is
+\[
+Q'\supseteq\{(2,j,e_2),(1,j',e_3)\}\cup
+\{(1,\omega^kj,\,2\circ\omega^kj),\ (2,\omega^kj,\,1\circ\omega^kj)\;:\;1\le k<\alpha\},
+\]
+i.e.\ in every interior column of the $\omega$-arc from $j$ to $j'$ the
+entries of rows $1,2$ are swapped, row $2$ receives $e_2=1\circ j'$ at
+column $j$, and row $1$ receives $e_3=2\circ j$ at column $j'$.  (This
+is forced by the proof of Lemma 3.10: row $1$ must keep the symbol set
+$\{1\circ\omega^kj:1\le k\le\alpha\}$ on the cells
+$\{\omega^kj:1\le k<\alpha\}\cup\{j'\}$, and ``precisely one column
+from the pair $\{\omega^kj,\omega^{k'}j'\}$ has symbols swapped in rows
+$1$ and $2$''.)  The remaining cells of $Q$ lie in columns $j,j'$ and
+in rows other than $1,2$; they do not affect $\omega$.
+
+\begin{lemma}\label{lem:rev}
+Let $L'$ be the cross-switch of $L$ at the $B$-pair $\{j,j'\}$,
+$\omega^\alpha(j)=j'$, and let $\omega'=\omega_{L'}$.  Then
+$\omega'(j)=\omega^{\alpha-1}(j)$, $\omega'(\omega^kj)=\omega^{k-1}(j)$
+for $2\le k<\alpha$, $\omega'(\omega j)=j'$, and $\omega'=\omega$ on
+every other column.  In words: the interior of the $\omega$-arc from $j$
+to $j'$ is traversed in reverse, and the cycle structure of $\omega$ is
+otherwise unchanged.
+\end{lemma}
+
+\begin{proof}
+Write $1',2'$ for the new rows.  Then $1'\circ j=e_1$,
+$1'\circ\omega^kj=1\circ\omega^{k+1}j$ for $1\le k<\alpha$ (since
+$2\circ\omega^kj=1\circ\omega^{k+1}j$), $1'\circ j'=1\circ\omega j$;
+$2'\circ j=1\circ j'=1\circ\omega^\alpha j$,
+$2'\circ\omega^kj=1\circ\omega^kj$ for $1\le k<\alpha$, $2'\circ j'=e_4$.
+Now $\omega'(c)$ is the column whose row-$1'$ entry equals $2'\circ c$:
+for $c=j$ this is $\omega^{\alpha-1}j$; for $c=\omega^kj$ with
+$2\le k<\alpha$ it is $\omega^{k-1}j$; for $c=\omega j$ it is $j'$
+(the symbol $1\circ\omega j$ now sits at $(1',j')$); for $c=j'$ it is
+$\omega j'$, unchanged; for $c=\omega^{-1}j$, $2'\circ c=2\circ c=e_1=1'\circ j$,
+so $\omega'(c)=j$; all other columns are untouched in both rows.
+\end{proof}
+
+The example on p.~293 of \cite{CGW08} shows exactly this: there
+$\omega=(1\,2\,3\,4\,5\,6\,7)$, $j=2$, $j'=5$, $\alpha=3$, and the
+displayed cross-switch has rows $1\,2\,4\,5\,3\,6\,7$ and
+$2\,5\,3\,4\,6\,7\,1$, i.e.\ $\omega'=(1\,2\,4\,3\,5\,6\,7)$.
+
+\section{Case 3 lands in the wrong type}
+
+\begin{proposition}\label{prop:gap}
+Let $\{j,j'\}$ and $\{J,J'\}=\{\omega j,\omega j'\}$ both be $B$-pairs
+with $\omega^\alpha j=j'$ on an $(\alpha+\beta)$-cycle, and let $L'$ be
+the cross-switch of $L$ at $\{J,J'\}$ (either form).  Then $\{j,j'\}$ is
+an $A$-pair of $L'$, but in the first form it is at $\omega'$-distance
+$2$ (from $j$ to $j'$), and in the second form at $\omega'$-distance $2$
+from $j'$ to $j$.  Consequently the backflip at $\{j,j'\}$ splits the
+$(\alpha+\beta)$-cycle into parts $2$ and $\alpha+\beta-2$, which is
+the type $\mu$ only if $\min(\alpha,\beta)=2$.
+\end{proposition}
+
+\begin{proof}
+First form.  The arc from $J=\omega j$ to $J'=\omega^\alpha J$ has
+interior $\omega J,\dots,\omega^{\alpha-1}J$, and $\omega^{\alpha-1}J=\omega^\alpha j=j'$.
+By Lemma~\ref{lem:rev}, $\omega'(j)=\omega'(\omega^{-1}J)=J$ and
+$\omega'(J)=\omega^{\alpha-1}J=j'$.  The status of $\{j,j'\}$: column
+$j'$ is an interior column of the arc, so rows $1,2$ are swapped there,
+while column $j$ is untouched ($j\notin\{J,J'\}$ and $j$ is not in the
+arc); hence $\delta_{j,j'}$ changes by a transposition of rows $1,2$
+and $\{j,j'\}$ toggles from $B$ to $A$, as claimed in \cite{CGW08}.
+The second form reverses the arc from $J'$ to $J$, whose interior
+contains $j=\omega^{-1}J$ as its last column, and the same computation
+gives $\omega'(J')=j$, i.e.\ $\omega'^2(j')=j$.
+\end{proof}
+
+So the asserted membership $L'\in S(\mu,F)$ in item 4 fails in case 3
+whenever $\min(\alpha,\beta)\ge3$, and the joining rule 4 (cross-switch
+at $\{\omega j,\omega j'\}$ after a flip) fails symmetrically, so the
+two multigraphs do not coincide.  For $\min(\alpha,\beta)=2$ the arc has
+a single interior column, nothing is reversed, and the proof is
+complete; this is the case of the sharp example $n=5$.
+
+\paragraph{Numerical confirmation.}  We implemented Definition 3.9
+literally (rows $1,2$ as above; in columns $j,j'$ the rows strictly
+between $2$ and $1$ along $\delta_{j,j'}$ swap their two entries, which
+is what balances the corner cells) and checked on uniformly sampled
+Latin squares (Jacobson--Matthews) that the cross-switch is a Latin
+square of the same type in every instance.  Applying case 3 as written:
+at $n=9$ and $n=12$, in $1006$ and $1670$ instances with
+$\min(\alpha,\beta)\ge3$ respectively, the result had the wrong type in
+every single instance (e.g.\ $(2,7)$ with $(\alpha,\beta)=(3,4)$ gives
+$(2,2,5)$ instead of $(2,3,4)$; $(9)$ with $(3,6)$ gives $(2,7)$).
+
+\section{What survives, and what depends on the gap}
+
+Only item 4's claim in case 3 is affected.  Cases 1 and 2 and the
+switch edge are valid, so each $L\in S(\lambda,F)$ has degree at most
+$2(\mu_{\alpha+\beta}+1)(\alpha+\beta)$ in the multigraph of valid
+edges, and each $L\in S(\mu,F)$ has degree at least
+$\mu_\alpha\mu_\beta\alpha\beta$ (joining rules 1--2 are valid).  Hence
+the \emph{lower} bound $\frac12$ in \eqref{eq:L312} stands.  (In fact it
+is elementary: with $X$ the set of pairs $(L,\{j,j'\})$,
+$L\in S(\lambda,F)$, $\omega^\alpha j=j'$, and $J$ the analogous set of
+joining pairs, the flip and the switch give $|J|=2|X_A|$ exactly, so
+\eqref{eq:L312} reads $\frac13\le|X_A|/|X|\le1$, and the lower bound
+$\frac12$ is $|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$,
+equivalently
+\[
+\Pr\bigl[\{j,j'\}\text{ is an $A$-pair}\bigr]\;\ge\;\tfrac13
+\quad\text{for $(L,\{j,j'\})$ uniform on $X$},
+\]
+is not established for $\min(\alpha,\beta)\ge3$.
+
+Within \cite{CGW08} the upper bound of Lemma 3.12 is used for: the
+upper bound of Theorem 3.13; the lower bound $(2/3)^{\kappa-1}$ of
+Lemma 4.1 and the corresponding half of Lemma 4.2; the parity bounds
+of Theorem 4.3 (whose proof invokes the equality of the two
+multigraphs ``as in the proof of Lemma 3.12''); the upper bound
+$\PP_F((m))\le2m^{-2/3}$ of Lemma 4.4 and hence Corollary 4.5 (the
+factor $n^{1/3}$); and the results of Section 4.2 that rest on these.
+The upper bound $2^{\kappa-1}$ of Lemma 4.1, the lower bound
+$\PP_F((m))\ge2m^{-2}$, and the upper bounds on short-cycle counts
+derived from the joining direction are unaffected.
+
+\section{A partial repair}
+
+A cross-switch at a $B$-pair $\{J,J'\}$ at any $\omega$-distance
+$a\ge2$ is a type-preserving trade (the proof of Lemma 3.10 does not
+use $a=\alpha$), and by Lemma~\ref{lem:rev} it reverses the arc from
+$J$ to $J'$.  It toggles the status of $\{j,j'\}$ iff exactly one of
+$j,j'$ is an interior column of that arc, say at position $i$, and then
+the $\omega$-distance from $j$ to $j'$ changes by $a-2i$.  Thus the
+status-toggling moves that preserve the distance are precisely the
+cross-switches at $B$-pairs \emph{symmetric about $j$ or about $j'$}
+($a=2i$).
+
+Suppose $\alpha$ is even and $\alpha<2\beta$, and let
+$R=\{\omega^{\alpha/2}j,\ \omega^{3\alpha/2}j\}$: the pair at distance
+$\alpha$ symmetric about $j'$, whose arc avoids $j$.  If $R$ is a
+$B$-pair, cross-switch at $R$: $\{j,j'\}$ becomes an $A$-pair at
+distance $\alpha$, and the backflip at $\{j,j'\}$ lies in $S(\mu,F)$.
+If $R$ is an $A$-pair, backflip at $R$ itself, which is a pair at
+distance $\alpha$.  Either way case 3 acquires a valid edge
+(verified on $3928$ sampled instances at $n=10,13$: type $\mu$ in all of
+them).  The same works with the roles of $\alpha,\beta$ exchanged when
+$\beta$ is even and $\beta<2\alpha$.  The multiplicities on the
+$S(\mu,F)$ side change (an $A$-pair's backflip may now serve two
+splitting pairs), so the constant $3/2$ would have to be recomputed.
+
+When $\alpha$ and $\beta$ are both odd, every distance-preserving
+toggle has even arc length, so no symmetric pair is at distance $\alpha$
+or $\beta$; if all symmetric pairs about $j$ and $j'$ happen to be
+$A$-pairs, no single cross-switch repairs $\{j,j'\}$, and two-step
+repairs pass through a third type, which breaks the two-sided count.
+We do not see a canonical repair in this case (nor when
+$\alpha\ge2\beta$ with $\beta$ odd).
+
+\section{What the data say}
+
+The statement of Lemma 3.12 is almost certainly true, and far from
+sharp for $n\ge6$.  By the identity $|J|=2|X_A|$ the quantity in
+\eqref{eq:L312} is $\CC_n(\lambda)/\CC_n(\mu)$, where $\CC_n(\lambda)$
+is the number of completions of two rows of type $\lambda$, and
+$\Pr_X[A]=\CC_n(\mu)/(2\CC_n(\lambda))$.  From the exact values of
+$\CC_n(\lambda)$ tabulated in \cite{CGW08} (Tables 1 and 2, $n\le11$):
+
+\begin{center}
+\begin{tabular}{@{}rccc@{}}
+\toprule
+$n$ & \#splits $(\lambda\to\mu)$ & $\max\CC_n(\lambda)/\CC_n(\mu)$ & $\min\Pr_X[A]$\\
+\midrule
+5 & 1 & $1.5000$ (sharp) & $0.3333$\\
+6 & 3 & $0.9545$ & $0.5238$\\
+7 & 4 & $1.0035$ & $0.4982$\\
+8 & 8 & $1.0017$ & $0.4991$\\
+9 & 11 & $1.0002$ & $0.4999$\\
+10 & 19 & $1.0000$ & $0.5000$\\
+11 & 26 & $1.0000$ & $0.5000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent (all splits with $\alpha,\beta\ge2$; for $n\ge7$ every ratio
+is within $0.4\%$ of $1$, in the covered and the uncovered classes
+alike --- e.g.\ $(2,6)\to(2,3,3)$ at $n=8$, in the $(3,3)$ class, has
+ratio $1.0017$).  On
+uniformly sampled squares with a uniformly random marked pair at
+distance $\alpha\ge2$ on an $m$-cycle, $m-\alpha\ge2$, we find
+$\Pr_X[B]-\Pr_X[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$
+at $n=30,50,100$ ($9000$, $7200$, $3600$ instances), i.e.\
+$\Pr_X[A]=0.50\pm0.01$ throughout.  So the true constant in the upper
+bound of \eqref{eq:L312} appears to be $1+O(n^{-2})$ rather than $3/2$;
+the question is only what has been proved.
+
+\begin{thebibliography}{9}
+\bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle
+structure of two rows in a random Latin square, \emph{Random Structures
+\& Algorithms} 33 (2008), 286--309.
+\end{thebibliography}
+\end{document}
