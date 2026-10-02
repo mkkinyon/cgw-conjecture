@@ -1548,3 +1548,67 @@ it does follow from the intercalate count $\ge(1-o(1))n^2/4$ of
 Kwan--Sudakov \cite{KS18}: by row symmetry $\E N_2\ge\tfrac12-o(1)$,
 and $\E[N_2(N_2-1)]\le2\E N_4\le n/(n-4)$ from the proof of
 Proposition~\ref{prop:tailsurvive}(i), so $\Pr[N_2\ge1]\ge\tfrac18-o(1)$.)
+
+\paragraph{(g) (U) in its simplest conditional instances.}  Three
+observations settle what (U) is and is not, in the instance ``generic
+row pair $(x,y)$, the mark columns $p,p'$, two further columns $q,c$,
+conditioning only on $X$''.
+
+\emph{Generic columns reduce (U) to $(\alpha)$.}  For $(q,c)$ uniform
+among the free column pairs, $\{p,p'\},\{q,c\}$ are interleaved in
+$\rho_{x,y}$ for exactly $(d_1-1)(d_2-1)$ pairs (crossed) or
+$(\ell_p-1)(\ell_{p'}-1)$ pairs (parallel) out of $\binom{n-2}2$.  So
+the lower bound in (U) for generic $q,c$ is precisely the statement
+that the arcs or cycles of $\rho_{x,y}$ at $p,p'$ are macroscopic
+with probability bounded below --- the arc-trapping input $(\alpha)$,
+nothing softer.  The conjugation-invariance computation of \S(f) is
+the unconditional case of this, where the law of $(d_1,d_2)$ given the
+cycle type is explicit.
+
+\emph{Generic rows make (BL) trivial.}  Dually, for a column pair
+$(q,c)$ and the rows $1,2$, the number of row pairs $\{x,y\}$ interleaved
+with $\{1,2\}$ in $\delta_{q,c}$ is $(a_1-1)(a_2-1)$ or $(m_1-1)(m_2-1)$
+(arcs between $1,2$ on their common $(q,c)$-column cycle, or the two
+cycle lengths), which is at most $(n-2)^2/4<\tfrac12\binom{n-2}2(1+O(1/n))$
+\emph{deterministically}.  Since rows other than $1,2$ are exchangeable
+in $X$, for a fixed pair of rows $x,y$ and every column pair,
+$\Pr_X[\{1,2\},\{x,y\}\text{ interleaved in }\delta_{q,c}]\le\tfrac12+O(1/n)$.
+What \eqref{eq:Jp} needs is this bound conditionally on
+$|Q_p(\rho_{x,y})|=\ell$ and $q\in Q_p$, $c\notin Q_p$, i.e.\ for the
+row pair selected by its own row-cycle structure at $(q,c)$, and for
+a ladder pair, selected by the frame; exchangeability is lost exactly
+there.  The content of (BL) is thus a decorrelation between the
+row-cycle structure of $(x,y)$ at $q,c,p$ and its column-cycle
+position relative to rows $1,2$ --- not a bound on interleaving as
+such, which is free.
+
+\emph{Direction.}  Every lower bound on a ``different cycles'' or
+``different arcs'' event --- $(\beta)$, the availability $q,c$ in
+different $\rho_{z,w}$-cycles of the third-row repairs, CGW's
+$\Pr_X[A]\ge\tfrac13$ --- is of the type of the gap direction of
+CGW's lemma: it requires a canonical, bounded-multiplicity repair of
+the configurations in which the two points lie on one cycle, which is
+what CGW's case~3 fails to provide.  Upper bounds on such events
+(``merging is easy'') are the surviving direction and are available
+(Proposition~\ref{prop:tailsurvive}).  Third rows do provide repairs
+in $X$: for a crossed ladder pair $(x_k,y_k)$ of a $B$-instance the
+cross-switch of rows $x_k,y_k$ at $(p,p')$ is always defined (the
+frame arc between them contains exactly one of rows $1,2$), it
+changes that row at $p,p'$ and lands in $J$; for an $A$-instance the
+backflip at $(p,p')$ through $C_2$ does the same.  So every ladder
+pair of every instance of $X\cup J$ carries one move, the $j'$-trade
+when flippable and a type-changing move when crossed; but the
+type-changing moves reverse a frame arc or a frame cycle and carry
+the ladder to a different family (\S(a)), so the edge count does not
+close into an identity, and their inverses from the $J$ side are not
+indexed by a ladder pair of the target.  The same multiplicity
+problem defeats the third-row repair of CGW's case~3 (trade or
+cross-switch rows $z,w$ on different frame arcs between $1$ and $2$):
+every such pair gives an edge into $X_A\cup J$, but a target $A$-instance
+receives one edge from every available pair in $C'_1\times C'_2$, so
+the inequality obtained is $\E_X[(a_1-1)(a_2-1);B]\lesssim\E_X[(|C_1|-1)(|C_2|-1);A]$,
+fair again.  We record this as the precise reason that neither CGW's
+upper bound nor $(\beta)$ yields to switchings in $X$: the moves that
+toggle a same-cycle bit without touching the prescribed lines exist,
+but they are indexed by a free third pair of rows and so have
+unbounded multiplicity.
