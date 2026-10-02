@@ -34,8 +34,14 @@ pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
   except w.p. o(1/log n) (annealed).  Budget: ℓ₀ = n/log²n; total o(1/log² n).
 - Data (witness50.log): witness freq ≈ (ℓ′−1)/(n−1) − ℓ′/n; disjoint pairs
   E[WW′]/p² = 1.00±0.03; Var(G) and Var(star count) = binomial within 5 %.
-- Literature (scout, §sec:witnessstatus): nothing gives it; CGW08's two-row
-  switchings give constant-factor ratios per merge/split (exp loss in ℓ);
+- **CGW08 Thm 3.13 IS P_X[A] ≥ 1/3** (via thm:marked), and summed over types it
+  gives the UNCONDITIONAL witness lower bound with no loss in ℓ:
+  (2/3)E[(ℓ+β)N_{ℓ+β}] ≤ E[ℓN_ℓ·βN_β] ≤ 2E[(ℓ+β)N_{ℓ+β}], hence E[N_ℓ] ∈ [2/3, 4]/ℓ
+  and P[|Q_q| = ℓ] ∈ [0.66, 4]/n for ℓ ≤ √n/40 (prop:shortcycles, refereed;
+  exact at n ≤ 11 from CGW's tables; sharp at n=5). Remaining: the CONDITIONAL
+  form (two prescribed columns, rows x,y with distinct symbols there = CGW's
+  Lemma 3.12 in the 'path version') and the concentration.
+- Literature (scout, §sec:witnessstatus): the conditional form is not in print;
   Allsop–Morris 2026 give (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (exp loss in ℓ;
   δ=Δ=1+o(1) open — that IS the lower-bound clause); KS18's exact ratio method
   (1+O(1/n))/(s+1) for intercalates in two rows is the model to follow.
