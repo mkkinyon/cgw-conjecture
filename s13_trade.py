@@ -97,11 +97,12 @@ def main():
     for L in read_squares(n, sys.stdin.buffer):
         nsq += 1
         sig = sigma_of(L); pairs = []
+        col = {L[0][c]: c for c in range(n)}   # symbol -> column in row 0 (jm squares are NOT normalised)
         for cyc in cycles_of(sig):
             m = len(cyc)
             if m < 4: continue
             for ji, j in enumerate(cyc):
-                for alpha in range(2, m - 1): pairs.append((j, cyc[(ji + alpha) % m]))
+                for alpha in range(2, m - 1): pairs.append((col[j], col[cyc[(ji + alpha) % m]]))
         if not pairs: continue
         for (j, jp) in rng.sample(pairs, min(ninst, len(pairs))):
             S = Square(L, j, jp)

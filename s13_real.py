@@ -159,12 +159,13 @@ def main():
         nsq += 1
         sig = sigma_of(L)
         pairs = []
+        col = {L[0][c]: c for c in range(n)}   # symbol -> column in row 0 (jm squares are NOT normalised)
         for cyc in cycles_of(sig):
             m = len(cyc)
             if m < 4: continue
             for ji, j in enumerate(cyc):
                 for alpha in range(2, m - 1):
-                    pairs.append((j, cyc[(ji + alpha) % m], m))
+                    pairs.append((col[j], col[cyc[(ji + alpha) % m]], m))
         if not pairs: continue
         for (j, jp, mcyc) in rng.sample(pairs, min(ninst, len(pairs))):
             fam, R, M = build_pool(L, j, jp, kcap, rng)

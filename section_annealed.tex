@@ -378,6 +378,23 @@ class appeared: the per-instance bias histogram is consistent with
 the iid shape plus the $r=0$ atom.
 \end{enumerate}
 
+\emph{\textbf{SESSION-13 CORRECTION.}  The Jacobson--Matthews
+sampler emits unnormalised squares (row $1$ is not the identity), and
+\texttt{s7\_real\_bias.py}/\texttt{s8\_real\_bias.py} take the
+symbols of a $\sigma$-cycle and use them directly as column indices.
+The ``marked pairs'' of this subsection are therefore column pairs
+$(s,\sigma^\alpha(s))$ with $s$ read as a column, i.e.\ essentially
+uniformly random column pairs, not marks: in particular rows $1,2$ are
+adjacent in the frame ($\pi_P(1)=2$ or $\pi_P(2)=1$) in a fraction
+$\approx2/n$ of these instances, which never happens for a true mark
+(\S\ref{sec:s13trapped}).  Everything verified here (the master
+formula on the switched square, the $1/k$ law, the $r=0$ atom) is
+insensitive to this, and the corrected pipeline
+(\texttt{s13\_real.py}, symbol $\to$ column via row $1$) gives the
+same picture, but the numbers below are for random column pairs.  The
+bug was found because the trade chain of \S\ref{sec:s13tradechain}
+froze the bit on exactly the adjacent instances.}
+
 \emph{Status: COMPUTED (tables above; per-instance data in
 \texttt{s7\_inst\{30,50,100\}.csv}); the ground-truth re-verification
 of the master formula at $n=30,50,100$ is VERIFIED (0/3250).
