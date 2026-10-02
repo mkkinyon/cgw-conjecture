@@ -953,3 +953,53 @@ squares and compare the autocorrelation of the bit, as a function of
 the number of trades performed, with $\langle\varepsilon,P^m\varepsilon\rangle$
 of Theorem~\ref{thm:spectral}; and measure the flippable fraction and
 its correlation with the frame.
+
+\paragraph{The trade chain, continued: what a proof needs.}  Three
+observations sharpen the route.
+
+(i) \emph{EQ from the autocorrelation.}  Since $T$ is symmetric,
+$\E_X[\varepsilon(L_0)\varepsilon(L_{2M})]=\|T^M\varepsilon\|^2_{L^2(X)}\ge\langle\varepsilon,1\rangle^2=(\E_X\varepsilon)^2$.
+So $\mathrm{EQ}(\delta)$ follows from
+$\E_X[\varepsilon(L_0)\varepsilon(L_{2M})]\le\delta^2$ for a single $M$ ---
+a stationary two-time statement, the exact analogue for the trade chain
+of Corollary~\ref{cor:stationarydecay} for the walk, and the quantity
+\texttt{s13\_trade.py} measures.
+
+(ii) \emph{Which frame moves are free.}  Combining a turn with a trade
+makes the transposition $(x\,y)$ available at any pair for which the
+cycle of $x$ or of $y$ avoids rows $1,2$, or contains both (a turn of
+$C_x$ toggles the flippability of $(x,y)$ when $y\notin C_x$, and
+turning a cycle through both marked rows leaves $\sigma$ unchanged).
+Hence: in the \emph{together} state every move is available, including
+every separating one; in the \emph{apart} state every move is
+available except the splits of $C_1$, the splits of $C_2$, and the
+merges of $C_1$ with $C_2$, which require flippability.  The merges
+$C_1$--$C_2$ are the bit-changing moves.
+
+(iii) \emph{Flippability, exactly.}  Let $a=L(x,j)$, $b'=L(y,j')$ and
+$q^*$ the column where row $x$ holds $b'$ ($q^*\ne j$ when
+$\pi(x)\ne y$).  Following the $\rho_{x,y}$-cycle of $j$, column $j'$
+is reached exactly at the step after $q^*$; so $(x,y)$ is flippable iff
+$q^*$ does not lie on the $\rho_{x,y}$-cycle of $j$.  For a random-like
+$\rho_{x,y}$ this has probability $\tfrac12$, which is what is measured
+($0.500$--$0.511$ in every class: separating, non-separating, merging,
+other; and exactly $0$ for adjacent pairs).  A turn of $C_1$ (the move
+$X\to J$ of Proposition~\ref{prop:trapped}) toggles the flippability
+of \emph{every} merging pair simultaneously, so
+$\Pr_X[\text{no flippable merge}\mid\text{apart}]\le2\Pr_J[\text{all merges flippable}]$;
+this does not by itself show either is small.
+
+What a proof must supply is therefore: (F1) under $\mathrm{Unif}(X)$,
+in the apart state, a positive fraction of the pairs
+$C_1\times C_2$ (and of the splitting pairs of $C_1$, $C_2$) are
+flippable, except on a set of squares of measure $o(1/\log^2n)$; and
+(F2) a mixing argument for the frame walk in which all moves are
+available at rate $\asymp1/n^2$ except the constrained ones, which are
+available at rate $\ge c/n^2$ on the event (F1).  Both are statements
+about a pair of rows and a pair of columns of a random Latin square,
+with no intercalates, orbits or expanders; (F1) is the kind of
+statement the switching method reaches.  Measured on real squares
+with true marks ($n=30$, \texttt{runs/s13/trade30.log}): the
+autocorrelation of the bit after $m$ trades tracks that of the pure
+walk with transpositions avoiding $u,v$ and decays to the noise floor
+by $m\approx32$, with no plateau.
