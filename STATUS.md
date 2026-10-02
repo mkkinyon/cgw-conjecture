@@ -95,14 +95,20 @@ pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
   uniform; P[separated | clean, ℓ] = 0.19–0.20 = P[separated] (genericity);
   orbit coin 0.478/0.523 at n=100 (greedy matching, |T|≈42); fixed matching:
   |T| ≈ 3, E[ȳ] = 0.19 ⇒ per-pair factor ≈ 0.9, κ ≈ 0.15.
-  Residual = genericity (clean short column cycles through x not aligned with
-  the ρ_{x,y}-arcs at p,p′) + macroscopic arcs + concentration of Σȳ.  Pure
-  permutation core (Π): ρ₀ fixed, T a matching, τ(η) random sub-product:
-  P[p,p′ separated in ρ₀τ(η)] ≥ c — false for adversarial T (pairs at
-  ρ₀-distance 2), so the content is that a random square's clean coordinates are
-  not adversarial.  Every availability is again a same-cycle event of a generic
-  row pair (recursion); all exact identities in X are fair; prop:orbit's gain is
-  that fairness COMPOUNDS over a family (independent coins given the orbit).
+  Residual = genericity (β) + macroscopic arcs (α) + concentration (γ).
+  (Π) SOLVED (§sec:orbit (f)): P_η[b=1] ≥ ½·max_Z P[Z crossing]; b ≡ 0 on the cube iff
+  P₁,P₂ are in different components of the block graph (vertices = arcs P₁,P₂ and the
+  other cycles, edges = chords of T); one coordinate per pair suffices (eq:onecoord):
+  P_X[Flip_I=∅] ≤ E[Π(1−½X_k)], X_k = [first clean coordinate of pair k crossing].
+  (γ): data (cov{50,100}.log) — orbit weights of different pairs UNCORRELATED
+  (Var(Y)/(|I|Var ȳ) = 0.99/1.14, excess explained by Var|I|).
+  (α) ⇐ (BL) [interleaving of {1,2},{x,y} in column cycles ≤ 1−c; data 0.19].
+  ONE FORM: every input is "two pairs of lines interleaved in a third pair" (U):
+  c ≤ P[interleaved] ≤ 1−c in X, plus the same-cycle event for generic rows at the
+  prescribed columns (availability of the (BL) repairs).  Unconditionally (no type
+  conditioning) (U) is EXACT given the cycle type: P = A/3 + 2B ∈ [1/27, 1/3+O(1/n)]
+  (conjugation invariance; referee).  All exact identities in X are fair; prop:orbit's
+  gain is that fairness compounds over a family.
 - Literature (scout, §sec:witnessstatus): the conditional form is not in print;
   Allsop–Morris 2026 give (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (exp loss in ℓ;
   δ=Δ=1+o(1) open — that IS the lower-bound clause); KS18's exact ratio method
@@ -186,7 +192,7 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 -1. (CP) via hyp:orbit (the current best form of the residual).  Done: (a) the
    one-step switching is fair (useless); the orbit method compounds fairness.
-   Open inputs, in order of likely tractability: (α) arc-trapping in X — DONE
+   Open inputs (all of the form (U), see above): (α) arc-trapping in X — DONE
    up to (BL): CGW's lemma for the row pair (x,y) runs inside X with the flips
    blocked exactly when rows 1,2 and rows x,y are INTERLEAVED in the (q,c)-column
    cycles (switch-invariant); eq:Jp gives P_X[|Q_p(ρ_{x,y})| = ℓ] ≤ 3/((1−b_ℓ)(n−ℓ))
@@ -226,7 +232,7 @@ HANDOFF_session_12.md §3 QUICKSTART still green, plus:
 `python3 s13_spectral.py brute 6` (exact = brute, all digits);
 `python3 s13_spectral_big.py 4000` (sum ν = 1, m·E → 1.9);
 `gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → 4E[bias²] ≈ 0.115;
-`pdflatex second_row_notes.tex` ×2 → 0 errors, 120 pp;
+`pdflatex second_row_notes.tex` ×2 → 0 errors, 123 pp;
 `./jm 9 300 2500 3 | python3 s13_cgwcase3.py 9` → CGW case 3 lands in the wrong type (every instance);
 `gcc -O2 -DN=7 -o s13_comp7 s13_comp7.c && ./s13_comp7 0123456 1234560 0 2` → ladder identity exact (~1 min);
 `./jm 30 300 30000 1 | python3 s13_ladder.py 30` → P[Flip=∅|K₀] ≈ 2^{−(K₀−1)}.
