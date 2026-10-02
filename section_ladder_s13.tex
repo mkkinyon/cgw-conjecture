@@ -243,18 +243,22 @@ $K$.  Items (I), (II), (III), (T),
 
 The ladder is one of a family.  For an integer $c$ (an \emph{offset}) put
 \[
-K_c=\begin{cases}\min(|C_1|-c,\ |C_2|+c)&\text{on }A,\\
-\min(d_{21}-c,\ d_{12}+c)&\text{on }B,\end{cases}
+K_c=\begin{cases}\min(|C_1|-c,\ |C_2|)&\text{on }A,\\
+\min(d_{21}-c,\ d_{12})&\text{on }B,\end{cases}
 \qquad
-D_c=\bigl\{(x_{c+i},\,y_i)=(\pi^{-(c+i)}(1),\pi^{-i}(2)):\ \max(1,1-c)\le i<K_c\bigr\},
+D_c=\bigl\{(x_{c+i},\,y_i)=(\pi^{-(c+i)}(1),\pi^{-i}(2)):\ 1\le i<K_c\bigr\},
 \]
-so $D_0$ is the ladder; for $c>0$ the $x$-row is $c$ steps deeper than
-the $y$-row, for $c<0$ the other way round (we write $i$ for the
-$y$-depth, which must be $\ge1$, and $c+i\ge1$).
+so $D_0$ is the ladder and for $c>0$ the $x$-row is $c$ steps deeper
+than the $y$-row ($x$-depths $c+1,\dots,c+K_c-1$ stay inside
+$C_1\setminus\{1\}$, resp.\ the arc from $2$ to $1$; $y$-depths
+$1,\dots,K_c-1$ inside $C_2\setminus\{2\}$, resp.\ the arc from $1$ to
+$2$).  We take $c\ge0$; the families with the $y$-row deeper are
+obtained by exchanging the roles of rows $1$ and $2$ (and of
+$C_1,C_2$, $d_{12},d_{21}$) throughout.
 
 \begin{theorem}[offset ladders]\label{thm:ladderoffset}
-For every offset $c$, on the domain $\mathcal D_c=\{K_c\ge2\}$ (where
-$D_c\ne\emptyset$) the $j'$-trades at the pairs of $D_c$ are commuting
+For every offset $c\ge0$, on the domain $\mathcal D_c=\{K_c\ge2\}$
+(where $D_c\ne\emptyset$) the $j'$-trades at the pairs of $D_c$ are commuting
 involutions that preserve $K_c$, the unordered pairs of $D_c$ and their
 flippabilities, and toggle the bit iff the traded pair is flippable.
 Hence, with $\mathrm{Flip}_c$ the set of flippable pairs of $D_c$,
@@ -271,16 +275,21 @@ $\pi'$ agrees with that of $\pi$ up to depth $c+i$ and then continues
 along the chain of $2$: $\pi'^{-(c+i+t)}(1)=y_{i+t}$; symmetrically
 $\pi'^{-(i+t)}(2)=x_{c+i+t}$ ($t\ge1$).  So the pair of $D_c$ at
 $y$-depth $i'>i$ is $\{y_{i'},x_{c+i'}\}$, unchanged as a set, and the
-pairs at depth $i'<i$ are untouched: $D_c$ is preserved.  (For a
-family of pairs $(x_{k},y_{k'})$ this computation shows that depth
-$k'$ is sent to $k'-k+c$ beyond the traded pair, so only families
-with constant $k-k'$, i.e.\ the $D_c$, are preserved; non-diagonal
-chains are not.)  On $A$ the trade merges $C_1,C_2$ into a cycle with
+pairs at depth $i'<i$ are untouched: $D_c$ is preserved.  (The same
+computation shows that trading a pair at depths $(k,k')$ sends a
+deeper pair at depths $(K,K')$ to depths $(K'+k-k',\,K-k+k')$, whose
+offset is $2(k-k')-(K-K')$; it is preserved iff $K-K'=k-k'$, so only
+families of constant offset, i.e.\ the $D_c$, are preserved.)  On $A$
+the trade merges $C_1,C_2$ into a cycle with
 $d'_{12}=|C_1|-(c+i)+i=|C_1|-c$ and $d'_{21}=|C_2|+c$, so
-$K'_c=\min(d'_{21}-c,d'_{12}+c)=K_c$; on $B$ the pair separates rows
-$1,2$ ($c+i<d_{21}$ puts $x_{c+i}$ on the arc from $2$ to $1$,
-$i<d_{12}$ puts $y_i$ on the arc from $1$ to $2$) and gives
-$|C'_1|=d_{12}+c$, $|C'_2|=d_{21}-c$, again $K'_c=K_c$.  Commutation,
+$K'_c=\min(d'_{21}-c,d'_{12})=\min(|C_2|,|C_1|-c)=K_c$; on $B$ the pair
+separates rows $1,2$ ($c+i<d_{21}$ puts $x_{c+i}$ on the arc from $2$
+to $1$, $i<d_{12}$ puts $y_i$ on the arc from $1$ to $2$) and gives
+$|C'_1|=d_{12}+c$, $|C'_2|=d_{21}-c$, again
+$K'_c=\min(d_{12},d_{21}-c)=K_c$.  No pair of $D_c$ is frame-adjacent:
+$y_i=\pi(x_{c+i})$ would need $d_{21}=c-1$ (or $\pi(1)=2$ when $c=0$)
+and $x_{c+i}=\pi(y_i)$ would need $d_{21}=c+1$, both excluded on
+$\mathcal D_c$.  Commutation,
 preservation of flippability and the orbit count are as before.
 \end{proof}
 
@@ -291,53 +300,62 @@ confirms the identities for $c=0,1,2,3$ to all digits
 
 \paragraph{Using the offsets to price short arcs.}  Fix $\ell\ge2$ and
 consider $B$-instances with $d_{12}=\ell$.  For $0\le c\le n/2-\ell$
-and $d_{21}>c+\ell-1$ the offset-$c$ trade at a flippable pair of
-$D_c$ ($D_c$ has $\ell-1$ pairs here) lands in $A$ with
-$|C_1|=\ell+c\le n/2$, so by Theorem~\ref{thm:ladderoffset} restricted
-to the classes meeting this set and Proposition~\ref{prop:trapped},
+and $d_{21}\ge c+\ell$ one has $K_c=\ell$, so $D_c$ has $\ell-1$ pairs,
+and the offset-$c$ trade at a flippable pair of $D_c$ lands in $A$
+with $|C_1|=\ell+c\le n/2$ and $|C_2|=d_{21}-c\ge\ell$.  Within a
+class of $\mathcal D_c$ all $B$-members have the same $(d_{12},d_{21})$
+and all $A$-members the same $(|C_1|,|C_2|)=(d_{12}+c,d_{21}-c)$, and
+$\mathrm{Flip}_c$ is a class invariant, so Theorem~\ref{thm:ladderoffset}
+class by class and Proposition~\ref{prop:trapped} give
 \begin{equation}\label{eq:offsetprice}
-\Pr\bigl[B,\ d_{12}=\ell,\ d_{21}>c+\ell-1,\ \mathrm{Flip}_c\ne\emptyset\bigr]
-=\Pr\bigl[A,\ |C_1|=\ell+c,\ \mathrm{Flip}_c\ne\emptyset,\dots\bigr]
-\le\frac{18}{n-\ell-c-1}\le\frac{36}{n}.
+\Pr\bigl[B,\ d_{12}=\ell,\ d_{21}\ge c+\ell,\ \mathrm{Flip}_c\ne\emptyset\bigr]
+=\Pr\bigl[A,\ |C_1|=\ell+c,\ |C_2|\ge\ell,\ \mathrm{Flip}_c\ne\emptyset\bigr]
+\le\frac{18}{n-\ell-c-1}\le\frac{36}{n-2}.
 \end{equation}
-(The equality is the class-by-class correspondence: every class of
-$\mathcal D_c$ with $\mathrm{Flip}_c\ne\emptyset$ has half its members
-in $A$ with $|C_1|=\ell+c$ and half in $B$ with $d_{12}=\ell$.)
 Averaging over $c$: if $\theta(L,P)$ denotes the fraction of offsets
 $c\in[0,n/2-\ell]$ whose diagonal $D_c$ contains a flippable pair,
 then for every $\theta_0>0$
 \begin{equation}\label{eq:offsetavg}
-\Pr\bigl[B,\ d_{12}=\ell,\ |C_1|\ge n/2+\ell,\ \theta\ge\theta_0\bigr]\le\frac{36}{n\,\theta_0}.
+\Pr\bigl[B,\ d_{12}=\ell,\ |C_1|\ge n/2+\ell,\ \theta\ge\theta_0\bigr]\le\frac{36}{(n-2)\,\theta_0},
 \end{equation}
-Together with the splice-in bound $\Pr[B,d_{12}=\ell,|C_1|<n/2+\ell]\le8/n$
-of Remark~\ref{rem:ladderdata}(iii) (free rows $\ge n/2-\ell$), this
-prices every short arc except on the event $\{\theta<\theta_0\}$.
+since on $|C_1|\ge n/2+\ell$ one has $d_{21}=|C_1|-\ell\ge n/2\ge c+\ell$
+for every such $c$, so $\E[\theta\,\mathbf 1_E]$ is the average over
+$c$ of the left side of \eqref{eq:offsetprice}, and Markov's
+inequality applies.  Together with the splice-in bound
+$\Pr[B,d_{12}=\ell,|C_1|<n/2+\ell]\le4/(n-2\ell+1)\le8/n$ for
+$\ell\le n/4$ (the argument of Remark~\ref{rem:ladderdata}(iii) with
+$n-|C_1|>n/2-\ell$ free rows), this prices every short arc except on
+the event $\{\theta<\theta_0\}$.
 
 \paragraph{The single remaining input.}  Say that a pair of rows
 $(x,y)$, $x,y\notin\{1,2\}$, carries a \emph{witness} if the
 $\rho_{x,y}$-cycle through column $j$ has length at most
-$\ell'=\log^4n$ and does not contain $j'$ (then $(x,y)$ is flippable).
+$\ell'=\log^5n$ and does not contain $j'$ (then $(x,y)$ is flippable).
+A frame-adjacent pair ($y=\pi(x)$, so $\rho_{x,y}(j)=j'$) never
+carries one; the families below contain no such pair.
 For a pair of rows of a random Latin square the length of the
 $j$-cycle is spread like a uniform variable on $\{2,\dots,n\}$
 (Remark~\ref{rem:ladderdata}(iv)), so a witness has probability
 $\approx\ell'/n$.
 
 \begin{hypothesis}[witness lemma]\label{hyp:witness}
-Let $(L,P)$ be uniform on $X$, and condition on rows $1,2$ and columns
-$j,j'$ (hence on the frame and on every family of row pairs defined
-from it).  Let $\mathcal G$ be a family of \emph{blocks}, each block a
-set of at most $n$ pairs of rows $\notin\{1,2\}$, the blocks and their
-pairs determined by the frame, with every row occurring in at most $n$
-pairs altogether.  Let $G_{\mathcal G}$ be the number of blocks
-containing a pair that carries a witness.  Then
+Let $(L,P)$ be uniform on $X$.  Let $\mathcal G$ be one of the
+following families of \emph{blocks} of pairs of rows, determined by
+the frame: (i) the ladder, each pair a block of its own; (ii) for a
+$B$-instance with $d_{12}=\ell\le n/4$ and $|C_1|\ge n/2+\ell$, the
+diagonals $D_c$, $0\le c\le n/2-\ell$, each a block of $\ell-1$ pairs.
+Let $G_{\mathcal G}$ be the number of blocks containing a pair that
+carries a witness, and
+$\mu_{\mathcal G}=\sum_{\mathcal B\in\mathcal G}\min\bigl(\tfrac12,\ell'|\mathcal B|/n\bigr)$.
+Then there is a constant $\kappa>0$ such that
 \[
-\E G_{\mathcal G}\;\ge\;c\sum_{\text{blocks }\mathcal B}\min\Bigl(\tfrac12,\ \frac{\ell'\,|\mathcal B|}{n}\Bigr)
-\qquad\text{and}\qquad
-\Pr\bigl[G_{\mathcal G}<\tfrac12\E G_{\mathcal G}\bigr]=o(1/\log n)
-\ \text{ whenever }\ \E G_{\mathcal G}\ge\log^2n,
+\Pr\bigl[G_{\mathcal G}<\kappa\,\mu_{\mathcal G}\ \text{ and }\ \mu_{\mathcal G}\ge\log^2n\bigr]=o(1/\log n).
 \]
-uniformly over the conditioning.  (Blocks of size one: the number of
-pairs carrying a witness.)
+(This is annealed: an exceptional set of frames of probability
+$o(1/\log n)$ is allowed.  For a single pair of non-adjacent rows the
+witness probability is $\approx\ell'/n$, Remark~\ref{rem:ladderdata}(iv),
+so $\kappa\mu_{\mathcal G}$ is a constant fraction of the expected
+count if blocks are nearly independent given their shared rows.)
 \end{hypothesis}
 
 \begin{proposition}[(L) follows from the witness lemma]\label{prop:Lwitness}
@@ -350,37 +368,37 @@ Put $\ell_0=n/\log^2n$.  By Theorem~\ref{thm:ladder},
 $|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le
 \Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.
 
-\emph{Long ladders.}  On $\{K_0\ge\ell_0\}$ apply the hypothesis to
-the ladder with blocks of size one ($K_0-1$ disjoint pairs): $\E G\ge
-c\ell'\ell_0/n=c\log^2n$, so $G\ge1$ except with probability
-$o(1/\log n)$, and $G\ge1$ means $\mathrm{Flip}\ne\emptyset$.
+\emph{Long ladders.}  On $\{K_0\ge\ell_0\}$ take family (i):
+$\mu\ge(\ell_0-1)\ell'/n\ge\log^2n$, so $G\ge\kappa\mu\ge1$ except on an
+event of probability $o(1/\log n)$, and $G\ge1$ means
+$\mathrm{Flip}\ne\emptyset$.
 
 \emph{Short cycles.}  $\Pr[A,K_0<\ell_0]\le72\ell_0/n=72/\log^2n$ by
 Proposition~\ref{prop:trapped}.
 
-\emph{Short arcs.}  $\Pr[B,K_0<\ell_0]\le2\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell]$
-by the $1\leftrightarrow2$ symmetry.  Fix $\ell$.  The part with
-$|C_1|<n/2+\ell$ costs $\le8/n$.  On $|C_1|\ge n/2+\ell$ apply the
-hypothesis with the blocks $D_c$, $0\le c\le n/2-\ell$ (each of
-$\ell-1$ pairs; each $y_i$ occurs in $\le n/2$ pairs, each $x$-row in
-$\le\ell-1$): $\E G\ge c(n/2-\ell+1)\min(\tfrac12,(\ell-1)\ell'/n)\ge
-c'\min(n,(\ell-1)\ell')\ge c'\ell'\ge\log^2n$, so except with
-probability $o(1/\log n)$ the fraction of offsets whose diagonal
-contains a flippable pair is
-$\theta\ge\theta_0(\ell):=\tfrac c2\min(\tfrac12,(\ell-1)\ell'/n)$.  By
+\emph{Short arcs.}  $\Pr[B,K_0<\ell_0]\le\sum_{\ell<\ell_0}\bigl(\Pr[B,d_{12}=\ell]+\Pr[B,d_{21}=\ell]\bigr)$;
+we treat $d_{12}=\ell$, and $d_{21}=\ell$ is the same argument with the
+roles of rows $1,2$ exchanged (Proposition~\ref{prop:trapped} covers
+$C_2$, and the offset families become those with the $y$-row deeper).
+Fix $\ell$.  The part with $|C_1|<n/2+\ell$ costs $\le8/n$.  On
+$|C_1|\ge n/2+\ell$ take family (ii), with $N=\lfloor n/2-\ell\rfloor+1\ge n/4$
+blocks: $\mu=N\min(\tfrac12,(\ell-1)\ell'/n)\ge\tfrac14\min(n/2,(\ell-1)\ell')\ge\log^2n$,
+so except on an event $F_\ell$ of probability $o(1/\log n)$ the
+fraction of offsets whose diagonal contains a flippable pair is
+$\theta=G/N\ge\theta_0(\ell):=\kappa\min(\tfrac12,(\ell-1)\ell'/n)$.  By
 \eqref{eq:offsetavg},
 \[
 \sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta\ge\theta_0(\ell)]
-\le\sum_{\ell-1\le n/(2\ell')}\frac{72}{c\,(\ell-1)\ell'}
-+\sum_{n/(2\ell')<\ell-1<\ell_0}\frac{144}{c\,n}
-=O\Bigl(\frac{\log n}{\ell'}+\frac{\ell_0}{n}\Bigr)=O\Bigl(\frac1{\log^2n}\Bigr).
+\le\sum_{\ell-1\le n/(2\ell')}\frac{36\,n}{(n-2)\,\kappa\,(\ell-1)\ell'}
++\sum_{n/(2\ell')<\ell-1<\ell_0}\frac{72}{(n-2)\kappa}
+=O\Bigl(\frac{\log n}{\ell'}+\frac{\ell_0}{n}\Bigr)=O\Bigl(\frac1{\log^2n}\Bigr),
 \]
-The exceptional events $\{\theta<\theta_0(\ell)\}$ are the failures of
-the hypothesis for the block family of $\ell$; they are summed over
-$\ell<\ell_0$, which is why the hypothesis is stated conditionally on
-the frame: $\sum_\ell\Pr[B,d_{12}=\ell,\text{failure}]
-\le\sup_{\text{frames}}\Pr[\text{failure}\mid\text{frame}]
-\cdot\Pr[B,d_{12}<\ell_0]=o(1/\log n)$.
+and $\sum_{\ell<\ell_0}8/n\le8/\log^2n$.  The exceptional events: the
+family (ii) is a function of the frame, and the events $\{d_{12}=\ell\}$
+are disjoint, so $\sum_\ell\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,F_\ell]
+=\Pr\bigl[\bigcup_\ell\{B,d_{12}=\ell,|C_1|\ge n/2+\ell,F_\ell\}\bigr]$ is
+the probability of a single failure event of the hypothesis, which is
+$o(1/\log n)$.
 Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
 \end{proof}
 
@@ -389,8 +407,9 @@ Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
 (a cycle of length $\le\log^4n$ of a row-pair permutation through a
 given column), in the space of completions of two rows and two
 columns, for families of pairs selected by the frame.  It asks for a
-lower bound on their expected number and a second-moment-type
-concentration (relative variance $o(1/\log n)$) --- the territory of
+lower bound on their expected number and a lower-tail
+concentration (a second moment with relative variance $o(1/\log n)$
+suffices) --- the territory of
 the switching method \cite{KS18}: a switching that shortens or lengthens
 the $j$-cycle of $\rho_{x,y}$ by a bounded amount, applied in the
 conditional space, compares the counts of squares with
@@ -401,11 +420,14 @@ fairness of any global statistic.  (iii) Rigid squares ($\mathbb Z_p$
 isotopes and their relatives, where no row pair has a short cycle)
 enter only through the failure probability, which must be
 $o(1/\log n)$; for them the hypothesis is simply the statement that
-they are rare.  (iv) The constants: $\ell'=\log^4n$ and
+they are rare.  (iv) The constants: $\ell'=\log^5n$ and
 $\ell_0=n/\log^2n$ are one admissible choice; the proof needs
-$\ell'\ell_0/n\ge\log^2n$, $\ell_0/n=o(1/\log n)$ and
-$\log n/\ell'=o(1/\log n)$.  (v) The block form is needed because
-witnesses in a diagonal are not disjoint events across offsets only
-through the shared rows $y_i$; what the short-arc argument uses is the
-number of offsets with a witness, not the number of witnesses.
+$\ell_0\ell'/n\ge\log^2n$, $\ell_0/n=o(1/\log n)$ and
+$\log n/\ell'=o(1/\log n)$.  (v) The block form is what the
+short-arc argument uses: the number of offsets with a witness, not the
+number of witnesses, since the diagonals of different offsets are
+dependent through the shared rows $y_i$.  (vi) The hypothesis is
+stated only for the two families used; a version for arbitrary
+frame-determined families would be false, since frame-adjacent pairs
+never carry a witness.
 \end{remark}
