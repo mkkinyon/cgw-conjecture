@@ -779,3 +779,33 @@ columns prescribed it is the path version, which already fails for the
 reason above; with both it is what (L) needs.  Everything in
 \S\ref{sec:ladder}--\S\ref{sec:crossspace} is exact except this one
 constant.
+
+\paragraph{The unconditional core problem is settled with an explicit constant.}
+For a uniform Latin square and fixed rows $1,2$ and columns $p,p'$ let
+$W=\{p,p'\text{ in a common }\sigma\text{-cycle}\}$ ($\sigma$ the column
+permutation of rows $1,2$) and $B=\{1,2\text{ in a common frame cycle
+of }(p,p')\}$.  Three exact facts determine the joint law of $(W,B)$
+up to one number.  (i) $\Pr[B]=\Pr[W]$: transposition exchanges the
+two events and preserves the uniform measure.  (ii)
+$\Pr[B,\neg W]=\Pr[A,\neg W]$: on $\neg W$ the switch
+(Lemma~\ref{lem:switchtoggle}) is an involution toggling $B$.  (iii)
+$\Pr[A\mid W,\lambda,\alpha]\ge\frac13$ for every type and every
+split with $\alpha,\beta\ge2$ (CGW, \eqref{eq:cgwA}); the pairs at
+$\sigma$-distance $1$ have $B$ surely and total probability $O(1/n)$.
+Writing $w=\Pr[W]$: $\Pr[A,\neg W]=\Pr[B,\neg W]=\frac{1-w}2$,
+$\Pr[B,W]=w-\frac{1-w}2=\frac{3w-1}2$, $\Pr[A,W]=\frac{1-w}2$, hence
+$\Pr[A\mid W]=\frac{1-w}{2w}$ and (iii) gives
+\[
+\frac13\;\le\;\Pr[W]\;\le\;\frac35+O(1/n),
+\qquad\text{i.e.}\qquad
+\Pr\bigl[p,p'\text{ in different cycles of }\rho_{1,2}\bigr]\;\ge\;\frac25-O(1/n),
+\]
+and $\E|Q_p|=1+(n-1)\Pr[W]\le(\frac35+o(1))n$: the cycle of two given
+rows through a given column covers at most three fifths of the columns
+on average.  (The fairness conjecture is $w=\frac12$; the data give
+$0.50$.)  So (CP) holds without any conditioning, with $c=2/5$, by
+combining the two exact involutions with CGW's constant.  What is
+missing is the same statement after conditioning on two rows and two
+columns --- for which (i) fails (transposition does not preserve the
+conditioning), (ii) survives, and (iii) is CGW's lemma in the path
+version, which breaks as described.
