@@ -217,7 +217,7 @@ squares whose first two rows have row-cycle type $\lambda$.  Iterating:
 $\PP_n(\lambda)$ agrees with $\QQ_n(\lambda)$ within a factor
 exponential in $\kappa(\lambda)$, whence, e.g., almost all cycle types have
 $\PP_n/\QQ_n\in[n^{-3/2},n^{3/2}]$, the single-cycle probability is
-$2n^{-2}\le \PP_n((n))\le 2n^{-2/3}$, and
+$2n^{-2}\le \PP_n((n))\le 2n^{-2/3}$ (the upper bound under CGW($3/2$), Remark~\ref{rem:cgwgap}), and
 $\Pr(\sigma\text{ even})\in[\tfrac14-o(1),\tfrac34+o(1)]$.
 They also computed $\CC_n$ \emph{exactly} for $n\le 11$
 \cite[Tables 1--2]{CGW08}; those tables are the data source for
@@ -2292,7 +2292,10 @@ $\sum_{\pi\in\DD_n}2^{\kappa(\pi)}=n!\,[x^n]e^{-2x}(1-x)^{-2}\le n\cdot n!$
 $\QQ_n(\kappa>K)\le e\,n\,2^{-K}=O(n^{-2})$ for $A\log2\ge3$; also
 $\QQ_n(\text{non-plain})\le\sum_{\ell\mid n,\ \ell<n}
 \gamma((\ell^{n/\ell}))/D_n=O(n^{-1})$.  Under $\PP_n$, the unconditional
-CGW bound \cite[Cor.~4.5]{CGW08},
+CGW bound \cite[Cor.~4.5]{CGW08} (whose proof uses the $3/2$ direction
+of their Lemma~3.12, see Remark~\ref{rem:cgwgap}; the tail bound below
+is therefore conditional on CGW($3/2$) until re-derived from the
+surviving direction),
 $\PP_n(\lambda)\le n^{1/3}(\gamma(\lambda)/n!)\,2^{\kappa(\lambda)}$,
 combined with
 $\sum_{\pi\in\DD_n}4^{\kappa(\pi)}=n!\,[x^n]e^{-4x}(1-x)^{-4}

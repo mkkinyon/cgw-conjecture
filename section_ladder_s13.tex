@@ -525,7 +525,7 @@ $X=X(n,\lambda;\alpha,\beta)$ and $J=J(n,\mu;\alpha,\beta)$, so by
 Theorem~\ref{thm:marked} ($|J|=2|X_A|$) the CGW theorem is exactly
 \begin{equation}\label{eq:cgwA}
 \tfrac13\;\le\;\Pr_X[A]\;\le\;1
-\qquad\text{for every }n,\lambda,\alpha,\beta
+\qquad\text{for every }n,\lambda,\alpha,\beta\quad\text{(lower bound: CGW($3/2$), see Remark~\ref{rem:cgwgap})}
 \end{equation}
 (for $\alpha=\beta$ CGW's second form of the lemma and the $\alpha=\beta$
 conventions of \S\ref{sec:marked} give the same middle term $|X|/|J|$):
@@ -536,7 +536,62 @@ CGW's $3/2$ is sharp there.  (The upper bound $\Pr_X[A]\le1$ is the
 trivial direction $|J|\le2|X|$ of our identity; CGW's constant $1/2$
 is its switching-count shadow.)  The conjecture asks for $\Pr_X[A]=\frac12+o(1/\log n)$.
 
-\begin{proposition}[short cycles in two rows]\label{prop:shortcycles}
+\begin{remark}[a gap in the published proof of CGW's Lemma~3.12]\label{rem:cgwgap}
+The lower bound in \eqref{eq:cgwA} is CGW's upper bound $3/2$, and
+its proof requires every splitting pair of a $\lambda$-square to
+carry exactly two edges.  Case~3 of their splitting procedure
+(``$\{j,j'\}$ and $\{\omega j,\omega j'\}$ both $B$-pairs:
+cross-switch with respect to $\{\omega j,\omega j'\}$, then backflip
+with respect to $\{j,j'\}$'') does not produce an element of
+$S(\mu,F)$ when $\min(\alpha,\beta)\ge3$.  Indeed the rows-$1,2$ part of
+the cross-switch at a $B$-pair $(J,J')$ with $\omega^\alpha J=J'$ is
+forced by the proof of their Lemma~3.10 (row $1$ keeps the symbol set
+$\{1\circ\omega^kJ:1\le k\le\alpha\}$ on the cells
+$\{\omega^kJ:1\le k<\alpha\}\cup\{J'\}$, and in every interior column
+the two rows are swapped), which gives $1'\circ\omega^kJ=1\circ\omega^{k+1}J$
+for $1\le k<\alpha$, $1'\circ J'=1\circ\omega J$, $2'\circ\omega^kJ=1\circ\omega^kJ$,
+$2'\circ J=1\circ J'$; hence $\omega'(J)=\omega^{\alpha-1}J$,
+$\omega'(\omega^kJ)=\omega^{k-1}J$ for $2\le k<\alpha$, $\omega'(\omega J)=J'$:
+the cross-switch \emph{reverses the $\omega$-arc from $J$ to $J'$}.
+With $(J,J')=(\omega j,\omega j')$ the reversed arc has $j'=\omega^{\alpha-1}J$
+in its interior, so afterwards $\omega'(j)=\omega j$ and
+$\omega'(\omega j)=j'$: the pair $\{j,j'\}$ is at distance $2$, and the
+backflip at it splits the $(\alpha+\beta)$-cycle into parts $2$ and
+$\alpha+\beta-2$.  (For $\alpha=2$ the arc has a single interior
+column and nothing changes, so the proof is complete for
+$\min(\alpha,\beta)=2$ --- hence at $n\le5$, where it is sharp.)  The
+joining rule~4 fails symmetrically, and the two multigraphs are not
+equal.  Independent check: \texttt{s13\_cgwcase3.py} implements the
+cross-switch (rows $1,2$ as above, columns $j,j'$ swapped on the
+$\delta_{j,j'}$-arc from row $2$ to row $1$, which is what balances
+the corner cells), verifies that it is a Latin square of the same type
+in every instance, and finds that case~3 lands in the wrong type in
+$2676$ of $2676$ instances at $n=9,12$ with $\min(\alpha,\beta)\ge3$
+(a referee subagent found the gap first, with its own implementation).
+We found no published correction.  \emph{What survives:} the direction
+$|S(\lambda)|N_\lambda\ge\tfrac12|S(\mu)|N_\mu$, which by
+Theorem~\ref{thm:marked} is the trivial $|X|\ge|X_A|$; CGW's
+Lemma~4.1 upper bound ($|S(\lambda,F)|(m-1)!/(|S((m),F)|\gamma(\lambda))\le2^{\kappa-1}$),
+Lemma~4.4's lower bound $\Pr[(m)]\ge2/m^2$, and the upper bounds of
+Proposition~\ref{prop:shortcycles} (the factor $2$, hence
+$\E[N_\ell]\le(4+o(1))/\ell$).  \emph{What is now conditional} on the
+truth of CGW's $3/2$ --- call it \textup{CGW($3/2$)}, equivalently
+$\Pr_X[B]\le2/3$ for all $(\lambda,\alpha,\beta)$, a weak form of our
+own target $\Pr_X[B]=\tfrac12+o(1/\log n)$ --- is: the lower bound
+$\tfrac13$ in \eqref{eq:cgwA}; the lower bounds (factor $\tfrac23$) of
+Proposition~\ref{prop:shortcycles} and the witness bound
+$(\tfrac23-o(1))(\ell'-1)/n$; the unconditional (CP) constant $2/5$
+of \S\ref{sec:crossspace}; the ``$\ge\tfrac13$'' of \eqref{eq:CPcols};
+CGW's $\Pr[(n)]\le2n^{-2/3}$ and Corollary~4.5, hence the tail bound
+$\PP_n(\kappa>A\log n)=O(n^{-2/3})$ used in the proof of
+Theorem~\ref{thm:reduction}, which must be re-derived from the
+surviving direction (a $k$-fold joining bound on
+$\E\binom{\kappa}{k}$ with $k=\log n$ does it; to be written).  The
+data ($\Pr_X[B]\approx\tfrac12$ throughout) leave no doubt about the
+statement, and the exact tables at $n\le11$ verify it there.
+\end{remark}
+
+\begin{proposition}[short cycles in two rows; lower bounds under CGW($3/2$), Remark~\ref{rem:cgwgap}]\label{prop:shortcycles}
 Let $L$ be a uniform Latin square of order $n$, $\sigma$ the column
 permutation of two fixed rows, $N_\ell$ the number of $\ell$-cycles of
 $\sigma$, and $Q_q$ the $\sigma$-cycle through a fixed column $q$.
@@ -805,7 +860,8 @@ uniformly over the conditioning (or: for the ladder, not all pairs
 crossed).  Which half of the conditioning is the obstacle is settled
 by transposition (\S\ref{sec:orbit} below): with only the two
 \emph{columns} prescribed, (CP) is CGW's Theorem~3.13 for the
-transposed square and holds with $c=\frac13$ ($c=\frac12$ exactly when
+transposed square and holds with $c=\frac13$ under CGW($3/2$)
+(Remark~\ref{rem:cgwgap}) ($c=\frac12$ exactly, unconditionally, when
 rows $1,2$ are apart in the frame); with only rows $1,2$ prescribed
 (their type and the mark --- the conditioning that defines $X$) it is
 the path version, which breaks for the reason above; with both it is
@@ -813,7 +869,7 @@ what (L) needs, and the frame conditioning is then free.  Everything
 in \S\ref{sec:ladder}--\S\ref{sec:crossspace} is exact except this one
 constant.
 
-\paragraph{The unconditional core problem is settled with an explicit constant.}
+\paragraph{The unconditional core problem is settled with an explicit constant (under CGW($3/2$), Remark~\ref{rem:cgwgap}).}
 For a uniform Latin square and fixed rows $1,2$ and columns $p,p'$ let
 $W=\{p,p'\text{ in a common }\sigma\text{-cycle}\}$ ($\sigma$ the column
 permutation of rows $1,2$) and $B=\{1,2\text{ in a common frame cycle
@@ -886,7 +942,7 @@ and column relabelling.  Hence, by Lemma~\ref{lem:switchtoggle}
 \begin{equation}\label{eq:CPcols}
 \Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
 \;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
-\ge\tfrac13\ \text{ if together at distances $\ge2$}.
+\ge\tfrac13\ \text{ if together at distances $\ge2$ (the latter under CGW($3/2$))}.
 \end{equation}
 So (CP) with the \emph{columns} prescribed is CGW's theorem; it is the
 conditioning on rows $1,2$ --- on their type and the mark, which is

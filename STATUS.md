@@ -5,6 +5,21 @@
 is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
 are kept for the record; their TODO lists are superseded by this file.*
 
+## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap)
+Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
+at {j,j′}) lands in the WRONG type when min(α,β) ≥ 3: the cross-switch reverses the
+ω-arc from ωj to ωj′, which contains j′, so {j,j′} ends at distance 2 (forced by the
+proof of their Lemma 3.10; verified independently, s13_cgwcase3.py: 2676/2676 wrong at
+n=9,12).  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
+form of OUR target) is unproved as published; the 1/2 direction is trivial given
+thm:marked.  Conditional on "CGW(3/2)" from now on: eq:cgwA's P_X[A] ≥ 1/3,
+prop:shortcycles lower bounds, the unconditional witness bound, unconditional (CP)
+c = 2/5, eq:CPcols "≥ 1/3", CGW's P[(n)] ≤ 2n^{−2/3} and Cor 4.5, hence the TAIL BOUND in
+thm:reduction (P_n(κ > A log n) = O(n^{−2/3})) — TO DO: re-derive it from the surviving
+direction (k-fold joining bound on E[binom(κ,k)], k = log n; sketch in rem:cgwgap).
+Everything exact of ours (thm:marked, thm:ladder, offsets, lem:rowfair, lem:legalturn,
+prop:orbit, eq:Jp) is unaffected.  No published erratum found (quick search only).
+
 ## Goal and chain — REWRITTEN after the ladder identity (§sec:ladder)
 
 CGW weak conjecture d_TV(P_n,Q_n) → 0  ⇐  EQ(o(1/log n)) [thm:reduction]
@@ -169,10 +184,13 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 -1. (CP) via hyp:orbit (the current best form of the residual).  Done: (a) the
    one-step switching is fair (useless); the orbit method compounds fairness.
-   Open inputs, in order of likely tractability: (α) arc-trapping in X (the
-   ρ_{x,y}-cycles through p,p′ are macroscopic w.p. ≥ c for a ladder pair; a
-   short-cycle bound for a generic row pair at a prescribed column given the type
-   of rows 1,2); (β) genericity: P[clean coordinate (q,c) separated | ...] ≥ c —
+   Open inputs, in order of likely tractability: (α) arc-trapping in X — DONE
+   up to (BL): CGW's lemma for the row pair (x,y) runs inside X with the flips
+   blocked exactly when rows 1,2 and rows x,y are INTERLEAVED in the (q,c)-column
+   cycles (switch-invariant); eq:Jp gives P_X[|Q_p(ρ_{x,y})| = ℓ] ≤ 3/((1−b_ℓ)(n−ℓ))
+   with b_ℓ = interleaved fraction (data 0.19, interleave50.log); (BL): b_ℓ ≤ 1−c is
+   again a same-cycle genericity for third rows (the recursion, now explicit);
+   for ladder pairs the frame must be fixed too (bookkeeping not done); (β) genericity: P[clean coordinate (q,c) separated | ...] ≥ c —
    note the free row trades (lem:rowfair) re-randomise the clean coordinates
    without touching ρ_{x,y}, but their availability ("q,c in different
    ρ_{z,w}-cycles") is again a same-cycle event; (γ) concentration of Σȳ over
@@ -197,7 +215,7 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
 `akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
 `trade{30,50,100}.log` (trade chain on real squares); `f1/ladder{30,50,100}.log` (ladder
-statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent), `f1/icsw50.log` (intercalate identity), `orbit/orbit{30,50,100}.log`, `orbit/orbit{50,100}_fixed.log` (orbit method: `./jm 100 120 300000 9 | python3 s13_orbit.py 100 --inst 3 --lmax 8 --fixed`).  `s13_spectral.py brute N` (N ≤ 7) and
+statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent), `f1/icsw50.log` (intercalate identity), `orbit/orbit{30,50,100}.log`, `orbit/orbit{50,100}_fixed.log`, `orbit/interleave50.log` (orbit method / blocked fraction: `./jm 100 120 300000 9 | python3 s13_orbit.py 100 --inst 3 --lmax 8 --fixed`).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
@@ -206,6 +224,7 @@ HANDOFF_session_12.md §3 QUICKSTART still green, plus:
 `python3 s13_spectral.py brute 6` (exact = brute, all digits);
 `python3 s13_spectral_big.py 4000` (sum ν = 1, m·E → 1.9);
 `gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → 4E[bias²] ≈ 0.115;
-`pdflatex second_row_notes.tex` ×2 → 0 errors, 117 pp;
+`pdflatex second_row_notes.tex` ×2 → 0 errors, 120 pp;
+`./jm 9 300 2500 3 | python3 s13_cgwcase3.py 9` → CGW case 3 lands in the wrong type (every instance);
 `gcc -O2 -DN=7 -o s13_comp7 s13_comp7.c && ./s13_comp7 0123456 1234560 0 2` → ladder identity exact (~1 min);
 `./jm 30 300 30000 1 | python3 s13_ladder.py 30` → P[Flip=∅|K₀] ≈ 2^{−(K₀−1)}.
