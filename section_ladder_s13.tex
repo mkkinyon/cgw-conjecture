@@ -431,3 +431,75 @@ stated only for the two families used; a version for arbitrary
 frame-determined families would be false, since frame-adjacent pairs
 never carry a witness.
 \end{remark}
+
+\subsection{Status of the witness lemma: literature and data}\label{sec:witnessstatus}
+
+\paragraph{Data.}  \texttt{s13\_witness.py} (\texttt{runs/s13/f1/witness50.log}:
+$9000$ instances at $n=50$).  The single-pair witness frequency for
+ladder pairs is $0.079,0.168,0.314$ for $\ell'=5,10,20$ against
+$(\ell'-1)/(n-1)=0.082,0.184,0.388$ (the deficit is the probability
+that $j'$ lies on the short cycle, $\approx\ell'/n$).  For two
+disjoint ladder pairs $\E[WW']/p^2=1.03,1.00,0.99$ ($1.7\cdot10^5$
+samples).  The number $G$ of ladder pairs with a witness and the number
+$S$ of rows $x$ preceding row $1$ whose pair with $y_1=\pi^{-1}(2)$
+carries a witness (the ``star'' family, all pairs sharing one row)
+both have variance equal to the binomial value within the resolution
+of the data (ratios $0.95$--$1.1$ in bins of $K_0$, resp.\ of the star
+size; the inflation in the smallest bins is the spread of $K_0$ within
+a bin).  So at $n=50$ the witness indicators behave as independent
+events of probability $\approx\ell'/n$, both across disjoint pairs and
+across pairs sharing a row, to within a few percent --- the hypothesis
+holds with margin in the data.
+
+\paragraph{Literature (session-13 scout; see the references).}  Nothing
+in print gives the witness lemma, but the tools are there.
+\begin{itemize}[leftmargin=2em]
+\item Cavenagh--Greenhill--Wanless \cite{CGW08} work with switchings
+inside two rows (flip, backflip, cross-switch), uniformly over an
+arbitrary prescription of a set of full columns, and prove that the
+cycle-type law of a row pair is within a factor $3/2$ of the
+derangement law per merge/split (their Theorem~3.13), within $n^{3/2}$
+overall for types with $\le\frac65\log n$ cycles (Corollary~4.6),
+$\Pr[\text{single $n$-cycle}]\in[2n^{-2},2n^{-2/3}]$ (Lemma~4.4), and
+whp more than $(\log n)^{1-c}$ cycles (Theorem~4.11).  The
+constant-factor loss per step is what stands between their method and
+a bound $\Pr[\text{$j$-cycle of length }\le\ell']\gtrsim\ell'/n$ with
+the right dependence on $\ell'$; closing it means switching counts
+exact to $1+O(\mathrm{polylog}\,n/n)$, as Kwan--Sudakov achieve for
+intercalates in two rows (ratio $(1+O(1/n))/(s+1)$, \cite{KS18}
+Theorem~3).
+\item Allsop--Morris \cite{AM26} give universal bounds
+$(\delta/n)^{|P|}\le\Pr[L\supseteq P]\le(\Delta/n)^{|P|}$ for partial
+squares $P$ on $\le\alpha n$ rows and $\le\beta n$ columns, $2\alpha+\beta<1$.
+Summed over the patterns of a $j$-cycle of length $\ell$ this gives
+$\Pr[\text{length }\ell]\in[\delta^{2\ell},\Delta^{2\ell}]/n$: the
+right order $1/n$ for each $\ell$, with an exponential-in-$\ell$ slack;
+whether $\delta=\Delta=1+o(1)$ for small $P$ is stated as open there,
+and that is exactly the witness lemma's lower-bound clause.  Their
+hypotheses do not allow full prescribed columns together with
+prescribed rows, so the conditioning on rows $1,2$ and columns $j,j'$
+would have to be handled separately (the switchings never touch those
+cells, so this should be bookkeeping).
+\item Lower tails: Kwan--Sudakov and Kwan--Sah--Sawhney bound lower
+tails of the \emph{total} intercalate count with $\exp(-n^{c})$ errors,
+by comparison with Latin rectangles and the McKay--Wanless completion
+ratio $e^{O(n\log^2n)}$; that technique is useless for a count of
+polylogarithmic mean.  For the witness lemma one needs either a second
+moment with pairwise covariances of relative size $o(1/\log n)$
+(switchings on two pairs at once, exact to $1+O(\mathrm{polylog}/n)$)
+or a Poisson-type lower tail from matched creation/destruction
+degrees, as in the Kwan--Sudakov ratio method.
+\item Nothing is known about any ``two given columns in different
+cycles'' event with constant probability, in any conjugate form; the
+witness lemma deliberately avoids such events.
+\end{itemize}
+
+\paragraph{Verdict.}  (L), hence the weak CGW conjecture, is reduced
+to a local statement (Hypothesis~\ref{hyp:witness}) whose two clauses
+--- $\Theta(\ell'/n)$ lower bounds for short $j$-cycles of prescribed
+row pairs in the space of completions of two rows and two columns, and
+lower-tail concentration of their count across a frame-determined
+family --- are true in the data with margin, are not in the
+literature, and are of the kind the two-row switching method of
+\cite{CGW08,KS18} is designed for, provided its counts can be made
+exact to $1+O(\mathrm{polylog}\,n/n)$.  That is now the whole problem.

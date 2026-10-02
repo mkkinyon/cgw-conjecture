@@ -22,17 +22,25 @@ flippable, and
 for X and for every fixed R (quenched).  Data: P[Flip=∅ | K₀] = 2^{−(K₀−1)}
 to the resolution of 9000/7200 instances at n=30/50; P[Flip=∅] ≈ 4/n (0.125, 0.079, 0.041 at n=30,50,100).
 
-**(L) is the one open item.**  It needs NO fairness of anything: only that
-the K₀−1 disjoint-row ladder pairs are not all crossed.  Plan:
-- K₀ ≤ n/log³n costs O(1/log³n) by prop:trapped on A; on B the arc version
-  is proved for |C₁| ≤ n/2 (splice-in switching); MISSING: P[B, d₁₂=ℓ,
-  |C₁| > n/2, Flip=∅] = O(1/n) (rem:ladderdata(iii)).
-- K₀ ≥ n/log³n: it suffices that some ladder pair has a j-cycle of length
-  ≤ log⁵n avoiding j′ (a LOCAL witness; P ≈ ℓ/n per pair, expected log² n
-  witnesses) — eq:Lloc — a polylog-size substructure statement about
-  Θ(n/log³n) disjoint row pairs; target for KS switching / second moment
-  (precision o(1/log² n) in covariances).  Data: at n=50, K₀ ≥ 12: a witness
-  of length ≤ 10 exists in 93 %, ≤ 20 in 99.6 %.
+**(L) is the one open item, and it is now reduced to the witness lemma
+(hyp:witness, prop:Lwitness).**  Offset ladders D_c = {(π^{−(c+i)}(1), π^{−i}(2))}
+(thm:ladderoffset, exact at n=7 for c=0..3) price the short-arc B-states:
+averaging the offset identities over c gives P[B, d₁₂=ℓ, |C₁| ≥ n/2+ℓ, θ ≥ θ₀]
+≤ 36/((n−2)θ₀) where θ = fraction of offsets whose diagonal has a flippable
+pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
+- (L) ⇐ witness lemma: for the ladder (≥ n/log²n disjoint pairs) and for the
+  diagonal blocks of a short arc, the number of blocks containing a pair whose
+  ρ-cycle through j has length ≤ ℓ′ = log⁵n and avoids j′ is ≥ κ·Σ min(½, ℓ′|B|/n)
+  except w.p. o(1/log n) (annealed).  Budget: ℓ₀ = n/log²n; total o(1/log² n).
+- Data (witness50.log): witness freq ≈ (ℓ′−1)/(n−1) − ℓ′/n; disjoint pairs
+  E[WW′]/p² = 1.00±0.03; Var(G) and Var(star count) = binomial within 5 %.
+- Literature (scout, §sec:witnessstatus): nothing gives it; CGW08's two-row
+  switchings give constant-factor ratios per merge/split (exp loss in ℓ);
+  Allsop–Morris 2026 give (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (exp loss in ℓ;
+  δ=Δ=1+o(1) open — that IS the lower-bound clause); KS18's exact ratio method
+  (1+O(1/n))/(s+1) for intercalates in two rows is the model to follow.
+  Needed: two-row cycle switchings with degrees exact to 1+O(polylog/n), in the
+  space of completions of rows 1,2 and columns j,j′ (never touched by the moves).
 
 Superseded by (L) (keep as results, do not work on): (I), (II)/(T), (III),
 (F1), (F2), the component question, the pool/master-formula route, the
@@ -108,10 +116,11 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
 
--1. (L): (a) the arc-trapping gap rem:ladderdata(iii); (b) eq:Lloc by a Kwan–Sudakov
-   switching in the space of completions of rows 1,2 and columns j,j′ (short
-   j-cycles of disjoint ladder pairs); (c) measure covariances of the witness
-   events W_k on real squares to see the precision needed.
+-1. The witness lemma (hyp:witness): design the two-row cycle switching that moves
+   the j-cycle length of ρ_{x,y} by ±1 (or merges/splits it with a cycle avoiding j′)
+   with forward/backward degrees exact to 1+O(polylog/n); first for a single pair
+   (lower bound Θ(ℓ′/n)), then two pairs (covariance), in the conditional space.
+   Read CGW08 §3 (flip/backflip/cross-switch) and KS18 §3 first.
 0. (superseded) (F1)/(F2).
 
 1. (II): formulate the minimal "coarse product" property of the pool and
@@ -128,7 +137,7 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
 `akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
 `trade{30,50,100}.log` (trade chain on real squares); `f1/ladder{30,50,100}.log` (ladder
-statistics), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent).  `s13_spectral.py brute N` (N ≤ 7) and
+statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart

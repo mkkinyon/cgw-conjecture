@@ -1,0 +1,40 @@
+n=50: squares=1500 instances=9000
+ l= 5: single-pair witness freq p=0.0785  ((l-1)/(n-1)=0.0816);  disjoint ladder pairs E[W W']/p^2 = 1.026 (166277 samples)
+   ladder G:  K0-bin   count   mean G   var G   binomial var   ratio
+                0+     3956    0.268   0.266    0.247       1.08
+                8+     3466    0.812   0.783    0.748       1.05
+               16+     1514    1.329   1.250    1.225       1.02
+               24+       64    1.781   1.858    1.641       1.13
+   star  S:  size-bin count   mean S   var S   binomial var   ratio
+                0+     2433    0.320   0.321    0.295       1.09
+                8+     2239    0.946   0.914    0.871       1.05
+               16+     1837    1.571   1.455    1.448       1.00
+               24+     1271    2.098   2.058    1.933       1.06
+               32+      877    2.837   2.570    2.614       0.98
+               40+      343    3.327   2.931    3.065       0.96
+ l=10: single-pair witness freq p=0.1675  ((l-1)/(n-1)=0.1837);  disjoint ladder pairs E[W W']/p^2 = 1.000 (166277 samples)
+   ladder G:  K0-bin   count   mean G   var G   binomial var   ratio
+                0+     3956    0.551   0.543    0.458       1.18
+                8+     3466    1.718   1.512    1.431       1.06
+               16+     1514    2.922   2.701    2.433       1.11
+               24+       64    3.891   3.129    3.239       0.97
+   star  S:  size-bin count   mean S   var S   binomial var   ratio
+                0+     2433    0.666   0.689    0.555       1.24
+                8+     2239    1.983   1.854    1.651       1.12
+               16+     1837    3.318   2.859    2.763       1.04
+               24+     1271    4.554   3.825    3.791       1.01
+               32+      877    6.005   5.152    4.999       1.03
+               40+      343    7.242   5.711    6.029       0.95
+ l=20: single-pair witness freq p=0.3143  ((l-1)/(n-1)=0.3878);  disjoint ladder pairs E[W W']/p^2 = 0.994 (166277 samples)
+   ladder G:  K0-bin   count   mean G   var G   binomial var   ratio
+                0+     3956    1.043   1.014    0.715       1.42
+                8+     3466    3.208   2.699    2.199       1.23
+               16+     1514    5.506   4.490    3.775       1.19
+               24+       64    6.984   4.453    4.789       0.93
+   star  S:  size-bin count   mean S   var S   binomial var   ratio
+                0+     2433    1.264   1.315    0.867       1.52
+                8+     2239    3.589   2.992    2.461       1.22
+               16+     1837    6.156   4.670    4.221       1.11
+               24+     1271    8.551   6.461    5.863       1.10
+               32+      877   11.201   7.821    7.680       1.02
+               40+      343   13.662   9.017    9.367       0.96
