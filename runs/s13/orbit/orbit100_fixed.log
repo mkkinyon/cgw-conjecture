@@ -1,0 +1,8 @@
+        7    14170   0.1941
+        8    13736   0.2003
+  orbit test (random sub-matching of clean short pairs):
+    state at eps=0 = cr : inst=  191  mean |T|=2.97  mean P_eps[parallel]=0.2012
+    state at eps=0 = par: inst=  169  mean |T|=2.97  mean P_eps[parallel]=0.7994
+    instances with empty T: 16
+  orbit weight (fixed matching): E[ybar] = 0.1894 over 360 instances, empty T in 16
+    histogram of per-instance P_eps[parallel] (bins of 0.1): [103, 9, 22, 11, 36, 51, 12, 13, 10, 93]

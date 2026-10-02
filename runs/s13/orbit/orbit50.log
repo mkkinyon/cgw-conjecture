@@ -1,0 +1,24 @@
+n=50: squares=200 ladder-pair instances=600  LMAX=5 NEPS=64
+  column-cycle length through x:  len   count   P[legal]  P[clean]
+        2      13498   0.960    0.939
+        3      13380   0.923    0.884
+        4      13756   0.884    0.826
+        5      13655   0.845    0.770
+        6      13683   0.809    0.723
+        7      13566   0.784    0.687
+        8      13594   0.749    0.640
+        9      13312   0.721    0.598
+       10      13534   0.691    0.557
+       11      13541   0.663    0.521
+       12+    541281   0.633    0.211
+  all pairs: P[separated by {p,p'}] = 0.1844
+  clean pairs by length: len  count  P[cross-path | clean]
+        2    12677   0.1888
+        3    11824   0.1936
+        4    11366   0.1916
+        5    10519   0.1860
+  orbit test (random sub-matching of clean short pairs):
+    state at eps=0 = cr : inst=  299  mean |T|=18.44  mean P_eps[parallel]=0.4469
+    state at eps=0 = par: inst=  301  mean |T|=18.48  mean P_eps[parallel]=0.5609
+    instances with empty T: 0
+    histogram of per-instance P_eps[parallel] (bins of 0.1): [10, 14, 49, 85, 131, 152, 80, 53, 12, 14]

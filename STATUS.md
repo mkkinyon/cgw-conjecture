@@ -48,15 +48,44 @@ pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
   space X (rows 1,2 + columns p,p′): (F) flip identity at legal A cross-path
   pairs; (I) INTERCALATE identity E[I_sep; crossed] = E[I_merge; parallel]
   (intercalates on rows x,z, columns q∈P₁, c∈P₂; always legal, frame-preserving);
-  data: I = 0.98·|A||B|/n in every bin (icsw50.log).  Hence P[parallel] ≥
-  (2/n)E[I_sep; crossed]: a constant lower bound on flippability in X needs only
-  (i) a 1/n lower bound for a 2-cell pattern in a free row given rows 1,2,
-  columns p,p′ and rows x,y's structure, and (ii) arc-trapping for Q_p in X.
-  Neither is available (universal bounds exclude full lines; CGW tolerates full
-  columns only; splice-in needs turns avoiding rows 1,2).
-  **CORE PROBLEM (CP), eq:CP:** given rows 1,2 and columns p,p′, for rows x,y
-  with four distinct symbols on {p,p′}: P[p,p′ in different ρ_{x,y}-cycles] ≥ c
-  (or: not all ladder pairs crossed).  Unconditionally = CGW Thm 3.13.
+  data: I = 0.98·|A||B|/n in every bin (icsw50.log).  (I) is FAIR and gives no
+  inequality by itself: the deterministic bound is only I_merge ≤ (ℓ_p−1)(ℓ_p′−1)
+  (referee: Z₈×Z₂ counterexample to the earlier min(ℓ_p,ℓ_p′)−1 claim); a constant
+  needs two-sided intercalate control in the cross space (i)+(ii)+(iii).
+  **CORE PROBLEM (CP), eq:CP:** given rows 1,2 (type+mark) and columns p,p′, for
+  rows x,y with four distinct symbols on {p,p′}: P[p,p′ in different
+  ρ_{x,y}-cycles] ≥ c.  Unconditional (CP): c = 2/5 (1/3 ≤ P[W] ≤ 3/5+4/(5(n−1)),
+  refereed; exact at n=5).  **Columns-only (CP) is CGW transposed**
+  (eq:CPcols: = 1/2 apart, ≥ 1/3 together) — the obstacle is the conditioning
+  on rows 1,2 (type+mark = X itself), NOT the frame.  thm:ladder = the legal
+  half of transposed CGW; the illegal half (switch/cross-switch at {x_k,y_k} in
+  Lᵀ) = flip / cross-switch of rows 1,2 at (p,p′): toggles ALL side-1×side-2
+  statuses but reverses one side (ladder ↦ anti-diagonal).
+- **Orbit method (§sec:orbit, new; PROVED parts: lem:rowfair, lem:legalturn,
+  prop:orbit, prop:Lorbit):** in X every row trade of rows ∉{1,2} is legal
+  (⇒ exact fairness of A/B status of (q,c) for generic rows x,y when q,c lie in
+  different ρ_{x,y}-cycles: P_X = 1/2, lem:rowfair); a column-cycle turn is legal
+  iff the cycle meets {1,2} in 0 or 2 rows; turns at a fixed matching M of free
+  columns commute.  "Clean coordinates" of a ladder pair (x,y): short cycles
+  through x avoiding y, the family, and meeting {1,2} in 0/2.  They generate a
+  free (Z/2)-action; conditionally on the orbit the bits of a family of disjoint
+  pairs are INDEPENDENT and P[(x,y) crossed | orbit] ≤ 1 − ½ȳ_{x,y}, ȳ = orbit
+  average of the fraction of clean coordinates separated by {p,p′}.  Hence
+  P[Flip_G = ∅] ≤ E[exp(−½ Σ ȳ)] (prop:orbit), and (L) ⇐ hyp:orbit
+  (Σ_{sub-ladder} ȳ ≥ κ|I| w.p. 1−o(1/log n), + block form for offsets; the
+  flippability concentration of hyp:witness is no longer needed — Chernoff given
+  the orbit).  Data (orbit{50,100}[_fixed].log): column-cycle lengths through x
+  uniform; P[separated | clean, ℓ] = 0.19–0.20 = P[separated] (genericity);
+  orbit coin 0.478/0.523 at n=100 (greedy matching, |T|≈42); fixed matching:
+  |T| ≈ 3, E[ȳ] = 0.19 ⇒ per-pair factor ≈ 0.9, κ ≈ 0.15.
+  Residual = genericity (clean short column cycles through x not aligned with
+  the ρ_{x,y}-arcs at p,p′) + macroscopic arcs + concentration of Σȳ.  Pure
+  permutation core (Π): ρ₀ fixed, T a matching, τ(η) random sub-product:
+  P[p,p′ separated in ρ₀τ(η)] ≥ c — false for adversarial T (pairs at
+  ρ₀-distance 2), so the content is that a random square's clean coordinates are
+  not adversarial.  Every availability is again a same-cycle event of a generic
+  row pair (recursion); all exact identities in X are fair; prop:orbit's gain is
+  that fairness COMPOUNDS over a family (independent coins given the orbit).
 - Literature (scout, §sec:witnessstatus): the conditional form is not in print;
   Allsop–Morris 2026 give (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (exp loss in ℓ;
   δ=Δ=1+o(1) open — that IS the lower-bound clause); KS18's exact ratio method
@@ -138,13 +167,20 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
 
--1. (CP): an automatically-legal exact move in the cross space that changes a
-   cross-path status — none known.  Candidates: (a) 2-cell pattern bounds (i) in
-   the cross space by switchings using only intercalate/short-cycle moves (KPS-style
-   stable intercalate switchings); (b) relax rows 1,2 to type + mark and compensate
-   type changes by CGW ratios (fails when q or c lies on the σ-cycle through p);
-   (c) an exact identity whose bit-changing pairs are not pinned by both a row
-   pair and a column pair.
+-1. (CP) via hyp:orbit (the current best form of the residual).  Done: (a) the
+   one-step switching is fair (useless); the orbit method compounds fairness.
+   Open inputs, in order of likely tractability: (α) arc-trapping in X (the
+   ρ_{x,y}-cycles through p,p′ are macroscopic w.p. ≥ c for a ladder pair; a
+   short-cycle bound for a generic row pair at a prescribed column given the type
+   of rows 1,2); (β) genericity: P[clean coordinate (q,c) separated | ...] ≥ c —
+   note the free row trades (lem:rowfair) re-randomise the clean coordinates
+   without touching ρ_{x,y}, but their availability ("q,c in different
+   ρ_{z,w}-cycles") is again a same-cycle event; (γ) concentration of Σȳ over
+   the sub-ladder (second moment: average covariance o(1/log n) suffices).
+   (b) relax rows 1,2 to type + mark: DONE in the sense that the orbit method
+   works in X (type+mark), with column turns through both rows 1,2 legal.
+   (c) exact identity not pinned by a row pair and a column pair: the orbit
+   coordinates are exactly such (pinned by row x and column pair (q,c) only).
 0. (superseded) (F1)/(F2).
 
 1. (II): formulate the minimal "coarse product" property of the pool and
@@ -161,7 +197,7 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 `runs/s13/frame*.log` (frame comparison), `akB_0_p.log` (p = 2.4, moot),
 `akB_{6,7}_k40.log` (moot); `comp7/*.log` (exact components n=7, ~1 min each);
 `trade{30,50,100}.log` (trade chain on real squares); `f1/ladder{30,50,100}.log` (ladder
-statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent).  `s13_spectral.py brute N` (N ≤ 7) and
+statistics), `f1/witness50.log` (witness lemma scoping), `f1/f1_*.log` (flippability of bit-changing pairs: fair, independent), `f1/icsw50.log` (intercalate identity), `orbit/orbit{30,50,100}.log`, `orbit/orbit{50,100}_fixed.log` (orbit method: `./jm 100 120 300000 9 | python3 s13_orbit.py 100 --inst 3 --lmax 8 --fixed`).  `s13_spectral.py brute N` (N ≤ 7) and
 `s13_spectral_big.py N` reproduce the theorem.
 
 ## Quickstart
@@ -170,6 +206,6 @@ HANDOFF_session_12.md §3 QUICKSTART still green, plus:
 `python3 s13_spectral.py brute 6` (exact = brute, all digits);
 `python3 s13_spectral_big.py 4000` (sum ν = 1, m·E → 1.9);
 `gcc -O3 -o s13_frame s13_frame.c -lm && ./s13_frame 2 32 100000` → 4E[bias²] ≈ 0.115;
-`pdflatex second_row_notes.tex` ×2 → 0 errors, 105 pp;
+`pdflatex second_row_notes.tex` ×2 → 0 errors, 117 pp;
 `gcc -O2 -DN=7 -o s13_comp7 s13_comp7.c && ./s13_comp7 0123456 1234560 0 2` → ladder identity exact (~1 min);
 `./jm 30 300 30000 1 | python3 s13_ladder.py 30` → P[Flip=∅|K₀] ≈ 2^{−(K₀−1)}.
