@@ -1,0 +1,10 @@
+n=50: squares=150 ladder-pair instances=300
+  |Q_p| distribution (2..10, 11+): [3, 7, 5, 7, 5, 9, 5, 5, 3, 251]  expected ~N/n each = 6.0
+  P[interleaved] (rows 1,2 vs rows x,y in the (q,c)-column cycles; q,c in different rho_{x,y}-cycles):
+    all      * : pairs=   181745  P[interleaved]=0.1864
+    all      A : pairs=    90662  P[interleaved]=0.1867
+    all      B : pairs=    91083  P[interleaved]=0.1861
+    join     * : pairs=   130630  P[interleaved]=0.1876
+    nonjoin  * : pairs=    51115  P[interleaved]=0.1833
+    sig-diff * : pairs=    85496  P[interleaved]=0.1930
+    sig-same * : pairs=    96249  P[interleaved]=0.1805

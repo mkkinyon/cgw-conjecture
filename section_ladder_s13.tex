@@ -1168,3 +1168,86 @@ Proposition~\ref{prop:orbit} is $1-\tfrac12\bar y\approx0.9$ on
 average, and Hypothesis~\ref{hyp:orbit}(i) is the statement that the
 average over the sub-ladder does not collapse: $\kappa\approx0.15$ is
 what the data suggest.
+
+\paragraph{(e) The arc-trapping input $(\alpha)$: CGW's lemma for a
+generic row pair in $X$, and the blocked fraction.}  The orbit weight
+$\bar y_{x,y}$ vanishes when the $\rho_{x,y}$-cycles through $p,p'$
+are short, so Hypothesis~\ref{hyp:orbit} needs
+$\Pr_X[|Q_p(\rho_{x,y})|\le\varepsilon n]\le C\varepsilon$ for the
+ladder pairs --- CGW's short-cycle bound for the row pair $(x,y)$
+inside $X$.  Run CGW's splitting/joining multigraph for the
+distinguished rows $x,y\notin\{1,2\}$ inside $X$.  Switches and
+cross-switches of rows $x,y$ are free (they change rows $x,y$ only),
+so the repairs of their splitting and joining procedures are always
+available; the flip and backflip at a column pair $(q,c)$ turn the
+$(q,c)$-column cycle through $x$ or through $y$ and are legal iff
+that cycle meets $\{1,2\}$ in $0$ or $2$ rows
+(Lemma~\ref{lem:legalturn}).  Since either cycle may be used, the
+flip at $(q,c)$ is \emph{blocked} exactly when rows $1,2$ and rows
+$x,y$ are \emph{interleaved} in the column-cycle structure of $(q,c)$:
+in the $A$-state ($x,y$ in different cycles $Z_x,Z_y$) one of $1,2$
+lies in $Z_x$ and the other in $Z_y$; in the $B$-state the four rows
+alternate $x,1,y,2$ on the common cycle.  Interleaving is invariant
+under the switch of rows $x,y$ (which maps $A$-crosswise to $B$-cross
+and back, Lemma~\ref{lem:rowfair}) and under the switch of rows $1,2$
+at a column pair in different $\sigma$-cycles (same computation with
+the roles exchanged; this move preserves $X$ up to $\alpha\leftrightarrow\beta$).
+Legality is a property of the bitrade, so CGW's edge correspondence
+survives the removal of the blocked edges, and the $\mu$-side flip
+edges alone give, for the cycle through the mark column
+($N_\lambda(p)=\ell$ splitting pairs leave $p$ in the $\ell$-piece):
+\begin{equation}\label{eq:Jp}
+\E_X\bigl[\#\{(q,c):\ q\in Q_p,\ c\notin Q_p,\ \text{not interleaved}\};\ |Q_p|=\ell\bigr]
+\;\le\;2\ell\,\Pr_X\bigl[|Q_p|\ge\ell+2\bigr]\;\le\;2\ell .
+\end{equation}
+Hence, with $b_\ell$ the conditional expectation given $|Q_p|=\ell$ of
+the fraction of interleaved pairs among the $\ell(n-\ell)$ joining
+pairs,
+\[
+\Pr_X\bigl[|Q_p(\rho_{x,y})|=\ell\bigr]\;\le\;\frac{2}{(1-b_\ell)(n-\ell)} ,
+\]
+i.e.\ CGW's bound $\le 4/n$ holds in $X$ up to the factor
+$1/(1-b_\ell)$: $(\alpha)$ \emph{follows from} (BL): $b_\ell\le1-c$.
+Data (\texttt{s13\_interleave.py}, \texttt{runs/s13/orbit/interleave50.log},
+$300$ ladder pairs at $n=50$, $1.8\cdot10^5$ column pairs):
+$\Pr[\text{interleaved}]=0.186$ over all pairs in different
+$\rho_{x,y}$-cycles, $0.1867$ in the $A$-state and $0.1861$ in the
+$B$-state (the switch invariance), $0.188$ on joining pairs of $Q_p$
+and $0.183$ off them, $0.193$/$0.181$ according as $q,c$ lie in
+different/the same $\sigma$-cycles; and the lengths $|Q_p|$ are
+spread uniformly ($3,7,5,7,5,9,5,5,3$ instances at
+$\ell=2,\dots,10$ against $6$ expected per length).  So the blocked
+fraction is $\approx0.19$ and the loss is a factor $1.23$.
+
+What (BL) needs is again a same-cycle statement for generic row pairs:
+the interleaving at $(q,c)$ is changed only by trades of third rows
+$z,w\notin\{1,2,x,y\}$ along $\rho_{z,w}$-cycles through exactly one
+of $q,c$ ($\delta_{q,c}\mapsto\delta_{q,c}\circ(z\,w)$), which
+de-interleave when $z,w$ lie on adjacent arcs between the special
+rows (in the $B$-cross state) or separate $x$ from the row of
+$\{1,2\}$ in its cycle (in the $A$-crosswise state); the
+cross-switch of $z,w$ reverses a $\delta_{q,c}$-arc and is either
+illegal (the arc contains exactly one of $1,2$), harmful (it contains
+exactly one of $x,y$), or useless (it contains no special row).  A
+double count of these involutions gives
+$\Pr[\text{interleaved}]\le1/(1+\kappa)$ as soon as, for an
+interleaved square, a $\kappa$-fraction of the row pairs $(z,w)$ in
+the de-interleaving positions have $q,c$ in different
+$\rho_{z,w}$-cycles --- the generic same-cycle event of
+\S\ref{sec:crossspace} once more, now for the third rows at the
+prescribed column pair.  This is the explicit form of the recursion:
+each level's availability is the next level's genericity, and no
+level is settled by an exact identity.  For the ladder pairs there is
+the further point that $(x,y)$ is selected by the frame, so
+$(\alpha)$ is needed conditionally on the frame, while \eqref{eq:Jp}
+is stated for fixed rows $x,y$ with the frame free.  The same
+blocked-edge multigraph can be run with columns $p,p'$ fixed if every
+move avoids them: the flips at free column pairs do; the switch of
+rows $x,y$ used to repair a $B$-pair $(q,c)$ trades along the
+$\rho_{x,y}$-cycle selected by the min-symbol rule, which is
+unavailable when that cycle is $Q_p$ or $Q_{p'}$ (one may then trade
+along the other cycle, if it avoids $p,p'$, at the cost of the
+involution property); and CGW's cross-switch repairs trade along
+$\rho_{x,y}$-arcs that may pass through $p$ or $p'$.  This enlarges
+the blocked set by a second cycle-avoidance event; we have not carried
+the bookkeeping through.
