@@ -50,7 +50,10 @@ row-sharing rare. Status:
   the apart state AND separating splits in the together state — and (F2)
   mixing of the thinned walk. Numerics: autocorrelation tracks the pure walk
   to the noise floor (n=30). If everything were flippable, EQ(o(1)) would
-  follow from Diaconis–Shahshahani on cosets (P[u~v]=½ exactly on each coset).
+  follow from Diaconis–Shahshahani on the fibres {π⁻¹(1)=a, π⁻¹(2)=b} ≅ S_{n−2}
+  (P[u~v]=½ exactly on each fibre; NOT on parity classes: there it is
+  ½ ± 1/((n−2)(n−3)), refereed). Standalone statement: paper/fairness_question.tex
+  (refereed; σ-distance ≥ 2 in BOTH directions; no component enumeration beyond n=6).
 
 ## Bugs found this session
 - Sessions 7–8 real-square pipelines (s7/s8_real_bias.py) used σ's SYMBOLS as column

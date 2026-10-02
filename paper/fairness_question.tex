@@ -8,8 +8,10 @@
 \newtheorem{remark}{Remark}
 \renewcommand{\Pr}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\CC}{\mathcal C}
 
-\title{A fairness question for two involutions on Latin squares}
+\title{A fairness question for two families of involutions on Latin squares}
+\author{}
 \date{October 2026}
 
 \begin{document}
@@ -27,18 +29,21 @@ rows defined by
 L\bigl(\pi(r),\,j'\bigr)=L(r,j)\qquad(r\in[n]),
 \]
 i.e.\ $\pi(r)$ is the row in which column $j'$ holds the symbol that
-column $j$ holds in row $r$.  ($\pi$ is a derangement.)  The
-\emph{bit} of $L$ is
+column $j$ holds in row $r$; we call $\pi$ the \emph{frame} of $L$.
+It is a derangement, since $\pi(r)=r$ would force
+$L(r,j)=L(r,j')$.  The \emph{bit} of $L$ is
 \[
-\beta(L)=\mathbf 1\{\text{rows $1$ and $2$ lie in a common cycle of }\pi_L\}.
+\beta(L)=\mathbf 1\{\text{rows $1$ and $2$ lie in a common cycle of }\pi_L\},
 \]
+and we write $C_1,C_2$ for the cycles of $\pi_L$ through rows $1$ and
+$2$ (so $\beta=1$ iff $C_1=C_2$).
 
 \paragraph{Row-pair permutations.}  For rows $x\ne y$ let
 $\rho_{x,y}$ be the permutation of the columns defined by
-$L(y,\rho_{x,y}(q))=L(x,q)$.  For a cycle $Q$ of $\rho_{x,y}$ the two
-rows carry the same set of symbols on the columns of $Q$.
+$L(y,\rho_{x,y}(q))=L(x,q)$.  On the columns of any cycle $Q$ of
+$\rho_{x,y}$ the two rows carry the same set of symbols.
 
-\paragraph{Two moves.}
+\paragraph{Two families of moves.}
 \begin{enumerate}[leftmargin=2.2em]
 \item[(\textsc{trade})] For rows $x\ne y$ with $x,y\notin\{1,2\}$,
 let $Q$ be the cycle of $\rho_{x,y}$ containing $j'$, and exchange the
@@ -50,24 +55,29 @@ the rows of $c$.
 
 \begin{lemma}
 Both moves produce Latin squares, are involutions, and leave rows $1$
-and $2$ unchanged.  A turn inverts $\pi$ on the cycle $c$ and leaves
-its cycle partition unchanged.  A trade at $(x,y)$ replaces $\pi$ by
+and $2$ unchanged.  A turn replaces $\pi$ by $\pi^{-1}$ on the rows of
+$c$ and leaves it unchanged elsewhere; the cycle partition is
+unchanged.  A trade at $(x,y)$ replaces $\pi$ by
 $(x\,y)\circ\pi$ if $j\notin Q$ (so the cycles of $x$ and $y$ are
 merged if distinct and split if equal), and by
 $(x\,y)\circ\pi\circ(x\,y)$ if $j\in Q$ (the cycle partition is
 unchanged up to exchanging the labels $x,y$).  In particular a trade
 can change $\beta$ only when $j\notin Q$; call such a pair $(x,y)$
-\emph{flippable}.  Writing $b'=L(y,j')$ and $q^*$ for the column in
-which row $x$ holds $b'$, the pair $(x,y)$ is flippable iff $q^*$ does
-not lie on the $\rho_{x,y}$-cycle of $j$; if $\pi(x)=y$ or
-$\pi(y)=x$ it is never flippable.
+\emph{flippable}.  If $\pi(x)=y$ or $\pi(y)=x$ then $(x,y)$ is not
+flippable.
 \end{lemma}
 
-The proofs are direct verifications.  (Both rows carry the same
+The proofs are direct verifications.  Both rows carry the same
 symbols on $Q$, and both columns carry the same symbols on $c$, which
-gives the Latin property; the frame formulas follow from the
-definition of $\pi$, since only the entries of rows $x,y$ in columns
-$j,j'$ matter.)
+gives the Latin property; the traded cycle is again the
+$\rho_{x,y}$-cycle of $j'$ in the new square, and the turned cycle is
+again a cycle of the new frame, which gives the involution property.
+The frame formulas follow from the definition of $\pi$, since only the
+entries of rows $x,y$ in columns $j,j'$ matter.  For the last claim:
+with $b'=L(y,j')$ and $q^*$ the column in which row $x$ holds $b'$,
+one has $\rho_{x,y}(q^*)=j'$, so $Q$ is the $\rho_{x,y}$-cycle of
+$q^*$.  If $\pi(x)=y$ then $b'=L(x,j)$, so $q^*=j\in Q$; if
+$\pi(y)=x$ then $L(x,j')=L(y,j)$, so $\rho_{x,y}(j')=j\in Q$.
 
 \section*{Components and the question}
 
@@ -76,14 +86,17 @@ columns $j\ne j'$ such that
 \begin{equation}\label{eq:nonadj}
 R(1,j)\ne R(2,j')\qquad\text{and}\qquad R(1,j')\ne R(2,j),
 \end{equation}
-i.e.\ $\pi(1)\ne2$ and $\pi(2)\ne1$ for every extension of $R$.  Let
-$S(R)$ be the set of Latin squares whose first two rows are $R$.  The
-two moves act on $S(R)$; let $\mathcal K(R)$ be the set of orbits
-(``components'') of the group they generate, and for a component
-$K$ let
+i.e.\ $\pi(1)\ne2$ and $\pi(2)\ne1$ for every extension of $R$.
+(Without \eqref{eq:nonadj} the question below is void: if
+$R(1,j)=R(2,j')$ then $\pi(1)=2$, hence $\beta=1$, for every extension
+of $R$.)  Let $S(R)$ be the set of Latin squares whose first two rows
+are $R$.  Each move is an involution of $S(R)$; let $\mathcal K(R)$
+be the set of orbits (``components'') of the group they generate, and
+for a component $K$ let
 \[
 p(K)=\frac{|\{L\in K:\beta(L)=1\}|}{|K|}.
 \]
+We call the bit \emph{fair} on $K$ if $p(K)$ is close to $\tfrac12$.
 
 \begin{question}[component fairness]
 Is it true that, uniformly over $R$ and over column pairs $(j,j')$
@@ -95,66 +108,99 @@ satisfying \eqref{eq:nonadj},
 Equivalently: for $L$ uniform in $S(R)$, the conditional probability
 that $\beta(L)=1$ given the component of $L$ is $\tfrac12+o(1)$ in
 $L^2$.  A quantitative version asks for the left side to be
-$o(1/\log^2n)$.
+$o(1/\log^2n)$.  A weaker, averaged version that is still useful is
+stated in Remark~\ref{rem:weaker}(i).
 \end{question}
 
-\begin{remark}[why the question is natural]
-Under the uniform measure on $S(R)$ the moves define a symmetric
-Markov chain (pick a uniform pair $x,y\notin\{1,2\}$ and trade, or a
-uniform row $x\notin\{1,2\}$ and turn its cycle when allowed), so the
-uniform measure on each component is stationary and the left side of
-the Question is $\lim_{M\to\infty}\E[\beta'(L_0)\beta'(L_{2M})]$ with
-$\beta'=2\beta-1$, the long-time autocorrelation of the bit.  Along
-the chain the frame $\pi$ performs the walk of left multiplication by
-transpositions $(x\,y)$, $x,y\notin\{1,2\}$, \emph{thinned} to the
-flippable pairs (the turns and the non-flippable trades only relabel
-rows within cycles).  The unthinned walk preserves $\pi^{-1}(1)$ and
-$\pi^{-1}(2)$ and is the random-transposition walk on $S_{n-2}$ after
-contracting the arcs $\pi^{-1}(1)\to1$ and $\pi^{-1}(2)\to2$; on each
-of its cosets exactly half of the permutations have rows $1,2$ in a
-common cycle.  So if every pair were flippable the answer would be
-yes, with rate $o(1)$ after $O(n\log n)$ steps by Diaconis--Shahshahani.
-The content of the Question is that the thinning by flippability does
-not destroy this.
+\begin{remark}[why the question is natural]\label{rem:natural}
+Consider the Markov chain on $S(R)$ which, with probability
+$\tfrac12$, picks a uniform pair $x,y\notin\{1,2\}$ and trades, and
+otherwise picks a uniform row $x\notin\{1,2\}$ and turns its
+$\pi$-cycle if that cycle avoids rows $1,2$ (holding if not).  Each
+move is an involution chosen with state-independent probability, so
+the kernel is symmetric and the uniform measure on each component is
+stationary.  Every state has a hold: by \eqref{eq:nonadj} the cycle
+$C_1$ is not $(1\,2)$, so it contains a row $x\notin\{1,2\}$ whose
+turn is rejected.  Hence the chain is aperiodic on each component, and
+for the stationary chain started from the uniform measure on $S(R)$
+the left side of the Question equals
+$\lim_{t\to\infty}\E[\beta'(L_0)\beta'(L_t)]$ with $\beta'=2\beta-1$,
+the long-time autocorrelation of the bit.
+
+Along the chain the frame $\pi$ performs the walk of left
+multiplication by transpositions $(x\,y)$, $x,y\notin\{1,2\}$,
+\emph{thinned} to the flippable pairs: the turns reverse a cycle and
+the non-flippable trades conjugate by $(x\,y)$, and neither changes
+$\beta$.  The unthinned walk preserves $a=\pi^{-1}(1)$ and
+$b=\pi^{-1}(2)$.  On the fibre $\{\pi:\pi^{-1}(1)=a,\ \pi^{-1}(2)=b\}$,
+identified with the permutations of $[n]\setminus\{1,2\}$ by
+contracting the arcs $a\to1\to\pi(1)$ and $b\to2\to\pi(2)$, it is the
+walk by uniformly random transpositions, and rows $1,2$ share a cycle
+of $\pi$ iff $a,b$ share a cycle of the contracted permutation, which
+is the case for exactly half of the permutations of each fibre (two
+given points of a uniform permutation lie in a common cycle with
+probability exactly $\tfrac12$).  So if every pair were flippable the
+answer would be yes, with the left side $o(1)$ after $O(n\log n)$
+steps by Diaconis--Shahshahani.  The content of the Question is that
+the thinning by flippability does not destroy this.
 \end{remark}
 
-\begin{remark}[what is known numerically]
-On uniformly random Latin squares with $n=30$--$100$, a uniformly
-random pair $x,y\notin\{1,2\}$ is flippable with probability
-$0.50\pm0.01$, independently of the relative position of $x,y$ in the
-cycles of $\pi$ except for the exclusion $\pi(x)=y$, $\pi(y)=x$; the
-fraction of flippable pairs in a square is concentrated
-($0.42$--$0.55$ at $n=30$); and the autocorrelation of the bit along the
-chain, as a function of the number of trades performed, follows that
-of the unthinned walk and decays to zero.  No square with
-$|2p(K)-1|$ bounded away from $0$ has been observed except for
-components of trivial size.
+\begin{remark}[what is known numerically]\label{rem:numerics}
+The chain of Remark~\ref{rem:natural}, modified to reject
+non-flippable trades (its components are finer than those above, so
+the evidence transfers), was run on uniformly random Latin squares of
+order $n=30,50,100$, with $(j,j')$ at distance at least $2$ in both
+directions inside a cycle of the column permutation $\sigma$ of $R$
+defined by $R(2,\sigma(q))=R(1,q)$.  A uniformly random pair
+$x,y\notin\{1,2\}$ that is not $\pi$-adjacent (i.e.\ $\pi(x)\ne y$,
+$\pi(y)\ne x$) is flippable with probability $0.500\pm0.001$, the
+same whether $x,y$ lie in one cycle of $\pi$ or in two; the
+$\pi$-adjacent pairs, which are never flippable, are a fraction
+$\approx2/n$ of all pairs.  The autocorrelation of the bit, as a
+function of the number of trades performed, decays at least as fast
+as that of the unthinned walk and reaches the noise floor
+($\approx0.01$) within $64$ trades at each $n$.  Column pairs with
+$j,j'$ in different cycles of $\sigma$ were not tested at these
+sizes.  Components have been enumerated only for $n\le6$, where the
+left side of the Question takes values between $0$ (all tested pairs
+with $j,j'$ in different $\sigma$-cycles) and $0.14$.
 \end{remark}
 
-\begin{remark}[weaker forms that are still useful]
-(i) A yes in expectation over $R$ --- for $(R,j,j')$ drawn as the first
-two rows and a column pair of a uniformly random Latin square, with
-$(j,j')$ restricted to pairs at a prescribed distance along a cycle of
-the row permutation $R(1,\cdot)\mapsto R(2,\cdot)$ --- suffices for
-the application below.  (ii) A sufficient condition is that, for all
-but an $o(1/\log^2n)$-fraction of $L\in S(R)$, a positive proportion
-of the bit-changing pairs (the pairs $x,y$ in the common cycle of
-rows $1,2$ that separate them when $\beta=1$; the pairs
-$x\in C_1$, $y\in C_2$ when $\beta=0$) are flippable, together with a
-mixing estimate for the thinned walk.
+\begin{remark}[weaker forms that are still useful]\label{rem:weaker}
+(i) The application in Remark~\ref{rem:provenance} needs only an
+averaged version: for every cycle type $\lambda$ of $\sigma$, with $L$
+uniform among the Latin squares of order $n$ whose column permutation
+$\sigma$ has cycle type $\lambda$, $R$ its first two rows, and
+$(j,j')=(j,\sigma^\alpha(j))$ with $j$ in an $m$-cycle of $\sigma$
+and $\alpha,m-\alpha\ge2$ prescribed, the expectation of the left
+side of the Question is $o(1/\log^2n)$.  (ii) A natural route is to
+show that, for all but an $o(1/\log^2n)$-fraction of $L\in S(R)$, a
+positive proportion of the bit-changing pairs are flippable --- when
+$\beta=1$ these are the pairs $x,y\in C_1$ such that rows $1$ and $2$
+lie on different arcs of the split of $C_1$ into
+$(x,\pi(x),\dots,\pi^{-1}(y))$ and $(y,\pi(y),\dots,\pi^{-1}(x))$;
+when $\beta=0$ they are the pairs $x\in C_1$, $y\in C_2$ --- and to
+combine this with a mixing estimate for the thinned walk.
 \end{remark}
 
-\begin{remark}[provenance]
+\begin{remark}[provenance]\label{rem:provenance}
 The Question arose in a programme on the Cavenagh--Greenhill--Wanless
 conjecture on the cycle type of the second row of a random Latin
-square: with $(j,j')$ a marked column pair $\{j,\sigma^\alpha(j)\}$,
-$\alpha\ge2$, inside a cycle of the row permutation $\sigma$, the
-marked-pair identity $2\,\mathcal C_n(\lambda)/\mathcal C_n(\mu)-1
-=\Pr[\beta=1]/\Pr[\beta=0]$ reduces the conjecture to
-$\Pr[\beta=1]=\tfrac12+o(1/\log n)$ over such instances, and a
-positive answer to the quantitative Question, averaged as in
-Remark~3(i), gives exactly that.  The question itself makes no
-reference to this.
+square.  Let $\CC_n(\nu)$ be the number of Latin squares of order $n$
+whose column permutation $\sigma$ (defined in
+Remark~\ref{rem:numerics}) has cycle type $\nu$, let $\lambda$ contain
+a part $m=\alpha+\alpha'$ with $\alpha,\alpha'\ge2$, and let $\mu$ be
+$\lambda$ with that part split into $\alpha,\alpha'$.  For $L$
+uniform among the squares of type $\lambda$ and $(j,j')$ a uniform
+pair $\{j,\sigma^\alpha(j)\}$ with $j$ in an $m$-cycle of $\sigma$,
+the marked-pair identity
+\[
+2\,\frac{\CC_n(\lambda)}{\CC_n(\mu)}-1=\frac{\Pr[\beta=1]}{\Pr[\beta=0]}
+\]
+reduces the conjecture to $\Pr[\beta=1]=\tfrac12+o(1/\log n)$ over
+such instances, and a positive answer to the quantitative Question,
+averaged as in Remark~\ref{rem:weaker}(i), gives exactly that.  The
+question itself makes no reference to this.
 \end{remark}
 
 \end{document}
