@@ -103,6 +103,16 @@ pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
   (γ): data (cov{50,100}.log) — orbit weights of different pairs UNCORRELATED
   (Var(Y)/(|I|Var ȳ) = 0.99/1.14, excess explained by Var|I|).
   (α) ⇐ (BL) [interleaving of {1,2},{x,y} in column cycles ≤ 1−c; data 0.19].
+  (U) in its simplest instances (§(g), refereed): generic columns ⇒ (U) IS the two-arc
+  form of (α) (both arcs/cycles at p,p′ macroscopic); generic rows ⇒ (BL) is TRIVIAL
+  (interleaved fraction over row pairs ≤ ½ + O(1/n) deterministically; exchangeability)
+  but is lost under the conditioning |Q_p(ρ_{x,y})| = ℓ / frame selection, which is the
+  content.  DIRECTION: lower bounds on different-cycles events not conditioned on their
+  own toggle ((β), third-row availability, CGW's P_X[A] ≥ 1/3) are gap-direction; upper
+  bounds are surviving-direction.  Third-row repairs exist (crossed ladder pair: cross-
+  switch of x_k,y_k at (p,p′) always defined, lands in J_B with (d₁₂,d₂₁) → (2k,|C|−2k);
+  A-instance: backflip through C₂ → J_A) but have unbounded multiplicity / don't preserve
+  the ladder — the precise reason switchings in X cannot give the gap direction.
   ONE FORM: every input is "two pairs of lines interleaved in a third pair" (U):
   c ≤ P[interleaved] ≤ 1−c in X, plus the same-cycle event for generic rows at the
   prescribed columns (availability of the (BL) repairs).  Unconditionally (no type
