@@ -1,0 +1,34 @@
+# s13_comp7.c at commit 53a2ac6 (offset-diagonal version), ./s13_comp7 0123456 1234560 0 2
+R = 0123456 / 1234560, j=0 jp=2, sigma(j)=6 sigma(jp)=1, hypothesis (1): holds
+|S(R)| = 6566400 completions
+P[beta=1 | R] = 0.497076
+diagonal c=0: P[B,D]-P[A,D] = -0.005848 ; P[B,D,Flip=0]-P[A,D,Flip=0] = -0.005848 ; P[D^c] = 0.0000 (B:0 A:0) ; P[D,Flip=0] = 0.4152
+diagonal c=1: P[B,D]-P[A,D] = +0.001462 ; P[B,D,Flip=0]-P[A,D,Flip=0] = +0.001462 ; P[D^c] = 0.3430 (B:1102080 A:1150080) ; P[D,Flip=0] = 0.2801
+diagonal c=2: P[B,D]-P[A,D] = +0.003509 ; P[B,D,Flip=0]-P[A,D,Flip=0] = +0.003509 ; P[D^c] = 0.6211 (B:2008320 A:2069760) ; P[D,Flip=0] = 0.1839
+diagonal c=3: P[B,D]-P[A,D] = -0.001316 ; P[B,D,Flip=0]-P[A,D,Flip=0] = -0.001316 ; P[D^c] = 0.8098 (B:2643840 A:2673600) ; P[D,Flip=0] = 0.0958
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  + 6566388 smaller components, total size 6566388 (1.00000 of S(R)), largest 1, contributing 0.999998 to the LHS
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1001:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  |K| =        1 (0.00000 of S(R))  p(K) = 1.0000  row-parity-1 fraction = 1.000  (row,col,sym,sgnpi) bins: 1111:1
+  + 6566388 smaller components, total size 6566388 (1.00000 of S(R)), largest 1, contributing 0.999998 to the LHS

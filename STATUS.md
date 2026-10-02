@@ -18,7 +18,7 @@ c = 2/5, eq:CPcols "≥ 1/3", CGW's P[(n)] ≤ 2n^{−2/3} and Cor 4.5, hence th
 thm:reduction — DONE: prop:tailsurvive (refereed) gives E[N_ℓ] ≤ 4/ℓ (ℓ ≤ n/2),
 E[(κ)_k] ≤ 2^{k−1}(4+k²/log n)(log n)^k and P[κ ≥ 16 log n] = O(n^{−2} log n) from |J| = 2|X_A|
 alone, so thm:reduction is now independent of CGW's unproved direction.  Also: CGW(3/2) ⟸
-P_X[Flip≠∅] ≥ 1/3 (thm:ladder), i.e. our (L) in constant form would repair their theorem.
+P_X[Flip=∅] ≤ 1/3 (thm:ladder; sharp at n=5), i.e. our (L) in constant form would repair their theorem.
 Everything exact of ours (thm:marked, thm:ladder, offsets, lem:rowfair, lem:legalturn,
 prop:orbit, eq:Jp) is unaffected.  No published erratum found (quick search only).
 

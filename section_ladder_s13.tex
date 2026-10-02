@@ -618,8 +618,10 @@ repair at all).
 Theorem~\ref{thm:ladder}, $\Pr_X[B]-\Pr_X[A]=\Pr_X[B,\mathrm{Flip}=\emptyset]-\Pr_X[A,\mathrm{Flip}=\emptyset]\le\Pr_X[\mathrm{Flip}=\emptyset]$,
 so $\Pr_X[B]\le\tfrac12+\tfrac12\Pr_X[\mathrm{Flip}=\emptyset]$: CGW's
 $3/2$, i.e.\ $\Pr_X[B]\le2/3$, follows from
-$\Pr_X[\mathrm{Flip}\ne\emptyset]\ge1/3$ --- a constant-probability
-version of (L), e.g.\ (CP) with $c\ge1/3$ for a single ladder pair.
+$\Pr_X[\mathrm{Flip}=\emptyset]\le1/3$ --- a constant-probability
+version of (L), e.g.\ (CP) with $c\ge2/3$ for a single ladder pair
+(sharp at $n=5$, where $\Pr_X[\mathrm{Flip}=\emptyset]=1/3$ and
+$\Pr_X[B]=2/3$).
 Conversely nothing in the present notes uses CGW($3/2$) on the main
 line.
 
@@ -1555,10 +1557,14 @@ four columns are uniform distinct points, and the interleaving
 probability is $\tfrac13A+2B$ with $A=\sum_i(m_i)_4/(n)_4$,
 $B=\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$ over the cycle lengths $m_i$;
 this is at most $\tfrac13+O(1/n)$ for every type (equality at the
-$n$-cycle) and at least $\tfrac13\Pr[W\mid\text{type}]^2-O(1/n)$,
-hence $\ge\tfrac1{27}-O(1/n)$ by $\Pr[W]\ge\tfrac13$, which uses only
-the involutions (i), (ii) of \S\ref{sec:crossspace}.  The data ($0.19$
-in every version we measured, \S(d), \S(e)) sit inside this range.
+$n$-cycle) and at least $\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$
+(Jensen: $\sum_iw_i^4\ge(\sum_iw_i^2)^3$ for $w_i=m_i/n$), hence
+$\ge\tfrac1{81}-O(1/n)$ \emph{on average over the type} by Jensen
+again and $\Pr[W]\ge\tfrac13$, which uses only the involutions (i),
+(ii) of \S\ref{sec:crossspace}.  Per type the lower bound fails
+(e.g.\ $(2^{n/2})$ gives $O(n^{-2})$): the lower half of (U) needs
+macroscopic cycles.  The data ($0.19$ in every version we measured,
+\S(d), \S(e)) sit inside this range.
 (As an aside, the surviving direction alone does not give even a weak
 form of CGW's Lemma~4.4, upper half, $\Pr[\sigma\text{ is an $n$-cycle}]\le1-c$;
 it does follow from the intercalate count $\ge(1-o(1))n^2/4$ of

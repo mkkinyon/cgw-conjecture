@@ -27,6 +27,7 @@ def sub(text, pairs):
 # ---------- blocks ----------
 marked = block(M, 17, 159)
 marked = sub(marked, [
+ (r"and let $Q$ be the row cycle through one column of"+"\n"+r"$P$ (the two row cycles are distinct).", r"and let $Q$ be the row cycle through one column of"+"\n"+r"$P$ (the two row cycles are distinct), selected by CGW's min-symbol rule."),
  (r"Throughout, squares are normalised to have first row $\mathrm{id}$, so"+"\n"+r"the column map is $\omega=\sigma$ ($1\circ\omega(j)=2\circ j$ with the"+"\n"+r"first row the identity gives $\omega(j)=\sigma(j)$).",
   r"Throughout, squares are normalised to have first row $\mathrm{id}$; CGW's column map"+"\n"+r"$\omega$, defined by $L(1,\omega(j))=L(2,j)$, is then $\omega(j)=L(2,j)$, and we take"+"\n"+r"$\sigma=\omega$ (only the cycle type matters, and it is the same for $\omega$ and $\omega^{-1}$)."),
 ])
@@ -35,7 +36,7 @@ hyp_eq = block(N, find(N, r'\begin{hypothesis}[B-pair equidistribution'), find(N
 hyp_eq = sub(hyp_eq, [(r"For every pair $\mu\to\lambda$ as above with $\alpha\neq\beta$,"
                        "\n$\\bigl|\\bar q(\\mu\\to\\lambda)-1\\bigr|\\le\\delta(n)$.",
                        r"For every $\lambda\vdash n$ with a part $m=\alpha+\beta$, $\alpha\ne\beta$, $\alpha,\beta\ge2$, and $\mu$ the split type,"
-                       "\n$\\bigl|2\\CC_n(\\lambda)/\\CC_n(\\mu)-1\\bigr|\\le\\delta(n)$.")])
+                       "\n$\\bigl|\\bar q(\\mu\\to\\lambda)-1\\bigr|\\le\\delta(n)$, where $\\bar q(\\mu\\to\\lambda):=2\\CC_n(\\lambda)/\\CC_n(\\mu)-1=\\Pr_X[B]/\\Pr_X[A]$ by Theorem~\\ref{thm:marked}.")])
 
 t0 = find(N, r'\begin{theorem}\label{thm:reduction}')
 t1 = find(N, r'\end{proof}', t0)
@@ -46,14 +47,30 @@ reduction = sub(reduction, [
   r"Conjecture~\ref{conj:cgw}."),
  (r"For each step of such a chain, Theorem~\ref{thm:identity} and", r"For each step of such a chain, Theorem~\ref{thm:marked} and"),
  (r"  The loops statement follows"+"\n"+r"from \eqref{eq:setTV}, Remark~\ref{rem:reduced} (the passage to reduced"+"\n"+r"squares is exact), and \S\ref{sec:known} as in \cite[Lemma 6.2]{CGW08}.", ""),
+ (r"\dtv(\PP_n,\QQ_n)\;=\;O\bigl(\delta\,\log n\;+\;n^{-2/3}\bigr).", r"\dtv(\PP_n,\QQ_n)\;=\;O\bigl(\delta\,\log n\;+\;n^{-1+o(1)}\bigr)."),
+ (r"=\frac{\gamma(\lambda)}{\gamma((n))}\,(1+\varepsilon)^{\pm(\kappa-1)},"+"\n"+r"\qquad |\varepsilon|\le\delta,",
+  r"=\frac{\gamma(\lambda)}{\gamma((n))}\prod_{i=1}^{\kappa-1}(1+\varepsilon_i)^{\pm1},"+"\n"+r"\qquad |\varepsilon_i|\le\delta,"),
+ (r"$\PP_n(\lambda)=\QQ_n(\lambda)\,Z^{-1}(1+O(K\delta))$ where $Z>0$ is a", r"$\PP_n(\lambda)=\QQ_n(\lambda)\,Z^{-1}(1+O(K\delta))$ (the bound is vacuous unless $K\delta=O(1)$, which is the case of interest) where $Z>0$ is a"),
+])
+# remove the "original argument, kept for the record" passage
+i0 = reduction.index(r"; the"+"\n"+r"original argument, kept for the record,")
+i1 = reduction.index(r"On the complement of $\mathcal B$")
+reduction = reduction[:i0] + ".\n\n" + reduction[i1:]
+reduction = sub(reduction, [
+ (r"shows $Z^{-1}=1+O(K\delta)+O(n^{-2/3})$, whence"+"\n"+r"$\sum_{\lambda\notin\mathcal B}|\PP_n-\QQ_n|=O(K\delta)+O(n^{-2/3})$.",
+  r"shows $Z^{-1}=1+O(K\delta)+O(n^{-1+o(1)})$, whence"+"\n"+r"$\sum_{\lambda\notin\mathcal B}|\PP_n-\QQ_n|=O(K\delta)+O(n^{-1+o(1)})$."),
+ (r"$\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-2/3})$ (with"+"\n"+r"Proposition~\ref{prop:tailsurvive} in place of \cite[Cor.~4.5]{CGW08}"+"\n"+r"the error term becomes $O(\delta\log n+n^{-1+o(1)})$).",
+  r"$\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-1+o(1)})$."),
 ])
 
 p0 = find(Lad, r'\begin{proposition}[the number of cycles, from the surviving direction only]')
 p1 = find(Lad, r'\end{proof}', p0)
 tail = block(Lad, p0, p1)
+tail = sub(tail, [(r"$\E[\ell N_\ell]\le2n/(n-\ell)$ for every $\ell$;", r"$\E[\ell N_\ell]\le2n/(n-\ell)$ for every $\ell<n$;")])
 
 ladder = block(Lad, 9, 137)
 ladder = sub(ladder, [
+ (r"The same identity holds with $X$ replaced by $S(R)\times\{P\}$ for any"+"\n"+r"fixed admissible pair of first rows $R$ and mark $P$.", r"The same identity holds with $X$ replaced by the set of squares with a fixed pair of"+"\n"+r"rows $1,2$ (of type $\lambda$) and a fixed mark $P$."),
  (r"combinatorial statement.  Notation as in \S\ref{sec:s13trapped}:", r"Notation:"),
  (r"through $j'$ (\S\ref{sec:s13trapped}).", r"through $j'$."),
 ])
@@ -64,7 +81,7 @@ off0 = find(Lad, r'\subsection{Offset ladders, and what (L) needs}')
 off1 = find(Lad, r'\paragraph{The single remaining input.}') - 1
 offsets = block(Lad, off0+1, off1)
 offsets = sub(offsets, [
- (r"(the argument of Remark~\ref{rem:ladderdata}(iii) with"+"\n"+r"$n-|C_1|>n/2-\ell$ free rows)", r"(a splice-in switching with $n-|C_1|>n/2-\ell$ free rows, Remark~\ref{rem:splice})"),
+ (r"(the argument of Remark~\ref{rem:ladderdata}(iii) with"+"\n"+r"$n-|C_1|>n/2-\ell$ free rows)", r"(Proposition~\ref{prop:splice} below)"),
 ])
 
 tr0 = find(Mix, r'\begin{proposition}[short frame cycles through a marked row are rare]')
@@ -91,7 +108,7 @@ orbit_c = block(Lad, o_c0, o_w0-1)
 orbit_c = sub(orbit_c, [
  (r"Follow the proof of Proposition~\ref{prop:Lwitness}.  Long ladders:", r"Put $\ell_0=n/\log^2n$.  By Theorem~\ref{thm:ladder}, $|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.  Long ladders:"),
  (r"the parts $|C_1|<n/2+\ell$"+"\n"+r"and $K_0<\ell_0$ on $A$ are as before.",
-  r"the part $|C_1|<n/2+\ell$ costs $\le8/n$ per $\ell$ by the splice-in bound, and $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}; the case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$."),
+  r"the part $|C_1|<n/2+\ell$ costs $\le8/n$ per $\ell$ by Proposition~\ref{prop:splice}, and $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}; the case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$."),
 ])
 orbit_w = block(Lad, o_w0, o_d0-1)
 orbit_w = sub(orbit_w, [
@@ -113,7 +130,7 @@ orbit_d = sub(orbit_d, [
 # (f) block: eq:Pi and the block graph characterization
 f0 = find(Lad, r'\paragraph{(f) The permutation problem $(\Pi)$')
 f1 = find(Lad, r'Every input of Hypothesis~\ref{hyp:orbit} is now of one form.') - 1
-pi_block = block(Lad, f0, f1)
+pi_block = block(Lad, f0, f1).replace(r'\paragraph{(f) The permutation problem', r'\paragraph{(e) The permutation problem')
 pi_block = sub(pi_block, [
  (r"(``separated''"+"\n"+r"in \S(c) and Lemma~\ref{lem:legalturn})", r"(``separated'' in Lemma~\ref{lem:legalturn})"),
  (r"the"+"\n"+r"adversarial examples of \S(c) are instances of the disconnected case"+"\n"+r"(the distance-$2$ chords straddling $p$ or $p'$ join $P_1$ to $P_2$"+"\n"+r"and must be excluded there).", r"a family of chords at $\rho_0$-distance $2$, none straddling $p$ or $p'$, is a disconnected example."),
@@ -163,8 +180,8 @@ the ladder identity, by which the bit is exactly fair except on the squares in w
 ``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
 the exceptional set is bounded by a product of conditionally independent factors.  The
 conjecture is thereby reduced to a genericity hypothesis about the cycle structure of two
-rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, test
-numerically up to $n=100$, and locate within the known switching technology.  Along the
+rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, whose ingredients we test
+numerically up to $n=100$, and which we locate within the known switching technology.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -191,7 +208,7 @@ $\QQ_n(\lambda)\propto\gamma(\lambda)$, so the conjecture says that $\CC_n$ is n
 constant on the types that carry most of the mass.  CGW proved
 $\CC_n(\lambda)/\CC_n(\mu)\in[\tfrac12,\tfrac32]$ for adjacent types (one part of
 $\lambda$ split into two parts of $\mu$, both $\ge2$), and used it to show that the two
-laws agree within a factor $n^{3/2}$ on every type; the upper bound $\tfrac32$, and
+laws agree within a factor $n^{3/2}$ on every type with at most $\tfrac65\log n$ parts; the upper bound $\tfrac32$, and
 with it the upper half of the latter statement, is affected by the gap described in
 Remark~\ref{rem:gap} and \cite{gapnote}.
 
@@ -226,8 +243,8 @@ from Hypothesis~\ref{hyp:orbit} (Proposition~\ref{prop:Lorbit}).
 Hypothesis~\ref{hyp:orbit} is a statement of the form ``two pairs of lines of a random
 Latin square are interleaved in the cycle structure of a third pair with probability
 bounded away from $0$ and $1$'', under conditioning on the cycle type of rows $1,2$.
-Without that conditioning it is elementary (\S\ref{sec:remains}); the data give the
-interleaving probability $0.19$ in every version we measured, and $\Pr_X[B]=0.50\pm0.01$ at
+Without that conditioning its upper half is elementary and its lower half reduces to the row pair having macroscopic cycles (\S\ref{sec:remains}); the data give the
+interleaving probability $0.19$ in every version we measured, and $\Pr_X[B]=0.49$--$0.50$ ($\pm0.01$) at
 $n=30,50,100$.  Section~\ref{sec:remains} explains why the switching methods available
 inside $X$ --- all of which we have pushed as far as they go --- produce only fair
 identities and cannot by themselves give the hypothesis.
@@ -245,7 +262,7 @@ multigraphs exactly).  We give the details in a separate note \cite{gapnote}; he
 paper does: the lower bound $\tfrac12$ of CGW's lemma is the trivial half of
 Theorem~\ref{thm:marked}, and the upper bound $\tfrac32$ is, by the same theorem,
 $\Pr_X[B]\le\tfrac23$ --- a weak form of what we are after.  By Theorem~\ref{thm:ladder}
-it would follow from $\Pr_X[\mathrm{Flip}\ne\emptyset]\ge\tfrac13$.
+it would follow from $\Pr_X[\mathrm{Flip}=\emptyset]\le\tfrac13$.
 
 \paragraph{Conventions.}  $L(r,c)$ is the entry in row $r$, column $c$.  For rows $x,y$,
 $\rho_{x,y}$ is the permutation of columns with $L(y,\rho_{x,y}(q))=L(x,q)$, so that
@@ -256,7 +273,20 @@ $L(\delta(r),c)=L(r,q)$, and its cycles are the \emph{column cycles} of $(q,c)$.
 cycle; a \emph{turn} of a column cycle swaps the entries of columns $q,c$ in its rows.  Both
 are Latin trades (the result is again a Latin square).  For $\lambda\vdash n$, $S(\lambda)$ is
 the set of Latin squares of order $n$ with first row the identity whose rows $1,2$ have
-cycle type $\lambda$, so $|S(\lambda)|=\gamma(\lambda)(n-2)!\,\CC_n(\lambda)$.
+cycle type $\lambda$, so $|S(\lambda)|=\gamma(\lambda)(n-2)!\,\CC_n(\lambda)$; we also
+write $D_\lambda=\gamma(\lambda)$ for the number of derangements of type $\lambda$.  A
+column pair $\{j,j'\}$ is \emph{admissible} if $j'\notin\{j,\sigma(j),\sigma^{-1}(j)\}$
+(CGW's condition for the pair operations; every marked pair is admissible since
+$\alpha,\beta\ge2$).  Following CGW, the \emph{flip} at an $A$-pair whose columns lie in
+different $\sigma$-cycles, and the \emph{backflip} (or \emph{unflip}) at an $A$-pair whose
+columns lie in one $\sigma$-cycle, is the turn of the column cycle of the pair through row
+$2$ (it joins, resp.\ splits, the $\sigma$-cycles involved); the \emph{switch} at a pair
+whose columns lie in different $\sigma$-cycles is the trade of rows $1,2$ along the row
+cycle through one of the two columns, selected by CGW's rule (the cycle whose columns
+carry the smaller minimum symbol).  We call Conjecture~\ref{conj:cgw}, which asks only
+for convergence in total variation, the \emph{weak} conjecture; the stronger statements
+suggested by Cameron (``tends very rapidly'') and by the data (pointwise ratios
+$1+o(1)$) are not addressed here.
 Jacobson--Matthews sampling
 \cite{JM96} is used for all numerical data; the scripts and logs are in the project
 repository.
@@ -305,9 +335,9 @@ body.append(ladder)
 body.append(r"""
 
 \begin{remark}[data]\label{rem:ladderdata}
-On Jacobson--Matthews samples with a uniformly random mark ($9000$, $7200$, $3600$ ladder-pair
-instances at $n=30,50,100$): $\Pr[\mathrm{Flip}=\emptyset\mid K_0]=2^{-(K_0-1)}$ within
-statistical error for every $K_0$; $\Pr[\mathrm{Flip}=\emptyset]=0.125,0.079,0.041\approx4/n$;
+On Jacobson--Matthews samples with a uniformly random mark ($9000$, $7200$, $3000$ ladder-pair
+instances at $n=30,50,100$; \texttt{runs/s13/f1/}): $\Pr[\mathrm{Flip}=\emptyset\mid K_0]=2^{-(K_0-1)}$ within
+statistical error for $K_0\le6$ and consistent with it beyond; $\Pr[\mathrm{Flip}=\emptyset]=0.125,0.079,0.041\approx4/n$;
 the ladder pairs are flippable with frequency $0.5002$ ($62082$ pairs at $n=50$); and
 $\Pr[B]-\Pr[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$.
 \end{remark}
@@ -318,13 +348,38 @@ $\Pr[B]-\Pr[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$.
 body.append(offsets)
 body.append(r"""
 
-\begin{remark}[the splice-in bound]\label{rem:splice}
-The bound $\Pr[B,d_{12}=\ell,|C_1|<n/2+\ell]\le4/(n-2\ell+1)$ is the $B$-state version of
-the following switching, which we state and prove for the cycle of row $1$.
-\end{remark}
-
 """)
 body.append(trapped)
+body.append(r"""
+
+\begin{proposition}[the splice-in bound]\label{prop:splice}
+For $2\le\ell\le n/4$,
+$\Pr_X[B,\ d_{12}=\ell,\ |C_1|<n/2+\ell]\le4/(n-2\ell+1)\le8/n$, and the same with
+$d_{21}$ in place of $d_{12}$.
+\end{proposition}
+
+\begin{proof}
+Let $E$ be the event.  \emph{Forward moves.}  From $(L,P)\in E$ choose $y=\pi^i(1)$ with
+$1\le i\le\ell-1$ (a row strictly inside the arc from $1$ to $2$; $\ell-1$ choices) and a row
+$x\notin C_1$ ($n-|C_1|\ge(n-2\ell+1)/2$ choices), and let $C_x$ be the frame cycle of $x$,
+which contains neither $1$ nor $2$.  If $(x,y)$ is not flippable, turn $C_x$: this trades
+columns $j,j'$ on the rows of $C_x$ only, so it preserves $X$, inverts $\pi$ on $C_x$
+(Lemma~\ref{lem:cycletrade}), fixes row $y$, and replaces $\rho_{x,y}$ by
+$\rho_{x,y}\circ(j\,j')$, which makes $(x,y)$ flippable.  Then apply the $j'$-trade at
+$(x,y)$, which replaces the frame by $(x\,y)\circ\pi^{\pm}$ ($\pi^\pm=\pi$, or $\pi$ inverted
+on $C_x$): the arc from $1$ to $2$ becomes
+$1\to\dots\to\pi^{-1}(y)\to x\to\dots\to y\to\dots\to2$ with $C_x$ occupying
+positions $i,\dots,i+|C_x|-1$, so $d_{12}$ grows by $|C_x|$, rows $1,2$ are untouched, and the result
+is again in $X_B$ with the same mark.  \emph{Backward moves.}  Given the target
+$(L',P)\in X_B$ and $\ell$, a preimage is determined by the position $i\in\{1,\dots,\ell-1\}$
+of $x$ on the arc of $L'$ from $1$ to $2$ (then $|C_x|=d'_{12}-\ell$ and
+$y=\pi'^{\,i+|C_x|}(1)$ are determined), together with the binary choice of whether $C_x$ was turned; undoing is the
+same $j'$-trade (the pair stays flippable, $\rho'_{x,y}=\rho_{x,y}^{-1}$ on the traded
+cycle) followed by the turn.  So each target has at most $2(\ell-1)$ preimages while each
+source has at least $(\ell-1)(n-2\ell+1)/2$ forward moves, whence
+$|E|\,(\ell-1)(n-2\ell+1)/2\le2(\ell-1)\,|X|$.
+\end{proof}
+""")
 body.append(r"""
 
 \section{The orbit method}\label{sec:orbit}
@@ -343,9 +398,9 @@ body.append(r"""
 \section{What remains}\label{sec:remains}
 
 Hypothesis~\ref{hyp:orbit} has three inputs: $(\alpha)$ the cycles of $\rho_{x_k,y_k}$
-through $j,j'$ are macroscopic for a constant fraction of the ladder pairs (both arcs when
+through $p,p'$ are macroscopic for a constant fraction of the ladder pairs (both arcs when
 they coincide, both cycles when they do not); $(\beta)$ \emph{genericity}: the clean
-coordinates of a ladder pair are separated by $\{j,j'\}$ with probability bounded below;
+coordinates of a ladder pair are separated by $\{p,p'\}$ with probability bounded below;
 $(\gamma)$ concentration of $\sum_k\bar y_k$ over the family.  Numerically $(\gamma)$ is an
 independence statement (the orbit weights of different ladder pairs are uncorrelated to
 within sampling error), $(\beta)$ holds with the same constant $0.19$--$0.20$ at every cycle
@@ -363,15 +418,21 @@ body.append(pi_block)
 body.append(r"""
 
 Three facts locate the difficulty.  (i) Without conditioning on the type of rows $1,2$,
-(U) for four generic columns in a generic row pair is elementary: by conjugation invariance
-the four columns are uniform points given the cycle type of $\rho_{x,y}$, and the
-interleaving probability is $\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$
-over the cycle lengths $m_i$, which lies in $[\tfrac1{27}-O(1/n),\tfrac13+O(1/n)]$.
+(U) for four generic columns in a generic row pair is elementary in its upper half: by
+conjugation invariance the four columns are uniform points given the cycle type of
+$\rho_{x,y}$, and the interleaving probability is
+$\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$ over the cycle lengths
+$m_i$, which is at most $\tfrac13+O(1/n)$ for every type (with equality for the $n$-cycle)
+and, by Jensen, at least $\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$, where $W$ is the event
+that two given columns share a cycle of $\rho_{x,y}$; the lower half therefore holds
+exactly when $\rho_{x,y}$ has macroscopic cycles with probability bounded below (it fails
+for the type $(2^{n/2})$, where the formula is $O(n^{-2})$), which is the content of
+$(\alpha)$ for a generic row pair.
 (ii) For generic rows the dual statement is trivial: the number of row pairs interleaved with
 $\{1,2\}$ in a column pair is at most $(n-2)^2/4$, half of all pairs, deterministically, and
 rows other than $1,2$ are exchangeable in $X$.  What is needed is the same for a row pair
 selected by its own row-cycle structure (the ladder pair, at the columns where its cycle
-through $j$ meets a joining pair), and exchangeability is lost exactly there.  (iii)
+through $p$ meets a joining pair), and exchangeability is lost exactly there.  (iii)
 Inside $X$ the exact tools are the free trades of rows other than $1,2$ (which preserve
 interleaving) and the column-cycle turns (which are legal exactly off the interleaved
 configurations), and every identity they produce is fair: it equates two expectations with
@@ -396,5 +457,7 @@ squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
 \end{thebibliography}
 \end{document}
 """)
-open('paper/weak_cgw_conditional.tex', 'w').write(''.join(body))
+import sys; sys.path.insert(0, 'paper')
+from postprocess_conditional import postprocess
+open('paper/weak_cgw_conditional.tex', 'w').write(postprocess(''.join(body)))
 print('written')
