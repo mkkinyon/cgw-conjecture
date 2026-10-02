@@ -1,4 +1,4 @@
-"""s13_ladder.py -- the ladder identity on real squares (session 13, sec:s13ladder).
+"""s13_ladder.py -- the ladder identity on real squares (session 13, sec:ladder).
 
 Ladder pairs: (x_k, y_k) = (pi^-k(1), pi^-k(2)), 1 <= k < K0, K0 = min(|C1|,|C2|)
 (apart) or min(d12, d21) (together).  The j'-trades at these pairs commute, preserve

@@ -20,7 +20,7 @@ on every orbit of ⟨T_k⟩ the bit is EXACTLY fair unless no ladder pair is
 flippable, and
     P[B] − P[A] = P[B, Flip=∅] − P[A, Flip=∅],   |P[B] − ½| ≤ ½ P[Flip=∅],
 for X and for every fixed R (quenched).  Data: P[Flip=∅ | K₀] = 2^{−(K₀−1)}
-to the resolution of 9000/7200 instances at n=30/50; P[Flip=∅] ≈ 8/n.
+to the resolution of 9000/7200 instances at n=30/50; P[Flip=∅] ≈ 4/n (0.125, 0.079, 0.041 at n=30,50,100).
 
 **(L) is the one open item.**  It needs NO fairness of anything: only that
 the K₀−1 disjoint-row ladder pairs are not all crossed.  Plan:

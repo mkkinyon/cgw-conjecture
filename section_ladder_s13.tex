@@ -15,7 +15,7 @@ in different cycles of $\rho_{x,y}$, and the \emph{$j'$-trade} at
 $(x,y)$ exchanges rows $x,y$ on the $\rho_{x,y}$-cycle through $j'$,
 which replaces $\pi$ by $(x\,y)\circ\pi$ if $(x,y)$ is flippable and by
 $(x\,y)\circ\pi\circ(x\,y)$ otherwise.  $B=\{1\sim2\}$ (rows $1,2$ in a
-common frame cycle), $A$ its complement; for $B$-instances $d_{12}$ and
+common frame cycle), $A$ its complement, $\mathbf 1_B$ the bit; for $B$-instances $d_{12}$ and
 $d_{21}$ are the numbers of $\pi$-steps from $1$ to $2$ and from $2$ to
 $1$.
 
@@ -33,8 +33,9 @@ $\mathrm{Flip}(L,P)=\{k<K_0:(x_k,y_k)\text{ flippable}\}$.
 The rows $x_1,\dots,x_{K_0-1}$ are distinct rows of $C_1\setminus\{1\}$
 (on $A$) or of the arc from $2$ to $1$ (on $B$), the $y_k$ likewise in
 $C_2\setminus\{2\}$ or the arc from $1$ to $2$; so the $2(K_0-1)$
-ladder rows are distinct and avoid rows $1,2$, and $K_0\ge2$ by the
-admissibility of the mark ($\pi(1)\ne2$, $\pi(2)\ne1$).
+ladder rows are distinct and avoid rows $1,2$, and $K_0\ge2$: on $A$
+because $\pi$ is a derangement, on $B$ by the admissibility of the mark
+($\pi(1)\ne2$, $\pi(2)\ne1$).
 
 \begin{theorem}[ladder identity]\label{thm:ladder}
 For every $n$, $\lambda$ and split $\alpha+\beta=m$ with
@@ -46,22 +47,28 @@ $\alpha,\beta\ge2$,
 \bigl|\Pr_X[B]-\tfrac12\bigr|\;\le\;\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
 \]
 The same identity holds with $X$ replaced by $S(R)\times\{P\}$ for any
-fixed admissible first-row pair $R$ and mark $P$.
+fixed admissible pair of first rows $R$ and mark $P$.
 \end{theorem}
 
 \begin{proof}
-Fix $(L,P)\in X$ and write $K=\{1,\dots,K_0-1\}$.  We show that the
-$T_k$, $k\in K$, are commuting involutions of $X$ which preserve
-$K_0$, the unordered ladder pairs and the set $\mathrm{Flip}$, and that
-$T_k$ toggles $B$ exactly when $k\in\mathrm{Flip}$.  Granting this, the
-group $G=\langle T_k:k\in K\rangle\cong(\mathbb Z/2)^{K}$ acts on $X$
-with orbits $\{T_S(L,P):S\subseteq K\}$ of size $2^{|K|}$ (each $T_k$
-changes rows $x_k,y_k$ and distinct $k$ change distinct rows), and on
-the orbit of $(L,P)$ the bit of $T_S(L,P)$ is
-$\beta(L,P)+|S\cap\mathrm{Flip}|\bmod2$.  If $\mathrm{Flip}\ne\emptyset$
-exactly half of the subsets $S$ have $|S\cap\mathrm{Flip}|$ odd, so
-$B$ and $A$ each contain half of the orbit; summing over orbits gives
-the identity, and the bound follows from $\Pr[B]+\Pr[A]=1$.
+Fix $(L,P)\in X$ and write $K=\{1,\dots,K_0-1\}$.  The ladder depends
+on $(L,P)$, so the $T_k$ are not maps of $X$; the statement to prove is
+that $(L,P)\sim T_S(L,P)$, $S\subseteq K$ (the trades at the
+unordered pairs of $S$, in any order), is an equivalence relation on
+$X$ whose classes have exactly $2^{|K|}$ elements and on which the bit
+is $\mathbf 1_B(T_S(L,P))=\mathbf 1_B(L,P)+|S\cap\mathrm{Flip}|\bmod2$.
+This follows once we know that each $T_k$ is an involution of $X$
+which preserves $K_0$, the set of unordered ladder pairs and the
+flippability of each of them, that $T_k$ toggles the bit exactly when
+$k\in\mathrm{Flip}$, and that trades at disjoint row pairs commute:
+then the same trades, at the same unordered pairs with the same
+flippabilities, are available from every point of a class (symmetry
+and transitivity), the $2^{|K|}$ points $T_S(L,P)$ are distinct
+(rows $x_k,y_k$ are changed by $T_k$ and by no other $T_i$), and the
+bit formula holds.  If $\mathrm{Flip}\ne\emptyset$ exactly half of the
+subsets $S$ have $|S\cap\mathrm{Flip}|$ odd, so $B$ and $A$ each
+contain half of the class; summing over classes gives the identity,
+and the bound follows from $\Pr[B]+\Pr[A]=1$.
 
 \emph{$T_k$ is a well-defined involution of $X$.}  The $j'$-trade at
 $(x_k,y_k)$ changes only rows $x_k,y_k\notin\{1,2\}$, so $\sigma$ and
@@ -104,20 +111,22 @@ depends only on rows $x_i,y_i$, which are different rows.  Likewise
 $T_i$ and $T_k$ act on disjoint pairs of rows, each along a column set
 determined by its own two rows, so $T_iT_k=T_kT_i$.  (After $T_k$ the
 pair $\{x_i,y_i\}$ may have changed its index, but the trade at an
-unordered pair does not depend on the index, so the group generated is
-the same from every point of the orbit.)
+unordered pair does not depend on the index or on the order of the
+two rows.)
 
 The statement for fixed $R$ holds because every $T_k$ fixes rows $1$
 and $2$.
 \end{proof}
 
 \begin{corollary}[the conjecture reduces to the ladder]\label{cor:ladder}
-By Theorem~\ref{thm:marked}, $\mathrm{EQ}(\delta)$ holds with
-$\delta=2\Pr_X[\mathrm{Flip}=\emptyset](1+o(1))$, and by
-Theorem~\ref{thm:reduction}
+Write $f(n,\lambda;\alpha,\beta)=\Pr_X[\mathrm{Flip}=\emptyset]$.  By
+Theorem~\ref{thm:marked}, $\bar q(\mu\to\lambda)-1=(\Pr_X[B]-\Pr_X[A])/\Pr_X[A]$
+and $\Pr_X[A]\ge(1-f)/2$, so $|\bar q-1|\le2f/(1-f)$: $\mathrm{EQ}(\delta)$
+holds with $\delta(n)=\max_{\lambda,\alpha\ne\beta}2f/(1-f)$.  If this
+$\delta(n)\to0$, Theorem~\ref{thm:reduction} gives
 \[
-\dtv(\PP_n,\QQ_n)=O\Bigl(\log n\cdot\max_{\lambda,\alpha,\beta}
-\Pr_{X(n,\lambda;\alpha,\beta)}[\mathrm{Flip}=\emptyset]+n^{-2/3}\Bigr).
+\dtv(\PP_n,\QQ_n)=O\Bigl(\log n\cdot\max_{\lambda,\alpha\ne\beta}
+f(n,\lambda;\alpha,\beta)+n^{-2/3}\Bigr).
 \]
 In particular the weak CGW conjecture follows from
 \begin{equation}\label{eq:L}
@@ -130,66 +139,86 @@ In particular the weak CGW conjecture follows from
 (i) The ladder consists of $K_0-1$ pairs of \emph{disjoint} rows,
 $K_0=\min(|C_1|,|C_2|)$ resp.\ $\min(d_{12},d_{21})$, and a pair is
 flippable iff columns $j,j'$ lie in different cycles of its row
-permutation --- the conjugate (rows$\leftrightarrow$columns) of the
-bit itself.  (L) does not ask these coins to be fair, only that they
+permutation --- the complement of the conjugate
+(rows$\leftrightarrow$columns) of the bit itself.  (L) does not ask these coins to be fair, only that they
 do not all fail.
 
 (ii) Exact enumeration at $n=7$ (\texttt{s13\_comp7.c}, four
 instances) confirms the identity to all digits
 ($\Pr[B]-\Pr[A]=-0.005848$ and $\Pr[B,\mathrm{Flip}=\emptyset]
 -\Pr[A,\mathrm{Flip}=\emptyset]=-0.005848$ for $\lambda=(7)$,
-$\alpha=2$; $+0.003509$ for $\alpha=3$; $-0.004651$ for $(5,2)$;
-$0$ for a cross-cycle pair).  On uniform squares with true marks
-(\texttt{s13\_ladder.py}, \texttt{runs/s13/f1/ladder\{30,50\}.log};
-$9000$ and $7200$ instances):
+$\{\alpha,\beta\}=\{2,5\}$; $+0.003509$ for $\{3,4\}$; $-0.004651$
+for $(5,2)$; $0$ for a cross-cycle pair), where however
+$\Pr[\mathrm{Flip}=\emptyset]=0.40$--$0.42$: the bound only bites for
+large $n$.  On uniform squares with true marks
+(\texttt{s13\_ladder.py}, \texttt{runs/s13/f1/ladder\{30,50,100\}.log};
+$9000$, $7200$, $3000$ instances):
 \[
 \Pr[\mathrm{Flip}=\emptyset\mid K_0]=2^{-(K_0-1)}
 \]
-to the resolution of the data for every $K_0$ ($n=50$: $0.480,0.265,
-0.142,0.070,0.036,0.030,0.002$ for $K_0=2..8$ against $0.5,0.25,
-0.125,0.0625,0.031,0.016,0.008$), the ladder coins are flippable with
-frequency $0.4990$ ($n=30$) and $0.5002$ ($n=50$), and
-$\Pr[\mathrm{Flip}=\emptyset]=0.125$ ($n=30$), $0.079$ ($n=50$)
-$=\E[2^{-(K_0-1)}]$ to three digits.  Since $\Pr[K_0=k]\approx4/n$ for
-small $k$, this is $\approx8/n$: if the coins are fair and
-independent, (L) holds with $O(1/n)$ and the conjecture would follow
-with $\dtv=O(\log n/n)$.
+within statistical error for $K_0\le6$ and consistent with it beyond
+($n=50$: $0.480,0.265,0.142,0.070,0.036,0.030,0.002$ for $K_0=2..8$
+against $0.5,0.25,0.125,0.0625,0.031,0.016,0.008$), the ladder coins
+are flippable with frequency $0.4990$, $0.5002$, $0.4993$, and
+$\Pr[\mathrm{Flip}=\emptyset]=0.125,\ 0.079,\ 0.041$ against
+$\E[2^{-(K_0-1)}]=0.124,\ 0.077,\ 0.038$.  Since $\Pr[K_0=k]\approx4/n$
+for small $k$ and $\sum_{k\ge2}2^{-(k-1)}=1$, this is $\approx4/n$
+($0.133,0.080,0.040$): if the coins are fair and independent, (L)
+holds with $O(1/n)$ and the conjecture would follow with
+$\dtv=O(\log n/n)$.  The heuristic rests on uniformity: for
+isotopes of $\mathbb Z_n$ every $\rho_{x,y}$ is an $n$-cycle and
+$\mathrm{Flip}=\emptyset$ always.
 
-(iii) \emph{Cost of a short ladder.}  On $A$,
-$\Pr[K_0\le\ell]\le72\ell/n$ by Proposition~\ref{prop:trapped}.  On
-$B$ the ladder identity itself gives
-$\Pr[B,\min(d_{12},d_{21})\le\ell,\mathrm{Flip}\ne\emptyset]
+(iii) \emph{Cost of a short ladder.}
+$\Pr[A,K_0\le\ell]\le\Pr[|C_1|\le\ell]+\Pr[|C_2|\le\ell]\le72\ell/n$
+for $\ell\le n/2-1$ by Proposition~\ref{prop:trapped}.  On $B$ the
+ladder identity itself gives
+$\Pr[B,K_0\le\ell,\mathrm{Flip}\ne\emptyset]
 =\Pr[A,K_0\le\ell,\mathrm{Flip}\ne\emptyset]\le72\ell/n$, and the
-switching of Proposition~\ref{prop:trapped} (splice a free cycle into
-the short arc, toggling flippability by a turn of the free cycle)
-gives $\Pr[B,d_{12}=\ell,|C_1|\le n/2]\le8/n$; what is missing is
-$\Pr[B,\ d_{12}=\ell,\ |C_1|>n/2,\ \mathrm{Flip}=\emptyset]=O(1/n)$,
-a short arc inside a cycle covering most rows with no flippable
-ladder pair.  \emph{To do.}
+switching of Proposition~\ref{prop:trapped} gives
+$\Pr[B,d_{12}=\ell,|C_1|\le n/2]\le4/n$ (and the same for $d_{21}$):
+from such a square pick $y$ strictly inside the arc from $1$ to $2$
+($\ell-1$ choices) and $x$ in a free cycle $C_x$ ($n-|C_1|\ge n/2$
+choices), turn $C_x$ if $(x,y)$ is not flippable, and $j'$-trade; the
+arc becomes $1\to\dots\to\pi^{-1}(y)\to x\to(C_x)\to y\to\dots\to2$, so
+$d_{12}$ grows by $|C_x|$ and nothing else changes; given the target,
+the position of $x$ on the new arc ($\ell-1$ choices) and the binary
+``turn back'' pin the move, so there are at most $2(\ell-1)$
+preimages.  What is missing is
+$\Pr[B,\ K_0\le\ell_0,\ |C_1|>n/2,\ \mathrm{Flip}=\emptyset]=O(\ell_0/n)$:
+a short arc inside a cycle covering most rows, with no flippable
+ladder pair; there the free rows may be absent and the flippability
+of a pair inside $C_1$ cannot be toggled by a turn.  \emph{To do.}
 
 (iv) \emph{Local witnesses.}  A ladder pair is flippable as soon as
 the $\rho_{x_k,y_k}$-cycle through $j$ is short and avoids $j'$ (or
 the one through $j'$ is short and avoids $j$).  On real squares the
 length of the $j$-cycle of a ladder pair is spread like a uniform
-variable on $[1,n]$ ($\Pr[\le\ell]=0.021,0.081,0.18,0.38$ for
-$\ell=2,5,10,20$ at $n=50$), and among instances with $K_0\ge n/4$ a
-flippable ladder pair with $j$-cycle of length $\le10$ exists in
-$93\%$, $\le20$ in $99.6\%$.  So, granting (iii) with
-$\ell_0=n/\log^3n$ (cost $O(1/\log^3n)$), (L) follows from
+variable on $\{2,\dots,n\}$ ($\Pr[\le\ell]=0.021,0.081,0.18,0.38$ for
+$\ell=2,5,10,20$ at $n=50$ against $(\ell-1)/(n-1)=0.020,0.082,0.18,0.39$;
+$0.010,0.041,0.092,0.19$ at $n=100$), and among instances with
+$K_0\ge n/4$ a flippable ladder pair with $j$-cycle of length $\le10$
+exists in $93\%$ ($n=50$) and $95\%$ ($n=100$), $\le20$ in $99.6\%$
+and $99.8\%$.  A non-flippable pair has $j'$ on its $j$-cycle, hence
+no $j$-cycle avoiding $j'$ of any length, so
+$\{\mathrm{Flip}=\emptyset,K_0\ge\ell_0\}$ is contained in the event
+below; granting the missing part of (iii) with $\ell_0=n/\log^3n$
+(total cost $O(1/\log^3n)$), (L) follows from
 \begin{equation}\label{eq:Lloc}
 \Pr\Bigl[K_0\ge\tfrac n{\log^3n}\ \text{and no ladder pair has a
 $j$-cycle of length}\le\log^5n\text{ avoiding }j'\Bigr]=o(1/\log n),
 \end{equation}
-a statement about $\Theta(n/\log^3n)$ disjoint row pairs each of which
-carries such a cycle with probability $\approx\log^5n/n$ (expected
-number $\approx\log^2n$ witnesses).  Short cycles through a given
+a statement about at least $n/\log^3n$ disjoint row pairs each of
+which carries such a cycle with probability $\approx\log^5n/n$
+(expected number $\gtrsim\log^2n$ witnesses).  Short cycles through a given
 column in the row permutation of a given row pair are substructures
 of polylogarithmic size, so \eqref{eq:Lloc} is the kind of statement
 that the switching method of Kwan--Sudakov \cite{KS18} and its
-successors is built for: a second-moment bound needs only
-$\operatorname{Cov}(W_k,W_{k'})=o(\Pr[W_k]\Pr[W_{k'}]/\log^2n)$ for
-disjoint pairs, in the space of completions of two rows and two
-columns.  No fairness of any global statistic is needed anywhere.
+successors is built for: a second-moment bound needs
+$\operatorname{Cov}(W_k,W_{k'})=o(\Pr[W_k]\Pr[W_{k'}]/\log n)$ for
+disjoint pairs $k\ne k'$ (with $\E\sum_kW_k\gtrsim\log^2n$ the
+diagonal term is already $O(1/\log^2 n)$), in the space of completions
+of two rows and two columns.  No fairness of any global statistic is needed anywhere.
 \end{remark}
 
 \begin{remark}[relation to the earlier programme]
@@ -201,8 +230,11 @@ pair is flippable.  Compared with the pool of intercalates
 (Theorem~\ref{thm:master}) the ladder has deterministic bit-changing
 pairs and an exact bias formula, at the price of needing the pairs
 to be flippable; compared with the trade chain it needs no mixing.
-The quenched version (fixed $R$) answers the fairness Question of
-\texttt{paper/fairness\_question.tex}: $|2\Pr[\beta=1\mid R]-1|\le
-\Pr[\mathrm{Flip}=\emptyset\mid R]$.  Items (I), (II), (III), (T),
+The quenched version (fixed $R$) reduces the fairness Question of
+\texttt{paper/fairness\_question.tex} to the quenched form of (L):
+$|2\Pr[B\mid R]-1|\le\Pr[\mathrm{Flip}=\emptyset\mid R]$, and since the
+ladder classes refine the components of the trade chain, also
+$|2p(K)-1|\le\Pr[\mathrm{Flip}=\emptyset\mid K]$ for every component
+$K$.  Items (I), (II), (III), (T),
 (F1), (F2) and the component question are superseded by (L).
 \end{remark}
