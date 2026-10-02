@@ -638,21 +638,10 @@ since an equality would force $\pi(x)=y$ or $\pi(y)=x$ --- and the free
 part of rows $x,y$ consists of cycles together with two paths; the
 witness is precisely ``the path starting at the column where row $y$
 holds $L(x,j)$ is short and ends at the column where row $x$ holds
-$L(y,j)$''.  Extending CGW's three switchings
-and their counting to this path structure is a bounded technical task
-(the switchings act on free columns only and never touch columns
-$j,j'$).  For (b), the switchings that act on rows $\ne1,2$ (trades,
-cross-switches of the pair $x,y$) preserve $\sigma$, but the turns of
-column cycles of free column pairs may pass through rows $1,2$ and
-change the type of $\sigma$; either one restricts to turns avoiding
-rows $1,2$ (whose availability is again a non-giant-cycle statement),
-or one lets the type change by one merge/split and compensates with
-the CGW ratio bound for rows $1,2$ --- which is itself the same lemma
-with prescribed columns $j,j'$ and distinct symbols, i.e.\ (a) again.
-So the whole of (a)+(b) is one lemma: \emph{CGW's Lemma~3.12 for two
-prescribed full columns on which the two distinguished rows carry
-distinct symbols} (the path version).  (c) is the second-moment
-version of the same switchings applied to two pairs at once.
+$L(y,j)$''.  Whether CGW's three switchings and their counting extend
+to this path structure is examined in \S\ref{sec:crossspace}: they do
+not, and the reason is instructive.  (c) is the second-moment version
+of the same question.
 
 \paragraph{A duality (heuristic).}  Transposing the square exchanges
 the roles.  With $T(c,r)=L(r,c)$ and $\rho$ in the convention
@@ -680,3 +669,113 @@ suggests what a proof of the witness lemma must contain --- a lower
 bound on flippable pairs inside a frame cycle --- which is what CGW's
 cross-switch supplies for the pair $(1,2)$ at the level of constants
 (this is a reading of the structure, not a demonstrated reduction).
+
+\subsection{The path version of CGW's lemma: where it breaks, and what survives}
+\label{sec:crossspace}
+
+Work in $\Omega(F)$, $F=$ the two full columns $p=j$, $p'=j'$, for a
+pair of rows $x,y$ carrying four distinct symbols on $\{p,p'\}$ (every
+ladder pair).  Write $Q_p,Q_{p'}$ for the $\rho_{x,y}$-cycles through
+$p,p'$.  \emph{Crossed}: $p'\in Q_p$, with arcs $P_1$ (from $p$ to $p'$,
+$d_1-1$ interior columns) and $P_2$ (from $p'$ to $p$, $d_2-1$);
+\emph{parallel}: $Q_p\ne Q_{p'}$, interior sizes $\ell-1$, $\beta-1$.
+Parallel is flippability.  All other $\rho_{x,y}$-cycles are
+\emph{free}.
+
+\paragraph{Which of CGW's moves are legal.}  A flip at a free column
+pair $(q,c)$ (turn of the $(q,c)$-column cycle through $y$) never
+touches columns $p,p'$ and is legal in $\Omega(F)$; it replaces
+$\rho_{x,y}$ by $(q\,c)\circ\rho_{x,y}$ when $(q,c)$ is an $A$-pair
+(rows $x,y$ in different $(q,c)$-column cycles).  A switch (trade of
+rows $x,y$ along a $\rho$-cycle containing exactly one of $q,c$) is
+legal iff that cycle is free.  A cross-switch at a $B$-pair $(q,c)$ in
+one cycle is legal iff the $\rho$-arc from $q$ to $c$ avoids $p,p'$.
+Hence: pairs $(q,c)$ inside one free cycle, or $q$ in a free cycle and
+$c$ anywhere, or both on the same path with the arc inside the path,
+are fully repairable as in CGW (cases 1--3 of their splitting
+procedure), and the within-path/free-cycle statistics of
+Proposition~\ref{prop:shortcycles} go through in $\Omega(F)$.  But a
+\emph{cross-path} pair --- $q\in P_1$, $c\in P_2$ in the crossed state,
+or $q\in Q_p\setminus p$, $c\in Q_{p'}\setminus p'$ in the parallel
+state --- cannot be repaired when it is a $B$-pair: the switch would
+trade along $Q_p$ (through $p$), and the cross-switch's arc from $q$ to
+$c$ passes through $p'$ or $p$.  And the cross-path pairs are exactly
+the ones whose flip exchanges crossed and parallel.  CGW's condition
+that the distinguished rows carry the same symbols on $F$ is therefore
+not cosmetic: it is what makes every pair repairable, by excluding
+paths.
+
+\paragraph{What survives: two exact identities in the cross space.}
+Both hold conditionally on the frame of $(p,p')$ and on rows $1,2$
+(they preserve both), i.e.\ in $X$ itself.
+\begin{enumerate}[leftmargin=2em]
+\item[(F)] The flip at a cross-path $A$-pair is an involution between
+crossed and parallel squares preserving the pair and its $A$-status
+(Lemma~\ref{lem:cycletrade}), legal when the $(q,c)$-column cycle
+through $y$ avoids rows $1,2$ (or contains both --- then $\sigma$ is
+conjugated and the mark is kept).  Summing,
+$\E[\#\text{legal $A$ cross-path pairs};\ \mathrm{crossed}]
+=\E[\#\text{legal $A$ cross-path pairs};\ \mathrm{parallel}]$.
+\item[(I)] An intercalate on rows $x,z$ ($z\notin\{1,2\}$) and free
+columns $q,c$ is a Latin trade whose switch replaces $\rho_{x,y}$ by
+$\rho_{x,y}\circ(q\,c)$ and touches nothing else that matters; it is
+always legal.  It separates $p,p'$ iff crossed with $q\in P_1$,
+$c\in P_2$, and merges iff parallel with $q\in Q_p\setminus p$,
+$c\in Q_{p'}\setminus p'$.  With $I_{\rm sep}$, $I_{\rm merge}$ the
+numbers of such intercalates,
+\begin{equation}\label{eq:icid}
+\E[I_{\rm sep};\ \mathrm{crossed}]=\E[I_{\rm merge};\ \mathrm{parallel}]
+\qquad\text{exactly, in }X\text{ and conditionally on the frame.}
+\end{equation}
+\end{enumerate}
+Identity (I) has the merit that its moves are local and automatically
+legal, and its weights are intercalate counts of a single row with
+columns constrained to two sets.  On real squares (\texttt{s13\_icsw.py},
+\texttt{runs/s13/f1/icsw50.log}: $9000$ ladder pairs at $n=50$)
+$\E[I_{\rm sep}\mid\mathrm{crossed}]=0.98\cdot\E[(d_1-1)(d_2-1)/n]$ and
+$\E[I_{\rm merge}\mid\mathrm{parallel}]=0.98\cdot\E[(\ell-1)(\beta-1)/n]$,
+with ratio $0.97$--$0.99$ in every bin of the product.  Since
+deterministically $I_{\rm merge}\le\min(\ell-1,\beta-1)$ (each row $z$
+holds a given symbol once), \eqref{eq:icid} gives, with $\tfrac n2\Pr[\mathrm{par}]\ge\E[I_{\rm merge};\mathrm{par}]$,
+\[
+\Pr[\mathrm{parallel}]\;\ge\;\frac2n\,\E[I_{\rm sep};\ \mathrm{crossed}] ,
+\]
+so a constant lower bound on flippability in the cross space follows
+from (i) $\E[I_{\rm sep}\mid\mathrm{crossed},d_1,d_2]\ge\kappa(d_1-1)(d_2-1)/n$
+--- a lower bound of order $1/n$ for the two-cell pattern
+``$L(z,q_0)=L(x,c_0)$ in the row $z$ holding $L(x,q_0)$ at $c_0$'' for
+$q_0\in P_1$, $c_0\in P_2$, conditionally on rows $1,2$, columns $p,p'$
+and the structure of rows $x,y$ --- and (ii) crossed squares having
+macroscopic arcs except with probability $\le\Pr[\mathrm{crossed}]-c$
+(an arc-trapping bound).
+
+\paragraph{Why neither input is available.}  The universal bounds of
+Allsop--Morris require the conditioning to be a partial square on
+$\le\alpha n$ rows and $\le\beta n$ columns; two full rows or two full
+columns violate this.  CGW's framework tolerates full columns but not
+full rows, and its repair moves fail across the paths.  For (ii), the
+splice-in switching that proves Proposition~\ref{prop:trapped} needs
+turns of column cycles through $y$ avoiding rows $1,2$ --- legality is
+again a cycle-avoidance event --- while the intercalate version of the
+splice has availability $1/n$ per position and yields only
+$\Pr[\mathrm{crossed},d_1=d]\lesssim1/d$.  In every formulation the
+obstruction is one and the same: in the space with two rows and two
+columns prescribed there is no exact move that is both automatically
+legal and able to change a cross-path status, and the probability
+that such moves are available is a cycle-avoidance event of the kind
+we are trying to bound.
+
+\paragraph{The core problem, stated once.}  Let $(L,P)$ be uniform on
+$X$, condition on rows $1,2$ and columns $p,p'$, and let $(x,y)$ be a
+pair of rows carrying four distinct symbols on $\{p,p'\}$.
+\begin{equation}\label{eq:CP}
+\textup{(CP)}\qquad
+\Pr\bigl[p,p'\text{ lie in different cycles of }\rho_{x,y}\bigm|\text{rows }1,2,\ \text{columns }p,p'\bigr]\;\ge\;c>0 ,
+\end{equation}
+uniformly over the conditioning (or: for the ladder, not all pairs
+crossed).  Without the conditioning this is CGW's Theorem~3.13
+($\Pr_X[A]\ge1/3$) by the row/column symmetry; with only the two
+columns prescribed it is the path version, which already fails for the
+reason above; with both it is what (L) needs.  Everything in
+\S\ref{sec:ladder}--\S\ref{sec:crossspace} is exact except this one
+constant.
