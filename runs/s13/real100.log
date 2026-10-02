@@ -1,0 +1,5 @@
+n=100: squares=300, instances=1200
+  real : mean k=47.9 (k'=47.8)  E[eps_S eps_T]=0.0431(0.0082)  E[bias^2]*k'=0.515   levels M=1,2,3: 0.6429, 0.4769, 0.3702
+         frame: E#cycles=4.24  P(u~v)=0.496   pool: same-cycle chords 28549 vs null 29056.9 (of 57317); position bins [6732, 7373, 7617, 6827]
+  model: mean k=47.9 (k'=47.8)  E[eps_S eps_T]=0.0512(0.0086)  E[bias^2]*k'=0.612   levels M=1,2,3: 0.6558, 0.4974, 0.3978
+         frame: E#cycles=4.18  P(u~v)=0.517   pool: same-cycle chords 29211 vs null 29372.9 (of 57317); position bins [7012, 7382, 7504, 7313]
