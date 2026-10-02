@@ -1297,9 +1297,10 @@ permutation core is: for a permutation $\rho_0$ and a matching
 $\mathcal T$ of transpositions on points other than $p,p'$, with
 $\tau(\eta)$ the product of a uniformly random subset of
 $\mathcal T$, bound $\Pr_\eta[p,p'\text{ separated in }\rho_0\tau(\eta)]$
-from below.  For an adversarial $\mathcal T$ (pairs at
-$\rho_0$-distance $2$) the probability is $0$, so the content is that
-the clean coordinates of a random square are not adversarial; and the
+from below.  For an adversarial $\mathcal T$ (e.g.\ all pairs at
+$\rho_0$-distance $2$, none straddling $p$ or $p'$) the probability is
+$0$, so the content is that the clean coordinates of a random square
+are not adversarial; and the
 moves that re-randomise the clean coordinates without touching
 $\rho_{x,y}$ --- the free row trades of Lemma~\ref{lem:rowfair} --- have
 availabilities that are again same-cycle events of generic row pairs.
@@ -1359,12 +1360,15 @@ $Y_I=\sum_{k\in I}\bar y_k$: mean $|I|=5.2$ resp.\ $9.9$,
 $\E[\bar y]=0.130$ resp.\ $0.135$, $\mathrm{Var}(\bar y)=0.084$ resp.\
 $0.080$, and $\mathrm{Var}(Y_I)=0.43$ resp.\ $0.90$ against
 $|I|\mathrm{Var}(\bar y)=0.44$ resp.\ $0.79$: the ratio $0.99$ resp.\
-$1.14$ (the latter including the variation of $|I|$) shows no positive
-correlation between the orbit weights of different ladder pairs.  So
-$(\gamma)$ is, numerically, an independence statement; the lower tail
-$\Pr[Y_I<\kappa|I|]$ at these small $|I|$ ($0.18$ at $\kappa=0.05$,
-$n=100$) is what $|I|\approx10$ independent summands with mean $0.13$
-and a $50\%$ atom at $0$ give.
+$1.14$ (both including the variation of $|I|$, which at $n=100$
+contributes $\approx\E[\bar y]^2\mathrm{Var}(|I|)\approx0.2$; a
+referee's re-run with fresh seeds gave within-$|I|$ ratios $1.03$ and
+$0.94$) shows no detectable positive correlation between the orbit
+weights of different ladder pairs.  So $(\gamma)$ is, numerically, an
+independence statement.  The orbit weight has an atom of $\approx0.8$
+at $0$ (few coordinates per pair with a fixed matching), and the lower
+tail $\Pr[Y_I<\kappa|I|]$ at these sizes ($0.18$ at $\kappa=0.05$,
+$n=100$) is dominated by the instances with $|I|\le4$.
 
 \paragraph{(e) The arc-trapping input $(\alpha)$: CGW's lemma for a
 generic row pair in $X$, and the blocked fraction.}  The orbit weight
@@ -1454,7 +1458,8 @@ everything reduces to.}  Fix a permutation $\rho_0$ of the columns,
 two columns $p\ne p'$, and a set $\mathcal T$ of pairwise disjoint
 transpositions avoiding $p,p'$; for $\eta\in\{0,1\}^{\mathcal T}$ let
 $\tau(\eta)$ be the product of the transpositions with $\eta_Z=1$.
-Call $Z=(q,c)$ \emph{crossing} in a permutation $\rho$ if $\{q,c\}$ and
+Call $Z=(q,c)$ \emph{crossing} in a permutation $\rho$ (``separated''
+in \S(c) and Lemma~\ref{lem:legalturn}) if $\{q,c\}$ and
 $\{p,p'\}$ are interleaved in the cycle structure of $\rho$: $q,c$ on
 different arcs of a common cycle through $p,p'$, or $q$ in the cycle
 of $p$ and $c$ in the (different) cycle of $p'$, or vice versa.  By
@@ -1467,20 +1472,33 @@ $\eta$ uniform and $b(\eta)=[p,p'\text{ separated in }\rho_0\tau(\eta)]$,
 \;\ge\;\tfrac12\,\E_\eta\Bigl[\frac{\#\{Z\text{ crossing in }\rho_0\tau(\eta)\}}{|\mathcal T|}\Bigr],
 \end{equation}
 and $b\equiv0$ on the cube iff no $Z$ is crossing in any
-$\rho_0\tau(\eta)$.  This happens iff the two arcs $P_1,P_2$ of the
-cycle through $p,p'$ (crossed state) lie in different components of
-the graph whose vertices are $P_1$, $P_2$ and the other cycles of
-$\rho_0$ and whose edges are the transpositions of $\mathcal T$ joining
-different vertices: a transposition inside a vertex splits off a
-piece without changing the separation, one joining a third cycle to
-$P_1$ merges it into the arc, and once a path of such merges connects
-$P_1$ to $P_2$ some transposition has become crossing.  In particular
-a single crossing $Z$ at $\eta=0$ gives $\Pr_\eta[b=1]\ge\tfrac12$ on
-the orbit of $Z$ alone, and the examples of \S(c) (chords at
-$\rho_0$-distance $2$) are precisely the disconnected case.  There is
-no loss in using one coordinate per pair: with $Z_k$ the first clean
-coordinate of the $k$-th pair in a fixed order of the matching (an
-orbit-invariant choice), Proposition~\ref{prop:orbit} reads
+$\rho_0\tau(\eta)$.  Let $\rho_0$ be crossed, with arcs $P_1$ (from
+$p$ to $p'$) and $P_2$, and form the graph whose vertices are $P_1$,
+$P_2$ and the other cycles of $\rho_0$ and whose edges are the
+transpositions of $\mathcal T$ joining different vertices.  Then
+$b\equiv0$ iff $P_1$ and $P_2$ lie in different components.  If they
+are connected by a path $P_1=V_0,V_1,\dots,V_m=P_2$ with edges
+$Z_1,\dots,Z_m$, apply $Z_1,\dots,Z_{m-1}$ in order: $Z_i$, with one
+end on the arc from $p$ to $p'$ and the other in $V_i$, inserts $V_i$
+into that arc ($\rho\circ(q\,c)$ sends $q\mapsto\rho(c)$, runs around
+$V_i$, and returns to $\rho(q)$), $P_2$ is untouched, and $Z_m$ then
+joins the arc to $P_2$ and is crossing.  If they are disconnected, let
+$K_1$ be the union of the vertices in the component of $P_1$ and $K_2$
+that of $P_2$: every transposition of $\mathcal T$ has both ends in
+$K_1$, both in $K_2$ or both outside, so $\tau(\eta)$ preserves $K_1$,
+while $\rho_0(K_1)=(K_1\setminus\{p\})\cup\{p'\}$; the
+$\rho_0\tau(\eta)$-orbit of $p$ therefore stays in $K_1$ until it
+reaches $p'$, and it cannot close at $p$ before that, since
+$\rho_0\tau(x)=p$ forces $\tau(x)=\rho_0^{-1}(p)\in P_2\subseteq K_2$.
+In particular a single crossing $Z$ at $\eta=0$ gives
+$\Pr_\eta[b=1]\ge\tfrac12$ on the orbit of $Z$ alone, and the
+adversarial examples of \S(c) are instances of the disconnected case
+(the distance-$2$ chords straddling $p$ or $p'$ join $P_1$ to $P_2$
+and must be excluded there).  One may equally use one coordinate per
+pair: with $Z_k$ the first clean coordinate of the $k$-th pair in a
+fixed order of the matching (orbit-invariant, since cleanliness of
+every matching pair is), the proof of Proposition~\ref{prop:orbit}
+applied to the sub-family $\{Z_k\}$ gives
 \begin{equation}\label{eq:onecoord}
 \Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\Bigl[\prod_{k\in I}\bigl(1-\tfrac12X_k\bigr)\Bigr],
 \qquad X_k=[\,Z_k\text{ crossing in }\rho_{x_k,y_k}\,],
@@ -1498,23 +1516,35 @@ $\{q,c\}$ (a clean coordinate) be interleaved in the row pair
 $(x_k,y_k)$ with probability $\ge c$; (BL), hence $(\alpha)$, asks
 that the row pairs $\{1,2\}$ and $\{x,y\}$ be \emph{not} interleaved in
 a joining column pair $(q,c)$ with probability $\ge c$; and the
-availability of every third-row repair of \S(e) is the event that
-$\{p,p'\}$ and $\{q,c\}$ are not interleaved in $(z,w)$.  So the whole
-residual is the two-sided statement
+availability of the third-row switch repairs of \S(e) is the event
+that $q,c$ lie in different $\rho_{z,w}$-cycles --- with the frame
+fixed, that in addition $\{p,p'\}$ and $\{q,c\}$ are not interleaved
+in $(z,w)$.  So the residual is the two-sided statement
 \[
 \textup{(U)}\qquad c\;\le\;\Pr\bigl[\text{two given pairs of lines are interleaved in a third pair}\bigr]\;\le\;1-c
 \]
 in $X$ (type and mark of rows $1,2$ prescribed; the other lines
-generic or selected by cycle structure), and the exact tools of $X$
+generic or selected by cycle structure), together with the two-point
+same-cycle event for generic rows at the prescribed columns named in
+\S(e); and the exact tools of $X$
 --- the free row trades of Lemma~\ref{lem:rowfair}, which preserve
 interleaving of $\{1,2\}$ with the traded pair (\S(e)), and the column
 turns of Lemma~\ref{lem:legalturn}, which are legal exactly off the
 interleaved configurations --- are either blind to (U) or need (U).
 Without any conditioning, (U) for four generic columns in a generic
-row pair follows from $\Pr[W]\le3/5$ under CGW($3/2$)
-(\S\ref{sec:crossspace}); from the surviving direction alone one does
-not even get $\Pr[\sigma\text{ is an $n$-cycle}]\le1-c$ (that is CGW's
-Lemma~4.4, upper half), although it follows from the intercalate
-counts of Kwan--Sudakov \cite{KS18} by a second moment.  The data give
-$0.19$ for the interleaving probability in every version we measured
-(\S(d), \S(e)).
+row pair holds with explicit constants and without CGW($3/2$): the law
+of $\rho_{x,y}$ is conjugation-invariant, so given its cycle type the
+four columns are uniform distinct points, and the interleaving
+probability is $\tfrac13A+2B$ with $A=\sum_i(m_i)_4/(n)_4$,
+$B=\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$ over the cycle lengths $m_i$;
+this is at most $\tfrac13+O(1/n)$ for every type (equality at the
+$n$-cycle) and at least $\tfrac13\Pr[W\mid\text{type}]^2-O(1/n)$,
+hence $\ge\tfrac1{27}-O(1/n)$ by $\Pr[W]\ge\tfrac13$, which uses only
+the involutions (i), (ii) of \S\ref{sec:crossspace}.  The data ($0.19$
+in every version we measured, \S(d), \S(e)) sit inside this range.
+(As an aside, the surviving direction alone does not give even a weak
+form of CGW's Lemma~4.4, upper half, $\Pr[\sigma\text{ is an $n$-cycle}]\le1-c$;
+it does follow from the intercalate count $\ge(1-o(1))n^2/4$ of
+Kwan--Sudakov \cite{KS18}: by row symmetry $\E N_2\ge\tfrac12-o(1)$,
+and $\E[N_2(N_2-1)]\le2\E N_4\le n/(n-4)$ from the proof of
+Proposition~\ref{prop:tailsurvive}(i), so $\Pr[N_2\ge1]\ge\tfrac18-o(1)$.)
