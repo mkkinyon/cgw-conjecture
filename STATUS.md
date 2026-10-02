@@ -39,8 +39,24 @@ pair (eq:offsetavg); the splice-in switching does |C₁| < n/2+ℓ.  So:
   (2/3)E[(ℓ+β)N_{ℓ+β}] ≤ E[ℓN_ℓ·βN_β] ≤ 2E[(ℓ+β)N_{ℓ+β}], hence E[N_ℓ] ∈ [2/3, 4]/ℓ
   and P[|Q_q| = ℓ] ∈ [0.66, 4]/n for ℓ ≤ √n/40 (prop:shortcycles, refereed;
   exact at n ≤ 11 from CGW's tables; sharp at n=5). Remaining: the CONDITIONAL
-  form (two prescribed columns, rows x,y with distinct symbols there = CGW's
-  Lemma 3.12 in the 'path version') and the concentration.
+  form.  **The 'path version' of CGW Lemma 3.12 is NOT routine (§sec:crossspace):**
+  with columns p,p′ prescribed, rows x,y of a ladder pair have two PATHS in the
+  free part, and the cross-path pairs (the only ones whose flip exchanges
+  crossed/parallel) cannot be repaired when they are B-pairs (switch would trade
+  through p; cross-switch arc passes through p′).  CGW's condition (3) is exactly
+  what excludes paths — essential, not cosmetic.  What survives in the cross
+  space X (rows 1,2 + columns p,p′): (F) flip identity at legal A cross-path
+  pairs; (I) INTERCALATE identity E[I_sep; crossed] = E[I_merge; parallel]
+  (intercalates on rows x,z, columns q∈P₁, c∈P₂; always legal, frame-preserving);
+  data: I = 0.98·|A||B|/n in every bin (icsw50.log).  Hence P[parallel] ≥
+  (2/n)E[I_sep; crossed]: a constant lower bound on flippability in X needs only
+  (i) a 1/n lower bound for a 2-cell pattern in a free row given rows 1,2,
+  columns p,p′ and rows x,y's structure, and (ii) arc-trapping for Q_p in X.
+  Neither is available (universal bounds exclude full lines; CGW tolerates full
+  columns only; splice-in needs turns avoiding rows 1,2).
+  **CORE PROBLEM (CP), eq:CP:** given rows 1,2 and columns p,p′, for rows x,y
+  with four distinct symbols on {p,p′}: P[p,p′ in different ρ_{x,y}-cycles] ≥ c
+  (or: not all ladder pairs crossed).  Unconditionally = CGW Thm 3.13.
 - Literature (scout, §sec:witnessstatus): the conditional form is not in print;
   Allsop–Morris 2026 give (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (exp loss in ℓ;
   δ=Δ=1+o(1) open — that IS the lower-bound clause); KS18's exact ratio method
@@ -122,11 +138,13 @@ two-block odd perturbation; ρ from burnt-in starts (pitfall 56).
 
 ## Possible next steps (owner's choice)
 
--1. The witness lemma (hyp:witness): design the two-row cycle switching that moves
-   the j-cycle length of ρ_{x,y} by ±1 (or merges/splits it with a cycle avoiding j′)
-   with forward/backward degrees exact to 1+O(polylog/n); first for a single pair
-   (lower bound Θ(ℓ′/n)), then two pairs (covariance), in the conditional space.
-   Read CGW08 §3 (flip/backflip/cross-switch) and KS18 §3 first.
+-1. (CP): an automatically-legal exact move in the cross space that changes a
+   cross-path status — none known.  Candidates: (a) 2-cell pattern bounds (i) in
+   the cross space by switchings using only intercalate/short-cycle moves (KPS-style
+   stable intercalate switchings); (b) relax rows 1,2 to type + mark and compensate
+   type changes by CGW ratios (fails when q or c lies on the σ-cycle through p);
+   (c) an exact identity whose bit-changing pairs are not pinned by both a row
+   pair and a column pair.
 0. (superseded) (F1)/(F2).
 
 1. (II): formulate the minimal "coarse product" property of the pool and
