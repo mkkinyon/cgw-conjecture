@@ -1,16 +1,24 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
-*Updated 2026-10-01 (session 13, continuous).  The notes
+*Updated 2026-10-02 (session 13, continuous).  Two refereed documents: `paper/cgw_gap_note.tex`
+(5 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (17 pp, assembled by
+`paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
+thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
+refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
+Referee corrections applied to both (see git log a9d7507 and after).  The notes
 `second_row_notes.tex` (105 pp, 0 errors) are the living document; this file
 is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
 are kept for the record; their TODO lists are superseded by this file.*
 
-## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap)
+## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
 at {j,j′}) lands in the WRONG type when min(α,β) ≥ 3: the cross-switch reverses the
-ω-arc from ωj to ωj′, which contains j′, so {j,j′} ends at distance 2 (forced by the
-proof of their Lemma 3.10; verified independently, s13_cgwcase3.py: 2676/2676 wrong at
-n=9,12).  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
+ω-arc from ωj to ωj′ (or the complementary arc, by the smallest-symbol rule), which contains j′ (resp. j), so {j,j′} ends at distance 2
+(s13_cgwcase3.py: 1006/1006 at n=9, 3098/3098 at n=12 wrong type).  For min(α,β)=2<max the type is
+right but the form reversing the LONG arc makes joining rule 4 cross-switch at a different pair, so
+G_S ≠ G_J: exact at n=5, (5)→(2,3), all 161280 squares (s13_cgw_multigraph.py, runs/s13/cgw/):
+172800 of 1036800 G_S edges absent from G_J (half of case-3 + their switch edges), µ-degrees in G_S
+12/18/24 vs 18 asserted.  Only (2,2) is unaffected.  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
 form of OUR target) is unproved as published; the 1/2 direction is trivial given
 thm:marked.  Conditional on "CGW(3/2)" from now on: eq:cgwA's P_X[A] ≥ 1/3,
 prop:shortcycles lower bounds, the unconditional witness bound, unconditional (CP)
