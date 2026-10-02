@@ -132,17 +132,23 @@ multiplication by transpositions $(x\,y)$, $x,y\notin\{1,2\}$,
 \emph{thinned} to the flippable pairs: the turns reverse a cycle and
 the non-flippable trades conjugate by $(x\,y)$, and neither changes
 $\beta$.  The unthinned walk preserves $a=\pi^{-1}(1)$ and
-$b=\pi^{-1}(2)$.  On the fibre $\{\pi:\pi^{-1}(1)=a,\ \pi^{-1}(2)=b\}$,
-identified with the permutations of $[n]\setminus\{1,2\}$ by
-contracting the arcs $a\to1\to\pi(1)$ and $b\to2\to\pi(2)$, it is the
-walk by uniformly random transpositions, and rows $1,2$ share a cycle
-of $\pi$ iff $a,b$ share a cycle of the contracted permutation, which
-is the case for exactly half of the permutations of each fibre (two
-given points of a uniform permutation lie in a common cycle with
-probability exactly $\tfrac12$).  So if every pair were flippable the
-answer would be yes, with the left side $o(1)$ after $O(n\log n)$
-steps by Diaconis--Shahshahani.  The content of the Question is that
-the thinning by flippability does not destroy this.
+$b=\pi^{-1}(2)$.  Contracting the arcs $a\to1\to\pi(1)$ and
+$b\to2\to\pi(2)$ identifies the fibre
+$\{\pi:\pi^{-1}(1)=a,\ \pi^{-1}(2)=b\}$ with the permutations of
+$[n]\setminus\{1,2\}$ having no fixed point outside $\{a,b\}$ (a fixed
+point at $a$ or $b$ is the $2$-cycle $(1\,a)$ or $(2\,b)$ of $\pi$),
+and the walk with the walk by uniformly random transpositions of
+$[n]\setminus\{1,2\}$ in which the moves that would create a fixed
+point --- exactly the $\pi$-adjacent pairs --- are rejected.  Rows
+$1,2$ share a cycle of $\pi$ iff $a,b$ share a cycle of the contracted
+permutation, which is the case for exactly half of each fibre: left
+multiplication by $(a\,b)$ is an involution of the fibre that
+toggles it.  So if every non-adjacent pair were flippable the answer
+would be yes, with the left side $o(1)$ after $O(n\log n)$ steps if,
+as one expects by comparison with the unrestricted walk
+(Diaconis--Shahshahani), the rejections do not slow the walk down.
+The content of the Question is that the thinning by flippability does
+not destroy this.
 \end{remark}
 
 \begin{remark}[what is known numerically]\label{rem:numerics}

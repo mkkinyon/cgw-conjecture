@@ -50,9 +50,9 @@ row-sharing rare. Status:
   the apart state AND separating splits in the together state — and (F2)
   mixing of the thinned walk. Numerics: autocorrelation tracks the pure walk
   to the noise floor (n=30). If everything were flippable, EQ(o(1)) would
-  follow from Diaconis–Shahshahani on the fibres {π⁻¹(1)=a, π⁻¹(2)=b} ≅ S_{n−2}
-  (P[u~v]=½ exactly on each fibre; NOT on parity classes: there it is
-  ½ ± 1/((n−2)(n−3)), refereed). Standalone statement: paper/fairness_question.tex
+  follow from Diaconis–Shahshahani on the fibres {π⁻¹(1)=a, π⁻¹(2)=b} (= permutations
+  of n−2 points with no fixed point outside {a,b}, NOT all of S_{n−2}; P[u~v]=½
+  exactly there by the involution π ↦ (a b)∘π; NOT ½ on parity classes: ½ ± 1/((n−2)(n−3))). Standalone statement: paper/fairness_question.tex
   (refereed; σ-distance ≥ 2 in BOTH directions; no component enumeration beyond n=6).
 
 ## Bugs found this session
