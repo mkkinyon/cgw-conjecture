@@ -636,3 +636,135 @@ triangle-removal process; a positive answer would also deliver (T1)
 by the same device.  Second: redo the bookkeeping of
 \S\ref{sec:s9}--\S\ref{sec:s10} from the stationary start (T3),
 which is the honest form of (I).
+
+\subsubsection{The transfer (II): exact conditional structure, and the real-square test}
+\label{sec:s13transfer2}
+
+With \S\ref{sec:spectralexact} in hand, the whole programme rests on
+(T1)--(T2).  This subsection makes them precise and tests them.
+
+\paragraph{The conditional structure.}  Fix the mark $P=\{j,j'\}$
+and write $L_{\mathrm{rest}}$ for the $n\times(n-2)$ Latin rectangle
+obtained by deleting columns $j,j'$ from $L$; for each row $r$ let
+$\mathrm{miss}(r)$ be the pair of symbols absent from row $r$ of
+$L_{\mathrm{rest}}$.  Then:
+\begin{enumerate}[leftmargin=2.2em]
+\item[(i)] \emph{The frame is a function of $L_{\mathrm{rest}}$.}
+$\{L(r,j),L(r,j')\}=\mathrm{miss}(r)$, and $\pi_P(r)$ is the row $r'$
+with $L(r',j')=L(r,j)$, i.e.\ the other row whose missing pair contains
+$L(r,j)$.  So the cycles of $\pi_P$ are exactly the cycles of the
+$2$-regular ``leftover'' graph $G$ on rows ($r\sim r'$ iff
+$\mathrm{miss}(r)\cap\mathrm{miss}(r')\ne\emptyset$), traversed in a
+direction fixed by the orientation of each leftover cycle; the
+orientations are the $2^{\#\mathrm{cycles}}$ completions of
+$L_{\mathrm{rest}}$, fair coins except on the (at most two) cycles
+through rows $1,2$, which the conditioning on $S(\lambda)$ and the mark
+constrain.  The bit $[u\sim v]$ does not depend on the orientations.
+\item[(ii)] \emph{The pool is a coin-flip thinning of a candidate set
+determined by $L_{\mathrm{rest}}$.}  An intercalate $(r,r',j,c)$ with
+$c\notin\{j,j'\}$ requires $L(r',c)=L(r,j)\in\mathrm{miss}(r)$ and
+$L(r,c)=L(r',j)\in\mathrm{miss}(r')$.  Call $(r,r',c)$ a
+\emph{candidate} if $L(r',c)\in\mathrm{miss}(r)$ and
+$L(r,c)\in\mathrm{miss}(r')$ (a property of $L_{\mathrm{rest}}$).  A
+candidate is an intercalate through $j$ iff both rows place the
+relevant symbol in column $j$, through $j'$ iff both place it in $j'$,
+and otherwise it is nothing; so it is realised on the $j$-side with
+probability $\tfrac14$ and on the $j'$-side with probability $\tfrac14$
+when $r,r'$ lie on different leftover cycles, and with probabilities
+$(\tfrac12,\tfrac12)$ or $(0,0)$ when they lie on the same cycle.  The
+conjugating coordinates ($c=j'$) are exactly the $2$-cycles of $\pi_P$.
+Each row has about four candidate partners (a missing symbol of $r$
+sits in row $r'$ in a unique column $c$, and $L(r,c)$ must then be
+missing from $r'$, probability $\approx2/n$ for each of the $n-2$ rows
+$r'$ and each of the two missing symbols), so there are $\approx2n$
+candidates and $\approx n/2$ pool chords on each side, as observed.
+\item[(iii)] \emph{Local exclusion.}  A non-conjugating pool chord
+$(r,r')$ never has $\pi_P(r)=r'$ or $\pi_P(r')=r$: $L(r',c)=L(r,j)$ and
+$L(r',j')=L(r,j)$ would put one symbol twice in row $r'$.  Rows
+adjacent along a cycle of $\pi_P$ therefore never form a chord, and in
+particular no chord has both ends in a cycle of length $\le3$ (a
+$2$-cycle is conjugating, a $3$-cycle has all its pairs adjacent).
+\end{enumerate}
+Thus (T1)--(T2) are statements about $L_{\mathrm{rest}}$ alone: the
+cycle structure of its leftover graph $G$, and the position of the
+candidate graph $H$ ($r\sim r'$ iff $(r,r',c)$ is a candidate for some
+$c$) relative to the cycles of $G$.
+
+\paragraph{The test.}  \texttt{s13\_real.py} takes uniform squares
+from the Jacobson--Matthews sampler, samples marks
+$(j,\sigma^\alpha(j))$ with $\alpha\ge2$ in $\sigma$-cycles of length
+$\ge4$, builds the frame $\pi_P$ and a randomised greedy cell-disjoint
+pool of all intercalates through $j$ or $j'$ in rows $3..n$ (so
+$k\approx n/2$, no cap), computes the bit as
+$[u\sim v\text{ in }M_\omega\pi_P R_\omega]$ (verified against the
+switched square on $60$ random subsets: $0$ mismatches), and measures,
+with independent uniform subsets $S,T$ and uniform $\omega$:
+$\E[\varepsilon_S\varepsilon_T]$; the level statistics
+$\E[\varepsilon(\omega)\varepsilon(\omega\triangle D)]$ for
+$|D|=1,2,3$ non-conjugating coordinates (the model predicts
+$\langle\varepsilon,P^{|D|}\varepsilon\rangle$ up to $O(k^2/n)$); the
+frame ($\#$cycles, $\Pr[u\sim v]$, $|C_u|$); and the pool's position
+relative to the frame (number of chords with both ends in one
+$\pi_P$-cycle against the null $\sum_i|C_{r_i}\setminus\{r_i,u,v\}|/(n-3)$,
+and the relative position $d(r,r')/|C_r|$ of the second end in four
+bins).  For every real instance a \emph{matched model instance} is
+generated: a uniform derangement frame and uniform disjoint chords on
+rows $3..n$ with the same side counts $(|\mathcal I_j|,|\mathcal I_{j'}|,|\mathcal I_{jj'}|)$,
+and the same statistics are computed.
+
+\paragraph{Results.}  ($n=50$: $600$ squares, $2400$ instances, $16$
+$(S,T)$-pairs and $16$ level samples per instance; standard errors in
+parentheses.)
+\[
+\begin{array}{lccccccc}
+\toprule
+n=50 & k' & \E[\varepsilon_S\varepsilon_T] & \text{lev }1 & \text{lev }2 & \text{lev }3 & \Pr[u\sim v] & \Pr[|C_u|\le5]\\
+\midrule
+\text{real}  & 22.7 & 0.1326\,(73) & 0.627\,(5) & 0.472\,(6) & 0.374\,(6) & 0.522 & 0.073\\
+\text{model} & 22.7 & 0.1296\,(72) & 0.638\,(5) & 0.482\,(6) & 0.376\,(7) & 0.515 & 0.076\\
+\bottomrule
+\end{array}
+\]
+Pool position: real $27085$ same-cycle chords against a null of
+$28050$ ($-3.4\%$), model $28179$ against $28373$; position bins
+real $[5880,7322,7854,6029]$, model $[6674,7199,7463,6843]$ --- the
+real end bins are depleted by $\approx10\%$, which is the exclusion
+(iii) at the cycle lengths of $n=50$ ($\approx14$ rows per cycle; the
+two excluded positions out of $\approx14$ are $\approx15\%$ of an end
+bin).  The level-1 statistic is $1.6\sigma$ lower in the real squares
+(a chord toggles the bit slightly more often, $18.7\%$ against
+$18.1\%$), in the direction the exclusion predicts.  Everything else
+agrees within one standard error.  [$n=100$ and $n=200$: in
+progress at the time of writing; to be filled in.]
+
+\paragraph{What is now needed, restated.}  By
+Corollary~\ref{cor:stationarymodel} the programme needs, for
+$L\sim\mathrm{Unif}(S(\lambda))$ on the expander event and the marks of
+Theorem~\ref{thm:marked}:
+\[
+\text{(T)}\qquad
+\E\bigl[\varepsilon(\alpha)\,\varepsilon(\alpha\rho_D)\bigr]=o(1/\log^2n),
+\qquad \alpha=\pi_P(L),\ D\text{ a uniform subset of the pool},
+\]
+and the model says the left side is $\approx2/k'$.  Two remarks
+change the shape of the problem.  (a) \emph{Large pools.}  Nothing
+forces $k'=\Theta(\log^{11}n)$: Lemma~\ref{lem:supply} supplies
+$t\le\beta n/(8\ell)$ intercalates per column, and the real pool has
+$\approx n/2$.  With $k'=n/\mathrm{polylog}$ the trapped marks are
+those with row $1$ or $2$ in a $\pi_P$-cycle of length
+$\le\mathrm{polylog}\,n$, so (T1) becomes a statement about
+\emph{short} column cycles of a random Latin square ---
+$\E[C_\ell(\pi_P)]\le C/\ell$ for $\ell\le\mathrm{polylog}\,n$ --- rather
+than about cycles of length $n/\mathrm{polylog}$; for bounded $\ell$
+this is the Poisson statistics of short cycles of two columns, which
+is classical for uniform squares.  (b) \emph{What union-of-costs
+cannot do.}  Neither (T1) nor (T2) is an $e^{-\omega(n\log^2n)}$-robust
+property, so neither transfers from the uniform measure to
+$\mathrm{Unif}(S(\lambda))$ by Lemma~\ref{lem:condexp}; the natural
+tool is a switching argument on $L_{\mathrm{rest}}$ that preserves
+$S(\lambda)$ (switches avoiding rows $1,2$ preserve $\sigma$, the
+leftover graph $G$, and hence the frame, while moving the candidate
+graph $H$), i.e.\ a proof that, conditionally on $G$, the candidate
+graph is in generic position.  This is the open problem of the
+project; it is a problem about $n\times(n-2)$ Latin rectangles, and
+the numerics say its conclusion holds with margin.
