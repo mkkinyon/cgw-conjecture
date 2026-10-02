@@ -712,41 +712,35 @@ generated: a uniform derangement frame and uniform disjoint chords on
 rows $3..n$ with the same side counts $(|\mathcal I_j|,|\mathcal I_{j'}|,|\mathcal I_{jj'}|)$,
 and the same statistics are computed.
 
-\paragraph{Results.}  [The first run of this test inherited the
-symbol/column bug of \S\ref{sec:realbias} (marks were random column
-pairs); the tables below are from the corrected pipeline, which
-produced the same picture.]  ($n=50$: $600$ squares, $2400$ instances, $16$
-$(S,T)$-pairs and $16$ level samples per instance; standard errors in
-parentheses.)
+\paragraph{Results (corrected pipeline, true marks).}  ($n=50$: $600$
+squares, $2400$ instances, $16$ $(S,T)$-pairs and $16$ level samples
+per instance; standard errors in parentheses.)
 \[
 \begin{array}{lccccccc}
 \toprule
 n=50 & k' & \E[\varepsilon_S\varepsilon_T] & \text{lev }1 & \text{lev }2 & \text{lev }3 & \Pr[u\sim v] & \Pr[|C_u|\le5]\\
 \midrule
-\text{real}  & 22.7 & 0.1326\,(73) & 0.627\,(5) & 0.472\,(6) & 0.374\,(6) & 0.522 & 0.073\\
-\text{model} & 22.7 & 0.1296\,(72) & 0.638\,(5) & 0.482\,(6) & 0.376\,(7) & 0.515 & 0.076\\
-\midrule
-n=100 & k' & \E[\varepsilon_S\varepsilon_T] & \text{lev }1 & \text{lev }2 & \text{lev }3 & \Pr[u\sim v] & \Pr[|C_u|\le10]\\
-\midrule
-\text{real}  & 47.8 & 0.0795\,(92) & 0.643\,(6) & 0.495\,(7) & 0.406\,(8) & 0.518 & 0.089\\
-\text{model} & 47.8 & 0.0781\,(87) & 0.643\,(6) & 0.496\,(7) & 0.398\,(8) & 0.508 & 0.083\\
+\text{real}  & 22.7 & 0.0928\,(62) & 0.608\,(5) & 0.445\,(5) & 0.333\,(6) & 0.497 & 0.071\\
+\text{model} & 22.7 & 0.1338\,(73) & 0.644\,(5) & 0.488\,(6) & 0.382\,(6) & 0.518 & 0.085\\
 \bottomrule
 \end{array}
 \]
-($n=100$: $300$ squares, $1200$ instances.)  At $n=100$ the same-cycle
-deficit is $-1.6\%$ and the end-bin depletion $\approx4\%$, both
-halved from $n=50$, as the $2/(\text{cycle length})$ exclusion predicts.
-Pool position: real $27085$ same-cycle chords against a null of
-$28050$ ($-3.4\%$), model $28179$ against $28373$; position bins
-real $[5880,7322,7854,6029]$, model $[6674,7199,7463,6843]$ --- the
-real end bins are depleted by $\approx10\%$, which is the exclusion
-(iii) at the cycle lengths of $n=50$ ($\approx14$ rows per cycle; the
-two excluded positions out of $\approx14$ are $\approx15\%$ of an end
-bin).  The level-1 statistic is $1.6\sigma$ lower in the real squares
-(a chord toggles the bit slightly more often, $18.7\%$ against
-$18.1\%$), in the direction the exclusion predicts.  Everything else
-agrees within one standard error.  [$n=100$ and $n=200$: in
-progress at the time of writing; to be filled in.]
+[$n=100$: to be added when the run completes.]  Pool position: real
+$27847$ same-cycle chords against a null of $28586$ ($-2.6\%$), model
+$29182$ against $29176$; position bins real $[5947,7734,7892,6274]$,
+model $[6869,7489,7715,7109]$.  The real squares decorrelate
+\emph{faster} than the model, at every level, by $10$--$30\%$ at
+$n=50$; the mechanism is the exclusion (iii): the model's pool
+contains the $\approx|C|$ adjacent pairs of each cycle, which never
+change the bit, while the real pool does not, which raises the
+bit-changing fraction of a chord by a factor $\approx(|C|-1)/(|C|-3)$
+--- a $1/n$-type effect, in the favourable direction.  (With the
+symbol/column bug the two effects of order $1/n$ --- this one and the
+frozen adjacent instances --- happened to cancel, which is why the
+first run showed real $\approx$ model.)  The frame statistics agree
+with the model and the trapping fraction $\Pr[|C_u|\le5]$ is $0.071$
+against the model's $0.085$ (and against the bound $36\cdot5/50$ of
+Proposition~\ref{prop:trapped}).
 
 \paragraph{What is now needed, restated.}  By
 Corollary~\ref{cor:stationarymodel} the programme needs, for
@@ -999,7 +993,17 @@ available at rate $\ge c/n^2$ on the event (F1).  Both are statements
 about a pair of rows and a pair of columns of a random Latin square,
 with no intercalates, orbits or expanders; (F1) is the kind of
 statement the switching method reaches.  Measured on real squares
-with true marks ($n=30$, \texttt{runs/s13/trade30.log}): the
-autocorrelation of the bit after $m$ trades tracks that of the pure
-walk with transpositions avoiding $u,v$ and decays to the noise floor
-by $m\approx32$, with no plateau.
+with true marks ($n=30$, $900$ instances, \texttt{runs/s13/trade30.log}):
+flippable fraction $0$ for adjacent pairs and $0.5005$, $0.4999$ for
+same-cycle and different-cycle pairs; the autocorrelation of the bit
+after $m$ trades is $0.559,0.413,0.307,0.250,0.170,0.121,0.069,0.048,
+0.025,0.007,0.004,0.002$ at $m=1,2,3,4,6,8,12,16,24,32,48,64$, against
+$0.617,0.454,0.345,0.279,0.192,0.143,0.086,0.058,0.026,0.011,0.003,0.005$
+for the walk with iid transpositions avoiding $u,v$ from a uniform
+derangement frame: the chain decorrelates slightly faster (the
+adjacency exclusion again) and reaches the noise floor by $m\approx32$,
+with no plateau.  [With the symbol/column bug the same experiment
+showed a plateau at $\approx0.09$: the frozen instances were exactly
+those with $\pi(1)=2$ or $\pi(2)=1$, impossible for a true mark, on
+which the chain --- which preserves $\pi^{-1}(1)$ and $\pi^{-1}(2)$
+--- cannot move the bit.]
