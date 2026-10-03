@@ -1895,9 +1895,9 @@ and $\min(|Q_p|,|Q_{p'}|)$ if parallel.  For $t<\mu_{x,y}$ the pair
 $(q^t,c^t)$ is free ($q^t\ne c^t$, both $\notin\{p,p'\}$) and
 \emph{separated by $\{p,p'\}$ in $\rho_{x,y}$ by construction}: on
 different arcs when crossed, one in $Q_p$ and one in $Q_{p'}$ when
-parallel.  So the turn of its column cycle through $x$ toggles the bit
-(Lemma~\ref{lem:legalturn}) whenever it is legal --- there is no
-genericity to ask for.
+parallel.  So the turn of its column cycle $Z$ through $x$ (with $y\notin Z$)
+toggles the bit (Lemma~\ref{lem:legalturn}) whenever it is legal ---
+there is no genericity to ask for.
 
 \begin{lemma}[the adaptive coordinate is orbit-invariant]\label{lem:adaptinv}
 Let $t<\mu_{x,y}$, let $Z$ be the column cycle of $(q^t,c^t)$ through
@@ -1929,11 +1929,13 @@ turned cycle is preserved (Lemma~\ref{lem:cycletrade}).
 \end{proof}
 
 \begin{proposition}[orbit bound with adaptive coordinates]\label{prop:adaptive}
-Let $(L,P)\in X$, $I$ a family of ladder pairs $(x_k,y_k)$ with
-pairwise distinct rows, none in $\{1,2\}$, and $T\ge1$.  Call the
-candidate $(k,t)$ \emph{good} if $t\le\min(T,\mu_k-1)$ and the column
-cycle $Z_k^t$ of $(q_k^t,c_k^t)$ through $x_k$ meets $\{1,2\}$ in $0$
-or $2$ rows and meets the rows of $I$ only in $x_k$.  Let $t_0(k)$ be
+Let $(L,P)\in X$, $I$ a frame-determined family of pairs $(x_k,y_k)$
+as in \S(c) (distinct $x$-rows, disjoint from the $y$-rows, none in
+$\{1,2\}$; the ladder, or a union of offset diagonals), and
+$T,\ell_1\ge1$.  Call the candidate $(k,t)$ \emph{good} if
+$t\le\min(T,\mu_k-1)$ and the column cycle $Z_k^t$ of $(q_k^t,c_k^t)$
+through $x_k$ has length $\le\ell_1$, meets $\{1,2\}$ in $0$ or $2$
+rows and meets the rows of $I$ only in $x_k$.  Let $t_0(k)$ be
 the least good $t$ (if any), $C_k=\{q_k^t,c_k^t:\ t\le t_0(k)\}$
 (all candidates $t\le\min(T,\mu_k-1)$ if there is none), and
 \[
@@ -1950,7 +1952,8 @@ Hence
 \end{proposition}
 \begin{proof}
 $T_k$ changes only columns $q_k,c_k:=q_k^{t_0(k)},c_k^{t_0(k)}$ in the
-rows of $Z_k$.  Legality: $Z_k$ meets $\{1,2\}$ in $0$ or $2$ rows and
+rows of $Z_k$ (lengths of cycles are preserved with their row sets, so
+the length condition is invariant along with the rest).  Legality: $Z_k$ meets $\{1,2\}$ in $0$ or $2$ rows and
 $\{q_k,c_k\}\cap\{p,p'\}=\emptyset$, so the type of rows $1,2$ and the
 mark are preserved (Lemma~\ref{lem:legalturn}); columns $p,p'$ are
 untouched, so the frame and the ladder are preserved.  For $k\ne l$ in
@@ -2000,7 +2003,7 @@ $\approx(1-2Ts/n)^2$, so
 \]
 far above the $C\log\log n$ required; \eqref{eq:hypadaptive} is then a
 concentration statement for a count of \emph{local} configurations
-(each good candidate is determined by $O(\log^2n)$ cells: $2t$ cells of
+(each good candidate is determined by $O(\log^2n)$ cells: $4t$ cells of
 rows $x_k,y_k$ and the cycle $Z_k^t$), which is the kind of statement
 the switching method is built for --- modulo, as always, the frame
 selection of the rows.
@@ -2011,15 +2014,38 @@ instances at $n=30,50,100$, for a random $k\in U$ the turn of $Z_k$ was
 applied and checked to toggle the status of $(x_k,y_k)$, to leave the
 status, $\mu_l$, $t_0(l)$, $C_l$ of every other pair and the set $U$
 unchanged, and to preserve the type of rows $1,2$ and the frame
-($682$, $697$, $215$ turns, no failure); the bound
-$\Pr[\mathrm{Flip}_I=\emptyset]\le\E[2^{-|U|}]$ holds in every $K_0$
-class.  With the small families and parameters usable at these sizes
-($T=6$, $\ell_1=8$--$10$, $|I|\le n/8$) $15$--$30\%$ of the ladder
-pairs have a good candidate but only $3$--$13\%$ are in $U$: the
-collision rule in $U$ (which forbids the chosen pair to meet the
-candidate sets of \emph{all} other pairs, $\approx2Ts$ columns) is
-crude, and at $n\le100$ with $2Ts\ge n$ it removes most pairs; the
-asymptotic regime $2Ts/n\le\tfrac12$ is out of reach of sampling.  The
-rule could be refined (only used pairs need to be protected, if $U$
-is defined by a canonical greedy order that is itself invariant), but
-the present form suffices for the statement.
+($682$, $697$, $444$, $215$ turns at $n=30,50,50,100$, no failure);
+the bound $\Pr[\mathrm{Flip}_I=\emptyset]\le\E[2^{-|U|}]$ holds in
+every $K_0$ class.  With the small families and parameters usable at
+these sizes ($T=6$, $\ell_1=6$--$10$, $|I|\le\max(3,n/8)$)
+$14$--$30\%$ of the ladder pairs have a good candidate but only
+$2$--$13\%$ are in $U$: the collision rule in $U$ (which forbids the
+chosen pair to meet the candidate sets of \emph{all} other pairs,
+$\approx2Ts$ columns) is crude, and at $n\le100$ with $2Ts\ge n$ it
+removes most pairs; the asymptotic regime $2Ts/n\le\tfrac12$ is out of
+reach of sampling.  (Protecting only the used pairs would need a
+canonical choice of $U$ that is itself orbit-invariant; the obvious
+greedy rule is not, since a turn can shrink the candidate set of an
+excluded pair; the ``for all $l\in I$'' quantifier is what makes the
+present $U$ invariant.)
+
+\emph{What it costs.}  The fixed matching of \S(c) offered $\approx n/2$
+coordinates per pair, of which a constant number were short and clean
+and a constant fraction of those (the data say $0.19$) separated; the
+adaptive rule offers $T=O(\log^2n)$ coordinates per pair, all
+separated, so membership in $U$ is a \emph{rare} event per pair
+($\approx T\ell_1/n$), and \eqref{eq:hypadaptive} is a lower-tail
+statement about rare local events --- of the type of the witness lemma
+(\S\ref{sec:witnessstatus}), with a column cycle of a free pair through
+$x_k$ in place of a $\rho_{x_k,y_k}$-cycle through $p$ --- rather than
+the ``typically constant size'' statement that \S(c) advertised.  The
+genericity constant is gone, the rarity is not.  There is a second
+regime: with $s\approx T\approx\ell_1\approx\sqrt n$ (say
+$s=\sqrt n/4$), a pair has a good candidate with probability bounded
+below and $\E|U|\asymp\sqrt n$, so \eqref{eq:hypadaptive} becomes a
+second-moment statement about $\sqrt n$ events of constant probability
+($(\gamma)$-type decorrelation) at the price of arc trapping at scale
+$\sqrt n$ ($\mu_k>\sqrt n$ for a constant fraction of the pairs,
+which by \eqref{eq:Jp} needs $1-b_\ell\gg n^{-1/2}$ for
+$\ell\le\sqrt n$).  Either way, what is left is the behaviour of
+short column cycles and arcs at the frame-selected rows.

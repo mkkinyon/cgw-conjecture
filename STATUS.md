@@ -25,7 +25,12 @@ distance 2 or m−2** (prop:alpha2) — the first gap-direction bound we have; f
 multiplicity.  §(h),(i): two disjoint row pairs have numerically independent cycle types (n=30,50,100);
 prop:genericlong: a generic row pair has a cycle > n/5 w.p. ≥ 1/2 unconditionally; KS/KSS inventory: transfer
 lemma e^{O(n log² n)} ⇒ KSS intercalate concentration holds in every class of X; nothing in KS/KSS addresses
-frame-selected families.  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
+frame-selected families.  **§(j) ADAPTIVE COORDINATES (prop:adaptive, refereed, verified at n=30–100):**
+take the coordinates of ladder pair k to be (ρ_k^t p, ρ_k^t p′), t ≤ min(T, μ_k−1): they are separated by {p,p′}
+BY CONSTRUCTION and orbit-invariant (lem:adaptinv), so (β) disappears: P_X[Flip_I=∅] ≤ E[2^{−|U|}], U = pairs with a
+short clean candidate cycle (and non-colliding).  New hypothesis eq:hypadaptive: E[2^{−|U|}; K₀ ≥ ℓ₀] = o(1/log n)
+(+ offset version).  Cost: per-pair membership is rare (≈ Tℓ₁/n) — a witness-lemma-type lower tail — or, with
+s ≈ T ≈ ℓ₁ ≈ √n, constant per pair but needs arc trapping at scale √n.  Consequence: CGW's 3/2 direction (⟺ P_X[B] ≤ 2/3 via thm:marked — a weak
 form of OUR target) is unproved as published; the 1/2 direction is trivial given
 thm:marked.  Conditional on "CGW(3/2)" from now on: eq:cgwA's P_X[A] ≥ 1/3,
 prop:shortcycles lower bounds, the unconditional witness bound, unconditional (CP)
