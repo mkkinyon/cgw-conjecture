@@ -94,9 +94,20 @@ counts/figures, terminology (ρ = permutation of columns induced by rows; τ_t =
 to the first pair, §7 closing includes the ν-tail.  Paper sources: `paper/firstpair_block.py` (new), `cprime_blocks.py` (remains),
 `assemble_conditional.py`, `postprocess_conditional.py`.  Did not touch the core obstacle.  Remaining before posting (R2c–e):
 literature search (user), human read of §§2–4, the gap-note courtesy window.
-**What did NOT change (today):** no proven lower bound at a frame-selected pair; the only one remains P_X[A] ≥ ¼ at distance 2
-(global joining argument).  hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read done
-(NEXT_STEPS, counts as the one due after 5 segments); next cold read after R4.
+**Seg 6 — R4 (one segment, stopping rule applied): DATA + one small PROVED lemma that is a one-way REDUCTION of the ν-term +
+NEGATIVE KNOWLEDGE on the switching route.**  Data: n·P_X[Gᶜ] = 5.5, 5.5, 5.5, 5.4 at n = 30, 50, 100, 150 (type (n)); 5.5 for
+(4,2^73) at n=150; P[ν=k] ≈ 4/n; P[Gᶜ|ν=k] ≈ 0.6^{k−1} at every n and type.  lem:nuswitch (notes §(l); refereed; verified on
+2.5·10⁵ moves): for the staircase event E_k(a,b) (ρ-path from a ∈ {p,p′} first meets {p,p′} at step k at b), trading rows x₁,u
+along the ρ_{x₁,u}-cycle W_u through w_{k−1} is always legal, keeps (x₁,y₁), and is rigidly invertible when W_u avoids
+{p, w₀..w_{k−2}}; hence P_X[ν ≤ M, f ≥ θn] ≤ 4M/(θn), f = number of admissible rows u.  Where it stalls: the residual
+P_X[ν ≤ M, f < θn] is a lower tail of a count of constant-probability events (≈1/(k+1) each) at frame-selected positions —
+the same TYPE as the second term of hyp:firstpair (a different event).  Fixed-position route (exchangeability + union
+bound over staircases) needs "P[Q ⊆ L | R] ≤ (C/n)^{|Q|} for Q in two rows", which always-legal row trades give only to one
+factor 1/n per row; column turns are legal on a set whose size is again a lower tail.  Stopped per the rule.  Scripts
+`s13_nutail.py`; data logs runs/s13/fixrect/fp*.log.
+**What did NOT change (today):** no proven lower bound at a frame-selected position; both terms of hyp:firstpair are lower
+tails of counts of constant-probability events at such positions; the only lower bound remains P_X[A] ≥ ¼ at distance 2.
+hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read due now (6 segments today).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

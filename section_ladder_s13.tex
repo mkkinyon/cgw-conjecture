@@ -2355,3 +2355,104 @@ event at a frame-selected position in $X$ remains unproved; the only
 one available is Proposition~\ref{prop:alpha2}'s $\Pr_X[A]\ge\tfrac14$
 at distance $2$, which comes from CGW's global joining argument, not
 from a local one.
+
+\paragraph{(l) R4: the $\nu$-tail at the first pair, and where a switching
+for it stalls.}  (Classification: one small PROVED lemma, which is a
+one-way REDUCTION of the $\nu$-term of \eqref{eq:hypfirstpair} to a
+lower tail at frame-selected positions; NEGATIVE KNOWLEDGE about the
+switching route; DATA.  Stopped by the agreed rule after one segment.)
+Write $\nu$ for the arc/cycle minimum at the first pair (called $\mu$
+in \S(k); the paper uses $\nu$ since $\mu$ is the split type).  The
+first-pair condition \eqref{eq:hypfirstpair} splits as
+$\Pr_X[G^c]\le\Pr_X[\nu\le M]+\Pr_X[\nu>M,\ t\le M\text{ all bad}]$,
+and the first term is an \emph{upper} bound on a short arc or cycle of
+$\rho=\rho_{x_1,y_1}$ at the mark, the direction in which switchings
+usually work.  The event $\{\nu\le M\}$ is the union over $k\le M$ of
+the four events $E_k(a,b)$, $a,b\in\{p,p'\}$: the $\rho$-path
+$w_0=a,w_1,\dots$ first meets $\{p,p'\}$ at step $k\ge2$, at $w_k=b$.
+Each such event is a ``staircase'' of $2k$ cells in rows $x_1,y_1$:
+$L(y_1,w_{i+1})=L(x_1,w_i)$ for $0\le i<k$, together with the two anchor
+cells $L(x_1,p)=L(1,p')$, $L(y_1,p)=L(2,p')$ that define the pair.
+
+\begin{lemma}[a rigid always-legal switching for the staircase]\label{lem:nuswitch}
+Fix $k\ge2$, $a,b\in\{p,p'\}$ and $L\in E_k(a,b)$ with path $w_0,\dots,w_k$ (recall
+$x_1,y_1\notin\{1,2\}$ since $\alpha,\beta\ge2$, \S(k)).  For a row
+$u\notin\{1,2,x_1,y_1\}$ let $W_u$ be the $\rho_{x_1,u}$-cycle through $w_{k-1}$, and call
+$u$ admissible if $W_u\cap(\{p\}\cup\{w_0,\dots,w_{k-2}\})=\emptyset$; let $f_k(L)$ be the
+number of admissible $u$.  For admissible $u$, trading rows $x_1,u$ along $W_u$ gives a
+square $L'\in X$ with the same frame-selected pair $(x_1,y_1)$, and $(L,u)$ is recovered
+from $(L',k,a,b)$ alone.  Consequently, writing $f_{k,a,b}$ for $f_k$ and, on
+$\{\nu\le M\}$, $(k,a,b)$ for the triple realising $\nu$ (with $a=p$ if both starts do),
+for every $\theta>0$,
+\[
+\Pr_X\bigl[E_k(a,b)\cap\{f_{k,a,b}\ge\theta n\}\bigr]\le\frac1{\theta n},\qquad
+\Pr_X\bigl[\nu\le M,\ f_{k,a,b}\ge\theta n\bigr]\le\frac{4M}{\theta n}.
+\]
+\end{lemma}
+
+\begin{proof}
+Rows $1,2$ are untouched, so $L'\in X$ (the mark and $\sigma$ are unchanged); row $y_1$ is
+untouched; $p\notin W_u$ keeps the anchor $L(x_1,p)$, so $x_1,y_1$ are the frame-selected
+pair of $L'$.  Inversion: $\rho'(w)$ (the column of $L'(x_1,w)$ in row $y_1$) differs from
+$\rho(w)$ only for $w\in W_u$, so the admissibility condition makes the $\rho'$-path from
+$a$ agree with $w_0,\dots,w_{k-1}$; the symbol $s=L(x_1,w_{k-1})=L(y_1,b)=L'(y_1,b)$ is read
+off row $y_1$; $u$ is the row of $s$ in column $w_{k-1}$ of $L'$ (the trade moved $s$ from
+$(x_1,w_{k-1})$ to $(u,w_{k-1})$ and changed nothing else in that column; note
+$w_{k-1}\notin\{p,p'\}$ by first meeting, and $p'\in W_u$ is harmless, as nothing reads row
+$x_1$ at $p'$); and
+$W_u$ is the $\rho'_{x_1,u}$-cycle through $w_{k-1}$ (the trade inverts it as a cycle of
+$\rho_{x_1,u}$).  Trading back returns $L$.  So
+$\sum_{L\in E_k(a,b)}f_k(L)\le|X|$, which gives the first bound; the second is a union bound over
+$k\le M$ and the four $(a,b)$.
+\end{proof}
+
+Checked on samples (\texttt{s13\_nutail.py}; $218101$ moves at $n=30$,
+$28018$ at $n=50$, $k\le6$): every move is legal, keeps $(x_1,y_1)$ and
+is inverted exactly.  The admissible fraction $f_k/n$ has mean
+$0.35,0.23,0.17,0.14,0.11$ for $k=2,\dots,6$ at $n=30$ ($0.38$--$0.13$ at
+$n=50$), and a lower tail: at $n=30$, $f_k<n/20$ for $0$, $0.5\%$, $2.6\%$,
+$7\%$, $14\%$ of the sources with $k=2,\dots,6$.
+
+\emph{Where it stalls.}  The lemma leaves
+$\Pr_X[\nu\le M,\ f<\theta n]$, and $f<\theta n$ says that for all but
+$\theta n$ rows $u$ the $\rho_{x_1,u}$-cycle through $w_{k-1}$ meets a
+prescribed set of $k$ columns.  This is a lower tail of a count of
+constant-probability events (the cycle through a given column of a
+random permutation has length uniform on $\{1,\dots,n\}$, so it avoids
+$k$ given columns with probability $\approx1/(k+1)$; the data above fit
+this) at frame-selected positions ($x_1$, $w_{k-1}$ and the path) ---
+of the same type as the second term, though a different event.  Two attempted repairs fail for the reasons already on
+record: (i) by row exchangeability and a union bound over the
+staircase's $n^{2k-2}$ free parameters, $\Pr_X[\nu\le M]$ would follow
+from a \emph{fixed-position} bound ``$\Pr[Q\subseteq L\mid R]\le(C/n)^{|Q|}$
+for partial squares $Q$ with $|Q|\le2M+2$ cells in two rows'' (the
+staircase of $E_k(a,b)$ with its two anchors has $2k$, $2k+1$ or $2k+2$
+distinct cells and $n^{2k-3}$, $n^{2k-2}$ or $n^{2k-1}$ free parameters
+according as $(a,b)=(p,p)$, mixed, or $(p',p')$, and the exchangeability
+factor is $(n-2)(n-3)$; then $\Pr_X[\nu\le M]\le8C^{2M+2}/n$ for
+$C\ge2$); but in $S(R)$ the always-legal row
+trades give only one factor $1/n$ per row (two cells in one row are
+not shown to have probability $O(1/n^2)$), and column turns are legal
+only on a set of choices whose size is again a lower tail of a
+fixed-position count; (ii) breaking the staircase by a trade that is
+allowed to move the anchor (so that the frame-selected pair changes)
+loses the rigidity of the inversion.  So the lemma moves the $\nu$-term to a lower tail of the same type
+as the second term (a different event, at positions selected by the
+same pair); it does not show the $\nu$-term easier or harder than the
+second term.
+
+\emph{Data (R4).}  With all candidates $t<\nu$ (\texttt{s13\_firstpair\_id.py};
+\texttt{runs/s13/fixrect/fp*.log}): $n\Pr_X[G^c]=5.5,\,5.5,\,5.5,\,5.4$ at
+$n=30,50,100,150$ for the type $(n)$ ($\alpha=2$; $5.6$, $5.5$ for
+$\alpha=n/2$ at $n=100,150$), and $5.5$ for $(4,2^{73})$ at $n=150$
+($6000$ squares, $3$ marks each, thinning $n^2$).  $\Pr[\nu=k]\approx4/n$
+for $k\le12$ at every $n$ ($0.040$ at $n=100$, $0.026$ at $n=150$), and
+$\Pr[G^c\mid\nu=k]$ against $0.59^{k-1}$: $0.60,0.30,0.20,0.14,0.07$ vs
+$0.59,0.35,0.21,0.12,0.07$ at $n=150$ --- the same at every $n$ and type.
+So the first-moment picture $\Pr_X[G^c]\approx\E[0.6^{\nu-1}]\approx5.5/n$
+is stable in $n$ and type; it says nothing about the $o(1/\log n)$
+requirement beyond the trivial observation that $5.5/n\ll1/\log n$.
+
+\emph{What did not change.}  No lower bound at a frame-selected position;
+both terms of \eqref{eq:hypfirstpair} are lower tails of counts of
+constant-probability events at such positions.  Stopped.
