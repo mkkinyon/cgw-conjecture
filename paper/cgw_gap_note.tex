@@ -325,7 +325,18 @@ weaker than $\tfrac32$ --- any constant, or even the averaged statement
 $\sum_{\mu\in M}\gamma(\mu)|S(\mu,F)|/(\gamma(\lambda)|S(\lambda,F)|)\to\infty$
 over the odd splits $M$ of a large even part --- but we do not have
 that either.  So, as far as we can see, Theorem~1.1 of \cite{CW16}
-currently depends on the gap at two points.
+currently depends on the gap at two points.  The statement itself is
+nevertheless true: Kwan, Petrova and Sawhney \cite{KPS25} have since
+proved Cameron's conjecture on parities (their Theorem~1.3), of which
+Theorem~1.1 of \cite{CW16} is a special case (part~(4)).  Their written
+proof of parts~(3)--(4) uses \cite{CW16} as a black box, so the formal
+dependence on the gap runs through it, but their Remark~6.6 sketches an
+independent re-proof of the Cavenagh--Wanless theorem by their own
+method; we take it that the dependence is removable, and have not
+checked the sketch.  Their Theorem~1.3(1) also gives, by row
+exchangeability, $\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$,
+which supersedes Theorem~4.3 of \cite{CGW08} (affected by the gap, as
+listed above).
 
 More generally, the surviving direction bounds fine types from above
 only: it gives no upper bound on the probability of a coarse type.  In
@@ -341,9 +352,12 @@ $\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
 this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
 gives $\PP_F((2,m-2))\le\tfrac m{2(m-2)}\PP_F((m))$, and iterating over
 $k$ two-cycles loses a factor of order $4^kk!$.  (We checked the other
-papers citing \cite{CGW08} that are indexed by MathSciNet; the remaining
-citations are to the intercalate estimates, superseded by \cite{KS18},
-or to the conjecture on multiplication groups of random loops.)
+papers citing \cite{CGW08} that are indexed by MathSciNet or listed by
+Google Scholar; the remaining citations are to the intercalate
+estimates, superseded by \cite{KS18}, to the conjecture on
+multiplication groups of random loops, or, as in Allsop and Morris
+\cite{AM26}, to the reversibility and effect lemmas for cycle and
+cross switches in \S3 of \cite{CGW08}, which are unaffected.)
 
 \section{A partial repair}
 
@@ -526,6 +540,8 @@ $1.8\cdot10^{-4}$, $<10^{-5}$, $<10^{-5}$ for $n=7,\dots,11$) rather
 than $3/2$; the question is only what has been proved.
 
 \begin{thebibliography}{9}
+\bibitem{AM26} J. Allsop and P. Morris, Universal probability bounds for partial Latin squares,
+arXiv:2606.18174 (2026).
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle
 structure of two rows in a random Latin square, \emph{Random Structures
 \& Algorithms} 33 (2008), 286--309.
@@ -533,6 +549,8 @@ structure of two rows in a random Latin square, \emph{Random Structures
 Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
 squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
+\bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
+arXiv:2509.13125 (2025).
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures \& Algorithms} 52 (2018), 181--196.
 \end{thebibliography}

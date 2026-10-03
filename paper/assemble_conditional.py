@@ -397,7 +397,10 @@ surviving direction gives no upper bound on coarse types: in particular we know 
 that two rows of a random Latin square form a single $n$-cycle with probability $o(1)$
 (Lemma~4.4's $2n^{-2/3}$; the second-moment method with \cite{KS18} and
 Proposition~\ref{prop:tailsurvive}(i) gives only $\le\tfrac56+o(1)$), and the parity theorem
-of \cite{CW16} uses the unproved direction at odd splits (details in \cite{gapnote}).  For
+of \cite{CW16} uses the unproved direction at odd splits (details in \cite{gapnote}); that
+theorem is nevertheless true, being a special case of \cite[Thm.~1.3(4)]{KPS25}, whose
+written proof uses \cite{CW16} as a black box but whose Remark~6.6 sketches an independent
+re-proof.  For
 $\min(\alpha,\beta)=2$ the count can be corrected with the constant $2$ in place of $\tfrac32$
 \cite[Prop.~3]{gapnote}: for marks at distance $2$ or $m-2$ on an $m$-cycle,
 $\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[A]\ge\tfrac14$ unconditionally.  The present
@@ -519,6 +522,8 @@ rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 28
 \bibitem{gapnote} [author], A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, note, October 2026.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
+arXiv:2509.13125 (2025).
 \bibitem{CW16} N.~J. Cavenagh and I.~M. Wanless, There are asymptotically the same number of
 Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin

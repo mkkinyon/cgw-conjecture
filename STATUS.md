@@ -1,12 +1,12 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
-(7 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (25 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
+(8 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (25 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
 Referee corrections applied to both (see git log a9d7507 and after).  The notes
-`second_row_notes.tex` (105 pp, 0 errors) are the living document; this file
+`second_row_notes.tex` (139 pp, 0 errors) are the living document; this file
 is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
 are kept for the record; their TODO lists are superseded by this file.*
 
@@ -35,7 +35,7 @@ obstacle; and P_X[B] itself is controlled by the same G (prop:firstpairbias); (4
 **Progress =** a proven lower bound at a frame-selected pair, or a falsification.  Another "lower tail of rare
 local events at frame-selected rows" = reformulation, to be labelled as such.
 
-## LITERATURE CHECK 2026-10-03 (MathSciNet citers of CGW08; KSSS, Allsop–Wanless, Divoux–Kelly–Kennedy–Sidhu, Gill–Mammoliti–Wanless read)
+## LITERATURE CHECK 2026-10-03 (MathSciNet + Google Scholar citers of CGW08; KSSS, Allsop–Wanless, DKKS, GMW, CW16, Allsop–Morris, KPS read)
 Notes §(m).  (a) Fixed-cell bounds in the literature are rectangle statements (KSSS Lemma 3.3, k ≤ n/4, within-row swaps; DKKS
 Thm 1.6, k < n/2, two-sided (1±δ)/n for εn-sparse P, Granet–Joos long switches in the free-pair expander) or open conjectures for
 sparse P in full squares (DKKS Conj 1.5; Kelly's (e²+o(1))/n spread).  Our (FC) conditions on two FULL rows (dense): in spread
@@ -53,6 +53,30 @@ splits min ≥ 3 (Lemma 2.3: the gap direction, outside Prop 3; what they need i
 currently depends on the gap at two points.  NEW NEGATIVE KNOWLEDGE (refereed): from the surviving material + our identities we
 know of no proof that two rows of a random Latin square form a single n-cycle w.p. o(1) (Lemma 4.4's 2n^{−2/3}); second moment
 (KS18 + prop:tailsurvive(i)) gives only P[(n)] ≤ 5/6 + o(1); Prop 3 iterated loses 4^k k!.  Gap note §4 updated (8 pp).**
+**Google Scholar citers (user's list) + Allsop–Morris 2026 and Kwan–Petrova–Sawhney 2025 read (notes §(n), §(o); refereed).**
+*Allsop–Morris (arXiv 2606.18174), Theorem 1.1: two-sided (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (δ→1/23, Δ→23) for partial Latin squares P
+with |R_P| ≤ αn, |C_P| ≤ βn, 2α+β < 1 — full squares; our R (two full rows) is outside the STATEMENT.  Their tool, the η-switching
+η_L(r,r′,c) (displaces the target cell within its row; changes only rows r,r′,r″; reversibility ≤ n preimages if Type One, ≤ 1
+otherwise), is LEGAL in X whenever r,r′,r″ ∉ {1,2} ∪ R_Q, with a DETERMINISTIC forward degree n − O(|Q|) — the first switching
+available to us in X with that property (all our turns have random forward degrees).  Their Theorem 3.1 (P[Type One | P] ≤ D/n),
+which converts reversibility into the per-cell bound, transfers to X in Claim 1 (recursion; bookkeeping α=(2+|R_Q|)/n, β=(|C_Q|+2)/n,
+excluded columns C_Q ∪ {p,p′}) and Claims 2–3 (cross-switch segments restricted to contain 0 or 2 of rows 1,2; double count must be
+rewritten; constants only), and FAILS at exactly one step: Claim 4(ii) (the column-cycle switch γ_L(c₂,c₃,x) when the row switch
+ρ(r₃,x,c₃) hits c₂) in the configuration "exactly one of rows 1,2 on γ_L(c₂,c₃,r₁) and x on the (c₂,c₃)-cycle of the other"; the
+other cases are repaired by turning unions of cycles.  Claim 1 alone gives only P_X[Type One | Q] = O(n^{−1/2}), i.e. C/√n per
+cell, not (FC).  If (FC) in X held with constant Δ: P_X[ν ≤ M] ≤ 8Δ^{2M+2}/n (notes §(l)(i)), the first term of hyp:firstpair.
+Classification: NEGATIVE KNOWLEDGE on one step + a sharp question for Allsop/Morris/Wanless: does Theorem 3.1 hold when P contains
+two complete rows the switchings never touch?  AM cite CGW08 only for the §3 switching lemmas (reversibility/effect of cycle and
+cross switches) — unaffected by the gap.*
+*KPS (arXiv 2509.13125) prove Cameron's parity conjecture (Thm 1.3) via an approximation lemma (triangle-removal process → random
+subset of a random Latin square at cost e^{O(n log² n)} on the failure probability) + a canonical switch-invariant family of
+"stable intercalates" that meets every large set of rows simultaneously (Lemma 8.3).  Consequences: (i) Thm 1.3(1) ⇒ P[rows 1,2
+same parity] = ½ + o(1) ⇒ **P_n[σ even] = ½ + o(1): the parity marginal of the weak conjecture is proved (by them)**; supersedes
+CGW Thm 4.3 (gap-affected); (ii) CW16's theorem is a special case of Thm 1.3(4), whose written proof uses CW16 as a black box
+(dependence CGW→CW16→KPS 1.3(3)–(4) formally present), Remark 6.6 sketches an independent re-proof — gap note §4 updated
+(commit pending); (iii) program sketch (not a result): approximation lemma for completions of a fixed R + stable toggles acting on
+flippability bits + re-randomisation; the separation input (β) reappears as "some stable intercalate at row x_k has a separated
+column pair".  Classification: literature / WRITING (two gap-note corrections).*
 
 ## COLD READ 2026-10-03 (independent subagent, after 6 segments) — verdict and corrections to adopt
 **Verdict.** Core obstacle unchanged; the log says so honestly.  New and unconditional today: prop:firstpair, prop:firstpairbias
@@ -163,7 +187,11 @@ factor 1/n per row; column turns are legal on a set whose size is again a lower 
 `s13_nutail.py`; data logs runs/s13/fixrect/fp*.log.
 **What did NOT change (today):** no proven lower bound at a frame-selected position; both terms of hyp:firstpair are lower
 tails of counts of constant-probability events at such positions; the only lower bound remains P_X[A] ≥ ¼ at distance 2.
-hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read due now (6 segments today).
+hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read done (section above).
+**Seg 7 — literature (NEGATIVE KNOWLEDGE on one step of a candidate tool + WRITING).**  See LITERATURE CHECK: Allsop–Morris
+η-switching legal and rigid in X with deterministic forward degree; their Thm 3.1 transfers except Claim 4(ii) in one configuration;
+KPS: parity marginal of the weak conjecture proved by them; gap note §4 (KPS, AM citations) updated.  Did not touch the core
+obstacle; located it inside an otherwise working argument (Claim 4(ii)), which is the sharpest consultation question we have.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
