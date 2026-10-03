@@ -2456,3 +2456,88 @@ requirement beyond the trivial observation that $5.5/n\ll1/\log n$.
 \emph{What did not change.}  No lower bound at a frame-selected position;
 both terms of \eqref{eq:hypfirstpair} are lower tails of counts of
 constant-probability events at such positions.  Stopped.
+
+\paragraph{(m) Literature check (2026-10-03): KSSS, Allsop--Wanless,
+Divoux--Kelly--Kennedy--Sidhu.}  (Classification: NEGATIVE KNOWLEDGE,
+with three literature anchors for the obstacle.)  Read against three
+questions: (a) is there a fixed-cell upper bound usable in completions
+of a fixed rectangle; (b) does anyone state or reprove a row-pair
+cycle-structure bound independently of CGW \S3; (c) does any published
+result depend on the gapped direction.
+
+\emph{Kwan--Sah--Sawhney--Simkin, Substructures in Latin squares (Israel
+J.\ Math.\ 2023).}  (a) Their Lemma~3.3 is exactly the fixed-cell bound
+(FC) of \S(l) --- $\Pr[L_{r,c}=s\mid Q\subseteq L]\le1/(n-2(k-1)-|Q_r|)$
+for a uniform $k\times n$ \emph{rectangle} and any completable partial
+array $Q$ (full prescribed rows allowed) --- proved by swapping the
+entry at $(r,c)$ with another entry of the same row, which is legal for
+all but $2(k-1)$ choices because the columns have only $k$ entries; the
+move is never legal in a full square.  With Godsil--McKay's Theorem~4.7
+($\Pr[M\subseteq L]\approx n^{-|M|}$ for small $M$ in $k\times n$
+rectangles) these are their only fixed-position estimates; everything
+about full squares is obtained by transfer (upper tails through
+$\gamma n$-row rectangles and McKay--Wanless Prop.~4, factor
+$e^{O(n\log^2n)}$; lower tails through the triangle-removal process,
+Theorem~7.6, factor $e^{O(n^{2-\gamma})}$).  (b) CGW is cited once, as
+background on the expected number of intercalates.  (c) No.
+
+\emph{Allsop--Wanless, Subsquares in random Latin rectangles
+(Combinatorica 2025).}  Results for all $k\le n$, including full squares,
+by cycle switching.  Their Lemmas~3.8--3.10 are fixed-cell conditional
+bounds in full squares: a cell that is the only prescribed one in its row
+has conditional probability $\le1/(k-m)$ (row-cycle switching, always
+legal: our ``one cell per row is exactly $1/(n-2)$''); a cell that is the
+only one in its column or with its symbol, $\le(1+O(m/n))/n$ (column or
+symbol cycle switching, legal there because nothing is prescribed in
+that column); and a cell with $\ell$ earlier prescribed cells in its row,
+$\le(\ell+1)/(k-m)$, \emph{provided} the prescribed entries in the
+relevant column pairs form a union of column cycles (Lemma~3.9 via
+Lemma~3.3: under this closure condition the probability that the row
+cycle through the new cell avoids the $\ell$ earlier columns is exactly
+$1/(\ell+1)$, by a second switching that swaps the two columns on all
+non-prescribed rows, legal precisely because of the closure).  For
+interior cells they use the trivial bound $1$, and they write (\S3.1) that
+estimating the number of columns $c'$ for which the column cycle
+$\sigma(c,c',r)$ avoids prescribed rows ``seems like a difficult task in
+general'' --- the forward-degree problem of \S(l), in their words.  In $X$
+the closure condition for a column pair $(q,c)$ over rows $1,2$ holds
+only when $\{q,c\}$ is a $2$-cycle of $\sigma$, and the complement swap
+is then our product of legal turns of the other cycles (Lemma lem:legalturn),
+which conjugates every $\rho_{x,y}$, $x,y\ge3$; so nothing transfers.
+(b) CGW cited for intercalate counts only.  (c) Their Theorem~2.1 rests
+on Kwan--Sudakov and KSS(S), not on CGW.
+
+\emph{Divoux--Kelly--Kennedy--Sidhu, Subsquares in random Latin squares
+and rectangles (J.\ Combin.\ Des.\ 2026).}  Theorem~1.6: for
+$k<(\tfrac12-\varepsilon)n$ and an $\varepsilon n$-sparse partial
+rectangle $P$ (at most $\varepsilon n$ entries per row, column and
+symbol) with $\ell$ entries, $\Pr[P\subseteq L]=((1\pm\delta)/n)^\ell$;
+Lemma~3.1 is the one-cell conditional form $(1\pm\delta)/n$.  Proved by
+``$2\ell$-cycle switches'' of Granet--Joos type: the forward degree is
+controlled because the graph of free (column, symbol) pairs is an
+almost-regular robust expander when $k<n/2$, so the number of long
+alternating cycles through an edge is concentrated.  In a full square
+there are no free pairs, so the method does not apply.  Their
+Conjecture~1.5 (the same for all $k\le n$) and Kelly's spread conjecture
+($\Pr[L\supseteq P]\le((e^2+o(1))/n)^{|P|}$ for every partial square
+$P$, $k=n$) are the fixed-position statements for full squares; both
+are open, and both are about \emph{sparse} prescribed sets.  Our (FC)
+conditions on two full rows, which is dense: in spread language,
+$\Pr_X[Q\subseteq L]=\Pr[R\cup Q\subseteq L]/\Pr[R\subseteq L]$, and a
+one-sided spread bound for the numerator is useless without a matching
+lower bound for $\Pr[R\subseteq L]=\CC_n(\lambda)/|\mathcal L_n|$ to a
+factor $n^{O(1)}$ --- which is a (weak) form of the CGW conjecture
+itself.  They note that sparsity is essentially necessary for the
+two-sided statement.  (b) CGW cited for the $9n^{5/2}/2$ intercalate
+bound (their Cor.~4.10, superseded by Kwan--Sudakov).  (c) No.
+
+\emph{Upshot.}  The fixed-position estimates in the literature are
+rectangle statements ($k<n/2$, where within-row swaps or long
+alternating cycles are available) or conjectures for sparse prescribed
+sets in full squares; the forward-degree problem for cycle switchings in
+full squares with prescribed rows is named as difficult by Allsop and
+Wanless and circumvented, not solved.  The right statement of our
+obstacle in this language: \emph{(FC) for $O(\mathrm{polylog}\,n)$ cells
+in two further rows of a uniform completion of a fixed $2\times n$
+rectangle}, a dense-conditioning spread statement.  Nothing read changes
+the status of any hypothesis or of the gap note's dependency list.
