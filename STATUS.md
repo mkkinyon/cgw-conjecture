@@ -47,7 +47,12 @@ the trivial bound; the forward-degree count for column cycles avoiding prescribe
 affected.  REPAIRED (refereed): prop:tailsurvive(ii) with k = ⌈√n⌉ gives P[κ ≥ 9√n] ≤ exp(−(½−o(1))√n log n) (so Thm 4.9's
 STATEMENT survives — the gap note previously said it did not; corrected), and C(finer) ≤ 2C(coarser) iterated gives P_n(λ) ≤
 (n/2)Π(2/c_i) (Cor 4.5 upper half with n/2 for n^{1/3}); GMW's proof goes through as stated.**  Gap note §4 and paper rem:gap
-updated (commit 828c235).  Still to read: Cavenagh–Wanless 2016 (parity equidistribution: mechanism + dependency).
+updated (commit 828c235).  **Cavenagh–Wanless 2016 (parity equidistribution) read: its Theorem 1.1 uses CGW Cor 4.5 (Lemma 2.1: needs P[(n)] = o(1),
+NOT repaired), Thm 4.9 (Lemma 2.2: repaired, modulo writing prop:tailsurvive in Ω(F)), and the UPPER bound of Thm 3.13 at odd
+splits min ≥ 3 (Lemma 2.3: the gap direction, outside Prop 3; what they need is only an averaged/any-constant version).  So CW16
+currently depends on the gap at two points.  NEW NEGATIVE KNOWLEDGE (refereed): from the surviving material + our identities we
+know of no proof that two rows of a random Latin square form a single n-cycle w.p. o(1) (Lemma 4.4's 2n^{−2/3}); second moment
+(KS18 + prop:tailsurvive(i)) gives only P[(n)] ≤ 5/6 + o(1); Prop 3 iterated loses 4^k k!.  Gap note §4 updated (8 pp).**
 
 ## COLD READ 2026-10-03 (independent subagent, after 6 segments) — verdict and corrections to adopt
 **Verdict.** Core obstacle unchanged; the log says so honestly.  New and unconditional today: prop:firstpair, prop:firstpairbias

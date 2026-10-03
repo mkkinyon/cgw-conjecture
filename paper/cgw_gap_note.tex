@@ -237,8 +237,9 @@ $|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$, equivalently
 \Pr\bigl[\{j,j'\}\text{ is an $A$-pair}\bigr]\;\ge\;\tfrac13
 \quad\text{for $(L,\{j,j'\})$ uniform on $X$},
 \]
-is not established for $\max(\alpha,\beta)\ge3$; for $\min(\alpha,\beta)=2$
-it holds with $\tfrac14$ in place of $\tfrac13$ (Proposition~\ref{prop:two} below).
+is not established by the published argument for $\max(\alpha,\beta)\ge3$;
+Proposition~\ref{prop:two} below establishes it with $\tfrac14$ in place of $\tfrac13$
+for $\min(\alpha,\beta)=2$, so it remains open for $\min(\alpha,\beta)\ge3$.
 
 Within \cite{CGW08} the upper bound of Lemma 3.12 is used for: the
 upper bound of Theorem 3.13; the lower bound $(2/3)^{\kappa-1}$ of
@@ -299,10 +300,50 @@ $\PP_F\le\tfrac m2\prod(2/c_i)$ in place of $m^{1/3}\prod(2/c_i)$ the
 estimate in their proof becomes $\exp(-\delta\sqrt n(1-o(1))\log^\varepsilon n)$
 times a polynomial factor, and the number of cycles is at most
 $9\sqrt n$ with probability $1-\exp(-\Omega(\sqrt n\log n))$; so their
-Theorem~9 holds as stated.  (We checked the other papers citing
-\cite{CGW08} that are indexed by MathSciNet; the remaining citations
-are to the intercalate estimates, superseded by \cite{KS18}, or to the
-conjecture on multiplication groups of random loops.)
+Theorem~9 holds as stated.
+
+Cavenagh and Wanless \cite{CW16} use three results of \cite{CGW08} in
+the proof of their Theorem~1.1 (asymptotically the same number of Latin
+squares of each parity): the upper half of Corollary~4.5 in their
+Lemma~2.1 (no row cycle of length $\ge n-\log n$ in the last two rows,
+with probability $1-o(1)$), Theorem~4.9 in their Lemma~2.2, and the
+upper bound of Theorem~3.13 in their Lemma~2.3, for the splits of an
+even part $z$ into two odd parts $a,z-a$ (so $\min(a,z-a)\ge3$).  The
+second use is repaired as above (our Proposition is stated for
+$F=\emptyset$; its proof uses only flips and switches at marks in the
+free columns and trades along cycles outside $F$, so it applies in
+$\Omega(F)$ with $m$ in place of $n$, but we have not written this out).
+The first is not repaired by the weaker surviving constant: with $n/2$ in
+place of $n^{1/3}$ the estimate in Lemma~2.1 becomes
+$O(2^{(\log n)/2}\log n)$, and already its $\lambda=(n)$ term is $1$; what
+Lemma~2.1 needs is that the cycle through column~$1$ has length
+$n-\omega(1)$ with probability $1-o(1)$, which includes
+$\PP_F((n))=o(1)$, discussed below.  The third is the unproved direction
+at exactly the splits where case~3 fails, outside the range of
+Proposition~\ref{prop:two}; what their Lemma~2.3 actually needs is
+weaker than $\tfrac32$ --- any constant, or even the averaged statement
+$\sum_{\mu\in M}\gamma(\mu)|S(\mu,F)|/(\gamma(\lambda)|S(\lambda,F)|)\to\infty$
+over the odd splits $M$ of a large even part --- but we do not have
+that either.  So, as far as we can see, Theorem~1.1 of \cite{CW16}
+currently depends on the gap at two points.
+
+More generally, the surviving direction bounds fine types from above
+only: it gives no upper bound on the probability of a coarse type.  In
+particular we know of no proof, from the surviving material or from our
+own identities, that the first two rows of a random Latin square form a
+single $n$-cycle with probability $o(1)$ (the statement
+$\PP_F((m))\le2m^{-2/3}$ of Lemma~4.4).  What is available is a constant:
+by row-pair symmetry and the intercalate count of \cite{KS18},
+$\E N_2\ge\tfrac12-o(1)$; the $\ell=\beta=2$ case of the surviving
+inequality gives $\E[N_2(N_2-1)]\le2\E N_4\le m/(m-4)$; so by the second
+moment method $\Pr[N_2\ge1]\ge(\E N_2)^2/\E[N_2^2]\ge\tfrac16-o(1)$ and
+$\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
+this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
+gives $\PP_F((2,m-2))\le\tfrac m{2(m-2)}\PP_F((m))$, and iterating over
+$k$ two-cycles loses a factor of order $4^kk!$.  (We checked the other
+papers citing \cite{CGW08} that are indexed by MathSciNet; the remaining
+citations are to the intercalate estimates, superseded by \cite{KS18},
+or to the conjecture on multiplication groups of random loops.)
 
 \section{A partial repair}
 
@@ -488,6 +529,8 @@ than $3/2$; the question is only what has been proved.
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle
 structure of two rows in a random Latin square, \emph{Random Structures
 \& Algorithms} 33 (2008), 286--309.
+\bibitem{CW16} N.~J. Cavenagh and I.~M. Wanless, There are asymptotically the same number of
+Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
 squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,

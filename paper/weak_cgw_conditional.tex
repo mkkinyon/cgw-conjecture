@@ -525,7 +525,12 @@ $1-o(e^{-\sqrt n/4})$) and of the upper half of Corollary~4.5 (with $n/2$ in pla
 $n^{1/3}$) do follow from the surviving direction: Proposition~\ref{prop:tailsurvive}(ii)
 with $k=\sqrt n$ gives $\Pr[\kappa\ge9\sqrt n]\le\exp(-(\tfrac12-o(1))\sqrt n\log n)$, and
 $\CC_n(\lambda)\le2^{\kappa-1}\CC_n((n))$ gives $\PP_n(\lambda)\le\tfrac n2\prod_i(2/c_i)$
-for a type with parts $c_i$; this repairs the use of both in \cite[Thm.~9]{GMW25}.  For
+for a type with parts $c_i$; this repairs the use of both in \cite[Thm.~9]{GMW25}.  The
+surviving direction gives no upper bound on coarse types: in particular we know of no proof
+that two rows of a random Latin square form a single $n$-cycle with probability $o(1)$
+(Lemma~4.4's $2n^{-2/3}$; the second-moment method with \cite{KS18} and
+Proposition~\ref{prop:tailsurvive}(i) gives only $\le\tfrac56+o(1)$), and the parity theorem
+of \cite{CW16} uses the unproved direction at odd splits (details in \cite{gapnote}).  For
 $\min(\alpha,\beta)=2$ the count can be corrected with the constant $2$ in place of $\tfrac32$
 \cite[Prop.~3]{gapnote}: for marks at distance $2$ or $m-2$ on an $m$-cycle,
 $\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[A]\ge\tfrac14$ unconditionally.  The present
@@ -1743,6 +1748,8 @@ rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 28
 \bibitem{gapnote} [author], A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, note, October 2026.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{CW16} N.~J. Cavenagh and I.~M. Wanless, There are asymptotically the same number of
+Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
 squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
