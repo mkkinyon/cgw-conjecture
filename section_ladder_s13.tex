@@ -2484,7 +2484,10 @@ background on the expected number of intercalates.  (c) No.
 \emph{Allsop--Wanless, Subsquares in random Latin rectangles
 (Combinatorica 2025).}  Results for all $k\le n$, including full squares,
 by cycle switching.  Their Lemmas~3.8--3.10 are fixed-cell conditional
-bounds in full squares: a cell that is the only prescribed one in its row
+bounds, stated for uniform $k\times n$ rectangles with $k>m$ (so for
+full squares in particular), whose hypotheses are structural (what else
+is prescribed in the cell's row, column or symbol class), not
+positional: a cell that is the only prescribed one in its row
 has conditional probability $\le1/(k-m)$ (row-cycle switching, always
 legal: our ``one cell per row is exactly $1/(n-2)$''); a cell that is the
 only one in its column or with its symbol, $\le(1+O(m/n))/n$ (column or
@@ -2508,11 +2511,12 @@ which conjugates every $\rho_{x,y}$, $x,y\ge3$; so nothing transfers.
 on Kwan--Sudakov and KSS(S), not on CGW.
 
 \emph{Divoux--Kelly--Kennedy--Sidhu, Subsquares in random Latin squares
-and rectangles (J.\ Combin.\ Des.\ 2026).}  Theorem~1.6: for
-$k<(\tfrac12-\varepsilon)n$ and an $\varepsilon n$-sparse partial
-rectangle $P$ (at most $\varepsilon n$ entries per row, column and
-symbol) with $\ell$ entries, $\Pr[P\subseteq L]=((1\pm\delta)/n)^\ell$;
-Lemma~3.1 is the one-cell conditional form $(1\pm\delta)/n$.  Proved by
+and rectangles (J.\ Combin.\ Des.\ 2026).}  Theorem~1.6: for every
+$\varepsilon,\eta>0$ there is $\gamma=\gamma(\varepsilon,\eta)>0$ such
+that for $k<(\tfrac12-\varepsilon)n$ and a $\gamma n$-sparse partial
+rectangle $P$ (at most $\gamma n$ entries per row, column and symbol)
+with $\ell$ entries, $\Pr[P\subseteq L]=((1\pm\eta)/n)^\ell$; Lemma~3.1
+is the one-cell conditional form $(1\pm\eta)/n$.  Proved by
 ``$2\ell$-cycle switches'' of Granet--Joos type: the forward degree is
 controlled because the graph of free (column, symbol) pairs is an
 almost-regular robust expander when $k<n/2$, so the number of long
@@ -2660,13 +2664,18 @@ $\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$, which is $o(1/\log n)$ for
 $M\le(\log n)/(4\log\Delta)$; this is the first term of the first-pair
 condition \eqref{eq:hypfirstpair}.  The second term (among the first
 $M$ candidates not all are bad) is not a fixed-cell event and is not
-reached by (FC); but $\eta$-switching, legal and rigid in $X$ with a
-\emph{deterministic} lower bound $n-O(1)$ on its forward degree, is
-the first switching available to us in $X$ with that property (the
-turns of \S(b)--(j) have random forward degrees).  The sharp
-question for the authors: does Theorem~3.1 hold when $P$ contains
-two complete rows that the switchings never touch, i.e.\ can
-Claim~4(ii) be repaired in the configuration above?
+reached by (FC); but $\eta$-switching is legal in $X$ with a
+\emph{deterministic} forward degree $n-O(1)$ and changes row $r$ only
+at $c,c'$.  (It is not rigid: Type One has up to $n$ preimages, which is
+why Theorem~3.1 is needed.  A plain trade of row $r$ with a free row is
+rigid with the same deterministic degree, but rewrites row $r$ along a
+whole cycle, so it yields one factor $1/n$ per row and nothing for a
+second prescribed cell in the same row; the confinement to $c,c'$ is
+what $\eta$ adds.  The turns of \S(b)--(j) have random forward degrees.)
+The question for the authors, assuming the transfer of Claims~2--3 is
+written out: does Theorem~3.1 hold when $P$ contains two complete rows
+that the switchings never touch, i.e.\ can Claim~4(ii) be repaired in
+the configuration above?
 
 \paragraph{(o) Kwan--Petrova--Sawhney 2025: parities, stable
 intercalates, and three consequences for us.}  (Classification:
@@ -2693,12 +2702,19 @@ Cavenagh--Wanless as a black box for the mod-$2$ equidistribution, with
 Remark~6.6 sketching an easy independent re-proof by switching a
 $2\times3$ and a $3\times2$ subrectangle.  So the formal dependence on
 the gap runs CGW $\to$ CW16 $\to$ KPS Theorem~1.3(3)--(4), and is
-removable.  Also, Theorem~1.3(1) (law of large numbers for the number
-of odd rows, deducible from the intercalate counts of KSS and
-single-intercalate switching ratios, \S2.4 of \cite{KPS25}) gives, by
-row exchangeability, $\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$,
-superseding CGW's Theorem~4.3 (which gave $[\tfrac14,\tfrac34]$ and is
-affected by the gap).
+presumably removable (we have not checked the sketch).  Their written
+deduction of Theorem~1.3(1)--(2) goes through (4), hence also through
+CW16; but Theorem~1.3(5) (the large deviation principle) is deduced
+from their Theorem~6.4 and Lemma~6.5(ii) (Sanov) with no use of CW16,
+and the rate function has its unique zero at $(\frac12,\frac12,\frac12)$,
+so the law of large numbers (1) follows from (5) without CW16.  Hence,
+by row exchangeability,
+$\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$
+independently of the gap, superseding CGW's Theorem~4.3 (which gave
+$[\tfrac14,\tfrac34]$ and is affected by the gap).  (The earlier
+version of this paragraph attributed (1) to the \S2.4 sketch of
+\cite{KPS25}; the cold read of 2026-10-03 pointed out that the written
+proof routes (1) through (4).)
 
 (ii) \emph{The parity marginal of the weak conjecture.}  Rows $1,2$
 have the same parity iff $\sigma=\rho_{1,2}$ is even.  So KPS prove

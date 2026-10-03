@@ -240,9 +240,10 @@ $\lambda$ split into two parts of $\mu$, both $\ge2$), and used it to show that 
 laws agree within a factor $n^{3/2}$ on every type with at most $\tfrac65\log n$ parts; the upper bound $\tfrac32$, and
 with it the upper half of the latter statement, is affected by the gap described in
 Remark~\ref{rem:gap} and \cite{gapnote}.  One marginal of the conjecture is known: by
-Kwan, Petrova and Sawhney's theorem on parities \cite[Thm.~1.3(1)]{KPS25} and the
-exchangeability of rows, $\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform
-derangements (\S\ref{sec:remains}).
+Kwan, Petrova and Sawhney's law of large numbers for the number of odd rows
+\cite[Thm.~1.3(1)]{KPS25} and the exchangeability of rows,
+$\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements
+(\S\ref{sec:remains}).
 
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
@@ -440,9 +441,9 @@ that two rows of a random Latin square form a single $n$-cycle with probability 
 (Lemma~4.4's $2n^{-2/3}$; the second-moment method with \cite{KS18} and
 Proposition~\ref{prop:tailsurvive}(i) gives only $\le\tfrac56+o(1)$), and the parity theorem
 of \cite{CW16} uses the unproved direction at odd splits (details in \cite{gapnote}); that
-theorem is nevertheless true, being a special case of \cite[Thm.~1.3(4)]{KPS25}, whose
-written proof uses \cite{CW16} as a black box but whose Remark~6.6 sketches an independent
-re-proof.  For
+theorem is expected to be true independently of the gap, being a special case of
+\cite[Thm.~1.3(4)]{KPS25}, whose written proof uses \cite{CW16} as a black box but whose
+Remark~6.6 sketches an independent re-proof, which we have not checked.  For
 $\min(\alpha,\beta)=2$ the count can be corrected with the constant $2$ in place of $\tfrac32$
 \cite[Prop.~3]{gapnote}: for marks at distance $2$ or $m-2$ on an $m$-cycle,
 $\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[A]\ge\tfrac14$ unconditionally.  The present

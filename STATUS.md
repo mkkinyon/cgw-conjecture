@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
-(8 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (29 pp, REVISED 2026-10-03 twice: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
+(10 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (29 pp, REVISED 2026-10-03 twice: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
@@ -16,8 +16,8 @@ prop:tailsurvive, thm:reduction independent of CGW, gap note + constant-2 repair
 been reformulated, not reduced: hyp:witness (one rare local event at a frame-selected pair) → hyp:orbit (constant-
 strength genericity (β), introduced by the orbit method itself, found gap-direction/unprovable in X) → (U) →
 hyp:adaptive (rare local events again, C log log n of them).  hyp:adaptive is of the SAME logical type as
-hyp:witness and logically STRONGER (needs many events, not one); the loop (β introduced → removed) was presented
-as progress twice.  The weakest sufficient condition we have is still hyp:witness.
+hyp:witness and heuristically MORE DEMANDING (needs many events, not one; no formal implication either way); the loop
+(β introduced → removed) was presented as progress twice.  The weakest sufficient condition we have is still hyp:witness.
 **Core obstacle, precisely:** a lower bound (any constant, any rate) on the probability of ANY local event at a
 row pair selected by the frame, inside X.  Minimal instance: P_X[(x₁,y₁) flippable] ≥ c, x₁ = π⁻¹(1), y₁ = π⁻¹(2).
 Every exact identity in X is fair; gap-direction bounds need a rigid inverse (exists only for min(α,β)=2);
@@ -37,12 +37,14 @@ local events at frame-selected rows" = reformulation, to be labelled as such.
 
 ## LITERATURE CHECK 2026-10-03 (MathSciNet + Google Scholar citers of CGW08; KSSS, Allsop–Wanless, DKKS, GMW, CW16, Allsop–Morris, KPS read)
 Notes §(m).  (a) Fixed-cell bounds in the literature are rectangle statements (KSSS Lemma 3.3, k ≤ n/4, within-row swaps; DKKS
-Thm 1.6, k < n/2, two-sided (1±δ)/n for εn-sparse P, Granet–Joos long switches in the free-pair expander) or open conjectures for
+Thm 1.6: for every ε,η>0 some γ>0 with k < (½−ε)n and γn-sparse P giving two-sided ((1±η)/n)^{|P|}, Granet–Joos long switches
+in the free-pair expander) or open conjectures for
 sparse P in full squares (DKKS Conj 1.5; Kelly's (e²+o(1))/n spread).  Our (FC) conditions on two FULL rows (dense): in spread
 language P_X[Q ⊆ L] = P[R∪Q]/P[R], and a one-sided numerator bound is useless without P[R ⊆ L] = C(λ)/|L_n| to n^{O(1)}, a weak
-CGW.  Allsop–Wanless (full squares, cycle switching): Lemmas 3.8–3.10 are fixed-cell bounds for boundary cells; interior cells get
-the trivial bound; the forward-degree count for column cycles avoiding prescribed rows "seems like a difficult task in general"
-(their §3.1) — the obstacle in their words.  (b) Nobody states or reproves a row-pair cycle bound independently of CGW §3.
+CGW.  Allsop–Wanless (k×n rectangles with k > m, cycle switching): Lemmas 3.8–3.10 are fixed-cell bounds whose hypotheses are
+structural (the cell is the only prescribed one in its row / column / symbol class, or a closure condition holds); the cells not
+covered get the trivial bound 1 in their application; the forward-degree count for column cycles avoiding prescribed rows "seems
+like a difficult task in general" (their §3.1) — the obstacle in their words.  (b) Nobody states or reproves a row-pair cycle bound independently of CGW §3.
 (c) **GMW25 Theorem 9 (hence their average-case Theorem 1 via Theorem 12) uses CGW Cor 4.5 (upper half) and Thm 4.9 — both
 affected.  REPAIRED (refereed): prop:tailsurvive(ii) with k = ⌈√n⌉ gives P[κ ≥ 9√n] ≤ exp(−(½−o(1))√n log n) (so Thm 4.9's
 STATEMENT survives — the gap note previously said it did not; corrected), and C(finer) ≤ 2C(coarser) iterated gives P_n(λ) ≤
@@ -57,24 +59,28 @@ know of no proof that two rows of a random Latin square form a single n-cycle w.
 *Allsop–Morris (arXiv 2606.18174), Theorem 1.1: two-sided (δ/n)^{|P|} ≤ P[L ⊇ P] ≤ (Δ/n)^{|P|} (δ→1/23, Δ→23) for partial Latin squares P
 with |R_P| ≤ αn, |C_P| ≤ βn, 2α+β < 1 — full squares; our R (two full rows) is outside the STATEMENT.  Their tool, the η-switching
 η_L(r,r′,c) (displaces the target cell within its row; changes only rows r,r′,r″; reversibility ≤ n preimages if Type One, ≤ 1
-otherwise), is LEGAL in X whenever r,r′,r″ ∉ {1,2} ∪ R_Q, with a DETERMINISTIC forward degree n − O(|Q|) — the first switching
-available to us in X with that property (all our turns have random forward degrees).  Their Theorem 3.1 (P[Type One | P] ≤ D/n),
+otherwise), is LEGAL in X whenever r,r′,r″ ∉ {1,2} ∪ R_Q, with a DETERMINISTIC forward degree n − O(|Q|), and changes row r only at c,c′
+(NOT rigid: Type One has ≤ n preimages, hence their Thm 3.1; a plain row trade is rigid with the same deterministic degree but
+rewrites the whole row, so gives one 1/n per row and nothing for a second cell in the row — the confinement to c,c′ is what η
+adds; our turns have random forward degrees).  Their Theorem 3.1 (P[Type One | P] ≤ D/n),
 which converts reversibility into the per-cell bound, transfers to X in Claim 1 (recursion; bookkeeping α=(2+|R_Q|)/n, β=(|C_Q|+2)/n,
-excluded columns C_Q ∪ {p,p′}) and Claims 2–3 (cross-switch segments restricted to contain 0 or 2 of rows 1,2; double count must be
-rewritten; constants only), and FAILS at exactly one step: Claim 4(ii) (the column-cycle switch γ_L(c₂,c₃,x) when the row switch
+excluded columns C_Q ∪ {p,p′}) and Claims 2–3 APPEAR to transfer after restricting cross-switch segments to contain 0 or 2 of rows 1,2 (the double count
+must be rewritten; NOT written out), and FAILS at one step: Claim 4(ii) (the column-cycle switch γ_L(c₂,c₃,x) when the row switch
 ρ(r₃,x,c₃) hits c₂) in the configuration "exactly one of rows 1,2 on γ_L(c₂,c₃,r₁) and x on the (c₂,c₃)-cycle of the other"; the
 other cases are repaired by turning unions of cycles.  Claim 1 alone gives only P_X[Type One | Q] = O(n^{−1/2}), i.e. C/√n per
 cell, not (FC).  If (FC) in X held with constant Δ: P_X[ν ≤ M] ≤ 8Δ^{2M+2}/n (notes §(l)(i)), the first term of hyp:firstpair.
-Classification: NEGATIVE KNOWLEDGE on one step + a sharp question for Allsop/Morris/Wanless: does Theorem 3.1 hold when P contains
-two complete rows the switchings never touch?  AM cite CGW08 only for the §3 switching lemmas (reversibility/effect of cycle and
+Classification: NEGATIVE KNOWLEDGE on one step + a concrete question for Allsop/Morris/Wanless (assuming Claims 2–3 transfer): does
+Theorem 3.1 hold when P contains two complete rows the switchings never touch?  AM cite CGW08 only for the §3 switching lemmas (reversibility/effect of cycle and
 cross switches) — unaffected by the gap.*
 *KPS (arXiv 2509.13125) prove Cameron's parity conjecture (Thm 1.3) via an approximation lemma (triangle-removal process → random
 subset of a random Latin square at cost e^{O(n log² n)} on the failure probability) + a canonical switch-invariant family of
 "stable intercalates" that meets every large set of rows simultaneously (Lemma 8.3).  Consequences: (i) Thm 1.3(1) ⇒ P[rows 1,2
-same parity] = ½ + o(1) ⇒ **P_n[σ even] = ½ + o(1): the parity marginal of the weak conjecture is proved (by them)**; supersedes
-CGW Thm 4.3 (gap-affected); (ii) CW16's theorem is a special case of Thm 1.3(4), whose written proof uses CW16 as a black box
-(dependence CGW→CW16→KPS 1.3(3)–(4) formally present), Remark 6.6 sketches an independent re-proof — gap note §4 updated
-(commit pending); (iii) program sketch (not a result): approximation lemma for completions of a fixed R + stable toggles acting on
+same parity] = ½ + o(1) ⇒ P_n[σ even] = ½ + o(1): the parity marginal of the weak conjecture follows from their work. CAUTION
+(cold read 2): their written deduction of 1.3(1) goes through 1.3(4), which uses CW16 (gap-dependent) as a black box; the
+gap-free route is 1.3(5) (LDP, from their Thm 6.4 + Lemma 6.5(ii), no CW16) ⇒ LLN (1). All three documents now state this route.
+Supersedes CGW Thm 4.3 (gap-affected); (ii) CW16's theorem is a special case of Thm 1.3(4), whose written proof uses CW16 as a
+black box (dependence CGW→CW16→KPS 1.3(3)–(4) formally present), Remark 6.6 sketches an independent re-proof, unchecked by us —
+gap note §4 says "expected to be true", not "true"; (iii) program sketch (not a result): approximation lemma for completions of a fixed R + stable toggles acting on
 flippability bits + re-randomisation; the separation input (β) reappears as "some stable intercalate at row x_k has a separated
 column pair".  Classification: literature / WRITING (two gap-note corrections).*
 
@@ -188,15 +194,22 @@ factor 1/n per row; column turns are legal on a set whose size is again a lower 
 **What did NOT change (today):** no proven lower bound at a frame-selected position; both terms of hyp:firstpair are lower
 tails of counts of constant-probability events at such positions; the only lower bound remains P_X[A] ≥ ¼ at distance 2.
 hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read done (section above).
-**Seg 7 — literature (NEGATIVE KNOWLEDGE on one step of a candidate tool + WRITING).**  See LITERATURE CHECK: Allsop–Morris
-η-switching legal and rigid in X with deterministic forward degree; their Thm 3.1 transfers except Claim 4(ii) in one configuration;
-KPS: parity marginal of the weak conjecture proved by them; gap note §4 (KPS, AM citations) updated.  Did not touch the core
-obstacle; located it inside an otherwise working argument (Claim 4(ii)), which is the sharpest consultation question we have.
-**Seg 8 — WRITING (R2, cold-read fixes; refereed by a fresh subagent, 15 findings applied).**  Paper 29 pp.  (a) NEW small PROVED
-item: rem:fewparts — thm:reduction uses EQ(δ) only along chains from (n) to plain λ with ≤ K = ⌈16 log n⌉ parts, so every
-hypothesis is needed only for plain λ with < K parts and plain µ (referee verified both routing cases; K excludes Θ(n)-part types
-asymptotically but NOT the sampled types at n ≤ 150, which all have < K parts; (4,2^13)→(2^15), (6,3^8)→(3^10) are excluded only
-because α=β); A = 16 made explicit.  (b) Cold-read fixes: abstract (four conditions, none implying another; hazard caveat;
+**Seg 7a — NEGATIVE KNOWLEDGE (Allsop–Morris transfer, notes §(n)).**  Cost first: AM Thm 1.1 does not apply to two full rows
+(|C_P| = |S_P| = n); in X, η-switching is not rigid in the Type-One case; Claims 2–3 of their Thm 3.1 are not written out in X;
+Claim 4(ii) fails in one configuration (exactly one of rows 1,2 on γ_L(c₂,c₃,r₁), x on the (c₂,c₃)-cycle of the other), and
+Claim 1 alone gives only C/√n per cell.  Content: η-switching is legal in X with deterministic forward degree, changing row r only at
+c,c′; if their Thm 3.1 held in X, (FC) would follow and with it P_X[ν ≤ M] ≤ 8Δ^{2M+2}/n.  Did not touch the core obstacle; restated
+one piece of it (the ν-tail) as a question in AM's vocabulary, conditional on the Claims 2–3 transfer.
+**Seg 7b — WRITING (literature records).**  Notes §(m),(n),(o); gap note §4 (GMW repair, CW16 dependence, KPS, AM citations); STATUS
+LITERATURE CHECK.  KPS: parity marginal of the weak conjecture follows from their Thm 1.3(5) ⇒ (1) without CW16 (route corrected
+after cold read 2).  Did not touch the core obstacle.
+**Seg 8a — PROVED (small): rem:fewparts.**  Cost first: it does not restrict the sampled types (all have < ⌈16 log n⌉ parts at
+n ≤ 150) and does not remove the two-full-row conditioning; it excludes Θ(n)-part types asymptotically.  Content: thm:reduction uses
+EQ(δ) only along chains from (n) to plain λ with ≤ K = ⌈16 log n⌉ parts, so every hypothesis is needed only for plain λ with < K
+parts and plain µ (referee verified both routing cases; (4,2^13)→(2^15), (6,3^8)→(3^10) are excluded only because α=β); A = 16
+made explicit.  Did not touch the core obstacle.
+**Seg 8b — WRITING (R2, cold-read fixes; refereed by a fresh subagent, 15 findings applied; then cold read 2, below).**  Paper 29 pp.
+Cold-read fixes: abstract (four conditions, none implying another; hazard caveat;
 sampler caveat; "whose proof in CGW has a gap" insinuation removed; fragment fixed), Results (2),(6) (M = C log log n split with
 the hazard condition stated with ν > t; "Θ(n) candidates" gone; "not shown to be easier"), §6(e) cost paragraph (hazard
 reading; data-measurability; hidden costs: ν-tail, positive dependence, admissibility; "simplest" not "smallest"), lem:nuswitch
@@ -207,7 +220,24 @@ in Q, C = 1+O(k/n), rectangle→square transfer only at e^{O(n log² n)} (McKay�
 citation); DKKS Thm 1.6 with correct quantifiers (ε,η; γn-sparse); AM Thm 1.1 + η-switching legal in X with deterministic
 forward degree; Thm 3.1: Claim 1 transfers, Claims 2–3 "appear to transfer, not written out", Claim 4(ii) configuration; AW
 §3.1 quote; KPS parity marginal with rows/columns/symbols).  (d) KPS parity marginal in the intro.  (e) Bibliography sorted;
-AM26, AW25, DKKS26, KSSS23, MW99 added.  Did not touch the core obstacle.  Cold read next (user's instruction).
+AM26, AW25, DKKS26, KSSS23, MW99 added.  Did not touch the core obstacle.
+**Cold read 2 (independent subagent, 2026-10-03 evening, after the literature burst; user-mandated).**  All seven literature
+characterisations VERIFIED against the sources except: DKKS quantifiers in notes/STATUS (fixed), AW "boundary cells / full squares"
+framing (fixed: structural hypotheses, k×n rectangles).  GMW repair plausible (their proof needs only a polynomial prefactor and
+exp(−Ω(√n)) tail).  CW16 dependencies as stated; two nits fixed (Lemma 2.1 "at most n − ω(1)"; their Lemma 2.2 claims 1 − o(c^m),
+neither CGW nor the repair gives that, only 1 − o(1) is used).  AM transfer analysis coherent (legality, 0-or-2 restriction, Claim 4(ii)
+configuration all check against am.txt); "constants only"/"otherwise working" were over-claims (fixed).  ERRORS/OVER-CLAIMS fixed:
+(D1) KPS dependency — the written proof of 1.3(1) runs through (4) and CW16; corrected everywhere to the (5) route; (D2) gap note
+"is nevertheless true" → "expected to be true"; (D3) "first switching ... rigid ... deterministic" → not rigid, what η adds is
+confinement of the change to c,c′; (D4) "sharpest" removed; (D5) KPS controls LARGE row sets (βn), not a selected pair — paper
+sentence fixed; (D6) STATUS "logically STRONGER" → "heuristically more demanding, no implication".  PROCESS: Segs 7, 8 stacked
+classes (split above); gap note: factorial-moment derivation now an Appendix (was "elsewhere"; refereed: correct; flip/switch now defined in §1); the
+citer-check sentence narrowed to what was read; date updated.  Appendix referee also found in gap note §4: 𝒞 undefined (now
+𝒞(λ) = |S(λ,F)|/γ(λ); the iterated bound is Lemma 4.1's upper half), a factor 2 (P_F((2,m−2)) ≤ (m/(m−2))P_F((m)), conclusion
+unchanged), and that Thm 4.9's FIRST assertion o((3/4)^k e^{π√(2m/3)}) also follows (vacuous below 8.9√m; Markov with k′ = ⌈k/2⌉
+above) — all fixed; gap note 10 pp.  Verdict: core obstacle unchanged; new and unconditional today = rem:fewparts only; the rest is
+literature and writing.  Recommendation adopted: the Claim 4(ii) question is labelled "assuming Claims 2–3 transfer"; writing out
+Claims 2–3 for the case "both rows 1,2 on γ_L" (half a day) is the prerequisite for sending that question.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

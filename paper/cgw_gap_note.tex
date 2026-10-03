@@ -14,7 +14,7 @@
 \title{A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, \\
 \emph{The cycle structure of two rows in a random Latin square}}
 \author{[author]}
-\date{2 October 2026}
+\date{3 October 2026}
 
 \begin{document}
 \maketitle
@@ -57,7 +57,15 @@ otherwise.  The \emph{backflip} at an $A$-pair $\{j,j'\}$ lying on one
 $\omega$-cycle of length $\alpha+\beta$ with $\omega^\alpha(j)=j'$
 trades the $\delta_{j,j'}$-cycle through row $2$; it splits that
 $\omega$-cycle into the two arcs between $j$ and $j'$, of lengths
-$\alpha$ and $\beta$ (Lemma 3.5).  The \emph{cross-switch} at a
+$\alpha$ and $\beta$ (Lemma 3.5).  The same trade at an $A$-pair
+whose columns lie on different $\omega$-cycles, of lengths $\alpha$ and
+$\beta$, is the \emph{flip} (Definition 3.2); it joins the two cycles
+into one, with $\omega'^{\beta}(j)=j'$ (Lemma 3.3).  The \emph{switch}
+at such a pair is the trade of rows $1,2$ along one of the two
+$\omega$-cycles (Definition 3.6 selects the cycle containing the
+smallest symbol; below we sometimes fix the cycle by another rule,
+which is harmless for the counts), and it turns a $B$-pair into an
+$A$-pair (Lemma 3.7).  The \emph{cross-switch} at a
 $B$-pair $\{j,j'\}$ with $\omega^\alpha(j)=j'$ (Definition 3.9) is a
 Latin bitrade $(Q,Q')$ that preserves $S(\lambda,F)$ (Lemma 3.10).
 
@@ -258,36 +266,44 @@ $2^{\kappa-1}$ of Lemma 4.1, the lower bound $\PP_F((m))\ge2m^{-2}$ of
 Lemma 4.4, Corollary 4.8, and the upper bounds on short-cycle counts
 derived from the joining direction are unaffected.  For instance, from
 the joining direction alone one still gets $\E[\ell N_\ell]\le2m/(m-\ell)$
-for the number $N_\ell$ of $\ell$-cycles, $\ell\le m/2$ (sum the
+for the number $N_\ell$ of $\ell$-cycles, $\ell<m$ (sum the
 inequality $\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$,
 with $N_\ell N_\beta$ read as $N_\ell(N_\ell-1)$ when $\beta=\ell$, over
 $\beta$), and by joining $k$ cycles successively one obtains a
 factorial-moment bound of the form
 $\E[(\kappa)_k]\le2^{k-1}(4+k^2/\log m)(\log m)^k$ for the number of
-cycles $\kappa$, valid for every $k$ (we give the derivation
-elsewhere).  With $k=\log m$ this gives $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$,
+cycles $\kappa$, valid for every $k$ (the derivation is in the
+Appendix).  With $k=\log m$ this gives $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$,
 and with $k=\lceil\sqrt m\rceil$ it gives, by Markov's inequality on $(\kappa)_k\ge(8\sqrt m)^k$,
 \[
 \Pr[\kappa\ge9\sqrt m]\le m\Bigl(\frac{\log m}{4\sqrt m}\Bigr)^{\sqrt m}
 =\exp\bigl(-(\tfrac12-o(1))\sqrt m\,\log m\bigr),
 \]
-which is the conclusion of Theorem 4.9 with a better rate.  So the
-statements of Theorem 4.9 and of the $\log m$-scale tail survive (by a
-different proof), while the lower bound on the number of cycles of
+which is the second assertion of Theorem 4.9 with a better rate.  The
+first assertion, $\Pr[\kappa\ge k]=o((\tfrac34)^k\exp(\pi\sqrt{2m/3}))$,
+also follows: it is vacuous unless $k\ge8.9\sqrt m$, and for such $k$
+Markov's inequality on $(\kappa)_{k'}$ with $k'=\lceil k/2\rceil$ gives
+$\Pr[\kappa\ge k]\le\tfrac12(4+k'^2/\log m)(4\log m/k)^{k'}$, which is
+$o((\tfrac34)^k)$.  So the statements of Theorem 4.9 and of the
+$\log m$-scale tail survive (by a different proof), while the lower bound on the number of cycles of
 Theorem 4.11 does not.  Likewise the upper half of Corollary 4.5
-survives in a weaker form: joining the $\kappa$ parts of a type one
-pair at a time and using at each step the surviving inequality
+survives in a weaker form.  Write $\CC(\lambda)=|S(\lambda,F)|/\gamma(\lambda)$,
+where $\gamma(\lambda)$ is the number of permutations of type $\lambda$,
+so that $\CC$ is the completion count per rectangle of type $\lambda$ and
+\eqref{eq:L312} reads $\tfrac12\le\CC(\lambda)/\CC(\mu)\le\tfrac32$.
+Joining the $\kappa$ parts of a type one pair at a time and using at
+each step the surviving inequality
 $\CC(\text{finer})\le2\,\CC(\text{coarser})$ (valid also when the two
 joined parts are equal) gives $\CC(\lambda)\le2^{\kappa-1}\CC((m))$ for a
-type $\lambda$ with $\kappa$ parts, hence
+type $\lambda$ with $\kappa$ parts (this is the upper half of Lemma~4.1,
+listed above as unaffected), hence
 \[
 \PP_F(\lambda)\le\frac{\gamma(\lambda)\,2^{\kappa-1}\CC((m))}{\gamma((m))\,\CC((m))}
 \le\frac{m}{2}\prod_{i=1}^{\kappa}\frac{2}{c_i}
 \]
-for a type with parts $c_1,\dots,c_\kappa$, where $\gamma(\lambda)\le m!/\prod c_i$
-is the number of permutations of type $\lambda$, $\gamma((m))=(m-1)!$, and
-$\PP_F(\lambda)\propto\gamma(\lambda)\CC(\lambda)$ (in place of the factor
-$m^{1/3}$, which came from Lemma 4.4).
+for a type with parts $c_1,\dots,c_\kappa$, using $\gamma(\lambda)\le m!/\prod c_i$,
+$\gamma((m))=(m-1)!$ and $\PP_F(\lambda)\propto\gamma(\lambda)\CC(\lambda)$ (in
+place of the factor $m^{1/3}$, which came from Lemma 4.4).
 
 \paragraph{A downstream use.}  Gill, Mammoliti and Wanless
 \cite{GMW25} use Corollary 4.5 (upper half) and Theorem 4.9 to prove
@@ -312,12 +328,14 @@ even part $z$ into two odd parts $a,z-a$ (so $\min(a,z-a)\ge3$).  The
 second use is repaired as above (our Proposition is stated for
 $F=\emptyset$; its proof uses only flips and switches at marks in the
 free columns and trades along cycles outside $F$, so it applies in
-$\Omega(F)$ with $m$ in place of $n$, but we have not written this out).
+$\Omega(F)$ with $m$ in place of $n$, but we have not written this out;
+their Lemma~2.2 states the probability as $1-o(c^m)$, which neither
+Theorem~4.9 nor the repair gives, but only $1-o(1)$ is used).
 The first is not repaired by the weaker surviving constant: with $n/2$ in
 place of $n^{1/3}$ the estimate in Lemma~2.1 becomes
 $O(2^{(\log n)/2}\log n)$, and already its $\lambda=(n)$ term is $1$; what
-Lemma~2.1 needs is that the cycle through column~$1$ has length
-$n-\omega(1)$ with probability $1-o(1)$, which includes
+Lemma~2.1 needs is that the cycle through column~$1$ has length at
+most $n-\omega(1)$ with probability $1-o(1)$, which includes
 $\PP_F((n))=o(1)$, discussed below.  The third is the unproved direction
 at exactly the splits where case~3 fails, outside the range of
 Proposition~\ref{prop:two}; what their Lemma~2.3 actually needs is
@@ -325,18 +343,26 @@ weaker than $\tfrac32$ --- any constant, or even the averaged statement
 $\sum_{\mu\in M}\gamma(\mu)|S(\mu,F)|/(\gamma(\lambda)|S(\lambda,F)|)\to\infty$
 over the odd splits $M$ of a large even part --- but we do not have
 that either.  So, as far as we can see, Theorem~1.1 of \cite{CW16}
-currently depends on the gap at two points.  The statement itself is
-nevertheless true: Kwan, Petrova and Sawhney \cite{KPS25} have since
-proved Cameron's conjecture on parities (their Theorem~1.3), of which
-Theorem~1.1 of \cite{CW16} is a special case (part~(4)).  Their written
-proof of parts~(3)--(4) uses \cite{CW16} as a black box, so the formal
-dependence on the gap runs through it, but their Remark~6.6 sketches an
-independent re-proof of the Cavenagh--Wanless theorem by their own
-method; we take it that the dependence is removable, and have not
-checked the sketch.  Their Theorem~1.3(1) also gives, by row
-exchangeability, $\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$,
-which supersedes Theorem~4.3 of \cite{CGW08} (affected by the gap, as
-listed above).
+currently depends on the gap at two points.  The statement is expected
+to be true independently of the gap: Kwan, Petrova and Sawhney
+\cite{KPS25} have since proved Cameron's conjecture on parities (their
+Theorem~1.2, and the trivariate Theorem~1.3), of which Theorem~1.1 of
+\cite{CW16} is a special case (Theorem~1.3(4), as they note); their
+written proof of part~(3), hence of~(4), uses \cite{CW16} as a black
+box, so formally the dependence on the gap runs through it, but
+their Remark~6.6 sketches an independent re-proof of the
+Cavenagh--Wanless theorem by their own method (switching a $2\times3$
+and a $3\times2$ subrectangle), which we have not checked.  Independently
+of this, their large deviation principle, Theorem~1.3(5), is deduced
+from their Theorem~6.4 and Lemma~6.5(ii) without any use of \cite{CW16}
+or of \cite{CGW08}, and it implies the law of large numbers for the
+number of odd rows (their Theorem~1.3(1)), hence, as they remark, by row
+exchangeability
+$\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$; this
+supersedes Theorem~4.3 of \cite{CGW08} (affected by the gap, as listed
+above).  (Their written deduction of the law of large numbers goes
+through part~(4), hence through \cite{CW16}; the route through
+part~(5) avoids it.)
 
 More generally, the surviving direction bounds fine types from above
 only: it gives no upper bound on the probability of a coarse type.  In
@@ -350,14 +376,18 @@ inequality gives $\E[N_2(N_2-1)]\le2\E N_4\le m/(m-4)$; so by the second
 moment method $\Pr[N_2\ge1]\ge(\E N_2)^2/\E[N_2^2]\ge\tfrac16-o(1)$ and
 $\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
 this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
-gives $\PP_F((2,m-2))\le\tfrac m{2(m-2)}\PP_F((m))$, and iterating over
-$k$ two-cycles loses a factor of order $4^kk!$.  (We checked the other
-papers citing \cite{CGW08} that are indexed by MathSciNet or listed by
-Google Scholar; the remaining citations are to the intercalate
-estimates, superseded by \cite{KS18}, to the conjecture on
-multiplication groups of random loops, or, as in Allsop and Morris
-\cite{AM26}, to the reversibility and effect lemmas for cycle and
-cross switches in \S3 of \cite{CGW08}, which are unaffected.)
+gives $\PP_F((2,m-2))\le\tfrac m{m-2}\PP_F((m))$, and iterating over
+$k$ two-cycles loses a factor of order $4^kk!$.  (We went through the
+titles of the papers citing \cite{CGW08} that are indexed by MathSciNet
+or listed by Google Scholar and read those whose titles suggested a
+use of the affected results: besides \cite{GMW25,CW16,KPS25}, these were
+Kwan--Sah--Sawhney--Simkin, Allsop--Wanless, Divoux--Kelly--Kennedy--Sidhu
+and Allsop--Morris \cite{AM26}, which cite \cite{CGW08} for the
+intercalate estimates, superseded by \cite{KS18}, or, in the last case,
+for the reversibility and effect lemmas for cycle and cross switches in
+\S3 of \cite{CGW08}, which are unaffected.  We have not read the
+remaining citing papers, whose titles concern autotopisms, transversals,
+bitrades and loops.)
 
 \section{A partial repair}
 
@@ -538,6 +568,83 @@ bound of \eqref{eq:L312} appears to be $1+o(1)$ (the maximal excess
 over $1$ in the table is $3.5\cdot10^{-3}$, $1.7\cdot10^{-3}$,
 $1.8\cdot10^{-4}$, $<10^{-5}$, $<10^{-5}$ for $n=7,\dots,11$) rather
 than $3/2$; the question is only what has been proved.
+
+\appendix
+\section{The factorial-moment bound for the number of cycles}
+
+We derive, from the joining direction alone, the bound used in \S4.
+Take $F=\emptyset$ (a uniform Latin square $L$ of order $n$, so $m=n$;
+the argument uses only flips, switches and the identity $|J|=2|X_A|$
+of \S4, so it applies in $\Omega(F)$ with $m$ in place of $n$, but we
+state it for $F=\emptyset$).  Let $N_\ell$ be the number of
+$\ell$-cycles of $\omega$ and $\kappa=\sum_\ell N_\ell$.  The two facts
+used are those behind $|J|=2|X_A|$: for columns $j_1,j_2$ in different
+$\omega$-cycles $C_1,C_2$, the flip at $\{j_1,j_2\}$ (the trade of the
+$\delta_{j_1,j_2}$-cycle through row~$2$) is defined when $\{j_1,j_2\}$
+is an $A$-pair and joins $C_1,C_2$ into one cycle of length
+$|C_1|+|C_2|$ with $\omega'^{|C_2|}(j_1)=j_2$ (Lemma 3.3), the other
+cycles being unchanged; and when $\{j_1,j_2\}$ is a $B$-pair, the switch
+along $C_2$ (we always switch the cycle of the second column, rather
+than the one selected by Definition 3.6; any fixed rule serves)
+inverts $C_2$ in place, leaves every other cycle unchanged, and makes
+$\{j_1,j_2\}$ an $A$-pair (Lemma 3.7).  The backflip at $\{j_1,j_2\}$ in the joined
+square returns the square before the flip, so joining is at most
+two-to-one onto its image (the original square or its switch).
+
+\emph{(i) $\E[\ell N_\ell]\le2n/(n-\ell)$ for $\ell<n$.}  For
+$\beta\ne\ell$, count instances $(L,\{j,j'\})$ with $j$ on an
+$\ell$-cycle and $j'$ on a $\beta$-cycle: $\ell N_\ell\,\beta N_\beta$ per
+square; joining maps them at most two-to-one into the instances
+$(L',\{j,j'\})$ with $\omega'^{\beta}(j)=j'$ on an $(\ell+\beta)$-cycle,
+of which there are $(\ell+\beta)N_{\ell+\beta}$ per square (this is
+$|J|\le2|X|$ for the split $(\ell,\beta)$).  So
+$\E[\ell N_\ell\,\beta N_\beta]\le2\E[(\ell+\beta)N_{\ell+\beta}]$, and
+for $\beta=\ell$ the same count with the $\ell^2\binom{N_\ell}2$
+instances on unordered pairs of distinct $\ell$-cycles and the
+$\ell N_{2\ell}$ unordered targets gives
+$\E[\ell^2N_\ell(N_\ell-1)]\le4\ell\E[N_{2\ell}]$.  Summing over
+$\beta\ne\ell$, using $\sum_\beta\beta N_\beta=n$, and adding the
+$\beta=\ell$ term,
+$\E[\ell N_\ell(n-\ell N_\ell)]+\E[\ell^2N_\ell(N_\ell-1)]\le2\E\bigl[\sum_{m'\ge\ell+2}m'N_{m'}\bigr]\le2n$,
+and the left side is $n\E[\ell N_\ell]-\ell\E[\ell N_\ell]$.
+
+\emph{(ii) $\E[(\kappa)_k]\le2^{k-1}\bigl(4+k^2/\log n\bigr)(\log n)^k$ for every $k\ge1$.}
+Count instances $(L,(C_1,j_1),\dots,(C_k,j_k))$ with $C_1,\dots,C_k$
+pairwise distinct cycles of lengths $\ell_1,\dots,\ell_k$ and
+$j_i\in C_i$: there are $\ell_1\cdots\ell_k$ per ordered $k$-tuple of
+distinct cycles with these lengths.  Join $C_1$ and $C_2$ at
+$\{j_1,j_2\}$ (switching $C_2$ first if the pair is a $B$-pair), then
+join the result with $C_3$ at $\{j_1,j_3\}$, and so on, always switching
+the cycle of the new column when needed, so that the cycle containing
+$j_1$ is never inverted; after $k-1$ steps all $j_i$ lie on one cycle of
+length $m'=\sum\ell_i$ at positions relative to $j_1$ determined by
+$(\ell_1,\dots,\ell_k)$, every cycle other than $C_1,\dots,C_k$ is
+unchanged, and the composite map is at most $2^{k-1}$-to-one.  Hence the
+number of instances with lengths $(\ell_i)$ is at most
+$2^{k-1}\sum_{L'}m'N_{m'}(L')$, i.e.
+$\E[\ell_1\cdots\ell_k\,T(\ell_1,\dots,\ell_k)]\le2^{k-1}\E[m'N_{m'}]$
+with $T$ the number of ordered $k$-tuples of distinct cycles with these
+lengths.  Summing over $(\ell_i)$, since $\sum_{(\ell_i)}T=(\kappa)_k$,
+\[
+\E[(\kappa)_k]\le2^{k-1}\sum_{\ell_1,\dots,\ell_k\ge2}
+\frac{\E[m'N_{m'}]}{\ell_1\cdots\ell_k}\Big|_{m'=\ell_1+\cdots+\ell_k}.
+\]
+Split at $m'\le n/2$, where $\E[m'N_{m'}]\le4$ by (i) and
+$\sum_{m'\le n/2}\sum_{\sum\ell_i=m'}\prod\ell_i^{-1}\le(\sum_{\ell\le n/2}\ell^{-1})^k\le(\log n)^k$,
+and $m'>n/2$, where some $\ell_i\ge m'/k$, so
+$\sum_{\sum\ell_i=m'}\prod\ell_i^{-1}\le k\cdot(k/m')(\log n)^{k-1}$ and
+$\sum_{m'>n/2}\E[m'N_{m'}]\,k^2(\log n)^{k-1}/m'\le k^2(\log n)^{k-1}$,
+because at most one cycle is longer than $n/2$.
+
+\emph{(iii) Tails.}  Markov's inequality on $(\kappa)_k$: with
+$k=\lceil\log n\rceil$ and $K=A\log n$, on $\{\kappa\ge K\}$ one has
+$(\kappa)_k\ge((A-1)\log n)^k$, so
+$\Pr[\kappa\ge A\log n]\le(7+\log n)(2/(A-1))^{\log n}$, which is
+$O(n^{-2}\log n)$ for $A\ge16$; with $k=\lceil\sqrt n\rceil$ and
+$K=9\sqrt n$, $(\kappa)_k\ge(8\sqrt n)^k$ on $\{\kappa\ge K\}$ and
+$4+k^2/\log n\le2n/\log n$ for large $n$, so
+$\Pr[\kappa\ge9\sqrt n]\le2^{k-1}(2n/\log n)(\log n)^k/(8\sqrt n)^k
+\le n\,(\log n/(4\sqrt n))^{\sqrt n}$ for large $n$, as used in \S4.
 
 \begin{thebibliography}{9}
 \bibitem{AM26} J. Allsop and P. Morris, Universal probability bounds for partial Latin squares,

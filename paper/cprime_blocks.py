@@ -320,8 +320,12 @@ so none of these statements applies; what we have checked is how far the Allsop-
 $\eta_L(r,r',c)$ --- which displaces the target cell within its row and otherwise changes
 only rows $r'$ and a third row $r''$, with at most $n$ preimages when it is an intercalate
 flip and at most one otherwise --- never touches rows $1,2$ when $r,r',r''\notin\{1,2\}$,
-so it is legal in $X$ with a \emph{deterministic} forward degree $n-O(|Q|)$; it is the first
-switching we know in $X$ with that property (the turns of \S\ref{sec:orbit} have random
+so it is legal in $X$ with a \emph{deterministic} forward degree $n-O(|Q|)$.  A plain trade
+of row $r$ with a free row along a row cycle has the same two properties and is rigid, but
+it rewrites row $r$ at every column of the cycle, so it gives one factor $1/n$ per row and
+nothing for a second cell in the same row; the $\eta$-switch changes row $r$ only at $c$
+and $c'$, which is what makes a second factor possible, at the price of the multiplicity
+$n$ in the intercalate case (the turns of \S\ref{sec:orbit}, by contrast, have random
 forward degrees, which is where the lower tails come from).  The step that converts its
 reversibility into a per-cell bound is their Theorem~3.1 (the intercalate case has
 conditional probability $O(1/n)$); of its four claims, the first transfers to $X$ with
@@ -334,17 +338,24 @@ whose cycle may meet $\{1,2\}$ in exactly one row; the configuration not covered
 free row lies on the $(c_2,c_3)$-cycle of the other''.  Without that step their recursion
 gives only $O(n^{-1/2})$ for the intercalate case, hence $C/\sqrt n$ per cell rather than
 \eqref{eq:FC}.  Whether their Theorem~3.1 holds when $P$ contains two complete rows that the
-switchings never touch is, as far as we can tell, the sharpest form of the question
-(details in \cite{repo}).  The difficulty of counting column cycles that avoid prescribed
+switchings never touch --- assuming the transfer of Claims~2--3 is written out --- is the
+most concrete form of the question we can state (details in \cite{repo}).  The difficulty of counting column cycles that avoid prescribed
 rows is also noted, in a different context, by Allsop and Wanless \cite[\S3.1]{AW25}.  We
-mention finally that the parity marginal of Conjecture~\ref{conj:cgw} is now a theorem:
-by Kwan, Petrova and Sawhney \cite[Thm.~1.3(1)]{KPS25} and row exchangeability,
+mention finally that the parity marginal of Conjecture~\ref{conj:cgw} follows from Kwan,
+Petrova and Sawhney's work: their law of large numbers for the number of odd rows
+\cite[Thm.~1.3(1)]{KPS25} and row exchangeability give
 $\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$, i.e.\
-$\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements; this says nothing
-about any individual adjacent pair $\lambda,\mu$ (which have opposite parities), but their
-method --- a canonical, switching-invariant family of ``stable intercalates'' that meets
-every large set of rows, columns and symbols simultaneously, transferred to Latin squares by an approximation
-lemma for the triangle-removal process --- is the one technique we know that controls
-events at \emph{all} row sets at once, hence at square-selected ones; we have not
-attempted to adapt it to completions of a fixed rectangle.
+$\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements.  (Their written
+deduction of Theorem~1.3(1) passes through their total-variation statement~1.3(4) and so
+through \cite{CW16}, which depends on the gap of Remark~\ref{rem:gap}; but their large
+deviation principle~1.3(5) is deduced from their Theorem~6.4 and Lemma~6.5(ii) without
+\cite{CW16}, and it implies the law of large numbers, so the parity marginal does not
+depend on the gap.)  This says nothing about any individual adjacent pair $\lambda,\mu$
+(which have opposite parities).  Their method --- a canonical, switching-invariant family
+of ``stable intercalates'' that meets every set of $\beta n$ rows, columns or symbols
+simultaneously, transferred to Latin squares by an approximation lemma for the
+triangle-removal process --- controls events at all \emph{large} sets of rows at once; it
+does not by itself say anything about a single square-selected pair, but it is the one
+technique we know that reaches every large row set simultaneously, which is what a long
+ladder needs; we have not attempted to adapt it to completions of a fixed rectangle.
 """
