@@ -126,6 +126,14 @@ orbit_d = sub(orbit_d, [
  (r"a"+"\n"+r"referee's re-run with fresh seeds", r"an"+"\n"+r"independent re-run with fresh seeds"),
 ])
 
+# witness block
+w0 = find(Lad, r'\paragraph{The single remaining input.}')
+w1 = find(Lad, r'\subsection{Status of the witness lemma: literature and data}') - 1
+witness = block(Lad, w0, w1)
+witness = witness.replace(r'\kappa', r'\kappa_1')
+from witness_subs import WITNESS_SUBS
+witness = sub(witness, WITNESS_SUBS)
+
 # (j) block: adaptive coordinates
 j0 = find(Lad, r'\begin{lemma}[the adaptive coordinate is orbit-invariant]')
 j1 = find(Lad, r'\end{proof}', find(Lad, r'\begin{proposition}[orbit bound with adaptive coordinates]'))
@@ -165,7 +173,7 @@ preamble = r"""\documentclass[11pt]{article}
 \newcommand{\QQ}{Q}
 \newcommand{\CC}{C}
 
-\title{The cycle type of two rows of a random Latin square:\\ an exact ladder identity and a conditional proof of the weak Cavenagh--Greenhill--Wanless conjecture}
+\title{The cycle type of two rows of a random Latin square:\\ exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture}
 \author{[author]}
 \date{2 October 2026 --- draft}
 
@@ -176,20 +184,23 @@ preamble = r"""\documentclass[11pt]{article}
 Let $L$ be a uniformly random Latin square of order $n$ and $\sigma$ the permutation of columns
 carrying its first row to its second.  Cavenagh, Greenhill and Wanless conjectured that the
 cycle type of $\sigma$ is asymptotically that of a uniform derangement, in total variation.
-We prove three exact identities --- the marked-pair identity, which expresses the ratio of
+We prove two exact identities and a reduction theorem --- the marked-pair identity, which expresses the ratio of
 completion counts of adjacent cycle types as the odds of one bit (``rows $1,2$ lie in a
 common column cycle of a marked column pair'') in a single uniform square; a reduction
 theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
 the ladder identity, by which the bit is exactly fair except on the squares in which no
 ``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
-the exceptional set is bounded by a product of conditionally independent factors.  With
-coordinates chosen along the row permutation of the ladder pair from the marked columns,
-each coordinate is placed where it toggles, and the conjecture is thereby reduced to a
-hypothesis about short column cycles at the ladder rows (Hypothesis~\ref{hyp:adaptive}):
-that with probability $1-o(1/\log n)$ some $C\log\log n$ of the $n/\log^2n$ ladder pairs
-carry a short clean non-colliding cycle at one of $O(\log^2n)$ prescribed column pairs, and
-likewise for the offset diagonals of short-arc instances.  We state it precisely, test its ingredients numerically up to
-$n=100$, and locate it within the known switching technology.  Along the
+the exceptional set is bounded by a product of conditionally independent factors.  The
+conjecture is thereby reduced to a ``witness lemma'' (Hypothesis~\ref{hyp:witness}): that
+with probability $1-o(1/\log n)$ some ladder pair of a long ladder has a short row cycle
+through one marked column avoiding the other --- a lower-tail statement about rare local
+configurations at rows selected by the square, whose heuristic expectation is
+$\gtrsim\log^2n$.  The orbit method gives alternative sufficient conditions of the same
+type, one of which trades the rarity for a genericity constant.  We state these precisely,
+report the numerical evidence (up to $n=100$, typical types only), and locate the remaining
+difficulty within the known switching technology: every exact identity available inside the
+conditioned space is fair, and the lower bounds needed are of the kind whose proof in
+\cite{CGW08} has a gap.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -220,6 +231,11 @@ laws agree within a factor $n^{3/2}$ on every type with at most $\tfrac65\log n$
 with it the upper half of the latter statement, is affected by the gap described in
 Remark~\ref{rem:gap} and \cite{gapnote}.
 
+\paragraph{Status of the arguments.}  The proofs below have been checked by automated
+referees (independent language-model agents with access to the sources and the data) and,
+where feasible, by exhaustive computation at $n\le7$ and by sampling; no human referee has
+read them.
+
 \paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
 $j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
 $X=X(n,\lambda;\alpha,\beta)$ is the set of marked squares of type $\lambda$; the
@@ -242,28 +258,33 @@ lie in different cycles of the column permutation of rows $x_k,y_k$,
 \qquad |\Pr_X[B]-\tfrac12|\le\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
 \]
 So Conjecture~\ref{conj:cgw} follows from (L): $\Pr_X[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
-\item[(4)] \emph{Orbit method} (Propositions~\ref{prop:orbit} and~\ref{prop:adaptive}):
+\item[(4)] \emph{Witness lemma} (Proposition~\ref{prop:Lwitness}): (L), hence the
+conjecture, follows from Hypothesis~\ref{hyp:witness}: with probability $1-o(1/\log n)$,
+a long ladder contains a pair $(x_k,y_k)$ whose $\rho_{x_k,y_k}$-cycle through $j$ has
+length $\le\log^5n$ and avoids $j'$ (such a pair is flippable outright), and, for the offset
+diagonals of short-arc instances, that a constant fraction of the expected number of
+diagonals carry one.  This is the reference hypothesis of the paper.
+\item[(5)] \emph{Orbit method} (Propositions~\ref{prop:orbit} and~\ref{prop:adaptive}):
 the flippabilities of a family of ladder pairs are conditionally independent given the
 orbit of a group of commuting column-cycle turns.  With a fixed matching of columns as
 coordinates this gives $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$
-with an explicit ``orbit weight'' $\bar y_k$ that needs a genericity input; with the
-\emph{adaptive} coordinates $(\rho_k^t(p),\rho_k^t(p'))$ --- the $t$-th columns along the
-row permutation $\rho_k$ of the $k$-th ladder pair from the marked columns --- every
-coordinate is separated by the mark, so its turn toggles whenever it is legal and clean,
-and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X[2^{-|U|}]$, where $U$ is the set of ladder
-pairs having a short clean candidate cycle (subject to a collision condition).  Hence (L), and the
-conjecture, follow from Hypothesis~\ref{hyp:adaptive} (Proposition~\ref{prop:Lorbit}).
+with an explicit ``orbit weight'' $\bar y_k$; with the \emph{adaptive} coordinates
+$(\rho_k^t(p),\rho_k^t(p'))$ --- the $t$-th columns along the row permutation $\rho_k$ of
+the $k$-th ladder pair from the marked columns --- every coordinate is separated by the
+mark, so its turn toggles whenever it is legal and clean, and
+$\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X[2^{-|U|}]$, where $U$ is the set of ladder pairs
+having a short clean candidate cycle (subject to a collision condition).  These give two
+alternative sufficient conditions (Hypotheses~\ref{hyp:orbitgen} and~\ref{hyp:adaptive}),
+for which we see no implication to or from Hypothesis~\ref{hyp:witness}: the first needs a
+genericity constant that the switchings available inside $X$ cannot provide, the second
+needs $C\log\log n$ rare local events on a long ladder where the witness lemma needs one.
 \end{enumerate}
-Hypothesis~\ref{hyp:adaptive} says that, with probability $1-o(1/\log n)$, at least
-$C\log\log n$ of the first $n/\log^2n$ ladder pairs carry a short clean column cycle
-through their $x$-row at one of $O(\log^2n)$ prescribed column pairs --- a lower-tail
-statement about rare local configurations (each determined by $O(\log^2n)$ cells) at rows
-selected by the square, under the conditioning on the type of rows $1,2$.  Its heuristic
-expectation is $\asymp\log^2n$ such pairs.  No genericity constant enters; the
-fixed-matching version needed one (a probability $\ge c$ that a generic column pair is
-interleaved with the mark in $\rho_k$, measured at $0.19$ and not provable by the switchings
-available inside $X$, \S\ref{sec:remains}).  The data give $\Pr_X[B]=0.49$--$0.50$
-($\pm0.01$) at $n=30,50,100$.
+All three hypotheses are of one logical type: a lower bound on the probability of a local
+configuration (polylogarithmically many cells) at a row pair selected by the frame of the
+mark, inside the space conditioned on the type of rows $1,2$.  Their heuristic margins are
+large; the data support them for typical types $\lambda$ and say nothing about rare ones;
+and none of the exact tools of this paper gives a lower bound of that kind
+(\S\ref{sec:remains}).  The data give $\Pr_X[B]=0.49$--$0.50$ ($\pm0.01$) at $n=30,50,100$.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
@@ -402,10 +423,37 @@ $|E|\,(\ell-1)(n-2\ell+1)/2\le2(\ell-1)\,|X|$.
 """)
 body.append(r"""
 
-\section{The orbit method}\label{sec:orbit}
+\section{The witness hypothesis}\label{sec:witness}
+
+Notation as in \S\ref{sec:ladder}: $(L,P)\in X$, $P=\{j,j'\}$, frame $\pi$, ladder pairs
+$(x_k,y_k)$, $K_0$, and for $B$-instances the offset diagonals $D_c$ of
+\S\ref{sec:offsets}.  The statement below is the reference hypothesis of this paper --- the
+least demanding sufficient condition for (L) that we have; the orbit method of
+\S\ref{sec:orbit} gives two others.
+
+""")
+body.append(witness)
+body.append(r"""
+
+\begin{remark}[data]\label{rem:witnessdata}
+On Jacobson--Matthews samples with a uniformly random mark (\texttt{runs/s13/f1/}), the
+length of the $j$-cycle of $\rho_{x_k,y_k}$ for a ladder pair is spread like a uniform
+variable on $\{2,\dots,n\}$: $\Pr[\le\ell]=0.021,0.081,0.18,0.38$ for $\ell=2,5,10,20$ at
+$n=50$ against $(\ell-1)/(n-1)=0.020,0.082,0.18,0.39$, and $0.010,0.041,0.092,0.19$ at
+$n=100$; among instances with $K_0\ge n/4$ a flippable ladder pair with $j$-cycle of length
+$\le10$ exists in $93\%$ ($n=50$) and $95\%$ ($n=100$) of the instances, and one of length
+$\le20$ in $99.6\%$ and $99.8\%$.  The samples see only typical types $\lambda$; the
+hypothesis is required uniformly in $\lambda$, and classes with all cycles of $\rho_{1,2}$
+short are too rare to be tested this way.
+\end{remark}
+
+\section{The orbit method: alternative sufficient conditions}\label{sec:orbit}
 
 Throughout this section $X=X(n,\lambda;\alpha,\beta)$, and ``legal'' means: preserves the
-type of rows $1,2$ and the mark, i.e.\ maps $X$ to itself.
+type of rows $1,2$ and the mark, i.e.\ maps $X$ to itself.  The method bounds
+$\Pr_X[\mathrm{Flip}_I=\emptyset]$ by a product of conditionally independent factors; the
+two hypotheses it leads to are compared with Hypothesis~\ref{hyp:witness} at the end of the
+section.
 
 """)
 body.append(orbit_a); body.append("\n\n")

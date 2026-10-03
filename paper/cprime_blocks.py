@@ -2,6 +2,29 @@
 prop:Lorbit, data, and the new section 6.  Imported by assemble_conditional.py."""
 
 cprime_intro = r"""
+\begin{hypothesis}[orbit genericity; fixed matching]\label{hyp:orbitgen}
+Fix the matching $\mathcal M$ of the free columns in consecutive pairs (in the natural
+order of the columns) and a constant $\ell_1$ as in (c),
+and for a family $\mathcal G$ and $D\subseteq\mathcal G$ write
+$Y_D=\sum_{(x,y)\in D}\bar y_{x,y}$ (orbit weights computed with cleanliness with respect to
+all rows of $\mathcal G$).  There is a constant $\kappa_0>0$ such that, with
+$\ell_0=n/\log^2n$ and uniformly in $\lambda,\alpha,\beta$: (i) for the sub-ladder $I$ of
+the first $\min(K_0-1,\lceil n/8\rceil)$ ladder pairs,
+$\E_X\bigl[e^{-Y_I/2};\ K_0\ge\ell_0\bigr]=o(1/\log n)$; (ii) for a $B$-instance, with
+$\ell:=d_{12}<\ell_0$ and $|C_1|\ge n/2+\ell$, $S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$
+and $\mathcal G=\bigcup_{c\in S}D_c$: the event that fewer than $\kappa_0|S|$ of the
+diagonals $D_c$, $c\in S$, have $Y_{D_c}\ge\kappa_0(\ell-1)$ has probability $o(1/\log n)$
+(one event, not one per $\ell$); and symmetrically for $d_{21}$.  (A fixed small fraction,
+not a half: with a fixed matching the orbit weight of a single pair vanishes with
+probability $\approx0.7$, \S(d), so for $\ell=2$ only a minority of the one-pair diagonals can
+qualify.)
+\end{hypothesis}
+\noindent Since $\bar y_{x,y}$ is typically of constant size (\S(d): $0.16$--$0.19$ on
+average with the fixed matching), (i) asks that the sum of $\approx n/8$ such weights not collapse; its content is a
+\emph{genericity constant} --- that a clean coordinate is separated by the mark with
+probability bounded below --- which none of the exact tools of this paper provides
+(\S\ref{sec:remains}).
+
 \paragraph{(c$'$) Adaptive coordinates: the toggling is automatic.}
 Proposition~\ref{prop:orbit} needs the clean coordinates of a ladder pair to be
 \emph{separated} by $\{p,p'\}$ with positive probability, a genericity input we cannot prove
@@ -23,48 +46,83 @@ genericity constant of \S\ref{sec:remains} lives.)
 
 cprime_rest = r"""
 \begin{hypothesis}[short clean cycles at the ladder rows]\label{hyp:adaptive}
-There are $T,\ell_1=O(\log^2n)$ such that, uniformly in $\lambda,\alpha,\beta$, with
-$\ell_0=n/\log^2n$ and $U$ as in Proposition~\ref{prop:adaptive}:
+There are $T,\ell_1=O(\log^2n)$ and a constant $\kappa_2>0$ such that, uniformly in
+$\lambda,\alpha,\beta$, with $\ell_0=n/(16\log^2n)$, $M=\lfloor n/\log^4n\rfloor$ and $U$ as
+in Proposition~\ref{prop:adaptive}:
 \begin{itemize}[leftmargin=2em]
-\item[(i)] for the sub-ladder $I$ of the first $\min(K_0-1,\lceil n/\log^2n\rceil)$ ladder
+\item[(i)] for the sub-ladder $I$ of the first $\min(K_0-1,\lceil\ell_0\rceil)$ ladder
 pairs, $\E_X\bigl[2^{-|U|};\ K_0\ge\ell_0\bigr]=o(1/\log n)$;
-\item[(ii)] for a $B$-instance with $d_{12}=\ell<\ell_0$ and $|C_1|\ge n/2+\ell$, with
-$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps $2\ell$, so that the
-$x$-rows $\pi^{-(c+i)}(1)$, $c\in S$, $1\le i<\ell$, are pairwise distinct and
-$|S|\ge n/(8\ell)$) and $U$ taken for the family $\bigcup_{c\in S}D_c$: the event that fewer
-than half of the diagonals $D_c$, $c\in S$, meet $U$ has probability $o(1/\log n)$ (as a
-single event over all $\ell<\ell_0$); and symmetrically for $d_{21}$.
+\item[(ii)] for a $B$-instance, with $\ell:=d_{12}<\ell_0$ and $|C_1|\ge n/2+\ell$: let
+$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps $2\ell$, so that the $x$-rows
+of the diagonals $D_c$, $c\in S$, are pairwise distinct; $|S|\ge n/(8\ell)\ge2\log^2n$),
+let $S'$ be the first $m_\ell:=\min\bigl(|S|,\lceil n/(\log^2n\cdot\min(\ell-1,M))\rceil\bigr)$
+offsets of $S$, let $D_c^{(M)}$ be the first $\min(\ell-1,M)$ pairs of $D_c$, and take $U$
+for the family $\mathcal F_\ell=\bigcup_{c\in S'}D_c^{(M)}$ (which has at most
+$2n/\log^2n$ pairs).  Then the event that fewer than $\kappa_2\log^2n$ of the diagonals
+$D_c^{(M)}$, $c\in S'$, meet $U$ has probability $o(1/\log n)$ (one event, not one per
+$\ell$); and symmetrically for $d_{21}$.
 \end{itemize}
 \end{hypothesis}
+\noindent The scaling in (ii) is forced: a diagonal of $\ell-1$ pairs meets $U$ with
+probability $\approx\min(\ell-1,M)\,T\ell_1/n$, so for short arcs only a small fraction of
+the diagonals can be expected to meet $U$, and the family must be kept to
+$O(n/\log^2n)$ pairs for the cleanliness and collision conditions of
+Proposition~\ref{prop:adaptive} to have constant cost; $|S'|\min(\ell-1,M)\approx n/\log^2n$
+makes the expected number of diagonals meeting $U$ of order $\log^2n$ for every $\ell$.
 
 \begin{proposition}\label{prop:Lorbit}
-Hypothesis~\ref{hyp:adaptive} implies \textup{(L)}, hence the weak CGW conjecture.
+Each of Hypotheses~\ref{hyp:orbitgen} and~\ref{hyp:adaptive} implies \textup{(L)}, hence
+the weak CGW conjecture.
 \end{proposition}
 
 \begin{proof}
 By Theorem~\ref{thm:ladder},
-$|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.
-\emph{Long ladders.}  $K_0$ is a function of the frame, hence orbit-invariant, and by
-Proposition~\ref{prop:adaptive} $\Pr[\mathrm{Flip}_I=\emptyset\mid\text{orbit}]\le2^{-|U|}$,
-so $\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]\le\E[2^{-|U|};K_0\ge\ell_0]=o(1/\log n)$ by (i).
+$|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$,
+with $\ell_0$ as in the hypothesis used.  \emph{Long ladders.}  $K_0$ is a function of the
+frame, hence orbit-invariant, and by Proposition~\ref{prop:orbit} resp.\
+Proposition~\ref{prop:adaptive} $\Pr[\mathrm{Flip}_I=\emptyset\mid\text{orbit}]\le e^{-Y_I/2}$
+resp.\ $2^{-|U|}$, so $\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]=o(1/\log n)$ by (i).
 \emph{Short ladders on $A$.}  $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}.
-\emph{Short arcs on $B$.}  Fix $\ell<\ell_0$ and consider $B$-instances with $d_{12}=\ell$.
-The part $|C_1|<n/2+\ell$ costs at most $8/n$ by Proposition~\ref{prop:splice}.  On
-$|C_1|\ge n/2+\ell$ apply Proposition~\ref{prop:adaptive} to the family
-$\bigcup_{c\in S}D_c$: its $x$-rows lie in the disjoint depth intervals $[c+1,c+\ell-1]$,
-$c\in S$, on the frame arc from $2$ to $1$, and its $y$-rows $\pi^{-i}(2)$ on the arc from
-$1$ to $2$, so the family is as required.  Given the orbit the statuses of all pairs are
-independent and $T_k$ toggles pair $k\in U$, so a diagonal $D_c$ with $U\cap D_c\ne\emptyset$
-is flippable (contains a parallel pair) with conditional probability $\ge\tfrac12$, and the
-diagonals' flippabilities are independent (they are disjoint sets of pairs).  Off the
-exceptional event of (ii), at least $|S|/2$ diagonals meet $U$, so the number of flippable
-offsets $c\in S$ has conditional mean $\mu\ge|S|/4$, and by Chernoff it is $\ge|S|/8$ except
-with conditional probability $\le e^{-\mu/8}\le e^{-|S|/32}\le e^{-\log^2n/256}$ (as
-$|S|\ge n/(8\ell_0)=\log^2n/8$), which is summable over $\ell<\ell_0$ to $o(1/n)$.  The
-identity behind \eqref{eq:offsetavg} holds for the average over $c\in S$ as well as over all
-$c$, so with $\theta_0=\tfrac18$,
-$\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta_S\ge\theta_0]\le36\ell_0/((n-2)\theta_0)=O(1/\log^2n)$.
-The case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
+\emph{Short arcs on $B$.}  Fix $\ell<\ell_0$ and consider $B$-instances with $d_{12}=\ell$;
+the case $d_{21}=\ell$ reduces to it by the involution exchanging rows $1,2$, as in
+Proposition~\ref{prop:Lwitness}.  The part $|C_1|<n/2+\ell$ costs at most $8/n$ by
+Proposition~\ref{prop:splice}.  On $|C_1|\ge n/2+\ell$ the family of (ii) is as required by
+the propositions: its $x$-rows lie in the disjoint depth intervals $[c+1,c+\ell-1]$, $c\in S$,
+on the frame arc from $2$ to $1$, and its $y$-rows $\pi^{-i}(2)$ on the arc from $1$ to $2$.
+Given the orbit the statuses of all pairs are independent, and the diagonals'
+flippabilities are independent (they are disjoint sets of pairs).  Under
+Hypothesis~\ref{hyp:orbitgen}, a diagonal with $Y_{D_c}\ge\kappa_0(\ell-1)$ is flippable
+with conditional probability $\ge1-e^{-\kappa_0(\ell-1)/2}\ge4\theta_0$,
+$\theta_0:=\tfrac14(1-e^{-\kappa_0/2})$; off the exceptional event of (ii) at least
+$\kappa_0|S|$ diagonals qualify, so the number of flippable offsets has conditional mean
+$\ge4\theta_0\kappa_0|S|$ and the fraction $\theta_S$ is $\ge2\theta_0\kappa_0=:\theta_0'$
+except with conditional probability $\le e^{-\theta_0\kappa_0|S|/2}\le e^{-\theta_0\kappa_0\log^2n/16}$
+(as $|S|\ge n/(8\ell_0)=\log^2n/8$).
+Under Hypothesis~\ref{hyp:adaptive}, a diagonal $D_c^{(M)}$ meeting $U$ is flippable with
+conditional probability $\ge\tfrac12$ (the status of a pair $k\in U$ is
+$\mathrm{bit}_k\oplus\varepsilon_k$ with $\varepsilon$ uniform on the orbit); off the
+exceptional event of (ii) at least $\kappa_2\log^2n$ diagonals of $S'$ meet $U$, so the
+number of flippable offsets in $S'$ has conditional mean $\mu\ge\tfrac12\kappa_2\log^2n$ and
+is $\ge\mu/2$ except with conditional probability $\le e^{-\mu/8}\le e^{-\kappa_2\log^2n/16}$;
+hence the fraction $\theta_{S'}$ is $\ge\theta_0(\ell):=\kappa_2\log^2n/(4m_\ell)$.  In both
+cases the conditional failure probabilities are summable over $\ell<\ell_0$ to $o(1/n)$.
+The derivation of \eqref{eq:offsetavg} from \eqref{eq:offsetprice} applies to the average
+over any set of offsets determined by $\ell=d_{12}$ alone, such as $S$ and $S'$, so
+\[
+\sum_{\ell<\ell_0}\Pr\bigl[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\ \theta_{S}\ge\theta_0(\ell)\bigr]
+\le\sum_{\ell<\ell_0}\frac{36}{(n-2)\,\theta_0(\ell)}
+\]
+(with $S'$ and $\theta_{S'}$ in the adaptive case), which is
+$36\ell_0/((n-2)\theta_0')=O(1/\log^2n)$ for Hypothesis~\ref{hyp:orbitgen}, and
+for Hypothesis~\ref{hyp:adaptive}, with $m_\ell\le n/(\log^2n\min(\ell-1,M))+1$,
+\begin{multline*}
+\sum_{\ell<\ell_0}\frac{144\,m_\ell}{(n-2)\kappa_2\log^2n}
+\le\frac{144}{\kappa_2\log^4n}\Bigl(\sum_{\ell-1\le M}\frac1{\ell-1}+\sum_{M<\ell-1<\ell_0}\frac1M\Bigr)+\frac{144\,\ell_0}{(n-2)\kappa_2\log^2n}\\
+=O\Bigl(\frac{\log n}{\log^4n}+\frac{\ell_0}{M\log^4n}+\frac1{\log^4n}\Bigr)=O\Bigl(\frac1{\log^2n}\Bigr).
+\end{multline*}
+The exceptional events of (ii) over all $\ell$ form a single event of probability
+$o(1/\log n)$ ($\ell=d_{12}$ is a frame statistic).  Altogether
+$\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
 \end{proof}
 
 \paragraph{What the hypothesis says, and what it costs.}  A ladder pair enters $U$ when one
@@ -77,10 +135,10 @@ $\approx e^{-2s\ell_1/n}$ for a family of $s$ pairs, and the chosen pair avoids 
 $\approx2Ts$ candidate columns of the other pairs with probability $\approx(1-2Ts/n)^2$, so
 \[
 \E|U|\;\approx\;s\cdot\frac{T\ell_1}{n}\,e^{-2s\ell_1/n}\Bigl(1-\frac{2Ts}n\Bigr)^2\;\asymp\;\log^2n
-\qquad\text{for }s=\frac n{\log^2n},\ T=\frac{\log^2n}4,\ \ell_1=\frac{\log^2n}2,
+\qquad\text{for }s=\frac n{16\log^2n},\ T=\frac{\log^2n}4,\ \ell_1=\frac{\log^2n}2,
 \]
 against the $C\log\log n$ ($C>1/\log2$) that (i) needs; the constant is small
-($\approx1/80$), so the heuristic excess over the threshold is a large-$n$ statement.  Compared with the fixed matching
+($\approx1/145$), so the heuristic excess over the threshold is a large-$n$ statement.  Compared with the fixed matching
 of (c), which offers $\approx n/2$ coordinates per pair of which a constant number are short
 and clean and a fraction $\approx0.19$ of those separated, the adaptive rule offers only
 $T=O(\log^2n)$ coordinates per pair, all separated: the genericity constant is gone, and in
@@ -100,9 +158,23 @@ the candidate set of an excluded pair, so the obvious greedy refinement is not i
 and it is crude: it is why the asymptotic regime $2Ts/n\le\tfrac12$ is out of reach of
 sampling at $n\le100$.
 
+\paragraph{Comparison with the witness lemma.}  Hypothesis~\ref{hyp:witness} asks for
+\emph{one} witness on a long ladder (a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding
+$p'$, which makes the pair flippable with no further argument), at a per-pair rate
+$\approx\ell'/n$.  Hypothesis~\ref{hyp:adaptive} asks for $C\log\log n$ good candidates at
+a per-pair rate $\approx T\ell_1/n$, and Hypothesis~\ref{hyp:orbitgen} asks for a
+genericity constant.  Neither orbit hypothesis is implied by the witness lemma or implies
+it (we see no implication in either direction); the witness lemma is the least demanding
+heuristically and is the reference hypothesis of this paper.  What the orbit method contributes is the mechanism ---
+exact fairness compounded over commuting involutions into exponential decay --- and, with
+the adaptive coordinates, the observation that the mechanism needs only rare local
+witnesses of a second kind (column cycles of a free pair through $x_k$) rather than a
+constant.  All three hypotheses share the same unproved core, stated in
+\S\ref{sec:remains}.
+
 \paragraph{(d) Data.}  All scripts and logs are in the repository \cite{repo}, under
 \texttt{s13\_*.py} and \texttt{runs/s13/orbit/}.  \emph{Adaptive coordinates.}  On
-true-marked instances at $n=30,50,100$ (family the first $\min(K_0-1,n/8)$ ladder pairs,
+instances with a uniformly random mark at $n=30,50,100$ (family the first $\min(K_0-1,n/8)$ ladder pairs,
 $T=6$, $\ell_1=6,8,10$; $2400$, $3000$, $900$ instances), for a random $k\in U$ the turn of
 $Z_k$ was applied and checked to toggle the status of $(x_k,y_k)$, to leave the status,
 $\mu_l$, $t_0(l)$, $C_l$ of every other pair and the set $U$ unchanged, and to preserve the
@@ -132,15 +204,19 @@ were fair and independent.
 remains = r"""
 \section{What remains}\label{sec:remains}
 
-Hypothesis~\ref{hyp:adaptive} is a statement about short cycles at the frame-selected rows:
-that enough ladder pairs $(x_k,y_k)$ have, at one of the prescribed column pairs
-$(\rho_k^t(p),\rho_k^t(p'))$, a column cycle through $x_k$ of length $O(\log^2n)$ that
-avoids the other ladder rows and meets $\{1,2\}$ in $0$ or $2$ rows; and that the arcs of
-$\rho_k$ at $p,p'$ are not shorter than $T$ for most $k$.  Both are local (polylogarithmic)
-configurations whose heuristic frequency is, for large $n$, far above what is needed; the difficulty is
-entirely that the rows are selected by the frame of the mark and the whole space is
-conditioned on the type of rows $1,2$.  We record what the available tools do and do not
-give.
+Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen} and~\ref{hyp:adaptive} are statements
+about local configurations at the frame-selected rows: a short $\rho_{x_k,y_k}$-cycle
+through $p$ avoiding $p'$; a clean column pair separated by the mark; a short clean column
+cycle at a prescribed column pair.  Their heuristic frequencies are, for large $n$, far
+above what is needed; the difficulty is entirely that the rows are selected by the frame of
+the mark and the whole space is conditioned on the type of rows $1,2$.  The minimal
+instance of the obstacle is a lower bound on a single frame-selected pair:
+\[
+\Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
+\]
+which no identity of this paper gives unconditionally (flippability of a ladder pair is a
+class invariant of the ladder trades; Proposition~\ref{prop:adaptive} makes it exactly
+$\tfrac12$ given the orbit on $\{1\in U\}$, which only moves the question to $\Pr[1\in U]$).  We record what the available tools do and do not give.
 
 \emph{Unconditional facts.}  For two generic rows of a uniform square,
 Proposition~\ref{prop:tailsurvive}(i) gives, by Markov's inequality on the number of

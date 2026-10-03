@@ -4,11 +4,10 @@ fails if a source text has drifted."""
 
 
 def postprocess(text):
-    i5 = text.index(r'\section{The orbit method}')
+    i5 = text.index(r'\section{The orbit method')
     head, orb = text[:i5], text[i5:]
     # kappa (genericity constant) -> kappa_0 in sections 5-6 (kappa = number of cycles in section 3)
     assert r'\kappa(\lambda)' not in orb and r'\kappa(\pi)' not in orb
-    orb = orb.replace(r'\kappa', r'\kappa_0')
     text = head + orb
     post = [
         (r"""Throughout this section $X=X(n,\lambda;\alpha,\beta)$, and ``legal'' means: preserves the
