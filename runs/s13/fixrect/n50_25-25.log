@@ -1,0 +1,13 @@
+n=50: squares=40000  sigma cycle type=[25, 25]  marks/class/square=4
+class m=25 alpha=2: N=160000  P[B]=0.5020  qbar=P[B]/P[A]=1.0081  P[K0>=2]=1.0000
+   P[(x1,y1) flippable | K0>=2] = 0.5009   | B: 0.5016  | A: 0.5002   mean |cycle through p| at pair 1 = 26.45
+   P[Flip_ladder = empty | K0=k] (k: N, p): {2: (13045, 0.5013), 3: (12426, 0.2533), 4: (11862, 0.1225), 5: (11198, 0.0607), 6: (10726, 0.0296), 7: (10257, 0.0152), 8: (9577, 0.0071), 9: (9018, 0.0027), 10: (71891, 0.0005)}
+   witness at pair 1, P[len<=L and avoids p'] / P[len<=L]: {4: (0.0602, 0.0607), 8: (0.1338, 0.1402), 16: (0.2613, 0.3004), 32: (0.4358, 0.6209)}
+   adaptive candidates at pair 1 (t<=min(8,mu-1)): P[mu>=2]=1.0000 E[mu]=9.58 P[mu-1>=8]=0.5045  P[G_1]=0.4069  P[some good t]=0.8837
+      involution check: P[flip1 & good]=0.4424  P[not flip1 & good]=0.4412   bound P[flip1] >= P[good]/2 = 0.4418
+class m=25 alpha=12: N=160000  P[B]=0.4990  qbar=P[B]/P[A]=0.9959  P[K0>=2]=1.0000
+   P[(x1,y1) flippable | K0>=2] = 0.5017   | B: 0.5006  | A: 0.5029   mean |cycle through p| at pair 1 = 26.47
+   P[Flip_ladder = empty | K0=k] (k: N, p): {2: (13200, 0.5067), 3: (12253, 0.2461), 4: (11800, 0.1225), 5: (11207, 0.0606), 6: (10699, 0.0318), 7: (10200, 0.0167), 8: (9665, 0.0083), 9: (9137, 0.0044), 10: (71839, 0.0004)}
+   witness at pair 1, P[len<=L and avoids p'] / P[len<=L]: {4: (0.0606, 0.061), 8: (0.1349, 0.1412), 16: (0.2631, 0.301), 32: (0.4371, 0.6209)}
+   adaptive candidates at pair 1 (t<=min(8,mu-1)): P[mu>=2]=1.0000 E[mu]=9.62 P[mu-1>=8]=0.5077  P[G_1]=0.4102  P[some good t]=0.8847
+      involution check: P[flip1 & good]=0.4439  P[not flip1 & good]=0.4408   bound P[flip1] >= P[good]/2 = 0.4423

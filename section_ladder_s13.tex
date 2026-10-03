@@ -2049,3 +2049,195 @@ $\sqrt n$ ($\mu_k>\sqrt n$ for a constant fraction of the pairs,
 which by \eqref{eq:Jp} needs $1-b_\ell\gg n^{-1/2}$ for
 $\ell\le\sqrt n$).  Either way, what is left is the behaviour of
 short column cycles and arcs at the frame-selected rows.
+
+\paragraph{(k) The first ladder pair alone: a fixed-rectangle sampler,
+atypical types, and the single-pair involution.}  (Classification:
+DATA, and one PROVED statement that is a one-way REDUCTION of the
+target to a transposed analogue not known to be easier --- not a
+proven lower bound.)
+The minimal instance of the obstacle identified in the assessment is
+\begin{equation}\label{eq:firstpair}
+\Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad
+x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
+\end{equation}
+uniformly in $\lambda,\alpha,\beta$.  (For $2\le\alpha\le m-2$ the pair
+is always a pair of rows outside $\{1,2\}$: $x_1=2$ would mean
+$p'=\sigma(p)$, $y_1=1$ would mean $p=\sigma(p')$; so $K_0\ge2$ always,
+and the data below confirm $\Pr[K_0\ge2]=1$.)
+
+\emph{The sampler.}  To test \eqref{eq:firstpair} and the ladder
+statistics on types $\lambda$ that the uniform square never produces,
+\texttt{jmfix.c} runs the Jacobson--Matthews chain on the completions
+of a \emph{fixed} $2\times n$ rectangle $R=(\mathrm{id},\sigma)$: from a
+proper state it chooses $(r,c,s)$ with $r\ge3$ and $s$ not in rows
+$1,2$ of column $c$ (so the second row touched is also $\ge3$), and
+from an improper state it chooses among the usual $2\cdot2\cdot2$
+resolutions and \emph{rejects} (stays) when the chosen row is $1$ or
+$2$.  The restricted move graph is undirected and every proper state
+has restricted degree $(n-2)n(n-3)$, every improper state keeps its
+original degree $8$ in the denominators, so the walk is a simple random
+walk on the restricted graph and its stationary law is uniform on the
+proper states of the component of the start.  Connectivity is not
+proved; it was tested: at $n=5,6$ (types $(5)$, $(6)$, $(2,2,2)$;
+$36$, $4032$, $5376$ completions, enumerated exactly) every completion
+is hit from two different starts and the $\chi^2$ statistics against
+uniformity are within one standard deviation of their mean
+($z=+0.40,+0.96;\ +0.10,-0.22;\ -0.87,+0.40$); at $n=7$, $R=(\mathrm{id},(0\,1\cdots6))$,
+$3\cdot10^5$ samples give $\Pr[B\mid R]=0.4965$ against the exact
+$0.497076$ of \texttt{s13\_comp7} over all $6566400$ completions
+(\texttt{s13\_fixrect.py}; logs \texttt{runs/s13/fixrect/}).  Since
+rows $\ge3$ of $X(n,\lambda;\alpha,\beta)$ are exchangeable and all
+marks of a given $(m,\alpha)$ in a given rectangle are equivalent under
+the symmetries of $R$, $\Pr_X$ of any event determined by the mark and
+the square equals its $\Pr[\,\cdot\mid R]$ averaged over the marks of
+that class, which is what \texttt{s13\_fixstats.py} computes.
+
+\emph{Data on atypical types.}  At $n=30$ ($60000$ squares per type,
+thinning $2000$ moves; a second run with thinning $500$ from a
+different start agrees) and $n=50$ ($40000$ squares, thinning $2500$),
+for the types $(n)$, $(n/2,n/2)$, $(n-2,2)$, $(10,10,10)$,
+$(4,2^{13})$, $(6,3^8)$ at $n=30$ and $(50)$, $(25,25)$, $(48,2)$,
+$(4,2^{23})$, $(6,3^{14},2)$ at $n=50$, with marks at $\alpha=2$,
+$\alpha\approx m/3$ and $\alpha=\lfloor m/2\rfloor$ where available
+($360000$ resp.\ $160000$ marked instances per class):
+\begin{itemize}
+\item $\Pr_X[B]\in[0.4974,0.5024]$ in every class, i.e.\ by
+Theorem~\ref{thm:marked} $\CC_n(\lambda)/\CC_n(\mu)\in[0.995,1.005]$
+for every tested pair --- including $(4,2^{13})\to(2^{15})$,
+$(6,3^8)\to(3^{10})$ and $(6,3^8)\to(4,3^8,2)$, types of
+$\Pr_n$-probability $e^{-\Theta(n)}$.  The sampling error is
+$\approx0.002$ ($n=30$) and $0.0025$ ($n=50$); the observed deviations
+are of that size.  This extends the exact ratios of
+Remark~\ref{rem:cgwgap} ($n\le7$, $[0.985,1.0035]$) to $n=30,50$
+and to extreme types, by sampling.  At $n=100$ ($12000$ squares,
+thinning $10^4$, types $(100)$ and $(4,2^{48})$, sampling error
+$\approx0.005$) $\Pr_X[B]\in[0.495,0.504]$ and
+$\Pr_X[\mathrm{flip}_1]\in[0.497,0.503]$.
+\item $\Pr_X[(x_1,y_1)\text{ flippable}]\in[0.4988,0.5017]$ in every
+class, and the same conditionally on $A$ and on $B$ (as it must be
+up to the factor $\bar q$: $\Pr_X[\mathrm{flip}_1\mid A]=\bar q\,\Pr_X[\mathrm{flip}_1\mid B]$,
+by the trade $T_1$).  At $n=7$ the value is $0.4896$, so $\tfrac12$ is
+not an identity; the data say $\tfrac12+o(1)$, uniformly in the type.
+\item $\Pr_X[\mathrm{Flip}_I=\emptyset\mid K_0=k]$ is $0.50$, $0.25$,
+$0.125$ for $k=2,3,4$ in every class (independent fair bits), and the
+witness frequencies at the first pair,
+$\Pr[|Q_p|\le\ell',\,p'\notin Q_p]$ for $\ell'=4,8,16$, are
+$0.100,0.216,0.388$ at $n=30$ and $0.060,0.134,0.261$ at $n=50$,
+again the same in every class to $\pm0.002$; the mean of $|Q_p|$ is
+$16.47$ at $n=30$ and $26.47$ at $n=50$ in every class.
+\end{itemize}
+So no falsification: on the types where the hypotheses could
+most plausibly fail, nothing distinguishes them from the typical type
+at the resolution $2\cdot10^{-3}$.  (This is \emph{not} evidence about
+the $o(1/\log n)$ tails; it is evidence that the first-moment
+quantities are type-independent.)
+
+\emph{The single-pair involution.}  The adaptive coordinates of \S(j),
+specialised to the one pair $(x_1,y_1)$, need neither short column
+cycles nor collision-freeness, because there are no other pairs to
+protect.  Write $\rho=\rho_{x_1,y_1}$, $\mu$ for the minimum of the two
+arc lengths (crossed) or of $|Q_p|,|Q_{p'}|$ (parallel); then $\mu\ge2$
+always, since $\rho(p)=p'$ would need $L_{y_1,p'}=L_{1,p'}$ and
+$\rho(p')=p$ would need $L_{x_1,p'}=L_{2,p'}$.  For $1\le t<\mu$ let
+$\{q_t,c_t\}=\{\rho^t(p),\rho^t(p')\}$ (free, distinct, separated), let
+$\tau_t$ be the column permutation of the pair ($\tau_t(r)$ is the row
+of $L_{r,q_t}$ in column $c_t$) and $Z_t(r)$ its cycle through $r$.
+Call $t$ \emph{good} if $x_1,y_1$ lie in different cycles of $\tau_t$
+and at least one of $Z_t(x_1)$, $Z_t(y_1)$ meets $\{1,2\}$ in $0$ or
+$2$ rows; let $G=\{\text{some }t<\mu\text{ is good}\}$ and, on $G$,
+$t_0$ the least good $t$ and $Z$ the admissible cycle (that through
+$x_1$ if admissible, else that through $y_1$).
+
+\begin{proposition}[single-pair involution]\label{prop:firstpair}
+Turning $Z$ (exchanging columns $q_{t_0},c_{t_0}$ in the rows of $Z$)
+is an involution of $X\cap G$ that preserves the frame $\pi$ (hence
+$x_1,y_1$), toggles the flippability of $(x_1,y_1)$ and fixes $t_0$ and
+$Z$.  Consequently
+\[
+\Pr_X[\mathrm{flip}_1\cap G]=\Pr_X[\mathrm{flip}_1^{\,c}\cap G],\qquad
+\bigl|\Pr_X[\mathrm{flip}_1]-\tfrac12\bigr|\le\tfrac12\Pr_X[G^c],\qquad
+\Pr_X[A],\ \Pr_X[B]\ \ge\ \tfrac14\Pr_X[G].
+\]
+\end{proposition}
+
+\begin{proof}
+Columns $p,p'$ are untouched, so $\pi$, $x_1,y_1$, the mark and the
+rows outside $Z$ are unchanged; rows $1,2$ are both in $Z$ or both
+outside, and if both are in, rows $1,2$ become $L_1\circ(q\,c)$,
+$L_2\circ(q\,c)$, so $\sigma'=(q\,c)\,\sigma\,(q\,c)$ has the type of
+$\sigma$ and, as $q,c\notin\{p,p'\}$, $\sigma'^{\alpha}(p)=p'$: the
+turned square is in $X$.  (In the normalised space $S(R)$ this turn
+is, after the column relabelling $(q\,c)$, the turn of the complement
+of $Z$, which contains exactly one of $x_1,y_1$ as well.)  Exactly one
+of the rows $x_1,y_1$ is in $Z$ (they are in different $\tau$-cycles),
+so $\rho'=\rho\circ(q\,c)$ if $x_1\in Z$ and $\rho'=(q\,c)\circ\rho$ if
+$y_1\in Z$.  In the first case Lemma~\ref{lem:adaptinv} applies with
+$t=t_0$.  In the second, $(q\,c)\circ\rho=\rho\circ(u\,u')$ with
+$u=\rho^{t_0-1}(p)$, $u'=\rho^{t_0-1}(p')$ (possibly $t_0=1$,
+$\{u,u'\}=\{p,p'\}$), and the same computation as in the lemma, with
+$t_0-1$ in place of $t$, shows: the $\rho$-paths from $p$ to $u$ and
+from $p'$ to $u'$ are unchanged, $\rho'(u)=c$ and $\rho'(u')=q$ (the
+ordered pair at step $t_0$ is reversed, the unordered pair is
+$\{q,c\}$), and crossed with arcs $(a,b)$ becomes parallel with cycle
+lengths $(b,a)$ and conversely.  In both cases $\mu'=\mu$ ($\rho$ has no
+fixed points as $x_1\neq y_1$), the candidates are the same for
+$t\le t_0$, flippability toggles, and the column pairs with $t<t_0$ are
+disjoint from $\{q,c\}$, so their $\tau_t$ and their badness are
+unchanged.  At $t_0$, $\tau'_{t_0}$ is $\tau_{t_0}$ with the
+cycle $Z$ reversed (or $\tau_{t_0}^{-1}$ so modified), so $x_1,y_1$ are
+still in different cycles, $Z$ is still its own cycle with the same
+intersection with $\{1,2\}$, and the other cycle through
+$\{x_1,y_1\}$ is unchanged; hence $t_0$ and $Z$ are the same in the
+turned square and the turn is an involution.  The first identity
+follows; the second from $\Pr[\mathrm{flip}_1]\ge\tfrac12\Pr[G]$ and
+$\Pr[\mathrm{flip}_1^c]\ge\tfrac12\Pr[G]$; for the third, the trade
+$T_1$ along $Q_{p'}$ at $(x_1,y_1)$ is an involution of
+$X\cap\mathrm{flip}_1$ exchanging $A$ and $B$ (the frame becomes
+$(x_1\,y_1)\circ\pi$), so
+$\Pr[B]-\Pr[A]=\Pr[B\cap\mathrm{flip}_1^c]-\Pr[A\cap\mathrm{flip}_1^c]$,
+whence $\Pr[A]\ge\tfrac12-\tfrac12\Pr[\mathrm{flip}_1^c]\ge\tfrac14\Pr[G]$,
+and likewise for $B$.
+\end{proof}
+
+The data (\texttt{--cand 8}, $t\le\min(8,\mu-1)$): $\E\mu=6.3$, $9.6$,
+$18.0$ at $n=30,50,100$; $\Pr[1\text{ good}]=0.40$--$0.42$ and
+$\Pr[G_{\le8}]=0.81$, $0.88$, $0.94$, in every class; the
+identity $\Pr[\mathrm{flip}_1\cap G]=\Pr[\mathrm{flip}_1^c\cap G]$ holds
+to $\pm0.002$ ($0.4416$ vs $0.4414$ at $n=50$, type $(50)$).  The
+per-candidate probability $\approx0.4$ is the random-permutation value
+for ``$x_1\not\sim y_1$ under $\tau_t$ and one of the two cycles has
+even intersection with $\{1,2\}$'' ($\tfrac12\cdot\tfrac56$ for the
+union of the two variants), so the first pair's candidates are not rare,
+unlike the family version of \S(j).
+
+\emph{What this is and is not.}  Proposition~\ref{prop:firstpair} is
+proved, and it has the attractive consequence that
+$\Pr_X[G]\ge c$ would give $\Pr_X[A]\ge c/4$ for \emph{every} split,
+i.e.\ a CGW-type constant bound without the gap of
+Remark~\ref{rem:cgwgap}.  But $G$ is a transposed analogue of the
+target: ``the column-pair permutation of a pair of columns selected
+from rows $x_1,y_1$ by $\rho$ puts the frame-selected rows $x_1,y_1$ in
+different cycles'' is flippability with rows and columns exchanged
+(\S(a)), with the admissibility clause added and with the conditioning
+still on rows $1,2$.  The implication is one-way
+($\Pr_X[G]\ge2c$ gives \eqref{eq:firstpair}; nothing comes back), and
+$G$ is not known to be easier: it is a lower bound for a local event
+at positions selected by the square, which is the obstacle itself.
+(One can toggle $G_t$ in turn by a trade of a row pair $(u,v)$,
+$u\in Z_t(x_1)$, $v\in Z_t(y_1)$, along a $\rho_{u,v}$-cycle through
+$q_t$ avoiding $c_t,p,p'$, when such a legal trade exists; we have not
+checked what such a trade preserves, and we record only that it would
+produce a third event of the same kind, not a bound.)  Two things are
+gained: the two-sided
+$|\Pr_X[\mathrm{flip}_1]-\tfrac12|\le\tfrac12\Pr_X[G^c]$ is a structural
+reason for the observed value $\tfrac12$, turning ``$\tfrac12+o(1)$''
+into ``$\Pr_X[G]\to1$'', a no-conspiracy statement over $\mu-1$
+candidates (probability $0.88$ at $n=50$ for $t\le8$); and the
+constant-$c$ target follows from the single event $G_1$ ($t=1$ is
+always a candidate), of probability $\approx0.41$ in the data.  But a
+lower bound on $\Pr_X[G_1]$ or on $\Pr_X[G]$ is the same problem.
+What did not change: a lower bound on the probability of any local
+event at a frame-selected position in $X$ remains unproved; the only
+one available is Proposition~\ref{prop:alpha2}'s $\Pr_X[A]\ge\tfrac14$
+at distance $2$, which comes from CGW's global joining argument, not
+from a local one.

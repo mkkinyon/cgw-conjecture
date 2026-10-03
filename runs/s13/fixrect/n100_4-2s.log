@@ -1,0 +1,7 @@
+n=100: squares=12000  sigma cycle type=[4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]  marks/class/square=3
+class m=4 alpha=2: N=36000  P[B]=0.4950  qbar=P[B]/P[A]=0.9803  P[K0>=2]=1.0000
+   P[(x1,y1) flippable | K0>=2] = 0.4972   | B: 0.4986  | A: 0.4958   mean |cycle through p| at pair 1 = 51.47
+   P[Flip_ladder = empty | K0=k] (k: N, p): {2: (1420, 0.4915), 3: (1467, 0.2365), 4: (1324, 0.142), 5: (1482, 0.0621), 6: (1322, 0.0356), 7: (1377, 0.0167), 8: (1249, 0.0168), 9: (1259, 0.0032), 10: (25100, 0.0001)}
+   witness at pair 1, P[len<=L and avoids p'] / P[len<=L]: {4: (0.0289, 0.029), 8: (0.0676, 0.069), 16: (0.1387, 0.1482), 32: (0.2626, 0.3081)}
+   adaptive candidates at pair 1 (t<=min(8,mu-1)): P[mu>=2]=1.0000 E[mu]=17.92 P[mu-1>=8]=0.7356  P[G_1]=0.4153  P[some good t]=0.9364
+      involution check: P[flip1 & good]=0.4656  P[not flip1 & good]=0.4708   bound P[flip1] >= P[good]/2 = 0.4682

@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
-*Updated 2026-10-02 (session 13, continuous).  Two refereed documents: `paper/cgw_gap_note.tex`
-(5 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (18 pp, REVISED 2026-10-02 evening: main hypothesis is now hyp:adaptive (short clean cycles at the ladder rows, via adaptive coordinates prop:adaptive); fixed-matching prop:orbit kept for comparison; §6 rewritten; refereed; assembled by `cprime_blocks.py` +
+*Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
+(7 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (21 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive are ALTERNATIVE sufficient conditions (§6, corrected offset parts); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
@@ -29,10 +29,9 @@ on rare λ unseen.
 **Over-claims to fix:** paper title "conditional proof" → "a reduction"; abstract "test its ingredients up to
 n=100" while the regime is out of reach; "(Π) SOLVED", "no genericity constant enters" sold as gains;
 "refereed" = by subagents.  **Publishable now:** gap note (+ Prop 3); the identities-plus-reduction paper.
-**Next (in order):** (1) make hyp:witness the primary hypothesis again, orbit/adaptive as alternative sufficient
-conditions; retitle; (2) a sampler for completions of a FIXED 2×n rectangle (JM restricted off rows 1,2, if
-connected) to test P_X[B] and witness frequencies on atypical λ — the one experiment that can falsify; (3) target
-P_X[(x₁,y₁) flippable] ≥ c; (4) send the gap note after the author's own read.
+**Next (in order):** (1) DONE 2026-10-03 (hyp:witness primary); (2) DONE 2026-10-03 (fixed-rectangle sampler; no
+falsification at n ≤ 100); (3) target P_X[(x₁,y₁) flippable] ≥ c — reduced one-way to P_X[G] ≥ 2c (prop:firstpair), same
+obstacle; (4) send the gap note after the author's own read.
 **Progress =** a proven lower bound at a frame-selected pair, or a falsification.  Another "lower tail of rare
 local events at frame-selected rows" = reformulation, to be labelled as such.
 
@@ -47,6 +46,31 @@ local events at frame-selected rows" = reformulation, to be labelled as such.
 4. Each report ends with "What did NOT change": the core obstacle restated, and whether this segment touched it.
 5. Every ~5 segments, an independent cold-read assessment (subagent given STATUS + paper, asked "shrinking or
    reformulating?"), recorded here.
+
+## SEGMENT LOG 2026-10-03 (classified per the working rules)
+**Seg 1 — WRITING.** Paper restructured: hyp:witness primary (§5, with (i) G=0 form, uniform in λ,α,β, row-exchange
+transport for d₂₁), hyp:orbitgen / hyp:adaptive as alternatives with corrected offset parts (scaled thresholds, truncated
+diagonals); §7 states the minimal instance.  Commit 72c6689.  Did not touch the core obstacle.
+**Seg 2 — DATA (no falsification).** `jmfix.c` + `s13_fixrect.py` + `s13_fixstats.py`: JM chain restricted to completions of
+a FIXED 2×n rectangle (simple random walk on the restricted move graph; uniform on the component).  Validated: n=5,6 all
+completions hit from two starts, χ² within 1σ (36 / 4032 / 5376 states); n=7 P[B|R]=0.4965 vs exact 0.497076.  Types (n),
+(n/2,n/2), (n−2,2), (10,10,10), (4,2^13), (6,3^8) at n=30 (60k squares), (50), (25,25), (48,2), (4,2^23), (6,3^14,2) at n=50
+(40k), (100), (4,2^48) at n=100 (12k); marks α=2, ≈m/3, m/2: P_X[B] ∈ [0.4974,0.5024] (n≤50; sampling error ≈0.002–0.0025),
+hence C(λ)/C(µ) ∈ [0.995,1.005] for every tested pair incl. (4,2^13)→(2^15), (6,3^8)→(3^10); P_X[(x₁,y₁) flippable] ∈
+[0.4988,0.5017] (0.4896 at n=7: ½ is not an identity); P[Flip=∅|K₀=k] = 2^{−(k−1)}; witness frequencies at pair 1 identical
+across types to ±0.002.  Says: first-moment quantities are type-independent at n ≤ 100.  Says nothing about o(1/log n) tails.
+Logs runs/s13/fixrect/; notes §(k).
+**Seg 3 — one-way REDUCTION of the minimal instance to a transposed analogue (prop:firstpair, refereed; NOT a lower bound).**
+For the first ladder pair alone, μ ≥ 2 always (t=1 is always a candidate) and the adaptive turn needs no short-cycle or
+collision condition: with G = {some t<μ: x₁,y₁ in different cycles of the column permutation of {ρ^t p, ρ^t p′}, and the
+cycle through x₁ or y₁ meets {1,2} in 0 or 2 rows}, the turn at the least good t is an involution of X∩G toggling flip₁:
+|P_X[flip₁] − ½| ≤ ½P_X[Gᶜ], and P_X[A], P_X[B] ≥ ¼P_X[G] for EVERY split.  Data: P[G₁] ≈ 0.41, P[G, t≤8] = 0.81/0.88/0.94
+at n=30/50/100, identity P[flip₁∩G]=P[¬flip₁∩G] holds to ±0.002.  Cost/what it is: G is flippability with rows and
+columns exchanged at square-selected positions (admissibility clause added; conditioning still on rows 1,2); the implication
+is one-way; a lower bound on P_X[G₁] (constant-probability local event, not rare) is the same obstacle.  Referee: fixed
+σ′=(q c)σ(q c) (not σ′=σ), the (q c)∘ρ case proved directly (lem:adaptinv does not cover it), regress remark downgraded.
+**What did NOT change (today):** no proven lower bound at a frame-selected pair; the only one remains P_X[A] ≥ ¼ at distance 2
+(global joining argument).  hyp:witness remains the reference hypothesis.  Segment count since last cold read: 3.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
