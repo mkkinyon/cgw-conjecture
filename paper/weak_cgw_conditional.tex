@@ -519,11 +519,17 @@ Consequently the upper bound of CGW's Theorem~3.13, the lower bound of their Lem
 the parity bounds of Theorem~4.3, the bound $\Pr[\sigma\text{ is an $n$-cycle}]\le2n^{-2/3}$
 of Lemma~4.4, both halves of Corollary~4.5, and the results of their Section~4.2 that rest
 on these (Corollary~4.6, Lemma~4.7, Theorems~4.9 and~4.11, Corollary~4.10 --- the last
-superseded by \cite{KS18}) are not established by the published argument.  For
+superseded by \cite{KS18}) are not established by the published argument.  The
+\emph{statements} of Theorem~4.9 (at most $9\sqrt n$ cycles with probability
+$1-o(e^{-\sqrt n/4})$) and of the upper half of Corollary~4.5 (with $n/2$ in place of
+$n^{1/3}$) do follow from the surviving direction: Proposition~\ref{prop:tailsurvive}(ii)
+with $k=\sqrt n$ gives $\Pr[\kappa\ge9\sqrt n]\le\exp(-(\tfrac12-o(1))\sqrt n\log n)$, and
+$\CC_n(\lambda)\le2^{\kappa-1}\CC_n((n))$ gives $\PP_n(\lambda)\le\tfrac n2\prod_i(2/c_i)$
+for a type with parts $c_i$; this repairs the use of both in \cite[Thm.~9]{GMW25}.  For
 $\min(\alpha,\beta)=2$ the count can be corrected with the constant $2$ in place of $\tfrac32$
 \cite[Prop.~3]{gapnote}: for marks at distance $2$ or $m-2$ on an $m$-cycle,
 $\CC_n(\lambda)/\CC_n(\mu)\le2$, i.e.\ $\Pr_X[A]\ge\tfrac14$ unconditionally.  The present
-paper uses none of them:
+paper uses none of the affected statements of \cite{CGW08}:
 Proposition~\ref{prop:tailsurvive} replaces Corollary~4.5 in the proof of
 Theorem~\ref{thm:reduction}.  The exact completion counts tabulated in \cite{CGW08} give
 $\CC_n(\lambda)/\CC_n(\mu)\in[0.985,1.0035]$ for every adjacent pair at $7\le n\le11$ (and
@@ -1737,6 +1743,8 @@ rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 28
 \bibitem{gapnote} [author], A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, note, October 2026.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
+squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures Algorithms} 52 (2018), 181--196.
 \bibitem{KSS21} M.~Kwan, A.~Sah and M.~Sawhney, Large deviations in random Latin squares,

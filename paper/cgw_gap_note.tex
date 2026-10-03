@@ -263,11 +263,46 @@ with $N_\ell N_\beta$ read as $N_\ell(N_\ell-1)$ when $\beta=\ell$, over
 $\beta$), and by joining $k$ cycles successively one obtains a
 factorial-moment bound of the form
 $\E[(\kappa)_k]\le2^{k-1}(4+k^2/\log m)(\log m)^k$ for the number of
-cycles $\kappa$, hence $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$ (we
-give the derivation elsewhere).  So a polynomial tail bound on the
-number of cycles at scale $\log m$ survives; the bound of Theorem 4.9
-at scale $\sqrt m$, and the lower bound on the number of cycles of
-Theorem 4.11, do not.
+cycles $\kappa$, valid for every $k$ (we give the derivation
+elsewhere).  With $k=\log m$ this gives $\Pr[\kappa\ge16\log m]=O(m^{-2}\log m)$,
+and with $k=\lceil\sqrt m\rceil$ it gives, by Markov's inequality on $(\kappa)_k\ge(8\sqrt m)^k$,
+\[
+\Pr[\kappa\ge9\sqrt m]\le m\Bigl(\frac{\log m}{4\sqrt m}\Bigr)^{\sqrt m}
+=\exp\bigl(-(\tfrac12-o(1))\sqrt m\,\log m\bigr),
+\]
+which is the conclusion of Theorem 4.9 with a better rate.  So the
+statements of Theorem 4.9 and of the $\log m$-scale tail survive (by a
+different proof), while the lower bound on the number of cycles of
+Theorem 4.11 does not.  Likewise the upper half of Corollary 4.5
+survives in a weaker form: joining the $\kappa$ parts of a type one
+pair at a time and using at each step the surviving inequality
+$\CC(\text{finer})\le2\,\CC(\text{coarser})$ (valid also when the two
+joined parts are equal) gives $\CC(\lambda)\le2^{\kappa-1}\CC((m))$ for a
+type $\lambda$ with $\kappa$ parts, hence
+\[
+\PP_F(\lambda)\le\frac{\gamma(\lambda)\,2^{\kappa-1}\CC((m))}{\gamma((m))\,\CC((m))}
+\le\frac{m}{2}\prod_{i=1}^{\kappa}\frac{2}{c_i}
+\]
+for a type with parts $c_1,\dots,c_\kappa$, where $\gamma(\lambda)\le m!/\prod c_i$
+is the number of permutations of type $\lambda$, $\gamma((m))=(m-1)!$, and
+$\PP_F(\lambda)\propto\gamma(\lambda)\CC(\lambda)$ (in place of the factor
+$m^{1/3}$, which came from Lemma 4.4).
+
+\paragraph{A downstream use.}  Gill, Mammoliti and Wanless
+\cite{GMW25} use Corollary 4.5 (upper half) and Theorem 4.9 to prove
+their Theorem~9 (with probability $1-o(\exp(-\tfrac14n^{1/2}))$ the first
+two rows of a random Latin square contain a row cycle of length at least
+$n^{1/2}\log^{1-\varepsilon}n$), on which the average-case bound of their
+Theorem~1 rests through Theorem~12.  Both inputs are affected by the
+gap, but both are replaced by the surviving bounds just stated: with
+$\PP_F\le\tfrac m2\prod(2/c_i)$ in place of $m^{1/3}\prod(2/c_i)$ the
+estimate in their proof becomes $\exp(-\delta\sqrt n(1-o(1))\log^\varepsilon n)$
+times a polynomial factor, and the number of cycles is at most
+$9\sqrt n$ with probability $1-\exp(-\Omega(\sqrt n\log n))$; so their
+Theorem~9 holds as stated.  (We checked the other papers citing
+\cite{CGW08} that are indexed by MathSciNet; the remaining citations
+are to the intercalate estimates, superseded by \cite{KS18}, or to the
+conjecture on multiplication groups of random loops.)
 
 \section{A partial repair}
 
@@ -453,6 +488,8 @@ than $3/2$; the question is only what has been proved.
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle
 structure of two rows in a random Latin square, \emph{Random Structures
 \& Algorithms} 33 (2008), 286--309.
+\bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
+squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures \& Algorithms} 52 (2018), 181--196.
 \end{thebibliography}
