@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  2 OCT 2026 17:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  2 OCT 2026 18:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,7 +480,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (10.73012pt too wide) detected at line 189
+Overfull \hbox (10.73012pt too wide) detected at line 201
 \OML/cmm/m/it/10.95 J  \OT1/cmr/m/n/10.95 =  \OML/cmm/m/it/10.95 J\OT1/cmr/m/n/
 10.95 (\OML/cmm/m/it/10.95 n; ^^V\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 ; ^^
 L\OT1/cmr/m/n/10.95 )  =  [](\OML/cmm/m/it/10.95 L; P\OT1/cmr/m/n/10.95 )  :  \
@@ -491,7 +491,7 @@ mr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 j; j[]\OMS/cmsy/m/n/10.
  []
 
 [3] [4] [5]
-Overfull \hbox (17.2927pt too wide) in paragraph at lines 425--429
+Overfull \hbox (17.2927pt too wide) in paragraph at lines 437--441
 []\OT1/cmr/m/n/10.95 For each step of such a chain, The-o-rem [][]2.4[][] and $
 [](\OML/cmm/m/it/10.95 ^^N\OT1/cmr/m/n/10.95 )$ give $\OMS/cmsy/m/n/10.95 j\OML
 /cmm/m/it/10.95 S\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 
@@ -503,7 +503,7 @@ ML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 =^^M\OT1/cmr/m/n/1
  []
 
 [6]
-Overfull \hbox (19.11624pt too wide) detected at line 523
+Overfull \hbox (19.11624pt too wide) detected at line 535
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95
  ] \OMS/cmsy/m/n/10.95 ^^@ \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/i
 t/10.95 A\OT1/cmr/m/n/10.95 ]  =  \U/msb/m/n/10.95 P[][]\OML/cmm/m/it/10.95 B; 
@@ -515,8 +515,8 @@ T1/cmr/m/n/10.95 ] \OMS/cmsy/m/n/10.95 ^^@ [][]  ^^T  []\U/msb/m/n/10.95 P[]\OT
 .95 :
  []
 
-[7] [8]
-Overfull \hbox (32.79228pt too wide) detected at line 695
+[7] [8] [9]
+Overfull \hbox (32.79228pt too wide) detected at line 707
 [][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 B;  d[] \OT1/cmr/m/n/10.95 = \OML
 /cmm/m/it/10.95 `;  d[] \OMS/cmsy/m/n/10.95 ^^U \OML/cmm/m/it/10.95 c \OT1/cmr/
 m/n/10.95 + \OML/cmm/m/it/10.95 `;  [][] \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.9
@@ -528,15 +528,8 @@ m/n/10.95 + \OML/cmm/m/it/10.95 `;  [][] \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.9
 sy/m/n/10.95 ;[] ^^T [] ^^T []\OML/cmm/m/it/10.95 :
  []
 
-[9] [10]
-Overfull \hbox (641.78705pt too wide) detected at line 823
-[][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 p; p[][]^^Z[] [] []p; p[][]  \OT1
-/cmr/m/n/10.95 =  [] []\OML/cmm/m/it/10.95 ;  \OMS/cmsy/m/n/10.95 ^^U [] []\OML
-/cmm/m/it/10.95 :
- []
-
-[11] [12]
-Overfull \hbox (36.92215pt too wide) detected at line 957
+[10] [11] [12]
+Overfull \hbox (36.92215pt too wide) detected at line 967
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x; y\OT1/cmr/m/n/10
 .95 )[] [] [][] \OMS/cmsy/m/n/10.95 ^^T \OT1/cmr/m/n/10.95 1 \OMS/cmsy/m/n/10.9
 5 ^^@ [][]\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P[][]\OMS/cmsy/m/n/10.95 G[] 
@@ -544,35 +537,23 @@ Overfull \hbox (36.92215pt too wide) detected at line 957
 m/m/it/10.95 e[]:
  []
 
-[13] [14]
-Overfull \hbox (2.27061pt too wide) in paragraph at lines 1081--1086
-[]\OT1/cmr/m/n/10.95 genericity: $\U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 [(\OML/c
-mm/m/it/10.95 q; c\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 j []\OML/cmm/m/it/
-10.95 `\OT1/cmr/m/n/10.95 ] = 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 199\OML/
-cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 19
-8\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10
-.95 193\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT1/cmr/
-m/n/10.95 201\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT
-1/cmr/m/n/10.95 201\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.9
-5 :\OT1/cmr/m/n/10.95 198\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0\OML/cmm/m/i
-t/10.95 :\OT1/cmr/m/n/10.95 197$
+[13]
+Overfull \hbox (2.98317pt too wide) in paragraph at lines 1046--1055
+[][]\OT1/cmr/bx/n/10.95 Proposition 5.5 \OT1/cmr/m/n/10.95 (or-bit bound with a
+dap-tive co-or-di-nates)\OT1/cmr/bx/n/10.95 . []\OT1/cmr/m/it/10.95 Let $\OT1/c
+mr/m/n/10.95 (\OML/cmm/m/it/10.95 L; P\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 
+2 \OML/cmm/m/it/10.95 X$\OT1/cmr/m/it/10.95 , $\OML/cmm/m/it/10.95 I$ \OT1/cmr/
+m/it/10.95 a frame-determined
  []
 
-
-Overfull \hbox (24.81438pt too wide) detected at line 1138
-[] \OML/cmm/m/it/10.95 c  \OMS/cmsy/m/n/10.95 ^^T  \U/msb/m/n/10.95 P[][][]  \O
-MS/cmsy/m/n/10.95 ^^T  \OT1/cmr/m/n/10.95 1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/
-it/10.95 c
- []
-
-[15] [16]
-Underfull \hbox (badness 1117) in paragraph at lines 1231--1232
+[14] [15] [16] [17]
+Underfull \hbox (badness 1117) in paragraph at lines 1264--1265
 []\OT1/cmr/m/n/10.95 [author], \OT1/cmtt/m/n/10.95 cgw-conjecture\OT1/cmr/m/n/1
 0.95 : scripts, logs and notes, [][]$\OT1/cmtt/m/n/10.95 https : / / github . c
 om / mkkinyon /
  []
 
-[17] (./weak_cgw_conditional.aux)
+[18] (./weak_cgw_conditional.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -581,36 +562,38 @@ Package rerunfilecheck Info: File `weak_cgw_conditional.out' has not changed.
 (rerunfilecheck)             Checksum: A8A943A013DD3029054A8BED55F3FBD5;1019.
  ) 
 Here is how much of TeX's memory you used:
- 11824 strings out of 476106
- 180834 string characters out of 5793933
- 1945975 words of memory out of 5000000
- 33611 multiletter control sequences out of 15000+600000
- 571479 words of font info for 86 fonts, out of 8000000 for 9000
+ 11828 strings out of 476106
+ 180877 string characters out of 5793933
+ 1949975 words of memory out of 5000000
+ 33613 multiletter control sequences out of 15000+600000
+ 571860 words of font info for 87 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,9n,79p,614b,597s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/symbols/msbm10.pfb>
-Output written on weak_cgw_conditional.pdf (17 pages, 355471 bytes).
+ 75i,12n,79p,614b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1095.600pk> </
+root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/symbols/msbm10.pfb>
+Output written on weak_cgw_conditional.pdf (18 pages, 372740 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
+ 382 PDF objects out of 1000 (max. 8388607)
+ 316 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

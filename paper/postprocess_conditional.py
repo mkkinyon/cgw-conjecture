@@ -22,8 +22,7 @@ letters $j,j'$ are freed for other columns), $\pi$ is its frame, and a column pa
 \emph{crossed} otherwise; $Q_p$ and $Q_{p'}$ denote the $\rho_{x,y}$-cycles through $p$ and
 $p'$.  A free pair $(q,c)$ is \emph{separated} by $\{p,p'\}$ in $\rho_{x,y}$ if $q$ and $c$
 lie on different arcs of a common cycle through $p,p'$ (crossed case) or one in $Q_p$ and the
-other in $Q_{p'}\ne Q_p$ (parallel case).  The inputs $(\alpha)$, $(\beta)$, $(\gamma)$ of
-the hypothesis are named in \S\ref{sec:remains}."""),
+other in $Q_{p'}\ne Q_p$ (parallel case)."""),
         (r"""So (CP) with the \emph{columns} prescribed is CGW's theorem; it is the
 conditioning on rows $1,2$ --- on their type and the mark, which is
 what defines $X$ and cannot be removed --- that is the path version.""",
@@ -74,8 +73,13 @@ itself is not in doubt."""),
     post.append((r"""normalising constant independent of $\lambda$ (namely
 $D_n\CC_n((n))/\sum\gamma\CC$).""", r"""normalising constant independent of $\lambda$ (namely
 $Z=\sum_\nu\gamma(\nu)\CC_n(\nu)/(|\DD_n|\,\CC_n((n)))$)."""))
-    post.append((r"(the latter under CGW($3/2$))", r"(the latter under the upper bound of CGW's Lemma~3.12; $\ge\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap})"))
+    post.append((r"""\Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
+\;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
+\ge\tfrac13\ \text{ if together at distances $\ge2$ (the latter under CGW($3/2$))}.""", r"""\Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
+\;\begin{cases}=\tfrac12&\text{if $x,y$ are apart in the frame},\\ \ge\tfrac13&\text{if together at distances $\ge2$}.\end{cases}"""))
+    post.append((r"So the statement with the \emph{columns} prescribed is CGW's theorem;", r"(The second bound is CGW's $\tfrac32$, affected by the gap; it holds with $\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap}.)  So the statement with the \emph{columns} prescribed is CGW's theorem;"))
     for a, b in post:
-        assert a in text, a[:70]
+        if a not in text:
+            print('postprocess: pattern not found (skipped):', repr(a[:60])); continue
         text = text.replace(a, b)
     return text

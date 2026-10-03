@@ -5,6 +5,8 @@ import re
 def lines(path):
     return open(path).read().split('\n')
 
+import sys as _s; _s.path.insert(0, 'paper')
+from cprime_blocks import cprime_intro, cprime_rest, remains
 M = lines('section_marked.tex')
 N = lines('second_row_notes.tex')
 Lad = lines('section_ladder_s13.tex')
@@ -70,6 +72,7 @@ tail = sub(tail, [(r"$\E[\ell N_\ell]\le2n/(n-\ell)$ for every $\ell$;", r"$\E[\
 
 ladder = block(Lad, 9, 137)
 ladder = sub(ladder, [
+ (r"n^{-2/3}", r"n^{-1+o(1)}"),
  (r"The same identity holds with $X$ replaced by $S(R)\times\{P\}$ for any"+"\n"+r"fixed admissible pair of first rows $R$ and mark $P$.", r"The same identity holds with $X$ replaced by the set of squares with a fixed pair of"+"\n"+r"rows $1,2$ (of type $\lambda$) and a fixed mark $P$."),
  (r"combinatorial statement.  Notation as in \S\ref{sec:s13trapped}:", r"Notation:"),
  (r"through $j'$ (\S\ref{sec:s13trapped}).", r"through $j'$."),
@@ -104,12 +107,8 @@ orbit_b = sub(orbit_b, [
  (r"The effect on"+"\n"+r"$\rho_{x,y}$ is the computation of \S\ref{sec:crossspace}; separation"+"\n"+r"is preserved by the arc computation there.",
   r"The effect on $\rho_{x,y}$: if $x\in Z$ and $y\notin Z$ the entries of row $x$ at $q,c$ are exchanged, so $\rho'_{x,y}=\rho_{x,y}\circ(q\,c)$, and symmetrically; multiplying by a transposition of two points on one cycle splits it at those points, so $p,p'$ are separated iff $q,c$ lie on different arcs between them, and multiplying by a transposition of two points on different cycles merges the cycles, so $p,p'$ are joined iff $q,c$ lie one in each of their cycles; in both cases $q,c$ lie one on each side afterwards."),
 ])
-orbit_c = block(Lad, o_c0, o_w0-1)
-orbit_c = sub(orbit_c, [
- (r"Follow the proof of Proposition~\ref{prop:Lwitness}.  Long ladders:", r"Put $\ell_0=n/\log^2n$.  By Theorem~\ref{thm:ladder}, $|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.  Long ladders:"),
- (r"the parts $|C_1|<n/2+\ell$"+"\n"+r"and $K_0<\ell_0$ on $A$ are as before.",
-  r"the part $|C_1|<n/2+\ell$ costs $\le8/n$ per $\ell$ by Proposition~\ref{prop:splice}, and $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}; the case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$."),
-])
+o_h0 = find(Lad, r'\begin{hypothesis}[orbit genericity]')
+orbit_c = block(Lad, o_c0, o_h0-1)
 orbit_w = block(Lad, o_w0, o_d0-1)
 orbit_w = sub(orbit_w, [
  (r"(the arc-trapping input (ii) of"+"\n"+r"\S\ref{sec:crossspace})", r"(the arc-trapping input $(\alpha)$ of \S\ref{sec:remains})"),
@@ -126,6 +125,11 @@ orbit_d = sub(orbit_d, [
   r"The covariance test ($543$ and $286$ instances at $n=50,100$) computes,"),
  (r"a"+"\n"+r"referee's re-run with fresh seeds", r"an"+"\n"+r"independent re-run with fresh seeds"),
 ])
+
+# (j) block: adaptive coordinates
+j0 = find(Lad, r'\begin{lemma}[the adaptive coordinate is orbit-invariant]')
+j1 = find(Lad, r'\end{proof}', find(Lad, r'\begin{proposition}[orbit bound with adaptive coordinates]'))
+adaptive = block(Lad, j0, j1)
 
 # (f) block: eq:Pi and the block graph characterization
 f0 = find(Lad, r'\paragraph{(f) The permutation problem $(\Pi)$')
@@ -178,10 +182,14 @@ common column cycle of a marked column pair'') in a single uniform square; a red
 theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
 the ladder identity, by which the bit is exactly fair except on the squares in which no
 ``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
-the exceptional set is bounded by a product of conditionally independent factors.  The
-conjecture is thereby reduced to a genericity hypothesis about the cycle structure of two
-rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, whose ingredients we test
-numerically up to $n=100$, and which we locate within the known switching technology.  Along the
+the exceptional set is bounded by a product of conditionally independent factors.  With
+coordinates chosen along the row permutation of the ladder pair from the marked columns,
+each coordinate is placed where it toggles, and the conjecture is thereby reduced to a
+hypothesis about short column cycles at the ladder rows (Hypothesis~\ref{hyp:adaptive}):
+that with probability $1-o(1/\log n)$ some $C\log\log n$ of the $n/\log^2n$ ladder pairs
+carry a short clean non-colliding cycle at one of $O(\log^2n)$ prescribed column pairs, and
+likewise for the offset diagonals of short-arc instances.  We state it precisely, test its ingredients numerically up to
+$n=100$, and locate it within the known switching technology.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -234,20 +242,28 @@ lie in different cycles of the column permutation of rows $x_k,y_k$,
 \qquad |\Pr_X[B]-\tfrac12|\le\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
 \]
 So Conjecture~\ref{conj:cgw} follows from (L): $\Pr_X[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
-\item[(4)] \emph{Orbit method} (Proposition~\ref{prop:orbit}): the flippabilities of a
-family of ladder pairs are conditionally independent given the orbit of a group of
-commuting column-cycle turns, and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$,
-where $\bar y_k$ is an explicit ``orbit weight''.  Hence (L), and the conjecture, follow
-from Hypothesis~\ref{hyp:orbit} (Proposition~\ref{prop:Lorbit}).
+\item[(4)] \emph{Orbit method} (Propositions~\ref{prop:orbit} and~\ref{prop:adaptive}):
+the flippabilities of a family of ladder pairs are conditionally independent given the
+orbit of a group of commuting column-cycle turns.  With a fixed matching of columns as
+coordinates this gives $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$
+with an explicit ``orbit weight'' $\bar y_k$ that needs a genericity input; with the
+\emph{adaptive} coordinates $(\rho_k^t(p),\rho_k^t(p'))$ --- the $t$-th columns along the
+row permutation $\rho_k$ of the $k$-th ladder pair from the marked columns --- every
+coordinate is separated by the mark, so its turn toggles whenever it is legal and clean,
+and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X[2^{-|U|}]$, where $U$ is the set of ladder
+pairs having a short clean candidate cycle (subject to a collision condition).  Hence (L), and the
+conjecture, follow from Hypothesis~\ref{hyp:adaptive} (Proposition~\ref{prop:Lorbit}).
 \end{enumerate}
-Hypothesis~\ref{hyp:orbit} is a statement of the form ``two pairs of lines of a random
-Latin square are interleaved in the cycle structure of a third pair with probability
-bounded away from $0$ and $1$'', under conditioning on the cycle type of rows $1,2$.
-Without that conditioning its upper half is elementary and its lower half reduces to the row pair having macroscopic cycles (\S\ref{sec:remains}); the data give the
-interleaving probability $0.19$ in every version we measured, and $\Pr_X[B]=0.49$--$0.50$ ($\pm0.01$) at
-$n=30,50,100$.  Section~\ref{sec:remains} explains why the switching methods available
-inside $X$ --- all of which we have pushed as far as they go --- produce only fair
-identities and cannot by themselves give the hypothesis.
+Hypothesis~\ref{hyp:adaptive} says that, with probability $1-o(1/\log n)$, at least
+$C\log\log n$ of the first $n/\log^2n$ ladder pairs carry a short clean column cycle
+through their $x$-row at one of $O(\log^2n)$ prescribed column pairs --- a lower-tail
+statement about rare local configurations (each determined by $O(\log^2n)$ cells) at rows
+selected by the square, under the conditioning on the type of rows $1,2$.  Its heuristic
+expectation is $\asymp\log^2n$ such pairs.  No genericity constant enters; the
+fixed-matching version needed one (a probability $\ge c$ that a generic column pair is
+interleaved with the mark in $\rho_k$, measured at $0.19$ and not provable by the switchings
+available inside $X$, \S\ref{sec:remains}).  The data give $\Pr_X[B]=0.49$--$0.50$
+($\pm0.01$) at $n=30,50,100$.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
@@ -395,59 +411,11 @@ type of rows $1,2$ and the mark, i.e.\ maps $X$ to itself.
 body.append(orbit_a); body.append("\n\n")
 body.append(orbit_b); body.append("\n\n")
 body.append(orbit_c); body.append("\n\n")
-body.append(orbit_w); body.append("\n\n")
-body.append(orbit_d)
+body.append(cprime_intro); body.append("\n\n")
+body.append(adaptive); body.append("\n\n")
+body.append(cprime_rest)
+body.append(remains)
 body.append(r"""
-
-\section{What remains}\label{sec:remains}
-
-Hypothesis~\ref{hyp:orbit} has three inputs: $(\alpha)$ the cycles of $\rho_{x_k,y_k}$
-through $p,p'$ are macroscopic for a constant fraction of the ladder pairs (both arcs when
-they coincide, both cycles when they do not); $(\beta)$ \emph{genericity}: the clean
-coordinates of a ladder pair are separated by $\{p,p'\}$ with probability bounded below;
-$(\gamma)$ concentration of $\sum_k\bar y_k$ over the family.  Numerically $(\gamma)$ is an
-independence statement (the orbit weights of different ladder pairs are uncorrelated to
-within sampling error), $(\beta)$ holds with the same constant $0.19$--$0.20$ at every cycle
-length, and $(\alpha)$ holds with the lengths spread uniformly.  All three are instances of
-one statement:
-\[
-\textup{(U)}\qquad c\;\le\;\Pr\bigl[\text{two given pairs of lines are interleaved in the cycle structure of a third pair}\bigr]\;\le\;1-c
-\]
-in $X$ --- where two column pairs are interleaved in a row pair $(x,y)$ if they alternate
-on a common cycle of $\rho_{x,y}$ or lie crosswise in two of its cycles, and dually for
-row pairs in a column pair.  The pure permutation part of the problem is settled:
-
-""")
-body.append(pi_block)
-body.append(r"""
-
-Three facts locate the difficulty.  (i) Without conditioning on the type of rows $1,2$,
-(U) for four generic columns in a generic row pair is elementary in its upper half: by
-conjugation invariance the four columns are uniform points given the cycle type of
-$\rho_{x,y}$, and the interleaving probability is
-$\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$ over the cycle lengths
-$m_i$, which is at most $\tfrac13+O(1/n)$ for every type (with equality for the $n$-cycle)
-and, by Jensen, at least $\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$, where $W$ is the event
-that two given columns share a cycle of $\rho_{x,y}$; the lower half therefore holds
-exactly when $\rho_{x,y}$ has macroscopic cycles with probability bounded below (it fails
-for the type $(2^{n/2})$, where the formula is $O(n^{-2})$), which is the content of
-$(\alpha)$ for a generic row pair.
-(ii) For generic rows the dual statement is trivial: the number of row pairs interleaved with
-$\{1,2\}$ in a column pair is at most $(n-2)^2/4$, half of all pairs, deterministically, and
-rows other than $1,2$ are exchangeable in $X$.  What is needed is the same for a row pair
-selected by its own row-cycle structure (the ladder pair, at the columns where its cycle
-through $p$ meets a joining pair), and exchangeability is lost exactly there.  (iii)
-Inside $X$ the exact tools are the free trades of rows other than $1,2$ (which preserve
-interleaving) and the column-cycle turns (which are legal exactly off the interleaved
-configurations), and every identity they produce is fair: it equates two expectations with
-random weights whose lower bounds are again statements of the form (U).  Lower bounds on
-``different cycles'' events are, in the language of \cite{CGW08}, of the type of the
-direction of their Lemma~3.12 whose proof has the gap: they require a canonical
-bounded-multiplicity repair of the same-cycle configurations, and the repairs available in
-$X$ (trades or cross-switches of a free pair of third rows) have unbounded multiplicity.
-What the orbit method adds to this is that the fairness compounds: a constant per-pair
-genericity gives exponential decay in the family size, which is why a hypothesis of
-constant strength suffices for a conclusion of strength $o(1/\log n)$.
 
 \begin{thebibliography}{9}
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two
@@ -457,6 +425,8 @@ rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 28
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures Algorithms} 52 (2018), 181--196.
+\bibitem{KSS21} M.~Kwan, A.~Sah and M.~Sawhney, Large deviations in random Latin squares,
+\emph{Bull. London Math. Soc.} 54 (2022), 1420--1438.
 \bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \end{thebibliography}
 \end{document}

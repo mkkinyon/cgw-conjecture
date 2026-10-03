@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-02 (session 13, continuous).  Two refereed documents: `paper/cgw_gap_note.tex`
-(5 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (17 pp, assembled by
+(5 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (18 pp, REVISED 2026-10-02 evening: main hypothesis is now hyp:adaptive (short clean cycles at the ladder rows, via adaptive coordinates prop:adaptive); fixed-matching prop:orbit kept for comparison; §6 rewritten; refereed; assembled by `cprime_blocks.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).

@@ -40,10 +40,14 @@ common column cycle of a marked column pair'') in a single uniform square; a red
 theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
 the ladder identity, by which the bit is exactly fair except on the squares in which no
 ``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
-the exceptional set is bounded by a product of conditionally independent factors.  The
-conjecture is thereby reduced to a genericity hypothesis about the cycle structure of two
-rows at four columns (Hypothesis~\ref{hyp:orbit}), which we state precisely, whose ingredients we test
-numerically up to $n=100$, and which we locate within the known switching technology.  Along the
+the exceptional set is bounded by a product of conditionally independent factors.  With
+coordinates chosen along the row permutation of the ladder pair from the marked columns,
+each coordinate is placed where it toggles, and the conjecture is thereby reduced to a
+hypothesis about short column cycles at the ladder rows (Hypothesis~\ref{hyp:adaptive}):
+that with probability $1-o(1/\log n)$ some $C\log\log n$ of the $n/\log^2n$ ladder pairs
+carry a short clean non-colliding cycle at one of $O(\log^2n)$ prescribed column pairs, and
+likewise for the offset diagonals of short-arc instances.  We state it precisely, test its ingredients numerically up to
+$n=100$, and locate it within the known switching technology.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -96,20 +100,28 @@ lie in different cycles of the column permutation of rows $x_k,y_k$,
 \qquad |\Pr_X[B]-\tfrac12|\le\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
 \]
 So Conjecture~\ref{conj:cgw} follows from (L): $\Pr_X[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
-\item[(4)] \emph{Orbit method} (Proposition~\ref{prop:orbit}): the flippabilities of a
-family of ladder pairs are conditionally independent given the orbit of a group of
-commuting column-cycle turns, and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$,
-where $\bar y_k$ is an explicit ``orbit weight''.  Hence (L), and the conjecture, follow
-from Hypothesis~\ref{hyp:orbit} (Proposition~\ref{prop:Lorbit}).
+\item[(4)] \emph{Orbit method} (Propositions~\ref{prop:orbit} and~\ref{prop:adaptive}):
+the flippabilities of a family of ladder pairs are conditionally independent given the
+orbit of a group of commuting column-cycle turns.  With a fixed matching of columns as
+coordinates this gives $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$
+with an explicit ``orbit weight'' $\bar y_k$ that needs a genericity input; with the
+\emph{adaptive} coordinates $(\rho_k^t(p),\rho_k^t(p'))$ --- the $t$-th columns along the
+row permutation $\rho_k$ of the $k$-th ladder pair from the marked columns --- every
+coordinate is separated by the mark, so its turn toggles whenever it is legal and clean,
+and $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X[2^{-|U|}]$, where $U$ is the set of ladder
+pairs having a short clean candidate cycle (subject to a collision condition).  Hence (L), and the
+conjecture, follow from Hypothesis~\ref{hyp:adaptive} (Proposition~\ref{prop:Lorbit}).
 \end{enumerate}
-Hypothesis~\ref{hyp:orbit} is a statement of the form ``two pairs of lines of a random
-Latin square are interleaved in the cycle structure of a third pair with probability
-bounded away from $0$ and $1$'', under conditioning on the cycle type of rows $1,2$.
-Without that conditioning its upper half is elementary and its lower half reduces to the row pair having macroscopic cycles (\S\ref{sec:remains}); the data give the
-interleaving probability $0.19$ in every version we measured, and $\Pr_X[B]=0.49$--$0.50$ ($\pm0.01$) at
-$n=30,50,100$.  Section~\ref{sec:remains} explains why the switching methods available
-inside $X$ --- all of which we have pushed as far as they go --- produce only fair
-identities and cannot by themselves give the hypothesis.
+Hypothesis~\ref{hyp:adaptive} says that, with probability $1-o(1/\log n)$, at least
+$C\log\log n$ of the first $n/\log^2n$ ladder pairs carry a short clean column cycle
+through their $x$-row at one of $O(\log^2n)$ prescribed column pairs --- a lower-tail
+statement about rare local configurations (each determined by $O(\log^2n)$ cells) at rows
+selected by the square, under the conditioning on the type of rows $1,2$.  Its heuristic
+expectation is $\asymp\log^2n$ such pairs.  No genericity constant enters; the
+fixed-matching version needed one (a probability $\ge c$ that a generic column pair is
+interleaved with the mark in $\rho_k$, measured at $0.19$ and not provable by the switchings
+available inside $X$, \S\ref{sec:remains}).  The data give $\Pr_X[B]=0.49$--$0.50$
+($\pm0.01$) at $n=30,50,100$.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
@@ -601,7 +613,7 @@ holds with $\delta(n)=\max_{\lambda,\alpha\ne\beta}2f/(1-f)$.  If this
 $\delta(n)\to0$, Theorem~\ref{thm:reduction} gives
 \[
 \dtv(\PP_n,\QQ_n)=O\Bigl(\log n\cdot\max_{\lambda,\alpha\ne\beta}
-f(n,\lambda;\alpha,\beta)+n^{-2/3}\Bigr).
+f(n,\lambda;\alpha,\beta)+n^{-1+o(1)}\Bigr).
 \]
 In particular the weak CGW conjecture follows from
 \begin{equation}\label{eq:L}
@@ -799,8 +811,7 @@ letters $j,j'$ are freed for other columns), $\pi$ is its frame, and a column pa
 \emph{crossed} otherwise; $Q_p$ and $Q_{p'}$ denote the $\rho_{x,y}$-cycles through $p$ and
 $p'$.  A free pair $(q,c)$ is \emph{separated} by $\{p,p'\}$ in $\rho_{x,y}$ if $q$ and $c$
 lie on different arcs of a common cycle through $p,p'$ (crossed case) or one in $Q_p$ and the
-other in $Q_{p'}\ne Q_p$ (parallel case).  The inputs $(\alpha)$, $(\beta)$, $(\gamma)$ of
-the hypothesis are named in \S\ref{sec:remains}.
+other in $Q_{p'}\ne Q_p$ (parallel case).
 
 \paragraph{(a) Transposition: which half of the conditioning is the
 obstacle.}  Let $L$ be uniform on \emph{all} Latin squares of order
@@ -818,10 +829,9 @@ and column relabelling.  Hence, by Lemma~\ref{lem:switchtoggle}
 CGW's Theorem~3.13 (the inequality $\Pr_X[A]\ge\tfrac13$, whose published proof has a gap for every split other than $(2,2)$, Remark~\ref{rem:gap}):
 \begin{equation}\label{eq:CPcols}
 \Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
-\;=\;\tfrac12\ \text{ if $x,y$ are apart in the frame},\qquad
-\ge\tfrac13\ \text{ if together at distances $\ge2$ (the latter under the upper bound of CGW's Lemma~3.12; $\ge\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap})}.
+\;\begin{cases}=\tfrac12&\text{if $x,y$ are apart in the frame},\\ \ge\tfrac13&\text{if together at distances $\ge2$}.\end{cases}
 \end{equation}
-So the statement with the \emph{columns} prescribed is CGW's theorem; it is the
+(The second bound is CGW's $\tfrac32$, affected by the gap; it holds with $\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap}.)  So the statement with the \emph{columns} prescribed is CGW's theorem; it is the
 conditioning on rows $1,2$ --- on their type and the mark, which is
 what defines $X$ and cannot be removed --- that is the obstacle.
 In the same transposed picture the ladder trades $T_k$ of
@@ -982,243 +992,264 @@ the first bound; the second is the product of the first over the
 independent bits.
 \end{proof}
 
-\begin{hypothesis}[orbit genericity]\label{hyp:orbit}
-There are constants $\kappa_0>0$ and $\ell_1$ such that, for the fixed matching
-$\mathcal M$ of Proposition~\ref{prop:orbit} and uniformly in $\lambda,\alpha,\beta$, with
-$\ell_0=n/\log^2n$: (i) for the sub-ladder $I$ of the first
-$\min(K_0-1,\lceil n/8\rceil)$ ladder pairs,
-$\Pr[K_0\ge\ell_0,\ Y_I<\kappa_0|I|]=o(1/\log n)$; (ii) for a
-$B$-instance with $d_{12}=\ell\le n/4$ and $|C_1|\ge n/2+\ell$, with
-$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps
-$2\ell$, so that the $x$-rows $\pi^{-(c+i)}(1)$, $c\in S$,
-$1\le i<\ell$, are pairwise distinct, $|S|\ge n/(4\ell)$, and the
-diagonals $D_c$, $c\in S$, involve at most $n/4+\ell$ rows), and
-cleanliness taken with respect to all rows of
-$\bigcup_{c\in S}D_c$: the event that fewer than half of the $D_c$,
-$c\in S$, have $Y_{D_c}\ge\kappa_0(\ell-1)$ has probability
-$o(1/\log n)$ (as a single event over all $\ell$).
-\end{hypothesis}
 
-\begin{proposition}\label{prop:Lorbit}
-Hypothesis~\ref{hyp:orbit} implies \textup{(L)}, hence the weak CGW
-conjecture.
-\end{proposition}
 
+\paragraph{(c$'$) Adaptive coordinates: the toggling is automatic.}
+Proposition~\ref{prop:orbit} needs the clean coordinates of a ladder pair to be
+\emph{separated} by $\{p,p'\}$ with positive probability, a genericity input we cannot prove
+(\S\ref{sec:remains}).  It disappears if the coordinates are chosen along $\rho_{x,y}$ from
+the mark.  For a pair $(x,y)$ of the family and $t\ge1$ let
+\[
+(q^t,c^t):=\bigl(\rho_{x,y}^{\,t}(p),\ \rho_{x,y}^{\,t}(p')\bigr),
+\]
+and let $\mu_{x,y}:=\min(d(p\to p'),d(p'\to p))$ if $(x,y)$ is crossed and
+$\min(|Q_p|,|Q_{p'}|)$ if parallel.  For $t<\mu_{x,y}$ the pair $(q^t,c^t)$ is free
+($q^t\ne c^t$, both $\notin\{p,p'\}$) and separated by $\{p,p'\}$ in $\rho_{x,y}$ by
+construction: on different arcs when crossed, one in $Q_p$ and one in $Q_{p'}$ when parallel.
+So the turn of its column cycle $Z$ through $x$ (with $y\notin Z$) toggles the status of
+$(x,y)$ whenever it is legal (Lemma~\ref{lem:legalturn}).  What makes these coordinates
+usable in the orbit method is that they are invariant under their own turn.  (We keep (c)
+for comparison: its orbit weight is what the data of (d) measure, and it is where the
+genericity constant of \S\ref{sec:remains} lives.)
+
+
+\begin{lemma}[the adaptive coordinate is orbit-invariant]\label{lem:adaptinv}
+Let $t<\mu_{x,y}$, let $Z$ be the column cycle of $(q^t,c^t)$ through
+$x$ with $y\notin Z$, and let $L'$ be the turn of $Z$.  Then
+$\rho'_{x,y}=\rho_{x,y}\circ(q^t\,c^t)$, the status of $(x,y)$ toggles,
+$\mu'_{x,y}=\mu_{x,y}$, and $(\rho'^{\,s}(p),\rho'^{\,s}(p'))=(q^s,c^s)$
+for every $s\le t$; in particular the $t$-th candidate of $L'$ is
+$(q^t,c^t)$ again, and its column cycle through $x$ is $Z$ (same row
+set).
+\end{lemma}
 \begin{proof}
-Put $\ell_0=n/\log^2n$.  By Theorem~\ref{thm:ladder}, $|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.  Long ladders:
-by Proposition~\ref{prop:orbit}, on $\{K_0\ge\ell_0\}$ and off the
-exceptional event of (i),
-$\Pr[\mathrm{Flip}=\emptyset\mid\text{orbit}]\le e^{-\kappa_0|I|/2}\le
-e^{-\kappa_0\ell_0/4}=o(1/\log n)$.  Short arcs: fix $\ell$ and apply
-Proposition~\ref{prop:orbit} to the family
-$\bigcup_{c\in S}D_c$: its $x$-rows $\pi^{-(c+i)}(1)$ lie in the
-disjoint intervals of depths $[c+1,c+\ell-1]$, $c\in S$, so they are
-pairwise distinct, and they lie on the frame arc from $2$ to $1$ while
-the $y$-rows $\pi^{-i}(2)$ lie on the arc from $1$ to $2$, so the two
-sets are disjoint.  Given the orbit the bits of all pairs are
-independent, hence so are the diagonals' flippabilities, and off the
-exceptional event at least $|S|/2$ of the diagonals are flippable with
-conditional probability $\ge1-e^{-\kappa_0(\ell-1)/2}\ge4\theta_0$,
-$\theta_0:=\tfrac14(1-e^{-\kappa_0/2})$.  The number of flippable
-offsets in $S$ then has conditional mean $\ge2\theta_0|S|$, and by
-Chernoff the fraction $\theta_S$ is $\ge\theta_0$ except with
-conditional probability $\le e^{-\theta_0|S|/4}\le
-e^{-\theta_0\log^2n/16}$ (as $|S|\ge n/(4\ell_0)=\log^2n/4$),
-summable over $\ell<\ell_0$ to $o(1/n)$.  The identity behind \eqref{eq:offsetavg}
-holds for the average over $c\in S$ as well as over all $c$, so
-$\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta_S\ge\theta_0]
-\le36\ell_0/((n-2)\theta_0)=O(1/\log^2n)$; the part $|C_1|<n/2+\ell$ costs $\le8/n$ per $\ell$ by Proposition~\ref{prop:splice}, and $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}; the case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
+Write $\rho=\rho_{x,y}$, $q=q^t$, $c=c^t$.  The turn exchanges the
+entries of $x$ at $q,c$ (and those of the other rows of $Z$, which do
+not affect $\rho$), so $\rho'=\rho\circ(q\,c)$: $\rho'(q)=\rho(c)$,
+$\rho'(c)=\rho(q)$, $\rho'=\rho$ elsewhere.  Crossed case, with
+$p=u_0\to u_1\to\dots\to u_a=p'\to v_1\to\dots\to v_b=p$ and
+$q=u_t$, $c=v_t$ ($t<\min(a,b)$): the cycles of $\rho'$ through $p$
+and $p'$ are $u_0\to\dots\to u_t\to v_{t+1}\to\dots\to v_b=p$ and
+$u_{t+1}\to\dots\to u_a=p'\to v_1\to\dots\to v_t\to u_{t+1}$, of
+lengths $b$ and $a$, so $(x,y)$ is now parallel with
+$\mu'=\min(a,b)=\mu$, and the paths $p\to u_s$, $p'\to v_s$ for
+$s\le t$ are untouched.  Parallel case, $Q_p=(p=u_0,u_1,\dots,u_{a-1})$,
+$Q_{p'}=(p'=v_0,\dots,v_{b-1})$, $q=u_t$, $c=v_t$ ($t<\min(a,b)$): the
+single cycle of $\rho'$ is
+$u_0\to\dots\to u_t\to v_{t+1}\to\dots\to v_{b-1}\to v_0=p'\to v_1\to\dots\to v_t\to u_{t+1}\to\dots\to u_{a-1}\to u_0$,
+with $d'(p\to p')=b$, $d'(p'\to p)=a$, so crossed with $\mu'=\mu$, and
+again the paths up to step $t$ are untouched.  The row set of the
+turned cycle is preserved (Lemma~\ref{lem:cycletrade}).
+\end{proof}
+
+\begin{proposition}[orbit bound with adaptive coordinates]\label{prop:adaptive}
+Let $(L,P)\in X$, $I$ a frame-determined family of pairs $(x_k,y_k)$
+as in \S(c) (distinct $x$-rows, disjoint from the $y$-rows, none in
+$\{1,2\}$; the ladder, or a union of offset diagonals), and
+$T,\ell_1\ge1$.  Call the candidate $(k,t)$ \emph{good} if
+$t\le\min(T,\mu_k-1)$ and the column cycle $Z_k^t$ of $(q_k^t,c_k^t)$
+through $x_k$ has length $\le\ell_1$, meets $\{1,2\}$ in $0$ or $2$
+rows and meets the rows of $I$ only in $x_k$.  Let $t_0(k)$ be
+the least good $t$ (if any), $C_k=\{q_k^t,c_k^t:\ t\le t_0(k)\}$
+(all candidates $t\le\min(T,\mu_k-1)$ if there is none), and
+\[
+U=\bigl\{k\in I:\ t_0(k)\text{ exists and }\{q_k^{t_0(k)},c_k^{t_0(k)}\}\cap C_l=\emptyset\ \text{for all }l\in I\setminus\{k\}\bigr\}.
+\]
+Then the turns $T_k$ of $Z_k^{t_0(k)}$, $k\in U$, are legal, commute,
+generate a free action of $\{0,1\}^U$ on $X$ that preserves the frame,
+the family, every $\mu_l$, $t_0(l)$, $C_l$ ($l\in I$) and $U$; $T_k$
+toggles the status of $(x_k,y_k)$ and fixes that of every other pair.
+Hence
+\[
+\Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\bigl[2^{-|U|}\bigr].
+\]
+\end{proposition}
+\begin{proof}
+$T_k$ changes only columns $q_k,c_k:=q_k^{t_0(k)},c_k^{t_0(k)}$ in the
+rows of $Z_k$ (lengths of cycles are preserved with their row sets, so
+the length condition is invariant along with the rest).  Legality: $Z_k$ meets $\{1,2\}$ in $0$ or $2$ rows and
+$\{q_k,c_k\}\cap\{p,p'\}=\emptyset$, so the type of rows $1,2$ and the
+mark are preserved (Lemma~\ref{lem:legalturn}); columns $p,p'$ are
+untouched, so the frame and the ladder are preserved.  For $k\ne l$ in
+$U$ the column pairs $\{q_k,c_k\}$, $\{q_l,c_l\}\subseteq C_l$ are
+disjoint, so the turns act on disjoint cells and commute, and the
+action is free.  Invariance of the data of a pair $l\ne k$ under $T_k$:
+rows $x_l,y_l\notin Z_k$, so $\rho_l$, its status, $\mu_l$ and all its
+candidates are unchanged; the goodness of candidate $(l,t)$ depends on
+the column cycle of $(q_l^t,c_l^t)$ through $x_l$, i.e.\ on the
+contents of columns $q_l^t,c_l^t$, which are not in $\{q_k,c_k\}$ for
+$t\le t_0(l)$ (resp.\ for all candidates if $t_0(l)$ does not exist) by
+the defining condition of $U$; hence $t_0(l)$ and $C_l$ are unchanged.
+Invariance of the data of $k$ itself: by Lemma~\ref{lem:adaptinv},
+$\mu_k$ and the candidates $t\le t_0(k)$ are unchanged; the candidates
+$t<t_0(k)$ have columns different from $q_k,c_k$ (distinct points of
+the two paths), so their cycles and non-goodness are unchanged, and
+$Z_k$ itself keeps its row set, so $t_0(k)$ is still good; $C_k$ is
+unchanged.  If $Z_k\ni1,2$, rows $1,2$ change at $q_k,c_k$, which
+affects none of the above.  Hence $U$ is invariant, every orbit of the
+cube is a cube of size $2^{|U|}$ on which the status of pair $k\in U$
+is $\mathrm{bit}_k(L)\oplus\varepsilon_k$, and $\mathrm{Flip}_I=\emptyset$
+forces one value of $(\varepsilon_k)_{k\in U}$; $X$ is uniform.
 \end{proof}
 
 
-\paragraph{What the hypothesis says.}  It replaces a lower-tail
-statement about rare short cycles (a ladder pair is flippable as soon as its
-$\rho_{x,y}$-cycle through $p$ is short and avoids $p'$, an event of probability
-$\approx\ell'/n$ per pair for cycles of length $\le\ell'$) by a statement about a quantity that is
-typically of constant size: $\bar y_{x,y}$ is the average, over the
-cube of a few column turns that fix rows $y$ and $1,2$ and the whole
-family, of the fraction of those turns' column pairs that are
-separated by $\{p,p'\}$ in the row pair $(x,y)$.  It is a
-\emph{genericity} statement --- the short column cycles of the
-matching pairs through $x$ are not aligned with the arcs of
-$\rho_{x,y}$ at $p,p'$ --- together with concentration of the sum over
-the family; concentration of the \emph{flippabilities} themselves is
-no longer required, since Proposition~\ref{prop:orbit} makes them
-conditionally independent.  It still contains inputs of the same kind: a
-positive orbit weight needs the cycles of $\rho_{x,y}$ through $p,p'$
-to be macroscopic (the arc-trapping input $(\alpha)$ of \S\ref{sec:remains}), and the genericity itself.  The pure
-permutation core is: for a permutation $\rho_0$ and a matching
-$\mathcal T$ of transpositions on points other than $p,p'$, with
-$\tau(\eta)$ the product of a uniformly random subset of
-$\mathcal T$, bound $\Pr_\eta[p,p'\text{ separated in }\rho_0\tau(\eta)]$
-from below.  For an adversarial $\mathcal T$ (e.g.\ all pairs at
-$\rho_0$-distance $2$, none straddling $p$ or $p'$) the probability is
-$0$, so the content is that the clean coordinates of a random square
-are not adversarial; and the
-moves that re-randomise the clean coordinates without touching
-$\rho_{x,y}$ --- the free row trades of Lemma~\ref{lem:rowfair} --- have
-availabilities that are again same-cycle events of generic row pairs.
-This is the recursion: every
-availability is a cycle-avoidance event, and the exact identities in
-$X$ (Lemma~\ref{lem:rowfair}, Proposition~\ref{prop:orbit}, and the one-step switchings of the marked space)
-are all fair.  What Proposition~\ref{prop:orbit} adds is that the
-fairness can be \emph{compounded} over a family: a product of
-conditionally independent coins, so that a constant per-pair
-genericity gives exponential decay in the family size.
-
-
-\paragraph{(d) Data.}  All scripts and logs referred to below are in the repository \cite{repo}, under \texttt{s13\_*.py} and \texttt{runs/s13/orbit/}.  The orbit test ($600$, $600$ and
-$360$ ladder pairs at $n=30,50,100$, marks drawn as in $X$, $\ell_1\le4,5,8$;
-here the matching is chosen greedily among all clean short pairs of
-the instance, which over-counts the coordinates of a fixed matching by
-a factor $\approx n/\ell_1$ --- observed $10.8$ and $14.3$ --- but
-tests the same genericity):
+\begin{hypothesis}[short clean cycles at the ladder rows]\label{hyp:adaptive}
+There are $T,\ell_1=O(\log^2n)$ such that, uniformly in $\lambda,\alpha,\beta$, with
+$\ell_0=n/\log^2n$ and $U$ as in Proposition~\ref{prop:adaptive}:
 \begin{itemize}[leftmargin=2em]
-\item the length of the column cycle of $(q,c)$ through $x$ is spread
-like a uniform variable on $\{2,\dots,n\}$ (about $1/n$ per length);
-the turn is legal for $98\%$ of the $2$-cycles and $64\%$ of the long
-cycles, clean for $97\%$ resp.\ $27\%$ ($n=100$);
-\item genericity: $\Pr[(q,c)\text{ separated}\mid\text{clean, length }\ell]
-=0.199,0.198,0.193,0.201,0.201,0.198,0.197$ for $\ell=2,\dots,8$, against
-$\Pr[\text{separated}]=0.195$ over all column pairs ($n=100$; at $n=50$:
-$0.186$--$0.194$ against $0.184$); the dependence on the arc lengths
-of $\rho_{x,y}$ at $p,p'$ was not binned;
-\item the orbit coin: with $|\mathcal T|\approx42$ coordinates
-($n=100$) the orbit average of the parallel bit is $0.478$ starting
-from a crossed square and $0.523$ from a parallel one (at $n=30$:
-$0.398/0.594$ with $|\mathcal T|\approx10$; at $n=50$: $0.447/0.561$
-with $|\mathcal T|\approx18$); at $n=100$, $243$ of the $360$
-per-instance orbit averages lie in $[0.4,0.6)$.
+\item[(i)] for the sub-ladder $I$ of the first $\min(K_0-1,\lceil n/\log^2n\rceil)$ ladder
+pairs, $\E_X\bigl[2^{-|U|};\ K_0\ge\ell_0\bigr]=o(1/\log n)$;
+\item[(ii)] for a $B$-instance with $d_{12}=\ell<\ell_0$ and $|C_1|\ge n/2+\ell$, with
+$S=\{2\ell t:\ 0\le t\le(n/2-\ell)/(2\ell)\}$ (offsets at gaps $2\ell$, so that the
+$x$-rows $\pi^{-(c+i)}(1)$, $c\in S$, $1\le i<\ell$, are pairwise distinct and
+$|S|\ge n/(8\ell)$) and $U$ taken for the family $\bigcup_{c\in S}D_c$: the event that fewer
+than half of the diagonals $D_c$, $c\in S$, meet $U$ has probability $o(1/\log n)$ (as a
+single event over all $\ell<\ell_0$); and symmetrically for $d_{21}$.
 \end{itemize}
-So $\bar y\approx0.2$ with no detectable dependence on the cycle
-length, and the orbit coin is fair to within the mixing allowed
-by $\approx0.2|\mathcal T|$ separated coordinates.  With the
-\emph{fixed} matching of consecutive free columns, as in
-Proposition~\ref{prop:orbit}: $|\mathcal T|=1.7$ resp.\ $3.0$
-clean coordinates per pair on average ($\approx0.9(\ell_1-1)/2$, as
-the uniform spread of the lengths predicts),
-$\mathcal T=\emptyset$ for $15\%$ resp.\ $4\%$ of the pairs, and
-$\E[\bar y]=0.159$ resp.\ $0.189$.  So the per-pair factor of
-Proposition~\ref{prop:orbit} is $1-\tfrac12\bar y\approx0.9$ on
-average, and Hypothesis~\ref{hyp:orbit}(i) is the statement that the
-average over the sub-ladder does not collapse; the data put the
-average of $\bar y$ at $0.13$--$0.19$, so the hypothesis asks for some
-$\kappa_0$ well below that, and the lower tail is examined in (d$'$).
+\end{hypothesis}
 
-\paragraph{(d$'$) The concentration input $(\gamma)$: data.}
-The covariance test ($543$ and $286$ instances at $n=50,100$) computes, with the fixed matching and cleanliness with
-respect to all rows of the sub-ladder $I$ of the first
-$\min(K_0-1,n/8)$ pairs, every $\bar y_k$, $k\in I$, and
-$Y_I=\sum_{k\in I}\bar y_k$: mean $|I|=5.2$ resp.\ $9.9$,
-$\E[\bar y]=0.130$ resp.\ $0.135$, $\mathrm{Var}(\bar y)=0.084$ resp.\
-$0.080$, and $\mathrm{Var}(Y_I)=0.43$ resp.\ $0.90$ against
-$|I|\mathrm{Var}(\bar y)=0.44$ resp.\ $0.79$: the ratio $0.99$ resp.\
-$1.14$ (both including the variation of $|I|$, which at $n=100$
-contributes $\approx\E[\bar y]^2\mathrm{Var}(|I|)\approx0.2$) shows no detectable positive correlation between the orbit
-weights of different ladder pairs.  So $(\gamma)$ is, numerically, an
-independence statement.  The orbit weight has an atom of $\approx0.8$
-at $0$ (few coordinates per pair with a fixed matching), and the lower
-tail $\Pr[Y_I<\kappa_0|I|]$ at these sizes ($0.18$ at $\kappa_0=0.05$,
-$n=100$) is dominated by the instances with $|I|\le4$.
+\begin{proposition}\label{prop:Lorbit}
+Hypothesis~\ref{hyp:adaptive} implies \textup{(L)}, hence the weak CGW conjecture.
+\end{proposition}
 
+\begin{proof}
+By Theorem~\ref{thm:ladder},
+$|\Pr[B]-\Pr[A]|\le\Pr[\mathrm{Flip}=\emptyset]\le\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]+\Pr[A,K_0<\ell_0]+\Pr[B,K_0<\ell_0]$.
+\emph{Long ladders.}  $K_0$ is a function of the frame, hence orbit-invariant, and by
+Proposition~\ref{prop:adaptive} $\Pr[\mathrm{Flip}_I=\emptyset\mid\text{orbit}]\le2^{-|U|}$,
+so $\Pr[K_0\ge\ell_0,\mathrm{Flip}=\emptyset]\le\E[2^{-|U|};K_0\ge\ell_0]=o(1/\log n)$ by (i).
+\emph{Short ladders on $A$.}  $\Pr[A,K_0<\ell_0]\le72\ell_0/n$ by Proposition~\ref{prop:trapped}.
+\emph{Short arcs on $B$.}  Fix $\ell<\ell_0$ and consider $B$-instances with $d_{12}=\ell$.
+The part $|C_1|<n/2+\ell$ costs at most $8/n$ by Proposition~\ref{prop:splice}.  On
+$|C_1|\ge n/2+\ell$ apply Proposition~\ref{prop:adaptive} to the family
+$\bigcup_{c\in S}D_c$: its $x$-rows lie in the disjoint depth intervals $[c+1,c+\ell-1]$,
+$c\in S$, on the frame arc from $2$ to $1$, and its $y$-rows $\pi^{-i}(2)$ on the arc from
+$1$ to $2$, so the family is as required.  Given the orbit the statuses of all pairs are
+independent and $T_k$ toggles pair $k\in U$, so a diagonal $D_c$ with $U\cap D_c\ne\emptyset$
+is flippable (contains a parallel pair) with conditional probability $\ge\tfrac12$, and the
+diagonals' flippabilities are independent (they are disjoint sets of pairs).  Off the
+exceptional event of (ii), at least $|S|/2$ diagonals meet $U$, so the number of flippable
+offsets $c\in S$ has conditional mean $\mu\ge|S|/4$, and by Chernoff it is $\ge|S|/8$ except
+with conditional probability $\le e^{-\mu/8}\le e^{-|S|/32}\le e^{-\log^2n/256}$ (as
+$|S|\ge n/(8\ell_0)=\log^2n/8$), which is summable over $\ell<\ell_0$ to $o(1/n)$.  The
+identity behind \eqref{eq:offsetavg} holds for the average over $c\in S$ as well as over all
+$c$, so with $\theta_0=\tfrac18$,
+$\sum_{\ell<\ell_0}\Pr[B,d_{12}=\ell,|C_1|\ge n/2+\ell,\theta_S\ge\theta_0]\le36\ell_0/((n-2)\theta_0)=O(1/\log^2n)$.
+The case $d_{21}=\ell$ is symmetric.  Altogether $\Pr[\mathrm{Flip}=\emptyset]=o(1/\log n)$.
+\end{proof}
+
+\paragraph{What the hypothesis says, and what it costs.}  A ladder pair enters $U$ when one
+of its $T$ candidate column pairs has a short column cycle through $x_k$ that is clean ---
+a configuration of $O(\log^2n)$ cells ($4t$ cells of rows $x_k,y_k$ to locate the
+candidate, and the cycle itself).  Heuristically a candidate's column cycle has length
+$\le\ell_1$ with probability $\approx\ell_1/n$ (the data of \S(d) show the lengths spread
+like a uniform variable on $\{2,\dots,n\}$), is clean with probability
+$\approx e^{-2s\ell_1/n}$ for a family of $s$ pairs, and the chosen pair avoids the
+$\approx2Ts$ candidate columns of the other pairs with probability $\approx(1-2Ts/n)^2$, so
+\[
+\E|U|\;\approx\;s\cdot\frac{T\ell_1}{n}\,e^{-2s\ell_1/n}\Bigl(1-\frac{2Ts}n\Bigr)^2\;\asymp\;\log^2n
+\qquad\text{for }s=\frac n{\log^2n},\ T=\frac{\log^2n}4,\ \ell_1=\frac{\log^2n}2,
+\]
+against the $C\log\log n$ ($C>1/\log2$) that (i) needs; the constant is small
+($\approx1/80$), so the heuristic excess over the threshold is a large-$n$ statement.  Compared with the fixed matching
+of (c), which offers $\approx n/2$ coordinates per pair of which a constant number are short
+and clean and a fraction $\approx0.19$ of those separated, the adaptive rule offers only
+$T=O(\log^2n)$ coordinates per pair, all separated: the genericity constant is gone, and in
+exchange membership in $U$ is a rare event per pair, so (i) is a lower-tail statement about
+rare local events at rows selected by the square --- of the same shape as a statement that
+some ladder pair has a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding $p'$ (which would
+make it flippable outright), now with a column cycle of a free pair through $x_k$ in its
+place.  There is a second regime:
+with $s\approx T\approx\ell_1\approx\sqrt n$ a pair enters $U$ with probability bounded
+below and $\E|U|\asymp\sqrt n$, so (i) becomes a second-moment statement about $\sqrt n$
+events of constant probability, at the price of the arcs of $\rho_k$ at $p,p'$ exceeding
+$\sqrt n$ for a constant fraction of the pairs.  In both regimes the lengths of the arcs of $\rho_k$ at $p,p'$ --- which the
+fixed-matching version needed to be macroscopic for a positive orbit weight --- enter only
+through the number of candidates $\min(T,\mu_k-1)$.  The collision rule in $U$ (the chosen pair must avoid the candidate
+columns of \emph{all} other pairs) is what makes $U$ orbit-invariant --- a turn can shrink
+the candidate set of an excluded pair, so the obvious greedy refinement is not invariant ---
+and it is crude: it is why the asymptotic regime $2Ts/n\le\tfrac12$ is out of reach of
+sampling at $n\le100$.
+
+\paragraph{(d) Data.}  All scripts and logs are in the repository \cite{repo}, under
+\texttt{s13\_*.py} and \texttt{runs/s13/orbit/}.  \emph{Adaptive coordinates.}  On
+true-marked instances at $n=30,50,100$ (family the first $\min(K_0-1,n/8)$ ladder pairs,
+$T=6$, $\ell_1=6,8,10$; $2400$, $3000$, $900$ instances), for a random $k\in U$ the turn of
+$Z_k$ was applied and checked to toggle the status of $(x_k,y_k)$, to leave the status,
+$\mu_l$, $t_0(l)$, $C_l$ of every other pair and the set $U$ unchanged, and to preserve the
+type of rows $1,2$ and the frame ($682$, $697$, $215$ turns, no failure; $444$ and $160$
+more with families of $12$ and $30$ pairs); the bound
+$\Pr[\mathrm{Flip}_I=\emptyset]\le\E[2^{-|U|}]$ holds in every $K_0$ class.  At these sizes
+$30\%$, $23\%$, $16\%$ of the ladder pairs have a good candidate and $13\%$, $5\%$, $3\%$
+are in $U$ ($8\%$ and $1.4\%$ with the family of $30$ pairs at $n=100$): $2Ts\ge n$ there,
+so the collision rule removes most pairs.  \emph{Column-cycle lengths
+and the fixed-matching coordinates.}  The length of the column cycle of a free pair through
+a ladder row is spread like a uniform variable on $\{2,\dots,n\}$ (about $1/n$ per length;
+the turn is legal for $98\%$ of the $2$-cycles and $64\%$ of the long cycles, and
+avoids $y$ for $97\%$ resp.\ $27\%$ of them, at $n=100$).  For the fixed matching of
+(c): $\Pr[(q,c)\text{ separated}\mid\text{clean, length }\ell]=0.193$--$0.201$ for
+$\ell=2,\dots,8$ against $0.195$ over all column pairs ($n=100$), i.e.\ no detectable
+dependence on the cycle length; with $|\mathcal T|\approx42$ coordinates the orbit average
+of the parallel bit is $0.478$ from a crossed and $0.523$ from a parallel start ($n=100$);
+with the fixed matching of consecutive free columns $|\mathcal T|=1.7$ resp.\ $3.0$ clean
+coordinates per pair ($n=50,100$) and $\E[\bar y]=0.159$ resp.\ $0.189$; and the orbit
+weights of different ladder pairs are uncorrelated to within sampling error
+($\mathrm{Var}(Y_I)/(|I|\mathrm{Var}\,\bar y)=0.99$ and $1.14$ at $n=50,100$, the excess
+coming from the variation of $|I|$).  The ladder data of Remark~\ref{rem:ladderdata}
+complete the picture: $\Pr[\mathrm{Flip}=\emptyset]\approx4/n$, as if the ladder coins
+were fair and independent.
 
 \section{What remains}\label{sec:remains}
 
-Hypothesis~\ref{hyp:orbit} has three inputs: $(\alpha)$ the cycles of $\rho_{x_k,y_k}$
-through $p,p'$ are macroscopic for a constant fraction of the ladder pairs (both arcs when
-they coincide, both cycles when they do not); $(\beta)$ \emph{genericity}: the clean
-coordinates of a ladder pair are separated by $\{p,p'\}$ with probability bounded below;
-$(\gamma)$ concentration of $\sum_k\bar y_k$ over the family.  Numerically $(\gamma)$ is an
-independence statement (the orbit weights of different ladder pairs are uncorrelated to
-within sampling error), $(\beta)$ holds with the same constant $0.19$--$0.20$ at every cycle
-length, and $(\alpha)$ holds with the lengths spread uniformly.  All three are instances of
-one statement:
-\[
-\textup{(U)}\qquad c\;\le\;\Pr\bigl[\text{two given pairs of lines are interleaved in the cycle structure of a third pair}\bigr]\;\le\;1-c
-\]
-in $X$ --- where two column pairs are interleaved in a row pair $(x,y)$ if they alternate
-on a common cycle of $\rho_{x,y}$ or lie crosswise in two of its cycles, and dually for
-row pairs in a column pair.  The pure permutation part of the problem is settled:
+Hypothesis~\ref{hyp:adaptive} is a statement about short cycles at the frame-selected rows:
+that enough ladder pairs $(x_k,y_k)$ have, at one of the prescribed column pairs
+$(\rho_k^t(p),\rho_k^t(p'))$, a column cycle through $x_k$ of length $O(\log^2n)$ that
+avoids the other ladder rows and meets $\{1,2\}$ in $0$ or $2$ rows; and that the arcs of
+$\rho_k$ at $p,p'$ are not shorter than $T$ for most $k$.  Both are local (polylogarithmic)
+configurations whose heuristic frequency is, for large $n$, far above what is needed; the difficulty is
+entirely that the rows are selected by the frame of the mark and the whole space is
+conditioned on the type of rows $1,2$.  We record what the available tools do and do not
+give.
 
-\paragraph{(e) The permutation problem $(\Pi)$, and the one statement
-everything reduces to.}  Fix a permutation $\rho_0$ of the columns,
-two columns $p\ne p'$, and a set $\mathcal T$ of pairwise disjoint
-transpositions avoiding $p,p'$; for $\eta\in\{0,1\}^{\mathcal T}$ let
-$\tau(\eta)$ be the product of the transpositions with $\eta_Z=1$.
-Call $Z=(q,c)$ \emph{crossing} in a permutation $\rho$ (``separated'' in Lemma~\ref{lem:legalturn}) if $\{q,c\}$ and
-$\{p,p'\}$ are interleaved in the cycle structure of $\rho$: $q,c$ on
-different arcs of a common cycle through $p,p'$, or $q$ in the cycle
-of $p$ and $c$ in the (different) cycle of $p'$, or vice versa.  By
-Lemma~\ref{lem:legalturn}, $\rho\mapsto\rho\circ Z$ toggles the
-separation of $p,p'$ exactly when $Z$ is crossing in $\rho$, and $Z$
-is crossing in $\rho\circ Z$ iff it is crossing in $\rho$.  Hence, for
-$\eta$ uniform and $b(\eta)=[p,p'\text{ separated in }\rho_0\tau(\eta)]$,
-\begin{equation}\label{eq:Pi}
-\Pr_\eta[b=1]\;\ge\;\tfrac12\max_{Z\in\mathcal T}\Pr_\eta\bigl[Z\text{ crossing in }\rho_0\tau(\eta)\bigr]
-\;\ge\;\tfrac12\,\E_\eta\Bigl[\frac{\#\{Z\text{ crossing in }\rho_0\tau(\eta)\}}{|\mathcal T|}\Bigr],
-\end{equation}
-and $b\equiv0$ on the cube iff no $Z$ is crossing in any
-$\rho_0\tau(\eta)$.  Let $\rho_0$ be crossed, with arcs $P_1$ (from
-$p$ to $p'$) and $P_2$, and form the graph whose vertices are $P_1$,
-$P_2$ and the other cycles of $\rho_0$ and whose edges are the
-transpositions of $\mathcal T$ joining different vertices.  Then
-$b\equiv0$ iff $P_1$ and $P_2$ lie in different components.  If they
-are connected by a path $P_1=V_0,V_1,\dots,V_m=P_2$ with edges
-$Z_1,\dots,Z_m$, apply $Z_1,\dots,Z_{m-1}$ in order: $Z_i$, with one
-end on the arc from $p$ to $p'$ and the other in $V_i$, inserts $V_i$
-into that arc ($\rho\circ(q\,c)$ sends $q\mapsto\rho(c)$, runs around
-$V_i$, and returns to $\rho(q)$), $P_2$ is untouched, and $Z_m$ then
-joins the arc to $P_2$ and is crossing.  If they are disconnected, let
-$K_1$ be the union of the vertices in the component of $P_1$ and $K_2$
-that of $P_2$: every transposition of $\mathcal T$ has both ends in
-$K_1$, both in $K_2$ or both outside, so $\tau(\eta)$ preserves $K_1$,
-while $\rho_0(K_1)=(K_1\setminus\{p\})\cup\{p'\}$; the
-$\rho_0\tau(\eta)$-orbit of $p$ therefore stays in $K_1$ until it
-reaches $p'$, and it cannot close at $p$ before that, since
-$\rho_0\tau(x)=p$ forces $\tau(x)=\rho_0^{-1}(p)\in P_2\subseteq K_2$.
-In particular a single crossing $Z$ at $\eta=0$ gives
-$\Pr_\eta[b=1]\ge\tfrac12$ on the orbit of $Z$ alone, and a family of chords at $\rho_0$-distance $2$, none straddling $p$ or $p'$, is a disconnected example.  One may equally use one coordinate per
-pair: with $Z_k$ the first clean coordinate of the $k$-th pair in a
-fixed order of the matching (orbit-invariant, since cleanliness of
-every matching pair is), the proof of Proposition~\ref{prop:orbit}
-applied to the sub-family $\{Z_k\}$ gives
-\begin{equation}\label{eq:onecoord}
-\Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\Bigl[\prod_{k\in I}\bigl(1-\tfrac12X_k\bigr)\Bigr],
-\qquad X_k=[\,Z_k\text{ crossing in }\rho_{x_k,y_k}\,],
-\end{equation}
-and $(\beta)$ becomes: $\Pr_X[X_k=1]\ge c$ for most $k$, i.e.\ the
-column pair selected by the column-cycle structure through $x_k$ is
-interleaved with $\{p,p'\}$ in the row-cycle structure of $(x_k,y_k)$
-with probability bounded below.
+\emph{Unconditional facts.}  For two generic rows of a uniform square,
+Proposition~\ref{prop:tailsurvive}(i) gives, by Markov's inequality on the number of
+columns on short cycles, $\Pr[\text{all cycles of }\rho_{x,y}\text{ have length}\le\varepsilon n]\le2\varepsilon/(1-\varepsilon)$;
+so a generic pair has a cycle longer than $n/5$ with probability $\ge\tfrac12$, and the
+column-cycle analogue holds by transposition.  Kwan and Sudakov's bound
+$\Pr[N_2\ge t]=e^{-\Omega(t\log t)}$ on the number of $2$-cycles of two fixed rows
+\cite[Thm.~3]{KS18} is proved by joining switchings of the same kind as those of
+Proposition~\ref{prop:tailsurvive} and is likewise an upper bound on short cycles.  The
+number of completions of any $2\times n$ rectangle is within $e^{O(n\log^2n)}$ of any other
+(van der Waerden and Br\'egman; \cite[Prop.~5]{KS18}), so any property of uniform squares
+with failure probability $e^{-\omega(n\log^2n)}$ --- such as the intercalate concentration
+of Kwan, Sah and Sawhney \cite{KSS21} --- holds conditionally on any fixed rows $1,2$ and
+mark, hence in $X$ for every $\lambda,\alpha,\beta$; but the natural failure probability of a
+statement about $m\le n$ prescribed row pairs is $e^{-\Omega(m)}$, which this transfer does
+not reach.
 
+\emph{Why the fixed-matching version is harder.}  With a fixed matching the orbit weight
+$\bar y_k$ of Proposition~\ref{prop:orbit} needs a lower bound on the probability that a
+generic column pair is interleaved with $\{p,p'\}$ in $\rho_{x_k,y_k}$ --- an instance of
+the statement ``two given pairs of lines of a random Latin square are interleaved in the
+cycle structure of a third pair with probability in $[c,1-c]$'' inside $X$.  Without the
+conditioning its upper half is elementary and its lower half reduces to macroscopic cycles
+(by conjugation invariance the interleaving probability given the cycle type of $\rho_{x,y}$
+is $\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4\le\tfrac13+O(1/n)$, and
+$\ge\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$ by Jensen, $W$ the event that two given columns
+share a cycle).  Inside $X$ the exact tools are the free trades of rows other than $1,2$
+(which preserve interleaving) and the legal column turns (which are legal exactly off the
+interleaved configurations), and every identity they produce is fair: it equates two
+expectations with random weights whose lower bounds are again of the same form.  Lower
+bounds on ``different cycles'' events are, in the language of \cite{CGW08}, of the type of
+the direction of their Lemma~3.12 whose proof has the gap: they require a repair of the
+same-cycle configurations with a rigid inverse, and the repairs available in $X$ (trades or
+cross-switches of a free pair of third rows) have unbounded multiplicity.  The one case in
+which we found a rigid inverse is CGW's own case 3 with $\min(\alpha,\beta)=2$, which gives
+$\Pr_X[A]\ge\tfrac14$ for marks at distance $2$ (Remark~\ref{rem:gap}); it does not extend
+to other distances for a reason of type rather than multiplicity.  The adaptive
+coordinates sidestep the question: the coordinate is placed where it is separated by
+construction, and the price is paid in rarity rather than in a constant we cannot prove.
 
-Three facts locate the difficulty.  (i) Without conditioning on the type of rows $1,2$,
-(U) for four generic columns in a generic row pair is elementary in its upper half: by
-conjugation invariance the four columns are uniform points given the cycle type of
-$\rho_{x,y}$, and the interleaving probability is
-$\tfrac13\sum_i(m_i)_4/(n)_4+2\sum_{i\ne j}(m_i)_2(m_j)_2/(n)_4$ over the cycle lengths
-$m_i$, which is at most $\tfrac13+O(1/n)$ for every type (with equality for the $n$-cycle)
-and, by Jensen, at least $\tfrac13\Pr[W\mid\text{type}]^3-O(1/n)$, where $W$ is the event
-that two given columns share a cycle of $\rho_{x,y}$; the lower half therefore holds
-exactly when $\rho_{x,y}$ has macroscopic cycles with probability bounded below (it fails
-for the type $(2^{n/2})$, where the formula is $O(n^{-2})$), which is the content of
-$(\alpha)$ for a generic row pair.
-(ii) For generic rows the dual statement is trivial: the number of row pairs interleaved with
-$\{1,2\}$ in a column pair is at most $(n-2)^2/4$, half of all pairs, deterministically, and
-rows other than $1,2$ are exchangeable in $X$.  What is needed is the same for a row pair
-selected by its own row-cycle structure (the ladder pair, at the columns where its cycle
-through $p$ meets a joining pair), and exchangeability is lost exactly there.  (iii)
-Inside $X$ the exact tools are the free trades of rows other than $1,2$ (which preserve
-interleaving) and the column-cycle turns (which are legal exactly off the interleaved
-configurations), and every identity they produce is fair: it equates two expectations with
-random weights whose lower bounds are again statements of the form (U).  Lower bounds on
-``different cycles'' events are, in the language of \cite{CGW08}, of the type of the
-direction of their Lemma~3.12 whose proof has the gap: they require a canonical
-bounded-multiplicity repair of the same-cycle configurations, and the repairs available in
-$X$ (trades or cross-switches of a free pair of third rows) have unbounded multiplicity.
-What the orbit method adds to this is that the fairness compounds: a constant per-pair
-genericity gives exponential decay in the family size, which is why a hypothesis of
-constant strength suffices for a conclusion of strength $o(1/\log n)$.
 
 \begin{thebibliography}{9}
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two
@@ -1228,6 +1259,8 @@ rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 28
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures Algorithms} 52 (2018), 181--196.
+\bibitem{KSS21} M.~Kwan, A.~Sah and M.~Sawhney, Large deviations in random Latin squares,
+\emph{Bull. London Math. Soc.} 54 (2022), 1420--1438.
 \bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \end{thebibliography}
 \end{document}
