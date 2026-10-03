@@ -35,6 +35,20 @@ obstacle; and P_X[B] itself is controlled by the same G (prop:firstpairbias); (4
 **Progress =** a proven lower bound at a frame-selected pair, or a falsification.  Another "lower tail of rare
 local events at frame-selected rows" = reformulation, to be labelled as such.
 
+## LITERATURE CHECK 2026-10-03 (MathSciNet citers of CGW08; KSSS, Allsop–Wanless, Divoux–Kelly–Kennedy–Sidhu, Gill–Mammoliti–Wanless read)
+Notes §(m).  (a) Fixed-cell bounds in the literature are rectangle statements (KSSS Lemma 3.3, k ≤ n/4, within-row swaps; DKKS
+Thm 1.6, k < n/2, two-sided (1±δ)/n for εn-sparse P, Granet–Joos long switches in the free-pair expander) or open conjectures for
+sparse P in full squares (DKKS Conj 1.5; Kelly's (e²+o(1))/n spread).  Our (FC) conditions on two FULL rows (dense): in spread
+language P_X[Q ⊆ L] = P[R∪Q]/P[R], and a one-sided numerator bound is useless without P[R ⊆ L] = C(λ)/|L_n| to n^{O(1)}, a weak
+CGW.  Allsop–Wanless (full squares, cycle switching): Lemmas 3.8–3.10 are fixed-cell bounds for boundary cells; interior cells get
+the trivial bound; the forward-degree count for column cycles avoiding prescribed rows "seems like a difficult task in general"
+(their §3.1) — the obstacle in their words.  (b) Nobody states or reproves a row-pair cycle bound independently of CGW §3.
+(c) **GMW25 Theorem 9 (hence their average-case Theorem 1 via Theorem 12) uses CGW Cor 4.5 (upper half) and Thm 4.9 — both
+affected.  REPAIRED (refereed): prop:tailsurvive(ii) with k = ⌈√n⌉ gives P[κ ≥ 9√n] ≤ exp(−(½−o(1))√n log n) (so Thm 4.9's
+STATEMENT survives — the gap note previously said it did not; corrected), and C(finer) ≤ 2C(coarser) iterated gives P_n(λ) ≤
+(n/2)Π(2/c_i) (Cor 4.5 upper half with n/2 for n^{1/3}); GMW's proof goes through as stated.**  Gap note §4 and paper rem:gap
+updated (commit 828c235).  Still to read: Cavenagh–Wanless 2016 (parity equidistribution: mechanism + dependency).
+
 ## COLD READ 2026-10-03 (independent subagent, after 6 segments) — verdict and corrections to adopt
 **Verdict.** Core obstacle unchanged; the log says so honestly.  New and unconditional today: prop:firstpair, prop:firstpairbias
 (found by a referee), lem:nuswitch, the validated sampler.  hyp:firstpair is logically incomparable with hyp:witness; the
