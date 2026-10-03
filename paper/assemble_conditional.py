@@ -185,29 +185,32 @@ preamble = r"""\documentclass[11pt]{article}
 Let $L$ be a uniformly random Latin square of order $n$ and $\sigma$ the permutation of columns
 carrying its first row to its second.  Cavenagh, Greenhill and Wanless conjectured that the
 cycle type of $\sigma$ is asymptotically that of a uniform derangement, in total variation.
-We prove three exact identities and a reduction theorem.  The marked-pair identity expresses the ratio of
-completion counts of adjacent cycle types as the odds of one bit (``rows $1,2$ lie in a
-common column cycle of a marked column pair'') in a single uniform square; a reduction
-theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
-the ladder identity, by which the bit is exactly fair except on the squares in which no
-``ladder pair'' of rows is flippable.  An orbit method bounds the probability of
+We prove three exact identities and a reduction theorem: the marked-pair identity, which
+expresses the ratio of completion counts of adjacent cycle types as the odds of one bit
+(``rows $1,2$ lie in a common column cycle of a marked column pair'') in a single uniform
+square; the reduction theorem, by which the conjecture follows from that bit being fair to
+$o(1/\log n)$; and the ladder identity, by which the bit is exactly fair except on the
+squares in which no ``ladder pair'' of rows is flippable.  An orbit method bounds the probability of
 the exceptional set by a product of conditionally independent factors.  The
-conjecture is thereby reduced to a ``witness lemma'' (Hypothesis~\ref{hyp:witness}): that
-with probability $1-o(1/\log n)$ some ladder pair of a long ladder has a short row cycle
-through one marked column avoiding the other --- a lower-tail statement about rare local
-configurations at rows selected by the square, whose heuristic expectation is
-$\gtrsim\log^2n$.  The orbit method gives alternative sufficient conditions of the same
-type, one of which trades the rarity for a genericity constant; and at the first ladder pair
-alone it gives a third exact identity, expressing the bias $\Pr_X[B]-\Pr_X[A]$ as an
-expectation over the event that none of the column pairs along the row permutation of that
-pair admits a legal toggling turn, so that the conjecture also follows if that event has
-probability $o(1/\log n)$ (in samples at $n\le100$ it is $\approx5.5/n$, which says nothing
-about the required rate).  We state these precisely,
-report the numerical evidence (up to $n=100$, including, through a sampler of completions of
-a fixed rectangle, types of exponentially small probability), and locate the remaining
-difficulty within the known switching technology: every exact identity we have found inside
-the conditioned space is fair, and the lower bounds needed are of the kind whose proof in
-\cite{CGW08} has a gap.  Along the
+conjecture thereby follows from any one of four sufficient conditions, none of which is
+known to imply another, all concerning the probability of a configuration at rows or
+columns selected by the square inside the space conditioned on the type of rows $1,2$, and
+all needed only for types with $O(\log n)$ parts.  The reference condition is a ``witness
+lemma'' (Hypothesis~\ref{hyp:witness}): with probability $1-o(1/\log n)$ some ladder pair
+of a long ladder has a short row cycle through one marked column avoiding the other.  The
+simplest to state comes from a third exact identity at the first ladder pair alone, which
+expresses the bias $\Pr_X[B]-\Pr_X[A]$ as an expectation over the event that none of the
+column pairs along the row permutation of that pair admits a legal toggling turn; the
+conjecture follows if that event has probability $o(1/\log n)$, and, given a constant
+conditional hazard along the row permutation, its failure is dominated by a short arc at
+the marked columns rather than by a large count of events.  We
+state these precisely, report the numerical evidence (up to $n=150$, including, through a
+sampler of completions of a fixed rectangle whose connectivity and mixing are not proved,
+types of exponentially small probability), and locate the remaining difficulty: every
+exact identity we have found inside the conditioned space is fair, and what is missing is
+a constant-factor estimate for events on a few cells in two fixed rows of a uniform
+completion of a fixed $2\times n$ rectangle, outside the range of the known fixed-cell
+bounds for Latin squares and rectangles.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -236,12 +239,17 @@ $\CC_n(\lambda)/\CC_n(\mu)\in[\tfrac12,\tfrac32]$ for adjacent types (one part o
 $\lambda$ split into two parts of $\mu$, both $\ge2$), and used it to show that the two
 laws agree within a factor $n^{3/2}$ on every type with at most $\tfrac65\log n$ parts; the upper bound $\tfrac32$, and
 with it the upper half of the latter statement, is affected by the gap described in
-Remark~\ref{rem:gap} and \cite{gapnote}.
+Remark~\ref{rem:gap} and \cite{gapnote}.  One marginal of the conjecture is known: by
+Kwan, Petrova and Sawhney's theorem on parities \cite[Thm.~1.3(1)]{KPS25} and the
+exchangeability of rows, $\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform
+derangements (\S\ref{sec:remains}).
 
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
 where feasible, by exhaustive computation at $n\le7$ and by sampling (this includes
-\S\ref{sec:orbit}(e), added last); no human referee has read them.
+\S\ref{sec:orbit}(e) and Remark~\ref{rem:fewparts}, added last); no human referee has read
+them.  The literature statements of \S\ref{sec:remains} were checked against the cited
+papers by the same means.
 
 \paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
 $j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
@@ -253,7 +261,8 @@ otherwise.  Our results are:
 \item[(1)] \emph{Marked-pair identity} (Theorem~\ref{thm:marked}):
 $2\CC_n(\lambda)/\CC_n(\mu)-1=\Pr_X[B]/\Pr_X[A]$ exactly, for every $n,\lambda,\alpha,\beta$.
 \item[(2)] \emph{Reduction} (Theorem~\ref{thm:reduction}): if
-$|\Pr_X[B]/\Pr_X[A]-1|\le\delta(n)$ for all adjacent pairs with $\alpha\ne\beta$
+$|\Pr_X[B]/\Pr_X[A]-1|\le\delta(n)$ for all adjacent pairs with $\alpha\ne\beta$ in which
+$\mu$ has at most $\lceil16\log n\rceil$ parts
 (equivalently $|\Pr_X[B]-\tfrac12|\le\tfrac14\delta(1+o(1))$), then
 $\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-1+o(1)})$.  The tail estimate it needs on the number
 of cycles of $\sigma$ is proved from the trivial half of (1) alone
@@ -297,22 +306,33 @@ where $F$ is the flippability of $(x_1,y_1)$ and $G$ the event that one of the $
 column pairs $\{\rho^t(j),\rho^t(j')\}$ along $\rho=\rho_{x_1,y_1}$ ($\nu$ = the length of
 the shorter arc or cycle of $\rho$ at the mark) induces a permutation of rows that separates
 $x_1$ from $y_1$ with a legal cycle.  So the conjecture also follows from
-Hypothesis~\ref{hyp:firstpair}: $\sup_{\lambda,\alpha,\beta}\Pr_X[G^c]=o(1/\log n)$ --- an
-event selected by one row pair, with candidates of constant probability (heuristically
-$\Theta(n)$ of them; in samples of the type $(n)$ at $n=30,50,100$,
-$\Pr_X[G^c]\approx5.5/n$) in place of a long ladder of rare events.  Again no implication
-to or from Hypothesis~\ref{hyp:witness} is known.
+Hypothesis~\ref{hyp:firstpair}: $\sup_{\lambda,\alpha,\beta}\Pr_X[G^c]=o(1/\log n)$.  With
+$M=C\log\log n$, $\Pr_X[G^c]\le\Pr_X[\nu\le M]+\Pr_X[\nu>M,\text{ the first }M\text{ candidates bad}]$,
+and the second term is $o(1/\log n)$ for $C$ large (depending on $c$) as soon as the
+conditional probability that candidate $t\le M$ is bad, given $\nu>t$ and that its
+predecessors are bad, is at most $1-c$; so the condition is
+an upper bound on a short arc at the frame-selected pair together with a constant
+conditional hazard over $O(\log\log n)$ events, in place of a long ladder of rare events,
+and it is the one hypothesis whose quantity the data measure directly ($n\Pr_X[G^c]$ is
+$5.5$ for $30\le n\le150$, a first-moment fact that says nothing about the rate).  Again
+no implication to or from Hypothesis~\ref{hyp:witness} is known; the $\nu$-tail is not
+shown to be easier than the rest (Lemma~\ref{lem:nuswitch}).
 \end{enumerate}
-All four hypotheses are of one logical type: a lower bound on the probability of a
-configuration at rows or columns selected by the frame of the mark, inside the space
-conditioned on the type of rows $1,2$.  Their heuristic margins are large; none of the exact
-tools of this paper gives a lower bound of that kind (\S\ref{sec:remains}).  The data
-(Jacobson--Matthews samples, and a sampler of completions of a fixed $2\times n$ rectangle
-that reaches types of $\PP_n$-probability $e^{-\Theta(n)}$, Remark~\ref{rem:fixrect}) give
-$\Pr_X[B]=\tfrac12\pm0.003$ in every tested class at $n\le50$ and witness events that are
-independent to three digits along the ladder; they do not reach the regime of any of the
-hypotheses, and the empirical sizes quoted for the hypothesised quantities are first-moment
-information only.
+All four hypotheses are of one logical type: a constant-factor estimate for the
+probability of a configuration at rows or columns selected by the frame of the mark, inside
+the space conditioned on the type of rows $1,2$; by Remark~\ref{rem:fewparts} each is
+needed only for types with at most $\lceil16\log n\rceil$ parts.  Their heuristic margins
+are large; none of the exact tools of this paper gives an estimate of that kind, and the
+fixed-cell bounds in the literature for Latin squares and rectangles stop short of the
+conditioning on two full rows (\S\ref{sec:remains}, where we also record how far the most
+recent of them, Allsop and Morris's switching argument \cite{AM26}, goes in the conditioned
+space).  The data (Jacobson--Matthews samples, and a sampler of completions of a fixed
+$2\times n$ rectangle that reaches types of $\PP_n$-probability $e^{-\Theta(n)}$,
+Remark~\ref{rem:fixrect}; its connectivity and mixing are not proved) give point estimates
+of $\Pr_X[B]$ within $0.003$ of $\tfrac12$ in every tested class at $n\le50$ and witness
+events that are independent to three digits along the ladder; they do not reach the regime
+of any of the hypotheses, and the empirical sizes quoted for the hypothesised quantities
+are first-moment information only.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
@@ -372,8 +392,30 @@ body.append(hyp_eq)
 body.append("\n\nBy Theorem~\\ref{thm:marked}, $\\mathrm{EQ}(\\delta)$ is the statement $|\\Pr_X[B]-\\tfrac12|\\le\\tfrac\\delta4(1+o(1))$ for all adjacent pairs with $\\alpha\\ne\\beta$.  The proof below needs a tail bound on the number $\\kappa$ of cycles of $\\sigma$; we first prove it from the trivial half of Theorem~\\ref{thm:marked} alone, so that nothing depends on the upper bound of \\cite[Lemma~3.12]{CGW08} (Remark~\\ref{rem:gap}).\n\n")
 body.append(tail)
 body.append("\n\n")
+reduction = sub(reduction, [
+ (r"Let $K=\lceil A\log n\rceil$ with $A$ a large absolute constant, and let", r"Let $K=\lceil A\log n\rceil$ with $A=16$, and let"),
+ (r"Assume $\mathrm{EQ}(\delta)$ with $\delta=\delta(n)\to0$.",
+  r"Assume $\mathrm{EQ}(\delta)$ with $\delta=\delta(n)\to0$, or only its instances in which $\mu$ has at most $\lceil16\log n\rceil$ parts."),
+])
 body.append(reduction)
 body.append(r"""
+
+\begin{remark}[which types are needed]\label{rem:fewparts}
+The proof uses $\mathrm{EQ}(\delta)$ only along the chains from $(n)$ to the plain types
+with at most $K=\lceil16\log n\rceil$ parts, i.e.\ for adjacent pairs $\mu\to\lambda$ with
+$\kappa(\mu)\le K$ (and $\alpha\ne\beta$; every intermediate type of a chain is plain,
+since the residual part always exceeds every part already split off, so $\lambda$ and
+$\mu$ are both plain).  Consequently each of the sufficient conditions below
+(Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen}, \ref{hyp:adaptive},
+\ref{hyp:firstpair}), which are stated as suprema over all $\lambda,\alpha,\beta$, is
+needed only for plain types $\lambda$ with fewer than $K$ parts and plain splits $\mu$.
+Asymptotically this excludes the types with $\Theta(n)$ parts, such as the families
+$(4,2^{(n-4)/2})$ of Remark~\ref{rem:fixrect} (at the sizes we sample, $n\le150$, every
+tested type still has fewer than $\lceil16\log n\rceil$ parts; the pairs
+$(4,2^{13})\to(2^{15})$ and $(6,3^8)\to(3^{10})$ there are not needed because $\alpha=\beta$
+and $\mu$ is not plain); it does not remove the conditioning itself, which is on two full
+rows whatever the type.
+\end{remark}
 
 \begin{remark}[the gap in CGW's Lemma 3.12]\label{rem:gap}
 In \cite{CGW08}, the direction $|S(\lambda,F)|N_\lambda\ge\tfrac12|S(\mu,F)|N_\mu$ of
@@ -517,21 +559,31 @@ body.append(remains)
 body.append(r"""
 
 \begin{thebibliography}{9}
+\bibitem{AM26} J. Allsop and P. Morris, Universal probability bounds for partial Latin squares,
+arXiv:2606.18174 (2026).
+\bibitem{AW25} J. Allsop and I.~M. Wanless, Subsquares in random Latin rectangles,
+\emph{Combinatorica} 45 (2025), art.~29.
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two
 rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 286--309.
+\bibitem{CW16} N.~J. Cavenagh and I.~M. Wanless, There are asymptotically the same number of
+Latin squares of each parity, \emph{Bull. Aust. Math. Soc.} 94 (2016), 187--194.
+\bibitem{DKKS26} A. Divoux, T. Kelly, C. Kennedy and J. Sidhu, Subsquares in random Latin
+squares and rectangles, \emph{J. Combin. Des.} 34 (2026), 184--197.
 \bibitem{gapnote} [author], A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, note, October 2026.
+\bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
+squares in average-case polynomial time, \emph{Random Structures Algorithms} 66 (2025), e70015.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{MW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many subsquares,
+\emph{J. Combin. Theory Ser.~A} 86 (1999), 322--347.
 \bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
 arXiv:2509.13125 (2025).
-\bibitem{CW16} N.~J. Cavenagh and I.~M. Wanless, There are asymptotically the same number of
-Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
-\bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
-squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
 \emph{Random Structures Algorithms} 52 (2018), 181--196.
 \bibitem{KSS21} M.~Kwan, A.~Sah and M.~Sawhney, Large deviations in random Latin squares,
 \emph{Bull. London Math. Soc.} 54 (2022), 1420--1438.
+\bibitem{KSSS23} M.~Kwan, A.~Sah, M.~Sawhney and M.~Simkin, Substructures in Latin squares,
+\emph{Israel J. Math.} 256 (2023), 363--416.
 \bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \end{thebibliography}
 \end{document}

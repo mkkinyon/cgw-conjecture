@@ -209,10 +209,22 @@ and~\ref{hyp:firstpair} are statements about configurations at positions selecte
 frame: a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding $p'$; a clean column pair
 separated by the mark; a short clean column cycle at a prescribed column pair; a column pair
 along $\rho_{x_1,y_1}$ whose column permutation separates $x_1$ from $y_1$.  Their heuristic
-frequencies are, for large $n$, far above what is needed; the difficulty is entirely that
-the positions are selected by the frame of the mark and the whole space is conditioned on
-the type of rows $1,2$.  The minimal instance of the obstacle is a lower bound on a single
-frame-selected pair:
+frequencies are, for large $n$, far above what is needed.  The weakest of the sufficient
+conditions our identities provide (short of $\mathrm{EQ}(\delta)$ itself) is the disjunction
+of (L) and Hypothesis~\ref{hyp:firstpair} class by class,
+\[
+\sup_{\lambda,\alpha,\beta}\ \min\bigl(\Pr_X[\mathrm{Flip}=\emptyset],\ \Pr_X[G^c]\bigr)=o(1/\log n)
+\]
+(by Theorems~\ref{thm:marked}, \ref{thm:ladder} and~\ref{thm:reduction} and
+Proposition~\ref{prop:firstpairbias}; by Remark~\ref{rem:fewparts} the supremum may be
+restricted to types with at most $\lceil16\log n\rceil$ parts), which we record but do not
+promote, since it is only a disjunction.  Two features make all of these statements hard
+for the available tools: the positions are selected by the frame of the mark, and the whole
+space is conditioned on the type of rows $1,2$.  The first is removable in principle (by
+row exchangeability a frame-selected row pair is two prescribed cells, see below), the
+second is not; and even the unconditioned versions of the needed bounds are, as far as we
+know, not in the literature.  The minimal instance of the obstacle is a lower bound on a
+single frame-selected pair:
 \begin{equation}\label{eq:minimal}
 \Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
 \end{equation}
@@ -240,7 +252,7 @@ $\Pr[N_2\ge t]=e^{-\Omega(t\log t)}$ on the number of $2$-cycles of two fixed ro
 \cite[Thm.~3]{KS18} is proved by joining switchings of the same kind as those of
 Proposition~\ref{prop:tailsurvive} and is likewise an upper bound on short cycles.  The
 number of completions of any $2\times n$ rectangle is within $e^{O(n\log^2n)}$ of any other
-(van der Waerden and Br\'egman; \cite[Prop.~5]{KS18}), so any property of uniform squares
+(van der Waerden and Br\'egman; \cite[Prop.~4]{MW99}, as used in \cite{KSSS23}), so any property of uniform squares
 with failure probability $e^{-\omega(n\log^2n)}$ --- such as the intercalate concentration
 of Kwan, Sah and Sawhney \cite{KSS21} --- holds conditionally on any fixed rows $1,2$ and
 mark, hence in $X$ for every $\lambda,\alpha,\beta$; but the natural failure probability of a
@@ -270,8 +282,69 @@ to other distances for a reason of type rather than multiplicity.  The adaptive
 coordinates sidestep the question: the coordinate is placed where it is separated by
 construction, and the price is paid in rarity rather than in a constant we cannot prove;
 at the first ladder pair alone (\S\ref{sec:orbit}(e)) the rarity disappears as well, and
-what is left is an upper bound on a short arc at the frame-selected pair together with the
-lower tail of the number of good candidates among the $\nu-1$ column pairs along
-$\rho_{x_1,y_1}$ --- the smallest sufficient condition we have, and still a lower bound at
-square-selected positions.
+what is left is an upper bound on a short arc at the frame-selected pair together with a
+constant conditional hazard over $O(\log\log n)$ candidates along $\rho_{x_1,y_1}$ --- the
+simplest sufficient condition we have (not the weakest: none of the four is known to imply
+another), and still a statement at square-selected positions in both of its terms
+(Lemma~\ref{lem:nuswitch}).
+
+\emph{The fixed-position form, and the literature.}  Row exchangeability turns every
+statement at the frame-selected pair into one at fixed positions: for an event $E$
+defined through the pair, $\Pr_X[E]=(n-2)(n-3)\Pr_X[E']$, where $E'$ is $E$ read at rows
+$3,4$ together with the two anchor cells $L(3,p)=L(1,p')$, $L(4,p)=L(2,p')$ that make
+$(3,4)$ the selected pair.  The $\nu$-tail of the first-pair hypothesis (through
+\eqref{eq:FC}) then asks for constant-factor upper bounds on the probability of events on
+$O(\log\log n)$ cells in two fixed rows of a uniform completion of a fixed $2\times n$
+rectangle with two further cells prescribed --- in the language of recent work on
+fixed-cell probabilities, a ``spread'' bound under dense conditioning (the second term of
+the hypothesis, and the witness lemma, involve column cycles through all rows and are not
+fixed-cell events).  The known results do not cover it.  For uniform $k\times n$ Latin
+\emph{rectangles} the one-cell bound $\Pr[L(r,c)=s\mid Q\subseteq L]\le1/n+O((k+|Q_r|)/n^2)$
+(their proof gives $1/(n-2(k-1)-|Q_r|)$) holds for any completable $Q$ with
+$2k+|Q_r|\le n/2$ \cite[Lemma~3.3]{KSSS23} --- which
+allows $Q$ to contain full rows, so \eqref{eq:FC} holds, with $C=1+O(k/n)$, for the first
+$k\le n/4-M-1$ rows of a uniform rectangle extending $R$; but the first $k$ rows of a uniform
+completion of $R$ to a square are not a uniform rectangle (they are weighted by their
+number of completions), and the two laws are known to agree only within
+$e^{O(n\log^2n)}$.  For $k<(\tfrac12-\varepsilon)n$ rows, Divoux, Kelly, Kennedy and Sidhu
+\cite[Thm.~1.6]{DKKS26} prove, for every $\varepsilon,\eta>0$ and some
+$\gamma=\gamma(\varepsilon,\eta)>0$, the two-sided bound $((1\pm\eta)/n)^{|P|}$ for
+$\gamma n$-sparse $P$ (at most $\gamma n$ cells in each row, column and symbol), and note
+that the sparsity is essentially necessary; in full
+squares the corresponding two-sided bound $(\delta/n)^{|P|}\le\Pr[L\supseteq P]\le(\Delta/n)^{|P|}$,
+$\delta\to1/23$, $\Delta\to23$, is proved by Allsop and Morris \cite[Thm.~1.1]{AM26} for
+$P$ occupying at most $\alpha n$ rows and $\beta n$ columns with $2\alpha+\beta<1$ (or any
+two of rows, columns, symbols).  Our $R\cup Q$ occupies all $n$ columns and all $n$ symbols,
+so none of these statements applies; what we have checked is how far the Allsop--Morris
+\emph{proof} goes in the conditioned space.  Their basic move, the $\eta$-switching
+$\eta_L(r,r',c)$ --- which displaces the target cell within its row and otherwise changes
+only rows $r'$ and a third row $r''$, with at most $n$ preimages when it is an intercalate
+flip and at most one otherwise --- never touches rows $1,2$ when $r,r',r''\notin\{1,2\}$,
+so it is legal in $X$ with a \emph{deterministic} forward degree $n-O(|Q|)$; it is the first
+switching we know in $X$ with that property (the turns of \S\ref{sec:orbit} have random
+forward degrees, which is where the lower tails come from).  The step that converts its
+reversibility into a per-cell bound is their Theorem~3.1 (the intercalate case has
+conditional probability $O(1/n)$); of its four claims, the first transfers to $X$ with
+bookkeeping changes, the second and third appear to transfer after restricting their
+cross-switches to one arc of the column cycle $\gamma_L$ between the rows $1,2$ lying on it
+(the constants change; we have not written this out), and the fourth fails at one point,
+where a column-cycle switch is used
+whose cycle may meet $\{1,2\}$ in exactly one row; the configuration not covered is
+``exactly one of rows $1,2$ lies on the column cycle $\gamma_L(c_2,c_3,r_1)$ and the chosen
+free row lies on the $(c_2,c_3)$-cycle of the other''.  Without that step their recursion
+gives only $O(n^{-1/2})$ for the intercalate case, hence $C/\sqrt n$ per cell rather than
+\eqref{eq:FC}.  Whether their Theorem~3.1 holds when $P$ contains two complete rows that the
+switchings never touch is, as far as we can tell, the sharpest form of the question
+(details in \cite{repo}).  The difficulty of counting column cycles that avoid prescribed
+rows is also noted, in a different context, by Allsop and Wanless \cite[\S3.1]{AW25}.  We
+mention finally that the parity marginal of Conjecture~\ref{conj:cgw} is now a theorem:
+by Kwan, Petrova and Sawhney \cite[Thm.~1.3(1)]{KPS25} and row exchangeability,
+$\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$, i.e.\
+$\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements; this says nothing
+about any individual adjacent pair $\lambda,\mu$ (which have opposite parities), but their
+method --- a canonical, switching-invariant family of ``stable intercalates'' that meets
+every large set of rows, columns and symbols simultaneously, transferred to Latin squares by an approximation
+lemma for the triangle-removal process --- is the one technique we know that controls
+events at \emph{all} row sets at once, hence at square-selected ones; we have not
+attempted to adapt it to completions of a fixed rectangle.
 """

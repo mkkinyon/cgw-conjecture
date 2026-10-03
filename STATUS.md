@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
-(8 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (25 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
+(8 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (29 pp, REVISED 2026-10-03 twice: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
@@ -192,6 +192,22 @@ hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  
 η-switching legal and rigid in X with deterministic forward degree; their Thm 3.1 transfers except Claim 4(ii) in one configuration;
 KPS: parity marginal of the weak conjecture proved by them; gap note §4 (KPS, AM citations) updated.  Did not touch the core
 obstacle; located it inside an otherwise working argument (Claim 4(ii)), which is the sharpest consultation question we have.
+**Seg 8 — WRITING (R2, cold-read fixes; refereed by a fresh subagent, 15 findings applied).**  Paper 29 pp.  (a) NEW small PROVED
+item: rem:fewparts — thm:reduction uses EQ(δ) only along chains from (n) to plain λ with ≤ K = ⌈16 log n⌉ parts, so every
+hypothesis is needed only for plain λ with < K parts and plain µ (referee verified both routing cases; K excludes Θ(n)-part types
+asymptotically but NOT the sampled types at n ≤ 150, which all have < K parts; (4,2^13)→(2^15), (6,3^8)→(3^10) are excluded only
+because α=β); A = 16 made explicit.  (b) Cold-read fixes: abstract (four conditions, none implying another; hazard caveat;
+sampler caveat; "whose proof in CGW has a gap" insinuation removed; fragment fixed), Results (2),(6) (M = C log log n split with
+the hazard condition stated with ν > t; "Θ(n) candidates" gone; "not shown to be easier"), §6(e) cost paragraph (hazard
+reading; data-measurability; hidden costs: ν-tail, positive dependence, admissibility; "simplest" not "smallest"), lem:nuswitch
++ (FC) eq:FC moved into the paper with proof (referee: correct; C ≥ 2 added), rem:fixrect "[0.995,1.005]" as point estimates,
+§7 "entirely" removed, min-hypothesis sup min(P_X[Flip=∅], P_X[Gᶜ]) recorded as the weakest condition short of EQ but not
+promoted, exchangeability formula P_X[E] = (n−2)(n−3)P_X[E′].  (c) §7 literature paragraph (KSSS Lemma 3.3 incl. full rows
+in Q, C = 1+O(k/n), rectangle→square transfer only at e^{O(n log² n)} (McKay–Wanless Prop 4, replacing the KS18 Prop 5
+citation); DKKS Thm 1.6 with correct quantifiers (ε,η; γn-sparse); AM Thm 1.1 + η-switching legal in X with deterministic
+forward degree; Thm 3.1: Claim 1 transfers, Claims 2–3 "appear to transfer, not written out", Claim 4(ii) configuration; AW
+§3.1 quote; KPS parity marginal with rows/columns/symbols).  (d) KPS parity marginal in the intro.  (e) Bibliography sorted;
+AM26, AW25, DKKS26, KSSS23, MW99 added.  Did not touch the core obstacle.  Cold read next (user's instruction).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
