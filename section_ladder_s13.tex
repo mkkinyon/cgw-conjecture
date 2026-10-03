@@ -2541,3 +2541,197 @@ obstacle in this language: \emph{(FC) for $O(\mathrm{polylog}\,n)$ cells
 in two further rows of a uniform completion of a fixed $2\times n$
 rectangle}, a dense-conditioning spread statement.  Nothing read changes
 the status of any hypothesis or of the gap note's dependency list.
+
+\paragraph{(n) Allsop--Morris 2026: $\eta$-switching is legal in $X$;
+where their Theorem~3.1 does and does not transfer.}  (Classification:
+analysis of a candidate tool from the literature; NEGATIVE KNOWLEDGE
+on one step, with a precisely located remaining question.  Nothing
+below is used by any result of ours yet.)  Allsop and Morris
+\cite{AM26} prove, for a \emph{full} uniform Latin square and any
+partial Latin square $P$ with $|R_P|\le\alpha n$ rows and
+$|C_P|\le\beta n$ columns, $2\alpha+\beta<1$,
+\[
+(\delta/n)^{|P|}\le\Pr[L\supseteq P]\le(\Delta/n)^{|P|},\qquad
+\delta\to1/23,\ \Delta\to23\ (\alpha,\beta\to0),
+\]
+(their Theorem~1.1; by Remark~1.2 any two of the three sets
+$R_P,C_P,S_P$ may play the roles).  Two full rows have $|C_P|=n$ and
+$|S_P|=n$, so our $R$ is outside the theorem.  The question is whether
+the \emph{proof} applies to $P=R\cup Q$ with $Q$ sparse in rows $\ge3$,
+i.e.\ whether the fixed-cell bound (FC) of \S(l) holds in $X$ (which,
+by the isotopy invariance of \S(k), is the same as in $S(R)$ for events
+whose prescribed symbols are read from rows $1,2$ at the mark).
+
+\emph{The switching.}  For a cell $(r,c)$ and a second row $r'$, let
+$s=L(r,c)$, $s'=L(r',c)$, $c'$ the column with $L(r,c')=s'$ and $r''$ the
+row with $L(r'',c')=s$.  Their $\eta$-switch $\eta_L(r,r',c)$ replaces
+$(r,c,s),(r',c,s'),(r,c',s')$ by $(r,c,s'),(r',c,s),(r,c',s)$ and
+otherwise changes only rows $r'$ and $r''$ (Type One: $r''=r'$, an
+intercalate flip; Type Two: two row-cycle switches; Type Three: a
+cross-switch whose column part has length $2$).  Reversibility
+(their Lemma~2.8): at most $n$ preimages if $\eta$ is of Type One, at
+most one otherwise.  They note it needs the row $r''$ to exist, so it is
+a tool for full squares only.  \emph{In $X$ (and in $S(R)$) it is legal whenever
+$r,r',r''\notin\{1,2\}$}: rows $1,2$ are never touched, so $\sigma$, the
+type and the mark are unchanged; the only cells of $P=R\cup Q$ it can
+destroy are $Q$'s cells in row $r$ at column $c'$, which excludes at
+most $|C_Q|$ choices of $r'$, and $r''\in\{1,2\}\cup R_Q$ excludes at
+most $2+|R_Q|$ more (the maps $r'\mapsto c'\mapsto r''$ are injective);
+and $r'\notin\{1,2\}\cup R_Q$ is required as well, since Types Two and
+Three rewrite row $r'$ at many columns.  So the forward count of their Claim~1 and
+Lemma~4.1 is $n-O(|Q|+j)$: the full-row conditioning costs nothing
+here, because the switch displaces the target cell within its row by
+two free rows and its column part (a cross-switch of column length
+$2$ in Type Three) touches only those rows.  Two bookkeeping changes
+are needed throughout: the excluded column set ``$C_P$'' (which in
+their proof keeps structure columns $c_{j+1}$ away from cells of $P$)
+becomes $C_Q\cup\{p,p'\}$, so that the sets $Y_j$ are defined with
+$c_{j+1}\notin C_Q\cup\{p,p'\}\cup\{c_\ell\}$, and the excluded row set
+becomes $\{1,2\}\cup R_Q$.
+
+\emph{Which space.}  The analysis below is in $X=X(n,\lambda;\alpha,\beta)$
+(type and mark conditioning), not in $S(R)$ with $R$ literally fixed:
+in $S(R)$ no column turn may touch rows $1,2$, while in $X$ a turn of a
+column pair $\{q,c\}\not\ni p,p'$ along a union of cycles meeting
+$\{1,2\}$ in $0$ or $2$ rows is legal (Lemma lem:legalturn).  This is
+the space the application needs: the anchors
+$L(x_1,p)=L(1,p')$, $L(y_1,p)=L(2,p')$ of \S(l) are cells whose
+prescribed symbols are read from rows $1,2$ at columns $p,p'$, which no
+legal move changes, so they behave as fixed cells throughout, and
+$\Pr_X$ of the staircase events is what \S(l) bounds.
+
+\emph{Their Theorem 3.1} ($\Pr[\eta_L(r,r',c)\text{ of Type One}\mid L\supseteq P]\le D/n$,
+$D\to22$) is what turns Lemma~2.8 into a per-cell bound $\Delta/n$
+(Lemma~4.1).  Its proof has four claims; we checked each in $X$.
+Claim~1 (an $\eta$-switching recursion
+$p_{j-1}\le(np_j+1)/(n(1+p_j-2\alpha-\beta)-3j-2)$): transfers with
+the bookkeeping above, $\alpha=(2+|R_Q|)/n$, $\beta=(|C_Q|+2)/n$ (the
+maps $x\mapsto y\mapsto x'$ are injective, so the exclusions cost
+$2|R_P|+|C_P|+3j+3$ as in their count).  Claims~2 and~3
+(cross-switches $\zeta(c_2,c_3,x_u,x_v)$ and row-cycle switches
+$\rho(x_i,x_j,c_3)$ among the free rows $x_i$ of the column cycle
+$\gamma_L=\gamma_L(c_2,c_3,r_1)$): the row-cycle switches are between
+free rows, legal; the cross-switch exchanges columns $c_2,c_3$ in the
+rows strictly between $x_u$ and $x_v$ on $\gamma_L$ (and changes
+$x_u,x_v$ along a partial row cycle), so in $X$ it is legal iff that
+segment contains both or neither of rows $1,2$ --- in their setting
+automatic because $c_2,c_3\notin C_P$, in ours a restriction on the
+pairs $(u,v)$ (e.g.\ to one arc of $\gamma_L$ between the rows $1,2$
+lying on it, of which one holds at least a third of the free rows).
+The restricted pair relation is no longer symmetric, so the double
+count of Claim~2 has to be rewritten; by Remark~2.7 the rows $1,2$ keep
+their positions on $\gamma_L$ under the cross-switch, so the arcs are
+preserved.  We expect this to change the constants of Claims~2--3 by
+a bounded factor and nothing else, but we have not rewritten it.
+Claim~4 ($p_2=O(1/n)$): from $L\in X_3$ and a free row $x\notin\gamma_L$,
+switch the row cycle $\rho_L(r_3,x,c_3)$ (legal); if that cycle hits
+column $c_2$ they first switch the column cycle $\gamma_L(c_2,c_3,x)$
+through $x$, which in $X$ is legal only if it meets $\{1,2\}$ in $0$
+or $2$ rows.  Repairs available in $X$: if neither of rows $1,2$ is
+on $\gamma_L$, turn the union of the $(c_2,c_3)$-cycles through
+$x$, $1$ and $2$ (legal as $c_2,c_3\notin\{p,p'\}$; avoids
+$r_1,r_2,r_3$; inverse determined, since a turn preserves the cycle
+partition and the case is read off the target); if both are on
+$\gamma_L$, the cycle through $x$ avoids them.  \emph{The
+one configuration we cannot handle}: exactly one of rows $1,2$ lies on
+$\gamma_L$ (the cycle through $r_1$, which must not be turned because
+$(r_1,c_2)$ is a structure cell) and the chosen $x$ lies on the cycle
+of the other; then no legal column turn separates $c_2$ from $c_3$ in
+$\rho_{r_3,x}$, and replacing the move by an $\eta$-switch brings back
+the Type-One multiplicity $n$, i.e.\ the Claim~1 recursion that alone
+gives only $p_0=O(n^{-1/2})$.  So in $X$ their argument gives
+$\Pr_X[\text{Type One}\mid Q]=O(n^{-1/2})$ unconditionally (Claim~1
+iterated to $j\asymp\sqrt n$, which they note is the best Claim~1 alone
+can give; through Lemma~4.1 this is only $C/\sqrt n$ per cell, not
+(FC)), and the $O(1/n)$ of Theorem~3.1 except that the forward count
+of Claim~4 is reduced, for the sources in that configuration, by the
+number of free rows on the $(c_2,c_3)$-cycle through the other of
+rows $1,2$.  That loss must be controlled in aggregate, as their
+$\Sigma_1$ is; a Claim~2--3-style averaging on that other cycle (row
+switches between its free rows are legal and cut it, Lemma~2.4(1)) is
+the natural attempt and has not been tried.  The question is about
+the cycle structure of a square-selected column pair at rows $1,2$
+--- our obstacle in miniature, but now confined to one step of an
+otherwise working argument.
+
+\emph{What (FC) in $X$ would give.}  By \S(l)(i), (FC) with constant
+$\Delta$ for $Q$ with $\le2M+2$ cells in rows $3,4$ gives
+$\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$, which is $o(1/\log n)$ for
+$M\le(\log n)/(4\log\Delta)$; this is the first term of the first-pair
+condition \eqref{eq:hypfirstpair}.  The second term (among the first
+$M$ candidates not all are bad) is not a fixed-cell event and is not
+reached by (FC); but $\eta$-switching, legal and rigid in $X$ with a
+\emph{deterministic} lower bound $n-O(1)$ on its forward degree, is
+the first switching available to us in $X$ with that property (the
+turns of \S(b)--(j) have random forward degrees).  The sharp
+question for the authors: does Theorem~3.1 hold when $P$ contains
+two complete rows that the switchings never touch, i.e.\ can
+Claim~4(ii) be repaired in the configuration above?
+
+\paragraph{(o) Kwan--Petrova--Sawhney 2025: parities, stable
+intercalates, and three consequences for us.}  (Classification:
+literature; two corrections to the gap note; one program sketch,
+not a result.)  \cite{KPS25} prove Cameron's conjecture: the row
+parities of a uniform Latin square are asymptotically $n$ independent
+fair coins, jointly with column and symbol parities subject to the
+Janssen--Zappa constraint (their Theorem~1.3), via a new approximation
+lemma (Lemma~4.7: a property of the triangle-removal process holding
+with probability $1-\varepsilon$ holds for a random subset of a random
+Latin square with probability $1-\varepsilon e^{O(n\log^2n)}$) and a
+``stable intercalate'' re-randomisation: a canonical collection
+$I_T(L)$ of disjoint intercalates, invariant under switching any
+subset of itself, so that switching a uniformly random subset leaves
+$L$ uniform and re-randomises the parities through linear algebra over
+$\mathbb F_2$; the collection is shown (Lemma~8.3) to meet every
+large-enough set of rows, columns and symbols simultaneously, with
+overwhelming probability.
+
+(i) \emph{Gap note.}  Theorem~1.3(4) contains the Cavenagh--Wanless
+parity theorem as a special case, so that theorem is true independently
+of the gap; but the written proof of Theorem~1.3(3)--(4) uses
+Cavenagh--Wanless as a black box for the mod-$2$ equidistribution, with
+Remark~6.6 sketching an easy independent re-proof by switching a
+$2\times3$ and a $3\times2$ subrectangle.  So the formal dependence on
+the gap runs CGW $\to$ CW16 $\to$ KPS Theorem~1.3(3)--(4), and is
+removable.  Also, Theorem~1.3(1) (law of large numbers for the number
+of odd rows, deducible from the intercalate counts of KSS and
+single-intercalate switching ratios, \S2.4 of \cite{KPS25}) gives, by
+row exchangeability, $\Pr[\text{rows }1,2\text{ have the same parity}]=\tfrac12+o(1)$,
+superseding CGW's Theorem~4.3 (which gave $[\tfrac14,\tfrac34]$ and is
+affected by the gap).
+
+(ii) \emph{The parity marginal of the weak conjecture.}  Rows $1,2$
+have the same parity iff $\sigma=\rho_{1,2}$ is even.  So KPS prove
+$\Pr_n[\sigma\text{ even}]=\tfrac12+o(1)$, while under $\QQ_n$ (uniform
+derangements) the same holds; i.e.\ $d_{TV}$ between the parity
+marginals of $\PP_n$ and $\QQ_n$ tends to $0$.  This is the first
+rigorous instance of the weak conjecture for a nontrivial functional
+of the type, and it should be stated in the paper.  It does not bear
+on adjacent pairs $\lambda,\mu$ (which have opposite parities), so it
+gives nothing for $\bar q(\mu\to\lambda)$ individually, only for the
+global average $\sum_{\lambda\text{ even}}\PP_n(\lambda)\to\tfrac12$.
+
+(iii) \emph{A route around frame selection.}  The KPS method is our
+orbit method with the two missing inputs supplied from outside: a
+canonical, switch-invariant family of independent toggles is exactly
+the structure of Proposition prop:orbit / prop:adaptive; what they can
+prove and we cannot is that the family is rich \emph{at every set of
+rows simultaneously} (so in particular at square-selected rows) ---
+because a property that holds for all row sets at once is a single
+event of overwhelming probability, which the approximation lemma
+transfers.  For our problem one would need: (a) the approximation lemma
+for completions of a fixed rectangle $R$ (plausible: the row-by-row
+side of their proof can start from $R$; not checked); (b) a stable
+family of toggles acting on the flippability bits, where a toggle at
+rows $(x_k,w)$, columns $(q,c)$ acts on $b_k$ iff $(q,c)$ is separated
+by the mark in $\rho_{x_k,y_k}$ --- so the genericity input $(\beta)$
+reappears, now as the question whether among the many stable
+intercalates at row $x_k$ some have a separated column pair; (c)
+possibly the re-randomisation itself to make $(\beta)$ hold: switching
+stable intercalates in rows $x_k$ or $y_k$ changes $\rho_{x_k,y_k}$ by
+transpositions and could randomise the arc structure at the mark.  This
+is a program for people who own that machinery, not a result; we
+record it as the most concrete external route we have seen to the
+frame-selection half of the obstacle.  (The $n$-cycle question of \S4 of
+the gap note is not reached by it either: $\Pr[(n)]\approx1/n$ is not
+an overwhelming-probability property.)
