@@ -1,0 +1,8 @@
+n=100: squares=150 instances=900  T=6 LMAX=10 family=first min(K0-1,12) pairs
+  pairs=8615  with a good candidate: 0.1562  in U: 0.0279
+  E|U| = 0.267   P[Flip=0] = 0.0344   E[2^-|U|] = 0.8738   (bound must hold: P[Flip=0] <= E[2^-|U|])
+  |U| histogram: {0: 685, 1: 191, 2: 23, 3: 1}
+  candidates per pair (min(T, min arc)-1): {1: 357, 2: 347, 3: 316, 4: 329, 5: 325, 6: 6941}
+  t0 histogram: {1: 286, 2: 248, 3: 227, 4: 214, 5: 189, 6: 182}
+  by K0 (K0: instances, P[Flip=0], E[2^-|U|]): {2: (35, 0.543, 0.8), 3: (41, 0.268, 0.744), 4: (26, 0.038, 0.856), 5: (34, 0.0, 0.746), 6: (32, 0.0, 0.758), 7: (40, 0.0, 0.8), 8: (35, 0.0, 0.85), 9: (21, 0.0, 0.762), 10: (26, 0.0, 0.962), 11: (26, 0.0, 0.837), 12: (584, 0.0, 0.91)}
+  direct checks: {'bit k toggled': 215, 'other bits unchanged': 215, 'candidate data unchanged (all pairs)': 215, 'U unchanged': 215, 'turn checked': 215}

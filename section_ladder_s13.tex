@@ -1878,3 +1878,148 @@ For the orbit method the lesson is that a lower bound on
 $\Pr[(q,c)\text{ separated}]$ for a clean coordinate would follow from
 a type-changing move at $(q,c)$ whose inverse is rigid; the moves of
 \S(g) are not, because the third pair of rows they use is free.
+
+\paragraph{(j) Adaptive coordinates: separation is automatic, and
+$(\beta)$ disappears.}  The search for a rigid type-changing move
+led instead to a change of coordinates that removes the need for one.
+In \S(c) the coordinates of a ladder pair $(x,y)$ were the pairs of a
+\emph{fixed} matching, chosen independently of the square, and
+$(\beta)$ asked that they be separated by $\{p,p'\}$ in $\rho_{x,y}$
+with positive probability.  Choose them instead \emph{along
+$\rho_{x,y}$ from the mark}: for $t\ge1$ let
+\[
+(q^t,c^t):=(\rho_{x,y}^{\,t}(p),\ \rho_{x,y}^{\,t}(p')),
+\]
+and let $\mu_{x,y}:=\min(d(p\to p'),d(p'\to p))$ if $(x,y)$ is crossed
+and $\min(|Q_p|,|Q_{p'}|)$ if parallel.  For $t<\mu_{x,y}$ the pair
+$(q^t,c^t)$ is free ($q^t\ne c^t$, both $\notin\{p,p'\}$) and
+\emph{separated by $\{p,p'\}$ in $\rho_{x,y}$ by construction}: on
+different arcs when crossed, one in $Q_p$ and one in $Q_{p'}$ when
+parallel.  So the turn of its column cycle through $x$ toggles the bit
+(Lemma~\ref{lem:legalturn}) whenever it is legal --- there is no
+genericity to ask for.
+
+\begin{lemma}[the adaptive coordinate is orbit-invariant]\label{lem:adaptinv}
+Let $t<\mu_{x,y}$, let $Z$ be the column cycle of $(q^t,c^t)$ through
+$x$ with $y\notin Z$, and let $L'$ be the turn of $Z$.  Then
+$\rho'_{x,y}=\rho_{x,y}\circ(q^t\,c^t)$, the status of $(x,y)$ toggles,
+$\mu'_{x,y}=\mu_{x,y}$, and $(\rho'^{\,s}(p),\rho'^{\,s}(p'))=(q^s,c^s)$
+for every $s\le t$; in particular the $t$-th candidate of $L'$ is
+$(q^t,c^t)$ again, and its column cycle through $x$ is $Z$ (same row
+set).
+\end{lemma}
+\begin{proof}
+Write $\rho=\rho_{x,y}$, $q=q^t$, $c=c^t$.  The turn exchanges the
+entries of $x$ at $q,c$ (and those of the other rows of $Z$, which do
+not affect $\rho$), so $\rho'=\rho\circ(q\,c)$: $\rho'(q)=\rho(c)$,
+$\rho'(c)=\rho(q)$, $\rho'=\rho$ elsewhere.  Crossed case, with
+$p=u_0\to u_1\to\dots\to u_a=p'\to v_1\to\dots\to v_b=p$ and
+$q=u_t$, $c=v_t$ ($t<\min(a,b)$): the cycles of $\rho'$ through $p$
+and $p'$ are $u_0\to\dots\to u_t\to v_{t+1}\to\dots\to v_b=p$ and
+$u_{t+1}\to\dots\to u_a=p'\to v_1\to\dots\to v_t\to u_{t+1}$, of
+lengths $b$ and $a$, so $(x,y)$ is now parallel with
+$\mu'=\min(a,b)=\mu$, and the paths $p\to u_s$, $p'\to v_s$ for
+$s\le t$ are untouched.  Parallel case, $Q_p=(p=u_0,u_1,\dots,u_{a-1})$,
+$Q_{p'}=(p'=v_0,\dots,v_{b-1})$, $q=u_t$, $c=v_t$ ($t<\min(a,b)$): the
+single cycle of $\rho'$ is
+$u_0\to\dots\to u_t\to v_{t+1}\to\dots\to v_{b-1}\to v_0=p'\to v_1\to\dots\to v_t\to u_{t+1}\to\dots\to u_{a-1}\to u_0$,
+with $d'(p\to p')=b$, $d'(p'\to p)=a$, so crossed with $\mu'=\mu$, and
+again the paths up to step $t$ are untouched.  The row set of the
+turned cycle is preserved (Lemma~\ref{lem:cycletrade}).
+\end{proof}
+
+\begin{proposition}[orbit bound with adaptive coordinates]\label{prop:adaptive}
+Let $(L,P)\in X$, $I$ a family of ladder pairs $(x_k,y_k)$ with
+pairwise distinct rows, none in $\{1,2\}$, and $T\ge1$.  Call the
+candidate $(k,t)$ \emph{good} if $t\le\min(T,\mu_k-1)$ and the column
+cycle $Z_k^t$ of $(q_k^t,c_k^t)$ through $x_k$ meets $\{1,2\}$ in $0$
+or $2$ rows and meets the rows of $I$ only in $x_k$.  Let $t_0(k)$ be
+the least good $t$ (if any), $C_k=\{q_k^t,c_k^t:\ t\le t_0(k)\}$
+(all candidates $t\le\min(T,\mu_k-1)$ if there is none), and
+\[
+U=\bigl\{k\in I:\ t_0(k)\text{ exists and }\{q_k^{t_0(k)},c_k^{t_0(k)}\}\cap C_l=\emptyset\ \text{for all }l\in I\setminus\{k\}\bigr\}.
+\]
+Then the turns $T_k$ of $Z_k^{t_0(k)}$, $k\in U$, are legal, commute,
+generate a free action of $\{0,1\}^U$ on $X$ that preserves the frame,
+the family, every $\mu_l$, $t_0(l)$, $C_l$ ($l\in I$) and $U$; $T_k$
+toggles the status of $(x_k,y_k)$ and fixes that of every other pair.
+Hence
+\[
+\Pr_X[\mathrm{Flip}_I=\emptyset]\;\le\;\E_X\bigl[2^{-|U|}\bigr].
+\]
+\end{proposition}
+\begin{proof}
+$T_k$ changes only columns $q_k,c_k:=q_k^{t_0(k)},c_k^{t_0(k)}$ in the
+rows of $Z_k$.  Legality: $Z_k$ meets $\{1,2\}$ in $0$ or $2$ rows and
+$\{q_k,c_k\}\cap\{p,p'\}=\emptyset$, so the type of rows $1,2$ and the
+mark are preserved (Lemma~\ref{lem:legalturn}); columns $p,p'$ are
+untouched, so the frame and the ladder are preserved.  For $k\ne l$ in
+$U$ the column pairs $\{q_k,c_k\}$, $\{q_l,c_l\}\subseteq C_l$ are
+disjoint, so the turns act on disjoint cells and commute, and the
+action is free.  Invariance of the data of a pair $l\ne k$ under $T_k$:
+rows $x_l,y_l\notin Z_k$, so $\rho_l$, its status, $\mu_l$ and all its
+candidates are unchanged; the goodness of candidate $(l,t)$ depends on
+the column cycle of $(q_l^t,c_l^t)$ through $x_l$, i.e.\ on the
+contents of columns $q_l^t,c_l^t$, which are not in $\{q_k,c_k\}$ for
+$t\le t_0(l)$ (resp.\ for all candidates if $t_0(l)$ does not exist) by
+the defining condition of $U$; hence $t_0(l)$ and $C_l$ are unchanged.
+Invariance of the data of $k$ itself: by Lemma~\ref{lem:adaptinv},
+$\mu_k$ and the candidates $t\le t_0(k)$ are unchanged; the candidates
+$t<t_0(k)$ have columns different from $q_k,c_k$ (distinct points of
+the two paths), so their cycles and non-goodness are unchanged, and
+$Z_k$ itself keeps its row set, so $t_0(k)$ is still good; $C_k$ is
+unchanged.  If $Z_k\ni1,2$, rows $1,2$ change at $q_k,c_k$, which
+affects none of the above.  Hence $U$ is invariant, every orbit of the
+cube is a cube of size $2^{|U|}$ on which the status of pair $k\in U$
+is $\mathrm{bit}_k(L)\oplus\varepsilon_k$, and $\mathrm{Flip}_I=\emptyset$
+forces one value of $(\varepsilon_k)_{k\in U}$; $X$ is uniform.
+\end{proof}
+
+\emph{What remains, in this coordinate system.}  Hypothesis~\ref{hyp:orbit}
+is replaced by the single statement
+\begin{equation}\label{eq:hypadaptive}
+\E_X\bigl[2^{-|U|};\ K_0\ge\ell_0\bigr]=o(1/\log n)
+\quad\text{for }I=\text{the first }\min(K_0-1,s)\text{ ladder pairs},
+\end{equation}
+together with its offset version for the diagonals of \S(ii) of
+Hypothesis~\ref{hyp:orbit}.  No genericity constant enters: $U$ is
+made of the ladder pairs that have a \emph{short clean candidate
+cycle}, and $|U|\ge C\log\log n$ with probability $1-o(1/\log n)$ is
+all that is needed.  The only remnant of $(\alpha)$ is the number of
+candidates $\min(T,\mu_k-1)$, i.e.\ that the arcs of $\rho_k$ at $p,p'$
+are longer than $T$ for a constant fraction of the pairs --- the
+weakest form of arc trapping, at polylogarithmic scale.  Heuristically,
+with $s=|I|$, a candidate's column cycle has length $\le\ell_1$ with
+probability $\approx\ell_1/n$, is clean with probability
+$\approx e^{-2s\ell_1/n}$, and the chosen pair avoids the
+$\approx2Ts$ candidate columns of the other pairs with probability
+$\approx(1-2Ts/n)^2$, so
+\[
+\E|U|\;\approx\;s\cdot\frac{T\ell_1}{n}\,e^{-2s\ell_1/n}\Bigl(1-\frac{2Ts}n\Bigr)^2
+\;\asymp\;\log^2n\qquad\text{for }s=\frac n{\log^2n},\ T=\frac{\log^2n}4,\ \ell_1=\frac{\log^2n}2,
+\]
+far above the $C\log\log n$ required; \eqref{eq:hypadaptive} is then a
+concentration statement for a count of \emph{local} configurations
+(each good candidate is determined by $O(\log^2n)$ cells: $2t$ cells of
+rows $x_k,y_k$ and the cycle $Z_k^t$), which is the kind of statement
+the switching method is built for --- modulo, as always, the frame
+selection of the rows.
+
+\emph{Verification and data} (\texttt{s13\_adaptive.py};
+\texttt{runs/s13/orbit/adaptive\{50,100\}.log}): on true-marked
+instances at $n=30,50,100$, for a random $k\in U$ the turn of $Z_k$ was
+applied and checked to toggle the status of $(x_k,y_k)$, to leave the
+status, $\mu_l$, $t_0(l)$, $C_l$ of every other pair and the set $U$
+unchanged, and to preserve the type of rows $1,2$ and the frame
+($682$, $697$, $215$ turns, no failure); the bound
+$\Pr[\mathrm{Flip}_I=\emptyset]\le\E[2^{-|U|}]$ holds in every $K_0$
+class.  With the small families and parameters usable at these sizes
+($T=6$, $\ell_1=8$--$10$, $|I|\le n/8$) $15$--$30\%$ of the ladder
+pairs have a good candidate but only $3$--$13\%$ are in $U$: the
+collision rule in $U$ (which forbids the chosen pair to meet the
+candidate sets of \emph{all} other pairs, $\approx2Ts$ columns) is
+crude, and at $n\le100$ with $2Ts\ge n$ it removes most pairs; the
+asymptotic regime $2Ts/n\le\tfrac12$ is out of reach of sampling.  The
+rule could be refined (only used pairs need to be protected, if $U$
+is defined by a canonical greedy order that is itself invariant), but
+the present form suffices for the statement.
