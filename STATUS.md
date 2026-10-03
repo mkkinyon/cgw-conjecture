@@ -10,6 +10,44 @@ Referee corrections applied to both (see git log a9d7507 and after).  The notes
 is the two-page map.  History: `git log`.  Old handoffs `HANDOFF_session_*.md`
 are kept for the record; their TODO lists are superseded by this file.*
 
+## ASSESSMENT (2026-10-02 evening; own + independent subagent) — read this before the ALERT
+**Verdict.** The PROVED base grew and is solid (thm:marked, thm:ladder, offsets, prop:trapped, prop:splice,
+prop:tailsurvive, thm:reduction independent of CGW, gap note + constant-2 repair).  The UNPROVED residual has
+been reformulated, not reduced: hyp:witness (one rare local event at a frame-selected pair) → hyp:orbit (constant-
+strength genericity (β), introduced by the orbit method itself, found gap-direction/unprovable in X) → (U) →
+hyp:adaptive (rare local events again, C log log n of them).  hyp:adaptive is of the SAME logical type as
+hyp:witness and logically STRONGER (needs many events, not one); the loop (β introduced → removed) was presented
+as progress twice.  The weakest sufficient condition we have is still hyp:witness.
+**Core obstacle, precisely:** a lower bound (any constant, any rate) on the probability of ANY local event at a
+row pair selected by the frame, inside X.  Minimal instance: P_X[(x₁,y₁) flippable] ≥ c, x₁ = π⁻¹(1), y₁ = π⁻¹(2).
+Every exact identity in X is fair; gap-direction bounds need a rigid inverse (exists only for min(α,β)=2);
+type-conditioning transfers at cost e^{O(n log² n)} (vdW/Brégman) while the heuristic failure of "long ladder,
+nothing flippable" is 2^{−n/log² n} — too large by log⁴n in the exponent, and tightening the transfer is
+conjecture-strength (the subagent's "cheap conditioning at n^{O(log n)}" used the wrong direction of thm:marked:
+the surviving half bounds fine types from ABOVE only).  Data speak to typical λ only; the hypotheses could fail
+on rare λ unseen.
+**Over-claims to fix:** paper title "conditional proof" → "a reduction"; abstract "test its ingredients up to
+n=100" while the regime is out of reach; "(Π) SOLVED", "no genericity constant enters" sold as gains;
+"refereed" = by subagents.  **Publishable now:** gap note (+ Prop 3); the identities-plus-reduction paper.
+**Next (in order):** (1) make hyp:witness the primary hypothesis again, orbit/adaptive as alternative sufficient
+conditions; retitle; (2) a sampler for completions of a FIXED 2×n rectangle (JM restricted off rows 1,2, if
+connected) to test P_X[B] and witness frequencies on atypical λ — the one experiment that can falsify; (3) target
+P_X[(x₁,y₁) flippable] ≥ c; (4) send the gap note after the author's own read.
+**Progress =** a proven lower bound at a frame-selected pair, or a falsification.  Another "lower tail of rare
+local events at frame-selected rows" = reformulation, to be labelled as such.
+
+## WORKING RULES (added 2026-10-02; every segment reads and obeys these)
+1. Every segment report classifies its outcome as exactly one of: PROVED (unconditional), REFORMULATION,
+   NEGATIVE KNOWLEDGE, DATA, WRITING.  No superlatives in STATUS or summaries ("headline", "kills", "solved"
+   are banned unless the statement is unconditional and refereed).
+2. A new hypothesis may REPLACE the reference hypothesis (currently hyp:witness) only if it is proved to be
+   implied by it or strictly weaker; otherwise it is listed as an ALTERNATIVE sufficient condition.
+3. The cost of any new formulation (rarity, constants, regime, what got worse) is stated in the first paragraph,
+   before the benefit.
+4. Each report ends with "What did NOT change": the core obstacle restated, and whether this segment touched it.
+5. Every ~5 segments, an independent cold-read assessment (subagent given STATUS + paper, asked "shrinking or
+   reformulating?"), recorded here.
+
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
 at {j,j′}) lands in the WRONG type when min(α,β) ≥ 3: the cross-switch reverses the
