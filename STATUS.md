@@ -31,7 +31,7 @@ n=100" while the regime is out of reach; "(Π) SOLVED", "no genericity constant 
 "refereed" = by subagents.  **Publishable now:** gap note (+ Prop 3); the identities-plus-reduction paper.
 **Next (in order):** (1) DONE 2026-10-03 (hyp:witness primary); (2) DONE 2026-10-03 (fixed-rectangle sampler; no
 falsification at n ≤ 100); (3) target P_X[(x₁,y₁) flippable] ≥ c — reduced one-way to P_X[G] ≥ 2c (prop:firstpair), same
-obstacle; (4) send the gap note after the author's own read.
+obstacle; and P_X[B] itself is controlled by the same G (prop:firstpairbias); (4) see NEXT_STEPS_2026-10-03.md.
 **Progress =** a proven lower bound at a frame-selected pair, or a falsification.  Another "lower tail of rare
 local events at frame-selected rows" = reformulation, to be labelled as such.
 
@@ -69,8 +69,23 @@ at n=30/50/100, identity P[flip₁∩G]=P[¬flip₁∩G] holds to ±0.002.  Cost
 columns exchanged at square-selected positions (admissibility clause added; conditioning still on rows 1,2); the implication
 is one-way; a lower bound on P_X[G₁] (constant-probability local event, not rare) is the same obstacle.  Referee: fixed
 σ′=(q c)σ(q c) (not σ′=σ), the (q c)∘ρ case proved directly (lem:adaptinv does not cover it), regress remark downgraded.
+**Seg 4 — DATA on hyp:witness (no falsification) + one PROVED alternative sufficient condition (prop:firstpairbias).**
+`s13_wtail.py` on fixed-rectangle samples (n=30: 7.2e5 instances; n=50: 3.6e5 each of (50),(25,25), 2.4e5 of (4,2^23); n=100:
+8e4 each of (100),(4,2^48)): P[no witness in first K ladder pairs | K₀−1 ≥ K] = (1−w₁)^K within noise to K = 12/20/40; hazard
+flat to 3 digits; P[Flip=∅|K] = 2^{−K} to K=12–15; across diagonals D_c (shared y-rows) P[G=0] and P[G<EG/2] binomial for all
+ℓ ≤ 12, all thresholds; identical for extreme types.  Regime of hyp:witness not reachable.  **prop:firstpairbias** (found by
+the referee of the recommendations draft; refereed; exact at n=5,6 all classes, n=7 sampled): P_X[B]−P_X[A] =
+E[(1_B−1_A)(1_{Fᶜ}−1_F); Gᶜ] ⇒ |P_X[B]−½| ≤ ½P_X[Gᶜ] ⇒ **weak CGW ⇐ hyp:firstpair: sup_{λ,α,β} P_X[Gᶜ] = o(1/log n)**, an
+ALTERNATIVE sufficient condition (rule 2: not proved weaker than hyp:witness; neither implies the other).  Cost first: still a
+lower tail of a count of square-selected events; decomposes as P[μ ≤ M] (upper bound on a short arc at the frame pair, unproved)
++ P[M disjoint candidates all bad] (the obstacle).  Heuristic/data: per-candidate 0.41, Eμ = 6.3/9.6/18 at n=30/50/100, P_X[Gᶜ]
+≈ 5.5/n (0.61, 0.18, 0.11 at n=7,30,50), P[Gᶜ|μ=k] ≈ 0.59^{k−1} (slightly above).  Notes §(k); `s13_firstpair_id.py`;
+`NEXT_STEPS_2026-10-03.md` (refereed recommendations: R1 send gap note; R2 put hyp:firstpair + data in the paper, literature
+search, post; R3 consultation with the unconditioned question first; R4 one experiment: P_X[Gᶜ] vs n and a switching bound for
+P[μ ≤ M], with stopping rule; R5 not: more reformulations, more first-moment sampling, transfer tightening, completion-count side).
 **What did NOT change (today):** no proven lower bound at a frame-selected pair; the only one remains P_X[A] ≥ ¼ at distance 2
-(global joining argument).  hyp:witness remains the reference hypothesis.  Segment count since last cold read: 3.
+(global joining argument).  hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read done
+(NEXT_STEPS, counts as the one due after 5 segments).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

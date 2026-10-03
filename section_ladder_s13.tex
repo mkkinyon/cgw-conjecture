@@ -2052,9 +2052,11 @@ short column cycles and arcs at the frame-selected rows.
 
 \paragraph{(k) The first ladder pair alone: a fixed-rectangle sampler,
 atypical types, and the single-pair involution.}  (Classification:
-DATA, and one PROVED statement that is a one-way REDUCTION of the
-target to a transposed analogue not known to be easier --- not a
-proven lower bound.)
+DATA; one PROVED statement that is a one-way REDUCTION of the target
+to a transposed analogue not known to be easier --- not a proven lower
+bound; and one PROVED alternative sufficient condition for weak CGW,
+Proposition~\ref{prop:firstpairbias}, of the same kind as the reference
+hypothesis.)
 The minimal instance of the obstacle identified in the assessment is
 \begin{equation}\label{eq:firstpair}
 \Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad
@@ -2126,6 +2128,34 @@ $0.100,0.216,0.388$ at $n=30$ and $0.060,0.134,0.261$ at $n=50$,
 again the same in every class to $\pm0.002$; the mean of $|Q_p|$ is
 $16.47$ at $n=30$ and $26.47$ at $n=50$ in every class.
 \end{itemize}
+\emph{Lower tails of the witness counts} (\texttt{s13\_wtail.py};
+$n=30$: $7.2\cdot10^5$ marked instances of type $(30)$; $n=50$:
+$3.6\cdot10^5$ each of $(50)$, $(25,25)$, $2.4\cdot10^5$ of $(4,2^{23})$;
+$n=100$: $8\cdot10^4$ each of $(100)$, $(4,2^{48})$; thresholds
+$\ell'=4,8,16,24$).  (i) Along the ladder, $\Pr[\text{no witness among
+the first }K\text{ pairs}\mid K_0-1\ge K]$ equals $(1-w_1)^K$ within
+sampling error for every $K$ up to $12$ ($n=30$), $20$ ($n=50$), $40$
+($n=100$) and every threshold, where $w_1$ is the first-pair witness
+rate ($0.100$, $0.060$, $0.030$ at $\ell'=4$); the hazard
+$\Pr[\text{witness at }k\mid\text{none before }k]$ is flat in $k$ to
+three digits ($0.100,0.100,\dots$ at $n=30$; $0.060$ at $n=50$; $0.030$
+at $n=100$, $k\le12$); and $\Pr[\mathrm{Flip}_I=\emptyset\mid K_0-1\ge K]=2^{-K}$
+within noise to $K=12$--$15$ (e.g.\ $0.00024$ vs $2^{-12}=0.00024$ at
+$n=50$, $N=1.07\cdot10^5$).  (ii) Across the diagonals $D_c$ of
+$B$-instances with $d_{12}=\ell\le n/4$, $|C_1|\ge n/2+\ell$ (which
+share their $y$-rows), the number $G$ of diagonals carrying a witness
+has $\Pr[G=0]$ and $\Pr[G<\E G/2]$ equal to the binomial values with
+the same per-diagonal rate, within noise, for every $\ell\le12$ and
+every threshold ($N\approx2000$--$13000$ instances per $\ell$).  All of
+this is identical for the extreme types.  So, at $n\le100$, the witness
+events at the frame-selected pairs behave as independent Bernoulli
+variables with the uniform-permutation rate, along the ladder and
+across the diagonals, in every type; the regime of
+Hypothesis~\ref{hyp:witness} ($\ell'\ge\log^5n$, failure $o(1/\log n)$
+over $\ge n/\log^2n$ pairs) is not reachable by sampling, and these data
+say nothing about it beyond the absence of any visible dependence or
+type effect at the second-moment level.
+
 So no falsification: on the types where the hypotheses could
 most plausibly fail, nothing distinguishes them from the typical type
 at the resolution $2\cdot10^{-3}$.  (This is \emph{not} evidence about
@@ -2210,9 +2240,91 @@ even intersection with $\{1,2\}$'' ($\tfrac12\cdot\tfrac56$ for the
 union of the two variants), so the first pair's candidates are not rare,
 unlike the family version of \S(j).
 
+\emph{The first pair controls the bias.}  (Found by the internal
+referee of the first draft of this paragraph; PROVED, verified exactly.)
+The two involutions combine: $T_1$ exchanges $A$ and $B$ on $F:=\mathrm{flip}_1$,
+and the turn exchanges $F$ and $F^c$ on $G$ while fixing $\pi$, hence $A$
+and $B$.
+
+\begin{proposition}[the first ladder pair controls the bias]\label{prop:firstpairbias}
+For every $n,\lambda,\alpha,\beta$,
+\[
+\Pr_X[B]-\Pr_X[A]=\E_X\bigl[(\mathbf 1_B-\mathbf 1_A)(\mathbf 1_{F^c}-\mathbf 1_F);\,G^c\bigr],
+\qquad\text{so}\qquad
+\bigl|\Pr_X[B]-\tfrac12\bigr|\le\tfrac12\Pr_X[G^c],\quad
+\Pr_X[A],\Pr_X[B]\ge\tfrac12\Pr_X[G],
+\]
+and $|\bar q-1|\le 2\Pr_X[G^c]/(1-\Pr_X[G^c])$.  Consequently
+(Theorem~\ref{thm:reduction}, which needs $|\bar q-1|\le\delta(n)$ with
+$\delta=o(1/\log n)$ over all $\lambda$ and all marks) the weak CGW
+conjecture follows from
+\begin{equation}\label{eq:hypfirstpair}
+\sup_{\lambda,\alpha,\beta}\Pr_{X(n,\lambda;\alpha,\beta)}[G^c]=o(1/\log n),
+\end{equation}
+an event selected by the first ladder pair (it involves the column
+cycles of the pairs $\{q_t,c_t\}$ through all rows, and rows $1,2$
+through admissibility; it is not local to the pair).
+\end{proposition}
+
+\begin{proof}
+Write $B_{FG}=\Pr_X[B\cap F\cap G]$ etc.  By $T_1$ (the $k=1$ trade of
+Theorem~\ref{thm:ladder}: an involution of $X\cap F$ with frame
+$(x_1\,y_1)\circ\pi$, hence exchanging $A$ and $B$),
+$B_{FG}+B_{FG^c}=A_{FG}+A_{FG^c}$.  By the turn (an involution of $X\cap G$
+exchanging $F$ and $F^c$ and preserving $\pi$, hence $A$ and $B$, which
+are functions of $\pi$), $B_{FG}=B_{F^cG}$ and $A_{FG}=A_{F^cG}$.  Hence
+\[
+\Pr[B]-\Pr[A]=(B_{F^cG}+B_{F^cG^c})-(A_{F^cG}+A_{F^cG^c})
+=(B_{FG}-A_{FG})+(B_{F^cG^c}-A_{F^cG^c})
+=(A_{FG^c}-B_{FG^c})+(B_{F^cG^c}-A_{F^cG^c}),
+\]
+which is the displayed expectation; its absolute value is at most
+$\Pr[G^c]$.  ($T_1$ need not preserve $G$.)  The last inequality is
+$|\bar q-1|=|\Pr[B]-\Pr[A]|/\Pr[A]$ with $\Pr[A]\ge\tfrac12(1-\Pr[G^c])$.
+\end{proof}
+
+Exact verification (\texttt{s13\_firstpair\_id.py}, all completions, all
+marks): $n=5$, $(5)$, $\alpha=2,3$; $n=6$, $(6)$, $\alpha=2,3,4$, and
+$(4,2)$: the identity and its two ingredients hold to all digits (e.g.\
+$n=6$, $(6)$, $\alpha=3$: $\Pr[B]-\Pr[A]=-0.142857$ on both sides,
+$\Pr[G^c]=0.714$); $n=7$, $2\cdot10^5$ sampled completions:
+left side $-0.0052$, right side $-0.0058$ (each $\pm0.001$), exact value
+of both $-0.005848$.  Data for $\Pr_X[G^c]$ with all candidates $t<\mu$:
+$0.61$, $0.18$, $0.11$ at $n=7,30,50$ (type $(n)$, $\alpha=2$), i.e.\
+$\approx5.5/n$; $\Pr[\mu=k]\approx4/n$ for small $k$ and
+$\Pr[G^c\mid\mu=k]=0.59,0.37,0.22,0.13,0.08$ for $k=2,\dots,6$ against
+$0.59^{k-1}=0.59,0.35,0.21,0.12,0.07$ (a slight positive dependence
+among the candidates, which share the rows $x_1,y_1$).
+
+\emph{Cost and comparison with the witness lemma.}
+\eqref{eq:hypfirstpair} is again a lower tail of a count of events at
+square-selected positions --- the obstacle is unchanged in kind.  It
+decomposes as $\Pr[G^c]\le\Pr[\mu\le M]+\Pr[\mu>M,\ t=1,\dots,M\text{
+all bad}]$.  The first term is an upper bound on a short arc or cycle
+of $\rho_{x_1,y_1}$ at $p,p'$; nothing of the kind is proved at a
+frame-selected pair (Proposition~\ref{prop:splice} bounds a different
+frame event), and heuristically it is $\approx4M/n$ (data:
+$\Pr[\mu=k]\approx4/n$).  The second term --- among $M$ candidates on
+disjoint free column pairs not all are bad --- is the obstacle itself,
+a lower bound for a local event at square-selected positions; the data
+put the per-candidate probability at $0.41$ and the dependence between
+candidates at a few percent, so heuristically it is $0.6^M$.  Compared
+with Hypothesis~\ref{hyp:witness} (all of this at the level of the
+heuristics and the data, nothing proved): one row pair instead of
+$\ge n/\log^2n$; per-event probability $\approx0.4$ instead of
+$\ell'/n$; expected count $\approx0.4\,\E\mu$ with $\E\mu=6.3,9.6,18$
+at $n=30,50,100$, instead of $\log^3n$; no offset families, no splice
+bound, no $K_0$ conditioning.  Neither hypothesis is known to imply the
+other ($\Pr[F^c]\ge\tfrac12\Pr[G]$, so \eqref{eq:hypfirstpair} does not
+give (L); Hypothesis~\ref{hyp:witness} says nothing about $G$), so by
+the working rules \eqref{eq:hypfirstpair} is an alternative sufficient
+condition.  It is the smallest \emph{sufficient} condition in these
+notes; the minimal instance \eqref{eq:firstpair} is smaller but not
+sufficient.
+
 \emph{What this is and is not.}  Proposition~\ref{prop:firstpair} is
 proved, and it has the attractive consequence that
-$\Pr_X[G]\ge c$ would give $\Pr_X[A]\ge c/4$ for \emph{every} split,
+$\Pr_X[G]\ge c$ would give $\Pr_X[A]\ge c/2$ for \emph{every} split,
 i.e.\ a CGW-type constant bound without the gap of
 Remark~\ref{rem:cgwgap}.  But $G$ is a transposed analogue of the
 target: ``the column-pair permutation of a pair of columns selected
@@ -2227,15 +2339,17 @@ at positions selected by the square, which is the obstacle itself.
 $u\in Z_t(x_1)$, $v\in Z_t(y_1)$, along a $\rho_{u,v}$-cycle through
 $q_t$ avoiding $c_t,p,p'$, when such a legal trade exists; we have not
 checked what such a trade preserves, and we record only that it would
-produce a third event of the same kind, not a bound.)  Two things are
+produce a third event of the same kind, not a bound.)  Three things are
 gained: the two-sided
 $|\Pr_X[\mathrm{flip}_1]-\tfrac12|\le\tfrac12\Pr_X[G^c]$ is a structural
 reason for the observed value $\tfrac12$, turning ``$\tfrac12+o(1)$''
 into ``$\Pr_X[G]\to1$'', a no-conspiracy statement over $\mu-1$
-candidates (probability $0.88$ at $n=50$ for $t\le8$); and the
+candidates (probability $0.88$ at $n=50$ for $t\le8$); the
 constant-$c$ target follows from the single event $G_1$ ($t=1$ is
-always a candidate), of probability $\approx0.41$ in the data.  But a
-lower bound on $\Pr_X[G_1]$ or on $\Pr_X[G]$ is the same problem.
+always a candidate), of probability $\approx0.41$ in the data; and,
+combined with $T_1$, the same event controls $\Pr_X[B]-\Pr_X[A]$
+(Proposition~\ref{prop:firstpairbias}).  But a lower bound on
+$\Pr_X[G_1]$ or on $\Pr_X[G]$ is the same problem.
 What did not change: a lower bound on the probability of any local
 event at a frame-selected position in $X$ remains unproved; the only
 one available is Proposition~\ref{prop:alpha2}'s $\Pr_X[A]\ge\tfrac14$
