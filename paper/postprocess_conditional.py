@@ -77,6 +77,17 @@ $Z=\sum_\nu\gamma(\nu)\CC_n(\nu)/(|\DD_n|\,\CC_n((n)))$)."""))
 \ge\tfrac13\ \text{ if together at distances $\ge2$ (the latter under CGW($3/2$))}.""", r"""\Pr\bigl[p,p'\text{ in different cycles of }\rho_{x,y}\bigm|\text{columns }p,p'\bigr]
 \;\begin{cases}=\tfrac12&\text{if $x,y$ are apart in the frame},\\ \ge\tfrac13&\text{if together at distances $\ge2$}.\end{cases}"""))
     post.append((r"So the statement with the \emph{columns} prescribed is CGW's theorem;", r"(The second bound is CGW's $\tfrac32$, affected by the gap; it holds with $\tfrac14$ unconditionally at distance $2$, Remark~\ref{rem:gap}.)  So the statement with the \emph{columns} prescribed is CGW's theorem;"))
+
+    post.append((r"""$\Pr_X[\mathrm{Flip}_I=\emptyset]$ by a product of conditionally independent factors; the
+two hypotheses it leads to are compared with Hypothesis~\ref{hyp:witness} at the end of the
+section.""", r"""$\Pr_X[\mathrm{Flip}_I=\emptyset]$ by a product of conditionally independent factors; the
+two hypotheses it leads to are compared with Hypothesis~\ref{hyp:witness} after (c$'$), and
+in (e) the same mechanism, applied to the first ladder pair alone, gives an exact expression
+for $\Pr_X[B]-\Pr_X[A]$ and a third alternative hypothesis."""))
+    post.append((r"""constant.  All three hypotheses share the same unproved core, stated in
+\S\ref{sec:remains}.""", r"""constant; at the first ladder pair alone, (e) below, the rarity disappears too, and what is
+left is the lower tail of the number of good candidates among $\mu-1$ column pairs.  All of
+these hypotheses share the same unproved core, stated in \S\ref{sec:remains}."""))
     for a, b in post:
         if a not in text:
             print('postprocess: pattern not found (skipped):', repr(a[:60])); continue

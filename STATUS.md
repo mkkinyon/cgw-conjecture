@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
-(7 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (21 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive are ALTERNATIVE sufficient conditions (§6, corrected offset parts); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
+(7 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (25 pp, REVISED 2026-10-03: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
@@ -83,9 +83,20 @@ lower tail of a count of square-selected events; decomposes as P[μ ≤ M] (uppe
 `NEXT_STEPS_2026-10-03.md` (refereed recommendations: R1 send gap note; R2 put hyp:firstpair + data in the paper, literature
 search, post; R3 consultation with the unconditioned question first; R4 one experiment: P_X[Gᶜ] vs n and a switching bound for
 P[μ ≤ M], with stopping rule; R5 not: more reformulations, more first-moment sampling, transfer tightening, completion-count side).
+**Seg 5 — WRITING (R2a,b).** Paper now 25 pp: §6(e) "The first ladder pair alone" (lem:mu2, prop:firstpair, prop:firstpairbias,
+hyp:firstpair, cor:firstpair, cost paragraph, rem:fixrect with the sampler, type-independence, witness-independence and P_X[Gᶜ]
+data incl. n=100: 0.055); §7 rewritten (four hypotheses; eq:minimal reduced one-way to P_X[G] ≥ 2c; fixed-cell restatement;
+literature sentence hedged, k=2 via KSS21 + exchangeability); Results item (6); item (2) states EQ(δ) correctly; abstract ("three
+exact identities", data scope, 5.5/n labelled first-moment); status paragraph; date.  Fresh referee of the revised paper: no
+mathematical error in §6(e); fixed: μ clash (arc minimum renamed ν in the paper), cor:firstpair input (uses |q̄−1| ≤ 2s/(1−s)),
+rem:fixrect symmetry argument (isotopies fixing rows 1,2, not row exchangeability; "assuming connectivity and mixing"), stale
+counts/figures, terminology (ρ = permutation of columns induced by rows; τ_t = δ_{q,c}), t₀−1 = 0 case, "cannot give (L)" scoped
+to the first pair, §7 closing includes the ν-tail.  Paper sources: `paper/firstpair_block.py` (new), `cprime_blocks.py` (remains),
+`assemble_conditional.py`, `postprocess_conditional.py`.  Did not touch the core obstacle.  Remaining before posting (R2c–e):
+literature search (user), human read of §§2–4, the gap-note courtesy window.
 **What did NOT change (today):** no proven lower bound at a frame-selected pair; the only one remains P_X[A] ≥ ¼ at distance 2
 (global joining argument).  hyp:witness remains the reference hypothesis; hyp:firstpair is an alternative.  Cold read done
-(NEXT_STEPS, counts as the one due after 5 segments).
+(NEXT_STEPS, counts as the one due after 5 segments); next cold read after R4.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

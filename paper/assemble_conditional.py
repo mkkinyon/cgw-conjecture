@@ -7,6 +7,7 @@ def lines(path):
 
 import sys as _s; _s.path.insert(0, 'paper')
 from cprime_blocks import cprime_intro, cprime_rest, remains
+from firstpair_block import firstpair_block
 M = lines('section_marked.tex')
 N = lines('second_row_notes.tex')
 Lad = lines('section_ladder_s13.tex')
@@ -175,7 +176,7 @@ preamble = r"""\documentclass[11pt]{article}
 
 \title{The cycle type of two rows of a random Latin square:\\ exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture}
 \author{[author]}
-\date{2 October 2026 --- draft}
+\date{3 October 2026 --- draft}
 
 \begin{document}
 \maketitle
@@ -184,22 +185,28 @@ preamble = r"""\documentclass[11pt]{article}
 Let $L$ be a uniformly random Latin square of order $n$ and $\sigma$ the permutation of columns
 carrying its first row to its second.  Cavenagh, Greenhill and Wanless conjectured that the
 cycle type of $\sigma$ is asymptotically that of a uniform derangement, in total variation.
-We prove two exact identities and a reduction theorem --- the marked-pair identity, which expresses the ratio of
+We prove three exact identities and a reduction theorem.  The marked-pair identity expresses the ratio of
 completion counts of adjacent cycle types as the odds of one bit (``rows $1,2$ lie in a
 common column cycle of a marked column pair'') in a single uniform square; a reduction
 theorem, by which the conjecture follows from that bit being fair to $o(1/\log n)$; and
 the ladder identity, by which the bit is exactly fair except on the squares in which no
-``ladder pair'' of rows is flippable --- and an orbit method by which the probability of
-the exceptional set is bounded by a product of conditionally independent factors.  The
+``ladder pair'' of rows is flippable.  An orbit method bounds the probability of
+the exceptional set by a product of conditionally independent factors.  The
 conjecture is thereby reduced to a ``witness lemma'' (Hypothesis~\ref{hyp:witness}): that
 with probability $1-o(1/\log n)$ some ladder pair of a long ladder has a short row cycle
 through one marked column avoiding the other --- a lower-tail statement about rare local
 configurations at rows selected by the square, whose heuristic expectation is
 $\gtrsim\log^2n$.  The orbit method gives alternative sufficient conditions of the same
-type, one of which trades the rarity for a genericity constant.  We state these precisely,
-report the numerical evidence (up to $n=100$, typical types only), and locate the remaining
-difficulty within the known switching technology: every exact identity available inside the
-conditioned space is fair, and the lower bounds needed are of the kind whose proof in
+type, one of which trades the rarity for a genericity constant; and at the first ladder pair
+alone it gives a third exact identity, expressing the bias $\Pr_X[B]-\Pr_X[A]$ as an
+expectation over the event that none of the column pairs along the row permutation of that
+pair admits a legal toggling turn, so that the conjecture also follows if that event has
+probability $o(1/\log n)$ (in samples at $n\le100$ it is $\approx5.5/n$, which says nothing
+about the required rate).  We state these precisely,
+report the numerical evidence (up to $n=100$, including, through a sampler of completions of
+a fixed rectangle, types of exponentially small probability), and locate the remaining
+difficulty within the known switching technology: every exact identity we have found inside
+the conditioned space is fair, and the lower bounds needed are of the kind whose proof in
 \cite{CGW08} has a gap.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
@@ -233,8 +240,8 @@ Remark~\ref{rem:gap} and \cite{gapnote}.
 
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
-where feasible, by exhaustive computation at $n\le7$ and by sampling; no human referee has
-read them.
+where feasible, by exhaustive computation at $n\le7$ and by sampling (this includes
+\S\ref{sec:orbit}(e), added last); no human referee has read them.
 
 \paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
 $j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
@@ -246,13 +253,14 @@ otherwise.  Our results are:
 \item[(1)] \emph{Marked-pair identity} (Theorem~\ref{thm:marked}):
 $2\CC_n(\lambda)/\CC_n(\mu)-1=\Pr_X[B]/\Pr_X[A]$ exactly, for every $n,\lambda,\alpha,\beta$.
 \item[(2)] \emph{Reduction} (Theorem~\ref{thm:reduction}): if
-$|\Pr_X[B]-\tfrac12|\le\delta(n)/4$ for all adjacent pairs with $\alpha\ne\beta$, then
+$|\Pr_X[B]/\Pr_X[A]-1|\le\delta(n)$ for all adjacent pairs with $\alpha\ne\beta$
+(equivalently $|\Pr_X[B]-\tfrac12|\le\tfrac14\delta(1+o(1))$), then
 $\dtv(\PP_n,\QQ_n)=O(\delta\log n+n^{-1+o(1)})$.  The tail estimate it needs on the number
 of cycles of $\sigma$ is proved from the trivial half of (1) alone
 (Proposition~\ref{prop:tailsurvive}).
 \item[(3)] \emph{Ladder identity} (Theorem~\ref{thm:ladder}): with the ladder pairs
 $(x_k,y_k)=(\pi^{-k}(1),\pi^{-k}(2))$, $1\le k<K_0$, and ``flippable'' meaning that $j,j'$
-lie in different cycles of the column permutation of rows $x_k,y_k$,
+lie in different cycles of the permutation $\rho_{x_k,y_k}$ of columns induced by rows $x_k,y_k$,
 \[
 \Pr_X[B]-\Pr_X[A]=\Pr_X[B,\mathrm{Flip}=\emptyset]-\Pr_X[A,\mathrm{Flip}=\emptyset],
 \qquad |\Pr_X[B]-\tfrac12|\le\tfrac12\Pr_X[\mathrm{Flip}=\emptyset].
@@ -269,8 +277,8 @@ the flippabilities of a family of ladder pairs are conditionally independent giv
 orbit of a group of commuting column-cycle turns.  With a fixed matching of columns as
 coordinates this gives $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X\exp(-\tfrac12\sum_{k\in I}\bar y_k)$
 with an explicit ``orbit weight'' $\bar y_k$; with the \emph{adaptive} coordinates
-$(\rho_k^t(p),\rho_k^t(p'))$ --- the $t$-th columns along the row permutation $\rho_k$ of
-the $k$-th ladder pair from the marked columns --- every coordinate is separated by the
+$(\rho_k^t(j),\rho_k^t(j'))$ --- the $t$-th columns along the permutation $\rho_k=\rho_{x_k,y_k}$
+of the $k$-th ladder pair from the marked columns --- every coordinate is separated by the
 mark, so its turn toggles whenever it is legal and clean, and
 $\Pr_X[\mathrm{Flip}_I=\emptyset]\le\E_X[2^{-|U|}]$, where $U$ is the set of ladder pairs
 having a short clean candidate cycle (subject to a collision condition).  These give two
@@ -278,13 +286,33 @@ alternative sufficient conditions (Hypotheses~\ref{hyp:orbitgen} and~\ref{hyp:ad
 for which we see no implication to or from Hypothesis~\ref{hyp:witness}: the first needs a
 genericity constant that the switchings available inside $X$ cannot provide, the second
 needs $C\log\log n$ rare local events on a long ladder where the witness lemma needs one.
+\item[(6)] \emph{The first ladder pair alone} (Propositions~\ref{prop:firstpair}
+and~\ref{prop:firstpairbias}): at the first pair $(x_1,y_1)$ the adaptive turn needs no
+side conditions, and combined with the first ladder trade it gives
+\[
+\Pr_X[B]-\Pr_X[A]=\E_X\bigl[(\mathbf 1_B-\mathbf 1_A)(\mathbf 1_{F^c}-\mathbf 1_F);\,G^c\bigr],
+\qquad\bigl|\Pr_X[B]-\tfrac12\bigr|\le\tfrac12\Pr_X[G^c],
+\]
+where $F$ is the flippability of $(x_1,y_1)$ and $G$ the event that one of the $\nu-1$
+column pairs $\{\rho^t(j),\rho^t(j')\}$ along $\rho=\rho_{x_1,y_1}$ ($\nu$ = the length of
+the shorter arc or cycle of $\rho$ at the mark) induces a permutation of rows that separates
+$x_1$ from $y_1$ with a legal cycle.  So the conjecture also follows from
+Hypothesis~\ref{hyp:firstpair}: $\sup_{\lambda,\alpha,\beta}\Pr_X[G^c]=o(1/\log n)$ --- an
+event selected by one row pair, with candidates of constant probability (heuristically
+$\Theta(n)$ of them; in samples of the type $(n)$ at $n=30,50,100$,
+$\Pr_X[G^c]\approx5.5/n$) in place of a long ladder of rare events.  Again no implication
+to or from Hypothesis~\ref{hyp:witness} is known.
 \end{enumerate}
-All three hypotheses are of one logical type: a lower bound on the probability of a local
-configuration (polylogarithmically many cells) at a row pair selected by the frame of the
-mark, inside the space conditioned on the type of rows $1,2$.  Their heuristic margins are
-large; the data support them for typical types $\lambda$ and say nothing about rare ones;
-and none of the exact tools of this paper gives a lower bound of that kind
-(\S\ref{sec:remains}).  The data give $\Pr_X[B]=0.49$--$0.50$ ($\pm0.01$) at $n=30,50,100$.
+All four hypotheses are of one logical type: a lower bound on the probability of a
+configuration at rows or columns selected by the frame of the mark, inside the space
+conditioned on the type of rows $1,2$.  Their heuristic margins are large; none of the exact
+tools of this paper gives a lower bound of that kind (\S\ref{sec:remains}).  The data
+(Jacobson--Matthews samples, and a sampler of completions of a fixed $2\times n$ rectangle
+that reaches types of $\PP_n$-probability $e^{-\Theta(n)}$, Remark~\ref{rem:fixrect}) give
+$\Pr_X[B]=\tfrac12\pm0.003$ in every tested class at $n\le50$ and witness events that are
+independent to three digits along the ladder; they do not reach the regime of any of the
+hypotheses, and the empirical sizes quoted for the hypothesised quantities are first-moment
+information only.
 
 \paragraph{A gap in CGW's Lemma 3.12.}  Case 3 of the splitting procedure in
 \cite{CGW08} (cross-switch at $\{\omega j,\omega j'\}$, then backflip at $\{j,j'\}$) does
@@ -380,7 +408,10 @@ On Jacobson--Matthews samples with a uniformly random mark ($9000$, $7200$, $300
 instances at $n=30,50,100$; \texttt{runs/s13/f1/}): $\Pr[\mathrm{Flip}=\emptyset\mid K_0]=2^{-(K_0-1)}$ within
 statistical error for $K_0\le6$ and consistent with it beyond; $\Pr[\mathrm{Flip}=\emptyset]=0.125,0.079,0.041\approx4/n$;
 the ladder pairs are flippable with frequency $0.5002$ ($62082$ pairs at $n=50$); and
-$\Pr[B]-\Pr[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$.
+$\Pr[B]-\Pr[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$.  On completions of a
+fixed rectangle (Remark~\ref{rem:fixrect}; $7\cdot10^5$ marked instances at $n=30$)
+$\Pr[\mathrm{Flip}=\emptyset\mid K_0-1\ge K]=2^{-K}$ within noise to $K=12$--$15$, in
+every tested type.
 \end{remark}
 
 \subsection{Offset ladders and short arcs}\label{sec:offsets}
@@ -442,9 +473,14 @@ variable on $\{2,\dots,n\}$: $\Pr[\le\ell]=0.021,0.081,0.18,0.38$ for $\ell=2,5,
 $n=50$ against $(\ell-1)/(n-1)=0.020,0.082,0.18,0.39$, and $0.010,0.041,0.092,0.19$ at
 $n=100$; among instances with $K_0\ge n/4$ a flippable ladder pair with $j$-cycle of length
 $\le10$ exists in $93\%$ ($n=50$) and $95\%$ ($n=100$) of the instances, and one of length
-$\le20$ in $99.6\%$ and $99.8\%$.  The samples see only typical types $\lambda$; the
-hypothesis is required uniformly in $\lambda$, and classes with all cycles of $\rho_{1,2}$
-short are too rare to be tested this way.
+$\le20$ in $99.6\%$ and $99.8\%$.  These samples see only typical types $\lambda$; the
+hypothesis is required uniformly in $\lambda$.  The fixed-rectangle sampler of
+Remark~\ref{rem:fixrect} reaches the rare types: there the witness events along the ladder
+are independent Bernoulli variables to three digits (flat hazard,
+$\Pr[\text{no witness in }K\text{ pairs}]=(1-w_1)^K$ to $K=40$ at $n=100$) and the witness
+counts across the offset diagonals have binomial lower tails, identically for $(n)$ and for
+$(4,2^{(n-4)/2})$.  Classes with all cycles of $\rho_{1,2}$ of length $\le3$ carry no
+admissible mark and do not enter.
 \end{remark}
 
 \section{The orbit method: alternative sufficient conditions}\label{sec:orbit}
@@ -462,6 +498,7 @@ body.append(orbit_c); body.append("\n\n")
 body.append(cprime_intro); body.append("\n\n")
 body.append(adaptive); body.append("\n\n")
 body.append(cprime_rest)
+body.append(firstpair_block)
 body.append(remains)
 body.append(r"""
 

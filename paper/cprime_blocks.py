@@ -204,19 +204,32 @@ were fair and independent.
 remains = r"""
 \section{What remains}\label{sec:remains}
 
-Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen} and~\ref{hyp:adaptive} are statements
-about local configurations at the frame-selected rows: a short $\rho_{x_k,y_k}$-cycle
-through $p$ avoiding $p'$; a clean column pair separated by the mark; a short clean column
-cycle at a prescribed column pair.  Their heuristic frequencies are, for large $n$, far
-above what is needed; the difficulty is entirely that the rows are selected by the frame of
-the mark and the whole space is conditioned on the type of rows $1,2$.  The minimal
-instance of the obstacle is a lower bound on a single frame-selected pair:
-\[
+Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen}, \ref{hyp:adaptive}
+and~\ref{hyp:firstpair} are statements about configurations at positions selected by the
+frame: a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding $p'$; a clean column pair
+separated by the mark; a short clean column cycle at a prescribed column pair; a column pair
+along $\rho_{x_1,y_1}$ whose column permutation separates $x_1$ from $y_1$.  Their heuristic
+frequencies are, for large $n$, far above what is needed; the difficulty is entirely that
+the positions are selected by the frame of the mark and the whole space is conditioned on
+the type of rows $1,2$.  The minimal instance of the obstacle is a lower bound on a single
+frame-selected pair:
+\begin{equation}\label{eq:minimal}
 \Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
-\]
-which no identity of this paper gives unconditionally (flippability of a ladder pair is a
-class invariant of the ladder trades; Proposition~\ref{prop:adaptive} makes it exactly
-$\tfrac12$ given the orbit on $\{1\in U\}$, which only moves the question to $\Pr[1\in U]$).  We record what the available tools do and do not give.
+\end{equation}
+which no identity of this paper gives unconditionally: flippability of a ladder pair is a
+class invariant of the ladder trades, and Proposition~\ref{prop:firstpair} reduces
+\eqref{eq:minimal} one way to $\Pr_X[G]\ge2c$, a lower bound for an event of the same kind
+with rows and columns exchanged (the column permutation of a pair of columns selected from
+rows $x_1,y_1$ separating the frame-selected rows $x_1,y_1$), which is not known to be
+easier.  By row exchangeability \eqref{eq:minimal} is a statement at fixed positions under
+conditioning: it is the probability that $p,p'$ lie in different cycles of $\rho_{3,4}$
+given rows $1,2$ and the two cells $L(3,p)=L(1,p')$, $L(4,p)=L(2,p')$.  Even without the
+conditioning on rows $1,2$ we know of no lower bound in the literature for the related
+quantity $\Pr[\text{the }\rho_{3,4}\text{-cycle through }p\text{ has length }k\text{ and avoids }p']$,
+$3\le k\le\log^5n$; the one case we know to be settled is $k=2$, where the concentration
+of the number of intercalates at $n^2/4$ \cite{KSS21} and the exchangeability of row
+pairs and of columns give $\approx1/n$.  We record what
+the available tools do and do not give.
 
 \emph{Unconditional facts.}  For two generic rows of a uniform square,
 Proposition~\ref{prop:tailsurvive}(i) gives, by Markov's inequality on the number of
@@ -255,5 +268,10 @@ which we found a rigid inverse is CGW's own case 3 with $\min(\alpha,\beta)=2$, 
 $\Pr_X[A]\ge\tfrac14$ for marks at distance $2$ (Remark~\ref{rem:gap}); it does not extend
 to other distances for a reason of type rather than multiplicity.  The adaptive
 coordinates sidestep the question: the coordinate is placed where it is separated by
-construction, and the price is paid in rarity rather than in a constant we cannot prove.
+construction, and the price is paid in rarity rather than in a constant we cannot prove;
+at the first ladder pair alone (\S\ref{sec:orbit}(e)) the rarity disappears as well, and
+what is left is an upper bound on a short arc at the frame-selected pair together with the
+lower tail of the number of good candidates among the $\nu-1$ column pairs along
+$\rho_{x_1,y_1}$ --- the smallest sufficient condition we have, and still a lower bound at
+square-selected positions.
 """
