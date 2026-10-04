@@ -3285,3 +3285,217 @@ factor $\ge2$ to spare, while $40$ arcs have no good pair; mean
 $g/f=0.22$ (median $0.17$; bound $1/30$).  The same at $n=50$ ($1039$
 instances, mean $g/f=0.23$), $n=100$ ($342$, $0.25$) and for the type
 $(4,2^{13})$ at $n=30$ ($1485$, $0.23$).
+
+\paragraph{(r) The hazard term: the switching identity, and what a
+chain of toggles would need (reformulation; negative knowledge; data).}
+This paragraph records the first attempt on the hazard hypothesis
+\eqref{eq:hyphazard}, the only remaining condition.  Its proved content
+is a double-counting identity; the rest is a reason why the natural
+switching chain cannot give \eqref{eq:hyphazard} without a lower bound
+of the kind that is the core problem, and measurements of the
+quantities such a chain would have to bound.  (A first draft of this
+paragraph claimed more --- that the chain fails for a reason intrinsic
+to the measure; a referee pointed out that the identity below makes
+that impossible, and the draft was withdrawn.)
+
+\emph{Setting.}  Fix the frame $R$ (rows $1,2$), a mark $(p,p')$, and
+write $(x_1,y_1)$ for the first ladder pair, $\rho=\rho_{x_1,y_1}$,
+$\nu$ for the hitting index of \S(k), and $(q_t,c_t)=(\rho^tp,\rho^tp')$
+for the column pair of candidate $t<\nu$.  Candidate $t$ is \emph{good}
+if $x_1,y_1$ lie on different $(q_t,c_t)$-cycles and one of the two
+cycles meets $\{1,2\}$ in $0$ or $2$ rows (admissibility); otherwise
+\emph{bad}, which splits into \emph{joined} ($x_1\sim y_1$ on the
+$(q_t,c_t)$-cycle $D_t$) and \emph{separated-inadmissible}.  Let
+$E_j=\{\nu>j,\ 1,\dots,j\text{ bad}\}$ and
+$F_j=\{\nu>j,\ 1,\dots,j-1\text{ bad},\ j\text{ good}\}$.  Write $h_j=\Pr_X[j\text{ good}\mid E_{j-1},\nu>j]=\Pr_X[F_j]/(\Pr_X[E_j]+\Pr_X[F_j])$
+for the hazard at $j$.  Since $\Pr_X[E_{j-1}]\ge\Pr_X[E_j]+\Pr_X[F_j]$,
+the bound $\Pr_X[E_j]\le C\Pr_X[F_j]$ for $j\le M$ gives
+$\Pr_X[E_M]\le(C/(C+1))^M$, which is \eqref{eq:hyphazard} for
+$M=C'\log\log n$ (the event in \eqref{eq:hyphazard} is $E_M$ itself);
+and $h_j\ge c$ is the same as $\Pr_X[E_j]\le\frac{1-c}{c}\Pr_X[F_j]$.
+
+\emph{The toggle and the identity.}  For $L\in E_j$ with $j$ joined, a
+\emph{toggle} is a row switch $\rho(z,z',c_j)$ of two free rows
+$z,z'\notin\{1,2,x_1,y_1\}$ on $D_j$, with $z,z'$ interleaving
+$x_1,y_1$ in the cyclic order of $D_j$, whose footprint (the row cycle
+of $(z,z')$ through $c_j$) avoids $q_j$ --- an Allsop--Morris good pair.
+By their Lemma~2.4(1) it separates $x_1$ from $y_1$ on the
+$(q_j,c_j)$-cycles; it does not touch rows $1,2,x_1,y_1$, so it stays
+in $S(R)$ and leaves $\rho$, $\nu$ and every $(q_t,c_t)$ unchanged.  It
+is \emph{ok} if candidate $j$ is good afterwards (separated and
+admissible) and \emph{preserving} if moreover candidates $1,\dots,j-1$
+are still bad, i.e.\ the result lies in $F_j$.  Conversely, for $L'\in
+F_j$ a \emph{merge} is a row switch $\rho(z,z',c_j)$ with $z$ a free
+row on the $(q_j,c_j)$-cycle $Z_j$ through $x_1$, $z'$ a free row on
+the cycle $Z'_j$ through $y_1$, and footprint avoiding $q_j$; it joins
+$Z_j$ and $Z'_j$ with $z,z'$ at the junctions, hence interleaving
+$x_1,y_1$, and it is \emph{preserving} if the result lies in $E_j$
+(candidates $1,\dots,j-1$ still bad; $j$ is joined automatically).
+Preserving toggles and preserving merges are inverse to each other
+(a switch of footprint containing $q_j$ conjugates the column
+permutation and leaves every candidate's status unchanged), so with $f_j(L)$ the number of
+preserving toggles of $L\in E_j$ (zero when $j$ is
+separated-inadmissible) and $b_j(L')$ the number of preserving merges
+of $L'\in F_j$, double counting gives the exact identity
+\begin{equation}\label{eq:hazardratio}
+\frac{\Pr_X[E_j]}{\Pr_X[F_j]}
+=\frac{\mathbb E_X[\,b_j\mid F_j]}{\mathbb E_X[\,f_j\mid E_j]}\,,\qquad
+b_j\le|Z_j||Z'_j|\le n^2/4 .
+\end{equation}
+This is a reformulation: $h_j\ge c$ exactly when
+$\mathbb E_X[b_j\mid F_j]\le\frac{1-c}{c}\,\mathbb E_X[f_j\mid E_j]$.  What is new in it is only
+that both sides are counts of local moves inside $S(R)$, so that the
+obstacle can be stated as a comparison of two cycle statistics in two
+conditioned ensembles.
+
+\emph{What a proof would need, and why the obvious bounds do not give
+it.}  (a) With the trivial bound $b_j\le n^2/4$ one needs $\mathbb
+E_X[f_j\mid E_j]\ge c\,n^2$.  Since $f_j\le$ the number of interleaving
+pairs on $D_j$, of order $|D_j|^2$, this requires that the
+column cycle through $x_1$ at the square-selected pair $(q_j,c_j)$ has
+length $\Theta(n)$ with conditional probability bounded below under
+$\Pr_X[\,\cdot\mid E_j]$.  Union bounds of the type used for
+Corollary~\ref{cor:nutail} exclude only lengths $O(\log n)$ (a cycle of
+length $k$ is a fixed-cell event with $2k$ cells and $n^{2k-1}$
+placements), giving $\mathbb E_X[f_j\mid E_j]\gtrsim(\log n)^2$ against
+$n^2$: useless.  This is the obstacle of rem:fcchanged in its most
+concrete form.  Empirically $d_j$, the number of toggles, is
+$\approx0.04\,n^2$ (below).
+(b) Even granting (a), the trivial backward bound cannot give
+\eqref{eq:hyphazard}, because $f_j$ decays geometrically in $j$.  An
+ok toggle separates $x_1,y_1$ at a joined earlier candidate $s<j$
+exactly when its footprint contains exactly one of $q_s,c_s$ (then the
+$(q_s,c_s)$-permutation $\pi_s$ is replaced by $\pi_s\circ(z\,z')$ or
+$(z\,z')\circ\pi_s$) and $z,z'$ interleave $x_1,y_1$ on $D_s$;
+goodness of $s$ additionally requires admissibility, which can change
+in either direction, and a separated-inadmissible $s$ can become good
+through admissibility alone.  The footprint is a row cycle of length
+$\approx0.35\,n$ and $D_s$ has length $\Theta(n)$, so the heuristic says the flip
+probability per earlier candidate is a constant $\varepsilon>0$.  The
+data (measured $\varepsilon\approx0.055,\,0.048,\,0.046$ at
+$n=30,50,100$ from $j=2$) decrease slowly with $n$, also at fixed
+footprint fraction, and do not decide whether $\varepsilon(n)$
+stabilises; the rate at fixed footprint fraction $x$ is
+$\propto x(1-x)$, as ``exactly one of $q_s,c_s$'' predicts.  What
+follows assumes $\varepsilon(n)$ bounded below; if instead
+$\varepsilon\lesssim1/\log n$ then $(1-\varepsilon)^{C\log\log n}\to1$
+and only (a) remains.  The preserving fraction among ok toggles is
+$\approx(1-\varepsilon)^{j-1}$, and with $b_j\le n^2/4$ the best the
+chain can give is $\Pr_X[E_j]\le(1-c(1-\varepsilon)^{j-1})\Pr_X[E_{j-1}]$,
+whose product satisfies
+\[
+\prod_{j\le M}\bigl(1-c(1-\varepsilon)^{j-1}\bigr)\ \ge\
+\exp\Bigl(-\frac{c}{\varepsilon(1-c)}\Bigr)
+\qquad(\log(1-x)\ge-x/(1-c)\text{ for }x\le c)
+\]
+for every $M$: a positive constant, never $o(1/\log n)$.  A $K$-step
+aggregate (from $E_M$ to the squares with exactly $K$ good candidates
+among the first $M$, heuristically forward
+$\approx(M-K)c_1n^2(1-\varepsilon)^{M}$ per square and backward
+$\le(K+1)c_2n^2$) gains at most
+$\max_K\binom MK r^K\le\max_K(eMr/K)^K=e^{Mr}$ with
+$r=(c_1/c_2)(1-\varepsilon)^M$, i.e.\ a factor bounded uniformly in
+$M$.  The a priori hope that preservation would decay like $1/j$
+(which would have given $\Pr_X[E_M]\lesssim M^{-c}$, enough to close
+the gap for $c\le1$ and to prove the conjecture for $c>1$) is
+contradicted by the data for $j\le8$.
+(c) The geometric decay is not the obstacle.  The identity forces
+$\mathbb E_X[b_j\mid F_j]$ to decay at the same rate whenever the
+hazard is flat, and it does (data): a merge that flips an earlier
+candidate to good is not preserving, by the same mechanism.  So the
+chain is viable only with a backward bound of the form $\mathbb
+E_X[b_j\mid F_j]\le C n^2(1-\varepsilon)^{j-1}$: either fewer merges
+on $F_j$ (short cycles there; the data rule this out, $\approx0.03n^2$
+merges) or a \emph{lower} bound on the fraction of merges that flip
+some earlier candidate --- a lower bound on ``footprint hits exactly
+one of $q_s,c_s$ and $z,z'$ interleave on $D_s$'', again a
+$\Theta(n)$-scale cycle statement in a conditioned ensemble, of the
+same kind as (a).  Conclusion: every version of the chain we can
+formulate needs a lower bound at scale $n$ on cycle structure at
+square-selected positions, in $\Pr_X[\,\cdot\mid E_j]$ or in
+$\Pr_X[\,\cdot\mid F_j]$ (a direct comparison of the two conditional
+expectations, say by a coupling of the two conditioned ensembles, is
+not excluded by anything here; we have no such coupling).  The two
+losses that must be matched are measured below and are matched, with
+ratio $\approx1.5$, and the preserving fractions among merges equal
+those among toggles to $\pm0.03$ at every $j$ --- the direct evidence
+for (c); but nothing proved reaches scale $n$.
+
+\emph{Variants.}  (i) Toggles with short footprints have small
+$\varepsilon$ (measured $0.01$ for footprint $\le0.1n$) and
+$\varepsilon\to0$ only for footprints $o(n)$; a lower bound on the
+number of interleaving good pairs with footprint $o(n)$ is a lower
+bound on the number of short row cycles through $c_j$ in the
+conditioned ensemble, for which only upper bounds are available (via
+(FC)).  (ii) Moves touching rows $x_1,y_1$ (cross-switches) change
+$\rho$ and with it every candidate; we see no way to compare $E_j$
+and $F_j$ through them.  (iii) The separated-inadmissible bad
+candidates ($15$--$17\%$ of the bad ones) need a different toggle (one
+that changes which cycle meets a special row); not analysed, and not
+needed for the conclusion.  (iv) We expect that two-sided fixed-cell
+bounds with constants other than $1$ (cor:FCtwo and a hypothetical
+lower counterpart) cannot give constant lower bounds for
+``different cycles'' events, which are not fixed-cell events; not
+argued here.
+
+\emph{Data} (\texttt{s13\_hazard.py}; \texttt{runs/s13/hazard/}):
+completions of a fixed rectangle of type $(n)$ (\texttt{jmfix}), $3$
+marks per square, $M=8$; $n=30$ ($3000$ instances), $50$ ($1800$),
+$100$ ($900$); all toggles and merges enumerated at $n=30,50$
+(\texttt{--maxtog 100000}), at most $60$ per instance sampled
+uniformly and reweighted at $n=100$ (\texttt{--maxtog 60}); all
+per-toggle statistics are toggle-weighted.  Checks: every toggle
+separated $x_1,y_1$ ($105572/105572$, $181549/181549$,
+$30599/30599$) and every merge joined them ($71903$, $136486$,
+$24392$, all cases).  The empirical hazard $\Pr[j\text{ good}\mid
+1,\dots,j-1\text{ bad},\ \nu>j]$ is $0.40\pm0.02$ at $j=1,2$ for all
+three $n$ and $0.35$--$0.47$ for $j\le5$ ($N\ge100$), with no
+significant trend in $j$ or $n$ ($n=30$ and $100$ both drop to
+$\approx0.355$ at $j=4,5$, about $1.2\sigma$), so that $\prod_{t\le M}(1-\text{hazard}_t)\approx0.6^M$
+(an approximation to $\Pr_X[E_M]$ that ignores the $\nu$ terms); the
+hypothesis holds with room to spare \emph{if the hazard stays bounded
+below}, which is exactly the unproved point.  Bad candidates: joined
+$83$--$85\%$, separated-inadmissible $15$--$17\%$ (pooled over $j$).
+Toggles ($j\le6$): $d_j\approx0.033$--$0.047\,n^2$, ok fraction
+$0.64$--$0.76$; preserving fraction among ok toggles
+$0.95,\ 0.89$--$0.93,\ 0.85$--$0.89,\ 0.81$--$0.84,\ 0.75$--$0.81$ for
+$j=2,\dots,6$ (the larger values at the larger $n$); number of earlier
+candidates flipped by an ok toggle at $j=6$: $0.75/0.21/0.04$
+($n=30$), $0.77/0.21/0.03$ ($50$), $0.81/0.17/0.02$ ($100$); mean
+footprint $0.33$--$0.38\,n$ (means $0.37,0.35,0.34$ at $n=30,50,100$);
+flip rate per earlier candidate by footprint fraction
+$x\in[b/10,(b+1)/10)$, $n=50$:
+$0.011,\,0.031,\,0.051,\,0.063,\,0.068,\,0.074,\,0.066,\,0.055,\,0.039,\,0.018$
+($n=30$, $100$ within $\pm0.02$).  Identity check and the two sides of
+\eqref{eq:hazardratio}, $j=1,\dots,6$: $\mathbb E[f_j\mid E_j]/n^2$
+runs $0.022\to0.019$ ($n=30$), $0.024\to0.019$ ($50$; $0.016$ at
+$j=5$, $N=79$), $0.024\to0.019$ ($100$); $\mathbb E[b_j\mid F_j]/n^2$ runs
+$0.032\to0.025$, $0.035\to0.026$, $0.037\to0.031$; the ratio
+$\mathbb E[b_j\mid F_j]/\mathbb E[f_j\mid E_j]$ against the direct
+count $N(E_j)/N(F_j)$ is $1.46/1.53$, $1.43/1.53$, $1.55/1.61$,
+$1.52/1.80$ ($n=30$, $j=1..4$), $1.49/1.42$, $1.43/1.48$,
+$1.38/1.18$, $1.45/1.66$ ($n=50$), $1.55/1.50$, $1.83/1.42$,
+$1.40/1.45$, $1.42/1.80$ ($n=100$) --- agreement within about two
+standard errors (largest discrepancy $n=100$, $j=2$: $1.83$ vs
+$1.42$, $N(F_2)=215$, both sides subsampled); the identity is exact
+for the ensemble and the sample estimates its two sides independently.
+Both sides decay with $j$ at the same rate.  Mean number of free pairs
+on $Z_j\times Z'_j$ on $F_j$: $0.063$--$0.078\,n^2$, of which about
+half are merges (footprint avoiding $q_j$), and the preserving fraction
+among merges is $1.00,\ 0.95,\ 0.89$--$0.93,\ 0.84$--$0.88,\
+0.80$--$0.82,\ 0.74$--$0.81$ for $j=1,\dots,6$, the same as among
+toggles.
+
+\emph{Status.}  Reformulation \eqref{eq:hazardratio} (exact);
+negative knowledge: the chain with the trivial backward bound stalls
+at a positive constant for every $M$ (if $\varepsilon(n)$ stays
+bounded below) and the two obvious bounds on the sides of
+\eqref{eq:hazardratio} both need a scale-$n$ lower bound on cycle
+structure at square-selected positions in a conditioned ensemble;
+what is shown is that these bounds fail, not that the toggle family
+does.  What did
+not change: the hazard hypothesis, the chain (weak CGW $\Leftarrow$
+hazard $\Leftarrow\cdots$), the reference hypothesis, the obstacle
+statement ``lower bounds only''.  What is new: the obstacle has the
+quantitative form \eqref{eq:hazardratio}, with both sides measured
+and matched at ratio $\approx1.5$.

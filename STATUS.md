@@ -286,6 +286,28 @@ rewritten (the proof goes through; AW's difficulty "sidestepped rather than solv
 (exposition/consistency) found one stale sentence contradicting §7 in the same paragraph, "none implies another" (hazard ⇒
 firstpair now), "bounded number of cells" (should be sparse sets), the M in cor:hazard, notation clashes (α,β; D; f; ν) — all
 fixed.  Did not touch the core obstacle.
+**Seg 12 — REFORMULATION (exact identity) + NEGATIVE KNOWLEDGE + DATA (hazard term; notes §(r), refereed twice; `s13_hazard.py`,
+runs/s13/hazard/).**  Cost: one segment.  For E_j = {ν>j, candidates 1..j bad}, F_j = {ν>j, 1..j−1 bad, j good}, toggles =
+interleaving row switches of free good pairs on the candidate's own (q_j,c_j)-cycle (separate x₁,y₁; rows 1,2,x₁,y₁ untouched,
+so ρ, ν, all candidates unchanged), merges = their inverses from F_j: exact identity P_X[E_j]/P_X[F_j] = E[b_j|F_j]/E[f_j|E_j]
+(eq:hazardratio; f_j = preserving toggles, b_j = preserving merges ≤ n²/4), so hazard ≥ c ⟺ E[b_j|F_j] ≤ ((1−c)/c) E[f_j|E_j].
+What a chain would need and why the obvious bounds fail: (a) with b_j ≤ n²/4 one needs E[f_j|E_j] ≥ c n², i.e. Θ(n)-length
+column cycles at square-selected positions in P_X[·|E_j] — (FC)-type union bounds give only O(log n) — the core problem in
+its most concrete form; (b) even granted (a), f_j decays like (1−ε)^{j−1} in j (an ok toggle flips an earlier candidate iff its
+Θ(n)-footprint hits exactly one of q_s,c_s and z,z′ interleave on D_s; ε ≈ 0.055/0.048/0.046 at n=30/50/100, slowly decreasing,
+not decided whether it stabilises), so the chain product ≥ exp(−c/(ε(1−c))) is a positive constant for every M (if ε stays
+bounded below); the K-step aggregate gains at most e^{Mr}, bounded; (c) the j-decay is NOT the obstacle: the identity forces
+E[b_j|F_j] to decay at the same rate when the hazard is flat, and it does (preserving fractions among merges = among toggles to
+±0.03), so the chain needs a scale-n lower bound on cycle structure on one side or the other; a direct coupling of the two
+conditioned ensembles is not excluded (none known).  The a priori hope "preservation ≈ 1/j ⇒ P[E_M] ≲ M^{−c}" is contradicted
+by the data.  Data (n=30/50/100, 3000/1800/900 instances, full enumeration at n≤50): hazard 0.40±0.02 at j=1,2 and 0.35–0.47 for
+j≤5, flat in j and n (so empirically P[E_M] ≈ 0.6^M); bad = joined 83–85% / separated-inadmissible 15–17%; d_j ≈ 0.033–0.047 n²;
+both sides of the identity measured, ratio ≈ 1.5 matching N(E_j)/N(F_j) within ≈2σ; E[f|E]/n² 0.024→0.019 and E[b|F]/n²
+0.035→0.03 over j=1..6.  Referee 1 caught an overclaim in the first draft ("the toggle family fails for a reason intrinsic to
+the measure" — impossible given the exact identity; withdrawn) and numeric ranges; referee 2 caught the n-independence claim on ε
+(contradicted at fixed footprint fraction), "every version needs" (softened to "every version we can formulate"), ν-bookkeeping.
+What did NOT change: hyp:hazard, the chain, hyp:witness as reference, the obstacle "lower bounds only".  What is new: the
+obstacle has the quantitative form eq:hazardratio with both sides measured; one natural route (trivial backward bound) closed.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

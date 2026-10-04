@@ -1,0 +1,33 @@
+n=50 squares=600 marks/square=3 M=8 seed=2 maxtog=100000 instances=1800  separation check: 181549/181549
+  empirical hazard: j, N(1..j-1 bad), P[j good | 1..j-1 bad], P[1..j all bad]
+    j=1: N=1800 P[good|prefix bad]=0.414  P[all bad up to j]=0.5861
+    j=2: N=966 P[good|prefix bad]=0.404  P[all bad up to j]=0.3495
+    j=3: N=533 P[good|prefix bad]=0.458  P[all bad up to j]=0.1895
+    j=4: N=263 P[good|prefix bad]=0.376  P[all bad up to j]=0.1182
+    j=5: N=148 P[good|prefix bad]=0.466  P[all bad up to j]=0.0631
+    j=6: N=66 P[good|prefix bad]=0.409  P[all bad up to j]=0.0373
+    j=7: N=35 P[good|prefix bad]=0.543  P[all bad up to j]=0.0170
+    j=8: N=15 P[good|prefix bad]=0.400  P[all bad up to j]=0.0102
+  bad candidates split: j=1: joined 903 / separated-inadmissible 152, j=2: joined 469 / separated-inadmissible 107, j=3: joined 248 / separated-inadmissible 41, j=4: joined 144 / separated-inadmissible 20, j=5: joined 65 / separated-inadmissible 14, j=6: joined 32 / separated-inadmissible 7, j=7: joined 13 / separated-inadmissible 3, j=8: joined 8 / separated-inadmissible 1
+  toggles for candidate j given 1..j bad: mean #good-pair toggles d, mean #ok (j becomes good), mean #preserving (1..j-1 still bad),
+  fraction preserving among ok, distribution of #earlier candidates flipped, mean footprint length/n
+    j=1: N=903 d=97.1 ok=69.0 pres=69.0 pres/ok=1.000 flips={0: 1.0} footprint/n=0.353
+    j=2: N=469 d=95.6 ok=69.7 pres=66.3 pres/ok=0.952 flips={0: 0.952, 1: 0.048} footprint/n=0.351
+    j=3: N=248 d=99.0 ok=70.4 pres=63.3 pres/ok=0.900 flips={0: 0.9, 1: 0.097, 2: 0.002} footprint/n=0.351
+    j=4: N=144 d=94.7 ok=70.1 pres=60.7 pres/ok=0.865 flips={0: 0.865, 1: 0.128, 2: 0.007, 3: 0.0} footprint/n=0.351
+    j=5: N=65 d=83.1 ok=57.6 pres=47.4 pres/ok=0.823 flips={0: 0.823, 1: 0.161, 2: 0.015, 3: 0.001} footprint/n=0.361
+    j=6: N=32 d=116.8 ok=74.9 pres=57.4 pres/ok=0.766 flips={0: 0.766, 1: 0.205, 2: 0.028, 3: 0.001} footprint/n=0.342
+    j=7: N=13 d=48.9 ok=41.0 pres=31.0 pres/ok=0.756 flips={0: 0.756, 1: 0.216, 2: 0.026, 3: 0.002} footprint/n=0.348
+    j=8: N=8 d=126.4 ok=100.4 pres=75.1 pres/ok=0.748 flips={0: 0.748, 1: 0.215, 2: 0.034, 3: 0.002} footprint/n=0.360
+  flip rate per earlier candidate by footprint length bin (len/n in [b/10,(b+1)/10)): bin: rate (#ok toggles)
+    0.0: 0.011 (8266)  0.1: 0.031 (12496)  0.2: 0.051 (10925)  0.3: 0.063 (9404)  0.4: 0.068 (8089)  0.5: 0.074 (6562)  0.6: 0.066 (5132)  0.7: 0.055 (3711)  0.8: 0.039 (2335)  0.9: 0.018 (776)
+  merging switches: joined x1,y1 in 136486/136486 cases
+  identity check: j, E[f_j|E_j] (all of E_j), E[b_j|F_j], mean #merging switches |F_j, mean |Z||Z'| |F_j, ratio E[b|F]/E[f|E], N(E_j)/N(F_j)
+    j=1: E[f|E]=59.0 E[b|F]=88.1 merging=88.1 |Z||Z'|=176.1 b/n^2=0.0353 ratio=1.493 N(E)/N(F)=1.416
+    j=2: E[f|E]=54.0 E[b|F]=77.3 merging=81.2 |Z||Z'|=163.6 b/n^2=0.0309 ratio=1.432 N(E)/N(F)=1.477
+    j=3: E[f|E]=54.4 E[b|F]=74.9 merging=82.6 |Z||Z'|=164.2 b/n^2=0.0300 ratio=1.378 N(E)/N(F)=1.184
+    j=4: E[f|E]=53.3 E[b|F]=77.2 merging=89.9 |Z||Z'|=180.6 b/n^2=0.0309 ratio=1.449 N(E)/N(F)=1.657
+    j=5: E[f|E]=39.0 E[b|F]=66.1 merging=80.8 |Z||Z'|=162.2 b/n^2=0.0265 ratio=1.696 N(E)/N(F)=1.145
+    j=6: E[f|E]=47.1 E[b|F]=65.2 merging=80.4 |Z||Z'|=158.3 b/n^2=0.0261 ratio=1.385 N(E)/N(F)=1.444
+    j=7: E[f|E]=25.2 E[b|F]=69.6 merging=92.6 |Z||Z'|=183.9 b/n^2=0.0279 ratio=2.765 N(E)/N(F)=0.842
+    j=8: E[f|E]=66.8 E[b|F]=72.8 merging=100.2 |Z||Z'|=198.3 b/n^2=0.0291 ratio=1.091 N(E)/N(F)=1.500
