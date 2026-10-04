@@ -8,6 +8,7 @@ def lines(path):
 import sys as _s; _s.path.insert(0, 'paper')
 from cprime_blocks import cprime_intro, cprime_rest, remains
 from firstpair_block import firstpair_block
+from fc_block import fc_block
 M = lines('section_marked.tex')
 N = lines('second_row_notes.tex')
 Lad = lines('section_ladder_s13.tex')
@@ -176,7 +177,7 @@ preamble = r"""\documentclass[11pt]{article}
 
 \title{The cycle type of two rows of a random Latin square:\\ exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture}
 \author{[author]}
-\date{3 October 2026 --- draft}
+\date{4 October 2026 --- draft}
 
 \begin{document}
 \maketitle
@@ -192,25 +193,27 @@ square; the reduction theorem, by which the conjecture follows from that bit bei
 $o(1/\log n)$; and the ladder identity, by which the bit is exactly fair except on the
 squares in which no ``ladder pair'' of rows is flippable.  An orbit method bounds the probability of
 the exceptional set by a product of conditionally independent factors.  The
-conjecture thereby follows from any one of four sufficient conditions, none of which is
-known to imply another, all concerning the probability of a configuration at rows or
+conjecture thereby follows from any one of several sufficient conditions, no two of
+which are known to be comparable except where stated, all concerning the probability of a configuration at rows or
 columns selected by the square inside the space conditioned on the type of rows $1,2$, and
 all needed only for types with $O(\log n)$ parts.  The reference condition is a ``witness
 lemma'' (Hypothesis~\ref{hyp:witness}): with probability $1-o(1/\log n)$ some ladder pair
 of a long ladder has a short row cycle through one marked column avoiding the other.  The
-simplest to state comes from a third exact identity at the first ladder pair alone, which
-expresses the bias $\Pr_X[B]-\Pr_X[A]$ as an expectation over the event that none of the
-column pairs along the row permutation of that pair admits a legal toggling turn; the
-conjecture follows if that event has probability $o(1/\log n)$, and, given a constant
-conditional hazard along the row permutation, its failure is dominated by a short arc at
-the marked columns rather than by a large count of events.  We
-state these precisely, report the numerical evidence (up to $n=150$, including, through a
-sampler of completions of a fixed rectangle whose connectivity and mixing are not proved,
-types of exponentially small probability), and locate the remaining difficulty: every
-exact identity we have found inside the conditioned space is fair, and what is missing is
-a constant-factor estimate for events on a few cells in two fixed rows of a uniform
-completion of a fixed $2\times n$ rectangle, outside the range of the known fixed-cell
-bounds for Latin squares and rectangles.  Along the
+simplest comes from a third exact identity at the first ladder pair alone, which expresses
+the bias $\Pr_X[B]-\Pr_X[A]$ as an expectation over the event that none of the column
+pairs along the row permutation of that pair admits a legal toggling turn.  That event
+splits into a short-arc term and a hazard term; we prove that the short-arc term is
+$o(1/\log n)$, by showing that the per-cell bound of Allsop and Morris for partial Latin
+squares extends to partial Latin squares containing two complete rows, so that the
+conjecture follows from the hazard term alone: with probability $1-o(1/\log n)$, among the
+first $O(\log\log n)$ column pairs along that row permutation some admits a legal
+toggling turn.  We state these precisely, report the numerical evidence (up to $n=150$,
+including, through a sampler of completions of a fixed rectangle whose connectivity and
+mixing are not proved, types of exponentially small probability), and locate the
+remaining difficulty: every exact identity we have found inside the conditioned space is
+fair, upper bounds on events at sparse sets of cells in a uniform completion of a fixed
+$2\times n$ rectangle are now available, and what is missing is a lower bound for
+a constant-probability event at positions selected by the square.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -248,9 +251,10 @@ $\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
 where feasible, by exhaustive computation at $n\le7$ and by sampling (this includes
-\S\ref{sec:orbit}(e) and Remark~\ref{rem:fewparts}, added last); no human referee has read
-them.  The literature statements of \S\ref{sec:remains} were checked against the cited
-papers by the same means.
+\S\ref{sec:orbit}(e), Remark~\ref{rem:fewparts} and \S\ref{sec:fc}, added last; the
+latter by two independent automated referees); no human referee has read them.  The
+literature statements of \S\ref{sec:remains} were checked against the cited papers by the
+same means.
 
 \paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
 $j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
@@ -316,18 +320,29 @@ an upper bound on a short arc at the frame-selected pair together with a constan
 conditional hazard over $O(\log\log n)$ events, in place of a long ladder of rare events,
 and it is the one hypothesis whose quantity the data measure directly ($n\Pr_X[G^c]$ is
 $5.5$ for $30\le n\le150$, a first-moment fact that says nothing about the rate).  Again
-no implication to or from Hypothesis~\ref{hyp:witness} is known; the $\nu$-tail is not
-shown to be easier than the rest (Lemma~\ref{lem:nuswitch}).
+no implication to or from Hypothesis~\ref{hyp:witness} is known.
+\item[(7)] \emph{The short-arc term is proved} (\S\ref{sec:fc}): the per-cell bound
+$\Pr[L(r,c)=s\mid L\supseteq P]\le\Delta/n$ of Allsop and Morris \cite{AM26}, and with it
+the fixed-cell bound $\Pr[Q\subseteq L\mid L\supseteq P]\le(\Delta/n)^{|Q|}$ for sparse
+$Q$, hold when $P$ contains two complete rows (Theorem~\ref{thm:AM31two},
+Corollary~\ref{cor:FCtwo}; $\Delta$ absolute, $\le66$), by running their switching proof
+with every column-cycle and cross-switch kept away from those rows.  Hence
+$\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$ for every type and mark
+(Corollary~\ref{cor:nutail}), and the conjecture follows from the \emph{hazard hypothesis}
+(Hypothesis~\ref{hyp:hazard}): with probability $1-o(1/\log n)$, among the first
+$C\log\log n$ candidates some is good --- which holds if each candidate is good with
+conditional probability $\ge c$ given that the earlier ones are bad (in the data a
+candidate is good with conditional probability $\approx0.4$).
 \end{enumerate}
-All four hypotheses are of one logical type: a constant-factor estimate for the
-probability of a configuration at rows or columns selected by the frame of the mark, inside
-the space conditioned on the type of rows $1,2$; by Remark~\ref{rem:fewparts} each is
-needed only for types with at most $\lceil16\log n\rceil$ parts.  Their heuristic margins
-are large; none of the exact tools of this paper gives an estimate of that kind, and the
+All these hypotheses are of one logical type: a lower bound on the probability of a
+configuration at rows or columns selected by the frame of the mark, inside the space
+conditioned on the type of rows $1,2$; by Remark~\ref{rem:fewparts} each is needed only
+for types with at most $\lceil16\log n\rceil$ parts.  Their heuristic margins are large;
+none of the exact tools of this paper gives a lower bound of that kind.  Upper bounds,
+for events at a sparse set of cells, are available after \S\ref{sec:fc}; the
 fixed-cell bounds in the literature for Latin squares and rectangles stop short of the
-conditioning on two full rows (\S\ref{sec:remains}, where we also record how far the most
-recent of them, Allsop and Morris's switching argument \cite{AM26}, goes in the conditioned
-space).  The data (Jacobson--Matthews samples, and a sampler of completions of a fixed
+conditioning on two full rows, and \S\ref{sec:fc} extends the most recent of them, that of
+Allsop and Morris \cite{AM26}, to that case (\S\ref{sec:remains} records the rest).  The data (Jacobson--Matthews samples, and a sampler of completions of a fixed
 $2\times n$ rectangle that reaches types of $\PP_n$-probability $e^{-\Theta(n)}$,
 Remark~\ref{rem:fixrect}; its connectivity and mixing are not proved) give point estimates
 of $\Pr_X[B]$ within $0.003$ of $\tfrac12$ in every tested class at $n\le50$ and witness
@@ -556,6 +571,7 @@ body.append(cprime_intro); body.append("\n\n")
 body.append(adaptive); body.append("\n\n")
 body.append(cprime_rest)
 body.append(firstpair_block)
+body.append(fc_block)
 body.append(remains)
 body.append(r"""
 
@@ -575,8 +591,6 @@ squares and rectangles, \emph{J. Combin. Des.} 34 (2026), 184--197.
 squares in average-case polynomial time, \emph{Random Structures Algorithms} 66 (2025), e70015.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
-\bibitem{MW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many subsquares,
-\emph{J. Combin. Theory Ser.~A} 86 (1999), 322--347.
 \bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
 arXiv:2509.13125 (2025).
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
@@ -585,6 +599,8 @@ arXiv:2509.13125 (2025).
 \emph{Bull. London Math. Soc.} 54 (2022), 1420--1438.
 \bibitem{KSSS23} M.~Kwan, A.~Sah, M.~Sawhney and M.~Simkin, Substructures in Latin squares,
 \emph{Israel J. Math.} 256 (2023), 363--416.
+\bibitem{MW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many subsquares,
+\emph{J. Combin. Theory Ser.~A} 86 (1999), 322--347.
 \bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \end{thebibliography}
 \end{document}

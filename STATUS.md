@@ -1,7 +1,7 @@
 # STATUS — CGW Conjecture project (rolling; replaces per-session handoffs)
 
 *Updated 2026-10-03 (session 13, continuous; see SEGMENT LOG below for today).  Two refereed documents: `paper/cgw_gap_note.tex`
-(10 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (29 pp, REVISED 2026-10-03 twice: hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
+(10 pp, to send to CGW) and `paper/weak_cgw_conditional.tex` (34 pp, REVISED 2026-10-04: §7 fixed-cell bound added; hyp:witness is the primary hypothesis again (§5); hyp:orbitgen / hyp:adaptive / hyp:firstpair are ALTERNATIVE sufficient conditions (§6, incl. new §6(e) first ladder pair); title 'a reduction'; assembled by `cprime_blocks.py` + `witness_subs.py` +
 `paper/assemble_conditional.py` + `postprocess_conditional.py`; thm:marked, prop:tailsurvive,
 thm:reduction [error O(δ log n + n^{−1+o(1)})], thm:ladder, offsets, prop:trapped, prop:splice (NEW,
 refereed: P_X[B,d₁₂=ℓ,|C₁|<n/2+ℓ] ≤ 4/(n−2ℓ+1)), orbit method, hyp:orbit ⇒ (L), What remains).
@@ -278,6 +278,14 @@ sup_{λ,α,β} P_X[ν > M, first M candidates all bad] = o(1/log n) for some M �
 to its second term.  What did NOT change: the remaining term is a lower bound at square-selected positions (candidate t good
 with conditional probability ≥ c); no lower bound of that kind is proved.  What DID change in the obstacle statement: the
 "upper-bound half" (short structures at the frame-selected pair) is done; "in either direction" → "lower bounds only".
+**Seg 11 — WRITING (paper, refereed).**  Paper 34 pp (snapshot 2026-10-04a): new §7 "The fixed-cell bound in completions of a
+rectangle" (thm:AM31two, Claims 1/2′/3′/4′ with the aggregate Claim 2′, cor:FCtwo, cor:nutail, hyp:hazard, cor:hazard,
+rem:fcchanged); §6(e): lem:nuswitch removed (its content is a one-line remark), staircase/(FC) paragraph now carries the parameter
+count and points to §7; §8: obstacle restated ("lower bounds only"), min-condition in terms of the hazard term, AM paragraph
+rewritten (the proof goes through; AW's difficulty "sidestepped rather than solved"); abstract and Results (7) updated; referee
+(exposition/consistency) found one stale sentence contradicting §7 in the same paragraph, "none implies another" (hazard ⇒
+firstpair now), "bounded number of cells" (should be sparse sets), the M in cor:hazard, notation clashes (α,β; D; f; ν) — all
+fixed.  Did not touch the core obstacle.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

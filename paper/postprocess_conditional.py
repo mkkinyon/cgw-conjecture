@@ -86,8 +86,9 @@ in (e) the same mechanism, applied to the first ladder pair alone, gives an exac
 for $\Pr_X[B]-\Pr_X[A]$ and a third alternative hypothesis."""))
     post.append((r"""constant.  All three hypotheses share the same unproved core, stated in
 \S\ref{sec:remains}.""", r"""constant; at the first ladder pair alone, (e) below, the rarity disappears too, and what is
-left is the lower tail of the number of good candidates among $\mu-1$ column pairs.  All of
-these hypotheses share the same unproved core, stated in \S\ref{sec:remains}."""))
+left, after \S\ref{sec:fc}, is a constant conditional hazard among the first
+$O(\log\log n)$ column pairs along the row permutation of that pair.  All of these
+hypotheses share the same unproved core, stated in \S\ref{sec:remains}."""))
     for a, b in post:
         if a not in text:
             print('postprocess: pattern not found (skipped):', repr(a[:60])); continue

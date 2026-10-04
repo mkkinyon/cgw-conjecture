@@ -25,7 +25,7 @@
 
 \title{The cycle type of two rows of a random Latin square:\\ exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture}
 \author{[author]}
-\date{3 October 2026 --- draft}
+\date{4 October 2026 --- draft}
 
 \begin{document}
 \maketitle
@@ -41,25 +41,27 @@ square; the reduction theorem, by which the conjecture follows from that bit bei
 $o(1/\log n)$; and the ladder identity, by which the bit is exactly fair except on the
 squares in which no ``ladder pair'' of rows is flippable.  An orbit method bounds the probability of
 the exceptional set by a product of conditionally independent factors.  The
-conjecture thereby follows from any one of four sufficient conditions, none of which is
-known to imply another, all concerning the probability of a configuration at rows or
+conjecture thereby follows from any one of several sufficient conditions, no two of
+which are known to be comparable except where stated, all concerning the probability of a configuration at rows or
 columns selected by the square inside the space conditioned on the type of rows $1,2$, and
 all needed only for types with $O(\log n)$ parts.  The reference condition is a ``witness
 lemma'' (Hypothesis~\ref{hyp:witness}): with probability $1-o(1/\log n)$ some ladder pair
 of a long ladder has a short row cycle through one marked column avoiding the other.  The
-simplest to state comes from a third exact identity at the first ladder pair alone, which
-expresses the bias $\Pr_X[B]-\Pr_X[A]$ as an expectation over the event that none of the
-column pairs along the row permutation of that pair admits a legal toggling turn; the
-conjecture follows if that event has probability $o(1/\log n)$, and, given a constant
-conditional hazard along the row permutation, its failure is dominated by a short arc at
-the marked columns rather than by a large count of events.  We
-state these precisely, report the numerical evidence (up to $n=150$, including, through a
-sampler of completions of a fixed rectangle whose connectivity and mixing are not proved,
-types of exponentially small probability), and locate the remaining difficulty: every
-exact identity we have found inside the conditioned space is fair, and what is missing is
-a constant-factor estimate for events on a few cells in two fixed rows of a uniform
-completion of a fixed $2\times n$ rectangle, outside the range of the known fixed-cell
-bounds for Latin squares and rectangles.  Along the
+simplest comes from a third exact identity at the first ladder pair alone, which expresses
+the bias $\Pr_X[B]-\Pr_X[A]$ as an expectation over the event that none of the column
+pairs along the row permutation of that pair admits a legal toggling turn.  That event
+splits into a short-arc term and a hazard term; we prove that the short-arc term is
+$o(1/\log n)$, by showing that the per-cell bound of Allsop and Morris for partial Latin
+squares extends to partial Latin squares containing two complete rows, so that the
+conjecture follows from the hazard term alone: with probability $1-o(1/\log n)$, among the
+first $O(\log\log n)$ column pairs along that row permutation some admits a legal
+toggling turn.  We state these precisely, report the numerical evidence (up to $n=150$,
+including, through a sampler of completions of a fixed rectangle whose connectivity and
+mixing are not proved, types of exponentially small probability), and locate the
+remaining difficulty: every exact identity we have found inside the conditioned space is
+fair, upper bounds on events at sparse sets of cells in a uniform completion of a fixed
+$2\times n$ rectangle are now available, and what is missing is a lower bound for
+a constant-probability event at positions selected by the square.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -97,9 +99,10 @@ $\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
 where feasible, by exhaustive computation at $n\le7$ and by sampling (this includes
-\S\ref{sec:orbit}(e) and Remark~\ref{rem:fewparts}, added last); no human referee has read
-them.  The literature statements of \S\ref{sec:remains} were checked against the cited
-papers by the same means.
+\S\ref{sec:orbit}(e), Remark~\ref{rem:fewparts} and \S\ref{sec:fc}, added last; the
+latter by two independent automated referees); no human referee has read them.  The
+literature statements of \S\ref{sec:remains} were checked against the cited papers by the
+same means.
 
 \paragraph{Results.}  Throughout, a \emph{mark} is a column pair $P=\{j,j'\}$ with
 $j'=\sigma^\alpha(j)$ on an $m$-cycle of $\sigma$, $m=\alpha+\beta$, $\alpha,\beta\ge2$;
@@ -165,18 +168,29 @@ an upper bound on a short arc at the frame-selected pair together with a constan
 conditional hazard over $O(\log\log n)$ events, in place of a long ladder of rare events,
 and it is the one hypothesis whose quantity the data measure directly ($n\Pr_X[G^c]$ is
 $5.5$ for $30\le n\le150$, a first-moment fact that says nothing about the rate).  Again
-no implication to or from Hypothesis~\ref{hyp:witness} is known; the $\nu$-tail is not
-shown to be easier than the rest (Lemma~\ref{lem:nuswitch}).
+no implication to or from Hypothesis~\ref{hyp:witness} is known.
+\item[(7)] \emph{The short-arc term is proved} (\S\ref{sec:fc}): the per-cell bound
+$\Pr[L(r,c)=s\mid L\supseteq P]\le\Delta/n$ of Allsop and Morris \cite{AM26}, and with it
+the fixed-cell bound $\Pr[Q\subseteq L\mid L\supseteq P]\le(\Delta/n)^{|Q|}$ for sparse
+$Q$, hold when $P$ contains two complete rows (Theorem~\ref{thm:AM31two},
+Corollary~\ref{cor:FCtwo}; $\Delta$ absolute, $\le66$), by running their switching proof
+with every column-cycle and cross-switch kept away from those rows.  Hence
+$\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$ for every type and mark
+(Corollary~\ref{cor:nutail}), and the conjecture follows from the \emph{hazard hypothesis}
+(Hypothesis~\ref{hyp:hazard}): with probability $1-o(1/\log n)$, among the first
+$C\log\log n$ candidates some is good --- which holds if each candidate is good with
+conditional probability $\ge c$ given that the earlier ones are bad (in the data a
+candidate is good with conditional probability $\approx0.4$).
 \end{enumerate}
-All four hypotheses are of one logical type: a constant-factor estimate for the
-probability of a configuration at rows or columns selected by the frame of the mark, inside
-the space conditioned on the type of rows $1,2$; by Remark~\ref{rem:fewparts} each is
-needed only for types with at most $\lceil16\log n\rceil$ parts.  Their heuristic margins
-are large; none of the exact tools of this paper gives an estimate of that kind, and the
+All these hypotheses are of one logical type: a lower bound on the probability of a
+configuration at rows or columns selected by the frame of the mark, inside the space
+conditioned on the type of rows $1,2$; by Remark~\ref{rem:fewparts} each is needed only
+for types with at most $\lceil16\log n\rceil$ parts.  Their heuristic margins are large;
+none of the exact tools of this paper gives a lower bound of that kind.  Upper bounds,
+for events at a sparse set of cells, are available after \S\ref{sec:fc}; the
 fixed-cell bounds in the literature for Latin squares and rectangles stop short of the
-conditioning on two full rows (\S\ref{sec:remains}, where we also record how far the most
-recent of them, Allsop and Morris's switching argument \cite{AM26}, goes in the conditioned
-space).  The data (Jacobson--Matthews samples, and a sampler of completions of a fixed
+conditioning on two full rows, and \S\ref{sec:fc} extends the most recent of them, that of
+Allsop and Morris \cite{AM26}, to that case (\S\ref{sec:remains} records the rest).  The data (Jacobson--Matthews samples, and a sampler of completions of a fixed
 $2\times n$ rectangle that reaches types of $\PP_n$-probability $e^{-\Theta(n)}$,
 Remark~\ref{rem:fixrect}; its connectivity and mixing are not proved) give point estimates
 of $\Pr_X[B]$ within $0.003$ of $\tfrac12$ in every tested class at $n\le50$ and witness
@@ -1483,8 +1497,9 @@ exact fairness compounded over commuting involutions into exponential decay --- 
 the adaptive coordinates, the observation that the mechanism needs only rare local
 witnesses of a second kind (column cycles of a free pair through $x_k$) rather than a
 constant; at the first ladder pair alone, (e) below, the rarity disappears too, and what is
-left is the lower tail of the number of good candidates among $\mu-1$ column pairs.  All of
-these hypotheses share the same unproved core, stated in \S\ref{sec:remains}.
+left, after \S\ref{sec:fc}, is a constant conditional hazard among the first
+$O(\log\log n)$ column pairs along the row permutation of that pair.  All of these
+hypotheses share the same unproved core, stated in \S\ref{sec:remains}.
 
 \paragraph{(d) Data.}  All scripts and logs are in the repository \cite{repo}, under
 \texttt{s13\_*.py} and \texttt{runs/s13/orbit/}.  \emph{Adaptive coordinates.}  On
@@ -1634,14 +1649,16 @@ unchanged in kind --- and it decomposes as
 \Pr_X[G^c]\le\Pr_X[\nu\le M]+\Pr_X[\nu>M,\ t=1,\dots,M\text{ all bad}].
 \]
 The first term is an upper bound on a short arc or cycle of $\rho_{x_1,y_1}$ at $p,p'$;
-nothing of the kind is proved at a frame-selected pair (Proposition~\ref{prop:splice}
-bounds a different frame event), and heuristically it is $\approx4M/n$.  The second term
+before \S\ref{sec:fc} nothing of the kind was available at a frame-selected pair
+(Proposition~\ref{prop:splice} bounds a different frame event); heuristically it is
+$\approx4M/n$, and \S\ref{sec:fc} proves $O(\Delta^{2M}/n)$.  The second term
 --- among the first $M$ candidates, which lie on disjoint free column pairs, not all are bad
 --- is a conditional statement about $M$ events of constant probability, and with
 $M=C\log\log n$ it needs only a hazard bounded below: if
 $\Pr_X[t\text{ bad}\mid\nu>t,\ 1,\dots,t-1\text{ bad}]\le1-c$ for $t\le M$ then the second
 term is $\le(1-c)^M=(\log n)^{-C\log(1/(1-c))}$, which is $o(1/\log n)$ for $C$ large (in
-the data the conditional probabilities are $\approx0.6$, Remark~\ref{rem:fixrect}).  Under
+the data a candidate is bad with conditional probability $\approx0.6$, i.e.\ good with
+$\approx0.4$, Remark~\ref{rem:fixrect}).  Under
 such a hazard bound the failure of $G$ is dominated by short arcs or cycles at the mark, not
 by a large count of events: the first-pair hypothesis is then the $\nu$-tail at the selected
 pair together with a constant conditional hazard over $O(\log\log n)$ candidates.  Compared with
@@ -1653,11 +1670,12 @@ $\{1,2\}$'') instead of $\ell'/n$; $O(\log\log n)$ events instead of $\ge\log^2n
 splice bound, no conditioning on $K_0$; and the quantity hypothesised is one the data
 measure directly ($n\Pr_X[G^c]$ is flat at $5.5$ for $30\le n\le150$), whereas the threshold
 $\ell'=\log^5n$ of Hypothesis~\ref{hyp:witness} exceeds every $n$ we can sample.  Against
-this: the $\nu$-tail is the dominant term and is not shown to be easier than the second
-(Lemma~\ref{lem:nuswitch} below); the candidates are generated by one permutation
-$\rho_{x_1,y_1}$ and are dependent (the measured dependence is positive, the unfavourable
-direction); and admissibility couples $G$ to rows $1,2$.  Neither hypothesis is known to
-imply the other: $\Pr_X[F^c]\ge\tfrac12\Pr_X[G]$, so the first pair alone cannot give (L),
+this: the candidates are generated by one permutation $\rho_{x_1,y_1}$ and are dependent
+(the measured dependence is positive, the unfavourable direction); and admissibility
+couples $G$ to rows $1,2$.  The $\nu$-tail, which is the dominant term in the data, is
+proved to be $O(\Delta^{2M}/n)$ in \S\ref{sec:fc} below (Corollary~\ref{cor:nutail}), so
+that only the hazard term remains (Hypothesis~\ref{hyp:hazard}).  Neither of
+Hypotheses~\ref{hyp:firstpair} and~\ref{hyp:witness} is known to imply the other: $\Pr_X[F^c]\ge\tfrac12\Pr_X[G]$, so the first pair alone cannot give (L),
 and Hypothesis~\ref{hyp:witness} says nothing about $G$.  So
 Hypothesis~\ref{hyp:firstpair} is a third alternative sufficient condition, the simplest
 to state and the only one whose hypothesised quantity we can measure; the reference
@@ -1666,61 +1684,36 @@ hypothesis of the paper remains Hypothesis~\ref{hyp:witness}.  The minimal insta
 $c=\tfrac12-o(1)$) but not evidently from Hypothesis~\ref{hyp:witness}, and is sufficient
 for neither.
 
-\paragraph{The $\nu$-tail under a rigid switching.}  The event $\{\nu\le M\}$ is the union
+\paragraph{The staircase events.}  The event $\{\nu\le M\}$ is the union
 over $2\le k\le M$ of the four events $E_k(a,b)$, $a,b\in\{p,p'\}$: the $\rho$-path
 $w_0=a,w_1,\dots$ (with $w_{i+1}=\rho(w_i)$, i.e.\ $L(y_1,w_{i+1})=L(x_1,w_i)$) first meets
-$\{p,p'\}$ at step $k$, at $w_k=b$.  Each is a ``staircase'' of $2k$ cells in rows $x_1,y_1$
-together with the two anchor cells $L(x_1,p)=L(1,p')$, $L(y_1,p)=L(2,p')$ that select the
-pair.  Upper bounds on short structures are the direction in which switchings usually work,
-and there is a switching for the staircase that is always legal and rigidly invertible:
-
-\begin{lemma}[a rigid switching for the staircase]\label{lem:nuswitch}
-Fix $k\ge2$, $a,b\in\{p,p'\}$ and $L\in E_k(a,b)$ with path $w_0,\dots,w_k$.  For a row
-$u\notin\{1,2,x_1,y_1\}$ let $W_u$ be the $\rho_{x_1,u}$-cycle through $w_{k-1}$, and call
-$u$ admissible if $W_u\cap(\{p\}\cup\{w_0,\dots,w_{k-2}\})=\emptyset$; let $f_k(L)$ be the
-number of admissible $u$.  For admissible $u$, trading rows $x_1,u$ along $W_u$ gives a
-square $L'\in X$ with the same frame-selected pair $(x_1,y_1)$, and $(L,u)$ is recovered
-from $(L',k,a,b)$ alone.  Consequently, for every $\theta>0$,
-\[
-\Pr_X\bigl[E_k(a,b)\cap\{f_k\ge\theta n\}\bigr]\le\frac1{\theta n},\qquad
-\Pr_X\bigl[\nu\le M,\ f\ge\theta n\bigr]\le\frac{4M}{\theta n},
-\]
-where on $\{\nu\le M\}$, $f$ denotes $f_k$ for the triple $(k,a,b)$ realising $\nu$ (with
-$a=p$ if both starts do).
-\end{lemma}
-
-\begin{proof}
-Rows $1,2$ are untouched, so $L'\in X$ with the same mark and $\sigma$; row $y_1$ is
-untouched; $p\notin W_u$ keeps the anchor $L(x_1,p)$, so $(x_1,y_1)$ is the frame-selected
-pair of $L'$.  Inversion: $\rho'(w)$, the column of $L'(x_1,w)$ in row $y_1$, differs from
-$\rho(w)$ only for $w\in W_u$, so admissibility makes the $\rho'$-path from $a$ agree with
-$w_0,\dots,w_{k-1}$; the symbol $s=L(x_1,w_{k-1})=L(y_1,b)=L'(y_1,b)$ is read off row $y_1$;
-$u$ is the row of $s$ in column $w_{k-1}$ of $L'$ (the trade moved $s$ from $(x_1,w_{k-1})$
-to $(u,w_{k-1})$ and changed nothing else in that column; $w_{k-1}\notin\{p,p'\}$ by first
-meeting, and $p'\in W_u$ is harmless since nothing reads row $x_1$ at $p'$); and $W_u$ is
-the $\rho'_{x_1,u}$-cycle through $w_{k-1}$, the trade having inverted it.  Trading back
-returns $L$.  So $\sum_{L\in E_k(a,b)}f_k(L)\le|X|$, which is the first bound; the second
-is a union bound over $k\le M$ and the four $(a,b)$.
-\end{proof}
-
-The lemma was checked on $2.5\cdot10^5$ sampled moves at $n=30,50$ (every move legal,
-pair preserved, inverted exactly).  It leaves $\Pr_X[\nu\le M,\ f<\theta n]$, where
-$f<\theta n$ says that for all but $\theta n$ rows $u$ the $\rho_{x_1,u}$-cycle through
-$w_{k-1}$ meets a prescribed set of $k$ columns: a lower tail of a count of
-constant-probability events (the cycle through a given column of a random permutation
-avoids $k$ given columns with probability $\approx1/(k+1)$; the sampled means of $f_k/n$
-are $0.35,0.23,0.17,0.14,0.11$ for $k=2,\dots,6$ at $n=30$) at positions selected by the
-same pair --- the same type as the second term of the first-pair hypothesis, for a
-different event.  Alternatively, by row exchangeability and a union bound over the
-$\le n^{2k-1}$ free parameters of a staircase, $\Pr_X[\nu\le M]\le8C^{2M+2}/n$ (for
-$C\ge2$) would follow from a \emph{fixed-position} bound
+$\{p,p'\}$ at step $k$, at $w_k=b$.  Each is a ``staircase'' of $2k$ cells in rows $x_1,y_1$,
+$(x_1,w_i,t_i)$ and $(y_1,w_{i+1},t_i)$ for $0\le i<k$ with $t_i=L(x_1,w_i)$ and
+$w_1,\dots,w_{k-1}\notin\{p,p'\}$ distinct, together with the two anchor cells
+$L(x_1,p)=L(1,p')$, $L(y_1,p)=L(2,p')$ that select the pair; all of them lie in the two rows
+$x_1,y_1\notin\{1,2\}$.  By the exchangeability of rows $3,\dots,n$,
+$\Pr_X[E_k(a,b)]=(n-2)(n-3)\Pr_X[E_k(a,b),\,(x_1,y_1)=(3,4)]$, and the latter event is a
+union, over at most $n^{2k-1}$ choices of the free columns and symbols, of events
+$\{L\supseteq Q\}$ with $Q$ a partial Latin square of at most $2k+2$ cells in rows $3,4$
+(for $(a,b)=(p,p)$, mixed, $(p',p')$: $2k$, $2k+1$, $2k+2$ cells and $n^{2k-3}$, $n^{2k-2}$,
+$n^{2k-1}$ parameters).  So an upper bound on the $\nu$-tail follows from a
+\emph{fixed-position} bound in completions of a fixed rectangle,
 \begin{equation}\label{eq:FC}
-\Pr\bigl[Q\subseteq L\;\big|\;L\supseteq R\bigr]\le(C/n)^{|Q|}\quad\text{for partial squares $Q$ with $|Q|\le2M+2$ cells in two rows,}
+\Pr\bigl[Q\subseteq L\;\big|\;L\supseteq R\bigr]\le(C_0/n)^{|Q|}
+\quad\text{for partial Latin squares $Q$ with $|Q|\le2M+2$ cells in two rows,}
 \end{equation}
-$L$ a uniform completion of the fixed $2\times n$ rectangle $R$; but the always-legal row
-trades give only one factor $1/n$ per row (two cells in one row are not shown to have
-probability $O(1/n^2)$), and column turns are legal only on a set of choices whose size is
-again a lower tail.  We return to \eqref{eq:FC} in \S\ref{sec:remains}.
+$L$ a uniform completion of the fixed $2\times n$ rectangle $R$ (each $S(R)$ contributes
+to $\Pr_X$ with the same weight, rectangles of one type having equal completion counts):
+\eqref{eq:FC} gives $\Pr_X[E_k(a,b)]\le(n-2)(n-3)n^{2k-3+t}(C_0/n)^{2k+t}\le C_0^{2k+2}/n$,
+$t\in\{0,1,2\}$, hence, summing the four events for each $k$ and the geometric series over
+$2\le k\le M$, $\Pr_X[\nu\le M]\le8C_0^{2M+2}/n$ for $C_0\ge2$.  The always-legal row
+trades give \eqref{eq:FC} only to one factor $1/n$ per row (an elementary rigid switching
+along the staircase gives $\Pr_X[\nu\le M,\ f_{\mathrm{adm}}\ge\theta n]\le4M/(\theta n)$
+with $f_{\mathrm{adm}}$ the number of admissible rows, which leaves a lower tail;
+\cite{repo}); two cells in one row need the
+$\eta$-switching of Allsop and Morris \cite{AM26}, whose per-cell bound we extend to
+partial Latin squares containing two complete rows in \S\ref{sec:fc}.  That section proves
+\eqref{eq:FC} with an absolute constant $C_0=\Delta\le66$.
 
 \begin{remark}[data: completions of a fixed rectangle]\label{rem:fixrect}
 To test the hypotheses on types that uniform sampling never produces we ran the
@@ -1782,28 +1775,309 @@ $o(1/\log n)$); they exclude a visible dependence between the events, or a visib
 of the type, at the first- and second-moment level for $n\le100$.
 \end{remark}
 
+
+\section{The fixed-cell bound in completions of a rectangle}\label{sec:fc}
+
+Throughout this section $R$ is a fixed $2\times n$ Latin rectangle occupying rows $1,2$,
+$Q$ is a partial Latin square with cells in rows other than $1,2$ such that $R\cup Q$ is a
+partial Latin square, and $L$ is uniform on $\{L\in\mathcal L_n:L\supseteq R\cup Q\}$; we
+write $S(R)$ for the completions of $R$.  Nothing in this section moves rows $1,2$, and
+the mark plays no role.  (In this section $\alpha,\beta$ denote the density parameters of
+\cite{AM26}, not the mark parameters; the mark parameters return in
+Corollary~\ref{cor:nutail}.  Their statistic $\nu(L)$ is not used; our $\nu$ is the arc
+minimum of \S\ref{sec:orbit}(e).)  We use the switchings of Allsop and Morris \cite{AM26} and follow
+their notation (\S\S2--4 there): $\rho_L(r,r',c)$ is the row cycle of rows $r,r'$ through
+column $c$, $\gamma_L(c,c',r)$ the column cycle of columns $c,c'$ through row $r$,
+$\zeta_L(c,c',r,r')$ the cross-switch, and $\eta_L(r,r',c)$ the $\eta$-switch, which
+replaces the entries $(r,c,s),(r',c,s'),(r,c',s')$ --- where $s=L[r,c]$, $s'=L[r',c]$ and
+$c'$ is the column with $L[r,c']=s'$ --- by $(r,c,s'),(r',c,s),(r,c',s)$ and otherwise
+changes only rows $r'$ and $r''$, the row with $L[r'',c']=s$; it is of \emph{Type One} if
+$r''=r'$ (then $\rho_L(r,r',c)$ is an intercalate), and by their Lemma~2.8 a square has
+at most $n$ preimages under an $\eta$-switch of Type One and at most one otherwise.  Their
+Theorem~1.1 bounds $\Pr[L\supseteq P]$ for partial Latin squares $P$ occupying at most
+$\alpha n$ rows and $\beta n$ columns with $2\alpha+\beta<1$, and so does not apply to
+$P=R\cup Q$, which occupies every column.  Their proof does, with changes we describe in
+full.  Call rows $1,2$ \emph{special} and write $E=\{1,2\}\cup R_Q$.
+
+\begin{theorem}[\cite{AM26}, Theorem~3.1, with two complete rows]\label{thm:AM31two}
+Let $R,Q$ be as above with $|R_Q|+6\le\alpha n$, $|C_Q|\le\beta n$ and $2\alpha+\beta<1$.
+Let $r,r'\notin\{1,2\}$ be distinct rows and $c$ a column, and suppose that $Q$ has no
+cell in row $r'$ outside column $c$.  Then, for $n\ge n_0(\alpha,\beta)$,
+\[
+\Pr\bigl[\eta_L(r,r',c)\text{ is of Type One}\;\big|\;L\supseteq R\cup Q\bigr]\le\frac{D}{n},
+\qquad D=D(\alpha,\beta)\to62\text{ as }\alpha,\beta\to0 .
+\]
+\end{theorem}
+
+The constant is not optimised.  The proof is that of \cite{AM26} with three changes: the
+row-exclusion set $R_P$ becomes $E$ and the column-exclusion set $C_P$ becomes $C_Q$ (the
+cells of $R$ need no exclusion because no switch below changes rows $1,2$); the
+cross-switches of their Claim~2 and the row switches of their Claim~3 are restricted to
+pairs of rows in a common \emph{arc} of a column cycle, so that no column part of a switch
+passes through a special row; and the statistic $\nu(L)$ of their Claims~3--4 is replaced by
+one that also counts the rows on the $(c_2,c_3)$-cycles through the special rows, so that the
+column-cycle switch of their Claim~4 is only ever applied to a cycle avoiding rows $1,2$.
+
+\paragraph{The recursion and Claim~1.}  For $L\supseteq R\cup Q$ put $r_0=r$, $c_0=c$,
+$s_0=L[r_0,c_0]$, $r_1=r'$, and let $c_1$ be the column with $L[r_0,c_1]=L[r_1,c_0]$.
+Recursively, for $j\ge1$, $s_j=L[r_j,c_j]$; $r_{j+1}$ is the row with $L[r_{j+1},c_j]=s_{j-1}$
+and $c_{j+1}$ the column with $L[r_j,c_{j+1}]=s_{j-1}$; $X_j$ is the set of squares with
+$s_j=s_{j-1}$, and $Y_j$ the set with $s_j\ne s_{j-1}$, $r_{j+1}\notin E\cup\{r_\ell:\ell\le j\}$
+and $c_{j+1}\notin C_Q\cup\{c_\ell:\ell\le j\}$ (with $Y_0$ all squares); $p_{j-1}=\Pr[X_j\mid Y_{j-1}]$,
+so that $p_0$ is the probability to be bounded.  Their Claim~1,
+\[
+p_{j-1}\le\frac{np_j+1}{n(1+p_j-2\alpha-\beta)-3j-2}\qquad(1\le j<n(1-2\alpha-\beta)/3),
+\]
+holds verbatim.  Its switch $\eta_L(r_j,x,c_j)$, for $L\in X_j$ and a row $x\notin E\cup\{r_\ell\}$
+with $y$ (the column with $L[r_j,y]=L[x,c_j]$) outside $C_Q\cup\{c_\ell\}$ and $x'$ (the row
+with $L[x',y]=s_{j-1}$) outside $E\cup\{r_\ell\}$, changes only rows $r_j,x,x'$, all outside
+$\{1,2\}$, so rows $1,2$ are untouched; the cells of $Q$ it could touch are $(r_j,y)$,
+excluded, $(r_j,c_j)$, which is not a cell of $Q$ ($c_j\notin C_Q$ for $j\ge2$, and for $j=1$
+the only cell of $Q$ allowed in row $r_1$ is in column $c_0\ne c_1$), and cells in rows
+$x,x'$, excluded.  The maps $x\mapsto y\mapsto x'$ are injective, so at most $|C_Q|+j+1$
+choices of $x$ are lost to $y$ and at most $|E|+j+1$ to $x'$, giving at least
+$n-2|E|-|C_Q|-3j-3\ge n(1-2\alpha-\beta)-3j-3$ switches from each $L\in X_j$ into $Y_j$,
+and the reversibility count is theirs.
+
+\paragraph{Setting for Claims~2--4.}  For $L\in X_3$ let $Q(L)$ consist of the cells of $Q$
+and the ten structure cells $\{(r_\ell,c_\ell),(r_{\ell+1},c_\ell),(r_\ell,c_{\ell+1}):\ell\le2\}\cup\{(r_3,c_3)\}$;
+a row is \emph{free} if it is not in $E\cup\{r_0,r_1,r_2,r_3\}$, and $f\ge n-|E|-4\ge n(1-\alpha)$
+is the number of free rows.  (The row $r_0$ need not be free and may lie anywhere; its cells
+in columns $c_2,c_3$ are not in $Q(L)$ and are never read by the recursion, which reads
+only the ten structure cells.)  Consider the partition of the rows into $(c_2,c_3)$-column
+cycles.  As in \cite{AM26}: $\gamma_L=\gamma_L(c_2,c_3,r_1)$ is one of them; $\{r_2,r_3\}$ is
+another (an intercalate, since $s_3=s_2$); and $c_2,c_3\notin C_Q$.  Call a cycle
+\emph{active} if it is $\gamma_L$ or contains a special row (so there are one to three
+active cycles, and $\{r_2,r_3\}$ is never active), let $\mathcal S(L)$ be the set of free
+rows on active cycles, and $g(L)=f-|\mathcal S(L)|$ the number of free rows on inactive
+cycles.  An inactive cycle other than $\{r_2,r_3\}$ avoids rows $1,2$ and $r_1,r_2,r_3$, so
+switching it changes no cell of $Q(L)$ or $R$.
+
+Give each active cycle $D$ (a cycle, not to be confused with the constant $D$) a \emph{reference row}: $r_1$ if $D=\gamma_L$, otherwise row $1$
+if $1\in D$, otherwise row $2$.  List the rows of $D$ as $x'_1,\dots,x'_m$ in the cyclic
+order from the reference row $x'_1$ read from column $c_2$ (the row after $x$ is the row
+whose $c_2$-entry is the $c_3$-entry of $x$, as on p.~16 of \cite{AM26}), and let the free
+rows of $D$ in this order be $x_1,\dots,x_d$.  The special rows of $D$ other than the
+reference row cut the list into \emph{arcs}; a pair $(i,j)$, $i<j$, of free positions is a
+\emph{same-arc pair} if no special row and no reference row lies strictly between $x_i$
+and $x_j$.  The free rows of the active cycles are the disjoint union of the free rows of
+the arcs, and there are at most three arcs in all (if $\gamma_L$ contains both special rows
+it has three arcs and is the only active cycle; if one, it has two and the other special
+row's cycle has one; if none, $\gamma_L$ has one and the special rows lie on one cycle with
+two arcs or on two cycles with one each).  As in \cite{AM26}, $(L,i,j)$ is \emph{good} if
+$\rho_L(x_i,x_j,c_3)$ does not hit column $c_2$, and \emph{bad} otherwise.
+
+\paragraph{Claim~$2'$ (good same-arc pairs, in aggregate).}  For $a\ge4$ let $\mathcal A_a$
+be the set of triples $(L,D,A)$ with $L\in X_3$, $D$ an active cycle of $L$ and $A$ an arc
+of $D$ with exactly $a$ free rows, and $N_a=|\mathcal A_a|$.  Then
+\[
+\sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs }(i,j)\text{ with }x_i,x_j\in A\}
+\ \ge\ N_a\,\frac{a(a-1)(a-3)}{9(a-2)}\ \ge\ N_a\,\frac{(a-3)^2}{9}.
+\]
+This is a statement about the class $\mathcal A_a$, as their Claim~2 is about the class
+$A_k$; a single arc may have no good pair.
+
+\emph{Proof.}  This is their proof run inside the arcs of size $a$.  For $(i,j)$ in $A$ let
+$W_A(i,j)$ be the set of pairs $(u,v)$ in $A$ with exactly one of $u,v$ strictly between $i$
+and $j$ and $\{u,v\}\cap\{i,j\}=\emptyset$; then $|W_A(i,j)|=(j-i-1)(a-(j-i)-1)$ in arc
+coordinates, $\sum_{(i,j)\subseteq A}|W_A(i,j)|=a(a-1)(a-2)(a-3)/12$ and $|W_A|\le(a-2)^2/4$
+(their (5)--(6) with $n-k$ replaced by $a$).  For a bad $(L,i_0,j_0)$ in $A$ and
+$(u,v)\in W_A(i_0,j_0)$: if $(L,u,v)$ is good, map to $(L,u,v)$ (Kind~1); if it is bad,
+cross-switch on $\zeta_L(c_2,c_3,x_u,x_v)$ (Kind~2).  The cross-switch is well defined
+($(L,u,v)$ is bad, and $x_u,x_v$ are not adjacent in the list since a position of
+$\{i_0,j_0\}$ separates them).  It changes the rows $x_u,x_v$, which are free, and the
+entries in columns $c_2,c_3$ of the rows strictly between $x_u$ and $x_v$ in the list,
+which are rows of $D$ that are neither special nor the reference row (the pair is
+same-arc) nor $r_2,r_3$ (not on $D$); such rows may include $r_0$ or rows of $R_Q$, whose
+cells in columns $c_2,c_3\notin C_Q$ are not in $Q(L)\cup R$.  So it changes no cell of
+$R$ or $Q(L)$, and $L'\in X_3$ with the same $r_\ell,c_\ell,s_\ell$.  By their Lemma~2.6 the
+row set of $D$ is unchanged, and by their Remark~2.7 the list of $L'$ is that of $L$ with
+the segment strictly between $x_u$ and $x_v$ reversed; so the special and reference rows
+keep their positions, $A$ is an arc of $L'$ with the same free rows, $(u,v)\in W_A(i',j')$
+for the new positions $(i',j')$ of $x_{i_0},x_{j_0}$, and $(L',i',j')$ is good by their
+Lemma~2.6(2); hence $(L',D,A)\in\mathcal A_a$.  The inverse counts are theirs: a good
+$(L',D',A',i',j')$ has at most $|W_{A'}(i',j')|$ Kind-1 preimages (the interleaving
+relation is symmetric) and at most $|W_{A'}(i',j')|$ Kind-2 preimages (one for each
+$(u,v)\in W_{A'}(i',j')$, by their Lemma~2.5 and Remark~2.7, the inverse cross-switch
+again lying inside $A'$).  Summing over $\mathcal A_a$, $\sum_{\text{bad}}|W|\le2\sum_{\text{good}}|W|$,
+whence $N_a\,a(a-1)(a-2)(a-3)/12=\sum_{\text{all}}|W|\le3\sum_{\text{good}}|W|\le3\cdot\#\{\text{good}\}\cdot(a-2)^2/4$.
+The last inequality of the claim is $a(a-1)\ge(a-2)(a-3)$.  $\square$
+
+\paragraph{Claim~$3'$ (free rows off the active cycles).}  $\sum_{L\in X_3}g(L)\ge f|X_3|/30$ for $f\ge501$.
+
+\emph{Proof.}  Double count the row switches $\rho_L(x_i,x_j,c_3)$ over $L\in X_3$, active
+cycles $D$ of $L$ and good same-arc pairs $(i,j)$ on $D$.  \emph{Forward.}  Such a switch
+exchanges the entries of the free rows $x_i,x_j$ on the columns of their row cycle through
+$c_3$, which does not contain $c_2$; it changes no cell of $R$ or $Q(L)$, so $L'\in X_3$
+with the same $r_\ell,c_\ell,s_\ell$.  The $(c_2,c_3)$-column permutation (the $c_2$-entry
+of a row $\mapsto$ its $c_3$-entry) changes only at rows $x_i,x_j$, whose $c_3$-entries are
+exchanged: it is composed with the transposition of those two symbols, which lie on one
+cycle.  So every cycle other than $D$ is unchanged and $D$ splits into two: one consists
+of the rows outside the segment strictly between $x_i$ and $x_j$ together with $x_i$, and
+contains the reference row and every special row of $D$; the other, $S$, consists of the
+rows strictly between together with $x_j$, and contains no special row because $(i,j)$ is
+a same-arc pair (this is their Lemma~2.4(1), with the orientation of our list).  Hence the
+active cycles of $L'$ are those of $L$ with $D$ replaced by $D\setminus S$ (if $D=\gamma_L$
+then $\gamma_{L'}=D\setminus S\ni r_1$; otherwise $\gamma_{L'}=\gamma_L$), $S$ is inactive in
+$L'$, $x_i\in\mathcal S(L')$, $x_j\in S$, and $g(L')=g(L)+|S\cap\text{free}|$.  Let $F(L)$
+be the number of such switches from $L$ (distinct pairs of rows give distinct switches,
+and a pair of rows lies on one cycle).  Summing Claim~$2'$ over $a$, with
+$h(a)=((a-3)_+)^2/9$,
+\[
+\sum_{L\in X_3}F(L)\ \ge\ \sum_{a\ge4}\ \sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs in }A\}
+\ \ge\ \sum_{a\ge4}N_ah(a)\ =\ \sum_{L\in X_3}\ \sum_{A}h(|A|),
+\]
+and for each $L$, since the arcs partition $\mathcal S(L)$ into at most three parts,
+$\sum_Ah(|A|)\ge\frac1{27}(\sum_A(|A|-3)_+)^2\ge\frac1{27}((f-g(L)-9)_+)^2$.
+\emph{Backward.}  If $L'$ arises from $(L,D,i,j)$ then $L$ is obtained from $L'$ by
+switching $\rho_{L'}(x_i,x_j,c_3)$ (a row cycle switch is an involution), so $L$ is
+determined by the unordered pair $\{x_i,x_j\}$, of which one row lies in $\mathcal S(L')$
+and the other on an inactive cycle of $L'$; the number of preimages of $L'$ is at most
+$|\mathcal S(L')|\,g(L')\le f\,g(L')$.  \emph{Conclusion.}  With
+$\bar g=|X_3|^{-1}\sum_Lg(L)$, Jensen's inequality for the convex function
+$t\mapsto((f-t-9)_+)^2$ gives
+$|X_3|((f-\bar g-9)_+)^2/27\le\sum_L\sum_Ah(|A|)\le\sum_LF(L)\le f\sum_{L'}g(L')=f|X_3|\bar g$.
+If $\bar g<f/30$ then $(f-\bar g-9)^2>(29f/30-9)^2\ge0.9f^2>27f\bar g$ for $f\ge501$, a
+contradiction.  $\square$
+
+\paragraph{Claim~$4'$.}  $p_2\le60/f\le60/(n(1-\alpha))$ for $f\ge501$.
+
+\emph{Proof.}  Their proof with the set of admissible rows changed.  For $L\in X_3$ let
+$x$ be a free row on an inactive cycle ($g(L)$ choices) and $\rho=\rho_L(r_3,x,c_3)$.  If
+$\rho$ does not hit column $c_2$, switch on $\rho$ to obtain $L'$; otherwise first switch
+on the $(c_2,c_3)$-cycle through $x$ to obtain $L''$, then on $\rho_{L''}(r_3,x,c_3)$ to
+obtain $L'$.  The cycle through $x$ is inactive, so it avoids rows $1,2$, $r_1$ (on
+$\gamma_L$) and $r_2,r_3$ (the intercalate), and $c_2,c_3\notin C_Q$: switching it changes
+no cell of $R$ or $Q(L)$, so $L''\in X_3$ with the same data; and $\rho_{L''}(r_3,x,c_3)$
+does not hit $c_2$, because the switch composes the row permutation of $(x,r_3)$ with the
+transposition of $L[x,c_2],L[x,c_3]$, two symbols of one cycle, which splits that cycle
+with the two symbols, hence the columns $c_2,c_3$, on different cycles (their
+Lemma~2.3(1)).  In either case the final switch involves the rows $r_3,x$, both outside
+$\{1,2\}\cup R_Q$, along a row cycle avoiding $c_2$; it changes no cell of $R$ or of
+$Q(L)\setminus\{(r_3,c_3)\}$ and replaces $s_3=s_2$ by $L[x,c_3]\ne s_2$ (or $L[x,c_2]$),
+so $L'\in Y_2\setminus X_3$, as in \cite{AM26}.  This gives at least $\sum_Lg(L)\ge f|X_3|/30$
+switches from $X_3$ to $Y_2\setminus X_3$.  Their inverse count applies unchanged: from
+$L'$ the row $r''$ with $L'[r'',c_3]=s_2$ equals $x$, and in each of the two cases $L$ is
+determined, by switching back $\rho_{L'}(r_3,r'',c_3)$ and, in the second case, then the
+$(c_2,c_3)$-cycle of $L''$ through $r''$ (the same set of rows as before); so each $L'$ has
+at most two preimages.  Hence $|Y_2\setminus X_3|\ge f|X_3|/60$ and
+$p_2=|X_3|/|Y_2|\le1/(1+f/60)\le60/f$.  $\square$
+
+\begin{proof}[Proof of Theorem~\ref{thm:AM31two}]
+Claim~1 twice from $p_2\le60/(n(1-\alpha))$, as in (16) of \cite{AM26}: with
+$\phi_j(x)=(nx+1)/(n(1+x-2\alpha-\beta)-3j-2)$, which is non-decreasing for $j=o(n)$,
+$p_1\le\phi_2(p_2)\le(60/(1-\alpha)+1)/(n(1-2\alpha-\beta)-8)$ and
+$p_0\le\phi_1(p_1)\le(np_1+1)/(n(1-2\alpha-\beta)-5)$, so $p_0\le D(\alpha,\beta)/n$ with
+$D(\alpha,\beta)=(60/(1-\alpha)+2+o(1))/(1-2\alpha-\beta)^2\to62$.
+\end{proof}
+
+\begin{corollary}[per-cell bound and (FC) in $S(R)$]\label{cor:FCtwo}
+With $R,Q$ as in Theorem~\ref{thm:AM31two}, for a row $r\notin\{1,2\}$ (in $R_Q$ or not) and
+any $(c,s)$ such that $Q$ has no cell $(r,c,\cdot)$,
+$\Pr[L[r,c]=s\mid L\supseteq R\cup Q]\le\Delta/n$ with $\Delta=(D+1)/(1-2\alpha-\beta)+o(1)$,
+which is $\le66$ for $\alpha,\beta$ small.  Consequently, for every partial Latin square
+$Q$ on rows other than $1,2$ with $|R_Q|,|C_Q|\le\varepsilon n$ ($\varepsilon$ a small
+absolute constant), \eqref{eq:FC} holds with $C=\Delta$:
+$\Pr[Q\subseteq L\mid L\supseteq R]\le(\Delta/n)^{|Q|}$.
+\end{corollary}
+
+\begin{proof}
+The first statement is Lemma~4.1 of \cite{AM26} with $\mathcal R=\{r\}$: its switch
+$\eta_L(r,r_1,c)$, $r_1\notin E\cup\{r\}$, avoids the cells of $R\cup Q$ when $c_1\notin C_Q$
+and $r_2\notin E$ (at most $|C_Q|+|E|$ excluded choices of $r_1$) and changes only rows
+$r,r_1,r_2\notin\{1,2\}$; the images $L'$ all have $r'(L')=r_1\notin E$ (the row with
+$L'[r_1,c]=s$), so in their sum (19) only $r'\notin\mathcal R\cup E$ occur, and for these
+the inverse count uses Theorem~\ref{thm:AM31two} for $Q'=Q\cup\{(r',c,s),(r,c,s')\}$ with
+$r'$ as its $r'$: the only cell of $Q'$ in row $r'$ is in column $c$, as the theorem
+allows, and $\alpha,\beta$ increase by $O(1/n)$.  The second statement follows by
+conditioning on the cells of $Q$ one at a time.
+\end{proof}
+
+\begin{corollary}[the $\nu$-tail]\label{cor:nutail}
+For every $\lambda,\alpha,\beta$ and every $M$ with $2M+2\le\varepsilon n$,
+$\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$.  In particular
+$\Pr_X[\nu\le C\log\log n]=O\bigl((\log n)^{2C\log\Delta}/n\bigr)=o(1/\log n)$ for every $C$.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:FCtwo} is \eqref{eq:FC} with $C=\Delta$, in every $S(R)$; the
+computation after \eqref{eq:FC} in \S\ref{sec:orbit}(e) gives the bound.
+\end{proof}
+
+So the first term of the first-pair condition is settled, and the weak conjecture follows
+from the second alone:
+
+\begin{hypothesis}[hazard hypothesis]\label{hyp:hazard}
+For some absolute $C$ and $M=M(n)\le C\log\log n$,
+$\displaystyle\sup_{\lambda,\alpha,\beta}\Pr_X\bigl[\nu>M,\ \text{the candidates }t=1,\dots,M\text{ are all bad}\bigr]=o(1/\log n)$.
+\end{hypothesis}
+
+\begin{corollary}\label{cor:hazard}
+Hypothesis~\ref{hyp:hazard} implies Hypothesis~\ref{hyp:firstpair}, hence
+Conjecture~\ref{conj:cgw}.  It holds with $M=\lceil C\log\log n\rceil$ if, for $t\le M$,
+the conditional probability that candidate $t$ is bad, given $\nu>t$ and that candidates
+$1,\dots,t-1$ are bad, is at most $1-c$ for an absolute $c>0$, and $C\log(1/(1-c))>1$.
+\end{corollary}
+
+\begin{proof}
+$\Pr_X[G^c]\le\Pr_X[\nu\le M]+\Pr_X[\nu>M,\ t\le M\text{ all bad}]$, and the first term is
+$o(1/\log n)$ by Corollary~\ref{cor:nutail}; under the conditional bound the second is at
+most $(1-c)^M=(\log n)^{-C\log(1/(1-c))}$.
+\end{proof}
+
+\begin{remark}[what changed, and what did not]\label{rem:fcchanged}
+Hypothesis~\ref{hyp:hazard} is a statement about $O(\log\log n)$ events of constant
+probability at column pairs selected by the frame-selected row pair; it is a lower bound
+(each candidate is good with conditional probability $\ge c$) and is not a fixed-cell
+event, so Corollary~\ref{cor:FCtwo} does not reach it.  The obstacle of
+\S\ref{sec:remains} is therefore unchanged in kind but reduced in scope: the upper-bound
+half --- short structures at a frame-selected pair --- is now available, through the
+$\eta$-switching of \cite{AM26}, whose forward degree is deterministic; only lower bounds
+at square-selected positions remain.  In the data (Remark~\ref{rem:fixrect}) the
+conditional probabilities of Corollary~\ref{cor:hazard} (that a candidate is bad) are
+$\approx0.6$ at every $n$ and type, i.e.\ $c\approx0.4$.  Where the obstruction of our earlier analysis went: with the admissible rows of
+their Claim~4 taken to be all free rows off $\gamma_L$, the column-cycle switch through
+$x$ fails to be legal exactly when the cycle through $x$ contains one special row; the
+statistic $g$ restricts to rows whose cycles contain none, and Claim~$3'$ shows that
+these are $\Omega(n)$ on average, by cutting all active cycles at once with the cuts
+confined to arcs.  Everything stays in $S(R)$; neither the mark nor the isotopy argument
+of Remark~\ref{rem:fixrect} is used.  The constants ($D\to62$, $\Delta\le66$, against their
+$22$ and $23$) are not optimised and are irrelevant for $M=O(\log\log n)$.  The argument
+was checked by two independent automated referees (the first found a claim stated per arc
+that is true only in aggregate, corrected above) and numerically on sampled completions
+at $n=30,50,100$: every restricted cross-switch, cut and Claim-$4'$ move behaved as
+stated, the aggregate of Claim~$2'$ held for every arc size with a factor about $2$ to
+spare, and the mean of $g/f$ was $0.22$--$0.25$ against the bound $1/30$ \cite{repo}.
+\end{remark}
+
 \section{What remains}\label{sec:remains}
 
-Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen}, \ref{hyp:adaptive}
-and~\ref{hyp:firstpair} are statements about configurations at positions selected by the
-frame: a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding $p'$; a clean column pair
-separated by the mark; a short clean column cycle at a prescribed column pair; a column pair
-along $\rho_{x_1,y_1}$ whose column permutation separates $x_1$ from $y_1$.  Their heuristic
-frequencies are, for large $n$, far above what is needed.  The weakest of the sufficient
-conditions our identities provide (short of $\mathrm{EQ}(\delta)$ itself) is the disjunction
-of (L) and Hypothesis~\ref{hyp:firstpair} class by class,
+Hypotheses~\ref{hyp:witness}, \ref{hyp:orbitgen}, \ref{hyp:adaptive},
+\ref{hyp:firstpair} and~\ref{hyp:hazard} are statements about configurations at positions
+selected by the frame: a short $\rho_{x_k,y_k}$-cycle through $p$ avoiding $p'$; a clean
+column pair separated by the mark; a short clean column cycle at a prescribed column pair;
+a column pair along $\rho_{x_1,y_1}$ whose column permutation separates $x_1$ from $y_1$;
+and, in the last, the same at one of the first $O(\log\log n)$ such pairs, given that the
+earlier ones fail.  Their heuristic frequencies are, for large $n$, far above what is
+needed.  The weakest of the sufficient conditions our identities provide (short of
+$\mathrm{EQ}(\delta)$ itself) is the disjunction of (L) and Hypothesis~\ref{hyp:hazard}
+class by class,
 \[
-\sup_{\lambda,\alpha,\beta}\ \min\bigl(\Pr_X[\mathrm{Flip}=\emptyset],\ \Pr_X[G^c]\bigr)=o(1/\log n)
+\sup_{\lambda,\alpha,\beta}\ \min\bigl(\Pr_X[\mathrm{Flip}=\emptyset],\ \Pr_X[\nu>M,\ t\le M\text{ all bad}]\bigr)=o(1/\log n)
+\quad\text{for some }M=M(n)\le C\log\log n
 \]
-(by Theorems~\ref{thm:marked}, \ref{thm:ladder} and~\ref{thm:reduction} and
-Proposition~\ref{prop:firstpairbias}; by Remark~\ref{rem:fewparts} the supremum may be
-restricted to types with at most $\lceil16\log n\rceil$ parts), which we record but do not
-promote, since it is only a disjunction.  Two features make all of these statements hard
-for the available tools: the positions are selected by the frame of the mark, and the whole
-space is conditioned on the type of rows $1,2$.  The first is removable in principle (by
-row exchangeability a frame-selected row pair is two prescribed cells, see below), the
-second is not; and even the unconditioned versions of the needed bounds are, as far as we
-know, not in the literature.  The minimal instance of the obstacle is a lower bound on a
+(by Theorems~\ref{thm:marked}, \ref{thm:ladder} and~\ref{thm:reduction},
+Proposition~\ref{prop:firstpairbias} and Corollary~\ref{cor:nutail}; by
+Remark~\ref{rem:fewparts} the supremum may be restricted to types with at most
+$\lceil16\log n\rceil$ parts), which we record but do not promote, since it is only a
+disjunction.  Two features make all of these statements hard for the available tools: the
+positions are selected by the frame of the mark, and the whole space is conditioned on the
+type of rows $1,2$.  The first is removable (by row exchangeability a frame-selected row
+pair is two prescribed cells, see below); the second is not, but \S\ref{sec:fc} shows that
+for \emph{upper} bounds on events at a sparse set of cells (occupying at most $\varepsilon n$
+rows and columns) it can be handled by the switchings of \cite{AM26}; what no tool of ours reaches is a \emph{lower} bound at
+square-selected positions, and even the unconditioned versions of the needed lower bounds
+are, as far as we know, not in the literature.  The minimal instance of the obstacle is a lower bound on a
 single frame-selected pair:
 \begin{equation}\label{eq:minimal}
 \Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
@@ -1862,23 +2136,24 @@ to other distances for a reason of type rather than multiplicity.  The adaptive
 coordinates sidestep the question: the coordinate is placed where it is separated by
 construction, and the price is paid in rarity rather than in a constant we cannot prove;
 at the first ladder pair alone (\S\ref{sec:orbit}(e)) the rarity disappears as well, and
-what is left is an upper bound on a short arc at the frame-selected pair together with a
-constant conditional hazard over $O(\log\log n)$ candidates along $\rho_{x_1,y_1}$ --- the
-simplest sufficient condition we have (not the weakest: none of the four is known to imply
-another), and still a statement at square-selected positions in both of its terms
-(Lemma~\ref{lem:nuswitch}).
+what is left is an upper bound on a short arc at the frame-selected pair, which
+\S\ref{sec:fc} proves, together with a constant conditional hazard over $O(\log\log n)$
+candidates along $\rho_{x_1,y_1}$, Hypothesis~\ref{hyp:hazard} --- the simplest sufficient
+condition we have (not proved weaker than the others), and still a lower bound at
+square-selected positions.
 
 \emph{The fixed-position form, and the literature.}  Row exchangeability turns every
 statement at the frame-selected pair into one at fixed positions: for an event $E$
 defined through the pair, $\Pr_X[E]=(n-2)(n-3)\Pr_X[E']$, where $E'$ is $E$ read at rows
 $3,4$ together with the two anchor cells $L(3,p)=L(1,p')$, $L(4,p)=L(2,p')$ that make
 $(3,4)$ the selected pair.  The $\nu$-tail of the first-pair hypothesis (through
-\eqref{eq:FC}) then asks for constant-factor upper bounds on the probability of events on
+\eqref{eq:FC}) is then a constant-factor upper bound on the probability of events on
 $O(\log\log n)$ cells in two fixed rows of a uniform completion of a fixed $2\times n$
 rectangle with two further cells prescribed --- in the language of recent work on
-fixed-cell probabilities, a ``spread'' bound under dense conditioning (the second term of
-the hypothesis, and the witness lemma, involve column cycles through all rows and are not
-fixed-cell events).  The known results do not cover it.  For uniform $k\times n$ Latin
+fixed-cell probabilities, a ``spread'' bound under dense conditioning; this is what
+\S\ref{sec:fc} proves.  The hazard hypothesis and the witness lemma involve column cycles
+through all rows and are not fixed-cell events.  The published results stop short of
+dense conditioning.  For uniform $k\times n$ Latin
 \emph{rectangles} the one-cell bound $\Pr[L(r,c)=s\mid Q\subseteq L]\le1/n+O((k+|Q_r|)/n^2)$
 (their proof gives $1/(n-2(k-1)-|Q_r|)$) holds for any completable $Q$ with
 $2k+|Q_r|\le n/2$ \cite[Lemma~3.3]{KSSS23} --- which
@@ -1895,32 +2170,20 @@ squares the corresponding two-sided bound $(\delta/n)^{|P|}\le\Pr[L\supseteq P]\
 $\delta\to1/23$, $\Delta\to23$, is proved by Allsop and Morris \cite[Thm.~1.1]{AM26} for
 $P$ occupying at most $\alpha n$ rows and $\beta n$ columns with $2\alpha+\beta<1$ (or any
 two of rows, columns, symbols).  Our $R\cup Q$ occupies all $n$ columns and all $n$ symbols,
-so none of these statements applies; what we have checked is how far the Allsop--Morris
-\emph{proof} goes in the conditioned space.  Their basic move, the $\eta$-switching
-$\eta_L(r,r',c)$ --- which displaces the target cell within its row and otherwise changes
-only rows $r'$ and a third row $r''$, with at most $n$ preimages when it is an intercalate
-flip and at most one otherwise --- never touches rows $1,2$ when $r,r',r''\notin\{1,2\}$,
-so it is legal in $X$ with a \emph{deterministic} forward degree $n-O(|Q|)$.  A plain trade
-of row $r$ with a free row along a row cycle has the same two properties and is rigid, but
-it rewrites row $r$ at every column of the cycle, so it gives one factor $1/n$ per row and
-nothing for a second cell in the same row; the $\eta$-switch changes row $r$ only at $c$
-and $c'$, which is what makes a second factor possible, at the price of the multiplicity
-$n$ in the intercalate case (the turns of \S\ref{sec:orbit}, by contrast, have random
-forward degrees, which is where the lower tails come from).  The step that converts its
-reversibility into a per-cell bound is their Theorem~3.1 (the intercalate case has
-conditional probability $O(1/n)$); of its four claims, the first transfers to $X$ with
-bookkeeping changes, the second and third appear to transfer after restricting their
-cross-switches to one arc of the column cycle $\gamma_L$ between the rows $1,2$ lying on it
-(the constants change; we have not written this out), and the fourth fails at one point,
-where a column-cycle switch is used
-whose cycle may meet $\{1,2\}$ in exactly one row; the configuration not covered is
-``exactly one of rows $1,2$ lies on the column cycle $\gamma_L(c_2,c_3,r_1)$ and the chosen
-free row lies on the $(c_2,c_3)$-cycle of the other''.  Without that step their recursion
-gives only $O(n^{-1/2})$ for the intercalate case, hence $C/\sqrt n$ per cell rather than
-\eqref{eq:FC}.  Whether their Theorem~3.1 holds when $P$ contains two complete rows that the
-switchings never touch --- assuming the transfer of Claims~2--3 is written out --- is the
-most concrete form of the question we can state (details in \cite{repo}).  The difficulty of counting column cycles that avoid prescribed
-rows is also noted, in a different context, by Allsop and Wanless \cite[\S3.1]{AW25}.  We
+so none of these statements applies as stated; \S\ref{sec:fc} shows that the
+Allsop--Morris \emph{proof} does go through with two complete rows, once its column-cycle
+and cross-switches are kept away from those rows.  What makes their $\eta$-switching the
+right tool is that it displaces the target cell within its row and otherwise changes only
+two other rows: a plain trade of row $r$ with a free row along a row cycle is rigid with the
+same deterministic forward degree, but it rewrites row $r$ at every column of the cycle,
+so it gives one factor $1/n$ per row and nothing for a second cell in the same row; the
+$\eta$-switch changes row $r$ only at $c$ and $c'$, which is what makes a second factor
+possible, at the price of the multiplicity $n$ in the intercalate case, which their
+Theorem~3.1 controls (the turns of \S\ref{sec:orbit}, by contrast, have random forward
+degrees, which is where the lower tails come from).  The difficulty of counting column
+cycles that avoid prescribed rows is noted, in a different context, by Allsop and Wanless
+\cite[\S3.1]{AW25}; in \S\ref{sec:fc} it is sidestepped rather than solved, by cutting the
+cycles so that the prescribed rows are never moved.  We
 mention finally that the parity marginal of Conjecture~\ref{conj:cgw} follows from Kwan,
 Petrova and Sawhney's work: their law of large numbers for the number of odd rows
 \cite[Thm.~1.3(1)]{KPS25} and row exchangeability give
@@ -1956,8 +2219,6 @@ squares and rectangles, \emph{J. Combin. Des.} 34 (2026), 184--197.
 squares in average-case polynomial time, \emph{Random Structures Algorithms} 66 (2025), e70015.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin
 squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
-\bibitem{MW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many subsquares,
-\emph{J. Combin. Theory Ser.~A} 86 (1999), 322--347.
 \bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
 arXiv:2509.13125 (2025).
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,
@@ -1966,6 +2227,8 @@ arXiv:2509.13125 (2025).
 \emph{Bull. London Math. Soc.} 54 (2022), 1420--1438.
 \bibitem{KSSS23} M.~Kwan, A.~Sah, M.~Sawhney and M.~Simkin, Substructures in Latin squares,
 \emph{Israel J. Math.} 256 (2023), 363--416.
+\bibitem{MW99} B.~D. McKay and I.~M. Wanless, Most Latin squares have many subsquares,
+\emph{J. Combin. Theory Ser.~A} 86 (1999), 322--347.
 \bibitem{repo} [author], \texttt{cgw-conjecture}: scripts, logs and notes, \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \end{thebibliography}
 \end{document}
