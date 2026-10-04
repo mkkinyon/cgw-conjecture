@@ -1,0 +1,9 @@
+n=30 squares=1000 instances=3000 joined=1535 separated=1465
+  insert moves: 3078 (two-step 1536), all checks passed: 3078/3078; preimage counts N <= 3k^2: 3078/3078 (max N 235)
+  transfer moves: 814 (two-step insert 407; bad pairs skipped 1436), all checks passed: 814/814
+  conditioned on joined: P[ell in [k,2k]], bound 400k/n, permutation value 3k^2/n^2 (dyadic k)
+    k=2: P[ell in [k,2k))=0.0000  P[min arc in [k,2k))=0.2625   400k/n=26.67   3k^2/n^2=0.0133
+    k=4: P[ell in [k,2k))=0.0313  P[min arc in [k,2k))=0.3746   400k/n=53.33   3k^2/n^2=0.0533
+    k=8: P[ell in [k,2k))=0.1531  P[min arc in [k,2k))=0.3629   400k/n=106.67   3k^2/n^2=0.2133
+  P[ell <= n/10 | joined]=0.000  P[min arc <= n/20 | joined]=0.000  mean ell/n=0.733  mean min arc/n=0.213
+  mean g/(n-ell) by ell/n bin (Claim 3'' lower bound 1/31): {0.1: 0.301, 0.2: 0.269, 0.3: 0.379, 0.4: 0.505, 0.5: 0.529, 0.6: 0.541, 0.7: 0.615, 0.8: 0.729, 0.9: 0.374}

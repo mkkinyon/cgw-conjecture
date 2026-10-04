@@ -3358,9 +3358,12 @@ $\Pr_X[\,\cdot\mid E_j]$.  Union bounds of the type used for
 Corollary~\ref{cor:nutail} exclude only lengths $O(\log n)$ (a cycle of
 length $k$ is a fixed-cell event with $2k$ cells and $n^{2k-1}$
 placements), giving $\mathbb E_X[f_j\mid E_j]\gtrsim(\log n)^2$ against
-$n^2$: useless.  This is the obstacle of rem:fcchanged in its most
-concrete form.  Empirically $d_j$, the number of toggles, is
-$\approx0.04\,n^2$ (below).
+$n^2$: useless.  This is a necessary condition only: $f_j$ also
+requires the interleaving pairs to be \emph{good} (footprint avoiding
+$q_j$) in positive density, which is a separate lower bound (see
+\S(t), where it is shown not to follow from the length bounds).
+Empirically $d_j$, the number of toggles, is $\approx0.04\,n^2$
+(below).
 (b) Even granting (a), the trivial backward bound cannot give
 \eqref{eq:hyphazard}, because $f_j$ decays geometrically in $j$.  An
 ok toggle separates $x_1,y_1$ at a joined earlier candidate $s<j$
@@ -3439,8 +3442,9 @@ lower counterpart) cannot give constant lower bounds for
 argued here.
 
 \emph{Data} (\texttt{s13\_hazard.py}; \texttt{runs/s13/hazard/}):
-completions of a fixed rectangle of type $(n)$ (\texttt{jmfix}), $3$
-marks per square, $M=8$; $n=30$ ($3000$ instances), $50$ ($1800$),
+completions of a fixed rectangle of type $(n)$ only (\texttt{jmfix};
+\eqref{eq:hyphazard} is a supremum over all types with fewer than
+$16\log n$ parts, not tested here), $3$ marks per square, $M=8$; $n=30$ ($3000$ instances), $50$ ($1800$),
 $100$ ($900$); all toggles and merges enumerated at $n=30,50$
 (\texttt{--maxtog 100000}), at most $60$ per instance sampled
 uniformly and reweighted at $n=100$ (\texttt{--maxtog 60}); all
@@ -3538,8 +3542,10 @@ Consequently, with $k_0=\lfloor\log n/(4\log\Delta)\rfloor$ ($\Delta$
 from Corollary~\ref{cor:FCtwo}) and $\delta\le1/100$,
 \[
 \Pr_X\bigl[\ell\le\delta n\text{ or }\min(a,a')\le\delta^3 n\ \big|\ E_1^{\rm j}\bigr]
-\ \le\ 8C_0\delta+\frac{5\Delta^5}{\sqrt n\,\Pr_X[E_1^{\rm j}]}.
+\ \le\ 8C_0\delta+\frac{5(\Delta^5+k_0\Delta^2)}{\sqrt n\,\Pr_X[E_1^{\rm j}]}.
 \]
+(If $\Pr_X[E_1^{\rm j}]$ is small the first-candidate hazard is large
+anyway; no lower bound on it is proved or needed.)
 ($C_0=6000$ will do; $n_0\ge\Delta^{32}$ is forced by the matching of
 (i) and (iii) at $k_0\ge8$, so the lemma is purely asymptotic.)
 
@@ -3637,18 +3643,18 @@ for $k\ge8$.
 
 \emph{(iii) Short lengths.}  $\{\ell=m\}\cap E_1^{\rm j}$ is the
 union over the positions of $x_1,y_1$ ($n^2$), of $q_1,c_1$ ($n^2$),
-of the $m-2$ other rows of the cycle ($n^{m-2}$) and of the $m-1$ free
-symbols ($n^{m-1}$; $L[y_1,q_1]=L[1,p']$ is forced) of fixed-cell
-events with $2m+2$ cells (the $2m$ cells of the cycle and the anchors
-$(x_1,p),(y_1,p)$), so by Corollary~\ref{cor:FCtwo} and the
-exchangeability of rows $3,\dots,n$, as in the proof of
-Corollary~\ref{cor:nutail}, it has probability at most
-$n^{2m+1}(\Delta/n)^{2m+2}=\Delta^{2m+2}/n$.  For $\{a=m\}\cap E_1^{\rm j}$
+of the $m-2$ other rows of the cycle ($n^{m-2}$), of the position of
+$y_1$ on it ($m-1$) and of the $m-1$ free symbols ($n^{m-1}$;
+$L[y_1,q_1]=L[1,p']$ is forced) of fixed-cell events with $2m+2$ cells
+(the $2m$ cells of the cycle and the anchors $(x_1,p),(y_1,p)$), so by
+Corollary~\ref{cor:FCtwo} and the exchangeability of rows
+$3,\dots,n$, as in the proof of Corollary~\ref{cor:nutail}, it has
+probability at most $(m-1)n^{2m+1}(\Delta/n)^{2m+2}=(m-1)\Delta^{2m+2}/n$.  For $\{a=m\}\cap E_1^{\rm j}$
 the path from $x_1$ to $y_1$ along the cycle has $m+1$ rows and
 $2m+2$ cells, and $c_1$ must be pinned by the further cells
 $(x_1,p')$ and $(y_1,c_1)$ with the forced symbol: $2m+5$ cells,
 $n^{2m+4}$ placements, probability at most $\Delta^{2m+5}/n$.  Summing
-over $m\le k_0$ (at most $2\Delta^{2k_0+2}/n\le2\Delta^2/\sqrt n$ and
+over $m\le k_0$ (at most $2k_0\Delta^{2k_0+2}/n\le2k_0\Delta^2/\sqrt n$ and
 $2\cdot2\Delta^{2k_0+5}/n\le4\Delta^5/\sqrt n$), and (i) over the
 dyadic $k\in[k_0,\delta n]$ ($\le800\delta$) and (ii) over the dyadic
 $k\in[k_0,\delta^3n]$ for each arc ($\le2\cdot12000\delta$), gives the
@@ -3746,10 +3752,11 @@ at scale $n$ at square-selected positions are unavailable: they are
 available where two marked rows pin the inverse.  NOT a reduction of the
 first-candidate hazard: the step from Lemma~A to $h_1\ge c_0$ needs
 good pairs across the $x_1$--$y_1$ cut, which \S(t) argues the toolkit
-cannot supply.  What did not change: the hazard hypothesis for $M=C\log n$
+cannot supply.  What did not change: the hazard hypothesis for $M\le C\log\log n$
 candidates (which is what the weak conjecture needs), the chain, the
 reference hypothesis; the obstacle statement ``lower bounds only'' now
-reads ``lower bounds only, for $j>1$, where the earlier candidates
+reads ``lower bounds only, at $j=1$ for good pairs across the cut
+(\S(t)) and for $j>1$ also where the earlier candidates
 must be preserved''.
 
 \paragraph{(t) The first-candidate step does not close: cross-switches
@@ -3801,7 +3808,11 @@ free of all special rows, which preserves interleaving), the Kind-2
 images stay in the family but the Kind-1 targets, the good auxiliary
 pairs themselves, are good same-stretch pairs, outside it; and no
 mixed sub-family of $W(i_0,j_0)$ has a usable lower bound on its size.
-This is the error in the earlier version of \S(s).
+(A cross-switch at a bad same-arc pair in the long direction, with
+$\Sigma\supseteq\{x_1,y_1\}$, legal when that arc has no frame row,
+toggles goodness and preserves interleaving; but its auxiliary pair is
+non-interleaving, so the Kind-1 targets leak out of the family just
+the same.)  This is the error in the earlier version of \S(s).
 
 \emph{(2) An invariant configuration (heuristic).}  Write $\pi$ for
 the row-successor map along a $(q_1,c_1)$-cycle.  Pairs $\{z,\pi(z)\}$
@@ -3914,8 +3925,10 @@ the rows off the longest cycle of the pair number at least $n/120$.
 (This is in the ``coarse'' direction that \S4 of the gap note records
 as not reached by the surviving material of \cite{CGW08}; it follows
 from the switching of Claims~2--3 of \cite{AM26} re-run with a single
-special row, plus row exchangeability.  It does not approach
-$\Pr[(n)]=o(1)$.)
+special row, plus row exchangeability.  It is not an improvement for the type $(n)$
+itself, for which the gap note's $\Pr_F((n))\le5/6+o(1)$ via
+intercalates is better than the $1-1/60$ implied here; it does not
+approach $\Pr[(n)]=o(1)$.)
 
 \emph{Where the loss is.}  Proposition~T is exactly the
 first-candidate statement with $(q,c)$ and $y$ \emph{fixed}: it needs
@@ -3939,8 +3952,10 @@ goodness is the precise residue of square selection at $j=1$.
 \emph{Status.}  NEGATIVE KNOWLEDGE: the reduction proposed in \S(s)
 is withdrawn (its last step is false, (1)), and we found no argument from
 the present toolkit that replaces it ((2), argued, not a theorem).  PROVED
-(subject to referee): Proposition~T and its corollary.  What did not
+(refereed twice): Proposition~T and its corollary.  What did not
 change: Lemma~A, the hazard hypothesis, the chain, the reference
 hypothesis.  What changed: the obstacle at $j=1$ has the exact form
-``good pairs across the $x_1$--$y_1$ cut, without exchangeability of
-$y_1$''.
+``good pairs across the $x_1$--$y_1$ cut on $E_1^{\rm j}$, without
+exchangeability of $y_1$'', plus the separated-inadmissible part of
+$E_1$ ($15$--$17\%$ of the bad candidates in the data), on which
+$f_1=0$ and for which no toggle has been analysed.

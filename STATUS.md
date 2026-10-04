@@ -121,6 +121,34 @@ kind whose proof in CGW has a gap" reads as insinuation; abstract must flag the 
 NEGATIVE KNOWLEDGE / DATA / WRITING, exactly one per segment (a segment with several outcomes is split); the cold read is done by
 a subagent that has not seen the session, never by a document the lead writes.
 
+## COLD READ 3 — 2026-10-04 (independent subagent, after Segs 10–14) — verdict and corrections adopted
+**Verdict (quoted in substance).** One real step in Segs 10–14: Seg 10 (AM's per-cell bound with two complete rows ⇒ ν-tail ⇒
+weak CGW ⇐ hazard hypothesis; one-way, genuine — the previous cold read had rated the removed ν-tail the HARDER term).  Segs 12–14
+did not move the hazard term at any j, including j = 1.  Unconditional and new: thm:AM31two/cor:FCtwo/cor:nutail (the important
+one); eq:hazardratio (exact); Lemma A (first scale-n lower bound at a square-selected position — lengths only, j = 1,
+n ≥ Δ³²); Prop T + corollary (fixed positions; weak coarse-type bound not in CGW08's surviving material); the negative result
+§(t)(1).  Every proof checked holds, with one counting slip (a factor m−1 in Lemma A (iii), changing a constant in an irrelevant
+regime; fixed).  The obstacle statement is "direction right, not complete": at j = 1 it is cut-goodness on E₁^j PLUS the
+separated-inadmissible part of E₁; sharp only relative to the eq:hazardratio route with the trivial backward bound.  Pattern: the
+first cold read's prediction ("another lower tail at frame-selected rows = reformulation") played out again in Seg 13, caught
+internally within one segment — the rules worked, the referees did not (they checked proofs as stated, not sketches or labels).
+**Recommendation.** Stop in-house work on the hazard term.  Do the pending WRITING pass (paper §7–§8 stale: "no tool reaches a
+lower bound at square-selected positions" — Lemma A is one for lengths; "lower bounds on different-cycles events need a rigid
+inverse" — Prop T is a non-rigid one at fixed positions; rem:fcchanged should cite Lemma A).  Put Prop T's corollary into gap
+note §4 next to the 5/6 bound.  Send the gap note.  Post the conditional paper with §7.  Consult Allsop/Morris/Wanless with the
+question in their vocabulary: "in a uniform completion of a fixed 2×n rectangle, with rows x,y pinned by two anchor cells and
+columns (q,c) read off row y, does any switching give P[x,y on different (q,c)-cycles] ≥ c?", mentioning Prop T as the
+fixed-position version their Claims 2–3 do give.  Do not expect KPS-type approximation (cost e^{O(n log² n)}) to help with a
+constant-probability event.  The loops note is independent and ready.
+**Corrections adopted now:** Seg 13 header (reduction label withdrawn), Seg 13 "what this changes" sentence, "M = C log n" →
+"M ≤ C log log n" (twice), Lemma A (iii) factor (m−1) and the consequence constant 5(Δ⁵ + k₀Δ²), §(r)(a) made explicit that
+Θ(n) length is necessary not sufficient, §(t)(1) long-direction cross-switch case added, Prop T's corollary placed next to 5/6,
+§(t) Status "refereed twice", obstacle statement at j = 1 completed with the separated-inadmissible part, §(r) Data flagged as
+type-(n) only, dyadic logs re-generated (they had been truncated by a logging bug of mine; numbers identical), Seg 12–14
+headers split into one class per sub-entry.  **Not done (owner's call):** paper WRITING pass; gap-note addition; consultations.
+**Process (rule 3):** the cost of Lemma A, stated here as the rules require: n ≥ Δ³² ≈ 10⁵⁸; constants 400 and 6000; a
+denominator P_X[E₁^j] with no proved lower bound (harmless: if small, h₁ is large); j = 1 only; lengths only.
+
 ## WORKING RULES (added 2026-10-02; every segment reads and obeys these)
 1. Every segment report classifies its outcome as exactly one of: PROVED (unconditional), REFORMULATION,
    NEGATIVE KNOWLEDGE, DATA, WRITING.  No superlatives in STATUS or summaries ("headline", "kills", "solved"
@@ -286,7 +314,7 @@ rewritten (the proof goes through; AW's difficulty "sidestepped rather than solv
 (exposition/consistency) found one stale sentence contradicting §7 in the same paragraph, "none implies another" (hazard ⇒
 firstpair now), "bounded number of cells" (should be sparse sets), the M in cor:hazard, notation clashes (α,β; D; f; ν) — all
 fixed.  Did not touch the core obstacle.
-**Seg 12 — REFORMULATION (exact identity) + NEGATIVE KNOWLEDGE + DATA (hazard term; notes §(r), refereed twice; `s13_hazard.py`,
+**Seg 12 — three classes, to be read as 12a REFORMULATION (exact identity), 12b NEGATIVE KNOWLEDGE, 12c DATA (hazard term; notes §(r), refereed twice; `s13_hazard.py`,
 runs/s13/hazard/).**  Cost: one segment.  For E_j = {ν>j, candidates 1..j bad}, F_j = {ν>j, 1..j−1 bad, j good}, toggles =
 interleaving row switches of free good pairs on the candidate's own (q_j,c_j)-cycle (separate x₁,y₁; rows 1,2,x₁,y₁ untouched,
 so ρ, ν, all candidates unchanged), merges = their inverses from F_j: exact identity P_X[E_j]/P_X[F_j] = E[b_j|F_j]/E[f_j|E_j]
@@ -308,7 +336,7 @@ the measure" — impossible given the exact identity; withdrawn) and numeric ran
 (contradicted at fixed footprint fraction), "every version needs" (softened to "every version we can formulate"), ν-bookkeeping.
 What did NOT change: hyp:hazard, the chain, hyp:witness as reference, the obstacle "lower bounds only".  What is new: the
 obstacle has the quantitative form eq:hazardratio with both sides measured; one natural route (trivial backward bound) closed.
-**Seg 13 — PROVED (Lemma A, refereed twice) + ONE-WAY REDUCTION (first-candidate hazard) + NEGATIVE (no direct comparison);
+**Seg 13 — PROVED (Lemma A, refereed twice); the ONE-WAY REDUCTION label originally attached here was wrong and is withdrawn (Seg 14); 13b NEGATIVE (no direct comparison);
 notes §(s), `s13_dyadic.py`, runs/s13/dyadic/.**  Cost: one segment.  Asked for a direct comparison of E[b_j|F_j] and
 E[f_j|E_j]: none found.  Found instead that Obstacle 1 of §(r) is not an obstacle at the first candidate.  **Lemma A
 (insert/cut):** conditionally on x₁ ~ y₁ at (q₁,c₁) (the joined part of E_1), P[ℓ ∈ [k,2k]] ≤ 400k/n and
@@ -327,12 +355,12 @@ g/(n−ℓ) ≥ 0.26 in every bin; P[ℓ ∈ [k,2k) | joined] tracks the permuta
 hazard follows from Lemma A plus "two Claim-2′ variants" was wrong — the cross-switch toggles the interleaving status of the
 straddling pairs together with their goodness, so Claim 2′ does not run on the interleaving family; see Seg 14.
 **What this changes:** the obstacle statement "scale-n lower bounds at square-selected positions are unavailable" (§(r)
-Obstacle 1, rem:fcchanged) is false where two marked rows pin the inverse; it stands for j > 1 only because insert moves have
-Θ(n) footprints that flip earlier candidates (the ε of §(r)).  The exactly-preserving move family (column switches of
+Obstacle 1, rem:fcchanged) is false for LENGTHS where two marked rows pin the inverse; for the hazard it stands at j = 1 (good pairs across the cut,
+Seg 14) and at j > 1 additionally because insert moves have Θ(n) footprints that flip earlier candidates (the ε of §(r)).  The exactly-preserving move family (column switches of
 (q_j,c′)-cycles avoiding special rows, c′ not a candidate column) is identified; its effect is understood only for intercalates,
 whose count at a square-selected column needs a lower bound on a fixed-cell count — the obstacle for j > 1 in its new form.
-What did NOT change: hyp:hazard for M = C log n candidates, the chain, hyp:witness as reference; nothing proved about E_j, j>1.
-**Seg 14 — NEGATIVE KNOWLEDGE (the j=1 reduction of Seg 13 withdrawn; a heuristic invariant) + PROVED (Prop T, fixed
+What did NOT change: hyp:hazard for M ≤ C log log n candidates, the chain, hyp:witness as reference; nothing proved about the hazard at any j.
+**Seg 14 — two classes: 14a NEGATIVE KNOWLEDGE (the j=1 reduction of Seg 13 withdrawn; a heuristic invariant), 14b PROVED (Prop T, fixed
 positions; refereed twice); notes §(t), `s13_goodpos.py`, runs/s13/dyadic/goodpos*.log.**  Cost: one segment.  Asked to prove
 the first-candidate hazard from Lemma A.  (1) The last step fails: the cross-switch at a bad interleaving pair (u,v) reverses
 the segment Σ containing x₁ (legal: ρ ↦ ρ∘(q₁ c₁), unordered candidates and ν preserved) and, by AM Lemma 2.6/Remark 2.7,
@@ -357,9 +385,9 @@ is 0.498/0.502/0.503 (interleaving) vs 0.432/0.460/0.479 (same-arc) at n = 30/50
 pairs (0 good of 13652/13202/6857); 0.49–0.51 at every distance ≥ 2.  Referee round 1 found the (c) rule misstated, the
 polarised configuration under-specified (inactive–inactive pairs, rows 1,2), "with equality", unhedged conclusion, (s) title and
 two "shows", a data inconsistency at n = 5; all fixed; round 2: (1) correct, (2) acceptable as hedged heuristic, (3) proved.
-What did NOT change: Lemma A, hyp:hazard, the chain, hyp:witness as reference, nothing proved about E_j for j ≥ 1 at
-square-selected positions.  What changed: the obstacle at j = 1 is now exactly "good pairs across the x₁–y₁ cut, without
-exchangeability of y₁"; the paper's rem:fcchanged/§8 should cite Lemma A and Prop T at the next WRITING pass (not done).
+What did NOT change: Lemma A, hyp:hazard, the chain, hyp:witness as reference, nothing proved about the hazard at any j.
+What changed: the obstacle at j = 1 is now exactly "good pairs across the x₁–y₁ cut on E₁^j, without exchangeability of y₁,
+plus the separated-inadmissible part of E₁ (15–17% of bad candidates), on which f₁ = 0 and no toggle is analysed"; the paper's rem:fcchanged/§8 should cite Lemma A and Prop T at the next WRITING pass (not done).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
