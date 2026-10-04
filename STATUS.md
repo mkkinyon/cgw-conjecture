@@ -238,6 +238,22 @@ unchanged), and that Thm 4.9's FIRST assertion o((3/4)^k e^{π√(2m/3)}) also f
 above) — all fixed; gap note 10 pp.  Verdict: core obstacle unchanged; new and unconditional today = rem:fewparts only; the rest is
 literature and writing.  Recommendation adopted: the Claim 4(ii) question is labelled "assuming Claims 2–3 transfer"; writing out
 Claims 2–3 for the case "both rows 1,2 on γ_L" (half a day) is the prerequisite for sending that question.
+**Seg 9 — PROVED (unconditional), user-directed diversion: prop:loops (notes §(p); refereed, no error; `s13_loopgroup.py`,
+runs/s13/loops/).**  Cost first: says nothing about P_X[B], the gap, or any hypothesis; the bound is vacuous below n ≈ 100.  Content:
+the rows of a uniform reduced Latin square (left translations of a uniform loop) generate a group ⊇ A_n with probability
+1 − e^{−(log 2 − o(1))n²}, hence S_n with probability 1 − 3c^n (Häggkvist–Janssen), so the conclusion of CGW Lemma 6.2 ("almost all
+loops have multiplication group S_n / trivial character theory"), which CGW state as a consequence of Conjecture 6.1 and which
+Cameron (blog, 2015) states as open, holds unconditionally — by counting only: imprimitive H ≤ Stab(Π) ⇒ the square decomposes into
+a block pattern and b² Latin squares of order a, so P ≤ (b!)^n L(a)^{b²} n!/L(n) ≤ e^{−n² log b + o(n²)} (vdW lower bound on L(n),
+Brégman upper bound on L(a)); primitive proper H has |H| < 4^n (Praeger–Saxl) and there are 2^{O(n²)} subgroups (Pyber), so P ≤
+2^{O(n²)} 4^{n²} n!/L(n) = e^{−(1−o(1)) n² log n}.  The first step and the S_{n/2} ≀ S_2 case were sketched by S. Eberhard in 2016
+comments on Cameron's post; the "thus only A_n and S_{n/2} ≀ S_2 remain" there is a gap (union over e^{Θ(n²)} subgroups of index
+between e^n and e^{(1+δ)n}), closed by the block-system count.  Data: n=5: 50/56 S_5, 6 C_5; n=6: 7776/9408 S_6, 72 A_6, 1560
+imprimitive; JM samples n=7..16: all S_n or A_n, A_n fraction 2.1%, 1.2%, 0.4%, 0.1%, 0, 0.  Answer to the owner's question: the
+loop corollary is MUCH easier than the conjecture — it uses no information about the second row; the slack is that it is an event
+about all n rows jointly, where the Latin-square count L(n) = e^{n² log n − 2n² + O(n log² n)} applies.  Not available for the
+conjecture itself (a two-row statement).  Decision pending: where to publish (short section in the paper vs. 3-page note; tell
+Cameron?).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

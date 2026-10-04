@@ -2751,3 +2751,174 @@ record it as the most concrete external route we have seen to the
 frame-selection half of the obstacle.  (The $n$-cycle question of \S4 of
 the gap note is not reached by it either: $\Pr[(n)]\approx1/n$ is not
 an overwhelming-probability property.)
+
+\paragraph{(p) What the conjecture is not needed for: the multiplication
+group of a random loop (user-directed diversion, 2026-10-03).}
+(Classification: PROVED, unconditional; a counting argument whose
+first step and whose treatment of $S_{n/2}\wr S_2$ were sketched by
+S.~Eberhard in comments on Cameron's blog \cite{Cam15}; the block-system
+count for general imprimitive groups and the union over primitive
+groups below are what make it a proof.  It does not touch the
+conjecture or the gap.)  CGW's Lemma~6.2 records a consequence of
+Conjecture~6.1 communicated by Cameron: that the rows of almost all
+reduced Latin squares --- the left translations of almost all loops ---
+generate $S_n$, so that almost all loops have trivial character theory
+in the sense of Smith.  For quasigroups (unreduced squares) this is
+Cameron's theorem \cite{Cam92}: the first row of a uniform square is a
+uniform permutation, and by {\L}uczak--Pyber \cite{LP93} a uniform
+permutation lies in no transitive proper subgroup other than $A_n$ with
+probability $1-o(1)$.  For loops the first row is the identity and the
+second row is not a uniform derangement, which is where
+Conjecture~6.1 enters; Cameron \cite{Cam15} states the loop case as
+open and routes it through the second-row conjecture (the 2016
+comment thread contains Eberhard's sketch, which nobody there wrote
+out or disputed).  The owner's question was whether the loop
+statement is easier than the conjecture.  It is: it needs no
+information about the law of the second row at all.  Throughout, a
+``uniform random loop'' is uniform on labelled loops with identity
+element $1$, i.e.\ on reduced squares, as in \cite{CGW08}.
+
+\emph{Setting.}  Let $L$ be a uniform Latin square of order $n$ with rows
+$r_1,\dots,r_n\in S_n$ (column $\mapsto$ symbol), and let
+$\sigma_i=r_1^{-1}r_i$, so that $(\sigma_1=\mathrm{id},\sigma_2,\dots,\sigma_n)$
+are the rows of the uniform square $L^0$ with first row the identity
+obtained by relabelling symbols.  Permuting the rows of $L^0$ so that
+its first column is the identity gives a uniform reduced square (each
+reduced square arises from exactly $(n-1)!$ squares $L^0$) with the
+same set of rows; so $H(L):=\langle\sigma_2,\dots,\sigma_n\rangle\le S_n$
+is the left multiplication group of a uniform random loop of order
+$n$.  $H(L)$ is transitive: for columns $c,s$ some row has
+$\sigma_i(c)=s$.  Let $\mathcal L_n$ be the set of Latin squares of
+order $n$ and $L(n)=|\mathcal L_n|$; then $|\{L^0\}|=L(n)/n!$.
+
+\begin{proposition}[the multiplication group of a random loop]\label{prop:loops}
+$\Pr[H(L)\not\supseteq A_n]\le e^{-(\log2-o(1))n^2}$.  Consequently, by
+H\"aggkvist--Janssen \cite{HJ96}, $\Pr[H(L)=S_n]\ge1-3c^n$ for some
+$c<1$ and all large $n$; since the full multiplication group
+$\mathrm{Mlt}(Q)$ contains $H(L)$, almost all loops have
+$\mathrm{Mlt}(Q)=S_n$, which is $2$-transitive, so by Smith's theory
+their character theory is trivial: the conclusion of
+\cite[Lemma~6.2]{CGW08} holds unconditionally.
+\end{proposition}
+
+The proof uses four external inputs: van der Waerden's permanent bound
+in the form $L(n)\ge(n!)^{2n}/n^{n^2}$ and Br\'egman's in the form
+$L(a)\le\prod_{k=1}^{a}(k!)^{a/k}$ \cite[Ch.~17]{vLW}; the theorem of
+Praeger and Saxl \cite{PS80} that a primitive permutation group of
+degree $n$ not containing $A_n$ has order less than $4^n$; and Pyber's
+bound \cite{Pyb93} that $S_n$ has at most $2^{O(n^2)}$ subgroups (now
+$2^{n^2/16+O(n^{3/2})}$, \cite{RT25}).  From the first two,
+\begin{equation}\label{eq:Lbounds}
+\log L(n)\ge n^2\log n-2n^2,\qquad
+\log L(a)\le a^2\log a-2a^2+a\bigl(\tfrac12\log^2a+2\log a+3\bigr)
+\end{equation}
+for all $n,a\ge1$: the first from $n!\ge(n/e)^n$; the second from
+$\log k!\le k\log k-k+\log k+1$, which gives
+$\sum_{k\le a}(\log k!)/k\le\sum_{k\le a}(\log k-1)+\sum_{k\le a}(\log k+1)/k
+\le(a\log a-a+\log a+1)-a+(\tfrac12\log^2a+1)+(\log a+1)$.
+
+\begin{proof}
+Since $H=H(L)$ is transitive, $H\not\supseteq A_n$ means that $H$ is
+imprimitive, or primitive with $|H|<4^n$ \cite{PS80}.
+
+\emph{Imprimitive.}  Let $\Pi$ be a partition of $[n]$ into $b$ blocks
+$C_1,\dots,C_b$ of size $a$, $1<a<n$, $ab=n$, and suppose every
+$\sigma_i$ preserves $\Pi$: every row of $L^0$ maps $\Pi$ to $\Pi$.  We
+count, more generally, the Latin squares all of whose rows map $\Pi$ to
+a fixed symbol partition $\Pi'$ with blocks $S_1,\dots,S_b$ (we need
+only $\Pi'=\Pi$).  Each row $r_i$ of such a square induces a bijection
+$\pi_i\colon[b]\to[b]$, $r_i(C_j)=S_{\pi_i(j)}$.  Fix $j,j'$ and let
+$I_{jj'}=\{i:\pi_i(j)=j'\}$.  In a column $c\in C_j$ the $a$ symbols
+of $S_{j'}$ each occur once, and they occur only in rows of
+$I_{jj'}$, each of which contributes one symbol of $S_{j'}$ to column
+$c$; hence $|I_{jj'}|=a$, and the subarray $I_{jj'}\times C_j$ is an
+$a\times a$ Latin square on the symbols $S_{j'}$.  Conversely any
+choice of an $n\times b$ array $(\pi_i(j))$ whose rows are permutations
+of $[b]$ and whose columns contain each value exactly $a$ times,
+together with one Latin square of order $a$ for each of the $b^2$
+pairs $(j,j')$ (on the row set $I_{jj'}$, column set $C_j$ and symbol
+set $S_{j'}$, all now determined), is a Latin square all of whose rows
+map $\Pi$ to $\Pi'$.  So the number of such squares is at most
+$(b!)^n\,L(a)^{b^2}$; the squares $L^0$ with $H\le\mathrm{Stab}(\Pi)$
+are among those with $\Pi'=\Pi$, and there are $L(n)/n!$ squares
+$L^0$, so
+\[
+\Pr\bigl[H\le\mathrm{Stab}(\Pi)\bigr]
+\le\frac{(b!)^n\,L(a)^{b^2}}{L(n)/n!}.
+\]
+There are $n!/((a!)^bb!)\le n!$ partitions $\Pi$ with blocks of size
+$a$, and fewer than $n$ divisors $a$.  By \eqref{eq:Lbounds}, with
+$b=n/a$ and $(b!)^n\le b^{nb}$,
+\[
+\log\frac{n!\,(n!)\,(b!)^nL(a)^{b^2}}{L(n)}
+\le 2n\log n+\frac{n^2}{a}\log b+\Bigl(n^2\log a-2n^2+\frac{n^2}{a}\bigl(\tfrac12\log^2a+2\log a+3\bigr)\Bigr)-n^2\log n+2n^2
+\]
+\[
+=-n^2\log b+\frac{n^2}{a}\Bigl(\log b+\tfrac12\log^2a+2\log a+3\Bigr)+2n\log n .
+\]
+If $a\ge\sqrt n$ the middle term is $O(n^{3/2}\log^2n)$ and the bound
+is $-n^2\log b+o(n^2)\le-n^2\log2+o(n^2)$.  If $2\le a<\sqrt n$ then
+$b>\sqrt n$, $(n^2/a)\log b\le\tfrac12n^2\log b$ and
+$(\tfrac12\log^2a+2\log a+3)/a\le\tfrac52$ (the maximum is at $a=2$), so the
+bound is $\le-\tfrac12n^2\log b+\tfrac52n^2+2n\log n\le-\tfrac14n^2\log n+3n^2$,
+which is $\le-n^2\log2$ for $n\ge e^{15}$.  Summing over $\Pi$ and
+$a$: $\Pr[H\text{ imprimitive}]\le n\,e^{-(\log2-o(1))n^2}$, the
+$o(1)$ being $O(\log^2n/n)$ from $a=n/2$ (numerically the bound is
+vacuous below $n\approx100$ and reaches $e^{-0.61n^2}$ at $n=10^3$).
+
+\emph{Primitive.}  For a fixed subgroup $K\le S_n$, the squares $L^0$
+with all rows in $K$ number at most $|K|^{n-1}$.  Summing over the
+subgroups $K$ with $|K|<4^n$, of which there are at most $2^{Cn^2}$
+\cite{Pyb93},
+\[
+\Pr\bigl[H\text{ primitive},\ H\not\supseteq A_n\bigr]
+\le\frac{2^{Cn^2}\,4^{n(n-1)}}{L(n)/n!}
+\le\exp\bigl(-n^2\log n+(C\log2+\log4+2)n^2+n\log n\bigr),
+\]
+which is $e^{-(1-o(1))n^2\log n}$.  Adding the two cases gives the
+first claim.  For the second: $H\le A_n$ iff every $\sigma_i$ is even
+iff all rows of $L$ have the parity of $r_1$, an event of probability
+$2\Pr[L\text{ all-even}]\le2c^n$ for some $c<1$ \cite{HJ96}
+(relabelling symbols by a transposition is a bijection between
+all-even and all-odd squares); and $H\supseteq A_n$, $H\not\le A_n$
+force $H=S_n$.
+\end{proof}
+
+\emph{Remarks.}  (i) Nothing about the second row is used; the strength
+of the bound ($e^{-\Omega(n^2)}$ against the $n^{-c}$ of a
+{\L}uczak--Pyber argument) comes from the event being about all $n$
+rows at once, which is where the Latin-square count
+$L(n)=e^{n^2\log n-2n^2+O(n\log^2n)}$ can be brought to bear.  This is
+the ``many rows'' slack of the owner's question in its purest form, and
+it is not available for Conjecture~6.1, which is a statement about the
+joint law of two rows.  (ii) The same argument with $G=\langle r_1,\dots,r_n\rangle$
+in place of $H$ (and $\Pi'=\Pi$) reproves Cameron's quasigroup theorem
+\cite{Cam92} without {\L}uczak--Pyber, with the same error bound.
+(iii) Eberhard's comments \cite{Cam15} contain the first step
+--- $|K|^n$ against $L(n)=(n!)^n/e^{n^2+o(n^2)}$, so that a single $K$
+of index $\ge e^{(1+\delta)n}$ contributes $e^{-\delta n^2+o(n^2)}$ ---
+followed by ``thus we need only worry about'' $A_n$ and
+$S_{n/2}\wr S_2$, and a row-by-row Br\'egman argument for the latter.
+The ``thus'' is a gap: the union over the $e^{\Theta(n^2)}$
+subgroups of index between $e^{n}$ and $e^{(1+\delta)n}$ (which
+include $S_{n/3}\wr S_3$, $S_{n/4}\wr S_4,\dots$) is not addressed
+there.  The block-system count above handles every imprimitive $K$ at
+once (by a different method from his), and the Praeger--Saxl and Pyber
+bounds are what make the union over primitive $K$ legitimate.
+(iv) Data (\texttt{s13\_loopgroup.py}; \texttt{runs/s13/loops/}): among
+the $56$ reduced squares of order $5$, $50$ have $H=S_5$ and $6$ have
+$H=C_5$ (the six cyclic subgroups of $S_5$, each the row set of exactly
+one reduced square, the sorted Cayley table of $\mathbb Z_5$; a
+sharply transitive set containing the identity inside $D_5$ or $F_{20}$
+must avoid every element with a fixed point, so no other proper
+transitive group occurs; these six are also the all-even reduced
+squares of order $5$); among the $9408$ of order $6$, $7776$ have
+$S_6$, $72$ have $A_6$, and $1560$ ($16.6\%$) are imprimitive (block
+sizes $2$ and $3$, orders $6$ to $48$); in Jacobson--Matthews samples
+of $3000$ squares at $n=7,8,9,10$ and $2000$ at $n=12,16$, every $H$
+is $S_n$ or $A_n$, with $A_n$ at $2.1\%,1.2\%,0.4\%,0.1\%$ and then
+$0$.  (v) Classification and cost: PROVED, unconditional, but a
+diversion: it says nothing about $\Pr_X[B]$, the gap, or any of the
+hypotheses, and it removes one of the two consequences CGW list for
+their conjecture (the other, ``strong results on the distribution of
+intercalates'', is superseded by \cite{KS18,KSS21}).

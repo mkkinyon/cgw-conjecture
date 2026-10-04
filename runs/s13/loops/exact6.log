@@ -1,0 +1,9 @@
+n=6 mode=exact squares=9408
+  S_n: 7776  (0.8265)
+  imprimitive blocks 2 order 48: 900  (0.0957)
+  imprimitive blocks 3 order 36: 240  (0.0255)
+  imprimitive blocks 2 order 24: 180  (0.0191)
+  imprimitive blocks 3 order 18: 160  (0.0170)
+  A_n: 72  (0.0077)
+  imprimitive blocks 3 order 6: 48  (0.0051)
+  imprimitive blocks 2 order 6: 32  (0.0034)
