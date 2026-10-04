@@ -323,16 +323,43 @@ transfer move's inverse count FAILS unless the insertion pair is fixed as z′ =
 needed; side conditions; cell counts in (iii) wrong (arc event needs (x₁,p′),(y₁,c₁) to pin c₁: Δ^{2m+5}/n); arc scale is
 δ³n not δn; data mislabelled.  Round 2: proved as stated with C₀ = 6000.  Numerics: all sampled insert (3078/1478/408) and
 transfer (814/514/158) moves at n = 30/50/100 legal with the stated effects and inverses; exact preimage counts ≤ 3k²;
-g/(n−ℓ) ≥ 0.26 in every bin; P[ℓ ∈ [k,2k) | joined] tracks the permutation value 3k²/n².  **Reduction:** the first-candidate
-hazard inf P_X[candidate 1 good | ν > 1] ≥ c₀ follows from Lemma A plus two Claim-2′ variants (good pairs among admissible
-interleaving pairs, with cross-switches through x₁ allowed in E_1 since they change ρ to ρ∘(q₁ c₁), preserving ν and every
-candidate as an unordered pair; and a frame-row-moving split for the separated-inadmissible part) — sketched, NOT proved.
+g/(n−ℓ) ≥ 0.26 in every bin; P[ℓ ∈ [k,2k) | joined] tracks the permutation value 3k²/n².  **Reduction (WITHDRAWN in Seg 14):** the claim that the first-candidate
+hazard follows from Lemma A plus "two Claim-2′ variants" was wrong — the cross-switch toggles the interleaving status of the
+straddling pairs together with their goodness, so Claim 2′ does not run on the interleaving family; see Seg 14.
 **What this changes:** the obstacle statement "scale-n lower bounds at square-selected positions are unavailable" (§(r)
 Obstacle 1, rem:fcchanged) is false where two marked rows pin the inverse; it stands for j > 1 only because insert moves have
 Θ(n) footprints that flip earlier candidates (the ε of §(r)).  The exactly-preserving move family (column switches of
 (q_j,c′)-cycles avoiding special rows, c′ not a candidate column) is identified; its effect is understood only for intercalates,
 whose count at a square-selected column needs a lower bound on a fixed-cell count — the obstacle for j > 1 in its new form.
 What did NOT change: hyp:hazard for M = C log n candidates, the chain, hyp:witness as reference; nothing proved about E_j, j>1.
+**Seg 14 — NEGATIVE KNOWLEDGE (the j=1 reduction of Seg 13 withdrawn; a heuristic invariant) + PROVED (Prop T, fixed
+positions; refereed twice); notes §(t), `s13_goodpos.py`, runs/s13/dyadic/goodpos*.log.**  Cost: one segment.  Asked to prove
+the first-candidate hazard from Lemma A.  (1) The last step fails: the cross-switch at a bad interleaving pair (u,v) reverses
+the segment Σ containing x₁ (legal: ρ ↦ ρ∘(q₁ c₁), unordered candidates and ν preserved) and, by AM Lemma 2.6/Remark 2.7,
+toggles the goodness of every pair straddling Σ — but it toggles their INTERLEAVING status too (i and x₁ inside Σ exchange
+order, j and y₁ outside keep theirs), so it maps (bad, interleaving) ↔ (good, non-interleaving): the Kind-2 image leaves the
+family; with same-stretch auxiliaries the Kind-1 image leaves it.  (2) Heuristic invariant ("polarised" squares: a pair of free
+rows of D at distance ≥ 2 is good iff non-interleaving; adjacent pairs {z,π(z)} are always bad; inactive cycles carry an
+orientation-dependent affinity to one arc; rows 1,2 ∈ D): preserved up to O(n) pairs per move by cross-switches, inactive column
+switches (which toggle goodness of C × (rows off C) and preserve it inside C), inserts, cuts, transfers.  On polarised squares
+f₁ = 0, so no double count of these moves alone can give a positive density of good interleaving pairs — argued, not a theorem.
+The missing input at j = 1 is exactly "good pairs across the x₁–y₁ cut".  (3) **Prop T (PROVED):** for a fixed 2×n rectangle R,
+fixed columns q ≠ c and fixed free rows x ≠ y, P_{S(R)}[x ~ y at (q,c)] ≤ 1 − 1/30 + 3/n (n ≥ 504); for a uniform Latin
+square ≤ 1 − 1/30 (n ≥ 502).  Proof: row exchangeability gives P[y ∈ D_x] = E|D_x ∩ free|/(n−3), and the proof of Claim 3″
+re-run with special set {1,2,x} gives E[rows off the active cycles] ≥ (n−3)/30.  Corollary: for a fixed column pair of a
+uniform Latin square, E[n − (longest cycle)] ≥ (n−1)/60 and P[rows off the longest cycle ≥ n/120] ≥ 1/120 − O(1/n) — a
+"coarse" statement of the kind gap note §4 lists as unavailable from CGW08's surviving material (candidate addition to the gap
+note; owner's call).  (4) Where the loss is: Prop T is the first-candidate statement with (q,c) and y FIXED; in the ladder
+q₁ = pos_{y₁}(L[1,p′]), c₁ = pos_{y₁}(L[x₁,p′]) are functions of row y₁, so y₁ is not exchangeable given the columns and the
+columns are random given less; every attempt to restore a generic second row (third free row with its own pair; row switches of
+y₁ avoiding p,q₁,c₁ — preserve the event; through q₁ — move the candidate) fails.  Data: on joined instances the good fraction
+is 0.498/0.502/0.503 (interleaving) vs 0.432/0.460/0.479 (same-arc) at n = 30/50/100, the difference being exactly the adjacent
+pairs (0 good of 13652/13202/6857); 0.49–0.51 at every distance ≥ 2.  Referee round 1 found the (c) rule misstated, the
+polarised configuration under-specified (inactive–inactive pairs, rows 1,2), "with equality", unhedged conclusion, (s) title and
+two "shows", a data inconsistency at n = 5; all fixed; round 2: (1) correct, (2) acceptable as hedged heuristic, (3) proved.
+What did NOT change: Lemma A, hyp:hazard, the chain, hyp:witness as reference, nothing proved about E_j for j ≥ 1 at
+square-selected positions.  What changed: the obstacle at j = 1 is now exactly "good pairs across the x₁–y₁ cut, without
+exchangeability of y₁"; the paper's rem:fcchanged/§8 should cite Lemma A and Prop T at the next WRITING pass (not done).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

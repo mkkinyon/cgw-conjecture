@@ -1,0 +1,4 @@
+n=30 squares=600 joined instances=888
+  good fraction: interleaving 0.498 (59015 pairs), same-arc 0.432 (101824 pairs)
+  adjacent pairs (z, pi(z)): good 0/13652
+  good fraction by cyclic distance along D (12 = >=12): {1: 0.0, 2: 0.496, 3: 0.501, 4: 0.498, 5: 0.502, 6: 0.497, 7: 0.503, 8: 0.498, 9: 0.498, 10: 0.499, 11: 0.494, 12: 0.498}

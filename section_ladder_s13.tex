@@ -3502,7 +3502,7 @@ and matched at ratio $\approx1.5$.
 
 \paragraph{(s) Scale-$n$ lower bounds at a square-selected position by
 insert/cut switching (one lemma proved; the first-candidate hazard
-reduced to it; data).}
+\emph{not} reduced to it, see \S(t); data).}
 This paragraph is the outcome of an attempt to compare the two sides of
 \eqref{eq:hazardratio} directly.  No such comparison was found.  What
 was found instead is that the first of the two obstacles of \S(r), the
@@ -3697,41 +3697,21 @@ $k=8,16,32$, $n=100$, against $0.019/0.077/0.307$), far below the
 bound $400k/n$, which is vacuous at these $n$ (the lemma needs
 $n\ge\Delta^{32}$); $\Pr[\min(a,a')\le n/20\mid\text{joined}]=0.00/0.09/0.17$.
 
-\emph{What Lemma A gives for the hazard at $j=1$ (reduction, not yet
-proved).}  By \eqref{eq:hazardratio} with $j=1$ (no preservation
-condition: $f_1$ is the number of ok toggles), $b_1\le n^2/4$, so
-$h_1\ge c$ follows from $\mathbb E_X[f_1\mid E_1]\ge c'n^2$.  Lemma A
-and Remark~(3) give, on $E_1^{\rm j}$ and with probability $1-O(\delta)$,
-arcs and special-row-free stretches of length $\ge\delta^3n$, hence
-$\ge\delta^6n^2$ interleaving pairs whose split is admissible (for
-instance, with the special rows in the cyclic order $x_1,1,y_1,2$ and
-stretches $A,B,C,D$ between them, the pairs in $A\times D$ and
-$B\times C$).  What remains is a Claim-$2'$ statement for this family
-$\mathcal P_{\rm adm}$: in aggregate over the class (fixed $\ell$ and
-cyclic order), at least a constant fraction of its pairs are good
-(footprint avoiding $q_1$).  The cross-switch of Claim~$2'$ at a bad
-pair $(u,v)\in\mathcal P_{\rm adm}$ reverses the segment between
-$x_u,x_v$ through $x_1$ (or $y_1$), which contains no frame row, and
-swaps the $(q_1,c_1)$-entries of $x_1$; this changes $\rho$ to
-$\rho\circ(q_1\,c_1)$, which leaves $\nu$ and every candidate
-\emph{as an unordered column pair} unchanged ($p,p'\notin\{q_1,c_1\}$;
-for $t\ge2$ the pair $(q_t,c_t)$ becomes $(c_t,q_t)$), keeps the row
-set of $D$ (\cite[Lemma~2.6]{AM26}) and the cyclic order of the
-special rows, and toggles the goodness of every pair interleaved with
-$(u,v)$ (\cite[Lemma~2.6(2)]{AM26}).  The interleaving relation on
-$\mathcal P_{\rm adm}$ is symmetric and, in local coordinates
-$(i,j)\in A\times D$, $|W(i,j)|=(i-1)(j-1)+(|A|-i)(|D|-j)$, with
-$\sum|W|\ge|A|^2|D|^2/4$ and $\max|W|\le|A||D|$, so the counting of
-Claim~$2'$ gives at least $|\mathcal P_{\rm adm}|/6$ good pairs in
-aggregate.  The separated-inadmissible part of $E_1$ needs a toggle
-that moves a frame row off the cycle of $x_1$ (a split of that cycle
-at a pair interleaving $x_1$ and the frame row), with Lemma~A applied
-to that cycle and that pair of marked rows.  We have checked these
-steps only to the level of this paragraph; the first-candidate
-statement $\inf_{\lambda,\alpha,\beta}\Pr_X[\text{candidate 1 good}\mid\nu>1]\ge c_0>0$
-is therefore a reduction to Lemma~A plus the two Claim-$2'$ variants,
-not a proved result.  It would be the first lower bound at a
-square-selected position in this project.
+\emph{What Lemma A gives for the hazard at $j=1$.}  By
+\eqref{eq:hazardratio} with $j=1$ (no preservation condition: $f_1$ is
+the number of ok toggles), $b_1\le n^2/4$, so $h_1\ge c$ follows from
+$\mathbb E_X[f_1\mid E_1]\ge c'n^2$.  Lemma A and Remark~(3) give, on
+$E_1^{\rm j}$ and with probability $1-O(\delta)$, arcs and
+special-row-free stretches of length $\ge\delta^3n$, hence
+$\ge\delta^6n^2$ interleaving pairs whose split is admissible.  What
+remains is a lower bound on the number of \emph{good} pairs (footprint
+avoiding $q_1$) among them.  (An earlier version of this paragraph
+claimed that this follows from Claim~$2'$ run on the interleaving
+family, with cross-switches through $x_1$; that is false --- the
+cross-switch toggles the interleaving status of the straddling pairs
+together with their goodness --- and \S(t) argues that no argument from
+the present toolkit gives it.  The first-candidate hazard is therefore
+\emph{not} reduced to Lemma~A; see \S(t).)
 
 \emph{Where $j>1$ stands.}  Lemma~A bounds the lengths at $(q_j,c_j)$
 in the class $\{x_1\sim y_1\text{ at }j\}$, not in $E_j$; the insert
@@ -3763,10 +3743,204 @@ $\ge\delta^3n$ with probability $1-O(\delta)$ conditionally on
 $x_1\sim y_1$, for $n\ge\Delta^{32}$.  This
 corrects the statement of \S(r) and of rem:fcchanged that lower bounds
 at scale $n$ at square-selected positions are unavailable: they are
-available where two marked rows pin the inverse.  REDUCTION: the
-first-candidate hazard $h_1\ge c_0$ to Lemma~A plus two Claim-$2'$
-variants.  What did not change: the hazard hypothesis for $M=C\log n$
+available where two marked rows pin the inverse.  NOT a reduction of the
+first-candidate hazard: the step from Lemma~A to $h_1\ge c_0$ needs
+good pairs across the $x_1$--$y_1$ cut, which \S(t) argues the toolkit
+cannot supply.  What did not change: the hazard hypothesis for $M=C\log n$
 candidates (which is what the weak conjecture needs), the chain, the
 reference hypothesis; the obstacle statement ``lower bounds only'' now
 reads ``lower bounds only, for $j>1$, where the earlier candidates
 must be preserved''.
+
+\paragraph{(t) The first-candidate step does not close: cross-switches
+toggle interleaving, an invariant configuration, and what
+exchangeability gives at fixed positions (negative knowledge; one
+proposition proved).}
+Attempting to prove the first-candidate hazard from Lemma~A, as
+\S(s) proposed, fails at its last step, and the failure is
+instructive.  We record it, the reason no variant of the present
+toolkit repairs it, and the fixed-position statement that the same
+toolkit \emph{does} give, which locates the loss exactly.
+
+\emph{(1) Cross-switches toggle interleaving.}  Setting of \S(s):
+$L\in E_1^{\rm j}$, $D$ the $(q_1,c_1)$-cycle through $x_1,y_1$, free
+rows of $D$ listed cyclically.  A pair $\{z,z'\}$ of free rows of $D$
+is \emph{interleaving} if exactly one of $x_1,y_1$ lies strictly
+between them (on either side), and \emph{good} if its row cycle through
+$c_1$ avoids $q_1$.  Let $(u,v)$ be a bad interleaving pair and $\zeta$
+the cross-switch $\zeta_L(q_1,c_1,x_u,x_v)$ in the direction whose open
+segment $\Sigma$ contains, say, $x_1$ and no frame row (legal: it
+changes the $(q_1,c_1)$-entries of the rows of $\Sigma$, hence of
+$x_1$, which replaces $\rho=\mathrm{pos}_{y_1}\circ L[x_1,\cdot]$ by
+$\rho\circ(q_1\,c_1)$; since $p,p'\notin\{q_1,c_1\}$ the two
+$\rho$-paths from $p$ and $p'$ keep their first steps and exchange
+their tails after step $1$, so $\nu$, the first pair, and every
+candidate $\{\rho^tp,\rho^tp'\}$ as an unordered pair are unchanged;
+if $\Sigma$ contains $y_1$ instead, $\rho$ becomes $(q_1\,c_1)\circ\rho$
+and the two paths are exchanged from step $1$ on, with the same
+conclusion).  By \cite[Lemma~2.6, Remark~2.7]{AM26} the row set of $D$
+is unchanged, the list is that of $L$ with $\Sigma$ reversed, and the
+goodness of every pair $\{i,j\}$ disjoint from $\{u,v\}$ with exactly
+one element in $\Sigma$ is toggled.  But for such a pair the
+interleaving status is toggled as well: $i\in\Sigma$ and $x_1\in\Sigma$
+exchange their relative order under the reversal, while $j$ and $y_1$
+outside $\Sigma$ keep theirs, and the four points
+$i,x_1,j,y_1$ alternate around the cycle before the switch iff they do
+not alternate after it.  Pairs disjoint from $\{u,v\}$ with both elements in $\Sigma$, or
+both outside, keep both their goodness (\cite[Lemma~2.6(1)]{AM26}) and
+their interleaving status.  So the cross-switch maps the pairs
+straddling $\Sigma$ bijectively onto themselves, exchanging
+\emph{(good, interleaving)} with \emph{(bad, non-interleaving)} and
+\emph{(bad, interleaving)} with \emph{(good, non-interleaving)}.  In
+the Claim-$2'$ scheme run on the interleaving family, with the
+auxiliary pairs $(u,v)\in W(i_0,j_0)$ taken interleaving, the Kind-2
+image of a bad interleaving pair is therefore a good
+\emph{non-interleaving} pair, outside the family, and the counting
+does not close; with the auxiliary pairs taken same-stretch (segment
+free of all special rows, which preserves interleaving), the Kind-2
+images stay in the family but the Kind-1 targets, the good auxiliary
+pairs themselves, are good same-stretch pairs, outside it; and no
+mixed sub-family of $W(i_0,j_0)$ has a usable lower bound on its size.
+This is the error in the earlier version of \S(s).
+
+\emph{(2) An invariant configuration (heuristic).}  Write $\pi$ for
+the row-successor map along a $(q_1,c_1)$-cycle.  Pairs $\{z,\pi(z)\}$
+are always bad: the shared symbol $L[z,c_1]=L[\pi(z),q_1]$ puts $q_1$
+and $c_1$ on one cycle of the row permutation of the pair.  Call a
+square $L\in E_1^{\rm j}$ with rows $1,2\in D$ \emph{polarised} if:
+a pair of free rows of $D$ at cyclic distance $\ge2$ is good iff it is
+non-interleaving; pairs at distance $\ge2$ inside an inactive cycle
+are good; every inactive cycle $C$ has an \emph{affinity} to one arc
+of $D$ (the arc $\text{arc}_k$ such that the pairs $C\times\text{arc}_k$
+are all good and $C\times\text{arc}_{3-k}$ all bad); and pairs between
+two inactive cycles are good iff the cycles have the same affinity.
+On a polarised square $f_1=0$.  Each move of the toolkit preserves
+polarisation up to the $O(n)$ pairs that contain a switched row (the
+rows $1,2$ stay on $D$ under every move): (a) a cross-switch at a bad
+interleaving pair, by (1), exchanges (bad, interleaving) with (good,
+non-interleaving) among the pairs straddling $\Sigma$ and fixes the
+status of pairs inside $D$ not straddling it; the rows of $\Sigma$ have
+their $(q_1,c_1)$-entries swapped, which toggles their goodness with
+every row off $D$, and since the reversal also moves
+$\Sigma\cap\text{arc}_1$ into $\text{arc}_2$ and vice versa this
+matches the affinities; (b) a cross-switch at a bad same-stretch pair
+would toggle goodness without changing interleaving, but on a
+polarised square no same-stretch pair at distance $\ge2$ is bad, and
+adjacent pairs never straddle a legal segment; (c) the column switch
+of an inactive cycle $C$ toggles the goodness of every pair
+$C\times(\text{rows off }C)$ (\cite[Lemma~2.3(1)--(2)]{AM26}, or the
+transposition argument of Claim~$4'$: only one row of the pair has its
+$(q_1,c_1)$-entries swapped) and preserves it for pairs inside $C$
+(both rows swapped), so it reverses the affinity of $C$ and preserves
+polarisation; (d) an insert of Lemma~A at a good pair $(z,z')$ puts
+$C$ into $z$'s arc (\cite[Lemma~2.4(2)]{AM26}), which by the
+affinity is the arc $C$ is good with, after which the pairs
+$C\times(\text{other arc})$ are interleaving and bad, the pairs
+$C\times(\text{same arc})$ non-interleaving and good, the pairs
+inside $C$ good, and the pairs $C'\times C$ for other inactive $C'$
+become $C'\times\text{arc}_k$ pairs with the status the inter-cycle
+rule prescribed, as required (a two-step insert first reverses the
+affinity of $C$, consistently with the two-step rule); (e) a cut
+produces an inactive $S$ from a same-stretch good pair, and $S$ has
+the affinity of the arc it came from; (f) a transfer is a cut
+followed by an insert.  Polarisation is the opposite of the truth
+(below), but every identity or inequality obtained by double counting
+these moves over a class closed under them is satisfied by a
+hypothetical measure concentrated on polarised squares, and an
+argument concluding $f_1>0$ on a positive fraction of $E_1^{\rm j}$
+would have to exploit the $O(n)$ exceptional pairs per move against
+the $\Theta(n^2)$ pairs in the counts.  We record as negative
+knowledge, heuristic and not a theorem: \emph{we see no counting
+argument built from cross-switches, inserts, cuts, transfers and
+inactive column switches that proves a positive density of good
+interleaving pairs on $E_1^{\rm j}$}; the first-candidate hazard is
+not reduced to Lemma~A, and the missing input is a lower bound on good
+pairs \emph{across the $x_1$--$y_1$ cut}.  (The ``cut goodness'' is
+the first-candidate form of ``lower bounds at square-selected
+positions'': Lemma~A supplies the lengths, not the crossing good
+pairs.)
+
+\emph{Data} (\texttt{s13\_goodpos.py}; \texttt{runs/s13/dyadic/goodpos*.log}):
+on joined instances at $n=30,50,100$ ($888/455/108$ instances, all
+pairs of free rows of $D$), the good fraction is $0.498/0.502/0.503$
+among interleaving pairs and $0.432/0.460/0.479$ among same-arc pairs,
+the difference being exactly the adjacent pairs ($0/13652$, $0/13202$,
+$0/6857$ good); by cyclic distance along $D$ the good fraction is
+$0$ at distance $1$ and $0.494$--$0.513$ at every distance $2,\dots,\ge12$.
+A different count --- all pairs of rows (special rows included) on
+all $(q,c)$-cycles, over all $(q,c)$ and all completions of the fixed
+rectangles of orders $5$ ($36$ squares) and $6$ ($4032$ squares) in
+\texttt{runs/s13/fixrect/all\_n\{5,6\}\_cyc.bin} --- gives good
+fractions $0.30$ at $n=5$ ($(\ell,d)=(5,2)$) and $0.59,\,0.48,\,0.52$
+at $n=6$ for $(\ell,d)=(4,2),(6,2),(6,3)$, so no involution toggles goodness for \emph{all} pairs at distance
+$\ge2$ (the frozen rows $1,2$ are among the counted pairs there; the
+free-row statistic itself was not enumerated).
+
+\emph{(3) What exchangeability gives at fixed positions.}  The
+statement we want at the square-selected pair is available at a
+\emph{fixed} pair, by a one-line use of row exchangeability on top of
+Claim~$3''$:
+
+\emph{Proposition T.}  Let $R$ be a $2\times n$ Latin rectangle (rows
+$1,2$), $n\ge504$, let $q\ne c$ be columns and $x\ne y$ rows in
+$\{3,\dots,n\}$.  Then
+$\Pr_{S(R)}[x\text{ and }y\text{ lie on the same }(q,c)\text{-column cycle}]\le1-\tfrac1{30}+\tfrac3n$.
+For a uniform Latin square of order $n\ge502$ (no $R$) and arbitrary
+rows $x\ne y$ the bound is $1-\tfrac1{30}$.
+
+\emph{Proof.}  Let $D_x$ be the $(q,c)$-cycle through $x$ and
+$\ell_x=|D_x|$.  For a permutation $\tau$ of $\{3,\dots,n\}$ fixing
+$x$, $L\mapsto\tau L$ (permuting rows) is a bijection of $S(R)$ with
+$y\in D_x(L)$ iff $\tau y\in D_x(\tau L)$; averaging over $\tau$,
+$\Pr[y\in D_x]=\mathbb E\,|D_x\cap\{3,\dots,n\}\setminus\{x\}|/(n-3)\le\mathbb E[\ell_x-1]/(n-3)$.
+The proof of Claim~$3''$ of \S(q) applies verbatim with special set
+$\{1,2,x\}$, $Q=\emptyset$ and the class $S(R)$ (active cycles: $D_x$
+and the cycles through rows $1,2$, at most three arcs; the switching
+is the row switches of good same-arc pairs on them and the
+cross-switches of Claim~$2'$, none of which moves a special row), and
+gives $\mathbb E[g]\ge f/30$ for the number $g$ of rows on cycles
+containing no special row, $f=n-3\ge501$.  Since $\ell_x\le n-g$,
+$\mathbb E[\ell_x-1]\le n-1-(n-3)/30$ and the bound follows.  For a
+uniform Latin square take the special set $\{x\}$, $f=n-1\ge501$, and
+average over all $\tau$ fixing $x$: $\Pr[y\in D_x]=\mathbb E[\ell_x-1]/(n-1)\le1-1/30$.  $\square$
+
+\emph{Corollary.}  For a uniform Latin square and a fixed column
+pair, the cycle $D_x$ through a fixed row satisfies
+$\mathbb E[n-\ell_x]\ge(n-1)/30$; hence, with $M$ the length of the
+longest cycle of the pair, $\mathbb E[n-M]\ge(n-1)/60$ (as
+$\sum_C|C|(n-|C|)\le2n(n-M)$) and
+$\Pr[n-M\ge n/120]\ge1/120-O(1/n)$: with probability bounded below,
+the rows off the longest cycle of the pair number at least $n/120$.
+(This is in the ``coarse'' direction that \S4 of the gap note records
+as not reached by the surviving material of \cite{CGW08}; it follows
+from the switching of Claims~2--3 of \cite{AM26} re-run with a single
+special row, plus row exchangeability.  It does not approach
+$\Pr[(n)]=o(1)$.)
+
+\emph{Where the loss is.}  Proposition~T is exactly the
+first-candidate statement with $(q,c)$ and $y$ \emph{fixed}: it needs
+no good pair across any cut, because $y$ is exchangeable with the
+other free rows and the question ``is $y$ on $D_x$'' becomes ``how
+long is $D_x$'', which Claim~$3''$ answers.  In the ladder, $y_1$ is
+selected by the cell $(y_1,p)$ and the candidate columns
+$q_1=\mathrm{pos}_{y_1}(L[1,p'])$, $c_1=\mathrm{pos}_{y_1}(L[x_1,p'])$
+are functions of row $y_1$; conditioning on the columns destroys the
+exchangeability of $y_1$, and conditioning on less leaves the columns
+random.  Every attempt to restore a generic second row (a third free
+row $w$ with its own pair $(q_w,c_w)$; a row switch of $y_1$ with a
+free row along a footprint avoiding $p,q_1,c_1$, which preserves the
+event; a switch along a footprint through $q_1$, which moves the
+candidate) either leaves the event untouched or moves the candidate
+pair with it.  So the first-candidate hazard is Proposition~T with the
+exchangeability of $y$ removed, and the switching toolkit, which
+proves Proposition~T, does not prove it; the missing cut-crossing
+goodness is the precise residue of square selection at $j=1$.
+
+\emph{Status.}  NEGATIVE KNOWLEDGE: the reduction proposed in \S(s)
+is withdrawn (its last step is false, (1)), and we found no argument from
+the present toolkit that replaces it ((2), argued, not a theorem).  PROVED
+(subject to referee): Proposition~T and its corollary.  What did not
+change: Lemma~A, the hazard hypothesis, the chain, the reference
+hypothesis.  What changed: the obstacle at $j=1$ has the exact form
+``good pairs across the $x_1$--$y_1$ cut, without exchangeability of
+$y_1$''.
