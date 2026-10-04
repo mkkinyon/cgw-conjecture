@@ -12,3 +12,4 @@ revisions within a day.
 | cgw_gap_note_2026-10-03d.pdf | 10 | 5e85f47 | new §5 "Other affected papers" (citer survey, GMW, CW16/KPS) split out of §4; abstract sentence on downstream papers |
 | weak_cgw_conditional_2026-10-03a.pdf | 25 | 32dbff9 | §6(e) first ladder pair; §7 rewritten |
 | weak_cgw_conditional_2026-10-03b.pdf | 29 | 275df89 | writing pass R2 + cold read 2: rem:fewparts, lem:nuswitch in the paper, literature paragraph, KPS route, bibliography |
+| loops_note_2026-10-03a.pdf | 6 | (see git log) | first refereed draft of the separate note on multiplication groups of random loops |
