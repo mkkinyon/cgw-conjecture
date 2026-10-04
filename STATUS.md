@@ -308,6 +308,31 @@ the measure" — impossible given the exact identity; withdrawn) and numeric ran
 (contradicted at fixed footprint fraction), "every version needs" (softened to "every version we can formulate"), ν-bookkeeping.
 What did NOT change: hyp:hazard, the chain, hyp:witness as reference, the obstacle "lower bounds only".  What is new: the
 obstacle has the quantitative form eq:hazardratio with both sides measured; one natural route (trivial backward bound) closed.
+**Seg 13 — PROVED (Lemma A, refereed twice) + ONE-WAY REDUCTION (first-candidate hazard) + NEGATIVE (no direct comparison);
+notes §(s), `s13_dyadic.py`, runs/s13/dyadic/.**  Cost: one segment.  Asked for a direct comparison of E[b_j|F_j] and
+E[f_j|E_j]: none found.  Found instead that Obstacle 1 of §(r) is not an obstacle at the first candidate.  **Lemma A
+(insert/cut):** conditionally on x₁ ~ y₁ at (q₁,c₁) (the joined part of E_1), P[ℓ ∈ [k,2k]] ≤ 400k/n and
+P[min arc ∈ [k,2k], ℓ ≥ δn] ≤ 6000k/(δ²n) for 8 ≤ k ≤ n/100; hence ℓ ≥ δn and both x₁–y₁ arcs ≥ δ³n with probability
+1 − O(δ) − O(Δ⁵/(√n P[E_1^j])), for n ≥ Δ³².  Mechanism (AM Claim-4 shape, new use): insert moves (merge D with an inactive
+cycle via a row switch, two-step with a column switch if the footprint hits q₁) number ≥ (ℓ−4)g with E[g | class] ≥ (n−2k)/31
+by Claim 3″ run inside the class; the inverse (a split whose x₁y₁-piece has size in [k,2k]) is pinned by the two marked rows to
+≤ 6k² choices; dyadic sum Σk/n = O(δ).  Arcs: transfer moves (cut S from the other arc at a good same-arc pair, insert at
+(z, z′=w′)), inverse ≤ 8k²n, forward ≥ (k−3)·(good pairs in the longest stretch) via Claim 2′ in aggregate.  Short lengths
+≤ log n/(4 log Δ) by (FC).  Referee round 1 found: wrong AM lemma cited for the merge; Lemma 2.3(1) needs re-basing; the
+transfer move's inverse count FAILS unless the insertion pair is fixed as z′ = w′ (real gap, fixed); canonical stretch B
+needed; side conditions; cell counts in (iii) wrong (arc event needs (x₁,p′),(y₁,c₁) to pin c₁: Δ^{2m+5}/n); arc scale is
+δ³n not δn; data mislabelled.  Round 2: proved as stated with C₀ = 6000.  Numerics: all sampled insert (3078/1478/408) and
+transfer (814/514/158) moves at n = 30/50/100 legal with the stated effects and inverses; exact preimage counts ≤ 3k²;
+g/(n−ℓ) ≥ 0.26 in every bin; P[ℓ ∈ [k,2k) | joined] tracks the permutation value 3k²/n².  **Reduction:** the first-candidate
+hazard inf P_X[candidate 1 good | ν > 1] ≥ c₀ follows from Lemma A plus two Claim-2′ variants (good pairs among admissible
+interleaving pairs, with cross-switches through x₁ allowed in E_1 since they change ρ to ρ∘(q₁ c₁), preserving ν and every
+candidate as an unordered pair; and a frame-row-moving split for the separated-inadmissible part) — sketched, NOT proved.
+**What this changes:** the obstacle statement "scale-n lower bounds at square-selected positions are unavailable" (§(r)
+Obstacle 1, rem:fcchanged) is false where two marked rows pin the inverse; it stands for j > 1 only because insert moves have
+Θ(n) footprints that flip earlier candidates (the ε of §(r)).  The exactly-preserving move family (column switches of
+(q_j,c′)-cycles avoiding special rows, c′ not a candidate column) is identified; its effect is understood only for intercalates,
+whose count at a square-selected column needs a lower bound on a fixed-cell count — the obstacle for j > 1 in its new form.
+What did NOT change: hyp:hazard for M = C log n candidates, the chain, hyp:witness as reference; nothing proved about E_j, j>1.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

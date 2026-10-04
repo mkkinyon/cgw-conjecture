@@ -3499,3 +3499,274 @@ hazard $\Leftarrow\cdots$), the reference hypothesis, the obstacle
 statement ``lower bounds only''.  What is new: the obstacle has the
 quantitative form \eqref{eq:hazardratio}, with both sides measured
 and matched at ratio $\approx1.5$.
+
+\paragraph{(s) Scale-$n$ lower bounds at a square-selected position by
+insert/cut switching (one lemma proved; the first-candidate hazard
+reduced to it; data).}
+This paragraph is the outcome of an attempt to compare the two sides of
+\eqref{eq:hazardratio} directly.  No such comparison was found.  What
+was found instead is that the first of the two obstacles of \S(r), the
+absence of lower bounds at scale $n$ on cycle lengths at
+square-selected positions, is not an obstacle: a switching of
+Allsop--Morris type, with the inverse count pinned by the marked rows
+$x_1,y_1$ and summed dyadically over length scales, gives such lower
+bounds with probability $1-O(\delta)$ at scale $\delta n$.  We state
+and prove the lemma for the first candidate, where there is no
+preservation problem, record what it gives for the hazard at $j=1$,
+and say where $j>1$ stands.
+
+\emph{Setting.}  As in \S(r): $R$, $(p,p')$, $(x_1,y_1)$, $\rho$,
+$\nu$, $(q_1,c_1)=(\rho p,\rho p')$; special rows $1,2,x_1,y_1$; a row
+is \emph{free} if not special.  $E_1^{\rm j}=\{\nu>1,\ x_1\sim y_1
+\text{ on the }(q_1,c_1)\text{-cycle }D\}$ (the joined part of $E_1$),
+$\ell=|D|$, and for $L\in E_1^{\rm j}$ the two arcs of $D$ between
+$x_1$ and $y_1$ have sizes $a,a'$ with $a+a'=\ell$.  A
+$(q_1,c_1)$-cycle is \emph{inactive} if it contains no special row;
+$g(L)$ is the number of rows on inactive cycles.  All probabilities
+are $\Pr_X$ (or $\Pr_{S(R)}$ for fixed $R$ and mark; the argument is
+the same).
+
+\emph{Lemma A (insert/cut).}  There are absolute constants $C_0$,
+$n_0$ such that for $n\ge n_0$, $8\le k\le n/100$ and
+$1/n\le\delta\le1/100$,
+\[
+\Pr_X\bigl[\ell\in[k,2k]\ \big|\ E_1^{\rm j}\bigr]\ \le\ C_0\,\frac kn,
+\qquad
+\Pr_X\bigl[\min(a,a')\in[k,2k],\ \ell\ge\delta n\ \big|\ E_1^{\rm j}\bigr]\ \le\ C_0\,\frac{k}{\delta^2n} .
+\]
+Consequently, with $k_0=\lfloor\log n/(4\log\Delta)\rfloor$ ($\Delta$
+from Corollary~\ref{cor:FCtwo}) and $\delta\le1/100$,
+\[
+\Pr_X\bigl[\ell\le\delta n\text{ or }\min(a,a')\le\delta^3 n\ \big|\ E_1^{\rm j}\bigr]
+\ \le\ 8C_0\delta+\frac{5\Delta^5}{\sqrt n\,\Pr_X[E_1^{\rm j}]}.
+\]
+($C_0=6000$ will do; $n_0\ge\Delta^{32}$ is forced by the matching of
+(i) and (iii) at $k_0\ge8$, so the lemma is purely asymptotic.)
+
+
+\emph{Proof.}  \emph{(i) The cycle length.}  Fix $k$ and let
+$\mathcal C_k=E_1^{\rm j}\cap\{\ell\in[k,2k]\}$.  \emph{Moves.}  For
+$L\in\mathcal C_k$, a free row $z\in D$ and a row $z'$ on an inactive
+cycle $C$: if the row cycle $\rho_L(z,z',c_1)$ avoids $q_1$, switch
+it; otherwise first switch the column cycle $C$ (columns $q_1,c_1$,
+rows of $C$) to obtain $L''$, in which $\rho_{L''}(z,z',c_1)$ avoids
+$q_1$ (\cite[Lemma~2.3(1)]{AM26} after re-basing the row cycle at a
+third of its columns, which exist since $z,z'$ lie on different
+$(q_1,c_1)$-cycles; directly as in the proof of Claim~$4'$ of \S(q),
+since $C\not\ni z$), and then switch it.  Call the
+result $L'$.  The column switch changes only rows of $C$, which are
+not special; the row switch changes only rows $z,z'$.  Hence rows
+$1,2,x_1,y_1$ are unchanged, so $L'\in S(R)$ with the same mark, first
+pair, $\rho$, $\nu$ and candidates.  By \cite[Lemma~2.4(2)]{AM26}
+(row switch of two rows on different column cycles along a row cycle
+avoiding $q_1$) $D$ and $C$ merge into one $(q_1,c_1)$-cycle
+$D'=D\cup C$, and every other cycle is unchanged; directly: column
+$q_1$ is unchanged and the $c_1$-entries of $z,z'$ are exchanged, so
+the column permutation is composed with the transposition of the two
+symbols $L[z,c_1],L[z',c_1]$, which splices $C$ into $D$ immediately
+after $z$ in the list; so $L'\in E_1^{\rm j}$ with
+$\ell'=\ell+|C|\ge\ell+2$, and the cyclic order of the special rows on
+$D$ is preserved.  The number of moves from $L$ is at least
+$(\ell-4)\,g(L)$.  \emph{Inverse count.}  Let $L'\in E_1^{\rm j}$.  If
+$L'$ arises from $(L,z,z')$ then $L$ is recovered from $(L',z,z')$ by
+switching $\rho_{L'}(z,z',c_1)$ (\cite[Fact~2.1]{AM26}: the same set
+of cells) and then, in the two-step case, switching the
+$(q_1,c_1)$-cycle through $z'$; so $L'$ has at most $2N$ preimages,
+$N$ the number of unordered pairs $\{z,z'\}$ of free rows on $D'$ such
+that switching $\rho_{L'}(z,z',c_1)$ splits $D'$ into a piece $P\ni
+x_1,y_1$ with $|P|\in[k,2k]$ and a piece $S$.  By
+\cite[Lemma~2.4(1)]{AM26} $S$ consists of the rows strictly between
+$z$ and $z'$ in the list together with $z'$, and $P=D'\setminus S$ is
+a contiguous arc of $D'$ ending at $z$; so $P$ determines $\{z,z'\}$,
+and $P$ is a contiguous arc of length $m\in[k,2k]$ containing $x_1$,
+of which there are at most $m$ for each $m$.  Hence $N\le\sum_{m=k}^{2k}m\le3k^2$
+and $L'$ has at most $6k^2$ preimages.  \emph{Lower bound on $g$.}
+Claim~$3''$ of \S(q), with special rows $1,2,x_1,y_1$ and with its
+switching (row switches of good same-arc pairs on the cycles through
+rows $1,2$ other than $D$, and the cross-switches of Claim~$2'$ on
+those cycles) applied inside the class $\mathcal C_k$, which it
+preserves (it touches neither $D$ nor a special row, so $\ell$,
+$E_1^{\rm j}$, the mark and the candidates are unchanged), gives
+$\mathbb E_X[g\mid\mathcal C_k]\ge(n-2k)/31$ for $n\ge n_0$, $k\le
+n/100$: the free rows off $D$ number $n-\ell-O(1)\ge n-2k-4$, they
+lie on the switched active cycles or on inactive cycles, the forward
+count is at least $\frac1{27}((n-2k-g-13)_+)^2$ in aggregate and the
+backward count at most $n\,g(L')$, and Jensen's inequality closes as
+in \S(q).  \emph{Conclusion.}  Double counting the moves,
+$|\mathcal C_k|\,(k-4)\,\mathbb E_X[g\mid\mathcal C_k]\le6k^2\,|E_1^{\rm j}|$,
+so $\Pr_X[\ell\in[k,2k]\mid E_1^{\rm j}]\le 6k^2\cdot31/((k-4)(n-2k))\le 400k/n$
+for $k\ge8$, $k\le n/100$.
+
+\emph{(ii) The arcs.}  Let $\mathcal C'_k=E_1^{\rm j}\cap\{a\in[k,2k],\ \ell\ge\delta n\}$
+($a$ the arc from $x_1$ to $y_1$ in the list order; the other arc by
+symmetry).  If $k>\delta n/4$ or $\delta n<240$ the claimed bound is
+$\ge1$ and there is nothing to prove, so assume $k\le\delta n/4$ and
+$\delta n\ge240$.  \emph{Transfer moves.}  The other arc has
+$\ell-a\ge\delta n-2k\ge\delta n/2$ rows and at most two frame rows,
+so it contains a special-row-free stretch of at least $\delta n/6-1$
+free rows; let $B=B(L)$ be the longest such stretch (ties broken by
+position), with $b=|B|$.  For a good same-arc pair $(w,w')$ in $B$
+(footprint $\rho_L(w,w',c_1)$ avoiding $q_1$) and a free row $z$ of
+the $x_1$--$y_1$ arc (at least $k-3$ choices): switch
+$\rho_L(w,w',c_1)$, which by \cite[Lemma~2.4(1)]{AM26} cuts the rows
+strictly between $w$ and $w'$ together with $w'$ off as a new cycle
+$S$ containing no special row, hence inactive, and leaves $x_1,y_1$
+and the $x_1$--$y_1$ arc untouched; then perform the insert move of
+(i) at the pair $(z,z')$ with $z':=w'$ (one- or two-step as there).
+The result $L'$ is in $E_1^{\rm j}$ with $\ell'=\ell$, $a'=a+|S|\ge a+2$,
+the same cyclic order of special rows, and $S$ spliced in after $z$,
+ending at $w'$ (in the two-step case the column switch reverses $S$
+as a cycle, and the splice still ends at $z'=w'$).  Claim~$2'$ of
+\S(q), applied to the class of triples $(L,D,B(L))$, $L\in\mathcal C'_k$,
+$|B(L)|=b$ --- closed under its cross-switches, which act inside $B$,
+touch no special row, keep $B$ as a set (\cite[Remark~2.7]{AM26}) and
+change neither $\ell$ nor $a$ --- gives at least $(b-3)^2/9\ge\delta^2n^2/400$
+good pairs in $B$ in aggregate (using $\delta n\ge240$), so at least
+$(k-3)\delta^2n^2/400$ moves per square of $\mathcal C'_k$ on average.
+\emph{Inverse count.}  From $L'$: the segment $S$ to be cut out of
+the $x_1$--$y_1$ arc leaves a prefix and a suffix of that arc of total
+length in $[k,2k]$, at most $(2k)^2$ choices, and determines the pair
+$(z,z')$ ($z$ the row before $S$, $z'=w'$ its last row); undoing the
+insert takes the row switch at $(z,z')$ and, in the two-step case, the
+column switch of the cycle through $z'$ (two alternatives); undoing
+the cut is the row switch at $(w,w')$ with $w'$ known and $w$ one of
+at most $n$ rows (no two-step alternative).  So at most $8k^2n$
+preimages.  \emph{Conclusion.}
+$\Pr_X[a\in[k,2k],\ \ell\ge\delta n\mid E_1^{\rm j}]\le8k^2n\cdot400/((k-3)\delta^2n^2)\le6000\,k/(\delta^2n)$
+for $k\ge8$.
+
+\emph{(iii) Short lengths.}  $\{\ell=m\}\cap E_1^{\rm j}$ is the
+union over the positions of $x_1,y_1$ ($n^2$), of $q_1,c_1$ ($n^2$),
+of the $m-2$ other rows of the cycle ($n^{m-2}$) and of the $m-1$ free
+symbols ($n^{m-1}$; $L[y_1,q_1]=L[1,p']$ is forced) of fixed-cell
+events with $2m+2$ cells (the $2m$ cells of the cycle and the anchors
+$(x_1,p),(y_1,p)$), so by Corollary~\ref{cor:FCtwo} and the
+exchangeability of rows $3,\dots,n$, as in the proof of
+Corollary~\ref{cor:nutail}, it has probability at most
+$n^{2m+1}(\Delta/n)^{2m+2}=\Delta^{2m+2}/n$.  For $\{a=m\}\cap E_1^{\rm j}$
+the path from $x_1$ to $y_1$ along the cycle has $m+1$ rows and
+$2m+2$ cells, and $c_1$ must be pinned by the further cells
+$(x_1,p')$ and $(y_1,c_1)$ with the forced symbol: $2m+5$ cells,
+$n^{2m+4}$ placements, probability at most $\Delta^{2m+5}/n$.  Summing
+over $m\le k_0$ (at most $2\Delta^{2k_0+2}/n\le2\Delta^2/\sqrt n$ and
+$2\cdot2\Delta^{2k_0+5}/n\le4\Delta^5/\sqrt n$), and (i) over the
+dyadic $k\in[k_0,\delta n]$ ($\le800\delta$) and (ii) over the dyadic
+$k\in[k_0,\delta^3n]$ for each arc ($\le2\cdot12000\delta$), gives the
+consequence.  $\square$
+
+\emph{Remarks on the proof.}  (1) The mechanism is that of Claim~$4'$:
+$\Omega(k\,n)$ moves out of the class, $O(k^2)$ into any square, the
+inverse pinned by the two marked rows which must both lie in a short
+piece.  The dyadic sum $\sum_k k/n$ over $k\le\delta n$ is $O(\delta)$,
+which is the right order ($\Pr[\ell\le\delta n]\approx\delta$ for a
+random permutation).  (2) Nothing here lower-bounds a specific cycle
+directly; the lemma says that a cycle through two marked rows is
+unlikely to be of intermediate length, because such a cycle can be
+grown in $\Omega(kn)$ ways and shrunk back to intermediate length in
+$O(k^2)$.  (3) The same argument, with the frame rows as the pinning
+rows, bounds the lengths of the special-row-free stretches of $D$
+(the segments between consecutive special rows) below by $\delta^3n$
+with probability $1-O(\delta)$ (the cube comes from the
+$\delta^{-2}$ in (ii)); and it applies verbatim to the
+$(q_j,c_j)$-cycle through $x_1$ for any $j<\nu$, \emph{as a statement
+about $\Pr_X[\,\cdot\mid x_1\sim y_1\text{ at }j]$}; what it does not
+do for $j>1$ is preserve the statuses of candidates $1,\dots,j-1$
+(the row switches have footprints of length $\Theta(n)$), so it says
+nothing about $\Pr_X[\,\cdot\mid E_j]$.
+(4) Numerical check (\texttt{s13\_dyadic.py}; \texttt{runs/s13/dyadic/}),
+completions of a fixed rectangle, $n=30,50,100$, $3000/1800/900$
+instances, of which $1535/917/458$ joined: every sampled insert move
+($3078/1478/408$, about half two-step) gives a Latin square with rows
+$0,1,x_1,y_1$ unchanged, $D'=D\cup C$, the cyclic order of the special
+rows preserved, and is undone by the stated inverse; the exact
+preimage count $N$ (unordered split pairs leaving an $x_1y_1$-piece of
+size in $[\ell,2\ell]$) is at most $3k^2$ in every case
+($\max N=235,712,3099$); every sampled transfer move of (ii)
+($814/514/158$; the longest special-row-free stretch of the other
+arc, a random good pair in it, a random free $z$ of the $x_1$--$y_1$
+arc, insert at $(z,w')$) is legal with $\ell'=\ell$, $a'=a+|S|$, the
+order of the special rows preserved, $S$ spliced in after $z$ and
+ending at $w'$, and is undone by the stated inverse (about $36$--$42\%$ of
+the sampled pairs in the stretch are good); the cross-switches of
+Claim~$2'$ and the Claim-$3''$ switching inside $\mathcal C_k$ are not
+re-checked here (they are the moves checked in \S(q));
+$\mathbb E[g/(n-\ell)\mid\ell/n\text{ bin}]\ge0.26$ in every bin
+(bound $1/31$); $\Pr[\ell\in[k,2k)\mid\text{joined}]$ for dyadic $k$
+tracks the permutation value $3k^2/n^2$ ($0.009/0.063/0.271$ at
+$k=8,16,32$, $n=100$, against $0.019/0.077/0.307$), far below the
+bound $400k/n$, which is vacuous at these $n$ (the lemma needs
+$n\ge\Delta^{32}$); $\Pr[\min(a,a')\le n/20\mid\text{joined}]=0.00/0.09/0.17$.
+
+\emph{What Lemma A gives for the hazard at $j=1$ (reduction, not yet
+proved).}  By \eqref{eq:hazardratio} with $j=1$ (no preservation
+condition: $f_1$ is the number of ok toggles), $b_1\le n^2/4$, so
+$h_1\ge c$ follows from $\mathbb E_X[f_1\mid E_1]\ge c'n^2$.  Lemma A
+and Remark~(3) give, on $E_1^{\rm j}$ and with probability $1-O(\delta)$,
+arcs and special-row-free stretches of length $\ge\delta^3n$, hence
+$\ge\delta^6n^2$ interleaving pairs whose split is admissible (for
+instance, with the special rows in the cyclic order $x_1,1,y_1,2$ and
+stretches $A,B,C,D$ between them, the pairs in $A\times D$ and
+$B\times C$).  What remains is a Claim-$2'$ statement for this family
+$\mathcal P_{\rm adm}$: in aggregate over the class (fixed $\ell$ and
+cyclic order), at least a constant fraction of its pairs are good
+(footprint avoiding $q_1$).  The cross-switch of Claim~$2'$ at a bad
+pair $(u,v)\in\mathcal P_{\rm adm}$ reverses the segment between
+$x_u,x_v$ through $x_1$ (or $y_1$), which contains no frame row, and
+swaps the $(q_1,c_1)$-entries of $x_1$; this changes $\rho$ to
+$\rho\circ(q_1\,c_1)$, which leaves $\nu$ and every candidate
+\emph{as an unordered column pair} unchanged ($p,p'\notin\{q_1,c_1\}$;
+for $t\ge2$ the pair $(q_t,c_t)$ becomes $(c_t,q_t)$), keeps the row
+set of $D$ (\cite[Lemma~2.6]{AM26}) and the cyclic order of the
+special rows, and toggles the goodness of every pair interleaved with
+$(u,v)$ (\cite[Lemma~2.6(2)]{AM26}).  The interleaving relation on
+$\mathcal P_{\rm adm}$ is symmetric and, in local coordinates
+$(i,j)\in A\times D$, $|W(i,j)|=(i-1)(j-1)+(|A|-i)(|D|-j)$, with
+$\sum|W|\ge|A|^2|D|^2/4$ and $\max|W|\le|A||D|$, so the counting of
+Claim~$2'$ gives at least $|\mathcal P_{\rm adm}|/6$ good pairs in
+aggregate.  The separated-inadmissible part of $E_1$ needs a toggle
+that moves a frame row off the cycle of $x_1$ (a split of that cycle
+at a pair interleaving $x_1$ and the frame row), with Lemma~A applied
+to that cycle and that pair of marked rows.  We have checked these
+steps only to the level of this paragraph; the first-candidate
+statement $\inf_{\lambda,\alpha,\beta}\Pr_X[\text{candidate 1 good}\mid\nu>1]\ge c_0>0$
+is therefore a reduction to Lemma~A plus the two Claim-$2'$ variants,
+not a proved result.  It would be the first lower bound at a
+square-selected position in this project.
+
+\emph{Where $j>1$ stands.}  Lemma~A bounds the lengths at $(q_j,c_j)$
+in the class $\{x_1\sim y_1\text{ at }j\}$, not in $E_j$; the insert
+moves at $j$ have footprints that meet $q_s$ or $c_s$ for $s<j$ with
+constant probability each and so leave $E_j$ at the rate $\varepsilon$
+of \S(r).  The move family that does preserve every earlier candidate
+exactly is the family of column switches of $(q_j,c')$-cycles avoiding
+the special rows, $c'$ not a candidate column: it changes column
+$q_j$ only, composing the $(q_j,c_j)$-permutation with the cyclic
+permutation of the switched rows, and is its own inverse.  Its effect
+on whether $x_1\sim y_1$ is transparent only for cycles of length $2$
+(intercalates on column $q_j$: separation iff the two rows interleave
+$x_1,y_1$ on $D_j$), and the forward count is then the number of
+intercalates on a square-selected column with rows in prescribed
+arcs, a fixed-cell count for which only upper bounds are available
+from (FC).  So the obstacle for $j>1$ is unchanged in substance but
+has moved: from ``no scale-$n$ lower bounds'' to ``no lower bounds on
+fixed-cell counts at square-selected positions, and no analysis of
+long-cycle column switches''.  We have no direct comparison of the two
+sides of \eqref{eq:hazardratio}.
+
+\emph{Status.}  PROVED (refereed; the referee's corrections --- the merge
+citation, the re-basing for Lemma~2.3(1), the convention $z'=w'$ in
+the transfer move without which the inverse count fails, the canonical
+stretch $B$, the side conditions of (ii), the cell counts of (iii),
+the arc scale $\delta^3n$ --- are incorporated): Lemma~A, i.e.\ the
+cycle length at the first candidate is $\ge\delta n$ and the arcs are
+$\ge\delta^3n$ with probability $1-O(\delta)$ conditionally on
+$x_1\sim y_1$, for $n\ge\Delta^{32}$.  This
+corrects the statement of \S(r) and of rem:fcchanged that lower bounds
+at scale $n$ at square-selected positions are unavailable: they are
+available where two marked rows pin the inverse.  REDUCTION: the
+first-candidate hazard $h_1\ge c_0$ to Lemma~A plus two Claim-$2'$
+variants.  What did not change: the hazard hypothesis for $M=C\log n$
+candidates (which is what the weak conjecture needs), the chain, the
+reference hypothesis; the obstacle statement ``lower bounds only'' now
+reads ``lower bounds only, for $j>1$, where the earlier candidates
+must be preserved''.
