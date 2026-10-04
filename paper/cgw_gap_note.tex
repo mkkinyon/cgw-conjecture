@@ -41,7 +41,11 @@ a canonical repair of case 3 exists when $\alpha$ is even and
 $\alpha<2\beta$ (or symmetrically), and we do not see one when
 $\alpha,\beta$ are both odd.  Exact data for $n\le11$ and sampled
 squares up to $n=100$ indicate that the statement is true with much
-room to spare.
+room to spare.  Among the papers citing \cite{CGW08}, the use in
+Gill--Mammoliti--Wanless (canonical labelling in average-case polynomial
+time) is repaired by a surviving estimate, while the parity theorem of
+Cavenagh--Wanless depends on the gap at two points; its statement is a
+special case of the recent parity theorem of Kwan--Petrova--Sawhney.
 \end{abstract}
 
 \section{Setting and the procedure}
@@ -305,7 +309,38 @@ for a type with parts $c_1,\dots,c_\kappa$, using $\gamma(\lambda)\le m!/\prod c
 $\gamma((m))=(m-1)!$ and $\PP_F(\lambda)\propto\gamma(\lambda)\CC(\lambda)$ (in
 place of the factor $m^{1/3}$, which came from Lemma 4.4).
 
-\paragraph{A downstream use.}  Gill, Mammoliti and Wanless
+The surviving direction bounds fine types from above only: it gives
+no upper bound on the probability of a coarse type.  In
+particular we know of no proof, from the surviving material or from our
+own identities, that the first two rows of a random Latin square form a
+single $n$-cycle with probability $o(1)$ (the statement
+$\PP_F((m))\le2m^{-2/3}$ of Lemma~4.4).  What is available is a constant:
+by row-pair symmetry and the intercalate count of \cite{KS18},
+$\E N_2\ge\tfrac12-o(1)$; the $\ell=\beta=2$ case of the surviving
+inequality gives $\E[N_2(N_2-1)]\le2\E N_4\le m/(m-4)$; so by the second
+moment method $\Pr[N_2\ge1]\ge(\E N_2)^2/\E[N_2^2]\ge\tfrac16-o(1)$ and
+$\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
+this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
+gives $\PP_F((2,m-2))\le\tfrac m{m-2}\PP_F((m))$, and iterating over
+$k$ two-cycles loses a factor of order $4^kk!$.
+
+\section{Other affected papers}
+\label{sec:other}
+
+We went through the
+titles of the papers citing \cite{CGW08} that are indexed by MathSciNet
+or listed by Google Scholar and read those whose titles suggested a
+use of the affected results: besides \cite{GMW25,CW16,KPS25}, these were
+Kwan--Sah--Sawhney--Simkin, Allsop--Wanless, Divoux--Kelly--Kennedy--Sidhu
+and Allsop--Morris \cite{AM26}, which cite \cite{CGW08} for the
+intercalate estimates, superseded by \cite{KS18}, or, in the last case,
+for the reversibility and effect lemmas for cycle and cross switches in
+\S3 of \cite{CGW08}, which are unaffected.  We have not read the
+remaining citing papers, whose titles concern autotopisms, transversals,
+bitrades and loops.  Two of the papers read use the affected results in
+an essential way; one of them is itself used by a third.
+
+Gill, Mammoliti and Wanless
 \cite{GMW25} use Corollary 4.5 (upper half) and Theorem 4.9 to prove
 their Theorem~9 (with probability $1-o(\exp(-\tfrac14n^{1/2}))$ the first
 two rows of a random Latin square contain a row cycle of length at least
@@ -336,7 +371,7 @@ place of $n^{1/3}$ the estimate in Lemma~2.1 becomes
 $O(2^{(\log n)/2}\log n)$, and already its $\lambda=(n)$ term is $1$; what
 Lemma~2.1 needs is that the cycle through column~$1$ has length at
 most $n-\omega(1)$ with probability $1-o(1)$, which includes
-$\PP_F((n))=o(1)$, discussed below.  The third is the unproved direction
+$\PP_F((n))=o(1)$, which, as noted at the end of \S4, we cannot prove either.  The third is the unproved direction
 at exactly the splits where case~3 fails, outside the range of
 Proposition~\ref{prop:two}; what their Lemma~2.3 actually needs is
 weaker than $\tfrac32$ --- any constant, or even the averaged statement
@@ -363,31 +398,6 @@ supersedes Theorem~4.3 of \cite{CGW08} (affected by the gap, as listed
 above).  (Their written deduction of the law of large numbers goes
 through part~(4), hence through \cite{CW16}; the route through
 part~(5) avoids it.)
-
-More generally, the surviving direction bounds fine types from above
-only: it gives no upper bound on the probability of a coarse type.  In
-particular we know of no proof, from the surviving material or from our
-own identities, that the first two rows of a random Latin square form a
-single $n$-cycle with probability $o(1)$ (the statement
-$\PP_F((m))\le2m^{-2/3}$ of Lemma~4.4).  What is available is a constant:
-by row-pair symmetry and the intercalate count of \cite{KS18},
-$\E N_2\ge\tfrac12-o(1)$; the $\ell=\beta=2$ case of the surviving
-inequality gives $\E[N_2(N_2-1)]\le2\E N_4\le m/(m-4)$; so by the second
-moment method $\Pr[N_2\ge1]\ge(\E N_2)^2/\E[N_2^2]\ge\tfrac16-o(1)$ and
-$\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
-this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
-gives $\PP_F((2,m-2))\le\tfrac m{m-2}\PP_F((m))$, and iterating over
-$k$ two-cycles loses a factor of order $4^kk!$.  (We went through the
-titles of the papers citing \cite{CGW08} that are indexed by MathSciNet
-or listed by Google Scholar and read those whose titles suggested a
-use of the affected results: besides \cite{GMW25,CW16,KPS25}, these were
-Kwan--Sah--Sawhney--Simkin, Allsop--Wanless, Divoux--Kelly--Kennedy--Sidhu
-and Allsop--Morris \cite{AM26}, which cite \cite{CGW08} for the
-intercalate estimates, superseded by \cite{KS18}, or, in the last case,
-for the reversibility and effect lemmas for cycle and cross switches in
-\S3 of \cite{CGW08}, which are unaffected.  We have not read the
-remaining citing papers, whose titles concern autotopisms, transversals,
-bitrades and loops.)
 
 \section{A partial repair}
 
