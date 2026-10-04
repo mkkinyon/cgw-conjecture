@@ -2951,8 +2951,9 @@ $E=\{1,2\}\cup R_Q$ for the excluded rows.
 \begin{theorem}[\cite{AM26}, Theorem~3.1, with two complete rows]\label{thm:AM31two}
 Let $R,Q$ be as above with $|R_Q|+6\le\alpha n$, $|C_Q|\le\beta n$ and
 $2\alpha+\beta<1$.  Let $r,r'\notin\{1,2\}$, $r\ne r'$, $c\in[n]$, and
-suppose $Q$ has no cell in row $r'$ outside column $c$ (in particular
-$r'\notin R_Q$ is allowed, and so is $(r',c,\cdot)\in Q$).  Then, for
+suppose $Q$ has no cell in row $r'$ outside column $c$ (so $r'\in R_Q$
+is allowed only through a cell $(r',c,\cdot)\in Q$; this is what the
+proof of the per-cell bound below needs).  Then, for
 $n\ge n_0(\alpha,\beta)$,
 \[
 \Pr\bigl[\eta_L(r,r',c)\text{ is of Type One}\;\big|\;L\supseteq R\cup Q\bigr]\le\frac{D}{n},
@@ -2981,7 +2982,7 @@ Claim~1, $p_{j-1}\le(np_j+1)/(n(1+p_j-2\alpha-\beta)-3j-2)$, holds
 verbatim: its switch $\eta_L(r_j,x,c_j)$ changes only rows $r_j,x,x'$,
 all outside $\{1,2\}$ when $x,x'\notin E$, so rows $1,2$ are untouched
 and $L'\supseteq R$; the cells of $Q$ it could touch are $(r_j,y)$ with
-$y\in C_Q$, $(r_j,c_j)$ (not a $Q$-cell: $c_j\notin C_Q$ for $j\ge1$,
+$y\in C_Q$, $(r_j,c_j)$ (not a $Q$-cell: $c_j\notin C_Q$ for $j\ge2$,
 and for $j=1$ the only $Q$-cell allowed in row $r_1$ is in column
 $c_0\ne c_1$) and cells in rows $x,x'\in R_Q$, excluded exactly as in
 their count ($|C_Q|+j+1$ choices of $x$ with $y\in C_Q\cup\{c_\ell\}$,
@@ -3055,9 +3056,11 @@ $\zeta_L(c_2,c_3,x_u,x_v)$ (Kind~2).  The cross-switch is well defined
 (the pair is bad and $u,v$ are not adjacent in the list, since a
 position of $\{i_0,j_0\}$ separates them); it changes rows $x_u,x_v$,
 which are free, and columns $c_2,c_3$ in the rows strictly between
-$x_u$ and $x_v$ in the list, which lie in $A$ and so are neither
-special, nor the reference row, nor $r_2,r_3$ (not on $D$); hence it
-changes no cell of $R$ and no cell of $Q(L)$, and $L'\in X_3$ with the
+$x_u$ and $x_v$ in the list, which are rows of $D$ that are neither
+special nor the reference row (the pair is same-arc) nor $r_2,r_3$ (not
+on $D$); such rows may include $r_0$ or rows of $R_Q$, whose cells in
+columns $c_2,c_3\notin C_Q$ are not in $Q(L)\cup R$; hence it changes no
+cell of $R$ and no cell of $Q(L)$, and $L'\in X_3$ with the
 same $r_\ell,c_\ell,s_\ell$.  By their Lemma~2.6 the row set of $D$ is
 unchanged, by their Remark~2.7 the list of $L'$ is that of $L$ with
 the segment strictly between $x_u$ and $x_v$ reversed, so the special
@@ -3103,7 +3106,7 @@ switches from $L$ (pairs $(D,(i,j))$; distinct pairs of rows give
 distinct switches, and a pair of rows lies on one cycle).  Summing
 Claim~$2'$ over $a$, with $h(a)=((a-3)_+)^2/9$,
 \[
-\sum_{L\in X_3}F(L)=\sum_{a\ge4}\ \sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs in }A\}
+\sum_{L\in X_3}F(L)\ \ge\ \sum_{a\ge4}\ \sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs in }A\}
 \ \ge\ \sum_{a\ge4}N_ah(a)\ =\ \sum_{L\in X_3}\ \sum_{A}h(|A|),
 \]
 and for each $L$, since the arcs of the active cycles partition
@@ -3189,13 +3192,30 @@ $\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$.  In particular
 $\Pr_X[\nu\le C\log\log n]=O((\log n)^{2C\log\Delta}/n)=o(1/\log n)$.
 \end{corollary}
 
-\emph{Proof.}  \S(l)(i): by row exchangeability $\Pr_X[E_k(a,b)]=(n-2)(n-3)\Pr_X[E']$
-where $E'$ prescribes the two anchor cells at rows $3,4$ and the $2k$
-staircase cells; a union bound over the $\le n^{2k-1}$ choices of the
-free columns and symbols and Corollary~\ref{cor:FCtwo} (averaged over the
-rectangles $R$ of type $\lambda$, which have equal completion counts)
-give $\Pr_X[E_k(a,b)]\le(n-2)(n-3)n^{2k-1}(\Delta/n)^{2k+2}\le\Delta^{2k+2}/n$;
-sum over $k\le M$ and the four $(a,b)$, using $\Delta\ge2$.  $\square$
+\emph{Proof.}  As in \S(l): $\{\nu\le M\}$ is the union over $2\le k\le M$
+and $a,b\in\{p,p'\}$ of the events $E_k(a,b)$ that the
+$\rho_{x_1,y_1}$-path $w_0=a,w_1,\dots$ first meets $\{p,p'\}$ at step
+$k$, at $w_k=b$ (\S(l) takes $\nu\ge2$ from \S(k)).  On $E_k(a,b)$ the
+square contains the cells $(x_1,p,L(1,p'))$, $(y_1,p,L(2,p'))$ (the
+anchors, whose symbols are determined by $R$) and
+$(x_1,w_i,t_i),(y_1,w_{i+1},t_i)$ for $0\le i<k$, where $t_i=L(x_1,w_i)$
+and $w_1,\dots,w_{k-1}\notin\{p,p'\}$ are distinct; all these cells lie
+in the two rows $x_1,y_1\notin\{1,2\}$ (\S(k)).  By the exchangeability
+of rows $3,\dots,n$ under $\Pr_X$ (equivalently, in each $S(R)$),
+$\Pr_X[E_k(a,b)]=(n-2)(n-3)\Pr_X[E_k(a,b),\ (x_1,y_1)=(3,4)]$, and the
+latter event is contained in the union, over the choices of
+$w_1,\dots,w_{k-1}$ and of the symbols $t_i$ not forced by the anchors,
+of the events $\{L\supseteq Q_{w,t}\}$ with $Q_{w,t}$ the partial Latin
+square of the cells listed, placed in rows $3,4$.  For $(a,b)=(p,p)$,
+mixed, $(p',p')$ the cells number $2k$, $2k+1$, $2k+2$ and the free
+parameters $n^{2k-3}$, $n^{2k-2}$, $n^{2k-1}$ respectively, so by
+Corollary~\ref{cor:FCtwo} (applied in each $S(R)$, $R$ of type
+$\lambda$; $\Pr_X$ is the average over these $R$ and the marks, all
+rectangles of a type having the same number of completions) each case
+contributes at most $(n-2)(n-3)\,n^{2k-3+t}(\Delta/n)^{2k+t}\le\Delta^{2k+t}/n\le\Delta^{2k+2}/n$,
+$t\in\{0,1,2\}$.  Summing over $k\le M$ and the four $(a,b)$:
+$\Pr_X[\nu\le M]\le4\sum_{k\le M}\Delta^{2k+2}/n\le8\Delta^{2M+2}/n$ for
+$\Delta\ge2$.  $\square$
 
 \emph{What this does and does not do.}  The first-pair condition
 \eqref{eq:hypfirstpair} is $\Pr_X[G^c]=o(1/\log n)$ uniformly, and

@@ -255,7 +255,29 @@ H ≤ K is the intersection of the n−1 conditions σ_i ∈ K (the identity row
 L(n)/n! = (n!)^{n−1}e^{−n²+o(n²)} settles every K of index ≥ e^{(1+δ)n}; the two families of smaller index (A_n, S_{n/2}≀S_2) need
 the Latin constraints inside K (block decomposition; Häggkvist–Janssen).  Not available for the conjecture itself (one row given
 the identity row).  Decision pending: where to publish (short section in the paper vs. 3-page note; tell
-Cameron?).
+Cameron?).  [Later: separate note `paper/loops_note.tex` drafted and refereed; user to contact Eberhard.]
+**Seg 10 — PROVED (two independent referee passes + numerical checks): the Allsop–Morris per-cell bound holds with two complete
+rows, hence (FC) in S(R), hence the ν-tail of hyp:firstpair is o(1/log n).**  Notes §(q); `s13_amtwo.py`; runs/s13/amtwo/.
+Cost first: constants (D → 62, Δ ≤ 66 vs AM's 22, 23); hypotheses |R_Q|+6 ≤ αn, |C_Q| ≤ βn (irrelevant for |Q| = O(log log n));
+nothing for the second term of hyp:firstpair, which is a lower bound at square-selected positions and is NOT a fixed-cell event.
+Content: thm:AM31two — for R two complete rows and Q sparse in other rows, P[η_L(r,r′,c) Type One | L ⊇ R ∪ Q] ≤ D/n (r,r′ ∉ {1,2},
+Q's cells in row r′ only in column c); cor:FCtwo — P[Q ⊆ L | R] ≤ (Δ/n)^{|Q|}; cor:nutail — P_X[ν ≤ M] ≤ 8Δ^{2M+2}/n for all
+λ,α,β.  How: AM's proof with (i) R_P → E = {1,2} ∪ R_Q, C_P → C_Q (η-switches change rows r_j,x,x′ ∉ {1,2} only); (ii) Claims
+2–3 restricted to SAME-ARC pairs on each ACTIVE (c₂,c₃)-cycle (γ_L and the cycles through rows 1,2; arcs cut by special and
+reference rows) so no column part passes through rows 1,2; (iii) AM's statistic ν replaced by g(L) = free rows on INACTIVE
+cycles; Claim 3″: Σ g ≥ f|X₃|/30 by cutting all active cycles simultaneously (forward ≥ ((f−g−9)₊)²/27 via aggregate Claim 2′,
+backward ≤ f·g(L′) because one switched row lands on an inactive cycle), Jensen; (iv) Claim 4′ uses only x on inactive cycles
+(the column-cycle switch through x then avoids rows 1,2) ⇒ p₂ ≤ 60/f ⇒ D → 62.  The §(n) configuration ("exactly one of rows 1,2
+on γ_L and x on the other's cycle") is simply never used.  All moves stay in S(R) — no mark, no isotopy argument.  Referee 1
+found Claim 2′ stated per arc (false — some arcs have no good pair; 40 of ~2900 in the sample); restated in aggregate over arcs of
+equal size, constants unchanged; referee 2 (independent, after the fix): no error, all steps re-derived.  Numerical checks at
+n = 30, 50, 100 and type (4,2^13): every restricted cross-switch legal/reversing/toggling/invertible; every cut splits as stated
+with special rows on the reference piece; every Claim-4′ move lands in Y₂∖X₃ and inverts; aggregate Claim 2′ holds for every arc
+size with factor ≈ 2 to spare; mean g/f ≈ 0.22–0.25 (bound 1/30).  **Consequence: weak CGW ⇐ HAZARD HYPOTHESIS (eq:hyphazard):
+sup_{λ,α,β} P_X[ν > M, first M candidates all bad] = o(1/log n) for some M ≤ C log log n** — a one-way reduction of hyp:firstpair
+to its second term.  What did NOT change: the remaining term is a lower bound at square-selected positions (candidate t good
+with conditional probability ≥ c); no lower bound of that kind is proved.  What DID change in the obstacle statement: the
+"upper-bound half" (short structures at the frame-selected pair) is done; "in either direction" → "lower bounds only".
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
