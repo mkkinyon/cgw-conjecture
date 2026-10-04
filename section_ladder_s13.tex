@@ -2929,3 +2929,339 @@ diversion: it says nothing about $\Pr_X[B]$, the gap, or any of the
 hypotheses, and it removes one of the two consequences CGW list for
 their conjecture (the other, ``strong results on the distribution of
 intercalates'', is superseded by \cite{KS18,KSS21}).
+
+\paragraph{(q) The Allsop--Morris per-cell bound with two complete rows:
+the $\nu$-tail of the first-pair hypothesis is $O(\Delta^{2M}/n)$.}
+(Classification: PROVED (two referee passes; the first found that
+Claim~$2'$ had been stated per arc, which is false, and must be stated
+in aggregate --- corrected below with no change in constants); a
+one-way reduction of Hypothesis~\eqref{eq:hypfirstpair} to its second
+term.  Written 2026-10-03, as the in-house item ``write out Claims~2--3''
+of the cold read; in writing them out, the configuration of \S(n) in
+which Claim~4(ii) failed turned out to be avoidable.)  Throughout this
+section the setting is $S(R)$: a fixed $2\times n$ Latin rectangle $R$
+occupying rows $1,2$, a partial Latin square $Q$ with cells in rows
+other than $1,2$ such that $R\cup Q$ is a partial Latin square, and $L$
+uniform on $\{L\in\mathcal L_n: L\supseteq R\cup Q\}$.  Nothing moves
+rows $1,2$; the mark plays no role.  We follow the notation of
+\cite[\S\S2--4]{AM26} and refer to their lemmas by number.  Call a row
+\emph{special} if it is $1$ or $2$, and write
+$E=\{1,2\}\cup R_Q$ for the excluded rows.
+
+\begin{theorem}[\cite{AM26}, Theorem~3.1, with two complete rows]\label{thm:AM31two}
+Let $R,Q$ be as above with $|R_Q|+6\le\alpha n$, $|C_Q|\le\beta n$ and
+$2\alpha+\beta<1$.  Let $r,r'\notin\{1,2\}$, $r\ne r'$, $c\in[n]$, and
+suppose $Q$ has no cell in row $r'$ outside column $c$ (in particular
+$r'\notin R_Q$ is allowed, and so is $(r',c,\cdot)\in Q$).  Then, for
+$n\ge n_0(\alpha,\beta)$,
+\[
+\Pr\bigl[\eta_L(r,r',c)\text{ is of Type One}\;\big|\;L\supseteq R\cup Q\bigr]\le\frac{D}{n},
+\qquad D=D(\alpha,\beta)\to62\text{ as }\alpha,\beta\to0 .
+\]
+\end{theorem}
+
+The constant is not optimised; what matters is that it is absolute.
+The proof is that of \cite{AM26} with the following changes, which we
+now describe in full: the row-exclusion set $R_P$ becomes $E$ and the
+column-exclusion set $C_P$ becomes $C_Q$ (the cells of $R$ are never
+touched because no switch below changes rows $1,2$); the cross-switches
+of their Claim~2 and the row switches of their Claim~3 are restricted
+to pairs of rows lying in a common \emph{arc} (defined below), so that
+no column part of a switch passes through a special row; and the
+statistic $\nu(L)$ of their Claims~3--4 is replaced by one that also
+counts the free rows on the $(c_2,c_3)$-cycles through the special
+rows, so that the column-cycle switch of their Claim~4 is always
+applied to a cycle avoiding rows $1,2$.
+
+\emph{The recursion (their p.~14) and Claim~1.}  Define $Y_0$, $r_j,c_j,s_j$,
+$X_j$, $Y_j$, $p_{j-1}$ exactly as in \cite{AM26}, with
+$R_P:=E$ and $C_P:=C_Q$ in the definition of $Y_j$ (so
+$r_{j+1}\notin E\cup\{r_\ell\}$, $c_{j+1}\notin C_Q\cup\{c_\ell\}$).
+Claim~1, $p_{j-1}\le(np_j+1)/(n(1+p_j-2\alpha-\beta)-3j-2)$, holds
+verbatim: its switch $\eta_L(r_j,x,c_j)$ changes only rows $r_j,x,x'$,
+all outside $\{1,2\}$ when $x,x'\notin E$, so rows $1,2$ are untouched
+and $L'\supseteq R$; the cells of $Q$ it could touch are $(r_j,y)$ with
+$y\in C_Q$, $(r_j,c_j)$ (not a $Q$-cell: $c_j\notin C_Q$ for $j\ge1$,
+and for $j=1$ the only $Q$-cell allowed in row $r_1$ is in column
+$c_0\ne c_1$) and cells in rows $x,x'\in R_Q$, excluded exactly as in
+their count ($|C_Q|+j+1$ choices of $x$ with $y\in C_Q\cup\{c_\ell\}$,
+$|E|+j+1$ with $x'\in E\cup\{r_\ell\}$, by injectivity of
+$x\mapsto y\mapsto x'$); the reversibility count (their Lemma~2.8) is a
+statement about Latin squares and is unchanged.  So
+$|Y_j|/|X_j|\ge(n-2|E|-|C_Q|-3j-3)/(np_j+1)$, which is their (3)--(4)
+with $\alpha n\ge|E|+1$, $\beta n\ge|C_Q|$.
+
+\emph{Setting for Claims~2--4.}  For $L\in X_3$ let $Q(L)$ be the set of
+cells of $Q$ together with the ten structure cells
+$\{(r_\ell,c_\ell),(r_{\ell+1},c_\ell),(r_\ell,c_{\ell+1}):0\le\ell\le2\}\cup\{(r_3,c_3)\}$;
+a row is \emph{free} if it is not in $E\cup\{r_0,r_1,r_2,r_3\}$, and
+$f\ge n-|E|-4\ge n(1-\alpha)$ is the number of free rows.  (The row
+$r_0$ need not be free and may lie on any cycle; its cells
+$(r_0,c_2),(r_0,c_3)$ are not in $Q(L)$ and are never read by the
+recursion, which reads only the ten structure cells, so a switch may
+change them.)
+Consider the partition of the rows into $(c_2,c_3)$-column cycles.  Three
+facts from \cite{AM26} remain true: $\gamma_L=\gamma_L(c_2,c_3,r_1)$ is
+one of these cycles; $\{r_2,r_3\}$ is another (an intercalate, since
+$s_2=s_3$); and $c_2,c_3\notin C_Q$.  Call a cycle \emph{active} if it
+is $\gamma_L$ or contains a special row (so there are between one and
+three active cycles, and $\{r_2,r_3\}$ is never active); let
+$\mathcal S(L)$ be the set of free rows on active cycles and
+$g(L)=f-|\mathcal S(L)|$ the number of free rows on inactive cycles.
+Every inactive cycle other than $\{r_2,r_3\}$ avoids rows $1,2$ and
+the rows $r_1,r_2,r_3$, so by Lemma~2.4 of \cite{AM26} (or directly)
+switching it changes no cell of $Q(L)$ and no cell of $R$.
+
+Give each active cycle $D$ a \emph{reference row}: $r_1$ if $D=\gamma_L$,
+otherwise row $1$ if $1\in D$, otherwise row $2$; list the rows of $D$
+as $x'_1,x'_2,\dots,x'_m$ in cyclic order from the reference row
+$x'_1$ (the order of \cite[p.~16]{AM26}, read from column $c_2$), and
+let the free rows of $D$ in this order be $x_1,\dots,x_d$.  The
+special rows of $D$ other than the reference row (at most two) cut the
+position sequence into \emph{arcs}; a pair $(i,j)$, $i<j$, of free
+positions is a \emph{same-arc pair} if no special row and no
+reference row lies strictly between $x_i$ and $x_j$ in the list.  The
+free rows of $D$ are the disjoint union of the arcs' free rows; an
+active cycle has at most three arcs, and all active cycles together at
+most three (if $\gamma_L$ contains both special rows there is no other
+active cycle; if it contains one, the other special row's cycle has
+one arc; if none, the special rows lie on one cycle with two arcs or
+on two cycles with one arc each).  As in \cite{AM26}, a triple
+$(L,i,j)$ is \emph{good} if $\rho_L(x_i,x_j,c_3)$ does not hit column
+$c_2$.
+
+\emph{Claim~$2'$ (good same-arc pairs, in aggregate).}  For $a\ge4$ let
+$\mathcal A_a$ be the set of triples $(L,D,A)$ with $L\in X_3$, $D$ an
+active cycle of $L$ and $A$ an arc of $D$ with exactly $a$ free rows,
+and $N_a=|\mathcal A_a|$.  Then
+\[
+\sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs }(i,j)\text{ with }x_i,x_j\in A\}
+\ \ge\ N_a\,\frac{a(a-1)(a-3)}{9(a-2)}\ \ge\ N_a\,\frac{(a-3)^2}{9}.
+\]
+(The statement is about the class $\mathcal A_a$, exactly as their
+Claim~2 is about $A_k$: a single arc can have no good pair at all, and
+on the sampled squares below some do.)
+
+\emph{Proof.}  This is the proof of their Claim~2 run inside the arcs
+of size $a$.
+For $(i,j)$ in $A$ let $W_A(i,j)$ be the pairs $(u,v)$ in $A$ with
+exactly one of $u,v$ in $(i,j)$ and $\{u,v\}\cap\{i,j\}=\emptyset$;
+$|W_A(i,j)|=(j-i-1)(a-(j-i)-1)$ in arc coordinates, so
+$\sum_{(i,j)\subseteq A}|W_A(i,j)|=a(a-1)(a-2)(a-3)/12$ and
+$\max|W_A|\le(a-2)^2/4$ (their (5)--(6) with $n-k$ replaced by $a$).
+For a bad $(L,i_0,j_0)$ in $A$ and $(u,v)\in W_A(i_0,j_0)$: if
+$(L,u,v)$ is good, map to $(L,u,v)$ (Kind~1); if bad, cross-switch on
+$\zeta_L(c_2,c_3,x_u,x_v)$ (Kind~2).  The cross-switch is well defined
+(the pair is bad and $u,v$ are not adjacent in the list, since a
+position of $\{i_0,j_0\}$ separates them); it changes rows $x_u,x_v$,
+which are free, and columns $c_2,c_3$ in the rows strictly between
+$x_u$ and $x_v$ in the list, which lie in $A$ and so are neither
+special, nor the reference row, nor $r_2,r_3$ (not on $D$); hence it
+changes no cell of $R$ and no cell of $Q(L)$, and $L'\in X_3$ with the
+same $r_\ell,c_\ell,s_\ell$.  By their Lemma~2.6 the row set of $D$ is
+unchanged, by their Remark~2.7 the list of $L'$ is that of $L$ with
+the segment strictly between $x_u$ and $x_v$ reversed, so the special
+and reference rows keep their positions, $A$ is an arc of $L'$ with
+the same row set, $(u,v)\in W_A(i',j')$ for the new positions
+$(i',j')$ of $x_{i_0},x_{j_0}$, and $(L',i',j')$ is good by
+Lemma~2.6(2); so $(L',D',A')\in\mathcal A_a$ with the same row sets.
+The inverse counts are as in \cite{AM26}: a good $(L',D',A',i',j')$ has
+at most $|W_{A'}(i',j')|$ Kind-1 preimages ($(i,j)\in W_{A'}(i',j')$,
+which is symmetric) and at most $|W_{A'}(i',j')|$ Kind-2 preimages (one
+for each $(u,v)\in W_{A'}(i',j')$, by their Lemma~2.5 and Remark~2.7,
+the inverse cross-switch again lying inside $A'$).  Summing over
+$\mathcal A_a$: $\sum_{\text{bad}}|W|\le2\sum_{\text{good}}|W|$, whence
+$N_a\,a(a-1)(a-2)(a-3)/12=\sum_{\text{all}}|W|\le3\sum_{\text{good}}|W|\le3\cdot\#\{\text{good}\}\cdot(a-2)^2/4$.  $\square$
+
+\emph{Claim~$3''$ (free rows off the active cycles).}
+$\sum_{L\in X_3}g(L)\ge f|X_3|/30$ for $f\ge501$.
+
+\emph{Proof.}  Double count the row switches $\rho_L(x_i,x_j,c_3)$ over
+$L\in X_3$, active cycles $D$ of $L$ and good same-arc pairs $(i,j)$ on
+$D$.  \emph{Forward.}  Such a switch exchanges the entries of the free
+rows $x_i,x_j$ on the columns of their row cycle through $c_3$, which
+does not contain $c_2$; it changes no cell of $R$ or $Q(L)$, so
+$L'\in X_3$ with the same $r_\ell,c_\ell,s_\ell$ and the same columns
+$c_2,c_3$.  The $(c_2,c_3)$-column permutation changes only at rows
+$x_i,x_j$ (whose $c_2$-entries are unchanged and whose $c_3$-entries
+are exchanged), so every cycle other than $D$ is unchanged and $D$
+splits into two cycles (their Lemma~2.4(1); directly: the new column
+permutation is the old one composed with the transposition of the two
+exchanged symbols, which splits the cycle): one consists of the rows of
+the list outside the segment between $x_i$ and $x_j$ together with
+$x_i$, and contains the reference row and every special row of $D$;
+the other, $S$, consists of the rows strictly between $x_i$ and $x_j$
+in the list together with $x_j$ (with the list read from column $c_2$
+as above), and contains no special row because $(i,j)$ is a same-arc
+pair.  Hence the active
+cycles of $L'$ are those of $L$ with $D$ replaced by $D\setminus S$,
+$S$ is inactive in $L'$ ($S$ contains neither $r_1$ nor a special row,
+so it is not $\gamma_{L'}$: if $D=\gamma_L$ then $\gamma_{L'}=D\setminus S\ni r_1$,
+otherwise $\gamma_{L'}=\gamma_L$), $x_j\in S$ and $x_i\in D\setminus S$,
+and $g(L')=g(L)+|S\cap\text{free}|$.  Let $F(L)$ be the number of such
+switches from $L$ (pairs $(D,(i,j))$; distinct pairs of rows give
+distinct switches, and a pair of rows lies on one cycle).  Summing
+Claim~$2'$ over $a$, with $h(a)=((a-3)_+)^2/9$,
+\[
+\sum_{L\in X_3}F(L)=\sum_{a\ge4}\ \sum_{(L,D,A)\in\mathcal A_a}\#\{\text{good pairs in }A\}
+\ \ge\ \sum_{a\ge4}N_ah(a)\ =\ \sum_{L\in X_3}\ \sum_{A}h(|A|),
+\]
+and for each $L$, since the arcs of the active cycles partition
+$\mathcal S(L)$ into at most three parts,
+$\sum_Ah(|A|)\ge\frac1{27}(\sum_A(|A|-3)_+)^2\ge\frac1{27}((f-g(L)-9)_+)^2$.
+\emph{Backward.}  If $L'$ arises from $(L,D,i,j)$ then $L$ is obtained
+from $L'$ by switching $\rho_{L'}(x_i,x_j,c_3)$ (their Fact~2.1), so
+$L$ is determined by the unordered pair $\{x_i,x_j\}$, in which one
+row lies in $\mathcal S(L')$ and the other in $S$, an inactive cycle
+of $L'$; the number of preimages of $L'$ is therefore at most
+$|\mathcal S(L')|\,g(L')\le f\,g(L')$.  \emph{Conclusion.}  With
+$\bar g=|X_3|^{-1}\sum g(L)$, Jensen's inequality on the convex function
+$t\mapsto((f-t-9)_+)^2$ gives
+$|X_3|\,((f-\bar g-9)_+)^2/27\le\sum_L\sum_Ah(|A|)\le\sum_LF(L)\le f\sum_{L'}g(L')=f|X_3|\bar g$.
+If $\bar g<f/30$ then $(f-\bar g-9)^2>(29f/30-9)^2\ge27f\cdot f/30=0.9f^2$
+for $f\ge501$, a contradiction.  $\square$
+
+\emph{Claim~$4'$.}  $p_2\le60/f\le60/(n(1-\alpha))$ for $f\ge501$.
+
+\emph{Proof.}  Their proof with the set of admissible rows $x$ changed.
+For $L\in X_3$ let $x$ be a free row on an inactive cycle ($g(L)$
+choices).  Let $\rho=\rho_L(r_3,x,c_3)$.  If $\rho$ does not hit column
+$c_2$, switch on $\rho$ to obtain $L'$; otherwise first switch on the
+$(c_2,c_3)$-cycle $\gamma_L(c_2,c_3,x)$ through $x$ to obtain $L''$, then
+on $\rho_{L''}(r_3,x,c_3)$ to obtain $L'$.  The cycle through $x$ is
+inactive, so it avoids rows $1,2$, $r_1$ (on $\gamma_L$) and $r_2,r_3$
+(the intercalate), and $c_2,c_3\notin C_Q$: switching it changes no
+cell of $R$ or $Q(L)$, so $L''\in X_3$ with the same data, and
+$\rho_{L''}(r_3,x,c_3)$ does not hit $c_2$ (their Lemma~2.3(1); directly:
+the switch replaces the row permutation of $(x,r_3)$ by its composition
+with the transposition of $L[x,c_2],L[x,c_3]$, two symbols of one
+cycle, which splits that cycle with the two symbols, hence the columns
+$c_2,c_3$, on different cycles).  In either case
+the final row switch involves the free rows $r_3,x$ (both outside
+$\{1,2\}\cup R_Q$) along a row cycle avoiding $c_2$, so it changes no
+cell of $R$ or of $Q(L)\setminus\{(r_3,c_3)\}$ and gives
+$L'\in Y_2\setminus X_3$, exactly as in \cite{AM26}.  So there are at
+least $\sum_Lg(L)\ge f|X_3|/30$ switches from $X_3$ to $Y_2\setminus X_3$.
+Their inverse count applies unchanged: from $L'$ the row $r''$ with
+$L'[r'',c_3]=s_2$ equals $x$, and in each of the two cases $L$ is
+determined, by switching back $\rho_{L'}(r_3,r'',c_3)$ and, in the
+second case, then the $(c_2,c_3)$-cycle of $L''$ through $r''$, which is
+the same set of rows as before; so each $L'$ has at most $2$ preimages.
+Hence $|Y_2\setminus X_3|\ge f|X_3|/60$ and
+$p_2=|X_3|/|Y_2|\le1/(1+f/60)\le60/f$.  $\square$
+
+\emph{Proof of Theorem~\ref{thm:AM31two}.}  Claim~1 twice from
+$p_2\le60/(n(1-\alpha))$, as in their (16): with
+$\phi_j(x)=(nx+1)/(n(1+x-2\alpha-\beta)-3j-2)$ non-decreasing for
+$j=o(n)$, $p_1\le\phi_2(p_2)\le(60/(1-\alpha)+1)/(n(1-2\alpha-\beta)-8)$
+and $p_0\le\phi_1(p_1)\le(np_1+1)/(n(1-2\alpha-\beta)-5)$, so
+$p_0\le D(\alpha,\beta)/n$ with
+$D(\alpha,\beta)=(60/(1-\alpha)+2+o(1))/(1-2\alpha-\beta)^2\to62$.  $\square$
+
+\begin{corollary}[per-cell bound and (FC) in $S(R)$]\label{cor:FCtwo}
+With $R,Q$ as in the theorem, for a row $r\notin\{1,2\}$ (in $R_Q$ or
+not) and any $(c,s)$ with no cell $(r,c,\cdot)$ in $Q$,
+$\Pr[L[r,c]=s\mid L\supseteq R\cup Q]\le\Delta/n$ with
+$\Delta=(D+1)/(1-2\alpha-\beta)+o(1)\le66$ for $\alpha,\beta$ small; consequently, for every
+partial Latin square $Q$ on rows other than $1,2$ with
+$|R_Q|,|C_Q|\le\varepsilon n$ ($\varepsilon$ small),
+\[
+\Pr\bigl[Q\subseteq L\;\big|\;L\supseteq R\bigr]\le\Bigl(\frac{\Delta}{n}\Bigr)^{|Q|}.
+\]
+\end{corollary}
+
+\emph{Proof.}  The first statement is \cite[Lemma~4.1]{AM26} with
+$\mathcal R=\{r\}$: its switch $\eta_L(r,r_1,c)$, $r_1\notin E\cup\{r\}$,
+avoids the cells of $R\cup Q$ when $c_1\notin C_Q$ and $r_2\notin E$ (at
+most $|C_Q|+|E|$ excluded choices of $r_1$), changes only rows
+$r,r_1,r_2\notin\{1,2\}$, and the inverse count uses
+Theorem~\ref{thm:AM31two} for the partial Latin squares
+$Q'=Q\cup\{(r_1,c,s),(r,c,s')\}$ with $r'=r_1$: $r_1\notin E$, so the
+only cell of $Q'$ in row $r_1$ is $(r_1,c,s)$, in column $c$, as the
+theorem allows, and $\alpha,\beta$ increase by $O(1/n)$ (the sum (19) of
+\cite{AM26} is over $r'\notin\mathcal R\cup E$ here, the only rows that
+arise as $r'(L')$).  The second follows by
+conditioning on the cells of $Q$ one at a time.  $\square$
+
+\begin{corollary}[the $\nu$-tail]\label{cor:nutail}
+For every $\lambda,\alpha,\beta$ and every $M$ with $2M+2\le\varepsilon n$,
+$\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$.  In particular
+$\Pr_X[\nu\le C\log\log n]=O((\log n)^{2C\log\Delta}/n)=o(1/\log n)$.
+\end{corollary}
+
+\emph{Proof.}  \S(l)(i): by row exchangeability $\Pr_X[E_k(a,b)]=(n-2)(n-3)\Pr_X[E']$
+where $E'$ prescribes the two anchor cells at rows $3,4$ and the $2k$
+staircase cells; a union bound over the $\le n^{2k-1}$ choices of the
+free columns and symbols and Corollary~\ref{cor:FCtwo} (averaged over the
+rectangles $R$ of type $\lambda$, which have equal completion counts)
+give $\Pr_X[E_k(a,b)]\le(n-2)(n-3)n^{2k-1}(\Delta/n)^{2k+2}\le\Delta^{2k+2}/n$;
+sum over $k\le M$ and the four $(a,b)$, using $\Delta\ge2$.  $\square$
+
+\emph{What this does and does not do.}  The first-pair condition
+\eqref{eq:hypfirstpair} is $\Pr_X[G^c]=o(1/\log n)$ uniformly, and
+$\Pr_X[G^c]\le\Pr_X[\nu\le M]+\Pr_X[\nu>M,\ t=1,\dots,M\text{ all bad}]$.
+Corollary~\ref{cor:nutail} disposes of the first term for
+$M=C\log\log n$ (any $C$).  So the weak conjecture now follows from the
+\emph{hazard hypothesis} alone:
+\begin{equation}\label{eq:hyphazard}
+\sup_{\lambda,\alpha,\beta}\ \Pr_X\bigl[\nu>M,\ \text{the first $M$ candidates are all bad}\bigr]=o(1/\log n)
+\quad\text{for some }M=M(n)\le C\log\log n,
+\end{equation}
+which holds if the conditional probability that candidate $t$ is bad,
+given $\nu>t$ and that candidates $1,\dots,t-1$ are bad, is at most
+$1-c$ for $t\le M$.  This is a one-way reduction (rule~1): the second
+term is not a fixed-cell event and is not reached by (FC); it is a
+lower bound on the probability of ``$x_1\not\sim y_1$ under $\tau_t$
+with an admissible cycle'' at a square-selected column pair, i.e.\ the
+obstacle, now with the short-arc term removed.  By Remark rem:fewparts
+(paper) only types with fewer than $16\log n$ parts are needed.  What
+changed in the obstacle: it is no longer ``in either direction''; the
+upper-bound half (short structures at the frame-selected pair) is
+done, by the Allsop--Morris machinery, and only lower bounds at
+square-selected positions remain.  Cost: constants ($\Delta\le66$ here
+against their $23$) and the hypothesis $|R_Q|,|C_Q|\le\varepsilon n$,
+irrelevant for $|Q|=O(\log\log n)$.
+
+\emph{Why the \S(n) obstruction disappeared.}  In \S(n) the Claim-4
+move used every free row $x$ off $\gamma_L$, and failed when the
+$(c_2,c_3)$-cycle through $x$ contained exactly one special row.  The
+repair is to use only rows $x$ on cycles containing no special row,
+and to prove (Claim~$3''$) that there are $\Omega(n)$ of them on
+average, by the same cutting argument as their Claim~3 applied
+simultaneously to $\gamma_L$ and to the cycles through the special
+rows, with the cuts confined to arcs so that special rows are never
+moved.  The price is in the constants only.  The transfer uses no move
+that touches rows $1,2$; in particular it holds in $S(R)$, not only in
+$X$, so the mark and the isotopy argument of \S(k) are not needed.
+
+\emph{Numerical checks} (\texttt{s13\_amtwo.py};
+\texttt{runs/s13/amtwo/}), on completions of a fixed rectangle
+(\texttt{jmfix}, $Q=\emptyset$, rows $1,2$ special), for random
+$(r,r',c)$ with the recursion run and $X_3$ membership tested:
+(a) on every $X_3$ instance $\gamma_L$ avoids $r_2,r_3$, $\{r_2,r_3\}$
+is a $(c_2,c_3)$-cycle and $\eta(r_2,r_3,c_2)$ is of Type One;
+(b) every restricted cross-switch of Claim~$2'$ (a bad interleaved
+same-arc pair) is a Latin square with rows $1,2$ and $Q(L)$ unchanged,
+keeps the row set of $D$, reverses the list between $x_u$ and $x_v$,
+toggles the goodness of the interleaved pair, and is inverted by the
+same cross-switch; (c) every row switch of Claim~$3''$ (a good same-arc
+pair) is legal, keeps $L$ in $X_3$ with the same data, splits $D$ as
+stated with all special rows on the reference piece and exactly one of
+$x_i,x_j$ on it (in our list orientation always $x_j$), leaves every
+other cycle unchanged, increases $g$ by exactly $|S\cap\text{free}|$,
+and is inverted by the same switch; (d) every Claim-$4'$ move (both
+cases) lands in $Y_2\setminus X_3$ with the same
+$r_\ell,c_\ell,s_0,s_1,s_2$, the intermediate square is in $X_3$, the
+intermediate row cycle avoids $c_2$, $r''=x$, and the inverse recovers
+$L$; (e) Claim~$2'$ in aggregate: for each arc size $a$, the total
+number of good pairs over the sampled arcs of size $a$ against
+$N_a\,a(a-1)(a-3)/(9(a-2))$ (and the number of arcs with no good pair
+at all, which is positive, as the aggregate form requires).  Run
+\texttt{./jmfix 30 200 2000 17 < runs/s13/fixrect/init30\_cyc.bin | python3 s13\_amtwo.py 30 --triples 300 --seed 5}
+(\texttt{n30\_cyc.log}): $1460$ $X_3$ instances, $1876$ cross-switches,
+$2125$ row switches, $1064$ Claim-4 moves, all checks passed; the
+aggregate of Claim~$2'$ holds for every $a$ from $4$ to $24$ with a
+factor $\ge2$ to spare, while $40$ arcs have no good pair; mean
+$g/f=0.22$ (median $0.17$; bound $1/30$).  The same at $n=50$ ($1039$
+instances, mean $g/f=0.23$), $n=100$ ($342$, $0.25$) and for the type
+$(4,2^{13})$ at $n=30$ ($1485$, $0.23$).

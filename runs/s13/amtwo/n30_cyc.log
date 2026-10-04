@@ -1,0 +1,58 @@
+n=30 squares=200 triples/square=300
+  X1: 2108
+  X2: 1779
+  X3: 1460
+  Y3: 34486
+  a_eta_type1: 1460
+  a_gamma_avoids_r2r3: 1460
+  a_intercalate: 1460
+  b2_arcs_with_no_good_pair: 40
+  b_inverse: 1876
+  b_legal: 1876
+  b_reversed: 1876
+  b_rowset_same: 1876
+  b_toggle: 1876
+  b_tried: 1876
+  b_uv_good_skip: 1961
+  c_g_increase_exact: 2125
+  c_inverse: 2125
+  c_legal: 2125
+  c_nogood: 466
+  c_others_same: 2125
+  c_split_ok: 2125
+  c_stays_X3: 2125
+  c_tried: 2125
+  c_xi_leaves: 0
+  d_Lpp_in_X3: 539
+  d_case1: 525
+  d_case2: 539
+  d_colswitch_legal: 539
+  d_inverse: 1064
+  d_lands_Y2_minus_X3: 1064
+  d_rho_avoids_c2: 539
+  d_rpp_is_x: 1064
+  d_tried: 1064
+  notY: 20167
+  Claim 2' aggregate (arc size a: arcs N_a, good pairs, required N_a*a(a-1)(a-3)/(9(a-2)), ok?):
+    a=4: N_a=335 good=495 required=223.3 OK
+    a=5: N_a=319 good=971 required=472.6 OK
+    a=6: N_a=314 good=1576 required=785.0 OK
+    a=7: N_a=257 good=1976 required=959.5 OK
+    a=8: N_a=257 good=2721 required=1332.6 OK
+    a=9: N_a=217 good=3072 required=1488.0 OK
+    a=10: N_a=181 good=3306 required=1583.8 OK
+    a=11: N_a=174 good=3976 required=1890.4 OK
+    a=12: N_a=129 good=3523 required=1702.8 OK
+    a=13: N_a=93 good=3106 required=1465.5 OK
+    a=14: N_a=90 good=3560 required=1668.3 OK
+    a=15: N_a=83 good=3783 required=1787.7 OK
+    a=16: N_a=80 good=4151 required=1981.0 OK
+    a=17: N_a=76 good=4654 required=2143.8 OK
+    a=18: N_a=37 good=2529 required=1179.4 OK
+    a=19: N_a=36 good=2785 required=1287.5 OK
+    a=20: N_a=27 good=2321 required=1076.7 OK
+    a=21: N_a=19 good=1830 required=840.0 OK
+    a=22: N_a=9 good=966 required=438.9 OK
+    a=23: N_a=3 good=354 required=160.6 OK
+    a=24: N_a=3 good=377 required=175.6 OK
+  g/f over X3 instances: N=1460 mean=0.219 min=0.000 10%=0.000 median=0.167  (bound 1/30=0.033)
