@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  3 OCT 2026 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  4 OCT 2026 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**cgw_gap_note.tex
+**cgw_gap_note
 (./cgw_gap_note.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -333,37 +333,37 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 21.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 448.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\min' on input line 448.
+(hyperref)                removing `math shift' on input line 477.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\alpha' on input line 448.
+(hyperref)                removing `\min' on input line 477.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\beta' on input line 448.
+(hyperref)                removing `\alpha' on input line 477.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 448.
+(hyperref)                removing `\beta' on input line 477.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 448.
+(hyperref)                removing `math shift' on input line 477.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 448.
+(hyperref)                removing `math shift' on input line 477.
 
-[6] [7] [8]
-Overfull \hbox (25.47403pt too wide) in paragraph at lines 621--638
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 477.
+
+[7] [8]
+Overfull \hbox (25.47403pt too wide) in paragraph at lines 650--667
 []\OT1/cmr/m/it/10.95 (ii) $\U/msb/m/n/10.95 E\OT1/cmr/m/n/10.95 [(\OML/cmm/m/i
 t/10.95 ^^T\OT1/cmr/m/n/10.95 )[]] \OMS/cmsy/m/n/10.95 ^^T \OT1/cmr/m/n/10.95 2
 [][]4 + \OML/cmm/m/it/10.95 k[]= [] n[]\OT1/cmr/m/n/10.95 ([] \OML/cmm/m/it/10.
@@ -374,13 +374,13 @@ m/m/it/10.95 C[]; j[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; [] ; \OT1/cmr/m/
 n/10.95 (\OML/cmm/m/it/10.95 C[]; j[]\OT1/cmr/m/n/10.95 ))$
  []
 
-
-Underfull \hbox (badness 2173) in paragraph at lines 660--662
+[9]
+Underfull \hbox (badness 2173) in paragraph at lines 689--691
 []\OT1/cmr/m/n/10.95 J. All-sop and P. Mor-ris, Uni-ver-sal prob-a-bil-ity boun
 ds for par-tial Latin squares,
  []
 
-[9] [10] (./cgw_gap_note.aux)
+[10] (./cgw_gap_note.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -389,13 +389,13 @@ Package rerunfilecheck Info: File `cgw_gap_note.out' has not changed.
 (rerunfilecheck)             Checksum: C96C716346511EEFE6E2FE4C76E9CCD3;1925.
  ) 
 Here is how much of TeX's memory you used:
- 9471 strings out of 476106
- 143154 string characters out of 5793933
+ 9473 strings out of 476106
+ 143171 string characters out of 5793933
  1943975 words of memory out of 5000000
- 31355 multiletter control sequences out of 15000+600000
+ 31356 multiletter control sequences out of 15000+600000
  569930 words of font info for 82 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,8n,79p,549b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,545b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/tex
@@ -418,10 +418,10 @@ ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
 ic/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msbm10.pfb>
-Output written on cgw_gap_note.pdf (10 pages, 310302 bytes).
+Output written on cgw_gap_note.pdf (10 pages, 316360 bytes).
 PDF statistics:
- 265 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 33 named destinations out of 1000 (max. 500000)
+ 272 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
+ 34 named destinations out of 1000 (max. 500000)
  73 words of extra memory for PDF output out of 10000 (max. 10000000)
 

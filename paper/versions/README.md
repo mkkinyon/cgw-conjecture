@@ -14,3 +14,5 @@ revisions within a day.
 | weak_cgw_conditional_2026-10-03b.pdf | 29 | 275df89 | writing pass R2 + cold read 2: rem:fewparts, lem:nuswitch in the paper, literature paragraph, KPS route, bibliography |
 | loops_note_2026-10-03a.pdf | 6 | (see git log) | first refereed draft of the separate note on multiplication groups of random loops |
 | weak_cgw_conditional_2026-10-04a.pdf | 34 | (see git log) | new §7 'The fixed-cell bound in completions of a rectangle' (AM Thm 3.1/Lemma 4.1 with two complete rows, (FC), ν-tail, hazard hypothesis); abstract, Results (7), §6(e), §8 updated; refereed |
+| weak_cgw_conditional_2026-10-04b.pdf | 38 | (see git log) | new §8 'The hazard term: an exact identity, the first candidate, and fixed positions' (prop:hazardid, prop:lengths = Lemma A, prop:fixedpos = Prop T, cor:longest, (d) what the first candidate still needs); abstract, Results (8), rem:fcchanged, §9 updated; writing referee |
+| cgw_gap_note_2026-10-04a.pdf | 10 | (see git log) | §4: coarse-direction paragraph from Allsop–Morris Claims 2–3 + row exchangeability (rows off the longest cycle ≥ n/120 w.p. ≥ 1/120 − o(1)); cites the paper |

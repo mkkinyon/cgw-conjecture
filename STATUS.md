@@ -388,6 +388,22 @@ two "shows", a data inconsistency at n = 5; all fixed; round 2: (1) correct, (2)
 What did NOT change: Lemma A, hyp:hazard, the chain, hyp:witness as reference, nothing proved about the hazard at any j.
 What changed: the obstacle at j = 1 is now exactly "good pairs across the x₁–y₁ cut on E₁^j, without exchangeability of y₁,
 plus the separated-inadmissible part of E₁ (15–17% of bad candidates), on which f₁ = 0 and no toggle is analysed"; the paper's rem:fcchanged/§8 should cite Lemma A and Prop T at the next WRITING pass (not done).
+**Seg 15 — WRITING (paper, gap note, consultations; writing referee).**  Cost: one segment; no mathematics changed.
+(a) Paper 38 pp (snapshot 2026-10-04b): new §8 "The hazard term: an exact identity, the first candidate, and fixed positions"
+— prop:hazardid (= eq:hazardratio), prop:lengths (= Lemma A, full proof), prop:fixedpos (= Prop T) + cor:longest, and (d) "what
+the first candidate still needs" (cross-switches toggle interleaving; polarisation, marked heuristic; separated-inadmissible
+part); abstract, Results item (8), Status-of-arguments, rem:fcchanged and two §9 passages updated so that "no lower bound at
+square-selected positions" now reads "lengths yes (first candidate, joined), different-cycles at fixed positions yes, good
+pairs across the x₁–y₁ cut no".  Writing referee: 21 items (a clipped display, "ok" undefined, π vs τ₁, legality needs "no
+frame row", hedge placement, ε(n) caveat, "needs" → "follows from", pooled-over-j, frame rows defined, pinning rows reverted
+to the refereed form, pos undefined, j ≤ 4, gap-note "only lower bound" contradiction with prop:two, "their constants",
+">(1−1/120)m"); all applied.  (b) Gap note 10 pp (snapshot 2026-10-04a): §4 gains the coarse-direction paragraph (AM Claims
+2–3 with one special row + row exchangeability ⇒ columns off the longest cycle of ρ_{1,2} ≥ n/120 w.p. ≥ 1/120 − o(1); weaker
+than 5/6 for (m); nothing about o(1)); cites the paper.  (c) `CONSULTATIONS_2026-10-04.md`: five contacts in order (Wanless/
+Cavenagh/Greenhill — gap note; Allsop/Morris cc Wanless — §7 check and the cut-goodness question in their vocabulary;
+Eberhard — loops note authorship; Cameron — loops note; optional KPS — Remark 6.6 and CW16's dependence), each with why, what
+to ask, attachments, what not to claim, and a draft.  What did NOT change: no hypothesis, no proof, no classification; the
+notes are unchanged.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  3 OCT 2026 17:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  4 OCT 2026 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**weak_cgw_conditional.tex
+**weak_cgw_conditional
 (./weak_cgw_conditional.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -422,8 +422,8 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 32.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Overfull \hbox (10.73012pt too wide) detected at line 262
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+Overfull \hbox (10.73012pt too wide) detected at line 294
 \OML/cmm/m/it/10.95 J  \OT1/cmr/m/n/10.95 =  \OML/cmm/m/it/10.95 J\OT1/cmr/m/n/
 10.95 (\OML/cmm/m/it/10.95 n; ^^V\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 ; ^^
 L\OT1/cmr/m/n/10.95 )  =  [](\OML/cmm/m/it/10.95 L; P\OT1/cmr/m/n/10.95 )  :  \
@@ -433,8 +433,8 @@ mr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 j; j[]\OMS/cmsy/m/n/10.
 95 g\OML/cmm/m/it/10.95 ;  j[];  j[][][];
  []
 
-[4] [5] [6]
-Overfull \hbox (17.2927pt too wide) in paragraph at lines 498--502
+[5] [6] [7]
+Overfull \hbox (17.2927pt too wide) in paragraph at lines 530--534
 []\OT1/cmr/m/n/10.95 For each step of such a chain, The-o-rem [][]2.4[][] and $
 [](\OML/cmm/m/it/10.95 ^^N\OT1/cmr/m/n/10.95 )$ give $\OMS/cmsy/m/n/10.95 j\OML
 /cmm/m/it/10.95 S\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 
@@ -445,8 +445,8 @@ ML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 =^^M\OT1/cmr/m/n/1
 0.95 (\OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 ))(1 +
  []
 
-[7] [8]
-Overfull \hbox (19.11624pt too wide) detected at line 627
+[8] [9]
+Overfull \hbox (19.11624pt too wide) detected at line 659
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95
  ] \OMS/cmsy/m/n/10.95 ^^@ \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/i
 t/10.95 A\OT1/cmr/m/n/10.95 ]  =  \U/msb/m/n/10.95 P[][]\OML/cmm/m/it/10.95 B; 
@@ -458,8 +458,8 @@ T1/cmr/m/n/10.95 ] \OMS/cmsy/m/n/10.95 ^^@ [][]  ^^T  []\U/msb/m/n/10.95 P[]\OT
 .95 :
  []
 
-[9] [10]
-Overfull \hbox (32.79228pt too wide) detected at line 802
+[10] [11]
+Overfull \hbox (32.79228pt too wide) detected at line 834
 [][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 B;  d[] \OT1/cmr/m/n/10.95 = \OML
 /cmm/m/it/10.95 `;  d[] \OMS/cmsy/m/n/10.95 ^^U \OML/cmm/m/it/10.95 c \OT1/cmr/
 m/n/10.95 + \OML/cmm/m/it/10.95 `;  [][] \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.9
@@ -471,8 +471,8 @@ m/n/10.95 + \OML/cmm/m/it/10.95 `;  [][] \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.9
 sy/m/n/10.95 ;[] ^^T [] ^^T []\OML/cmm/m/it/10.95 :
  []
 
-[11] [12] [13]
-Overfull \hbox (26.58517pt too wide) detected at line 985
+[12] [13]
+Overfull \hbox (26.58517pt too wide) detected at line 1017
  []$[]   [] \U/msb/m/n/10.95 P\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 B; d[] \O
 T1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 `; \OMS/cmsy/m/n/10.95 j\OML/cmm/m/it/10
 .95 C[]\OMS/cmsy/m/n/10.95 j ^^U \OML/cmm/m/it/10.95 n=\OT1/cmr/m/n/10.95 2 + \
@@ -481,15 +481,15 @@ OML/cmm/m/it/10.95 `; ^^R \OMS/cmsy/m/n/10.95 ^^U \OML/cmm/m/it/10.95 ^^R[]\OT1
 ^^T [] [] \OT1/cmr/m/n/10.95 + [] []$ 
  []
 
-
-Overfull \hbox (29.51068pt too wide) in paragraph at lines 1025--1039
+[14]
+Overfull \hbox (29.51068pt too wide) in paragraph at lines 1057--1071
 [][]\OT1/cmr/bx/n/10.95 Remark 5.4 \OT1/cmr/m/n/10.95 (data)\OT1/cmr/bx/n/10.95
  . []\OT1/cmr/m/n/10.95 On Jacobson--Matthews sam-ples with a uni-formly ran-do
 m mark (\OT1/cmtt/m/n/10.95 runs/s13/f1/\OT1/cmr/m/n/10.95 ),
  []
 
-[14] [15] [16]
-Overfull \hbox (36.92215pt too wide) detected at line 1209
+[15] [16]
+Overfull \hbox (36.92215pt too wide) detected at line 1241
 \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x; y\OT1/cmr/m/n/10
 .95 )[] [] [][] \OMS/cmsy/m/n/10.95 ^^T \OT1/cmr/m/n/10.95 1 \OMS/cmsy/m/n/10.9
 5 ^^@ [][]\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P[][]\OMS/cmsy/m/n/10.95 G[] 
@@ -497,8 +497,8 @@ Overfull \hbox (36.92215pt too wide) detected at line 1209
 m/m/it/10.95 e[]:
  []
 
-[17]
-Overfull \hbox (2.98317pt too wide) in paragraph at lines 1311--1320
+[17] [18]
+Overfull \hbox (2.98317pt too wide) in paragraph at lines 1343--1352
 [][]\OT1/cmr/bx/n/10.95 Proposition 6.6 \OT1/cmr/m/n/10.95 (or-bit bound with a
 dap-tive co-or-di-nates)\OT1/cmr/bx/n/10.95 . []\OT1/cmr/m/it/10.95 Let $\OT1/c
 mr/m/n/10.95 (\OML/cmm/m/it/10.95 L; P\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 
@@ -506,15 +506,15 @@ mr/m/n/10.95 (\OML/cmm/m/it/10.95 L; P\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95
 m/it/10.95 a frame-determined
  []
 
-[18] [19] [20]
-Overfull \hbox (2.31967pt too wide) in paragraph at lines 1489--1516
+[19] [20] [21]
+Overfull \hbox (2.31967pt too wide) in paragraph at lines 1522--1549
  []\OT1/cmr/bx/n/10.95 (d) Data.[] \OT1/cmr/m/n/10.95 All scripts and logs are 
 in the repos-i-tory [[]], un-der \OT1/cmtt/m/n/10.95 s13[]*.py \OT1/cmr/m/n/10.
 95 and \OT1/cmtt/m/n/10.95 runs/s13/orbit/\OT1/cmr/m/n/10.95 .
  []
 
-[21] [22]
-Overfull \hbox (2.43184pt too wide) in paragraph at lines 1591--1595
+[22]
+Overfull \hbox (2.43184pt too wide) in paragraph at lines 1624--1628
 \OT1/cmr/m/it/10.95 consequently $[]\U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OM
 L/cmm/m/it/10.95 B\OT1/cmr/m/n/10.95 ] \OMS/cmsy/m/n/10.95 ^^@ [][] ^^T []\U/ms
 b/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 G[]\OT1/cmr/m/n/10.95 ]$
@@ -531,7 +531,7 @@ r/m/n/10.95 2\U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\OML/cmm/m/it/10.95 G[]\OT
  []
 
 
-Overfull \hbox (12.45581pt too wide) in paragraph at lines 1619--1621
+Overfull \hbox (12.45581pt too wide) in paragraph at lines 1652--1654
 [][]\OT1/cmr/bx/n/10.95 Corollary 6.13. []\OT1/cmr/m/it/10.95 Hy-poth-e-sis [][
 ]6.12[][] im-plies Con-jec-ture [][]1.1[][], with $\OML/cmm/m/it/10.95 d[]\OT1/
 cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P[]; Q[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it
@@ -540,28 +540,55 @@ cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P[]; Q[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it
 .95 ] +
  []
 
-[23] [24] [25] [26] [27] [28]
-Underfull \hbox (badness 2173) in paragraph at lines 1944--1946
+[23] [24]
+Overfull \hbox (10.57552pt too wide) detected at line 1722
+[][][]\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 Q \OMS/cmsy/m/n/10.95 ^^R \OML/cm
+m/m/it/10.95 L [] L \OMS/cmsy/m/n/10.95 ^^S \OML/cmm/m/it/10.95 R[] \OMS/cmsy/m
+/n/10.95 ^^T \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 C[]=n\OT1/cmr/m/n/10.95 )[
+] []
+ []
+
+[25] [26] [27] [28] [29]
+Overfull \hbox (1.00125pt too wide) in paragraph at lines 2047--2071
+[][]\OT1/cmr/bx/n/10.95 Remark 7.6 \OT1/cmr/m/n/10.95 (what changed, and what d
+id not)\OT1/cmr/bx/n/10.95 . []\OT1/cmr/m/n/10.95 Hy-poth-e-sis [][]7.4[][] is 
+a state-ment about $\OML/cmm/m/it/10.95 O\OT1/cmr/m/n/10.95 ([] [] \OML/cmm/m/i
+t/10.95 n\OT1/cmr/m/n/10.95 )$
+ []
+
+[30] [31] [32] [33] [34]
+Overfull \hbox (27.8755pt too wide) detected at line 2374
+[]  [][]\U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [[] = \OMS/cmsy/m/n/10.95 ;\OT1/
+cmr/m/n/10.95 ]\OML/cmm/m/it/10.95 ;  \U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 [\
+OML/cmm/m/it/10.95 ^^W > M;  t \OMS/cmsy/m/n/10.95 ^^T \OML/cmm/m/it/10.95 M[]\
+OT1/cmr/m/n/10.95 ][] = \OML/cmm/m/it/10.95 o\OT1/cmr/m/n/10.95 (1\OML/cmm/m/it
+/10.95 = [] n\OT1/cmr/m/n/10.95 ) []\OML/cmm/m/it/10.95 M \OT1/cmr/m/n/10.95 = 
+\OML/cmm/m/it/10.95 M\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 n\OT1/cmr/m/n/10.9
+5 ) \OMS/cmsy/m/n/10.95 ^^T \OML/cmm/m/it/10.95 C [] [] n
+ []
+
+[35] [36] [37]
+Underfull \hbox (badness 2173) in paragraph at lines 2520--2522
 []\OT1/cmr/m/n/10.95 J. All-sop and P. Mor-ris, Uni-ver-sal prob-a-bil-ity boun
 ds for par-tial Latin squares,
  []
 
-[29] (./weak_cgw_conditional.aux)
+[38] (./weak_cgw_conditional.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `weak_cgw_conditional.out' has not changed.
-(rerunfilecheck)             Checksum: A697E3DDF38CA4E47AFE917C0C4B973F;1362.
+(rerunfilecheck)             Checksum: 632F731A13B5B203C9FE87B7DFDB5758;2133.
  ) 
 Here is how much of TeX's memory you used:
- 11896 strings out of 476106
- 181659 string characters out of 5793933
+ 11941 strings out of 476106
+ 182135 string characters out of 5793933
  1948975 words of memory out of 5000000
- 33641 multiletter control sequences out of 15000+600000
+ 33655 multiletter control sequences out of 15000+600000
  571860 words of font info for 87 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,12n,79p,614b,608s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,610b,708s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1095.600pk> </
 root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/te
@@ -582,11 +609,12 @@ dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/symbols/msbm10.pfb>
-Output written on weak_cgw_conditional.pdf (29 pages, 449970 bytes).
+sfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/symbols/msbm10.pfb>
+Output written on weak_cgw_conditional.pdf (38 pages, 526929 bytes).
 PDF statistics:
- 585 PDF objects out of 1000 (max. 8388607)
- 506 compressed objects within 6 object streams
- 111 named destinations out of 1000 (max. 500000)
- 65 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 765 PDF objects out of 1000 (max. 8388607)
+ 674 compressed objects within 7 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

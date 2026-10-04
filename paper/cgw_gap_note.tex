@@ -324,6 +324,35 @@ this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
 gives $\PP_F((2,m-2))\le\tfrac m{m-2}\PP_F((m))$, and iterating over
 $k$ two-cycles loses a factor of order $4^kk!$.
 
+One statement in the coarse direction is available from a different
+source, the switchings of Allsop and Morris \cite{AM26}.  Their
+Claims~2--3 (the cross-switch count of good pairs on a column cycle,
+and the double count of row switches that cut pieces off the cycles
+through the special rows, closed by Jensen's inequality) can be run
+with a single special row $x$ and no fixed cells, and give, for a
+uniform Latin square and a fixed column pair, $\E[n-\ell_x]\ge(n-1)/30$
+for the length $\ell_x$ of the cycle through $x$ (for $n\ge502$, with
+the constants of \cite[\S7]{paper}).  By row exchangeability this is
+$\Pr[x,y\text{ on the same cycle}]\le1-\tfrac1{30}$ for two fixed rows,
+and summing over $x$, with $M$ the length of the longest cycle of the
+pair and $\sum_C|C|(n-|C|)\le2n(n-M)$,
+\[
+\E[n-M]\ \ge\ \frac{n-1}{60},\qquad
+\Pr\Bigl[n-M\ge\frac n{120}\Bigr]\ \ge\ \frac1{120}-\frac1{60n};
+\]
+by transposition the same holds for the longest cycle of a fixed row
+pair, i.e.\ for $\PP_F$: with probability at least $1/120-o(1)$ the
+columns off the longest cycle of $\rho_{1,2}$ are at least $n/120$ in
+number.  This bounds the probability of the union of the coarsest
+types (longest part $>(1-1/120)m$; here $n=m$) away from $1$, which the
+surviving material does not do; it is weaker than $5/6$ for the type
+$(m)$ itself and says nothing about $\PP_F((m))=o(1)$.  (The
+argument, with the two rows of a fixed rectangle as further special
+rows, is written out in \cite[\S8]{paper}; apart from the distance-$2$ case of
+Proposition~\ref{prop:two} it is the only lower bound on a ``different
+cycles'' event we know, and it uses the exchangeability of the second
+row in an essential way.)
+
 \section{Other affected papers}
 \label{sec:other}
 
@@ -666,6 +695,7 @@ structure of two rows in a random Latin square, \emph{Random Structures
 Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
 squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
+\bibitem{paper} [author], The cycle type of two rows of a random Latin square: exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture, draft, October 2026, \url{https://github.com/mkkinyon/cgw-conjecture}.
 \bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
 arXiv:2509.13125 (2025).
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,

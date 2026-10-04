@@ -227,9 +227,13 @@ positions are selected by the frame of the mark, and the whole space is conditio
 type of rows $1,2$.  The first is removable (by row exchangeability a frame-selected row
 pair is two prescribed cells, see below); the second is not, but \S\ref{sec:fc} shows that
 for \emph{upper} bounds on events at a sparse set of cells (occupying at most $\varepsilon n$
-rows and columns) it can be handled by the switchings of \cite{AM26}; what no tool of ours reaches is a \emph{lower} bound at
-square-selected positions, and even the unconditioned versions of the needed lower bounds
-are, as far as we know, not in the literature.  The minimal instance of the obstacle is a lower bound on a
+rows and columns) it can be handled by the switchings of \cite{AM26}, and
+\S\ref{sec:hazardid} shows that the same switchings give \emph{lower} bounds at
+square-selected positions for cycle \emph{lengths} (Proposition~\ref{prop:lengths}) and
+give the different-cycles bound itself at \emph{fixed} positions, through row
+exchangeability (Proposition~\ref{prop:fixedpos}); what no tool of ours reaches is a
+lower bound for a different-cycles event at square-selected positions, where the second
+marked row is not exchangeable.  The minimal instance of the obstacle is a lower bound on a
 single frame-selected pair:
 \begin{equation}\label{eq:minimal}
 \Pr_X\bigl[(x_1,y_1)\text{ flippable}\bigr]\ge c,\qquad x_1=\pi^{-1}(1),\ y_1=\pi^{-1}(2),
@@ -279,9 +283,12 @@ share a cycle).  Inside $X$ the exact tools are the free trades of rows other th
 interleaved configurations), and every identity they produce is fair: it equates two
 expectations with random weights whose lower bounds are again of the same form.  Lower
 bounds on ``different cycles'' events are, in the language of \cite{CGW08}, of the type of
-the direction of their Lemma~3.12 whose proof has the gap: they require a repair of the
-same-cycle configurations with a rigid inverse, and the repairs available in $X$ (trades or
-cross-switches of a free pair of third rows) have unbounded multiplicity.  The one case in
+the direction of their Lemma~3.12 whose proof has the gap: at square-selected positions
+they require a repair of the same-cycle configurations with a rigid inverse, and the
+repairs available in $X$ (trades or cross-switches of a free pair of third rows) have
+unbounded multiplicity; at fixed positions the multiplicity is absorbed by the
+exchangeability of the second row (Proposition~\ref{prop:fixedpos}), which is exactly what
+the selection by the square removes (\S\ref{sec:hazardid}(d)).  The one case in
 which we found a rigid inverse is CGW's own case 3 with $\min(\alpha,\beta)=2$, which gives
 $\Pr_X[A]\ge\tfrac14$ for marks at distance $2$ (Remark~\ref{rem:gap}); it does not extend
 to other distances for a reason of type rather than multiplicity.  The adaptive

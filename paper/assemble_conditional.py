@@ -9,6 +9,7 @@ import sys as _s; _s.path.insert(0, 'paper')
 from cprime_blocks import cprime_intro, cprime_rest, remains
 from firstpair_block import firstpair_block
 from fc_block import fc_block
+from hazard_block import hazard_block
 M = lines('section_marked.tex')
 N = lines('second_row_notes.tex')
 Lad = lines('section_ladder_s13.tex')
@@ -177,7 +178,7 @@ preamble = r"""\documentclass[11pt]{article}
 
 \title{The cycle type of two rows of a random Latin square:\\ exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture}
 \author{[author]}
-\date{4 October 2026 --- draft}
+\date{4 October 2026 (second draft of the day) --- draft}
 
 \begin{document}
 \maketitle
@@ -212,8 +213,11 @@ including, through a sampler of completions of a fixed rectangle whose connectiv
 mixing are not proved, types of exponentially small probability), and locate the
 remaining difficulty: every exact identity we have found inside the conditioned space is
 fair, upper bounds on events at sparse sets of cells in a uniform completion of a fixed
-$2\times n$ rectangle are now available, and what is missing is a lower bound for
-a constant-probability event at positions selected by the square.  Along the
+$2\times n$ rectangle are now available, lower bounds at scale $n$ on cycle lengths at
+the first square-selected column pair and the fixed-position form of the needed
+``different cycles'' bound are proved, and what is missing is a lower bound for
+a constant-probability event at positions selected by the square --- at the first
+candidate, a positive density of good pairs across the cut between the two marked rows.  Along the
 way we observe that the published proof of the upper bound in Lemma~3.12 of
 Cavenagh--Greenhill--Wanless has a gap for every split other than $(2,2)$; our results do not
 depend on that bound, and we re-derive from the surviving direction the tail estimate on
@@ -251,8 +255,10 @@ $\PP_n(\sigma\text{ even})=\tfrac12+o(1)$, as for uniform derangements
 \paragraph{Status of the arguments.}  The proofs below have been checked by automated
 referees (independent language-model agents with access to the sources and the data) and,
 where feasible, by exhaustive computation at $n\le7$ and by sampling (this includes
-\S\ref{sec:orbit}(e), Remark~\ref{rem:fewparts} and \S\ref{sec:fc}, added last; the
-latter by two independent automated referees); no human referee has read them.  The
+\S\ref{sec:orbit}(e), Remark~\ref{rem:fewparts}, \S\ref{sec:fc} and
+\S\ref{sec:hazardid}, added last; the latter two by two independent automated referees
+each, and \S\ref{sec:hazardid} also by an independent cold read); no human referee has
+read them.  The
 literature statements of \S\ref{sec:remains} were checked against the cited papers by the
 same means.
 
@@ -333,6 +339,19 @@ $\Pr_X[\nu\le M]\le8\Delta^{2M+2}/n$ for every type and mark
 $C\log\log n$ candidates some is good --- which holds if each candidate is good with
 conditional probability $\ge c$ given that the earlier ones are bad (in the data a
 candidate is good with conditional probability $\approx0.4$).
+\item[(8)] \emph{The hazard term: identity, lengths, fixed positions} (\S\ref{sec:hazardid}):
+the conditional hazard at each candidate equals a ratio of two local move counts, one in
+each of two conditioned ensembles (Proposition~\ref{prop:hazardid}, exact); at the first
+candidate, conditionally on $x_1,y_1$ sharing a cycle there, that cycle has length
+$\ge\delta n$ and its two arcs length $\ge\delta^3n$ with probability $1-O(\delta)$
+(Proposition~\ref{prop:lengths}), by a switching of the Allsop--Morris type with the
+inverse pinned by the two marked rows; and for two \emph{fixed} free rows and a
+\emph{fixed} column pair, in the completions of any $2\times n$ rectangle, the rows lie
+on different cycles with probability $\ge1/30-3/n$ (Proposition~\ref{prop:fixedpos}), by
+row exchangeability on top of the same switching.  What the first candidate still needs,
+and what none of these give, is a positive density of \emph{good} pairs across the
+$x_1$--$y_1$ cut without the exchangeability of $y_1$; we explain why the cross-switch
+counting of \cite{AM26} does not supply it.
 \end{enumerate}
 All these hypotheses are of one logical type: a lower bound on the probability of a
 configuration at rows or columns selected by the frame of the mark, inside the space
@@ -572,6 +591,7 @@ body.append(adaptive); body.append("\n\n")
 body.append(cprime_rest)
 body.append(firstpair_block)
 body.append(fc_block)
+body.append(hazard_block)
 body.append(remains)
 body.append(r"""
 

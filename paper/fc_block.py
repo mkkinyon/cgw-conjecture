@@ -260,7 +260,9 @@ event, so Corollary~\ref{cor:FCtwo} does not reach it.  The obstacle of
 \S\ref{sec:remains} is therefore unchanged in kind but reduced in scope: the upper-bound
 half --- short structures at a frame-selected pair --- is now available, through the
 $\eta$-switching of \cite{AM26}, whose forward degree is deterministic; only lower bounds
-at square-selected positions remain.  In the data (Remark~\ref{rem:fixrect}) the
+at square-selected positions remain, and \S\ref{sec:hazardid} shows which: at the first
+candidate, lengths at scale $n$ are available (Proposition~\ref{prop:lengths}), good
+pairs across the cut between $x_1$ and $y_1$ are not.  In the data (Remark~\ref{rem:fixrect}) the
 conditional probabilities of Corollary~\ref{cor:hazard} (that a candidate is bad) are
 $\approx0.6$ at every $n$ and type, i.e.\ $c\approx0.4$.  Where the obstruction of our earlier analysis went: with the admissible rows of
 their Claim~4 taken to be all free rows off $\gamma_L$, the column-cycle switch through
