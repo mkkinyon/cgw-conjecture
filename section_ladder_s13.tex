@@ -2884,14 +2884,21 @@ all-even and all-odd squares); and $H\supseteq A_n$, $H\not\le A_n$
 force $H=S_n$.
 \end{proof}
 
-\emph{Remarks.}  (i) Nothing about the second row is used; the strength
-of the bound ($e^{-\Omega(n^2)}$ against the $n^{-c}$ of a
-{\L}uczak--Pyber argument) comes from the event being about all $n$
-rows at once, which is where the Latin-square count
-$L(n)=e^{n^2\log n-2n^2+O(n\log^2n)}$ can be brought to bear.  This is
-the ``many rows'' slack of the owner's question in its purest form, and
-it is not available for Conjecture~6.1, which is a statement about the
-joint law of two rows.  (ii) The same argument with $G=\langle r_1,\dots,r_n\rangle$
+\emph{Remarks.}  (i) Nothing about the law of the second row is used.
+The event $H\le K$ is the intersection of the $n-1$ events
+$\sigma_i\in K$, $i\ge2$ (the identity row lies in every subgroup and
+contributes nothing --- which is exactly why Cameron's one-row argument
+is unavailable for loops); the strength of the bound
+($e^{-\Omega(n^2)}$ against the $n^{-c}$ of a {\L}uczak--Pyber argument)
+comes from these $n-1$ conditions being imposed simultaneously.  The
+crude count $|K|^{n-1}$ against $L(n)/n!=(n!)^{n-1}e^{-n^2+o(n^2)}$
+settles every $K$ of index $\ge e^{(1+\delta)n}$; for the two families
+of smaller index, $A_n$ and $S_{n/2}\wr S_2$, one must use the Latin
+constraints inside $K$ (the block decomposition, which shows the
+structured squares pay a larger Latin-constraint cost, and
+H\"aggkvist--Janssen).  This is the ``many rows'' slack of the owner's
+question in its purest form, and it is not available for
+Conjecture~6.1, which concerns one row given the identity row.  (ii) The same argument with $G=\langle r_1,\dots,r_n\rangle$
 in place of $H$ (and $\Pi'=\Pi$) reproves Cameron's quasigroup theorem
 \cite{Cam92} without {\L}uczak--Pyber, with the same error bound.
 (iii) Eberhard's comments \cite{Cam15} contain the first step

@@ -250,9 +250,11 @@ Brégman upper bound on L(a)); primitive proper H has |H| < 4^n (Praeger–Saxl)
 comments on Cameron's post; the "thus only A_n and S_{n/2} ≀ S_2 remain" there is a gap (union over e^{Θ(n²)} subgroups of index
 between e^n and e^{(1+δ)n}), closed by the block-system count.  Data: n=5: 50/56 S_5, 6 C_5; n=6: 7776/9408 S_6, 72 A_6, 1560
 imprimitive; JM samples n=7..16: all S_n or A_n, A_n fraction 2.1%, 1.2%, 0.4%, 0.1%, 0, 0.  Answer to the owner's question: the
-loop corollary is MUCH easier than the conjecture — it uses no information about the second row; the slack is that it is an event
-about all n rows jointly, where the Latin-square count L(n) = e^{n² log n − 2n² + O(n log² n)} applies.  Not available for the
-conjecture itself (a two-row statement).  Decision pending: where to publish (short section in the paper vs. 3-page note; tell
+loop corollary is MUCH easier than the conjecture — it uses no information about the law of the second row; the slack is that
+H ≤ K is the intersection of the n−1 conditions σ_i ∈ K (the identity row contributes nothing), and |K|^{n−1} against
+L(n)/n! = (n!)^{n−1}e^{−n²+o(n²)} settles every K of index ≥ e^{(1+δ)n}; the two families of smaller index (A_n, S_{n/2}≀S_2) need
+the Latin constraints inside K (block decomposition; Häggkvist–Janssen).  Not available for the conjecture itself (one row given
+the identity row).  Decision pending: where to publish (short section in the paper vs. 3-page note; tell
 Cameron?).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
