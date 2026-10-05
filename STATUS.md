@@ -404,6 +404,24 @@ Cavenagh/Greenhill — gap note; Allsop/Morris cc Wanless — §7 check and the 
 Eberhard — loops note authorship; Cameron — loops note; optional KPS — Remark 6.6 and CW16's dependence), each with why, what
 to ask, attachments, what not to claim, and a draft.  What did NOT change: no hypothesis, no proof, no classification; the
 notes are unchanged.
+**Seg 16 — WRITING (loops note; external-model reads).**  Owner ran the note past DeepSeek V4.1 and ChatGPT.  DeepSeek
+caught a FALSE parenthetical in the sharpness remark ("the proportion among those with first row the identity is the same" —
+it is larger by ½·binom(n,n/2) = 2^{O(n)}; exponent unaffected); my referees and I had missed it (a parenthetical in a remark,
+phrased as a symmetry fact; the conditioning event respects every partition).  Owner fixed it and converted the reduction
+paragraph to counting language.  ChatGPT (more detailed prompt) found that the new declaration "Pr = proportion in L_n^0"
+made the sign paragraph read as conflating L_n and L_n^0 — correct diagnosis; but its proposed fix (drop the factor 2:
+"P_{L_n^0}[all even] = P_{L_n}[all even]") is WRONG: P_{L_n^0}[all rows even] = P_{L_n}[all rows of one parity] =
+2 P_{L_n}[all even] ≤ 2cⁿ (consistent with the n=6 count).  Sign paragraph rewritten with the spaces explicit and the
+factor 2 kept.  Also adopted from ChatGPT: symbol-relabelling invariance of H stated ((τr₁)^{-1}(τr_i) = r₁^{-1}r_i); identity
+row stays first after the column normalisation; Pyber constant restated; the 3ⁿ/n^{O(1)} index and the "log 2 vs log 3 − 1"
+remark explained; "dominant term" qualified to contributions to P[H ⊉ A_n]; sampling paragraph gives exact sizes
+(3000 at n=7–10, 2000 at n=12,16; A_n counts 63/37/13/3) and the chain caveat; JM96 and repo cited.  Not adopted: E (summing
+over all subgroups is already clear), the folklore sentence (owner's decision pending).  Two amsart overfull displays fixed.
+Snapshot versions/loops_note_2026-10-04a.pdf (5 pp).  Process lesson recorded: correctness referees must be told that
+remarks, parentheticals and "clearly"s are in scope and that every stated numerical relation is to be re-derived; and
+independent reads by models of other families, asked open questions, have non-overlapping blind spots — owner will do this
+for every exportable (gap note §3, Appendix, new §4 paragraph; paper §7–§8).  What did NOT change: the theorem, its proof,
+its constants.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

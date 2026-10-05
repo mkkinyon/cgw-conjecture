@@ -1,22 +1,29 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{amsart}
+% packages
 \usepackage[margin=1.1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amssymb,amsthm}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+
+% theorem styles
+\theoremstyle{plain}
+	\newtheorem{theorem}{Theorem}
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-\newcommand{\E}{\mathbb E}
-\renewcommand{\Pr}{\mathbb P}
+	\newtheorem{remark}[theorem]{Remark}
+
+% shortcuts
 \newcommand{\Mlt}{\mathrm{Mlt}}
 \newcommand{\Stab}{\mathrm{Stab}}
-\newcommand{\LL}{\mathcal L}
+
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\LL}{\mathcal{L}}
 \DeclareMathOperator{\sgn}{sgn}
 
 \title{Almost all loops have multiplication group $S_n$}
-\author{[author]}
+\author{}
 \date{October 2026 --- draft}
 
 \begin{document}
@@ -101,13 +108,15 @@ transitive proper subgroup lies in a maximal one, and the maximal
 transitive subgroups of $S_n$ are the wreath products $S_a\wr S_b$,
 $ab=n$, of which there are fewer than $n\cdot n!$, and the primitive
 maximal subgroups.  The crude count disposes of $S_a\wr S_b$ for
-$b\ge3$ (index at least $3^n/n^{O(1)}$) but not of $S_{n/2}\wr S_2$
+$b\ge3$ (the index $n!/((a!)^bb!)$ is a multinomial coefficient over
+$b!$, at least $3^n/n^{O(1)}$) but not of $S_{n/2}\wr S_2$
 (index $\binom n{n/2}/2<e^n$) nor of $A_n$; for the primitive
 subgroups one needs a bound on their orders and on their number.  We
 handle every imprimitive group by a single block decomposition
 (Lemma~\ref{lem:block}), which is sharper than the crude count ---
-it gives the exponent $\log2$ in place of $\log3-1$ --- and in
-particular disposes of $S_{n/2}\wr S_2$; the primitive groups by the
+for $b=3$ the crude count gives $e^{-(\log3-1)n^2+o(n^2)}$ and for
+$b=2$ nothing, while the lemma gives $e^{-(\log2-o(1))n^2}$ for every
+$b$ --- and in particular disposes of $S_{n/2}\wr S_2$; the primitive groups by the
 Praeger--Saxl order bound together with Pyber's bound on the number of
 subgroups of $S_n$; and $A_n$ by the theorem of H\"aggkvist and
 Janssen.
@@ -139,22 +148,23 @@ which multiplied by $a$ is the claim.
 $r_1,\dots,r_n\in S_n$ (so $r_i(c)=L(i,c)$), relabelling the symbols by
 $r_1^{-1}$ gives the square with rows $\sigma_i=r_1^{-1}r_i$, whose
 first row is the identity; this map $\LL_n\to\LL_n^0:=\{L:r_1=\mathrm{id}\}$
-is $n!$-to-one, so a uniform $L$ gives a uniform $L^0\in\LL_n^0$, and
-$|\LL_n^0|=L(n)/n!$.  Permuting the rows of $L^0$ so that its first
+is $n!$-to-one, so a proportion of squares in $\LL_n^0$ is the same proportion
+of squares in $\LL_n$, and $|\LL_n^0|=L(n)/n!$; and relabelling the
+symbols by any $\tau\in S_n$ replaces each $r_i$ by $\tau r_i$ and so
+leaves every $r_1^{-1}r_i=(\tau r_1)^{-1}(\tau r_i)$, hence the group
+they generate, unchanged.  Permuting the rows of $L^0$ so that its first
 column is $1,2,\dots,n$ gives a reduced square; each reduced square
-arises from exactly $(n-1)!$ squares $L^0$, so a uniform $L^0$ gives a
-uniform reduced square, and the two have the same \emph{set} of rows.
+arises from exactly $(n-1)!$ squares $L^0$, so proportions agree again,
+and the two have the same \emph{set} of rows, with the identity row
+still first (it is the unique row of $L^0$ with entry $1$ in column $1$).
 A uniform reduced square is the Cayley table of a uniform random loop
 on $[n]$ with identity $1$, whose left translations are its rows.
-Hence, writing
+Writing
 \[
 H(L):=\langle\sigma_2,\dots,\sigma_n\rangle=\langle r_1^{-1}r_i:2\le i\le n\rangle\le S_n,
 \]
-the law of $H(L)$ for uniform $L\in\LL_n$ is the law of $\Mlt_\lambda(Q)$
-for a uniform loop $Q$ of order $n$, and it suffices to prove
-Theorem~\ref{thm:main} for $H(L)$ with $L$ uniform on $\LL_n$ (or,
-equivalently, $L^0$ uniform on $\LL_n^0$).  $H(L)$ is transitive: for
-$c,s\in[n]$ the symbol $r_1(s)$ occurs in column $c$ in some row $i$,
+it follows that for every subgroup $K\le S_n$, the proportion of $L\in\LL_n$ with $H(L)=K$ equals the proportion of loops $Q$ of order $n$ with $\mathrm{Mlt}_\lambda(Q)=K$, and it suffices to prove the bounds of Theorem~\ref{thm:main} for $H(L)$ as proportions of $\LL_n$, or equivalently of $\LL_n^0$, which is what we do.
+$H(L)$ is transitive: for $c,s\in[n]$ the symbol $r_1(s)$ occurs in column $c$ in some row $i$,
 and then $\sigma_i(c)=s$.
 
 \paragraph{Group theory.}  We use three facts about subgroups of $S_n$.
@@ -163,9 +173,9 @@ contained in the stabiliser $\Stab(\Pi)\cong S_a\wr S_b$ of a partition
 $\Pi$ of $[n]$ into $b$ blocks of size $a$ with $1<a<n$, or primitive;
 a primitive subgroup not containing $A_n$ has order less than $4^n$
 (Praeger and Saxl \cite{PS80}); and the number of subgroups of $S_n$ is
-at most $2^{Cn^2}$ for an absolute constant $C$ (Pyber \cite{Pyb93},
-with $C=\frac16\log_224+o(1)$; Roney-Dougal and Tracey \cite{RT25} have
-recently shown $2^{n^2/16+O(n^{3/2})}$).
+at most $2^{(\frac16\log_224+o(1))n^2}$ (Pyber \cite{Pyb93}; Roney-Dougal
+and Tracey \cite{RT25} have recently shown $2^{n^2/16+O(n^{3/2})}$), in
+particular at most $2^{Cn^2}$ for an absolute constant $C$.
 
 \section{Proof of Theorem~\ref{thm:main}}
 
@@ -190,11 +200,14 @@ permutations of $[b]$, together with one Latin square of order $a$ for
 each of the $b^2$ pairs $(j,j')$, on the row set $I_{jj'}$, column set
 $C_j$ and symbol set $S_{j'}$ determined by the array (identifying
 each of these sets with $[a]$ in increasing order).  There are at most
-$(b!)^n$ arrays and $L(a)$ choices for each small square.
+$(b!)^n$ arrays (those that occur satisfy further constraints, which
+we do not need) and $L(a)$ choices for each small square.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-Let $L^0$ be uniform on $\LL_n^0$ and $H=H(L^0)$.  Since $H$ is
+Throughout, $\Pr$ denotes proportion in $\LL_n^0$; by the discussion above,
+these proportions equal the corresponding proportions of reduced squares, hence of loops.
+Let $L^0$ be uniform on $\LL_n^0$ and $H=H(L^0)$. Since $H$ is
 transitive, if $H\not\supseteq A_n$ then $H$ is imprimitive or
 primitive of order less than $4^n$.
 
@@ -210,7 +223,8 @@ and fewer than $n$ divisors $a$ of $n$.  By \eqref{eq:L}, with $b=n/a$,
 $(b!)^n\le b^{nb}$ and $\log n!\le n\log n$,
 \begin{align*}
 \log\frac{n!\cdot n!\,(b!)^n\,L(a)^{b^2}}{L(n)}
-&\le2n\log n+\frac{n^2}a\log b+\Bigl(n^2\log a-2n^2+\frac{n^2}a\bigl(\tfrac12\log^2a+2\log a+3\bigr)\Bigr)-n^2\log n+2n^2\\
+&\le2n\log n+\frac{n^2}a\log b+\Bigl(n^2\log a-2n^2+\frac{n^2}a\bigl(\tfrac12\log^2a+2\log a+3\bigr)\Bigr)\\
+&\qquad-n^2\log n+2n^2\\
 &=-n^2\log b+\frac{n^2}a\Bigl(\log b+\tfrac12\log^2a+2\log a+3\Bigr)+2n\log n.
 \end{align*}
 If $a\ge\sqrt n$, the middle term is at most
@@ -230,20 +244,23 @@ where the $o(1)$ is $O(\log^2n/n)$, from $a=n/2$.
 $L^0\in\LL_n^0$ all of whose rows lie in $K$ number at most $|K|^{n-1}$.
 Summing over the at most $2^{Cn^2}$ subgroups $K$ of order less than
 $4^n$,
-\[
+\begin{align*}
 \Pr\bigl[H\text{ primitive},\ H\not\supseteq A_n\bigr]
-\le\frac{2^{Cn^2}\,4^{n(n-1)}}{L(n)/n!}
-\le\exp\bigl(-n^2\log n+(C\log2+\log4+2)n^2+n\log n\bigr)
-=e^{-(1-o(1))n^2\log n}.
-\]
+&\le\frac{2^{Cn^2}\,4^{n(n-1)}}{L(n)/n!}\\
+&\le\exp\bigl(-n^2\log n+(C\log2+\log4+2)n^2+n\log n\bigr)\\
+&=e^{-(1-o(1))n^2\log n}.
+\end{align*}
 Adding the two cases gives the first inequality of the theorem.
 
-\emph{The sign.}  $H\le A_n$ if and only if every $\sigma_i=r_1^{-1}r_i$
-is even, i.e.\ every row of $L$ has the parity of $r_1$.  Relabelling
-the symbols by a transposition is a bijection of $\LL_n$ reversing the
-parity of every row, so this event has probability
-$2\Pr[\text{all rows of }L\text{ are even}]\le2c^n$ by
-H\"aggkvist and Janssen \cite{HJ96}.  If $H\supseteq A_n$ and
+\emph{The sign.}  $H\le A_n$ if and only if every row $\sigma_i$ of
+$L^0$ is even.  Under the $n!$-to-one map $L\mapsto L^0$ this is the
+condition that every row $r_i$ of $L\in\LL_n$ has the parity of $r_1$,
+so the proportion of $L^0\in\LL_n^0$ with all rows even equals the
+proportion of $L\in\LL_n$ with all rows of one parity.  Relabelling the
+symbols by a transposition is a bijection of $\LL_n$ reversing the
+parity of every row, so the squares with all rows odd are as many as
+those with all rows even, and the latter are at most $c^n|\LL_n|$ by
+H\"aggkvist and Janssen \cite{HJ96}.  Hence $\Pr[H\le A_n]\le2c^n$.  If $H\supseteq A_n$ and
 $H\not\le A_n$ then $H=S_n$; so $\Pr[H\ne S_n]\le e^{-(\log2-o(1))n^2}+2c^n\le3c^n$
 for large $n$.  Finally $\Mlt(Q)\supseteq\Mlt_\lambda(Q)=S_n$ is
 $2$-transitive, which is the rank-$2$ condition of \cite{Smith}.
@@ -252,14 +269,14 @@ $2$-transitive, which is the rank-$2$ condition of \cite{Smith}.
 \section{Remarks}
 
 \begin{remark}[sharpness]
-The dominant term is $S_{n/2}\wr S_2$, and there the exponent is right:
+Among the contributions to $\Pr[H\not\supseteq A_n]$ the dominant one
+is $S_{n/2}\wr S_2$, and there the exponent is right:
 the squares all of whose rows preserve a fixed partition into two
 blocks of size $n/2$ number $\binom n{n/2}L(n/2)^4$ by the bijective
 version of Lemma~\ref{lem:block}, and
 $\binom n{n/2}L(n/2)^4/L(n)=2^{-n^2+O(n\log^2n)}$ by the asymptotics
 $\log L(m)=m^2\log m-2m^2+O(m\log^2m)$ that \eqref{eq:L} encodes
-(this counts squares with arbitrary first row; the proportion among
-those with first row the identity is the same); the
+(this counts squares with arbitrary first row; the proportion among those with first row the identity is larger by $\tfrac12\binom{n}{n/2}=2^{O(n)}$, which does not affect the exponent); the
 union over the $\frac12\binom n{n/2}$ such partitions changes this by
 $2^{O(n)}$.  The threshold $n\ge e^{15}$ in the proof is an artefact of
 the case split and has not been optimised: the displayed bound with
@@ -321,10 +338,14 @@ $H=C_5$ (the sorted Cayley table of $\mathbb Z_5$ for each of the six
 cyclic subgroups; these are also the all-even ones).  For $n=6$, of
 $9408$ reduced squares $7776$ have $H=S_6$, $72$ have $A_6$ and $1560$
 have an imprimitive $H$ (block sizes $2$ and $3$, orders $6$ to $48$).
-In samples of uniformly random Latin squares of orders $7$ to $16$
-(Jacobson--Matthews chain, $2000$--$3000$ squares per order) every $H$
-was $S_n$ or $A_n$, with $A_n$ in $2.1\%$, $1.2\%$, $0.4\%$, $0.1\%$ of
-the samples at $n=7,8,9,10$ and never at $n=12,16$.
+In samples of Latin squares of orders $7$ to $16$ produced by the
+Jacobson--Matthews chain \cite{JM96} (whose stationary distribution is
+uniform; we have not verified mixing, so these are samples from a
+chain, not certified uniform samples): $3000$ squares at each of
+$n=7,8,9,10$ and $2000$ at each of $n=12,16$; every $H$ was $S_n$ or
+$A_n$, with $A_n$ in $63$, $37$, $13$, $3$ of the samples at
+$n=7,8,9,10$ ($2.1\%$, $1.2\%$, $0.4\%$, $0.1\%$) and never at
+$n=12,16$ \cite{repo}.
 \end{remark}
 
 \begin{remark}[labelled and unlabelled loops]
@@ -343,10 +364,12 @@ $1$ (though with a weaker error bound, that of \cite{MW05}).
 \bibitem{Cam15} P.~J. Cameron, A niggling problem, blog post, 24 January 2015, with comments by S.~Eberhard, 12--13 October 2016, \url{https://cameroncounts.wordpress.com/2015/01/24/a-niggling-problem/}.
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 286--309.
 \bibitem{HJ96} R. H\"aggkvist and J.~C.~M. Janssen, All-even Latin squares, \emph{Discrete Math.} 157 (1996), 199--206.
+\bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
 \bibitem{LP93} T. {\L}uczak and L. Pyber, On random generation of the symmetric group, \emph{Combin. Probab. Comput.} 2 (1993), 505--512.
 \bibitem{MW05} B.~D. McKay and I.~M. Wanless, On the number of Latin squares, \emph{Ann. Comb.} 9 (2005), 335--344.
 \bibitem{PS80} C.~E. Praeger and J. Saxl, On the orders of primitive permutation groups, \emph{Bull. London Math. Soc.} 12 (1980), 303--307.
 \bibitem{Pyb93} L. Pyber, Enumerating finite groups of given order, \emph{Ann. of Math.} 137 (1993), 203--220.
+\bibitem{repo} [author], \texttt{cgw-conjecture}: scripts and logs (\texttt{s13\_loopgroup.py}, \texttt{runs/s13/loops/}), \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
 \bibitem{RT25} C.~M. Roney-Dougal and G. Tracey, Subgroups of symmetric groups: enumeration and asymptotic properties, arXiv:2503.05416 (2025).
 \bibitem{Smith} J.~D.~H. Smith, \emph{An Introduction to Quasigroups and Their Representations}, Chapman \& Hall/CRC, 2007.
 \bibitem{vLW} J.~H. van Lint and R.~M. Wilson, \emph{A Course in Combinatorics}, 2nd ed., Cambridge University Press, 2001.
