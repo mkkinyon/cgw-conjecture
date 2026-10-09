@@ -61,8 +61,8 @@ that for almost all quasigroups (that is, for all but a vanishing
 proportion of the Latin squares of order $n$) the left translations
 generate $S_n$ or $A_n$; H\"aggkvist and Janssen \cite{HJ96} then showed
 that the proportion of Latin squares all of whose rows are even
-permutations is at most $c^n$ for some $c<1$, so that $A_n$ never
-occurs.  In particular $\Mlt(Q)$ is $2$-transitive, which in Smith's
+permutations is at most $c^n$ for some $c<1$, so that $A_n$ occurs for
+a proportion at most $c^n$ of quasigroups.  In particular $\Mlt(Q)$ is $2$-transitive, which in Smith's
 character theory of quasigroups \cite{Smith} means that almost all
 quasigroups have trivial character theory (``rank $2$'').
 
@@ -184,7 +184,8 @@ Let $\Pi=\{C_1,\dots,C_b\}$ be a partition of the columns $[n]$ and
 $\Pi'=\{S_1,\dots,S_b\}$ a partition of the symbols $[n]$, both into $b$
 blocks of size $a$, $ab=n$.  The number of Latin squares $L\in\LL_n$
 every row of which maps each block of $\Pi$ onto a block of $\Pi'$ is at
-most $(b!)^n\,L(a)^{b^2}$.
+most $(b!)^n\,L(a)^{b^2}$.  (Only $\Pi'=\Pi$ is used below; the proof
+is the same for two partitions.)
 \end{lemma}
 
 \begin{proof}
@@ -238,7 +239,11 @@ is at most $-n^2\log2$ once $n\ge e^{15}$.  Summing over $\Pi$ and $a$,
 \[
 \Pr[H\text{ imprimitive}]\le n\,e^{-(\log2-o(1))n^2},
 \]
-where the $o(1)$ is $O(\log^2n/n)$, from $a=n/2$.
+where the $o(1)$ is $O(\log^2n/n)$: the term $a=n/2$ is at most
+$e^{-n^2\log2+O(n\log^2n)}$, every term with $b\ge3$ and
+$a\ge\sqrt n$ is at most $e^{-n^2\log3+O(n^{3/2}\log^2n)}$, and every
+term with $a<\sqrt n$ is at most $e^{-n^2\log2}$ for $n\ge e^{15}$, so
+the sum is at most $n\,e^{-n^2\log2+O(n\log^2n)}$.
 
 \emph{Primitive.}  For a fixed subgroup $K\le S_n$, the squares
 $L^0\in\LL_n^0$ all of whose rows lie in $K$ number at most $|K|^{n-1}$.
@@ -269,30 +274,51 @@ $2$-transitive, which is the rank-$2$ condition of \cite{Smith}.
 \section{Remarks}
 
 \begin{remark}[sharpness]
-Among the contributions to $\Pr[H\not\supseteq A_n]$ the dominant one
-is $S_{n/2}\wr S_2$, and there the exponent is right:
-the squares all of whose rows preserve a fixed partition into two
-blocks of size $n/2$ number $\binom n{n/2}L(n/2)^4$ by the bijective
-version of Lemma~\ref{lem:block}, and
+For even $n$ the exponent $\log2$ is attained, by the subgroup
+$S_{n/2}\wr S_2$ (the bound is a union bound, so ``attained'' means
+that this one term already has the exponent of the total): the
+squares all of whose rows preserve a fixed partition into two blocks of
+size $n/2$ number exactly $\binom n{n/2}L(n/2)^4$ --- in the proof of
+Lemma~\ref{lem:block} with $b=2$ the array is determined by the $n/2$
+rows that swap the blocks, and conversely every array of this kind
+together with any four small squares gives a Latin square --- and
 $\binom n{n/2}L(n/2)^4/L(n)=2^{-n^2+O(n\log^2n)}$ by the asymptotics
-$\log L(m)=m^2\log m-2m^2+O(m\log^2m)$ that \eqref{eq:L} encodes
-(this counts squares with arbitrary first row; the proportion among those with first row the identity is larger by $\tfrac12\binom{n}{n/2}=2^{O(n)}$, which does not affect the exponent); the
-union over the $\frac12\binom n{n/2}$ such partitions changes this by
-$2^{O(n)}$.  The threshold $n\ge e^{15}$ in the proof is an artefact of
-the case split and has not been optimised: the displayed bound with
-\eqref{eq:L} inserted is already less than $1$ for $n\ge250$ (and equals
-$e^{-0.88\,n^2\log2}$ at $n=1000$), and with the exact van der Waerden
-and Br\'egman expressions in place of \eqref{eq:L} it is less than $1$
-for $n\ge30$ ($e^{-0.37\,n^2\log2}$ at $n=30$, $e^{-0.71\,n^2\log 2}$
-at $n=100$).
+$\log L(m)=m^2\log m-2m^2+O(m\log^2m)$ that \eqref{eq:L} encodes (this
+counts squares with arbitrary first row; the proportion among those
+with first row the identity is larger by $\tfrac12\binom{n}{n/2}=2^{O(n)}$,
+which does not affect the exponent); the union over the
+$\frac12\binom n{n/2}$ such partitions changes this by $2^{O(n)}$.  For
+odd $n$ the bound of the theorem is not sharp: with $p$ the least
+prime factor of $n$, the partition into $p$ blocks gives, by the same
+count (with the array in which the rows of the $k$-th block of $n/p$
+rows are the $k$-th row of the cyclic Latin square of order $p$, so
+that every choice of the $p^2$ small squares gives a Latin square), at
+least $L(n/p)^{p^2}=e^{-(\log p+o(1))n^2}L(n)$ squares with $H$
+imprimitive, and the proof gives $\Pr[H\not\supseteq A_n]\le e^{-(\log p-o(1))n^2}$
+whenever $p\le n^{1/4}/e^3$ (so that the terms with $a<\sqrt n$ are
+smaller); for prime $n$ every transitive group is primitive and
+$\Pr[H\not\supseteq A_n]\le e^{-(1-o(1))n^2\log n}$.  The threshold
+$n\ge e^{15}$ in the proof is an artefact of the case split and has
+not been optimised: the sum over the divisors $a$ of $n$ of
+$n!\cdot n!\,(b!)^nL(a)^{b^2}/L(n)$ (the first display of the
+imprimitive case times the crude count $n!$ of partitions, with
+\eqref{eq:L} inserted for $L(a)$ and $L(n)$ and $n!$, $(b!)^n$ exact)
+is already less than $1$ for every composite $n\ge93$ (and is
+$e^{-0.88\,n^2\log2}$ at $n=1000$), and with the exact van der
+Waerden and Br\'egman expressions in place of \eqref{eq:L} and the
+exact number $n!/((a!)^bb!)$ of partitions in place of $n!$ it is less
+than $1$ for every composite $n\ge15$ ($e^{-0.37\,n^2\log2}$ at
+$n=30$, $e^{-0.70\,n^2\log2}$ at $n=100$); these are finite
+computations \cite{repo}, not uniform inequalities.
 \end{remark}
 
 \begin{remark}[quasigroups]
 With $G=\langle r_1,\dots,r_n\rangle$ in place of $H$, the same three
 steps (Lemma~\ref{lem:block} with $\Pi'=\Pi$, the count $|K|^n$, and
 \cite{HJ96}) reprove Cameron's theorem \cite{Cam92} without
-\cite{LP93}, with the same error bound.  The converse direction is not
-available: the loop case cannot be deduced from the quasigroup case,
+\cite{LP93}, with the same bounds: $e^{-(\log2-o(1))n^2}$ for
+$G\not\supseteq A_n$ and $3c^n$ for $G\ne S_n$.  The converse direction is not
+available: the loop case does not follow from the quasigroup case,
 because the symbol relabelling that produces a reduced square replaces
 the row group $\langle r_i\rangle$ by $\langle r_1^{-1}r_i\rangle$.
 \end{remark}
@@ -317,16 +343,19 @@ simply does not need it.
 In comments on \cite{Cam15} (October 2016), Eberhard observed that
 the number of Latin squares with all rows in $K$ is at most
 $|K|^n=(n!)^n/[S_n:K]^n$ against $L(n)=(n!)^n/e^{n^2+o(n^2)}$, concluded
-that only $A_n$ and $S_{n/2}\wr S_2$ need separate treatment, asked
-whether the method of \cite{HJ96} adapts to other subgroups, and
+that only $A_n$ and $S_{n/2}\wr S_2$ need separate treatment, and
+asked whether the method of \cite{HJ96} adapts to other subgroups;
+Cameron replied that this ``should not be too hard'' and that the
+second-row conjecture was the most interesting part; Eberhard then
 sketched for $S_{n/2}\wr S_2$ a row-by-row count (fill the first
 $k\approx n/10$ rows inside the group, bound the rest by the standard
-row-by-row estimate); Cameron replied that this ``should not be too
-hard'' and that the second-row conjecture was the interesting part.
+row-by-row estimate).
 The sketch is correct once one passes to maximal subgroups, which
-takes care of the imprimitive groups with $b\ge3$; what it leaves open
-is the primitive case, which needs the order bound of \cite{PS80} and
-a count of subgroups such as \cite{Pyb93}, and the details for
+takes care of the imprimitive groups with $b\ge3$; what remains to be
+supplied is the primitive case, which needs an order bound for
+primitive groups such as \cite{PS80} and a count of subgroups such as
+\cite{Pyb93} (the sketch's
+``only $A_n$ and $S_{n/2}\wr S_2$'' presupposes it), and the details for
 $S_{n/2}\wr S_2$.  Lemma~\ref{lem:block} treats all imprimitive groups
 uniformly and gives the sharp exponent.  As far as we know the argument
 was not written out.
@@ -338,23 +367,35 @@ $H=C_5$ (the sorted Cayley table of $\mathbb Z_5$ for each of the six
 cyclic subgroups; these are also the all-even ones).  For $n=6$, of
 $9408$ reduced squares $7776$ have $H=S_6$, $72$ have $A_6$ and $1560$
 have an imprimitive $H$ (block sizes $2$ and $3$, orders $6$ to $48$).
-In samples of Latin squares of orders $7$ to $16$ produced by the
-Jacobson--Matthews chain \cite{JM96} (whose stationary distribution is
-uniform; we have not verified mixing, so these are samples from a
-chain, not certified uniform samples): $3000$ squares at each of
-$n=7,8,9,10$ and $2000$ at each of $n=12,16$; every $H$ was $S_n$ or
-$A_n$, with $A_n$ in $63$, $37$, $13$, $3$ of the samples at
-$n=7,8,9,10$ ($2.1\%$, $1.2\%$, $0.4\%$, $0.1\%$) and never at
-$n=12,16$ \cite{repo}.
+In samples of $3000$ Latin squares at each order $7\le n\le16$
+produced by the Jacobson--Matthews chain \cite{JM96} (the chain on
+proper and improper squares, started from the cyclic square, run for
+$200t$ moves and then recorded at those times $200t+kt$, $k\ge1$, at
+which the state is proper, improper checkpoints being skipped with the
+grid kept, $t=20n^2$; the stationary distribution restricted to proper
+states is uniform and this fixed-grid sampling is unbiased, but we have
+not verified mixing, so these are samples from a chain, not certified
+uniform samples), the number of squares with $H=A_n$ was
+$37,25,18,4,1,4,0,1,0,0$ for $n=7,\dots,16$, and every other $H$ was
+$S_n$ except for two squares at $n=8$ with $H=S_2\wr S_4$ (order
+$384$) \cite{repo}.
 \end{remark}
 
 \begin{remark}[labelled and unlabelled loops]
 The theorem counts labelled loops on $[n]$ with identity $1$, i.e.\
-reduced squares.  Since almost all Latin squares have trivial
-autoparatopy group \cite{MW05}, almost all reduced squares have trivial
-automorphism group as loops, so the proportion of isomorphism classes
-of loops of order $n$ with multiplication group $S_n$ also tends to
-$1$ (though with a weaker error bound, that of \cite{MW05}).
+reduced squares, and the error bound survives the passage to
+isomorphism classes.  Let $p_n\le3c^n$ be the proportion of reduced
+squares with $H\ne S_n$ and $\varepsilon_n$ the proportion of reduced
+squares whose loop has a nontrivial automorphism group.  A loop
+automorphism is an autotopism of the square, the autotopy group is an
+isotopy invariant, and the map from $\LL_n$ to reduced squares is
+uniform, so $\varepsilon_n$ is at most the proportion of Latin squares
+with a nontrivial autoparatopy group, which is $n^{-3n^2/8+o(n^2)}$ by
+\cite[Theorem~4]{MW05}.  An isomorphism class with trivial automorphism
+group contains exactly $(n-1)!$ reduced squares, and every class
+contains at least one, so the proportion of isomorphism classes with
+multiplication group $\ne S_n$ is at most
+$(p_n+(n-1)!\,\varepsilon_n)/(1-\varepsilon_n)=O(c^n)$.
 \end{remark}
 
 \paragraph{Acknowledgements.}  [Eberhard; Cameron; Wanless.]

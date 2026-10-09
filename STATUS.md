@@ -422,6 +422,23 @@ remarks, parentheticals and "clearly"s are in scope and that every stated numeri
 independent reads by models of other families, asked open questions, have non-overlapping blind spots — owner will do this
 for every exportable (gap note §3, Appendix, new §4 paragraph; paper §7–§8).  What did NOT change: the theorem, its proof,
 its constants.
+**Seg 17 — WRITING (loops note; second outside read).**  Owner gave the note to a higher-tier ChatGPT model (fresh session);
+report favourable ("accept subject to revision"), with four substantive points, all adopted after re-derivation: (i) the o(1) =
+O(log² n/n) claim in the imprimitive case needed the one-line comparison for b ≥ 3 (added); (ii) the sharpness remark is for
+even n only — now: exact two-block count explained from the lemma's proof; for composite odd n with least prime factor p the
+proof gives e^{−(log p − o(1))n²} when p ≤ n^{1/4}/e³ and the p-block partition gives the matching lower bound (admissible
+array: cyclic square of order p); for prime n every transitive group is primitive so ≤ e^{−(1−o(1))n² log n}; (iii) the
+numerical thresholds were under-described: the quoted −0.37/−0.70 use the EXACT partition count n!/((a!)^b b!) as well as the
+exact vdW/Brégman expressions (recomputed: eq.(1)+crude n! → < 1 for every composite n ≥ 93, −0.88 at n=1000; exact → every
+composite n ≥ 15); (iv) the unlabelled-loops remark understated: with MW05 Theorem 4 (proportion with nontrivial autoparatopy
+group ≤ n^{−3n²/8+o(n²)}, verified on arXiv:0909.2101) the proportion of bad isomorphism classes is ≤ (p_n + (n−1)!ε_n)/(1−ε_n)
+= O(cⁿ), not a weaker bound.  Also: "A_n never occurs" (literally false; n=6 has 72) → "a proportion at most cⁿ"; Eberhard
+remark: chronology of Cameron's reply corrected (referee, from the blog), "needs PS80" softened; quasigroups remark "cannot be
+deduced" → "does not follow"; lemma: the two-partition generality flagged as unused.  Samples regenerated for all 7 ≤ n ≤ 16
+with recorded parameters (thin 20n², burn-in 200·thin, fixed-grid proper-state sampling, unbiased): A_n counts 37,25,18,4,1,4,
+0,1,0,0; two S_2≀S_4 at n = 8 — the earlier "every H was S_n or A_n" no longer holds and the note says so.  Referee (internal)
+re-derived every number; one real catch of its own (Eberhard chronology).  Snapshot versions/loops_note_2026-10-09a.pdf (6 pp).
+What did NOT change: theorem, proof, constants.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

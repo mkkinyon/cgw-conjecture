@@ -1,3 +1,4 @@
+command: ./jm 7 3000 980 107 | python3 s13_loopgroup.py sample 7   (burn-in 200*thin moves; samples every thin moves at proper states)
 n=7 mode=sample squares=3000
-  S_n: 2937  (0.9790)
-  A_n: 63  (0.0210)
+  S_n: 2963  (0.9877)
+  A_n: 37  (0.0123)
