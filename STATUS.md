@@ -439,6 +439,19 @@ with recorded parameters (thin 20n², burn-in 200·thin, fixed-grid proper-state
 0,1,0,0; two S_2≀S_4 at n = 8 — the earlier "every H was S_n or A_n" no longer holds and the note says so.  Referee (internal)
 re-derived every number; one real catch of its own (Eberhard chronology).  Snapshot versions/loops_note_2026-10-09a.pdf (6 pp).
 What did NOT change: theorem, proof, constants.
+**Seg 18 — WRITING (loops note; Eberhard's suggestion).**  Eberhard declined coauthorship and pointed out that the primitive
+case can avoid CFSG via Babai–Pyber or Sun–Wilmes.  Analysis: the note's primitive ORDER bound (Praeger–Saxl 4ⁿ) was already
+elementary; the CFSG exposure was the COUNT of subgroups (Pyber 2^{Cn²}, RT25), needed only because 4ⁿ is too weak for the
+trivial generator count ((n!)^{2n} ≫ L(n)/n!).  With Babai 1981 (uniprimitive, e^{4√n log² n}) and Babai 1982 / Pyber 1993
+(doubly transitive, exp(exp(c√log n)) / n^{c log² n}, elementary), every primitive K ⊉ A_n has log|K| = o(n), so K has ≤ 6√n log²n
+generators, ≤ e^{6n^{3/2}log³n} such subgroups, and the primitive bound e^{−(1−o(1))n² log n} follows with no subgroup-count
+theorem.  Edited: Group-theory paragraph, primitive paragraph of the proof, intro, abstract ("the classification of finite
+simple groups is not used"), new Remark [the primitive case] (why 4ⁿ does not suffice; Sun–Wilmes would also do), Eberhard
+remark, acknowledgements; Bab81, Bab82, Pyb93b, SW15 added to the bibliography.  Referee: arithmetic and literature confirmed
+(Maróti's survey; SW abstract "elementary and almost purely combinatorial"); caught a leftover "order less than 4ⁿ" in the
+proof and that "Pyber's count rests on CFSG" could not be verified — reworded to "we have not checked whether that count can be
+obtained without the classification".  Snapshot versions/loops_note_2026-10-12a.pdf (6 pp).  What did NOT change: theorem
+statement, constants, the imprimitive and sign cases.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

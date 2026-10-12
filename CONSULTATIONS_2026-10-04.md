@@ -72,7 +72,7 @@ Recommended order: (1) Wanless/Cavenagh/Greenhill, then (2) Allsop/Morris — th
 
 ---
 
-## 3. Eberhard — the loops note
+## 3. Eberhard — the loops note  *(done 2026-10-12: declined coauthorship; suggested the CFSG-free primitive case, adopted in loops_note_2026-10-12a)*
 
 **Why him.** The 2016 sketch (maximal-subgroup remark) is his; the note proves the statement he sketched and credits him. He should decide between coauthorship and attribution before anyone else sees it.
 
