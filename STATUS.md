@@ -452,6 +452,29 @@ remark, acknowledgements; Bab81, Bab82, Pyb93b, SW15 added to the bibliography. 
 proof and that "Pyber's count rests on CFSG" could not be verified — reworded to "we have not checked whether that count can be
 obtained without the classification".  Snapshot versions/loops_note_2026-10-12a.pdf (6 pp).  What did NOT change: theorem
 statement, constants, the imprimitive and sign cases.
+**Seg 19 — WRITING (loops note; third outside read).**  Owner gave the CFSG-free version to a fresh ChatGPT session (remarks
+and parentheticals declared in scope).  Report: "accept after revision"; one definite error, two strengthenings, fifteen
+presentation items.  Adopted after re-derivation: (i) the Sun–Wilmes sentence was wrong — their exp(O(n^{1/3} log^{7/3} n))
+holds for uniprimitive groups EXCEPT the Cameron groups (S_m on 2-subsets has degree binom(m,2) and order m! = e^{Θ(√n log n)});
+now stated with SW's Corollary 1.3 exceptions, and the example shows Babai's bound is sharp up to the log power; (ii) GKKP26
+(Greenhill–Kopfová–Kwan–Petrova, arXiv:2610.13487, 9 Oct 2026; source uploaded by owner, Theorem 1.1 verified: all-even
+proportion (½+o(1))ⁿ two-sided, KPS25 already had the upper bound, HJ96's constant is √(3/4)) ⇒ new Remark [the sign]:
+P[H ≤ A_n] = P[H = A_n] = P[H ≠ S_n] = (½+o(1))ⁿ, every c > ½ works and no c < ½; (iii) sharpness for every composite n:
+log P[H ⊉ A_n] = −n² log p + o(n²) with no restriction on p (split the imprimitive sum at a = log² n: middle term O(n²/log n)
+for a ≥ log² n; for a < log² n the proof's −¼n² log n + 3n² beats −n² log p since log p < 2 log log n); even n: −n² log 2 +
+O(n log² n); (iv) prime n two-term: −n² log n + 2n² + O(n^{3/2} log³ n), lower bound (n−2)!/R(n) from the labelled cyclic loops;
+(v) the thresholds "every composite n ≥ 93 / ≥ 15" were computed in a one-off script never committed — now s13_loopbounds.py
+(runs/s13/loops/bounds25000.log): sums evaluated for all composite n ≤ 25000, analytic tail from n ≥ 22107 via the proof's two
+inequalities (sharp: fails at 22106), monotone beyond; (vi) Lemma 2 made exact, T(a,b) L(a)^{b²} with the converse written
+out; (vii) identity Pr_{L⁰}[H ≤ K] = (n!/|K|) Pr_L[all rows in K] displayed in §2 (eq:K) and used in the sharpness remark;
+(viii) R(n) = L(n)/(n!(n−1)!) displayed (eq:R); transitivity via σ_i(1); B assembled in a display; two n!'s explained; derivative
+of f(a)/a; "unbiased" → protocol wording; class-count numerator explained; repo citation now names a tag and the commands.
+Not adopted: the shorter imprimitive treatment (loses log 2 — the report itself says so); "up to conjugacy" qualifiers (intro
+already counts conjugates).  Referee (internal, fresh): every number re-derived, thresholds reproduced with exact arithmetic,
+SW checked against arXiv:1510.02195 (exceptions made precise per Cor. 1.3), Petrova's initial corrected (K.), "for large n"
+made explicit in the a < log² n case, parenthetical after the theorem corrected (relabel AND reorder).  Snapshot
+versions/loops_note_2026-10-12b.pdf (8 pp), tag loops-note-2026-10-12b.  What did NOT change: theorem statement, proof,
+constants; the sign remark records the GKKP improvement, the theorem is not restated with it.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip

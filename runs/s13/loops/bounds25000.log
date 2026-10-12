@@ -1,0 +1,9 @@
+NMAX=25000
+version A (eq.(1), crude n! partitions): sum >= 1 last at composite n=92; so < 1 for every composite n >= 93 up to NMAX
+version B (exact vdW/Bregman, exact partition count): sum >= 1 last at composite n=14; so < 1 for every composite n >= 15 up to NMAX
+  n=30: log(sum)/(n^2 log 2): A=1.0115  B=-0.3681
+  n=100: log(sum)/(n^2 log 2): A=-0.0595  B=-0.7049
+  n=1000: log(sum)/(n^2 log 2): A=-0.8817  B=-0.9443
+analytic tail at n=NMAX: (a>=sqrt n) bound/(n^2)=-0.15694, (a<sqrt n) bound/(n^2)=-0.03085; need both < -log(n)/n^2 = -1.62e-08: OK
+quotients decreasing on a geometric grid from NMAX to 1e9: True
+tail bounds alone give sum < 1 for all n >= 22107 (given monotonicity)

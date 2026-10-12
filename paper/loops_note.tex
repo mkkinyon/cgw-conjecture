@@ -97,6 +97,14 @@ for some absolute $c<1$ and all large $n$.  Consequently almost all loops
 have $\Mlt_\lambda(Q)=\Mlt(Q)=S_n$ and trivial character theory.
 \end{theorem}
 
+\noindent(The first row of a reduced square is the identity, so $H(L)$
+is the left multiplication group of the loop.  For a square with
+arbitrary first row $r_1$ the group that matters is $\langle r_1^{-1}r_i\rangle$,
+the row group of the loop whose Cayley table is obtained by relabelling
+the symbols and then reordering the rows; this is set out in
+\S\ref{sec:prelim}, and it is in the larger set of squares
+with first row the identity that the counting is done.)
+
 The idea, which Eberhard sketched in comments on Cameron's post
 \cite{Cam15}, is that the event is about all $n-1$ non-identity rows
 simultaneously, and such events are cheap to bound by counting: for a
@@ -123,7 +131,7 @@ is controlled by counting generators; and $A_n$ by the theorem of
 H\"aggkvist and Janssen.  No step uses the classification of finite
 simple groups.
 
-\section{Preliminaries}
+\section{Preliminaries}\label{sec:prelim}
 
 \paragraph{Latin squares.}  Let $\LL_n$ be the set of Latin squares of
 order $n$ on the symbol set $[n]$ and $L(n)=|\LL_n|$.  We use two
@@ -146,43 +154,67 @@ and $\sum_{k\le a}1/k\le\log a+1$,
 \]
 which multiplied by $a$ is the claim.
 
-\paragraph{Loops and reduced squares.}  For $L\in\LL_n$ with rows
-$r_1,\dots,r_n\in S_n$ (so $r_i(c)=L(i,c)$), relabelling the symbols by
-$r_1^{-1}$ gives the square with rows $\sigma_i=r_1^{-1}r_i$, whose
-first row is the identity; this map $\LL_n\to\LL_n^0:=\{L:r_1=\mathrm{id}\}$
-is $n!$-to-one, so a proportion of squares in $\LL_n^0$ is the same proportion
-of squares in $\LL_n$, and $|\LL_n^0|=L(n)/n!$; and relabelling the
-symbols by any $\tau\in S_n$ replaces each $r_i$ by $\tau r_i$ and so
-leaves every $r_1^{-1}r_i=(\tau r_1)^{-1}(\tau r_i)$, hence the group
-they generate, unchanged.  Permuting the rows of $L^0$ so that its first
-column is $1,2,\dots,n$ gives a reduced square; each reduced square
-arises from exactly $(n-1)!$ squares $L^0$, so proportions agree again,
-and the two have the same \emph{set} of rows, with the identity row
-still first (it is the unique row of $L^0$ with entry $1$ in column $1$).
-A uniform reduced square is the Cayley table of a uniform random loop
-on $[n]$ with identity $1$, whose left translations are its rows.
-Writing
+\paragraph{Loops and reduced squares.}  Three sets of squares are
+counted below: $\LL_n$; the squares with first row the identity,
+$\LL_n^0:=\{L\in\LL_n:r_1=\mathrm{id}\}$; and the reduced squares, whose
+first row and first column are the identity, $R(n)$ in number.
+Relabelling the symbols of $L\in\LL_n$ by a permutation is a bijection
+of $\LL_n$ (there are $n!$ of them), permuting the rows is another
+($n!$ of them), and
+\begin{equation}\label{eq:R}
+|\LL_n^0|=\frac{L(n)}{n!},\qquad R(n)=\frac{|\LL_n^0|}{(n-1)!}=\frac{L(n)}{n!\,(n-1)!}:
+\end{equation}
+exactly one relabelling of the symbols (by $r_1^{-1}$, where
+$r_1,\dots,r_n\in S_n$ are the rows of $L$, $r_i(c)=L(i,c)$) brings the
+first row to the identity, giving the square $L^0$ with rows
+$\sigma_i=r_1^{-1}r_i$; and exactly one permutation of the rows of
+$L^0$ fixing the first row (which is the unique row with entry $1$ in
+column $1$) brings the first column to $1,2,\dots,n$, giving a reduced
+square with the same \emph{set} of rows as $L^0$.  A uniform reduced
+square is the Cayley table of a uniform random loop on $[n]$ with
+identity $1$, whose left translations are its rows.  Writing
 \[
 H(L):=\langle\sigma_2,\dots,\sigma_n\rangle=\langle r_1^{-1}r_i:2\le i\le n\rangle\le S_n,
 \]
-it follows that for every subgroup $K\le S_n$, the proportion of $L\in\LL_n$ with $H(L)=K$ equals the proportion of loops $Q$ of order $n$ with $\mathrm{Mlt}_\lambda(Q)=K$, and it suffices to prove the bounds of Theorem~\ref{thm:main} for $H(L)$ as proportions of $\LL_n$, or equivalently of $\LL_n^0$, which is what we do.
-$H(L)$ is transitive: for $c,s\in[n]$ the symbol $r_1(s)$ occurs in column $c$ in some row $i$,
-and then $\sigma_i(c)=s$.
+relabelling the symbols of $L$ by $\tau$ replaces each $r_i$ by $\tau r_i$
+and leaves every $r_1^{-1}r_i=(\tau r_1)^{-1}(\tau r_i)$, hence $H(L)$,
+unchanged; so for every subgroup $K\le S_n$ the proportion of $L\in\LL_n$
+with $H(L)=K$ equals the proportion of $L^0\in\LL_n^0$ with $H(L^0)=K$,
+equals the proportion of reduced squares with row group $K$, equals the
+proportion of loops $Q$ of order $n$ with $\Mlt_\lambda(Q)=K$.  It
+therefore suffices to prove the bounds of Theorem~\ref{thm:main} for
+$H(L)$ as proportions of $\LL_n^0$, which is what we do.  Two further
+facts.  First, $H(L)$ is transitive: the first column of $L$ is a
+permutation, so the values $\sigma_i(1)=r_1^{-1}(L(i,1))$, $1\le i\le n$,
+run through all of $[n]$.  Second, for a subgroup $K\le S_n$ the squares
+$L\in\LL_n$ all of whose rows lie in $K$ are exactly the relabellings by
+$\tau\in K$ of the squares $L^0\in\LL_n^0$ all of whose rows lie in $K$
+(if $r_1\in K$ then $r_i\in K$ iff $\sigma_i\in K$), $|K|$ of them for
+each $L^0$; dividing by $L(n)=n!\,|\LL_n^0|$,
+\begin{equation}\label{eq:K}
+\Pr_{\LL_n^0}\bigl[H\le K\bigr]=\frac{n!}{|K|}\,\Pr_{\LL_n}\bigl[\text{all rows in }K\bigr],
+\end{equation}
+where $\Pr_X$ denotes proportion in $X$.  The two sides differ by the
+index of $K$, which is where a count of squares with all rows in $K$
+(as in Lemma~\ref{lem:block}) and a statement about $H$ part company.
 
 \paragraph{Group theory.}  We use three facts about subgroups of $S_n$.
 A transitive subgroup not containing $A_n$ is either imprimitive, i.e.\
 contained in the stabiliser $\Stab(\Pi)\cong S_a\wr S_b$ of a partition
 $\Pi$ of $[n]$ into $b$ blocks of size $a$ with $1<a<n$, or primitive.
-A primitive subgroup not containing $A_n$ has order at most
-$e^{4\sqrt n\log^2n}$ for $n\ge n_0$: for uniprimitive groups (primitive
-but not doubly transitive) this is Babai's theorem \cite{Bab81}, and a
-doubly transitive group not containing $A_n$ has order at most
-$\exp(\exp(c\sqrt{\log n}))$ (Babai \cite{Bab82}) and at most
-$n^{c\log^2n}$ (Pyber \cite{Pyb93b}), both smaller for large $n$; the
-proofs of all three bounds are elementary, in particular they do not use
-the classification of finite simple groups.  Finally a group of order
-$m$ is generated by at most $\log_2m$ elements (adjoining to a proper
-subgroup an element outside it at least doubles the order).
+A primitive subgroup $K\not\supseteq A_n$ has order at most
+\[
+B:=e^{4\sqrt n\log^2n}\qquad\text{for }n\ge n_0.
+\]
+Indeed, if $K$ is uniprimitive (primitive but not doubly transitive),
+$|K|<B$ is Babai's theorem \cite{Bab81}; if $K$ is doubly transitive,
+$|K|\le\exp(\exp(c\sqrt{\log n}))$ by Babai \cite{Bab82} and
+$|K|\le n^{c\log^2n}$ by Pyber \cite{Pyb93b}, and either bound is below
+$B$ once $n$ is large.  The proofs of all three bounds are elementary;
+in particular they do not use the classification of finite simple
+groups.  Finally a group of order $m$ is generated by at most $\log_2m$
+elements (adjoining to a proper subgroup an element outside it at least
+doubles the order).
 
 \section{Proof of Theorem~\ref{thm:main}}
 
@@ -190,9 +222,12 @@ subgroup an element outside it at least doubles the order).
 Let $\Pi=\{C_1,\dots,C_b\}$ be a partition of the columns $[n]$ and
 $\Pi'=\{S_1,\dots,S_b\}$ a partition of the symbols $[n]$, both into $b$
 blocks of size $a$, $ab=n$.  The number of Latin squares $L\in\LL_n$
-every row of which maps each block of $\Pi$ onto a block of $\Pi'$ is at
-most $(b!)^n\,L(a)^{b^2}$.  (Only $\Pi'=\Pi$ is used below; the proof
-is the same for two partitions.)
+every row of which maps each block of $\Pi$ onto a block of $\Pi'$ is
+exactly $T(a,b)\,L(a)^{b^2}$, where $T(a,b)\le(b!)^n$ is the number of
+$n\times b$ arrays with entries in $[b]$ whose rows are permutations of
+$[b]$ and in each of whose columns every symbol occurs exactly $a$
+times.  (Only $\Pi'=\Pi$ is used below; the proof is the same for two
+partitions.)
 \end{lemma}
 
 \begin{proof}
@@ -201,15 +236,19 @@ with $r_i(C_j)=S_{\pi_i(j)}$.  Fix $j,j'$ and let
 $I_{jj'}=\{i:\pi_i(j)=j'\}$.  In a column $c\in C_j$ each of the $a$
 symbols of $S_{j'}$ occurs exactly once, and only in rows of $I_{jj'}$,
 each of which contributes exactly one symbol of $S_{j'}$ to column $c$;
-hence $|I_{jj'}|=a$, and the subarray with rows $I_{jj'}$ and columns
-$C_j$ is an $a\times a$ Latin square on the symbol set $S_{j'}$.  Thus
-$L$ is determined by the $n\times b$ array $(\pi_i(j))$, whose rows are
-permutations of $[b]$, together with one Latin square of order $a$ for
+hence $|I_{jj'}|=a$, so the array $(\pi_i(j))$ is of the kind counted by
+$T(a,b)$, and the subarray with rows $I_{jj'}$ and columns $C_j$ is an
+$a\times a$ Latin square on the symbol set $S_{j'}$.  Thus $L$ is
+determined by the array together with one Latin square of order $a$ for
 each of the $b^2$ pairs $(j,j')$, on the row set $I_{jj'}$, column set
-$C_j$ and symbol set $S_{j'}$ determined by the array (identifying
-each of these sets with $[a]$ in increasing order).  There are at most
-$(b!)^n$ arrays (those that occur satisfy further constraints, which
-we do not need) and $L(a)$ choices for each small square.
+$C_j$ and symbol set $S_{j'}$ determined by the array (identifying each
+of these sets with $[a]$ in increasing order).  Conversely every such
+array together with any $b^2$ small squares gives a square of the
+required kind: row $i$ carries, on the column block $C_j$, each symbol
+of $S_{\pi_i(j)}$ once, and these $b$ symbol blocks are distinct; column
+$c\in C_j$ carries, on the rows $I_{jj'}$, each symbol of $S_{j'}$ once,
+and the $b$ row sets $I_{jj'}$ ($j'\in[b]$) partition $[n]$.  There are
+at most $(b!)^n$ arrays and $L(a)$ choices for each small square.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -229,7 +268,9 @@ with $\Pi'=\Pi$,
 \]
 There are $n!/((a!)^bb!)\le n!$ partitions $\Pi$ with blocks of size $a$
 and fewer than $n$ divisors $a$ of $n$.  By \eqref{eq:L}, with $b=n/a$,
-$(b!)^n\le b^{nb}$ and $\log n!\le n\log n$,
+$(b!)^n\le b^{nb}$ and $\log n!\le n\log n$ (of the two factors $n!$
+below, one is the $n!$ of $|\LL_n^0|=L(n)/n!$ and the other bounds the
+number of partitions),
 \begin{align*}
 \log\frac{n!\cdot n!\,(b!)^n\,L(a)^{b^2}}{L(n)}
 &\le2n\log n+\frac{n^2}a\log b+\Bigl(n^2\log a-2n^2+\frac{n^2}a\bigl(\tfrac12\log^2a+2\log a+3\bigr)\Bigr)\\
@@ -241,7 +282,8 @@ $n^{3/2}(\frac12\log^2n+3\log n+3)=o(n^2)$, so the right side is
 $-n^2\log b+o(n^2)\le-n^2\log2+o(n^2)$.  If $2\le a<\sqrt n$, then
 $b>\sqrt n$, $(n^2/a)\log b\le\frac12n^2\log b$, and
 $(\frac12\log^2a+2\log a+3)/a\le\frac52$ (the function is decreasing in
-$a\ge1$ and is less than $2.32$ at $a=2$), so the right side is at most
+$a\ge1$, its derivative being $-(\frac12\log^2a+\log a+1)/a^2$, and is
+less than $2.32$ at $a=2$), so the right side is at most
 $-\frac12n^2\log b+\frac52n^2+2n\log n\le-\frac14n^2\log n+3n^2$, which
 is at most $-n^2\log2$ once $n\ge e^{15}$.  Summing over $\Pi$ and $a$,
 \[
@@ -283,34 +325,70 @@ $2$-transitive, which is the rank-$2$ condition of \cite{Smith}.
 
 \section{Remarks}
 
-\begin{remark}[sharpness]
-For even $n$ the exponent $\log2$ is attained, by the subgroup
-$S_{n/2}\wr S_2$ (the bound is a union bound, so ``attained'' means
-that this one term already has the exponent of the total): the
-squares all of whose rows preserve a fixed partition into two blocks of
-size $n/2$ number exactly $\binom n{n/2}L(n/2)^4$ --- in the proof of
-Lemma~\ref{lem:block} with $b=2$ the array is determined by the $n/2$
-rows that swap the blocks, and conversely every array of this kind
-together with any four small squares gives a Latin square --- and
-$\binom n{n/2}L(n/2)^4/L(n)=2^{-n^2+O(n\log^2n)}$ by the asymptotics
-$\log L(m)=m^2\log m-2m^2+O(m\log^2m)$ that \eqref{eq:L} encodes (this
-counts squares with arbitrary first row; the proportion among those
-with first row the identity is larger by $\tfrac12\binom{n}{n/2}=2^{O(n)}$,
-which does not affect the exponent); the union over the
-$\frac12\binom n{n/2}$ such partitions changes this by $2^{O(n)}$.  For
-odd $n$ the bound of the theorem is not sharp: with $p$ the least
-prime factor of $n$, the partition into $p$ blocks gives, by the same
-count (with the array in which the rows of the $k$-th block of $n/p$
-rows are the $k$-th row of the cyclic Latin square of order $p$, so
-that every choice of the $p^2$ small squares gives a Latin square), at
-least $L(n/p)^{p^2}=e^{-(\log p+o(1))n^2}L(n)$ squares with $H$
-imprimitive, and the proof gives $\Pr[H\not\supseteq A_n]\le e^{-(\log p-o(1))n^2}$
-whenever $p\le n^{1/4}/e^3$ (so that the terms with $a<\sqrt n$ are
-smaller); for prime $n$ every transitive group is primitive and
-$\Pr[H\not\supseteq A_n]\le e^{-(1-o(1))n^2\log n}$.  The threshold
-$n\ge e^{15}$ in the proof is an artefact of the case split and has
-not been optimised: the sum over the divisors $a$ of $n$ of
-$n!\cdot n!\,(b!)^nL(a)^{b^2}/L(n)$ (the first display of the
+\begin{remark}[sharpness]\label{rem:sharp}
+The first bound of the theorem is sharp on the scale $n^2$ for even
+$n$ and not otherwise; more precisely, the proof and the lemma together
+determine the exponent at every order.  Let $n$ be composite with least
+prime factor $p$ (so $p\le\sqrt n$).  Then
+\[
+\log\Pr[H\not\supseteq A_n]=-n^2\log p+o(n^2),
+\]
+so that $\log\Pr[H\not\supseteq A_n]/n^2\to-\log2$ along even $n$ (no
+statement about a multiplicative constant is intended) and the exponent
+$\log2$ of the theorem is attained there, while for odd composite $n$
+the true exponent is $\log p>\log2$.  For the lower bound take the
+partition $\Pi$ into $p$ blocks of size $a=n/p$: $T(a,p)\ge1$ (the
+array in which the rows of the $k$-th block of $a$ rows are the $k$-th
+row of the cyclic Latin square of order $p$ has every symbol $a$ times
+in every column), so by Lemma~\ref{lem:block} at least $L(a)^{p^2}$
+squares of $\LL_n$ have all rows in $\Stab(\Pi)$, and by \eqref{eq:K}
+and \eqref{eq:L}
+\[
+\Pr[H\not\supseteq A_n]\ge\Pr[H\le\Stab(\Pi)]\ge\frac{L(a)^{p^2}}{L(n)}
+\ge e^{\,p^2(a^2\log a-2a^2)-n^2\log n+2n^2-n(\frac12\log^2n+2\log n+3)}
+=e^{-n^2\log p-O(n\log^2n)}.
+\]
+For the upper bound, split the imprimitive sum at $a=\log^2n$ instead
+of $\sqrt n$.  Every divisor $b=n/a>1$ is at least $p$.  If
+$a\ge\log^2n$, the middle term of the display is at most
+$n^2\log n/\log^2n+n^2(\frac12\log^2a+2\log a+3)/a=O(n^2/\log n)$
+(the function of $a$ is decreasing), so the term is at most
+$-n^2\log b+O(n^2/\log n)\le-n^2\log p+O(n^2/\log n)$.  If $2\le a<\log^2n$,
+the bound $-\frac14n^2\log n+3n^2$ of the proof applies (for large
+$n$, so that $\log^2n<\sqrt n$), and it is below $-n^2\log p$ once
+$\frac14\log n-3\ge2\log\log n$, because $\log p\le\log a<2\log\log n$.  The
+primitive case contributes $e^{-(1-o(1))n^2\log n}\le e^{-n^2\log p-(\frac12-o(1))n^2\log n}$.
+Hence $\Pr[H\not\supseteq A_n]\le e^{-n^2\log p+O(n^2/\log n)}$ for
+every composite $n$, without the restriction on $p$ that the case
+split at $\sqrt n$ would impose.  For even $n$ the error terms are
+sharper: $T(n/2,2)=\binom n{n/2}$ (an array with $b=2$ is determined by
+the set of rows that swap the blocks, which has size $n/2$), so exactly
+$\binom n{n/2}L(n/2)^4$ squares of $\LL_n$ have all rows in
+$\Stab(\Pi)$, and by \eqref{eq:K} with $n!/|\Stab(\Pi)|=\frac12\binom n{n/2}$
+and the asymptotics $\log L(m)=m^2\log m-2m^2+O(m\log^2m)$ that
+\eqref{eq:L} encodes,
+$\Pr[H\le\Stab(\Pi)]=2^{-n^2+O(n\log^2n)}$; the union over the
+$\frac12\binom n{n/2}$ partitions into two blocks changes this by
+$2^{O(n)}$, and the proof bounds the whole sum by $n\,e^{-n^2\log2+O(n\log^2n)}$,
+so $\log\Pr[H\not\supseteq A_n]=-n^2\log2+O(n\log^2n)$ for even $n$.
+
+For prime $n$ every transitive group is primitive, and the primitive
+display of the proof gives
+$\Pr[H\not\supseteq A_n]\le e^{-n^2\log n+2n^2+O(n^{3/2}\log^3n)}$.
+This too is sharp to two terms: the Cayley tables of the
+$(n-1)!/|\mathrm{Aut}(\mathbb Z_n)|=(n-2)!$ loops on $[n]$ with identity
+$1$ that are isomorphic to $\mathbb Z_n$ are reduced squares with $H$ the
+regular cyclic group of order $n$, so by \eqref{eq:R} and \eqref{eq:L}
+\[
+\Pr[H\not\supseteq A_n]\ge\frac{(n-2)!}{R(n)}=\frac{(n-2)!\,n!\,(n-1)!}{L(n)}
+\ge e^{-n^2\log n+2n^2-O(n\log^2n)},
+\]
+and $\log\Pr[H\not\supseteq A_n]=-n^2\log n+2n^2+O(n^{3/2}\log^3n)$
+along the primes.
+
+The threshold $n\ge e^{15}$ in the proof is an artefact of the case
+split and has not been optimised: the sum over the divisors $a$ of $n$
+of $n!\cdot n!\,(b!)^nL(a)^{b^2}/L(n)$ (the first display of the
 imprimitive case times the crude count $n!$ of partitions, with
 \eqref{eq:L} inserted for $L(a)$ and $L(n)$ and $n!$, $(b!)^n$ exact)
 is already less than $1$ for every composite $n\ge93$ (and is
@@ -318,8 +396,36 @@ $e^{-0.88\,n^2\log2}$ at $n=1000$), and with the exact van der
 Waerden and Br\'egman expressions in place of \eqref{eq:L} and the
 exact number $n!/((a!)^bb!)$ of partitions in place of $n!$ it is less
 than $1$ for every composite $n\ge15$ ($e^{-0.37\,n^2\log2}$ at
-$n=30$, $e^{-0.70\,n^2\log2}$ at $n=100$); these are finite
-computations \cite{repo}, not uniform inequalities.
+$n=30$, $e^{-0.70\,n^2\log2}$ at $n=100$).  These statements are
+certified as follows \cite{repo}: both sums were evaluated for every
+composite $n\le25000$, and for $n\ge22107$ the two inequalities of the
+proof --- a term with $a\ge\sqrt n$ is at most
+$-n^2\log2+n^{3/2}(\frac12\log^2n+3\log n+3)+2n\log n$ and a term with
+$a<\sqrt n$ at most $-\frac14n^2\log n+\frac52n^2+2n\log n$, both
+decreasing in $n$ after division by $n^2$ --- make every term of the
+first sum, hence of the second, which is termwise smaller, less than
+$1/n$.
+\end{remark}
+
+\begin{remark}[the sign]\label{rem:sign}
+The second bound of the theorem rests on the bound of \cite{HJ96} for
+the proportion of all-even squares, which is $(\sqrt{3/4}+o(1))^n$, so
+$c$ can be taken to be any number above $\sqrt{3/4}$.  Kwan, Petrova
+and Sawhney \cite{KPS25} have since shown that the vector of row
+parities of a uniformly random Latin square behaves like a vector of
+independent fair coin flips, in particular that the all-even proportion
+is at most $(\frac12+o(1))^n$; and Greenhill, Kopfov\'a, Kwan and
+Petrova \cite{GKKP26} have now proved the matching lower
+bound: the all-even proportion is $(\frac12+o(1))^n$.  The sign
+paragraph of the proof turns this into
+$\Pr[H\le A_n]=2\cdot(\frac12+o(1))^n=(\frac12+o(1))^n$, and since
+$\Pr[H\le A_n,\,H\ne A_n]\le\Pr[H\not\supseteq A_n]=e^{-\Omega(n^2)}$,
+\[
+\Pr[H=A_n]=(\tfrac12+o(1))^n\qquad\text{and}\qquad\Pr[H\ne S_n]=(\tfrac12+o(1))^n,
+\]
+both two-sided; so the exceptional loops are, to the exponential
+order, exactly those with $\Mlt_\lambda(Q)=A_n$, and in the theorem
+every $c>\frac12$ works and no $c<\frac12$ does.
 \end{remark}
 
 \begin{remark}[quasigroups]
@@ -337,9 +443,18 @@ the row group $\langle r_i\rangle$ by $\langle r_1^{-1}r_i\rangle$.
 The primitive case needs only that every primitive $K\not\supseteq A_n$
 has $\log|K|=o(n)$: then the generator count makes the number of such
 $K$ at most $(n!)^{o(n)}=e^{o(n^2\log n)}$, negligible against
-$L(n)/n!$.  Praeger and Saxl's elementary bound $|K|<4^n$ \cite{PS80}
-is too weak for this (it gives $(n!)^{2n}$ subgroups), which is why a
-first version of this note combined it with Pyber's bound
+$L(n)/n!$.  Babai's bound $B$ gives this with room to spare, and so
+would the bound $\exp(O(n^{1/3}\log^{7/3}n))$ of Sun and Wilmes
+\cite{SW15}, also proved without the classification, which holds for
+every uniprimitive group except $S_m$ and $A_m$ acting on $2$-subsets
+of $[m]$ ($n=\binom m2$) and the primitive groups between $A_m\times A_m$
+and $S_m\wr S_2$ in product action ($n=m^2$) \cite[Corollary~1.3]{SW15};
+these exceptions are Cameron groups, of order $e^{O(\sqrt n\log n)}$,
+and the first of them shows that Babai's bound is sharp up to the power
+of the logarithm ($S_m$ on $2$-subsets has order $m!=e^{\Theta(\sqrt n\log n)}$).
+Praeger and Saxl's elementary bound $|K|<4^n$ \cite{PS80} is too weak
+for the generator count (it gives $(n!)^{2n}$ subgroups).  That is why
+a first version of this note combined it with Pyber's bound
 $2^{(\frac16\log_224+o(1))n^2}$ on the number of subgroups of $S_n$
 \cite{Pyb93} (recently sharpened to $2^{n^2/16+O(n^{3/2})}$ by
 Roney-Dougal and Tracey \cite{RT25}); we have not checked whether that
@@ -347,9 +462,6 @@ count can be obtained without the classification of finite simple
 groups.  Eberhard pointed out that the elementary order bounds of
 Babai and Pyber used above make the primitive case self-contained and
 visibly free of it.
-The bound $\exp(O(n^{1/3}\log^{7/3}n))$ of Sun and Wilmes \cite{SW15}
-for uniprimitive groups, also proved without the classification, would
-do as well; anything with $\log|K|=o(n)$ does.
 \end{remark}
 
 \begin{remark}[what is and is not used]
@@ -389,7 +501,7 @@ uniformly and gives the sharp exponent.  As far as we know the argument
 was not written out.
 \end{remark}
 
-\begin{remark}[small orders]
+\begin{remark}[small orders]\label{rem:small}
 For $n=5$, of the $56$ reduced squares $50$ have $H=S_5$ and $6$ have
 $H=C_5$ (the sorted Cayley table of $\mathbb Z_5$ for each of the six
 cyclic subgroups; these are also the all-even ones).  For $n=6$, of
@@ -401,7 +513,9 @@ proper and improper squares, started from the cyclic square, run for
 $200t$ moves and then recorded at those times $200t+kt$, $k\ge1$, at
 which the state is proper, improper checkpoints being skipped with the
 grid kept, $t=20n^2$; the stationary distribution restricted to proper
-states is uniform and this fixed-grid sampling is unbiased, but we have
+states is uniform, and recording at fixed times rather than at the first
+proper state after a prescribed number of moves avoids a stopping-time
+bias, so the protocol has the right target distribution; but we have
 not verified mixing, so these are samples from a chain, not certified
 uniform samples), the number of squares with $H=A_n$ was
 $37,25,18,4,1,4,0,1,0,0$ for $n=7,\dots,16$, and every other $H$ was
@@ -423,7 +537,13 @@ with a nontrivial autoparatopy group, which is $n^{-3n^2/8+o(n^2)}$ by
 group contains exactly $(n-1)!$ reduced squares, and every class
 contains at least one, so the proportion of isomorphism classes with
 multiplication group $\ne S_n$ is at most
-$(p_n+(n-1)!\,\varepsilon_n)/(1-\varepsilon_n)=O(c^n)$.
+$(p_n+(n-1)!\,\varepsilon_n)/(1-\varepsilon_n)=O(c^n)$: with $N=R(n)$,
+the classes with $H\ne S_n$ and trivial automorphism group number at
+most $p_nN/(n-1)!$ (the row group is an isomorphism invariant up to
+conjugacy, so every square of such a class has $H\ne S_n$), the classes
+with nontrivial automorphism group number at most $\varepsilon_nN$, and
+the classes with trivial automorphism group alone number
+$(1-\varepsilon_n)N/(n-1)!$.
 \end{remark}
 
 \paragraph{Acknowledgements.}  We thank Sean Eberhard for the argument
@@ -437,15 +557,17 @@ classification of finite simple groups.  [Cameron; Wanless.]
 \bibitem{Cam92} P.~J. Cameron, Almost all quasigroups have rank 2, \emph{Discrete Math.} 106/107 (1992), 111--115.
 \bibitem{Cam15} P.~J. Cameron, A niggling problem, blog post, 24 January 2015, with comments by S.~Eberhard, 12--13 October 2016, \url{https://cameroncounts.wordpress.com/2015/01/24/a-niggling-problem/}.
 \bibitem{CGW08} N.~J. Cavenagh, C. Greenhill and I.~M. Wanless, The cycle structure of two rows in a random Latin square, \emph{Random Structures Algorithms} 33 (2008), 286--309.
+\bibitem{GKKP26} C. Greenhill, M. Kopfov\'a, M. Kwan and K. Petrova, On the probability that a random Latin square is all-even, arXiv:2610.13487 (2026).
 \bibitem{HJ96} R. H\"aggkvist and J.~C.~M. Janssen, All-even Latin squares, \emph{Discrete Math.} 157 (1996), 199--206.
 \bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
+\bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares, arXiv:2509.13125 (2025).
 \bibitem{LP93} T. {\L}uczak and L. Pyber, On random generation of the symmetric group, \emph{Combin. Probab. Comput.} 2 (1993), 505--512.
 \bibitem{MW05} B.~D. McKay and I.~M. Wanless, On the number of Latin squares, \emph{Ann. Comb.} 9 (2005), 335--344.
 \bibitem{PS80} C.~E. Praeger and J. Saxl, On the orders of primitive permutation groups, \emph{Bull. London Math. Soc.} 12 (1980), 303--307.
 \bibitem{Pyb93} L. Pyber, Enumerating finite groups of given order, \emph{Ann. of Math.} 137 (1993), 203--220.
 \bibitem{Pyb93b} L. Pyber, On the orders of doubly transitive permutation groups, elementary estimates, \emph{J. Combin. Theory Ser.~A} 62 (1993), 361--366.
 \bibitem{RT25} C.~M. Roney-Dougal and G. Tracey, Subgroups of symmetric groups: enumeration and asymptotic properties, arXiv:2503.05416 (2025).
-\bibitem{repo} [author], \texttt{cgw-conjecture}: scripts and logs (\texttt{s13\_loopgroup.py}, \texttt{runs/s13/loops/}), \url{https://github.com/mkkinyon/cgw-conjecture}, 2026.
+\bibitem{repo} [author], \texttt{cgw-conjecture}, \url{https://github.com/mkkinyon/cgw-conjecture}, tag \texttt{loops-note-2026-10-12b}: the thresholds of Remark~\ref{rem:sharp} are the output of \texttt{python3 s13\_loopbounds.py 25000} (log \texttt{runs/s13/loops/bounds25000.log}); the samples of Remark~\ref{rem:small} are produced by \texttt{./jm \$n 3000 \$((20*n*n)) \$((100+n)) | python3 s13\_loopgroup.py sample \$n} (logs \texttt{runs/s13/loops/sample\$n.log}, each recording its command) and the exact counts at $n=5,6$ by \texttt{python3 s13\_loopgroup.py exact \$n} (\texttt{exact5.log}, \texttt{exact6.log}).
 \bibitem{Smith} J.~D.~H. Smith, \emph{An Introduction to Quasigroups and Their Representations}, Chapman \& Hall/CRC, 2007.
 \bibitem{SW15} X. Sun and J. Wilmes, Faster canonical forms for primitive coherent configurations, in \emph{STOC '15}, ACM, 2015, 693--702.
 \bibitem{vLW} J.~H. van Lint and R.~M. Wilson, \emph{A Course in Combinatorics}, 2nd ed., Cambridge University Press, 2001.
