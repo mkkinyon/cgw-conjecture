@@ -473,7 +473,7 @@ Not adopted: the shorter imprimitive treatment (loses log 2 — the report itsel
 already counts conjugates).  Referee (internal, fresh): every number re-derived, thresholds reproduced with exact arithmetic,
 SW checked against arXiv:1510.02195 (exceptions made precise per Cor. 1.3), Petrova's initial corrected (K.), "for large n"
 made explicit in the a < log² n case, parenthetical after the theorem corrected (relabel AND reorder).  Snapshot
-versions/loops_note_2026-10-12b.pdf (8 pp), tag loops-note-2026-10-12b.  What did NOT change: theorem statement, proof,
+versions/loops_note_2026-10-12b.pdf (8 pp); the repo citation names commit 1232610 (tag pushes are refused by the session proxy).  What did NOT change: theorem statement, proof,
 constants; the sign remark records the GKKP improvement, the theorem is not restated with it.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
