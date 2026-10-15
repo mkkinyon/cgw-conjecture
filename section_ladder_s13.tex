@@ -3963,3 +3963,86 @@ hypothesis.  What changed: the obstacle at $j=1$ has the exact form
 exchangeability of $y_1$'', plus the separated-inadmissible part of
 $E_1$ ($15$--$17\%$ of the bad candidates in the data), on which
 $f_1=0$ and for which no toggle has been analysed.
+
+\paragraph{(u) Reading (2026-10-15): the conditioned approximation lemma of
+Greenhill--Kopfov\'a--Kwan--Petrova, and why it does not change the
+shape of the residual.}  GKKP (arXiv:2610.13487, 9 October 2026) prove
+that the proportion of all-even Latin squares is $(\frac12+o(1))^n$,
+two-sided (their Theorem~1.1, a special case of a theorem on all
+row/column/symbol parity vectors).  Two of their tools looked relevant
+to the obstacle (lower bounds on different-cycles events at
+square-selected positions in a fixed $2\times n$ rectangle); here is
+what they are and what they do not do.  Sources: arXiv source files,
+local copies under \texttt{refs/} (not in the repository).
+
+\emph{(i) The conditioned approximation lemma (their Lemma 3.1).}  For a
+$w\times n$ Latin rectangle $W$ with $w\le(1-\zeta)n$, a property
+$\mathcal T$ of completions of $W$, and a property $\vec{\mathcal U}$
+of ordered partial rectangles that is $(\rho,m)$-inherited from
+$\mathcal T$ (a random ordered $m$-subset of the entries of any
+completion in $\mathcal T$ lies in $\vec{\mathcal U}$ with probability
+$\ge\rho\ge e^{-o(\log^2n)}$), $m=\alpha n(n-w)$:
+\[
+\Pr\bigl[\mathbf L\in\mathcal T\bigr]\le
+\exp\Bigl(\frac{n\log^2n}{1-\alpha-o(1)}\Bigr)\,
+\Pr\bigl[\vec{\mathbf R}\in\vec{\mathcal U}\bigr],
+\]
+$\mathbf L$ uniform on the completions of $W$, $\vec{\mathbf R}$ the
+triangle removal process started from the residual graph of $W$.
+With $W$ = rows $1,2$ this is a statement about $X=\Omega(R)$, our
+space; the novelty over KPS is exactly the conditioning on $W$.  The
+transfer factor $e^{O(n\log^2n)}$ is the same as that of our transfer
+lemma (\S(h)), and for the same reason: the gap between the van der
+Waerden and Br\'egman-type counts of completions.  Hence the lemma
+certifies only properties whose failure probability in the removal
+process is $e^{-\omega(n\log^2n)}$; it is an upper bound on rare
+events, and gives nothing about a constant-probability event, let alone
+a lower bound for one.  GKKP say this themselves, in the form closest
+to our obstacle (after Definition~4.6): ``this definition does not
+tell us anything about the intercalates that intersect a fixed row
+[\dots] the currently known techniques for studying random Latin
+squares are insufficient to show this, since it is a property that is
+not likely enough to go through permanent estimates''.  A fixed row is
+the easiest case of a square-selected position.
+
+\emph{(ii) The stubborn-row surgery (their \S5--\S6).}  Their Fact 4.3 is
+the intercalate case of our toggle/merge mechanism (\S(r)): an
+intercalate in rows $r,r'$ at columns $c_1,c_2$, switched, merges or
+splits the cycles of $\sigma(x,r)$ through $c_1,c_2$ for any row $x\ne r,r'$.
+Lemma 6.2 (``repair systems'') says that with probability
+$1-e^{-\omega(n^2/\log^{2000}n)}$, for \emph{every} row permutation $D$
+(not necessarily a row of $L$) and every forbidden column/symbol sets
+of size $\le\log^{12}n$, there are $n/\log^{1000}n$ rows $r$ with
+$\le2$ intercalates each (in rows $r,r'$, $r'$ free) whose switching
+gives $\sigma(D,L[r])$ an even cycle of length $\le n/\log^{100}n$
+avoiding the forbidden sets.  The mechanism that defeats
+``selectedness'' is universality: quantify over all $D$ (an $n!$ union
+bound is affordable at this probability) and demand many
+candidates $r$, so that no single row, column or cycle has to behave.
+Both features are unavailable to us.  Universality over the selected
+object would require the property to hold for all column pairs
+$(q,c)$ and all free rows simultaneously, and ``$x_1\not\sim y_1$ at
+$(q,c)$'' fails at a constant fraction of column pairs; and the moves
+in the repair systems live in free rows, which cannot change $\omega$:
+every type-changing move is a trade involving row $1$ or $2$, whose
+availability is the $A$/$B$ status of a square-selected column pair
+--- the hazard term in another notation.  Free-row intercalates can
+change that status (an intercalate at columns $q,c$ in rows $z,z'$
+splits or merges the $\delta_{q,c}$-cycles), which is the toggle family
+of \S(r), and their number at a fixed column pair is $O(1)$ in
+expectation and not controlled at a selected one.
+
+\emph{(iii) What survives as usable.}  Nothing for the hazard term.
+Two smaller items: (a) their lemma would replace the $e^{O(n\log^2n)}$
+transfer of \S(h) with a statement directly in $X$ for any
+overwhelming-probability aggregate property of the free rows (e.g.\
+intercalate expansion among free rows, with rows $1,2$ removed), at no
+gain in exponent; (b) the identity $P_{\mathcal L^0}[H\le K]$ and the
+loops note are unaffected, except that Remark [the sign] now cites
+their theorem.  Classification: NEGATIVE KNOWLEDGE.  The shape of the
+residual is unchanged: a lower bound on a different-cycles event at a
+position read off the square, which neither switching (rigid inverses
+are indexed by such positions) nor the approximation method
+(overwhelming-probability aggregates only) addresses; the two bounds
+we have (Prop.~T by exchangeability; the distance-$2$ case by a
+one-column pin) come from outside both.

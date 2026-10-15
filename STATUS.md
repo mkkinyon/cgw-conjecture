@@ -500,6 +500,20 @@ Works for both-odd splits and α ≥ 2β, which §6's symmetric-pair repair does
 backflip at a toggled candidate lands in S(μ) (792/792 at n=9, 1740/1740 at n=12); repairs 77%/72% of case-3 instances.
 Cost: the residual (both candidates A-pairs in L) is again an "A-pair" event with no upper bound — the obstacle — so this
 enlarges the repaired class and does not close the gap.  Not yet in the note (owner to decide; 6-line paragraph for §6).
+**Seg 21 (2026-10-15) — NEGATIVE KNOWLEDGE (reading: GKKP arXiv:2610.13487, KSS21, Kwan 2020; notes §(u)).**  Question:
+does GKKP's approximation lemma conditioned on a fixed rectangle (their Lemma 3.1, W = rows 1,2 allowed) give any
+constant-probability statement at a square-selected position?  No: P[L ∈ T] ≤ exp(n log² n/(1−α−o(1))) · P[TRP ∈ U] — the same
+transfer factor as our §(h) lemma, from the same vdW/Brégman gap — so only events of probability e^{−ω(n log² n)} in the
+removal process transfer, and only as upper bounds.  GKKP state the obstacle themselves (after their Def. 4.6): intercalates
+meeting a FIXED row are "not likely enough to go through permanent estimates"; a fixed row is the easiest selected position.
+Their stubborn-row surgery (Fact 4.3 = intercalate case of our toggle/merge; Lemma 6.2 repair systems) beats selectedness by
+universality over all row permutations D plus n/polylog candidate mates; neither is available here: the property would have
+to hold at all column pairs simultaneously (false at a constant fraction), and free-row intercalates cannot change ω — they
+can only toggle the A/B status of a selected column pair, which is the hazard term.  Usable: nothing for the hazard term;
+their lemma can replace the §(h) transfer for overwhelming-probability aggregate properties of the free rows (no gain in
+exponent).  Sources kept locally under refs/ (gitignored; arXiv sources uploaded by the owner).  What did NOT change: the
+residual's shape — a lower bound on a different-cycles event at a position read off the square — which neither switching nor
+the approximation method addresses.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
