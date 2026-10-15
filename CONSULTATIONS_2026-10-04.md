@@ -30,13 +30,24 @@ Recommended order: (1) Wanless/Cavenagh/Greenhill, then (2) Allsop/Morris — th
 >
 > Dear Ian, Nick and Catherine,
 >
-> While working on the second-row conjecture from your 2008 paper I had to go through the proof of Lemma 3.12 in detail, and I believe the argument for the upper bound (the direction used in Theorem 3.13) does not go through for splits other than (2,2): the cross-switch of case 3 reverses an arc of the cycle rather than exchanging the two columns, and the resulting square lies in a different type class from the one the inverse count assumes. I have written this up in the attached short note, together with what I could verify survives (the lower bound of Lemma 3.12 and everything that follows from it alone, both assertions of Theorem 4.9, and the (2,2) case, where the upper bound holds with constant 2), and a section on the papers that cite the affected results — in particular Theorem 1.1 of Cavenagh–Wanless 2016, which as far as I can tell depends on the gap at two points, though its statement is now known to be true by other means (Kwan–Petrova–Sawhney, Theorem 1.3(4)); the use in Gill–Mammoliti–Wanless 2025 is repaired in the note.
+> While working on the second-row conjecture from your 2008 paper I had to go through the proof of Lemma 3.12 in detail, and I believe the argument for the upper bound (the direction used in Theorem 3.13) does not go through for splits other than (2,2): the cross-switch of case 3 reverses an arc of the cycle rather than exchanging the two columns, and the resulting square lies in a different type class from the one the inverse count assumes. I have written this up in the attached short note, together with what I could verify survives (the lower bound of Lemma 3.12 and everything that follows from it alone, both assertions of Theorem 4.9, and the splits with min(α,β) = 2, where the upper bound holds with constant 2), and a section on the papers that cite the affected results — in particular Theorem 1.1 of Cavenagh–Wanless 2016, which as far as I can tell depends on the gap at two points, though its statement is now known to be true by other means (Kwan–Petrova–Sawhney, Theorem 1.3(4)); the use in Gill–Mammoliti–Wanless 2025 is repaired in the note.
 >
 > I would be grateful if you could tell me whether I have misread the argument, and if not, whether you know a repair. I have not been able to find one beyond the (2,2) case, and the note says so. If you think an erratum is appropriate I would of course prefer to coordinate with you on how the dependence of the later papers is described.
 >
-> I should say plainly that I have no doubt about the statement itself, which the KPS results strongly support; the question is only about the proof.
+> I should say plainly that I have no doubt about the statement itself, which your exact tables for n ≤ 11 support with much room to spare (the note has the numbers); the question is only about the proof.
 >
 > With best regards,
+> [name]
+
+**Shorter alternative** (suggested by the outside read of 2026-10-15; same content, consequences left to the note; the note now opens with the Z_7 example, which the letter can mention):
+
+> Dear Nick, Catherine and Ian,
+>
+> While studying your 2008 paper on the cycle structure of two rows in a random Latin square, I came across what appears to be a problem with case 3 of the splitting procedure used to prove Lemma 3.12: the cross-switch reverses an arc, and the backflip then lands in the wrong cycle type. The addition table of Z_7 already shows it. I've attached a note explaining the issue, with that example, exact computations at n = 5, and an account of what I could recover. I want to emphasise that I haven't found a counterexample to Lemma 3.12 itself — your own tables for n ≤ 11 suggest it is true with much room to spare — my concern is specifically with the published argument.
+>
+> I'm sending this privately and in the hope that it will be useful. I'd very much welcome your thoughts, especially if I've misunderstood something or if there's a repair I've overlooked.
+>
+> Best wishes,
 > [name]
 
 ---

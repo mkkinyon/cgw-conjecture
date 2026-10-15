@@ -14,7 +14,7 @@
 \title{A gap in the proof of Lemma 3.12 of Cavenagh--Greenhill--Wanless, \\
 \emph{The cycle structure of two rows in a random Latin square}}
 \author{[author]}
-\date{3 October 2026}
+\date{15 October 2026}
 
 \begin{document}
 \maketitle
@@ -24,28 +24,19 @@ Case 3 of the splitting procedure used to prove Lemma 3.12 of
 \cite{CGW08} (cross-switch with respect to $\{\omega(j),\omega(j')\}$,
 then backflip with respect to $\{j,j'\}$) does not behave as claimed:
 the cross-switch reverses an $\omega$-arc containing $j'$ (or $j$),
-after which $\{j,j'\}$ is at $\omega$-distance $2$.  When
-$\min(\alpha,\beta)\ge3$ the backflip therefore produces a square of
-the wrong type.  When $\min(\alpha,\beta)=2<\max(\alpha,\beta)$ the type
-is right, but the resulting edge is in general not an edge of the
-joining multigraph, so the identity $G_S=G_J$ on which the double count
-rests fails; already for $n=5$, the sharp case, the splitting multigraph
-has vertices of degree $24$ on the $S(\mu,F)$ side where the proof
-asserts at most $18$.  The lower bound of Lemma 3.12 survives (and is
-in fact elementary); the upper bound $3/2$, hence the upper bound of
-Theorem 3.13 and the results of Section 4 that use it (listed below),
-is not established by the published argument for any split other than
-$(2,2)$.  For $\min(\alpha,\beta)=2$ the count can be corrected and
-gives the bound with $2$ in place of $3/2$; for $\min(\alpha,\beta)\ge3$
-a canonical repair of case 3 exists when $\alpha$ is even and
-$\alpha<2\beta$ (or symmetrically), and we do not see one when
-$\alpha,\beta$ are both odd.  Exact data for $n\le11$ and sampled
-squares up to $n=100$ indicate that the statement is true with much
-room to spare.  Among the papers citing \cite{CGW08}, the use in
-Gill--Mammoliti--Wanless (canonical labelling in average-case polynomial
-time) is repaired by a surviving estimate, while the parity theorem of
-Cavenagh--Wanless depends on the gap at two points; its statement is a
-special case of the recent parity theorem of Kwan--Petrova--Sawhney.
+after which $\{j,j'\}$ is at $\omega$-distance $2$, and when
+$\min(\alpha,\beta)\ge3$ the backflip produces a square of the wrong
+type.  The addition table of $\mathbb Z_7$ already shows this.  When
+$\min(\alpha,\beta)=2<\max(\alpha,\beta)$ the type is right but the
+two multigraphs of the double count differ; for $n=5$ we computed both
+exactly.  The lower bound of Lemma 3.12 survives (and is elementary);
+the upper bound $3/2$ is not established by the published argument for
+any split other than $(2,2)$, though all the evidence we have says
+that the statement is true, with room to spare.  The body of the note
+records what can be recovered (the bound with constant $2$ when
+$\min(\alpha,\beta)=2$; a partial repair of case 3; a tail bound for
+the number of cycles from the surviving direction) and which later
+results use the affected estimates.
 \end{abstract}
 
 \section{Setting and the procedure}
@@ -184,6 +175,22 @@ gives $\omega'(J')=j$, i.e.\ $\omega'^2(j')=j$.
 So the asserted membership $L'\in S(\mu,F)$ in item 4 fails in case 3
 whenever $\min(\alpha,\beta)\ge3$.
 
+\paragraph{An example by hand.}  Take the addition table of
+$\mathbb Z_7$, $L(r,c)=r+c\bmod7$, with the rows indexed by $0$ and $1$
+in the roles of rows $1$ and $2$ (and $F=\emptyset$).  Then
+$\omega(c)=c+1$, a single $7$-cycle.  Take $j=0$, $j'=3$,
+$(\alpha,\beta)=(3,4)$.  For any two columns $c,c'$ the permutation
+$\delta_{c,c'}$ is the translation $r\mapsto r+c'-c$, a single cycle
+when $c\ne c'$, so every pair is a $B$-pair: $\{0,3\}$ and
+$\{\omega0,\omega3\}=\{1,4\}$ in particular, and the procedure is in
+case 3.  The corner symbols at $\{1,4\}$ are $e_1=1$, $e_2=4$, $e_3=2$,
+$e_4=5$, so the cross-switch takes its first form and reverses the
+interior $2,3$ of the arc from $1$ to $4$: the new rows are
+$0\,1\,3\,4\,2\,5\,6$ and $1\,4\,2\,3\,5\,6\,0$, with
+$\omega'=(0\,1\,3\,2\,4\,5\,6)$ and $\omega'^2(0)=3$.  The pair
+$\{0,3\}$ is now an $A$-pair, as item 3 says, but at distance $2$; the
+backflip at $\{0,3\}$ gives type $(2,5)$, not $(3,4)$.
+
 \paragraph{The case $\min(\alpha,\beta)=2$.}  Say $\alpha=2\le\beta$.
 In the form of the cross-switch that reverses the arc of length $2$
 (a single interior column), nothing is reversed and case 3 is as
@@ -222,9 +229,10 @@ upper bound is incomplete for every split with $\max(\alpha,\beta)\ge3$.
 literally (rows $1,2$ as above; in columns $j,j'$ the rows
 $\delta^k(1)$, $1\le k<a$, with $\delta^a(1)=2$, swap their two entries,
 exactly as in the definition --- this is what balances the corner
-cells) and checked on uniformly sampled
-Latin squares (Jacobson--Matthews) that the cross-switch is a Latin
-square of the same type in every instance.  Applying case 3 as written:
+cells) and checked on Latin squares produced by the Jacobson--Matthews chain
+\cite{JM96} (not certified uniform; the correctness checks below do
+not depend on their distribution, the estimates of \S8 do) that the cross-switch is a Latin square of the same type
+in every instance.  Applying case 3 as written:
 in $1006$ ordered instances $(j,j')$ with $\min(\alpha,\beta)\ge3$ at
 $n=9$ ($300$ sampled squares) and $3098$ at $n=12$ ($300$ squares),
 the result had the wrong type in every single instance (e.g.\ $(2,7)$
@@ -251,7 +259,8 @@ $|X|\ge|X_A|$.)  The \emph{upper} bound $\frac32$, equivalently
 \]
 is not established by the published argument for $\max(\alpha,\beta)\ge3$;
 Proposition~\ref{prop:two} below establishes it with $\tfrac14$ in place of $\tfrac13$
-for $\min(\alpha,\beta)=2$, so it remains open for $\min(\alpha,\beta)\ge3$.
+for $\min(\alpha,\beta)=2$; for $\min(\alpha,\beta)\ge3$ we know of no
+proof.
 
 Within \cite{CGW08} the upper bound of Lemma 3.12 is used for: the
 upper bound of Theorem 3.13; the lower bound $(2/3)^{\kappa-1}$ of
@@ -293,8 +302,11 @@ $\log m$-scale tail survive (by a different proof), while the lower bound on the
 Theorem 4.11 does not.  Likewise the upper half of Corollary 4.5
 survives in a weaker form.  Write $\CC(\lambda)=|S(\lambda,F)|/\gamma(\lambda)$,
 where $\gamma(\lambda)$ is the number of permutations of type $\lambda$,
-so that $\CC$ is the completion count per rectangle of type $\lambda$ and
-\eqref{eq:L312} reads $\tfrac12\le\CC(\lambda)/\CC(\mu)\le\tfrac32$.
+so that $\CC(\lambda)/m!$ is the number of completions per two-row
+rectangle of type $\lambda$ compatible with $F$ (there are $m!\gamma(\lambda)$
+such rectangles; for $F\ne\emptyset$ the individual counts may differ
+and this is their average; the factor $m!$ cancels from every ratio
+below) and \eqref{eq:L312} reads $\tfrac12\le\CC(\lambda)/\CC(\mu)\le\tfrac32$.
 Joining the $\kappa$ parts of a type one pair at a time and using at
 each step the surviving inequality
 $\CC(\text{finer})\le2\,\CC(\text{coarser})$ (valid also when the two
@@ -314,12 +326,13 @@ no upper bound on the probability of a coarse type.  In
 particular we know of no proof, from the surviving material or from our
 own identities, that the first two rows of a random Latin square form a
 single $n$-cycle with probability $o(1)$ (the statement
-$\PP_F((m))\le2m^{-2/3}$ of Lemma~4.4).  What is available is a constant:
-by row-pair symmetry and the intercalate count of \cite{KS18},
-$\E N_2\ge\tfrac12-o(1)$; the $\ell=\beta=2$ case of the surviving
+$\PP_F((m))\le2m^{-2/3}$ of Lemma~4.4).  What is available, for $F=\emptyset$, is a constant:
+by row-pair symmetry (which conditioning on $F\ne\emptyset$ destroys,
+so the following is stated for $F=\emptyset$ only, $m=n$) and the
+intercalate count of \cite{KS18}, $\E N_2\ge\tfrac12-o(1)$; the $\ell=\beta=2$ case of the surviving
 inequality gives $\E[N_2(N_2-1)]\le2\E N_4\le m/(m-4)$; so by the second
 moment method $\Pr[N_2\ge1]\ge(\E N_2)^2/\E[N_2^2]\ge\tfrac16-o(1)$ and
-$\PP_F((m))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
+$\PP_\emptyset((n))\le\tfrac56+o(1)$.  Proposition~\ref{prop:two} does not improve
 this: it gives $\PP_F((m))\le4\PP_F((2,m-2))$, the surviving inequality
 gives $\PP_F((2,m-2))\le\tfrac m{m-2}\PP_F((m))$, and iterating over
 $k$ two-cycles loses a factor of order $4^kk!$.
@@ -380,7 +393,7 @@ $\PP_F\le\tfrac m2\prod(2/c_i)$ in place of $m^{1/3}\prod(2/c_i)$ the
 estimate in their proof becomes $\exp(-\delta\sqrt n(1-o(1))\log^\varepsilon n)$
 times a polynomial factor, and the number of cycles is at most
 $9\sqrt n$ with probability $1-\exp(-\Omega(\sqrt n\log n))$; so their
-Theorem~9 holds as stated.
+Theorem~9 holds as stated, granting the derivation in the Appendix.
 
 Cavenagh and Wanless \cite{CW16} use three results of \cite{CGW08} in
 the proof of their Theorem~1.1 (asymptotically the same number of Latin
@@ -389,7 +402,7 @@ Lemma~2.1 (no row cycle of length $\ge n-\log n$ in the last two rows,
 with probability $1-o(1)$), Theorem~4.9 in their Lemma~2.2, and the
 upper bound of Theorem~3.13 in their Lemma~2.3, for the splits of an
 even part $z$ into two odd parts $a,z-a$ (so $\min(a,z-a)\ge3$).  The
-second use is repaired as above (our Proposition is stated for
+second use is repaired as above (the Appendix is stated for
 $F=\emptyset$; its proof uses only flips and switches at marks in the
 free columns and trades along cycles outside $F$, so it applies in
 $\Omega(F)$ with $m$ in place of $n$, but we have not written this out;
@@ -406,8 +419,9 @@ Proposition~\ref{prop:two}; what their Lemma~2.3 actually needs is
 weaker than $\tfrac32$ --- any constant, or even the averaged statement
 $\sum_{\mu\in M}\gamma(\mu)|S(\mu,F)|/(\gamma(\lambda)|S(\lambda,F)|)\to\infty$
 over the odd splits $M$ of a large even part --- but we do not have
-that either.  So, as far as we can see, Theorem~1.1 of \cite{CW16}
-currently depends on the gap at two points.  The statement is expected
+that either.  So, as far as we can see, the published proof of Theorem~1.1 of
+\cite{CW16} uses the affected estimates at two points for which this
+note supplies no replacement.  The statement is expected
 to be true independently of the gap: Kwan, Petrova and Sawhney
 \cite{KPS25} have since proved Cameron's conjecture on parities (their
 Theorem~1.2, and the trivariate Theorem~1.3), of which Theorem~1.1 of
@@ -430,9 +444,10 @@ part~(5) avoids it.)
 
 \section{A partial repair}
 
-A cross-switch at a $B$-pair $\{J,J'\}$ at any $\omega$-distance
-$a\ge2$ is a type-preserving trade (the proof of Lemma 3.10 does not
-use $a=\alpha$), and by Lemma~\ref{lem:rev} it reverses the arc from
+A cross-switch at a $B$-pair $\{J,J'\}$ at any $\omega$-distance $a$
+with $2\le a\le t-2$, $t$ the length of the containing cycle (both
+arcs must have an interior), is a type-preserving trade (the proof of
+Lemma 3.10 does not use $a=\alpha$), and by Lemma~\ref{lem:rev} it reverses the arc from
 $J$ to $J'$.  If $\{J,J'\}$ is disjoint from $\{j,j'\}$, it toggles the
 status of $\{j,j'\}$ iff exactly one of $j,j'$ is an interior column of
 that arc, say at position $i$ ($1\le i<a$), and then the
@@ -452,7 +467,7 @@ to $j'$ stays $\alpha$; in the other form it becomes $\beta$), and the
 backflip at $\{j,j'\}$ lies in $S(\mu,F)$.
 If $R$ is an $A$-pair, backflip at $R$ itself, which is a pair at
 distance $\alpha$.  Either way case 3 acquires a valid edge
-(verified on $3928$ sampled instances at $n=10,13$: type $\mu$ in all of
+(verified on $3928$ instances in Jacobson--Matthews samples at $n=10,13$: type $\mu$ in all of
 them).  The same works with the roles of $\alpha,\beta$ exchanged when
 $\beta$ is even and $\beta<2\alpha$.  The multiplicities on the
 $S(\mu,F)$ side change (an $A$-pair's backflip may now serve two
@@ -477,12 +492,14 @@ defeats the double count.
 \section{The case $\min(\alpha,\beta)=2$: the bound holds with constant $2$}
 
 For $\min(\alpha,\beta)=2$ the published count can be corrected at the
-price of a weaker constant.  Say $\alpha=2\le\beta$, $m=\beta+2$.
+price of a weaker constant.  Say $\alpha=2\le\beta$ and write
+$t=\alpha+\beta=\beta+2$ for the length of the part being split ($m$
+keeps its meaning, the number of free columns).
 
 \begin{proposition}\label{prop:two}
 If $\alpha=2$ (or $\beta=2$), then
 \[
-\frac{|S(\lambda,F)|\,(\mu_{m}+1)\,m}{|S(\mu,F)|\,\mu_2\mu_\beta\,2\beta}\;\le\;2
+\frac{|S(\lambda,F)|\,(\mu_{t}+1)\,t}{|S(\mu,F)|\,\mu_2\mu_\beta\,2\beta}\;\le\;2
 \qquad(\beta\ne2),
 \]
 and for $\alpha=\beta=2$ the quantity of Lemma 3.12 is $\le2$ as well.
@@ -494,7 +511,8 @@ $S(\mu,F)$: in cases 1 and 2 this is item 4, and in case 3 the
 cross-switch either reverses nothing (the arc of length $2$) or
 reverses the arc of length $\beta$, and in both forms the backflip at
 $\{j,j'\}$ produces parts $2$ and $\beta$ (Proposition~\ref{prop:gap}).
-So $Z=2(\mu_m+1)m\,|S(\lambda,F)|$ counts valid edges.  It remains to
+So $Z=2(\mu_t+1)t\,|S(\lambda,F)|$ counts valid edges (for
+$\alpha=\beta=2$, where pairs are unordered, $Z=2(\mu_t+1)(t/2)|S(\lambda,F)|$).  It remains to
 show that every $M\in S(\mu,F)$ receives at most $4$ edges per joining
 pair, i.e.\ per pair $\{q,q'\}$ with $q$ in a $2$-cycle and $q'$ in a
 $\beta$-cycle of $\omega_M$.  Attribute each edge $(L,M)$ to a joining
@@ -546,7 +564,7 @@ $4\binom{\mu_2}{2}4|S(\mu,F)|$ for $\alpha=\beta=2$), and the result
 follows as in the proof of Lemma 3.12.
 \end{proof}
 
-We verified the recipe by computer: on sampled squares at $n=7,10,12$
+We verified the recipe by computer: on Jacobson--Matthews samples at $n=7,10,12$
 every direct and every switch edge of every splitting instance with
 $\alpha=2$ is recovered from its target and attributed pair by the
 inverse recipes above, with at most $4$ candidates per pair
@@ -557,12 +575,12 @@ edges at $B$-pairs.  The constant $2$ is what this count gives at
 $n=5$ ($24=4\cdot6$ is attained), where the truth is $3/2$.
 
 In the language of Section~4, Proposition~\ref{prop:two} says that for
-a marked pair at distance $2$ (or $m-2$) on an $m$-cycle,
+a marked pair at distance $2$ (or $t-2$) on a $t$-cycle,
 $\Pr_X[A]\ge\tfrac14$: a lower bound on a different-cycles event, which
 the surviving direction alone could not give.  The reason it works for
 $\alpha=2$ and not for $\min(\alpha,\beta)\ge3$ is not multiplicity but
 type: for $\min(\alpha,\beta)\ge3$ the wrong-form case-3 edges land in
-$S(\mu',F)$ with $\mu'$ the $(2,m-2)$ split, so the same count gives
+$S(\mu',F)$ with $\mu'$ the $(2,t-2)$ split, so the same count gives
 only $2(|X|-|X_{3}|)\le3|J|$, where $X_3$ is the set of instances in
 case 3 ($\{j,j'\}$ and $\{\omega j,\omega j'\}$ both $B$-pairs), i.e.\
 $\Pr_X[A]\ge\tfrac13(1-\Pr_X[\text{case }3])$, which is empty without a
@@ -597,9 +615,9 @@ lies in $[0.985,1.0035]$, with the minima $0.9861$ at
 $(3,4)\to(2,2,3)$, $n=7$, and $0.9853$ at $(2,2,4)\to(2,2,2,2)$, $n=8$,
 and the excess above $1$ at most $0.35\%$, in the covered and the
 uncovered classes alike --- e.g.\ $(2,6)\to(2,3,3)$ at $n=8$, in the
-$(3,3)$ class, has ratio $1.0017$).  On uniformly sampled squares with
-a uniformly random marked pair at distance $\alpha\ge2$ on an
-$m$-cycle, $m-\alpha\ge2$, we find
+$(3,3)$ class, has ratio $1.0017$).  On squares produced by the Jacobson--Matthews chain, with
+a uniformly random marked pair at distance $\alpha\ge2$ on a
+$t$-cycle, $t-\alpha\ge2$, we find
 $\Pr_X[B]-\Pr_X[A]=-0.022\pm0.011$, $+0.008\pm0.012$, $-0.030\pm0.018$
 at $n=30,50,100$ ($9000$, $7200$, $3600$ instances), i.e.\
 $\Pr_X[A]=0.50\pm0.01$ throughout.  So the true constant in the upper
@@ -658,7 +676,17 @@ the cycle of the new column when needed, so that the cycle containing
 $j_1$ is never inverted; after $k-1$ steps all $j_i$ lie on one cycle of
 length $m'=\sum\ell_i$ at positions relative to $j_1$ determined by
 $(\ell_1,\dots,\ell_k)$, every cycle other than $C_1,\dots,C_k$ is
-unchanged, and the composite map is at most $2^{k-1}$-to-one.  Hence the
+unchanged, and the composite map is at most $2^{k-1}$-to-one: the
+final square together with $j_1$ and $(\ell_1,\dots,\ell_k)$ determines
+the positions of $j_2,\dots,j_k$ on the joined cycle: a flip at
+$\{j_1,j\}$ changes $\omega$ only at $j_1$ and $j$, inserting the cycle
+of $j$ after $j_1$, so after all joins $j_i$ is at distance
+$\ell_i+\ell_{i+1}+\dots+\ell_k$ from $j_1$ (switching a cycle before
+it is joined does not affect this); the backflips
+at $\{j_1,j_k\},\dots,\{j_1,j_2\}$ in turn then return the squares
+before each join, and the only ambiguity is whether the cycle of
+$j_i$ was switched before the $(i-1)$-st join, two choices for each
+of the $k-1$ joins.  Hence the
 number of instances with lengths $(\ell_i)$ is at most
 $2^{k-1}\sum_{L'}m'N_{m'}(L')$, i.e.
 $\E[\ell_1\cdots\ell_k\,T(\ell_1,\dots,\ell_k)]\le2^{k-1}\E[m'N_{m'}]$
@@ -696,6 +724,7 @@ Latin squares of each parity, Bull. Aust. Math. Soc. 94 (2016), 187--194.
 \bibitem{GMW25} M.~J. Gill, A. Mammoliti and I.~M. Wanless, Canonical labeling of Latin
 squares in average-case polynomial time, Random Structures Algorithms 66 (2025), e70015.
 \bibitem{paper} [author], The cycle type of two rows of a random Latin square: exact identities and a reduction of the weak Cavenagh--Greenhill--Wanless conjecture, draft, October 2026, \url{https://github.com/mkkinyon/cgw-conjecture}.
+\bibitem{JM96} M.~T. Jacobson and P. Matthews, Generating uniformly distributed random Latin squares, \emph{J. Combin. Des.} 4 (1996), 405--437.
 \bibitem{KPS25} M. Kwan, K. Petrova and M. Sawhney, Parities in random Latin squares,
 arXiv:2509.13125 (2025).
 \bibitem{KS18} M. Kwan and B. Sudakov, Intercalates and discrepancy in random Latin squares,

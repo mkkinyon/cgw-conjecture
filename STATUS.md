@@ -475,6 +475,22 @@ SW checked against arXiv:1510.02195 (exceptions made precise per Cor. 1.3), Petr
 made explicit in the a < log² n case, parenthetical after the theorem corrected (relabel AND reorder).  Snapshot
 versions/loops_note_2026-10-12b.pdf (8 pp); the repo citation names commit 1232610 (tag pushes are refused by the session proxy).  What did NOT change: theorem statement, proof,
 constants; the sign remark records the GKKP improvement, the theorem is not restated with it.
+**Seg 20 (2026-10-15) — WRITING (gap note; outside read).**  Owner gave the gap note to a higher-tier ChatGPT model; verdict "the
+gap is real, send after two corrections".  Its independent checks: Z_7 example (L(r,c)=r+c, j=0, j'=3, (3,4): every pair is a
+B-pair, cross-switch at {1,4} gives ω′=(0 1 3 2 4 5 6), backflip → (2,5)); full n=5 enumeration reproduced (degrees 12/18/24 on
+11520/34560/11520 squares; 172800 edges of G_S missing from G_J and conversely).  Its one real catch: Proposition 3 used m
+(number of free columns) for the length of the split part — as written the inequality is FALSE (λ=(2,4,5)→(2,2,3,4), n=11:
+2.198 vs 0.999 with t=5) — a notation error that two internal referee passes had missed.  Adopted: t=α+β throughout §7–§8
+(internal referee found two more leftover m's); Z_7 example added after Prop 2 and mentioned in the abstract; 5/6 bound
+stated for F=∅ only (row-pair symmetry does not survive conditioning on F); cross-switch range 2 ≤ a ≤ t−2; 𝒞(λ)/m! is the
+(average) completion count per rectangle, m!γ(λ) rectangles; JM chain named wherever samples are used; GMW repair "granting
+the Appendix"; CW16 "published proof uses the affected estimates at two points for which this note supplies no replacement";
+"remains open" → "we know of no proof"; abstract shortened to the finding; Appendix: why the join map is 2^{k−1}-to-one
+(j_i at distance ℓ_i+…+ℓ_k from j_1); unordered-pair count for α=β=2; sign of the translation δ_{c,c'} fixed.  Not adopted:
+title change (owner's call; alternative "An issue with the splitting argument in Lemma 3.12 …" recorded here); shorter cover
+letter added to CONSULTATIONS as an alternative, and two slips in the existing draft fixed ("the (2,2) case" → min(α,β)=2;
+"KPS supports the statement" → the n ≤ 11 tables do).  Snapshot versions/cgw_gap_note_2026-10-15a.pdf (11 pp).  What did
+NOT change: the gap, its diagnosis, Prop 3's proof and constant, the Appendix bound, the dependency map.
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
