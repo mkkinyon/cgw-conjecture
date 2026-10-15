@@ -491,6 +491,15 @@ title change (owner's call; alternative "An issue with the splitting argument in
 letter added to CONSULTATIONS as an alternative, and two slips in the existing draft fixed ("the (2,2) case" → min(α,β)=2;
 "KPS supports the statement" → the n ≤ 11 tables do).  Snapshot versions/cgw_gap_note_2026-10-15a.pdf (11 pp).  What did
 NOT change: the gap, its diagnosis, Prop 3's proof and constant, the Appendix bound, the dependency map.
+**Seg 20b — REFORMULATION (partial repair of case 3, enlarged; s13_cgw_altpair.py, runs/s13/cgw/altpair{9,12}.log).**  Found
+while re-deriving the Z_7 example: the published cross-switch at {ωj, ωj′} DOES produce a usable A-pair, just not {j,j′} — the
+pairs {j, ω²j} and {j′, ω²j′} both toggle status (exactly one column interior to the reversed arc, in either form) and both sit
+at separation (α,β) in ω′ (first form: ω′^α(j)=ω²j; the other candidate at distance β the other way), so whichever was a B-pair
+in L gives a valid splitting edge, with bounded inverse ({J,J′} = {ω′(a), ω′(c)} or the mirror rule, ≤ 4 options per (M,Q)).
+Works for both-odd splits and α ≥ 2β, which §6's symmetric-pair repair does not.  Verified: every candidate toggles, every
+backflip at a toggled candidate lands in S(μ) (792/792 at n=9, 1740/1740 at n=12); repairs 77%/72% of case-3 instances.
+Cost: the residual (both candidates A-pairs in L) is again an "A-pair" event with no upper bound — the obstacle — so this
+enlarges the repaired class and does not close the gap.  Not yet in the note (owner to decide; 6-line paragraph for §6).
 
 ## ALERT (2026-10-02): gap in CGW08 Lemma 3.12 / Theorem 3.13 (rem:cgwgap; paper/cgw_gap_note.tex, refereed)
 Splitting case 3 of CGW's proof (cross-switch at the neighbour {ωj,ωj′}, then backflip
